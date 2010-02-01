@@ -1,0 +1,16 @@
+<p><a href="<?php echo $this->url(
+    array(
+        'controller' => 'work',
+        'action'     => 'deposit'
+    ), 
+    'default', 
+    true) ?>">Insert a new work</a></p>
+
+Existing Works: <br />
+<dl>
+    <!-- Loop through the entries that were provided to us by the controller -->
+    <?php foreach ($this->entries as $entry): ?>
+    <dt><?php echo $this->escape($entry->title) ?></dt>
+    <dd><?php echo $this->escape($entry->author) ?></dd>
+    <?php endforeach ?>
+</dl>

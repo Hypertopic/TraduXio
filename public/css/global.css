@@ -1,0 +1,73 @@
+/*  DOM ELEMENTS */
+body
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:14px;
+	margin:0px;
+}
+
+/* CLASSes */
+
+.footer{
+    color:#FFF;
+	background-image:url(../images/vert-line-foot.png);
+	height:30px;
+    font-size:0.8em;
+    text-align:center;
+    margin-top:4em;
+}
+.footer-text{
+		vertical-align:50%;
+}
+.footer img{
+	border: 0px;
+	height:28px;
+	width:85px;
+	vertical-align:text-bottom;
+}
+.highlight {
+    font-weight:bold;
+}
+
+/* IDs */
+
+#warning{}
+
+#header{
+    background-image: url(../images/vert-line.png);
+   /* background-color: #333;*/
+    color:#FFF;
+    height: 30px;
+    margin:0px;
+}
+#header a {
+    color:#FFF;
+    font-weight:bold;
+    text-decoration:none;
+}
+#header-logo{
+	float:left;
+    margin:5px;
+}
+#header-navigation{
+	float:right;
+    margin:5px;
+}
+#header-navigation ul {
+    margin:0;
+}
+#header-navigation ul li {
+    display:inline;
+    list-style:none;
+    margin-right:20px;
+}
+#content {
+    margin:5px;
+}
+#warning {
+	margin: 5px;
+	color: #F14;
+	font-variant: small-caps; 
+	font-weight:bold;
+	clear:both;
+}

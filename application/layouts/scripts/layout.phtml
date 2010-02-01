@@ -1,0 +1,72 @@
+<?php echo $this->doctype() ?> <!-- This Line will output the doctype we set inside the bootstrap file -->
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title><?php echo __('Traduxio Project'); if($this->page_title): echo " - "; echo __($this->page_title); endif;?></title>
+  
+  <!--
+      The line below demonstrates usage of the headLink() view helper
+      @see http://framework.zend.com/manual/en/zend.view.helpers.html
+      -->
+  <?php $this->headLink()->appendStylesheet($this->makeUrl('/css/global.css')) ?>
+  <?php echo $this->headLink(); ?>
+  <?php $this->headScript()->prependScript("tdxio.baseUrl='".$this->makeUrl('',true)."';"); ?>
+  <?php $this->headScript()->prependFile($this->makeUrl('/js/tdxio.js')); ?>
+  <?php $this->headScript()->prependFile($this->makeUrl('/js/lib/jquery.min.js')); ?>
+  <?php echo $this->headScript(); ?>
+  
+</head> 
+<body>
+
+	<!-- 
+		Layouts are a great place to put header and footer content that will be
+		needed on all pages that share the same layout.  To understand fully what
+		having layouts inside a MVC application mean, check out the Zend_Layout
+		section of the manual.
+		http://framework.zend.com/manual/en/zend.layout.html
+		-->
+
+	 <div id="header">
+		<div id="header-logo">
+			<b><a href="<?php echo $this->makeUrl('/'); ?>">Traduxio Project</a></b> - <?php echo $this->profileLink(); ?>
+		</div>
+		<div id="header-navigation">
+			<ul>
+			<li> <a href="<?php echo $this->makeUrl('/work/home'); ?>"><?php echo __('Oeuvres'); ?></a></li>
+			<li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concordancier'); ?></a></li>
+			<li> <a href="<?php echo $this->makeUrl('/work/deposit'); ?>"><?php echo __('New text'); ?></a> </li>	
+			<li><a href="<?php echo $this->makeUrl("/index/tutorial");?>">Help</a></li>
+		<?php //if ($this->home) :?>
+			<li><a href="<?php echo $this->makeUrl("/index/about");?>">About</a></li>
+		<?php //endif; ?>
+			<li> <a href="<?php echo $this->makeUrl("/index/feedback");?>">Feedback</a> </li>
+			</ul>
+			<!-- To keep urls consistent with the applications router (right now we
+				 are using the default router), we will employ the use of the url
+				 view helper
+				 http://framework.zend.com/manual/en/zend.view.helpers.html
+				 -->
+		</div>
+	</div>
+
+	<!-- This next call will now include any content that was generated in the
+		 dispatching of a controllers action (or series of actions).  -->
+	<div id="content">
+	<?php  echo $this->layout()->content ?>
+	</div>
+
+	<!-- if your application requires it, this would be a great place to put a
+		 footer for all pages. -->
+
+	<div class="footer">
+	<span class="footer-text">Le logiciel <span class="highlight">traduXio</span> est développé par l'association <span class="highlight">Zanchin</span> et le laboratoire <span class="highlight">Tech-CICO</span> avec le soutien de l'<span class="highlight">Unesco</span> et de l'<span class="highlight">Institut de la francophonie numérique</span>.</span>
+		<a href="http://validator.w3.org/check?uri=referer">
+		<img src="http://www.w3.org/Icons/valid-xhtml11-blue"
+			alt="Valid XHTML 1.1"/></a>
+		<a href="http://jigsaw.w3.org/css-validator/check/referer">
+		<img src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+			alt="Valid CSS!" /></a>
+	</div>
+	 	 
+</body>
+</html>
