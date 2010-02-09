@@ -14,5 +14,6 @@ class Model_DbTable_Work extends Model_DbTable_Taggable
      */
     protected $_name = 'work';
 
+
 	
 }

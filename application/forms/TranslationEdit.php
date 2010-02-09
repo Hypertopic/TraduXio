@@ -68,9 +68,6 @@ class Form_TranslationEdit extends Form_Abstract
         }
 
 
-        require_once "TextMetadataDispGrp.php";
-        TextMetadataDispGrp::apply($this,'translation');
-
         // add the submit button
         $this->addElement('submit', 'submit', array(
             'label'    => __('Save'),'decorators'=>array('ViewHelper')
@@ -84,7 +81,7 @@ class Form_TranslationEdit extends Form_Abstract
 
         $this->addDisplayGroup(array('submit','submitquit','cancel'),'buttons');
         $this->buttons->setDecorators(array('FormElements',array('HtmlTag',array('tag'=>'div'))));
-        $this->log($this->metadata->getDecorators(),'decorators');
+       // $this->log($this->metadata->getDecorators(),'decorators');
     }
 
     public function blockList() {

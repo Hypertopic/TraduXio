@@ -3,8 +3,7 @@
 /**
  * Sentence model
  *
- * Utilizes the Data Mapper pattern to persist data. Represents a single 
- * work entry.
+ * Represents an Original Sentence of an Original Work
  * 
  * @uses       Model_Taggable
  * @package    Traduxio
@@ -25,8 +24,7 @@ class Model_Sentence extends Model_Taggable
 		}
 		foreach ($segments as $i=>$segment) {
 	        $data=array('content'=>$segment);
-			$fields = array('work_id' => $work_id, 'number' => $i);
-            if ($clean || !$this->fetchEntryByFields($fields)) {
+            if ($clean || !$this->fetchSentence($work_id,$i)) {
 				Tdxio_Log::info('segmento '.$i);
                 $data['work_id']=$work_id;
                 $data['number']=$i;
@@ -39,6 +37,11 @@ class Model_Sentence extends Model_Taggable
         }
     }	
 	
+	public function fetchSentence($work_id, $number){
+		$fields = array('work_id' => $work_id, 'number' => $number);
+		$this->fetchByFields($fields);
+	}
+	
 	public function cleanText($work_id)
     {
         $table=$this->_getTable();
@@ -50,19 +53,23 @@ class Model_Sentence extends Model_Taggable
         $table=$this->_getTable();
         $table->update($data,$table->getAdapter()->quoteInto('work_id = ? AND ',$work_id).$table->getAdapter()->quoteInto('number = ?',$segnum));
     }
-	 /**
-     * Fetch an individual entry
-     *
-     * @param  int|string $id
-     * @return null|array
-     */
-    // public function fetchEntry($work_id,$number)
-    // {
-        // $table = $this->_getTable();
-        // $select = $table->select()->where('work_id = ?', $work_id)->where('number = ?',$number);
-        // $result = $table->fetchRow($select);
-        // if ($result) $result=$this->_toArray($result);
-        // return $result;
-    // }
+	
+	public function getLastSentenceId($work_id){
+		$table = $this->_getTable();
+		$where=$table->getAdapter()->quoteInto('work_id = ?', $work_id);
+		$result = $table->fetchAll($where);
+		$max = 0;
+		foreach($result as $key => $row){
+			$max = max($max,$row['number']);
+		}
+		Tdxio_Log::alert('Last index for work_id %d is '.$max,$work_id);
+		return $max;
+		
+	}
+	
+	public function fetchSentences($work_id){
+		$sentences = $this->fetchByFields(array('work_id'=>$work_id),'number');
+		return $sentences;		
+	}
 
 }

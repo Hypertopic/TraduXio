@@ -1,6 +1,6 @@
 <?php 
 
-// library/Tdxio/Model/Abstract.php
+
 /***
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,9 @@
 class Model_Abstract {
 
 	protected $_table;
-	
+	protected $_cache=array();
+
+
 	public function __construct($class_name=null,$idField=null,$contentField=null) {
         if (!is_null($class_name)) {
 			
@@ -44,19 +46,46 @@ class Model_Abstract {
 		$table=$this->_getTable();
 		return $table->fetchAll();
 	}
-	
-	public function fetchEntryByFields(array $fields){
-		if(!is_null($fields)){
-		$table = $this->_getTable();
-		$select = $table->select();
-		foreach($fields as $fieldname => $value){
-			$select->where($fieldname . ' = ?', $value);
+	    
+	public function fetchEntry($id,$recursive=1)
+    {
+        $table = $this->_getTable();
+        
+		$select = $table->select()->where($table->idcol.' = ?', $id);
+		$result = $table->fetchRow($select);
+		if ($result) {
+			$result=$this->_toArray($result,$recursive);
 		}
-		Tdxio_Log::info($select);
-        $result = $table->fetchRow($select);
-        if ($result) $result=$this->_toArray($result);
+		return $result;
+		return $this->_getFromCache($id,$recursive);
+    }
+	
+	
+	public function fetchByFields(array $fields, $order=null){
+		if(!is_null($fields)){
+			$table = $this->_getTable();
+			$select = $table->select();
+			foreach($fields as $fieldname => $value){
+				$select->where($fieldname . ' = ?', $value);
+			}
+			if ($order) $select->order($order);
+			Tdxio_Log::info($select);
+			$result = $table->fetchAll($select);
+			if ($result) $result=$this->_toArray($result);
 		}
         return $result;
 	}
 	
+
+	
+	
+	
+   	protected function _toArray($row,$recursive=1) {
+		return $this->_extend($row->toArray(),$recursive);
+    }
+	
+	protected function _extend($row,$recursive=1) {
+        return $row;
+    }
+
 }

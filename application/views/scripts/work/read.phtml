@@ -1,0 +1,29 @@
+
+<div id = "left-column"> 
+
+<div class = "leftColumn-inner">Translations
+	<ul>
+	  <li><a href="/pagekits/" title="">Translation 1</a></li>
+	  <li><a href="/pagekits/" title="">Translation 2</a></li>
+	</ul>
+</div>
+<div class = "leftColumn-inner">Options
+	<ul>
+	  <li><a href="/pagekits/" title="">Option 1</a></li>
+	  <li><a href="/pagekits/" title="">Option 2</a></li>
+	</ul>
+</div>
+</div>
+
+<div id = "right-column">
+	<div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
+	<div class = "text"> 
+		<?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
+			<?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
+			<span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($sentence['content']); ?></span>
+		<?php endforeach; ?>
+	</div>
+</div>
+
+
+<?php $this->page_title="Read Text: ".$this->escape($this->work['title']); ?>

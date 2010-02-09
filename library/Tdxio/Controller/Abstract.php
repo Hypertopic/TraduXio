@@ -32,7 +32,6 @@ class Tdxio_Controller_Abstract extends Zend_Controller_Action
         } else {
 			$classname='Model_'.$this->_modelname;
 			if (null === $this->_model) {
-				// require_once 'Model_Work.php';
                 $this->_model = new $classname();
 				Tdxio_Log::info($this->_model);
             }

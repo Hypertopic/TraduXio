@@ -21,13 +21,6 @@
 
 class Form_Translate extends Form_Abstract
 {
-    protected $_textlength = null;
-
-    public function __construct($textlength)
-    {
-        $this->_textlength=$textlength;
-        parent::__construct();
-    }
 
     /**
      * init() is the initialization routine called when Zend_Form objects are
@@ -51,17 +44,10 @@ class Form_Translate extends Form_Abstract
             'required'   => true
         ));
 
-        /*$this->addElement('textarea', 'text', array(
-            //'label'      => __('Text to translate'),
-            'rows' => $this->_textlength,
-            'class' => 'autogrow',
-            'cols'=> 50
-        ));*/
-
         // language dropdown
         $this->addElement('select', 'language', array(
             //'label'      => __('Source language'),
-            'multiOptions'=> $this->_getLanguages(),
+            'multiOptions'=> array('ita','eng','fra'),
             'required'   => true
         ));
 

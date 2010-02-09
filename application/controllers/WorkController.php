@@ -32,8 +32,7 @@ class WorkController extends Tdxio_Controller_Abstract
      */
     public function indexAction()
     {
-		//return $this->_helper->redirector('sign','work');
-        $work = new Model_Work();
+        $work = $this->getModel();
         $this->view->entries = $work->fetchAll();
     }
 	
@@ -69,51 +68,45 @@ class WorkController extends Tdxio_Controller_Abstract
         // Assign the form to the view
         $this->view->form = $form;
 	} 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /**
-     *
-     * Assuming the default route and default router, this action is dispatched 
-     * via the following url:
-     * - /work/sign
-     *
-     * @return void
-     */
-    public function signAction()
-    {
-        $request = $this->getRequest();
-        $form    = new Form_Work();
-
-        // Check to see if this action has been POST'ed to.
-        if ($this->getRequest()->isPost()) {
-            
-            // Now check to see if the form submitted exists, and
-            // if the values passed in are valid for this form.
-            if ($form->isValid($request->getPost())) {
-                
-                // Since we now know the form validated, we can now
-                // start integrating that data sumitted via the form
-                // into our model:
-                $model = new Model_Work();
-				$data = $form->getValues();
-                $model->save($data);
-                
-                // Now that we have saved our model, lets url redirect
-                // to a new location.
-                // This is also considered a "redirect after post";
-                // @see http://en.wikipedia.org/wiki/Post/Redirect/Get
-                return $this->_helper->redirector('index');
-            }
+	
+	public function readAction(){
+	
+		$request = $this->getRequest();
+		$id = $request->getParam('id');
+		$model = $this->getModel();
+		
+		if (!$id || !($work=$model->fetchOriginalWork($id))) {
+            throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
+        }	
+		$this->view->work = $work;
+	}
+	
+	public function translateAction(){
+		$request = $this->getRequest();
+		$id = $request->getParam('id');
+		$model = $this->getModel();		
+        if (!$id || !$origWork=$model->fetchOriginalWork($id)) {
+            throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
         }
-        
-        // Assign the form to the view
-        $this->view->form = $form;
-    }
-	
-	
+		$form = new Form_Translate();
+		
+		if ($request->isPost()) {
+		    if ($form->isValid($request->getPost())) {
+				$data=$form->getValues();
+				$userid = Tdxio_Auth::getUserName();				
+				$data['author']=$userid;
+                $newId=$model->createTranslation($data,$id);
+				return $this->_helper->redirector->gotoSimple('edit','translation',null,array('id'=>$newId));
+			}
+        }
+        $this->view->form=$form;
+        $this->view->origWork=$origWork;
+	}
+		
 	protected function getModel()
 	{
-	
-		
 		return new Model_Work();
 	}
+	
+	
 }

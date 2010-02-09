@@ -3,10 +3,9 @@
 /**
  * Taggable model
  *
- * Utilizes the Data Mapper pattern to persist data. Represents a single 
- * taggable entry.
+ * Represents a single taggable entry.
  * 
- * @uses       Model_TaggableMapper
+ * @uses       Model_Abstract
  * @package    Traduxio
  * @subpackage Model
  */

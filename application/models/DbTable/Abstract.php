@@ -16,6 +16,9 @@ class Model_DbTable_Abstract extends Zend_Db_Table_Abstract {
 	public $idcol='id';
     public $contentcol='name';
 	
+	
+	function getName() {return $this->_name;}
+	
     /**
      * Insert new row
      *
@@ -86,6 +89,7 @@ class Model_DbTable_Abstract extends Zend_Db_Table_Abstract {
         Tdxio_Log::info($data,"cleaned data");
         return $data;
     }
+	
 
 }
 

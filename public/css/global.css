@@ -4,6 +4,7 @@ body
     font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size:14px;
 	margin:0px;
+	color:#333333;
 }
 
 /* CLASSes */
@@ -15,6 +16,7 @@ body
     font-size:0.8em;
     text-align:center;
     margin-top:4em;
+	clear:both;
 }
 .footer-text{
 		vertical-align:50%;
@@ -28,8 +30,120 @@ body
 .highlight {
     font-weight:bold;
 }
+.title{
+	padding:3px;
+	font-size:120%;
+	font-weight:bold;
+}
+.text{
+	margin:5px 10px 10px 10px;
+	padding:10px;
+}
 
+.leftColumn-inner {
+background:url(../images/nav_bg.jpg) repeat-y scroll 0 0 #F7F7E6;
+margin:0 0 10px;
+overflow:hidden;
+padding:10px 0 0 20px;
+color:#555;
+font-weight:bold;
+}
+
+.leftColumn-inner ul {
+font-size:0.8em;
+font-weight:bold;
+line-height:0.8em;
+list-style:none outside none;
+margin-bottom:0;
+margin-top:0;
+padding-bottom:0.4em;
+padding-left:0.6em;
+}
+
+.leftColumn-inner ul li a {
+display:block;
+padding:6px 10px 4px 0;
+}
+
+.bounding-box{
+	border: 1px solid #DBDBDB;	
+}
+
+
+.language{
+	font-size:0.8em;
+	font-weight:bold;
+	padding:3px;
+}
+
+.td-left{
+	width:20%;
+	text-align:right;
+	vertical-align:bottom;
+}
+.td-right{
+	width:60%;
+	text-align:left;
+	vertical-align:bottom;
+}
+
+.full-width{
+	width:100%;
+}
+
+
+a:link, a:active {
+color:#0066B7;
+}
+
+a {
+text-decoration:none;
+}
+
+#clear{
+	clear:both;
+	height:30px;
+	width:100%;
+}
+#button{}
+
+#work-title{
+	margin:10px;
+}
+
+
+#left-column{
+	float:left;
+	max-width:300px;
+	min-width:150px;
+	overflow:hidden;
+	width:21%;
+	/* width:20%;
+	float:left;
+	text-align: right;
+	margin-top:5px;
+	clear:none; */
+}
+
+#right-column{
+	width:75%;
+	float:left;
+	border: 1px solid #DBDBDB;
+	max-width:800px;
+	min-width:250px;
+}
 /* IDs */
+
+#left-options{
+	background: transparent url(../images/vert-line.png);
+	width: 200px;
+	margin:10px;
+	color:#FFF;
+	font-size:90%;
+	font-weight:bold;
+	padding:5px;
+}
+
 
 #warning{}
 
@@ -48,10 +162,17 @@ body
 #header-logo{
 	float:left;
     margin:5px;
+	width:21%;
+	max-width:300px;
+	min-width:80px;
 }
 #header-navigation{
 	float:right;
     margin:5px;
+	width:70%;
+	text-align:right;
+	min-width:600px;
+	max-width:700px;
 }
 #header-navigation ul {
     margin:0;
