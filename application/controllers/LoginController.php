@@ -64,7 +64,7 @@ class LoginController extends Zend_Controller_Action
 		}
 		$user = Tdxio_Auth::getUserName();
 		$model = new Model_User();			
-		$model->registerUser($user); // da implementare nel modello!!!!!!!!!!!!!!!!!!!!!!!!------------------------
+		$model->registerUser($user);
 			
 		// We're authenticated! Redirect to the home page
 		$this->_helper->redirector('index', 'index');

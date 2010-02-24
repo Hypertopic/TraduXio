@@ -33,7 +33,7 @@ class WorkController extends Tdxio_Controller_Abstract
 	public function indexAction()
 	{
 		$work = $this->getModel();
-		$this->view->entries = $work->fetchAll();
+		$this->view->entries = $work->fetchAllOriginalWorks();
 		Tdxio_Log::info($this->view->entries);
 	}
 		
@@ -79,6 +79,11 @@ class WorkController extends Tdxio_Controller_Abstract
 		if (!$id || !($work=$model->fetchOriginalWork($id))) {
 			throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
 		}	
+		Tdxio_Log::info('mostra il work: ');
+		Tdxio_Log::info($work);
+		if(empty($work['Sentences'])){
+			return $this->_helper->redirector->gotoSimple('read','translation',null,array('id'=>$id));
+		}
 		$this->view->work = $work;
 	}
 	

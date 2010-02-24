@@ -61,8 +61,8 @@ class Model_Work extends Model_Taggable
 	}
 	
 	public function fetchOriginalWork($work_id){
+	
 		if(!$work = $this->fetchWork($work_id)){return null;}
-		// $work['is_original_work']=true;
 		$sentenceModel= new Model_Sentence();
 		$work['Sentences'] = $sentenceModel->fetchSentences($work_id);
 		$content = '';
@@ -75,6 +75,26 @@ class Model_Work extends Model_Taggable
 		return $work;
 	}
 
+	public function fetchAllOriginalWorks()
+	{
+		$table = $this->_getTable();
+		$select1 = $this->getSelectCondOriginalWork();
+		$select2 = $table->select()->where('id IN (?)',$select1);
+		Tdxio_Log::info('stringa sql '.$select2->__toString());
+		return $table->fetchAll($select2);
+	}
+	
+	public function getSelectCondOriginalWork(){
+		$table = $this->_getTable();
+		$db = $table->getAdapter();
+		$select = $db->select()->distinct()->from('sentence','work_id');
+		return $select;		
+	}
+	
+	public function isOriginalWork($id)
+	{
+	
+	}
 
 
 

@@ -104,6 +104,11 @@ class TranslationController extends Tdxio_Controller_Abstract
 
 	}
 	
+	public function readAction()
+	{	
+			
+	}
+	
 	
 	protected function _getBlockList($transBlocks) 
 	{

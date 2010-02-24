@@ -33,6 +33,10 @@ class Model_Abstract {
 		return $this->_table;
 	}
 	
+	protected function _getDb(){
+	
+	}
+	
 	
 	public function save(array $data)
 	{
@@ -62,6 +66,7 @@ class Model_Abstract {
 	
 	public function fetchByFields(array $fields, $order=null)
 	{
+		$result = null;
 		if(!is_null($fields)){
 			$table = $this->_getTable();
 			$select = $table->select();

@@ -14,8 +14,7 @@ class Model_Taggable extends Model_Abstract
 
 	public function __construct() {
         
-		Tdxio_Log::info('blabla');
 		//parent::__construct($class_name,$idField,$contentField); 
-    }
+	}
 
 }
