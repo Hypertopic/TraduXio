@@ -19,28 +19,27 @@ class Model_Abstract {
 
 
 	public function __construct($class_name=null,$idField=null,$contentField=null) {
-        if (!is_null($class_name)) {
-			
+		if (!is_null($class_name)) {
 			Tdxio_Log::info($class_name,'class_name_construct');
-            $this->_table = new Model_DbTable_Abstract(strtolower($class_name),$idField,$contentField);
-        }
-    }
+			$this->_table = new Model_DbTable_Abstract(strtolower($class_name),$idField,$contentField);
+		}
+	}
 	
 	protected function _getTable() {
-        if (null === $this->_table) {
+		if (null === $this->_table) {
 			$classname='Model_DbTable_' . $this->_tableClass;
-            $this->_table = new $classname;
-        }
-        return $this->_table;
-    }
+			$this->_table = new $classname;
+		}
+		return $this->_table;
+	}
 	
 	
 	public function save(array $data)
-    {
-        $table  = $this->_getTable();
-        $new_id = $table->insert($data);
-        return $new_id;
-    }
+	{
+		$table  = $this->_getTable();
+		$new_id = $table->insert($data);
+		return $new_id;
+	}
 	
 	public function fetchAll() {
 		$table=$this->_getTable();
@@ -48,8 +47,8 @@ class Model_Abstract {
 	}
 	    
 	public function fetchEntry($id,$recursive=1)
-    {
-        $table = $this->_getTable();
+	{
+		$table = $this->_getTable();
         
 		$select = $table->select()->where($table->idcol.' = ?', $id);
 		$result = $table->fetchRow($select);
@@ -58,10 +57,11 @@ class Model_Abstract {
 		}
 		return $result;
 		return $this->_getFromCache($id,$recursive);
-    }
+	}
 	
 	
-	public function fetchByFields(array $fields, $order=null){
+	public function fetchByFields(array $fields, $order=null)
+	{
 		if(!is_null($fields)){
 			$table = $this->_getTable();
 			$select = $table->select();
@@ -73,19 +73,16 @@ class Model_Abstract {
 			$result = $table->fetchAll($select);
 			if ($result) $result=$this->_toArray($result);
 		}
-        return $result;
+		return $result;
 	}
 	
-
-	
-	
-	
-   	protected function _toArray($row,$recursive=1) {
+   	protected function _toArray($row,$recursive=1) 
+	{
 		return $this->_extend($row->toArray(),$recursive);
-    }
+	}
 	
 	protected function _extend($row,$recursive=1) {
-        return $row;
-    }
+		return $row;
+	}
 
 }

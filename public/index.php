@@ -20,7 +20,7 @@ defined('APPLICATION_ENV')
 
 //Define path to temporary files
 defined('TEMP_PATH')
-	|| define('TEMP_PATH', realpath(dirname(__FILE__) . '/../public/temp'));
+	|| define('TEMP_PATH', realpath(dirname(__FILE__) . '/../temp'));
 	
 function __($text)
 {

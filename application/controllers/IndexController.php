@@ -25,13 +25,6 @@ class IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        /*
-           There is nothing inside this action, but it will still attempt to 
-           render a view.  This is because by default, the front controller 
-           uses the ViewRenderer action helper to handle auto rendering
-           (In the MVC grand scheme of things, the ViewRenderer allows us to 
-           draw the line between the C and V in the MVC.  Also note this is by 
-           default on, but optional).
-        */
+	return $this->_helper->redirector('index','work');
     }
 }

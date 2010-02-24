@@ -9,6 +9,12 @@ body
 
 /* CLASSes */
 
+.creator{
+	text-align:left;
+	color:#BBB;
+	margin:10px;
+}
+
 .footer{
     color:#FFF;
 	background-image:url(../images/vert-line-foot.png);
@@ -100,6 +106,77 @@ a {
 text-decoration:none;
 }
 
+
+div.logo {
+	border-right: thick dotted;
+	padding: 15px;
+    text-align:right;
+    width:280px;
+}
+div.citation {
+    padding-left:30px;
+    padding-top:5px;
+    padding-bottom:10px;
+    margin-left:20px;
+    margin-top:10px;
+    text-align:justify;
+    font-size:0.8em;
+    background-image:url(../images/citation-mark.gif);
+    background-repeat:no-repeat;
+}
+div.citation span.author {
+    display:block;
+    text-align:right;
+}
+div.site-title {
+    font-size:2em;
+    font-weight:bold;
+    text-align:right;
+}
+
+
+li.language {
+    font-variant:small-caps;
+    font-size:16px;
+    list-style:none;
+}
+
+li.author {
+    font-variant:normal;
+    font-size:12px;
+    list-style-type:none;
+}
+
+li.closed {
+    list-style-image:url(../images/closed_list_item.gif);
+    cursor:pointer;
+}
+li.open {
+    list-style-image:url(../images/open_list_item.gif);
+    cursor:pointer;
+}
+li.closed ul {
+    display:none;
+}
+li.open ul {
+    cursor:default;
+}
+ul.texts {
+    padding-left:1em;
+}
+li.text {
+    list-style-image:none;
+    list-style-type:none;
+}
+li.text a {
+    text-decoration:none;
+    color:#555;
+}
+
+.home tr{
+	vertical-align:top;
+}
+
 #clear{
 	clear:both;
 	height:30px;
@@ -162,17 +239,17 @@ text-decoration:none;
 #header-logo{
 	float:left;
     margin:5px;
-	width:21%;
-	max-width:300px;
-	min-width:80px;
+	width:25%;
+	/*max-width:500px;
+	min-width:80px;*/
 }
 #header-navigation{
 	float:right;
     margin:5px;
 	width:70%;
 	text-align:right;
-	min-width:600px;
-	max-width:700px;
+	/*min-width:600px;
+	max-width:700px;*/
 }
 #header-navigation ul {
     margin:0;

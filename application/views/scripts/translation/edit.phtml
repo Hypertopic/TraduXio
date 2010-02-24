@@ -1,5 +1,5 @@
 <?php
-// application/views/scripts/text/index.phtml
+// application/views/scripts/translation/edit.phtml
 /***
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,10 +42,10 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
     <td class="view<?php echo $origDir; ?>"><div class="title">Original text :<?php echo $this->escape($this->translation['OriginalWork']['title']); ?></div></td>
     <td class="edit<?php echo $transDir; ?>"><div class="title">This translation :<?php echo $elements['title']->render() ?></div></td>
 </tr>
-<?php foreach ($this->translation['InterpretationBlocks'] as $blocknum=>$block) : ?>
+<?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
 <tr>
     <td class="textorig view<?php echo $origDir; ?>">
-        <?php $div_id="text".$this->translation['OriginalWork']['id']."-block-".$block['from']."-".$block['to']; ?>
+        <?php $div_id="text".$this->translation['OriginalWork']['id']."-block-".$block['from_segment']."-".$block['to_segment']; ?>
         <div class="block" id="<?php echo $div_id; ?>">
         <?php
             Tdxio_Log::info($block);
@@ -57,7 +57,7 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
                 <?php if ($segnum<max(array_keys($block['OriginalSentences']))) {
                         $segment=$this->addCutSign($segment,$segnum);
                 } else {
-                    if ($blocknum<max(array_keys($this->translation['InterpretationBlocks']))) {
+                    if ($blocknum<max(array_keys($this->translation['TranslationBlocks']))) {
                         $segment=$this->addMergeSign($segment,$segnum);
                     } else {
                         $segment=$this->prepareSegment($segment);

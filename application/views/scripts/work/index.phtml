@@ -1,16 +1,25 @@
-<p><a href="<?php echo $this->url(
-    array(
-        'controller' => 'work',
-        'action'     => 'deposit'
-    ), 
-    'default', 
-    true) ?>">Insert a new work</a></p>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/close-ul.js')); ?>
+<!--<div class="central-home">-->
+<table class="home">
+<tr><td>
+<div class="logo"><img src="<?php echo $this->makeUrl('/images/traduxio_home_logo.jpg'); ?>">
+<div class="citation">Du point de vue de la communaut&eacute;, le langage n'est pas seulement un fait social , [...] il est par l'alt&eacute;rit&eacute; [...] le fondement de toute association humaine.<span class="author">Eugenio Coseriu</span></div>
+<div class="site-title"><?php echo __('Translating cultural texts') ?></div>
+</div>
+</td><td class="lang-list">
 
-Existing Works: <br />
+		  
+		  
 <dl>
     <!-- Loop through the entries that were provided to us by the controller -->
     <?php foreach ($this->entries as $entry): ?>
-    <dt><?php echo $this->escape($entry->title) ?></dt>
-    <dd><?php echo $this->escape($entry->author) ?></dd>
-    <?php endforeach ?>
+    <dt><a href="<?php echo $this->url(
+            array('controller'=>'work','action'=>'read','id'=>$entry['id'])) ?>">
+                         <?php echo $this->escape($entry->title) ?></a></dt>
+  <?php endforeach ?>
 </dl>
+</td></tr></table>
+<!--</div>-->
+
+
+<?php $this->page_title="Homepage"; ?>
