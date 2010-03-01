@@ -78,17 +78,25 @@ class Model_Work extends Model_Taggable
 	public function fetchAllOriginalWorks()
 	{
 		$table = $this->_getTable();
-		$select1 = $this->getSelectCondOriginalWork();
+		$select1 = $this->getSelectCondOriginalWork('sentence');
 		$select2 = $table->select()->where('id IN (?)',$select1);
 		Tdxio_Log::info('stringa sql '.$select2->__toString());
 		return $table->fetchAll($select2);
 	}
 	
-	public function getSelectCondOriginalWork(){
+	public function getSelectCondOriginalWork($table_name){
 		$table = $this->_getTable();
 		$db = $table->getAdapter();
-		$select = $db->select()->distinct()->from('sentence','work_id');
+		$select = $db->select()->distinct()->from($table_name,'work_id');
+		
 		return $select;		
+	}
+	
+	public function fetchMyTranslations($user){
+		$table = $this->_getTable();
+		$select1 = $this->getSelectCondOriginalWork('interpretation');
+		$select2 = $table->select()->where('id IN (?)',$select1)->where('creator = ?',$user);
+		return	$table->fetchAll($select2);
 	}
 	
 	public function isOriginalWork($id)

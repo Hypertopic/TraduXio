@@ -105,8 +105,11 @@ class TranslationController extends Tdxio_Controller_Abstract
 	}
 	
 	public function readAction()
-	{	
-			
+	{			
+		$request=$this->getRequest();
+		$translationId=$request->getParam('id');
+		$translation = $this->_getModel()->fetchTranslationWork($translationId);
+		$this->view->translation = $translation;
 	}
 	
 	

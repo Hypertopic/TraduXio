@@ -1,0 +1,26 @@
+
+<table class="full-width">
+<tr>
+<td> Left Options:
+
+</td>
+<td> Original Text:
+<div class="title"> <?php echo $this->translation['OriginalWork']['title']; ?></div>
+<div class="text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
+				 <?php echo $sentence['content']; ?>
+				 <?php endforeach; ?>
+</div>
+</td>
+<td> Translation:
+<div class="title"> <?php echo $this->translation['title']; ?></div>
+<div class="text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
+				 <?php echo $block['translation']; ?>
+				 <?php endforeach; ?>
+</div>
+
+</td>
+</tr>
+</table>
+
+<?php $this->page_title="Read Translation: ".$this->escape($this->translation['title']); ?>
+

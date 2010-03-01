@@ -16,7 +16,7 @@ class WorkController extends Tdxio_Controller_Abstract
 	public function init()
 	{
 		// Local to this controller only; affects all actions,
-		// as loaded in init:
+		// as loaded in init: 
 	}
 
 	    /**
@@ -33,8 +33,44 @@ class WorkController extends Tdxio_Controller_Abstract
 	public function indexAction()
 	{
 		$work = $this->getModel();
-		$this->view->entries = $work->fetchAllOriginalWorks();
+		$entries = $work->fetchAllOriginalWorks();
 		Tdxio_Log::info($this->view->entries);
+		
+		$sort=array();
+        $langs=array();
+        $authors=array(-1=>array('name'=>'No Author'));
+		if(!is_null($entries)){
+			foreach ($entries as $entry) {
+				if (isset($entry['language'])) {
+					$lang=$entry['language'];
+					if (!isset($sort[$lang])) {
+						$sort[$lang]=array();
+					}
+					if (!isset($langs[$lang])) {
+//						$langs[$lang]=$entry['Language'];
+						$langs[$lang]=$entry['language'];
+
+					}
+					if (!isset($entry['author']) || $entry['author']==='' /*|| $entry['Author']['name']===''*/) {
+						$entry['author']=-1;
+					}
+						$author=$entry['author'];
+						if (!isset($sort[$lang][$author])) {
+							$sort[$lang][$author]=array();
+						}
+						if (!isset($authors[$author])) {
+							//$authors[$author]=$entry['Author'];
+							$authors[$author]=$entry['author'];
+							
+						}
+						$sort[$lang][$author][]=$entry;
+				}
+			}
+		}
+        $this->view->entries=$sort;
+        $this->view->langs=$langs;
+        $this->view->authors=$authors;
+        $this->view->entries=$entries;
 	}
 		
 		
@@ -109,6 +145,16 @@ class WorkController extends Tdxio_Controller_Abstract
 		$this->view->origWork=$origWork;
 	}
 		
+	public function myAction(){
+		$user = Tdxio_Auth::getUserName(); 
+		if(!is_null($user)){
+			$work = $this->getModel();
+			$this->view->myEntries = $work->fetchMyTranslations($user);
+			Tdxio_Log::info($this->view->myEntries);		
+		}else return $this->_helper->redirector->gotoSimple('index','work');
+	}
+	
+	
 	protected function getModel()
 	{
 		return new Model_Work();

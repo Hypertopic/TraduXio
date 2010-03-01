@@ -6,9 +6,28 @@
 <div class="citation">Du point de vue de la communaut&eacute;, le langage n'est pas seulement un fait social , [...] il est par l'alt&eacute;rit&eacute; [...] le fondement de toute association humaine.<span class="author">Eugenio Coseriu</span></div>
 <div class="site-title"><?php echo __('Translating cultural texts') ?></div>
 </div>
-</td><td class="lang-list">
+</td>
+<td class="lang-list">
 
 		  
+<ul>
+<?php
+foreach ($this->entries as $lang=>$authors) { ?>
+          <li class='language'><?php echo $this->langs[$lang];?>
+          <ul class='authors'>
+<?php     foreach ($authors as $author=>$texts) { ?>
+              <li class='author closed'><?php echo $this->authors[$author]['name'];?>
+              <ul class='texts'>
+<?php         foreach ($texts as $text) { ?>
+                 <li class='text'><a href="<?php echo $this->url(
+            array('controller'=>'text','action'=>'read','id'=>$text['id'])) ?>">
+                         <?php echo $text['title']; ?></a> (<?php echo count($text['Translations']) ?> translations)</li>
+<?php         } ?>
+                </ul></li>
+<?php     } ?>
+          </ul></li>
+<?php   } ?>
+                  </ul>
 		  
 <dl>
     <!-- Loop through the entries that were provided to us by the controller -->
@@ -18,7 +37,9 @@
                          <?php echo $this->escape($entry->title) ?></a></dt>
   <?php endforeach ?>
 </dl>
-</td></tr></table>
+</td>
+</tr>
+</table>
 <!--</div>-->
 
 
