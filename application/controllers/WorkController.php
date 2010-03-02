@@ -7,11 +7,11 @@
  * @uses       Tdxio_Controller_Abstract
  * @package    Traduxio
  * @subpackage Controller
- */
+ */ 
  
 class WorkController extends Tdxio_Controller_Abstract
 {
-	protected $_modelname='Work';
+	protected $_modelname='Work'; 
 	
 	public function init()
 	{
@@ -34,7 +34,7 @@ class WorkController extends Tdxio_Controller_Abstract
 	{
 		$work = $this->getModel();
 		$entries = $work->fetchAllOriginalWorks();
-		Tdxio_Log::info($this->view->entries);
+		Tdxio_Log::info($entries);
 		
 		$sort=array();
         $langs=array();
@@ -70,7 +70,10 @@ class WorkController extends Tdxio_Controller_Abstract
         $this->view->entries=$sort;
         $this->view->langs=$langs;
         $this->view->authors=$authors;
-        $this->view->entries=$entries;
+        Tdxio_Log::info($langs);
+        Tdxio_Log::info($authors);
+        Tdxio_Log::info($sort);
+        
 	}
 		
 		
@@ -111,6 +114,7 @@ class WorkController extends Tdxio_Controller_Abstract
 		$request = $this->getRequest();
 		$id = $request->getParam('id');
 		$model = $this->getModel();
+		$tagForm = new Form_Tag();
 		
 		if (!$id || !($work=$model->fetchOriginalWork($id))) {
 			throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
@@ -120,7 +124,22 @@ class WorkController extends Tdxio_Controller_Abstract
 		if(empty($work['Sentences'])){
 			return $this->_helper->redirector->gotoSimple('read','translation',null,array('id'=>$id));
 		}
+		
+		if ($this->getRequest()->isPost()) {
+		    
+			if ($tagForm->isValid($this->getRequest()->getPost())) {
+				
+				$data = $tagForm->getValues();
+				Tdxio_Log::info('dati di tag');
+				Tdxio_Log::info($data);
+				$this->tag($id,$data);
+				return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$id));
+			}
+		}
+		
+		
 		$this->view->work = $work;
+		$this->view->tagForm = $tagForm;
 	}
 	
 	public function translateAction(){
@@ -154,6 +173,18 @@ class WorkController extends Tdxio_Controller_Abstract
 		}else return $this->_helper->redirector->gotoSimple('index','work');
 	}
 	
+	public function tag($work_id,$data){
+		
+		$model= $this->getModel();
+		$user = Tdxio_Auth::getUserName();
+		$tag = array('username'=> $user, 'work_id'=> $work_id, 'comment' => $data['tag_comment']);
+		$model->tag($tag);
+	}
+	
+	public function tagSentence()
+	{
+		
+	}
 	
 	protected function getModel()
 	{

@@ -262,6 +262,23 @@ li.text a {
 #content {
     margin:5px;
 }
+#fieldset-tag_group{
+	border:0px;
+	background-color:#E5E5E5;
+}
+#tag_group-element{
+	margin:0px;
+	width:100%;
+}
+#tag_button-element {
+	float:left;
+	margin:0px;
+}
+#tag_comment-element{
+	float:right;
+	margin:0px;
+}
+
 #warning {
 	margin: 5px;
 	color: #F14;

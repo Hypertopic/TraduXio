@@ -1,11 +1,19 @@
 
 <table class="full-width">
 <tr>
-<td> Left Options:
+<td>
+<div id = "left-column"> 
+<div class = "leftColumn-inner">Options
+	<ul>
+	  <li><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])) ?>"><?php echo __('Edit this Translation'); ?></a></li>	  
+	</ul>
+</div>
+<?php echo $this->tagForm; ?>
+</div>
 
 </td>
 <td> Original Text:
-<div class="title"> <?php echo $this->translation['OriginalWork']['title']; ?></div>
+<div class="title"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
 <div class="text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
 				 <?php echo $sentence['content']; ?>
 				 <?php endforeach; ?>

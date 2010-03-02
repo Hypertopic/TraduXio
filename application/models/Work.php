@@ -103,6 +103,18 @@ class Model_Work extends Model_Taggable
 	{
 	
 	}
+	
+	public function tag($tag){
+		
+		$tagTable = new Model_DbTable_Tag;
+		$data = array('taggable' => $tag['work_id'],
+					  'user' => $tag['username'],
+				      //'genre' => $tag['comment'],
+					  'comment' => $tag['comment']
+					);
+		$newId = $tagTable->insert($data);
+		
+	}
 
 
 

@@ -109,9 +109,31 @@ class TranslationController extends Tdxio_Controller_Abstract
 		$request=$this->getRequest();
 		$translationId=$request->getParam('id');
 		$translation = $this->_getModel()->fetchTranslationWork($translationId);
+		
+		$tagForm = new Form_Tag();
+		if ($this->getRequest()->isPost()) {
+		
+			if ($tagForm->isValid($this->getRequest()->getPost())) {
+				
+				$data = $tagForm->getValues();
+				Tdxio_Log::info('dati di tag');
+				Tdxio_Log::info($data);
+				$this->tag($translationId,$data);
+				return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$translationId));
+			}
+		}
+				
+		$this->view->tagForm = $tagForm;
 		$this->view->translation = $translation;
 	}
 	
+	public function tag($work_id,$data){
+		
+		$model= new Model_Work();
+		$user = Tdxio_Auth::getUserName();
+		$tag = array('username'=> $user, 'work_id'=> $work_id, 'comment' => $data['tag_comment']);
+		$model->tag($tag);
+	}
 	
 	protected function _getBlockList($transBlocks) 
 	{
