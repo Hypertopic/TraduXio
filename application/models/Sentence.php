@@ -39,7 +39,10 @@ class Model_Sentence extends Model_Taggable
 	
 	public function fetchSentence($work_id, $number){
 		$fields = array('work_id' => $work_id, 'number' => $number);
-		$this->fetchByFields($fields);
+		$sentence = $this->fetchByFields($fields);
+		
+		Tdxio_Log::info($sentence,'sentence,frase');
+		return $sentence;		
 	}
 	
 	public function cleanText($work_id)
@@ -54,7 +57,7 @@ class Model_Sentence extends Model_Taggable
         $table->update($data,$table->getAdapter()->quoteInto('work_id = ? AND ',$work_id).$table->getAdapter()->quoteInto('number = ?',$segnum));
     }
 	
-	public function getLastSentenceId($work_id){
+	public function getLastSentenceNumber($work_id){
 		$table = $this->_getTable();
 		$where=$table->getAdapter()->quoteInto('work_id = ?', $work_id);
 		$result = $table->fetchAll($where);

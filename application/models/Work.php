@@ -36,6 +36,36 @@ class Model_Work extends Model_Taggable
 		return $new_id;
 	}
 	
+	public function update(array $data, $id)
+	{
+		if (isset($data['insert_text']))  {
+            $sentences = $this->_getCutter()->getSentences($data['insert_text']);
+            
+			$sentenceModel=new Model_Sentence();
+			
+			$offset=($sentenceModel->getLastSentenceNumber($id))+1;            
+			$sentences_offset=array();
+			foreach ($sentences as $i=>$seg) {
+				$sentences_offset[$i+$offset]=$seg;
+			}
+			$sentenceModel->bulkSave($id,$sentences_offset,false);
+			$segnums=array_keys($sentences_offset);
+			$fromseg=$segnums[0];
+			$toseg=end($segnums);
+			Tdxio_Log::info($sentences_offset,'sentences aggiornate nella chiamata diretta');
+			Tdxio_Log::info('fromseg is '.$fromseg.', toseg is '.$toseg);
+			
+			$table=$this->_getTable();
+			Tdxio_Log::info($data);
+			$new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
+			
+			//aggiungi un translation block ad ogni traduzione di $id
+			$this->addInterpretations($id,$fromseg,$toseg,$data['insert_text']);
+			
+        }
+        return $new_id;	
+	}
+		
 	public function createTranslation(array $data,$original_work_id)
 	{
 		// insert data into the table "work"
@@ -101,6 +131,15 @@ class Model_Work extends Model_Taggable
 	
 	public function isOriginalWork($id)
 	{
+		$table = $this->_getTable();
+		$db = $table->getAdapter();
+		
+		$select = $db->select()->from('sentence')->where('work_id = ?', $id);
+		$result = $db->fetchAll($select);
+		if(!empty($result))
+			return true;
+		else 
+			return false;		
 	
 	}
 	
@@ -114,6 +153,34 @@ class Model_Work extends Model_Taggable
 					);
 		$newId = $tagTable->insert($data);
 		
+	}
+	
+	protected function addInterpretations($work_id,$fromseg,$toseg,$srcText){
+		
+		$table  = $this->_getTable();
+		$intTable = new Model_DbTable_Interpretation();
+		
+		$select = $intTable->select()->distinct()->from($intTable,'work_id')->where('original_work_id = ?',$work_id); 
+		$trnsltIds = $intTable->fetchAll($select);
+		$trnsltIds = $trnsltIds->toArray();
+		$trModel = new Model_Translation();
+			
+		Tdxio_Log::info($trnsltIds,'trnsltIds');
+		
+		foreach($trnsltIds as $key=>$transl){
+			Tdxio_Log::info($transl,'Guarda');				
+			$my_id = $transl['work_id'];
+			$data['TranslationBlocks']=array();
+			$data['TranslationBlocks'][]=array('original_work_id' => $work_id,
+											'work_id'=> $my_id,
+											'from_segment'=>$fromseg,
+											'to_segment'=>$toseg,
+											'translation'=>"");
+			Tdxio_Log::info($data,'data');
+			$trModel->update($data,$my_id);
+			Tdxio_Log::info('Adding translation block in text with id '.$my_id);
+							
+		}
 	}
 
 

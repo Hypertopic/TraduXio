@@ -1,0 +1,27 @@
+<?php
+// application/views/scripts/text/extend.phtml
+/***
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ **/
+
+?><?php echo $this->headScript()->appendFile($this->makeUrl('/js/autogrow.js')); ?>
+<div class="central-home">
+
+<div class="title"><?php echo $this->escape($this->text['title']); ?></div>
+<div class="language"><?php echo $this->escape($this->text['Language']['ref_name']); ?></div>
+<br/><span class="label">Last segment of the text:</span>
+
+<div class="text view<?php echo $textDir; ?>" lang="<?php echo $this->text['Language']['part1'] ?>">
+<span class="segment" id="<?php echo$this->text['id']?>"></span><?php echo $this->lasttext; ?>
+</div>
+<div class="form">
+<?php echo $this->form ?>
+</div></div>
+<?php $this->page_title="Continue Text Insertion: ".$this->escape($this->text['title']); ?>

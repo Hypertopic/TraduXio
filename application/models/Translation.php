@@ -22,7 +22,7 @@ class Model_Translation extends Model_Abstract
 					'original_work_id'=> $original_work_id,
 					'translation' => '',
 					'from_segment' => 0,
-					'to_segment' => $this->getLastSentenceId($original_work_id),
+					'to_segment' => $this->getLastSentenceNumber($original_work_id),
 					);
 		$id = $table->insert($data);
 		
@@ -118,9 +118,9 @@ class Model_Translation extends Model_Abstract
 		return $sourceText;
 	}
 	
-	protected function getLastSentenceId($work_id){
+	protected function getLastSentenceNumber($work_id){
 		$sentenceModel = new Model_Sentence();
-		return $sentenceModel->getLastSentenceId($work_id);
+		return $sentenceModel->getLastSentenceNumber($work_id);
 	}
 	
 	public function fetchInterpretations($work_id){
@@ -208,5 +208,6 @@ class Model_Translation extends Model_Abstract
         }
         return $this->_cutter;
     }
+    
 
 }

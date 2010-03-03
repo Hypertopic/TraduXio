@@ -173,7 +173,51 @@ class WorkController extends Tdxio_Controller_Abstract
 		}else return $this->_helper->redirector->gotoSimple('index','work');
 	}
 	
-	public function tag($work_id,$data){
+	public function extendAction(){
+    	$request = $this->getRequest();
+		$id=$request->getParam('id');
+		
+		$model=$this->_getModel(); 
+		
+		if (!$id || !($work=$model->fetchWork($id))) {
+			throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
+		}	
+		
+		if(!$model->isOriginalWork($id)) {
+			throw new Zend_Controller_Action_Exception(sprintf('Cannot extend a translation. Edit it instead.'), 404);
+		}
+		
+		$sentenceModel = new Model_Sentence();
+		
+		if($id && $work=$model->fetchOriginalWork($id))
+		{			
+			$form = new Form_TextExtend(); 
+			$lastsentence = $sentenceModel->fetchSentence($id,$sentenceModel->getLastSentenceNumber($id));
+			Tdxio_Log::info($lastsentence,'pipipopo');
+			$lasttext = ' '.$lastsentence[0]['content'];
+			
+			if ($this->getRequest()->isPost()) 
+			{
+				if ($form->isValid($request->getPost())){
+					$model = $this->_getModel();
+					$data=$form->getValues();
+									
+					unset($data['submit']);
+					
+					$newId=$model->update($data,$id);
+				    return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
+				}
+			}
+			$this->view->form=$form;
+			$this->view->text=$work;
+			$this->view->lasttext=$lasttext;
+			
+		}else {
+            throw new Zend_Exception("Couldn't find text $id");
+        }
+	}	
+	
+	protected function tag($work_id,$data){
 		
 		$model= $this->getModel();
 		$user = Tdxio_Auth::getUserName();
@@ -181,7 +225,7 @@ class WorkController extends Tdxio_Controller_Abstract
 		$model->tag($tag);
 	}
 	
-	public function tagSentence()
+	protected function tagSentence()
 	{
 		
 	}
