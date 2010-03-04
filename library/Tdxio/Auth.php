@@ -26,7 +26,10 @@ class Tdxio_Auth
 	}
 	
 	public static function getUserRole(){
-		return 'member'; //temporaneo
+		if(!self::getUserId())
+			return 'guest'; 
+		else return 'member'; 
+		//temporaneo
 		//dovrò decidere in seguito se chiamare da qui il modello
 		// o se delegare questa funzione ad un altra classe
 	}

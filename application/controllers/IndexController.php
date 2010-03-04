@@ -27,4 +27,21 @@ class IndexController extends Zend_Controller_Action
     {
 	return $this->_helper->redirector('index','work');
     }
+    
+    
+    
+	public function getRule($request){	
+		$action = $request->action;
+		$resource_id = $request->getParam('id');
+		
+		switch($action){
+			case 'feedback': 
+					if($request->isPost()){
+						$rule =array('privilege'=> 'feedback','text_id' => null) ;
+					}else{$rule =array('privilege'=> 'feedback','text_id' => null, 'notAllowed'=>true) ;}
+					break;
+		default: $rule = 'noAction';		
+		}
+		return $rule;
+	}
 }

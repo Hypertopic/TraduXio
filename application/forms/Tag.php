@@ -41,8 +41,6 @@ class Form_Tag extends Form_Abstract
             'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
             'required'=>true));
 
-        //$title=$this->createElement('text','title');
-        
         $this->addElement($tag);
         // add the submit button
         $this->addElement('submit', 'tag_button', array(

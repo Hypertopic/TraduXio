@@ -33,9 +33,11 @@
 		<div id="header-navigation">
 			<ul>
 			<li> <a href="<?php echo $this->makeUrl('/work/index'); ?>"><?php echo __('Oeuvres'); ?></a></li>
-			<li> <a href="<?php echo $this->makeUrl('/work/my'); ?>"><?php echo __('My Translations'); ?></a></li>
 			<li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concordancier'); ?></a></li>
+			<?php if($this->showCreate): ?>
+			<li> <a href="<?php echo $this->makeUrl('/work/my'); ?>"><?php echo __('My Translations'); ?></a></li>
 			<li> <a href="<?php echo $this->makeUrl('/work/deposit'); ?>"><?php echo __('New text'); ?></a> </li>	
+			<?php endif; ?>
 			<li><a href="<?php echo $this->makeUrl('/index/tutorial');?>">Help</a></li>
 		<?php //if ($this->home) :?>
 			<li><a href="<?php echo $this->makeUrl('/index/about');?>">About</a></li>

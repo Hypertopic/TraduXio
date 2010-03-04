@@ -161,4 +161,40 @@ class TranslationController extends Tdxio_Controller_Abstract
 	
 	}
 	
+		
+	public function getRule($request){
+		$action = $request->action;
+		$resource_id = $request->getParam('id');
+		// $rule = 'noAction';
+		
+		switch($action){
+//			case 'create': 
+//				if($request->isPost()){
+//					$rule = array('privilege'=> 'create','text_id' => null);
+//				}else{
+//					$rule = array('privilege'=> 'create','text_id' => null, 'notAllowed'=>true);
+//				}
+//				break; 
+			case 'edit':
+				if($request->isPost()){
+					$rule = array('privilege'=> 'edit','text_id' => $resource_id);	 	
+				}else{
+					$rule = array('privilege'=> 'edit','text_id' => $resource_id, 'notAllowed'=>true);	 	
+				} break; 
+			case 'cut':
+				$rule = array('privilege'=> 'edit','text_id' => $resource_id);	
+				break;
+			case 'merge': 
+				$rule = array('privilege'=> 'edit','text_id' => $resource_id);		
+				break;				
+			case 'read': 
+				$rule = array('privilege'=> 'read','text_id' => $resource_id,'edit_privilege'=> 'edit');	
+				break; 	
+			case 'concord': break;
+			default:$rule = 'noAction';
+		}				
+		return $rule;
+		
+	}
+	
 }

@@ -72,8 +72,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$loader = new Zend_Loader_PluginLoader(array(
 		'Tdxio_Plugin' => APPLICATION_PATH . '/../library/Tdxio/Plugin/'
 		));
-		
-		//$loader->addPrefixPath();
+
+		$front = Zend_Controller_Front::getInstance();
+		$aclPlugin = new Tdxio_Plugin_AclPlugin();
+		$front->registerPlugin($aclPlugin); 
+
 	}
 		
 	//INITIALIZE HELPER PATH

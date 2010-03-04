@@ -78,34 +78,21 @@ class WorkController extends Tdxio_Controller_Abstract
 		
 		
 	public function depositAction()
-	{
-		
+	{		
 		$form = new Form_TextDeposit();
 
-		// Check to see if this action has been POST'ed to.
 		if ($this->getRequest()->isPost()) {
 		    
-			// Now check to see if the form submitted exists, and
-			// if the values passed in are valid for this form.
 			if ($form->isValid($this->getRequest()->getPost())) {
 				
-				// Since we now know the form validated, we can now
-				// start integrating that data sumitted via the form
-				// into our model:
 				$data = $form->getValues();
 				$data['creator']=Tdxio_Auth::getUserName();
 				$model = $this->getModel();
 				$model->save($data);
 				Tdxio_Log::info($data);
-				// Now that we have saved our model, lets url redirect
-				// to a new location.
-				// This is also considered a "redirect after post";
-				// @see http://en.wikipedia.org/wiki/Post/Redirect/Get
 				return $this->_helper->redirector('index');
 			}
 		}
-		
-		// Assign the form to the view
 		$this->view->form = $form;
 	} 
 	
@@ -233,6 +220,43 @@ class WorkController extends Tdxio_Controller_Abstract
 	protected function getModel()
 	{
 		return new Model_Work();
+	}
+	
+	public function getRule($request){
+		$action = $request->action;
+		$resource_id = $request->getParam('id');
+		$rule = 'noAction';
+		Tdxio_Log::info($request,'request');
+		Tdxio_Log::info($resource_id);
+		switch($action){
+			case 'index': 
+						$rule = array('privilege'=> 'read','text_id' => null);		
+						break; 
+			case 'deposit': 
+						if($request->isPost()){
+							$rule = array('privilege'=> 'create','text_id' => null );		
+						}else{$rule = array('privilege'=> 'create','text_id' => null, 'notAllowed'=>true);} 
+						break; 
+			case 'translate':
+			case 'read': //if you can read a text, you can translate it as well 
+						$rule = array('privilege'=> 'read','text_id' => $resource_id,'edit_privilege'=> 'edit');		
+						break; 						
+//			case 'edit':
+//					if($request->isPost()){
+//						$rule = array('privilege'=> 'edit','text_id' => $resource_id);		
+//					}else{$rule = array('privilege'=> 'edit','text_id' => $resource_id,'notAllowed'=>true);		
+//					} break; 
+			case 'my': break;					
+			case 'extend':
+					if($request->isPost()){
+						$rule = array('privilege'=> 'edit','text_id' => $resource_id);		
+					}else{
+						$rule = array('privilege'=> 'edit','text_id' => $resource_id, 'notAllowed'=>true);	
+					} break; 
+			default:$rule = 'noAction';
+		}				
+		return $rule;
+		
 	}
 	
 	

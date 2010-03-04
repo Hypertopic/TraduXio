@@ -98,5 +98,6 @@ class LoginController extends Zend_Controller_Action
         // Our form, of course, will just pass the parameters 'username'
         // and 'password'.
     }
+    
 	
 }

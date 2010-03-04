@@ -97,6 +97,13 @@ padding:6px 10px 4px 0;
 	width:100%;
 }
 
+.inline{
+	float:left;
+}
+.insert-text{
+	clear:both;
+}
+
 
 a:link, a:active {
 color:#0066B7;
@@ -285,4 +292,10 @@ li.text a {
 	font-variant: small-caps; 
 	font-weight:bold;
 	clear:both;
+}
+
+#title-label, #author-label, #the_text-label, #language-label{
+	
+	display:inline;
+	padding-left:40px;
 }

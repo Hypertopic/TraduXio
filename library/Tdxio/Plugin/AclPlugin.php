@@ -1,11 +1,10 @@
 <?php
 
-require_once APPLICATION_PATH.'/models/PrivilegeModel.php'; 
+//require_once APPLICATION_PATH.'/models/PrivilegeModel.php'; 
 
 class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 {
-//    private $_acl;
-    public $_userid;
+	public $_userid;
 	public $_role;
 
     private $_noauth = array('controller' => 'login',
@@ -16,9 +15,8 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
    
     public function __construct()
     {
-   		$aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('TdxioAuthHelper');
-		$this->_userid = $aclHelper->getUserId();
-		$this->_role = $aclHelper->getRole();
+		$this->_userid = Tdxio_Auth::getUserId();
+		$this->_role = Tdxio_Auth::getUserRole();
     }
 
 	public function preDispatch($request)
@@ -39,13 +37,13 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 		$controller = new $classname($request,$response); 
 		
 		$rule = $controller->getRule($request);
-		$this->log($rule," rule dopo text-controller");
+		Tdxio_Log::info($rule," rule dopo text-controller");
 		
 		$layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
 		$view = $layout->getView();
 		$view->userid=$this->_userid;
 		$view->preview = false;//view even unaccessible content
-		$privilegeModel = new PrivilegeModel();
+		$privilegeModel = new Model_Privilege();
 		$create_privilege = array(
 					'user_id' => $this->_userid,
 					'role' => $this->_role,
@@ -65,11 +63,11 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 					'text_id' => $rule['text_id'],
 					'visibility' => $rule['visibility']
 		);
-		$this->log($privilege,'privilegio');
+		Tdxio_Log::info($privilege,'privilegio');
 		$view->showEdit=false;
 		
 		if (!($privilegeModel->exist($privilege))){
-			$this->log('not exist');
+			Tdxio_Log::info('the privilege does not exist');
 			if(isset($rule['notAllowed'])&&$view->preview){
 				$view->notAllowed=true;
 				return;
@@ -82,6 +80,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 				$actionName = $this->_noacl['action'];
 			}
 		}else{
+			Tdxio_Log::info('the privilege exists');
 			if(isset($rule['edit_privilege'])){
 				$editPrivilege=$privilege;
 				$editPrivilege['privilege']=$rule['edit_privilege'];
@@ -97,55 +96,4 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 		$request->setActionName($actionName);
 	}
 	
-	public function getUserId(Zend_Auth $auth=null)
-    {
-		if(is_null($auth)){
-			$auth = Zend_Auth::getInstance();
-		}
-        if ($auth->hasIdentity()) {
-            $username = $auth->getIdentity();
-           if (preg_match('/cn\=([a-zA-Z0-9.]*)/',$username,$matches)) {
-				$this->_userid=$matches[1];
-                return $matches[1];
-           }
-		}
-	
-		return null;
-    }
-	
-/* 	public function getEntriesByUserId($userid){
-		if (userid=='diana.zambon'){
-			$test_entries=array('ita' => array(
-												5 => array(
-															'id'=>175,
-															'title'=>'creatore',
-															'Translations'=>array(
-																				  176,
-																				  177)
-															)
-												)
-								);
-								
-			return $test_entries;
-		}
-		return null;
-	}
- */	
-	protected $_logger=null;
-    protected function log($message='',$title=null,$priority=1) {
-        if (!$this->_logger) {
-            global $logger;
-            $this->_logger=$logger;
-        }
-        if (is_null($message)) {
-            $message="{NULL}";
-        } elseif (is_bool($message)) {
-            $message="{".($message ? 'TRUE':'FALSE')."}";
-        } elseif (is_array($message) || is_object($message)) {
-            $message=print_r($message,true);
-        }
-        if (null !== $title) $message="[$title] : ".$message;
-        $this->_logger->log($message,$priority);
-    }
-
 }

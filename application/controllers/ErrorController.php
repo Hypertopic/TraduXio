@@ -3,11 +3,11 @@
 /**
  * Error controller
  *
- * @uses       Zend_Controller_Action
+ * @uses       Tdxio_Controller_Abstract
  * @package    Traduxio
  * @subpackage Controller
  */
-class ErrorController extends Zend_Controller_Action
+class ErrorController extends Tdxio_Controller_Abstract
 {
     /**
      * errorAction() is the action that will be called by the "ErrorHandler" 
@@ -47,7 +47,5 @@ class ErrorController extends Zend_Controller_Action
     {		
     }
 	
-	public function getRule($request){
-		return 'noAction';	
-	}
+
 }

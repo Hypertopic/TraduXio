@@ -39,21 +39,41 @@ class Form_TextDeposit extends Form_Abstract
 
         $title=$this->createElement('text','title');
         //var_dump($title);
+        
         $title->setOptions(array(
             'label'      => 'Title',
-            'required'   => true
+            'required'   => true,
+            'class' => 'title'
+            
         ));
-        $title->setAttrib('class','title');
         $title->setAttrib('class',$title->getAttrib('class').' deposit');
-        $this->addElement($title);
+        $title->addDecorator(array('Inline'=>'HtmlTag'),array('tag'=>'span','class'=>'inline tag'));
+		
+		$author=$this->createElement('text','author');
+                
+        $author->setOptions(array(
+            'label'      => 'Author',
+            'required'   => true,
+            'class' => 'author'
+            
+        ));
+        $author->setAttrib('class',$title->getAttrib('class').' deposit');
+        $author->addDecorator(array('Inline'=>'HtmlTag'),array('tag'=>'span','class'=>'inline tag'));
 
-        $this->addElement('textarea', 'the_text', array(
+        $this->addElement($title);
+        $this->addElement($author);
+        
+        //$this->addDisplayGroup(array('title','author'), 'ta_group');
+        
+        $text = $this->createElement('textarea', 'the_text', array(
             'label'      => __('Text content'),
             'required'   => true,
             'rows' => 10,
             'class' => 'autogrow mini',
             'cols'=>100
         ));
+        $text->addDecorator(array('Inline'=>'HtmlTag'),array('tag'=>'div','class'=>'insert-text'));
+        $this->addElement($text);
 
         // language dropdown
         $this->addElement('select', 'language', array(
@@ -62,14 +82,11 @@ class Form_TextDeposit extends Form_Abstract
             'required'   => true
         ));
 
-       // require_once "TextMetadataDispGrp.php";
-       // Form_TextMetadataDispGrp::apply($this);
-
         // add the submit button
         $this->addElement('submit', 'submit', array(
             'label'    => __('Deposit'),
         ));
-
+        
     }
 
 

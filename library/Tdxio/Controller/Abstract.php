@@ -47,4 +47,8 @@ class Tdxio_Controller_Abstract extends Zend_Controller_Action
 	
 	}
 	
+	public function getRule($request){
+		return 'noAction';	
+	}
+	
 }
