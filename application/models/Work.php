@@ -109,9 +109,10 @@ class Model_Work extends Model_Taggable
 	{
 		$table = $this->_getTable();
 		$select1 = $this->getSelectCondOriginalWork('sentence');
-		$select2 = $table->select()->where('id IN (?)',$select1);
-		Tdxio_Log::info('stringa sql '.$select2->__toString());
-		return $table->fetchAll($select2);
+		$select2 = $this->getSelectCondAllowedWork('read');
+		$select = $table->select()->where('id IN (?)',$select1)->where('id IN (?)',$select2);
+		Tdxio_Log::info('stringa sql'.$select->__toString());
+		return $table->fetchAll($select);
 	}
 	
 	public function getSelectCondOriginalWork($table_name){
@@ -120,6 +121,21 @@ class Model_Work extends Model_Taggable
 		$select = $db->select()->distinct()->from($table_name,'work_id');
 		
 		return $select;		
+	}
+	
+	public function getSelectCondAllowedWork($privilege)
+	{
+		$table = $this->_getTable();
+		$db = $table->getAdapter();
+		$user_name = Tdxio_Auth::getUserName();
+		if(is_null($user_name)) $user_name = 'guest';
+		$visibility = 'public';
+	
+		$select = $db->select()->from('work','id')->where('creator = ?',$user_name)
+												  ->orWhere('visibility = ?',$visibility)
+												  ->orWhere('id IN (?)',$db->select()->from('privileges','work_id')->where('user_id = ?',$user_name)->where('privilege = ?',$privilege));		
+		return $select;		
+		
 	}
 	
 	public function fetchMyTranslations($user){
@@ -183,6 +199,15 @@ class Model_Work extends Model_Taggable
 		}
 	}
 
+	public function getAttribute($work_id, $attrname){
+
+		$work=$this->fetchWork($work_id);
+		if(isset($work[$attrname])){
+			return $work[$attrname];
+		}
+
+        throw new Zend_Exception('The specified attribute does not exist in the database.');
+    }
 
 
 }

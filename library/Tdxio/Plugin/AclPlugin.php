@@ -15,7 +15,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
    
     public function __construct()
     {
-		$this->_userid = Tdxio_Auth::getUserId();
+		$this->_userid = Tdxio_Auth::getUserName();
 		$this->_role = Tdxio_Auth::getUserRole();
     }
 
@@ -48,7 +48,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 					'user_id' => $this->_userid,
 					'role' => $this->_role,
 					'privilege'=> 'create',
-					'text_id' => null
+					'work_id' => null
 		);	
 		if ($privilegeModel->exist($create_privilege) || $view->preview){$view->showCreate=true;}
 		else {$view->showCreate=false;}
@@ -60,7 +60,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 					'user_id' => $this->_userid,
 					'role' => $this->_role,
 					'privilege'=> $rule['privilege'],
-					'text_id' => $rule['text_id'],
+					'work_id' => $rule['work_id'],
 					'visibility' => $rule['visibility']
 		);
 		Tdxio_Log::info($privilege,'privilegio');

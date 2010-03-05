@@ -5,11 +5,11 @@
  *
  * Default controller for this application.
  * 
- * @uses       Zend_Controller_Action
+ * @uses       Tdxio_Controller_Abstract
  * @package    Traduxio
  * @subpackage Controller
  */
-class IndexController extends Zend_Controller_Action
+class IndexController extends Tdxio_Controller_Abstract
 {
     /**
      * The "index" action is the default action for all controllers -- the 
@@ -37,8 +37,8 @@ class IndexController extends Zend_Controller_Action
 		switch($action){
 			case 'feedback': 
 					if($request->isPost()){
-						$rule =array('privilege'=> 'feedback','text_id' => null) ;
-					}else{$rule =array('privilege'=> 'feedback','text_id' => null, 'notAllowed'=>true) ;}
+						$rule =array('privilege'=> 'feedback','work_id' => null) ;
+					}else{$rule =array('privilege'=> 'feedback','work_id' => null, 'notAllowed'=>true) ;}
 					break;
 		default: $rule = 'noAction';		
 		}

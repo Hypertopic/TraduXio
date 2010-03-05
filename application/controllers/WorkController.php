@@ -222,36 +222,48 @@ class WorkController extends Tdxio_Controller_Abstract
 		return new Model_Work();
 	}
 	
+
+	
 	public function getRule($request){
 		$action = $request->action;
 		$resource_id = $request->getParam('id');
 		$rule = 'noAction';
 		Tdxio_Log::info($request,'request');
-		Tdxio_Log::info($resource_id);
+		Tdxio_Log::info($resource_id,'resource_id');
+		if(!is_null($resource_id)){ 
+			$visibility=$this->_getModel()->getAttribute($resource_id,'visibility');
+			Tdxio_Log::info($visibility,'visibilita');
+		}
+		
 		switch($action){
 			case 'index': 
-						$rule = array('privilege'=> 'read','text_id' => null);		
+						$rule = array('privilege'=> 'read','work_id' => null);		
 						break; 
 			case 'deposit': 
 						if($request->isPost()){
-							$rule = array('privilege'=> 'create','text_id' => null );		
-						}else{$rule = array('privilege'=> 'create','text_id' => null, 'notAllowed'=>true);} 
+							$rule = array('privilege'=> 'create','work_id' => null );		
+						}else{$rule = array('privilege'=> 'create','work_id' => null, 'notAllowed'=>true);} 
 						break; 
 			case 'translate':
-			case 'read': //if you can read a text, you can translate it as well 
-						$rule = array('privilege'=> 'read','text_id' => $resource_id,'edit_privilege'=> 'edit');		
+				if($request->isPost()){
+					$rule = array('privilege'=> 'translate','work_id' => $resource_id);
+				}else{
+					$rule = array('privilege'=> 'read','work_id' => $resource_id, 'notAllowed'=>true);
+				}
+			case 'read':
+						$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');		
 						break; 						
 //			case 'edit':
 //					if($request->isPost()){
-//						$rule = array('privilege'=> 'edit','text_id' => $resource_id);		
-//					}else{$rule = array('privilege'=> 'edit','text_id' => $resource_id,'notAllowed'=>true);		
+//						$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);		
+//					}else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'notAllowed'=>true,'visibility'=>$visibility);		
 //					} break; 
 			case 'my': break;					
 			case 'extend':
 					if($request->isPost()){
-						$rule = array('privilege'=> 'edit','text_id' => $resource_id);		
+						$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);		
 					}else{
-						$rule = array('privilege'=> 'edit','text_id' => $resource_id, 'notAllowed'=>true);	
+						$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility, 'notAllowed'=>true);	
 					} break; 
 			default:$rule = 'noAction';
 		}				

@@ -50,7 +50,7 @@ class Form_RemovePrivilege extends Form_Abstract
 
 		
 		foreach($this->_list as $key=>$privilege){
-		if(is_null($privilege['text_id'])){
+		if(is_null($privilege['work_id'])){
 			$attrList=array(
 				'label' => $privilege['plaintext'],
 				'value' => $privilege['id'],

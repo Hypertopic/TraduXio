@@ -165,30 +165,26 @@ class TranslationController extends Tdxio_Controller_Abstract
 	public function getRule($request){
 		$action = $request->action;
 		$resource_id = $request->getParam('id');
-		// $rule = 'noAction';
+		
+		if(!is_null($resource_id)){
+			$visibility = new Model_Work()->getAttribute($resource_id,'visibility');
+		}
 		
 		switch($action){
-//			case 'create': 
-//				if($request->isPost()){
-//					$rule = array('privilege'=> 'create','text_id' => null);
-//				}else{
-//					$rule = array('privilege'=> 'create','text_id' => null, 'notAllowed'=>true);
-//				}
-//				break; 
 			case 'edit':
 				if($request->isPost()){
-					$rule = array('privilege'=> 'edit','text_id' => $resource_id);	 	
+					$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);	 	
 				}else{
-					$rule = array('privilege'=> 'edit','text_id' => $resource_id, 'notAllowed'=>true);	 	
+					$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility, 'notAllowed'=>true);	 	
 				} break; 
 			case 'cut':
-				$rule = array('privilege'=> 'edit','text_id' => $resource_id);	
+				$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);	
 				break;
 			case 'merge': 
-				$rule = array('privilege'=> 'edit','text_id' => $resource_id);		
+				$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);		
 				break;				
 			case 'read': 
-				$rule = array('privilege'=> 'read','text_id' => $resource_id,'edit_privilege'=> 'edit');	
+				$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');	
 				break; 	
 			case 'concord': break;
 			default:$rule = 'noAction';

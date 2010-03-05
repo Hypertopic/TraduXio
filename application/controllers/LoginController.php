@@ -3,12 +3,12 @@
 /*** Login controller
  *
  * 
- * @uses       Zend_Controller_Action
+ * @uses       Tdxio_Controller_Abstract
  * @package    Traduxio
  * @subpackage Controller
  */
  
-class LoginController extends Zend_Controller_Action
+class LoginController extends Tdxio_Controller_Abstract
 {
     
 	public function preDispatch()
