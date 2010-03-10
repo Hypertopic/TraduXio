@@ -222,7 +222,14 @@ select.manage-select{
 	font-weight:normal;
 	font-size:170%;
 }
-
+.srcLang {
+font-variant:small-caps;
+}
+li.srcLang, li.trlLang, li.srcAuth {
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+}
 #clear{
 	clear:both;
 	height:30px;
@@ -337,4 +344,10 @@ select.manage-select{
 	
 	display:inline;
 	padding-left:40px;
+}
+
+#my-transl{
+	font-size:200%;
+	color:#505050;
+
 }

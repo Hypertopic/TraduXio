@@ -91,7 +91,12 @@ class Model_Work extends Model_Taggable
 
 	
 	public function fetchWork($id){
-		return $this->fetchEntry($id);
+		if(!is_array($id)){
+			return $this->fetchEntry($id);
+		}else{
+			$table=$this->_getTable();
+			return $table->fetchAll($table->select()->where('id IN (?)',$id))->toArray();
+		}
 	}
 	
 	public function fetchOriginalWork($work_id){
@@ -109,14 +114,19 @@ class Model_Work extends Model_Taggable
 		return $work;
 	}
 
-	public function fetchAllOriginalWorks()
+	public function fetchAllOriginalWorks($idList=null)
 	{
 		$table = $this->_getTable();
 		$select1 = $this->getSelectCondOriginalWork('sentence');
-		$select2 = $this->getSelectCondAllowedWork('read');
-		$select = $table->select()->where('id IN (?)',$select1)->where('id IN (?)',$select2);
+		$select2 = $this->getSelectCondAllowedWork('read');	
+		if(is_null($idList)){			
+			$select = $table->select()->where('id IN (?)',$select1)->where('id IN (?)',$select2);
+		}else {//select only some specific original works
+			$select = $table->select()->where('id IN (?)',$select1)->where('id IN (?)',$select2)->where('id IN (?)',$idList);
+		}
 		Tdxio_Log::info('stringa sql'.$select->__toString());
 		return $table->fetchAll($select);
+		
 	}
 	
 	public function getSelectCondOriginalWork($table_name){
@@ -142,11 +152,42 @@ class Model_Work extends Model_Taggable
 		
 	}
 	
-	public function fetchMyTranslations($user){
+	public function fetchMyTranslationWorks($user){
 		$table = $this->_getTable();
 		$select1 = $this->getSelectCondOriginalWork('interpretation');
 		$select2 = $table->select()->where('id IN (?)',$select1)->where('creator = ?',$user);
-		return	$table->fetchAll($select2);
+		$translations = $table->fetchAll($select2)->toArray();
+		$translations = $this->getOriginalWorksFromTranslations($translations);
+		return $translations;
+	}
+	
+	public function getOriginalWorksFromTranslations($translations){
+		if(!empty($translations)){
+			$idList=array();
+			foreach($translations as $key=>$trWork){
+				$idList[$key]=$trWork['id'];			
+			}
+			$table = $this->_getTable();
+			$db = $table->getAdapter();
+			$select = $db->select()->from('interpretation',array('work_id','original_work_id'))->where('work_id IN (?)', $idList);
+			$result = $db->fetchAll($select);
+			$originalIds=array();
+			foreach($result as $key=>$ids){
+				$originalIds[$ids['work_id']]=$ids['original_work_id'];
+			}		
+			Tdxio_Log::info($originalIds,'originalIds');
+			$result=$this->fetchWork($originalIds);
+			$originalWorks=array();
+			foreach($result as $key=>$origWork){
+				$originalWorks[$origWork['id']]=$origWork;
+			}
+			
+			foreach($translations as $key=>$trWork){
+				$translations[$key]['original_work']=$originalWorks[$originalIds[$trWork['id']]];
+				$translations[$key]['srcLang']=$translations[$key]['original_work']['language'];
+			}					
+		}
+		return $translations;
 	}
 	
 	public function isOriginalWork($id)

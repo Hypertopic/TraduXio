@@ -1,9 +1,18 @@
+<div id="my-transl"><?php echo __('My Translations'); ?></div>
 <ul>
 
-<?php foreach ($this->myEntries as $key => $entry): ?>
-<li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$entry['id'])); ?>"> <?php echo $entry['title']; ?> </a></li>
+<?php foreach ($this->myEntries as $srcLang=>$trlLang):?>
+<?php foreach ($trlLang as $lang=>$texts):?>
+	<li class='srcLang'> <?php echo $srcLang;//$this->srcLangs[$srcLang]['ref_name'];?> <img src="<?php echo $this->makeUrl('/images/arrow-right.png'); ?>"> <?php echo $lang;//$this->trlLangs[$lang]['ref_name'];?></li>
+	<ul class='trl'>
+<?php foreach ($texts as $text): ?>
+	<li class='text'>
+	<a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$text['id'])) ?>"><?php echo $text['title']; ?></a></li>
 <?php endforeach; ?>
 </ul>
+<?php endforeach; ?>
+<?php endforeach; ?>
 
+</ul>
 
 <?php $this->page_title = __("My Translations");?>

@@ -48,11 +48,10 @@ class WorkController extends Tdxio_Controller_Abstract
 						$sort[$lang]=array();
 					}
 					if (!isset($langs[$lang])) {
-//						$langs[$lang]=$entry['Language'];
 						$langs[$lang]=$entry['language'];
 
 					}
-					if (!isset($entry['author']) || $entry['author']==='' /*|| $entry['Author']['name']===''*/) {
+					if (!isset($entry['author']) || $entry['author']==='' ) {
 						$entry['author']=-1;
 					}
 						$author=$entry['author'];
@@ -60,7 +59,6 @@ class WorkController extends Tdxio_Controller_Abstract
 							$sort[$lang][$author]=array();
 						}
 						if (!isset($authors[$author])) {
-							//$authors[$author]=$entry['Author'];
 							$authors[$author]=$entry['author'];
 							
 						}
@@ -151,8 +149,15 @@ class WorkController extends Tdxio_Controller_Abstract
 		$user = Tdxio_Auth::getUserName(); 
 		if(!is_null($user)){
 			$work = $this->getModel();
-			$this->view->myEntries = $work->fetchMyTranslations($user);
-			Tdxio_Log::info($this->view->myEntries);		
+			$myTranslations = $work->fetchMyTranslationWorks($user);
+								
+			$srcLangs=array();
+			foreach($myTranslations as $trWork){
+				$srcLangs[$trWork['srcLang']][$trWork['language']][]=$trWork;
+			}
+			$this->view->myEntries = $srcLangs;
+			
+			Tdxio_Log::info($srcLangs,'my translations');		
 		}else return $this->_helper->redirector->gotoSimple('index','work');
 	}
 	
