@@ -81,6 +81,12 @@ class Model_Abstract {
 		return $result;
 	}
 	
+	public function fetchAllWhere($where){
+		
+		
+	}
+	
+	
    	protected function _toArray($row,$recursive=1) 
 	{
 		return $this->_extend($row->toArray(),$recursive);

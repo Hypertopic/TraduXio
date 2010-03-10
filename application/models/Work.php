@@ -60,9 +60,13 @@ class Model_Work extends Model_Taggable
 			$new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
 			
 			//aggiungi un translation block ad ogni traduzione di $id
-			$this->addInterpretations($id,$fromseg,$toseg,$data['insert_text']);
-			
+			$this->addInterpretations($id,$fromseg,$toseg,$data['insert_text']);			
         }
+		if (isset($data['visibility'])){
+			$table=$this->_getTable();
+			$new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
+			Tdxio_Log::info($new_id,'nuovo id');
+		}
         return $new_id;	
 	}
 		
@@ -209,5 +213,68 @@ class Model_Work extends Model_Taggable
         throw new Zend_Exception('The specified attribute does not exist in the database.');
     }
 
+	public function isAllowed($privilege_name,$work_id){
+	
+		$user_name = Tdxio_Auth::getUserName();
+		$user_role = Tdxio_Auth::getUserRole();
+		$privilege = array( 'user_id' => $user_name,
+							'role' => $user_role,
+ 							'work_id' => $work_id,
+ 							'privilege' => $privilege_name,
+							'visibility' => $this->getAttribute($work_id, 'visibility')
+					);
+		$privilegeModel = new Model_Privilege();
+		return $privilegeModel->exist($privilege);  		
+	}
+	
+	public function getWorkPrivileges($id){	
+		$visibility=$this->getAttribute($id,'visibility');
+		$privilegeModel= new Model_Privilege();
+		$privilegeTable=$privilegeModel->_getTable();
+		
+		if($visibility=='custom'){
+		
+		$select = $privilegeTable->select()->where('work_id = ?',$id)
+												  ->orWhere('work_id is NULL AND visibility = ?',$visibility);
+		
+		Tdxio_Log::info('stringa sql in getWorkPrivileges'.$select->__toString());
+		  
+		$list = $privilegeTable->fetchAll($select);
+	
+		}else{
+			$list=$privilegeModel->fetchByFields(array('visibility = ?', $visibility));
+			$list = $list->toArray();
+		}
+		
+		Tdxio_Log::info($list);
+		$newlist=array();
+		foreach($list as $key=>$item){
+			$item['user_id']=($item['user_id']=='')?'All users are ' : 'User '.$item['user_id'].' is ';
+			$item['privilege']=($item['privilege']=='')?' do everything for ':$item['privilege'];
+			$newlist[$key]['plaintext']= $item['user_id'].' allowed to '.$item['privilege'].' this text.';
+			$newlist[$key]['id']=$item['id'];
+			$newlist[$key]['work_id']=$item['work_id'];
+		}		
+		return $newlist;
+	}
+	
+	public function removePrivilege($id_list=array(),$attribute_value=array()){
+		$privilegeModel= new Model_Privilege();
+		$privilegeModel->delete($id_list,$attribute_value);		
+	}
+	
+	public function addPrivilege($data){
+		$privilegeModel=new Model_Privilege();
+		$userModel= new Model_User();
+		$data['privilege']=$privilegeModel->_dbPrivilegeList[$data['privilege']];
+		$data['user_id']=($data['user']=='all')?null:$data['user'];
+		unset($data['user']);
+		
+		$data['role']=null;
+		Tdxio_Log::info($data['user_id']);
+		Tdxio_Log::info($data,'data da inserire');
+		$id=$privilegeModel->save($data);
+		Tdxio_Log::info($id);
+	}
 
 }

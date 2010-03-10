@@ -70,14 +70,15 @@ class Form_AddPrivilege extends Form_Abstract
 
 	protected function _getUsers()
     {
-        require_once APPLICATION_PATH . '/models/UserModel.php';
-		$userModel = new UserModel();
-		$usersarray=$userModel->fetchEntries();
-		$users[0]='all users';
+		$userModel = new Model_User();
+		$usersarray=$userModel->fetchAll();
+		Tdxio_Log::info('usersarray in addprivilege');
+		Tdxio_Log::info($usersarray->toArray());
+		$users['all']='all users';////////////////////////////////////////////??????????????????
 		foreach($usersarray as $key=>$user){
-			$users[$user['id']]=$user['name'];
-		}
-		
+			$users[$user['name']]=$user['name'];
+		}		
+		Tdxio_Log::info($users);
         return $users;
     }
 	/* 

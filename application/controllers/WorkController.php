@@ -12,6 +12,7 @@
 class WorkController extends Tdxio_Controller_Abstract
 {
 	protected $_modelname='Work'; 
+	public $_privilegeList=array('Read Text','Edit Text','Create Translation','Manage');
 	
 	public function init()
 	{
@@ -34,7 +35,7 @@ class WorkController extends Tdxio_Controller_Abstract
 	{
 		$work = $this->getModel();
 		$entries = $work->fetchAllOriginalWorks();
-		Tdxio_Log::info($entries);
+		//Tdxio_Log::info($entries);
 		
 		$sort=array();
         $langs=array();
@@ -106,8 +107,6 @@ class WorkController extends Tdxio_Controller_Abstract
 		if (!$id || !($work=$model->fetchOriginalWork($id))) {
 			throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
 		}	
-		Tdxio_Log::info('mostra il work: ');
-		Tdxio_Log::info($work);
 		if(empty($work['Sentences'])){
 			return $this->_helper->redirector->gotoSimple('read','translation',null,array('id'=>$id));
 		}
@@ -117,14 +116,11 @@ class WorkController extends Tdxio_Controller_Abstract
 			if ($tagForm->isValid($this->getRequest()->getPost())) {
 				
 				$data = $tagForm->getValues();
-				Tdxio_Log::info('dati di tag');
-				Tdxio_Log::info($data);
 				$this->tag($id,$data);
 				return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$id));
 			}
 		}
-		
-		
+		$this->view->canManage = $model->isAllowed('manage',$id);
 		$this->view->work = $work;
 		$this->view->tagForm = $tagForm;
 	}
@@ -203,6 +199,99 @@ class WorkController extends Tdxio_Controller_Abstract
             throw new Zend_Exception("Couldn't find text $id");
         }
 	}	
+
+	public function manageAction(){
+				
+	    $request = $this->getRequest();
+        $id= $request->getParam('id');
+		$model=$this->_getModel();
+		$visibility=$model->getAttribute($id,'visibility');
+		if($visibility=='custom'){
+			$addform = new Form_AddPrivilege($this->_privilegeList);			
+			$privilegeList=$model->getWorkPrivileges($id);			
+			$this->view->addform=$addform;				
+			if(!is_null($privilegeList)){
+				$remform = new Form_RemovePrivilege($id,$privilegeList);
+				$this->view->remform=$remform;
+				if($this->getRequest()->isPost()) {
+					Tdxio_Log::info('ispost rem');
+					if($remform->isValid($request->getPost())) {
+						Tdxio_Log::info('isvalid rem');
+						$data=$remform->getValues();
+						if($data['submit']=="Remove Privilege"){
+							$remove_list=array_keys($data,1);
+							if(!empty($remove_list)){								
+								$model->removePrivilege($remove_list,array());								
+								return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
+							}
+						}
+						Tdxio_Log::info($data);
+					}
+					$this->view->remform=$remform;
+				}
+			}
+			if($this->getRequest()->isPost()) {
+				Tdxio_Log::info('ispost add');
+				if($addform->isValid($request->getPost())) {
+					Tdxio_Log::info('isvalid add');
+					$data=$addform->getValues();
+					if($data['submit']=="Add Privilege"){
+						Tdxio_Log::info($data);
+						unset($data['submit']);
+						$data['work_id']=$id;
+						$data['visibility']='custom';
+						$model->addPrivilege($data);
+						return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
+					}
+				}
+			}
+			$this->view->link='Switch to Standard Privileges';
+		}else{
+			$stdform = new Form_StdPrivilege();
+			$this->view->stdform=$stdform;
+			if($this->getRequest()->isPost()) {
+				Tdxio_Log::info('ispost std');
+				if($stdform->isValid($request->getPost())) {
+					Tdxio_Log::info('isvalid std');
+					$data=$stdform->getValues();
+					if($data['submit']=="Save"){						
+						unset($data['submit']);
+						Tdxio_Log::info($data,"manage data");
+						$model->update($data,$id);
+						return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
+					}				
+				}
+			}
+			$this->view->stdform->setDefaults(array('visibility'=>$visibility));
+			$this->view->link='Switch to Custom Privileges';
+		}			
+		$this->view->visibility=$visibility;
+		$this->view->work_id=$id;		
+	}
+	
+	public function switchAction(){
+		$model=$this->_getModel();
+		$request = $this->getRequest();
+        $id=$request->getParam('id');
+		$visibility=$model->getAttribute($id,'visibility');
+	
+		if($visibility=='public' or $visibility=='private'){
+			// change field visibility in table text to custom
+			// go to manage page
+			$data=array('visibility'=>'custom');
+			$model->update($data,$id);
+		}elseif($visibility=='custom'){
+			//delete all custom privileges for the text  $id
+			// change field visibility in table text to private
+			// go to manage page
+			$attr_value=array('work_id'=>$id);
+			$model->removePrivilege(array(),$attr_value); 
+			$data=array('visibility'=>'private');
+			$model->update($data,$id);
+		}
+		return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
+	}
+
 	
 	protected function tag($work_id,$data){
 		

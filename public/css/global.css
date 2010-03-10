@@ -105,6 +105,14 @@ padding:6px 10px 4px 0;
 }
 
 
+.manage-link a{
+	font-size:80%;	
+	font-weight:bold;
+	color: #777;
+	text-decoration:none;
+	margin:50px;
+}
+
 a:link, a:active {
 color:#0066B7;
 }
@@ -182,6 +190,37 @@ li.text a {
 
 .home tr{
 	vertical-align:top;
+}
+
+div#add-privilege,div#rem-privilege{
+	width:70%;
+	margin:30px auto;
+	border: solid 1px;
+	border-color:#DBDBDB;
+}
+select.manage-select{
+	width:150px;
+}
+.privilege-form dt{
+	font-size:80%;
+	font-weight:bold;
+}
+.privilege-form dd{
+	
+}
+
+.privilege-form .title{
+	margin:auto;
+	text-align:center;
+	color:#FEFEFE;
+	/*background-image:url(../images/vert-line.png);*/
+	background-color: #DBDBDB;
+	width:100%;
+	height:40px;
+	vertical-align:bottom;
+	padding:20px 0px 0px;
+	font-weight:normal;
+	font-size:170%;
 }
 
 #clear{

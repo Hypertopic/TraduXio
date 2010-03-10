@@ -123,6 +123,8 @@ class TranslationController extends Tdxio_Controller_Abstract
 			}
 		}
 				
+		$workModel = new Model_Work();
+		$this->view->canManage = $workModel->isAllowed('manage',$translationId);
 		$this->view->tagForm = $tagForm;
 		$this->view->translation = $translation;
 	}
@@ -167,7 +169,8 @@ class TranslationController extends Tdxio_Controller_Abstract
 		$resource_id = $request->getParam('id');
 		
 		if(!is_null($resource_id)){
-			$visibility = new Model_Work()->getAttribute($resource_id,'visibility');
+			$workModel = new Model_Work();
+			$visibility = $workModel->getAttribute($resource_id,'visibility');
 		}
 		
 		switch($action){

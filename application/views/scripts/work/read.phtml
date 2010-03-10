@@ -4,21 +4,33 @@
 <div class = "leftColumn-inner">Translations
 	<ul>
 	<?php foreach($this->work['Translations'] as $translation): ?>
-		<li><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$translation['id'])) ?>">
-		<?php echo $this->escape($translation['title']) ?></a></li>
+		<li><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$translation['id'])); ?>">
+		<?php echo $this->escape($translation['title']); ?></a></li>
 		<?php endforeach; ?>
 	</ul>
 </div>
 <?php endif; ?>
-<div class = "leftColumn-inner">Options
+
+<div class = "leftColumn-inner">
+<?php if($this->showCreate || $this->showEdit || $this->canManage): ?>
+	<?php echo __('Options'); ?>
 	<ul>
+	<?php if($this->showCreate): ?>
 	  <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])) ?>"><?php echo __('Create a Translation'); ?></a></li>
+	<?php endif; ?>
+	<?php if($this->showEdit): ?>
 	  <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])) ?>"><?php echo __('Continue Text Insertion'); ?></a></li>	  
+	<?php endif; ?>
+	<?php if($this->canManage): ?>
+	  <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage Text's Privileges"); ?></a></li>
+	<?php endif; ?>
 	</ul>
+<?php endif; ?>
+</div>
+<?php if($this->showCreate){echo $this->tagForm; } ?>
+
 </div>
 
-<?php echo $this->tagForm; ?>
-</div>
 
 <div id = "right-column">
 	<div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
@@ -28,8 +40,8 @@
 			<span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($sentence['content']); ?></span>
 		<?php endforeach; ?>
 	</div>
-	<div class = "creator"> <?php echo (__('Text inserted by '));  echo $this->work['creator']; ?> </div>
-</div>
+	<div class = "creator"> <?php echo (__('Text inserted by '));  echo ($this->work['creator']); ?> </div>
+</div> 
 
 
-<?php $this->page_title="Read Text: ".$this->escape($this->work['title']); ?>
+<?php $this->page_title = __("Read Text: ").$this->escape($this->work['title']); ?>
