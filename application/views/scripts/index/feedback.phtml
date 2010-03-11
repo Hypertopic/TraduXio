@@ -1,0 +1,18 @@
+<div class="central-home">
+<div id="black-border">
+<?php echo $this->headScript()->appendFile($this->makeUrl('/js/autogrow.js')); ?>
+<?php if ($this->sent) : ?>
+<p>Your feedback has been successfully sent; thank you for your interest, we will answer you as soon as possible.
+<br/>The <i>Traduxio</i> team.</p>
+<?php else :?>
+<?php if ($this->error) : ?>
+<p> We encountered an error sending your message. Here is the error message : <i><?php echo $this->error; ?></i>.
+Sorry for the inconvenience, we're trying hard to fix it.
+<br/>The <i>Traduxio</i> team.</p>
+
+<?php endif; ?>
+<?php echo $this->form->render() ?>
+<?php endif;?>
+<?php $this->page_title="Send your feedback"; ?>
+</div>
+</div>

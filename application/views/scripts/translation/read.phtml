@@ -1,42 +1,46 @@
-
+<div class="central-home">
 <table class="full-width">
 <tr>
-<td>
-<div id = "left-column"> 
+<td class="left-column"> 
 
-<div class = "leftColumn-inner"><?php if($this->showEdit || $this->canManage): ?>
-<?php echo __('Options'); ?>
-	<ul>
+<?php if($this->showEdit || $this->canManage): ?>
+<div class="left-section"><?php echo __('Options'); ?></div>
+	
 		<?php if($this->showEdit): ?>
-			<li><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])) ?>"><?php echo __('Edit this Translation'); ?></a></li>	  
+			<div class="options"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])) ?>"><?php echo __('Edit this Translation'); ?></a></div>	  
+			<br>
 		<?php endif; ?>
 		<?php if($this->canManage): ?>
-			<li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->translation['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>	  
+			<div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->translation['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></div>	  
 		<?php endif; ?>
-	</ul>
 <?php endif; ?>
-</div>
 <?php if($this->showCreate){echo $this->tagForm; } ?>
-</div>
-
 </td>
-<td> Original Text:
-<div class="title"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
-<div class="text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
+
+<td>
+<table  class="right-column">
+<tr><td  class="right-column">
+<div class="title"><?php echo __('Original Text: ') ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
+<div class="language"><?php echo __($this->translation['OriginalWork']['language']); ?></div>
+<div class="original-text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
 				 <?php echo $sentence['content']; ?>
 				 <?php endforeach; ?>
 </div>
 </td>
-<td> Translation:
-<div class="title"> <?php echo $this->translation['title']; ?></div>
-<div class="text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
+<td  class="right-column"> 
+<div class="title"><?php echo __('Translation: ')?><?php echo $this->translation['title']; ?></div>
+<div class="language"><?php echo __($this->translation['language']); ?></div>
+<div class="translated-text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
 				 <?php echo $block['translation']; ?>
 				 <?php endforeach; ?>
 </div>
-
 </td>
 </tr>
 </table>
 
+</td>
+</tr>
+</table>
+</div>
 <?php $this->page_title="Read Translation: ".$this->escape($this->translation['title']); ?>
 

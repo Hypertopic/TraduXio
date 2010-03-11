@@ -29,7 +29,6 @@ class Model_Privilege extends Model_Abstract
 		$data['role']=$data['user_id']; //temporaneo
 		
 		if(!$this->exist($data)){//se non esiste già un privilegio analogo
-			Tdxio_Log::info('entrato qui');
 			$table  = $this->_getTable();				
 			$new_id=$table->insert($data);
 		    return $new_id; 

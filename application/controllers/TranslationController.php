@@ -110,14 +110,14 @@ class TranslationController extends Tdxio_Controller_Abstract
 		$translationId=$request->getParam('id');
 		$translation = $this->_getModel()->fetchTranslationWork($translationId);
 		
+		Tdxio_Log::info($translation,'readAction in translation');
 		$tagForm = new Form_Tag();
 		if ($this->getRequest()->isPost()) {
 		
 			if ($tagForm->isValid($this->getRequest()->getPost())) {
 				
 				$data = $tagForm->getValues();
-				Tdxio_Log::info('dati di tag');
-				Tdxio_Log::info($data);
+				Tdxio_Log::info($data,'dati di tag');
 				$this->tag($translationId,$data);
 				return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$translationId));
 			}
@@ -158,9 +158,9 @@ class TranslationController extends Tdxio_Controller_Abstract
 	
 	
 	public function concordAction()
-	{
-	
-	
+	{	
+        Tdxio_Log::info($this->getRequest()->getParams(),'params');
+        $this->view->assign($this->getRequest()->getParams());
 	}
 	
 		

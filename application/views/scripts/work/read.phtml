@@ -1,38 +1,37 @@
-
-<div id = "left-column"> 
-<?php if(isset($this->work['Translations'])): ?>
-<div class = "leftColumn-inner">Translations
-	<ul>
-	<?php foreach($this->work['Translations'] as $translation): ?>
-		<li><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$translation['id'])); ?>">
-		<?php echo $this->escape($translation['title']); ?></a></li>
-		<?php endforeach; ?>
-	</ul>
-</div>
+<div class="central-home">
+<table class="full-width">
+<tr><td class = "left-column"> 
+<?php if(!empty($this->work['Interpretations'])): ?>
+<div class="left-section"><?php echo __('Translations'); ?></div>
+	<?php foreach($this->work['Interpretations'] as $translation): ?>
+		<span class="translation"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$translation['work']['id'])); ?>">
+		<?php echo $this->escape($translation['work']['title']); ?></a>(<?php echo $this->escape($translation['work']['language']); ?>)</span>
+		<br><br>
+	<?php endforeach; ?>
+	
 <?php endif; ?>
 
-<div class = "leftColumn-inner">
+<div class="left-section">
 <?php if($this->showCreate || $this->showEdit || $this->canManage): ?>
-	<?php echo __('Options'); ?>
-	<ul>
+	<?php echo __('Options'); ?></div>
 	<?php if($this->showCreate): ?>
-	  <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])) ?>"><?php echo __('Create a Translation'); ?></a></li>
+	  <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])) ?>"><?php echo __('Create a Translation'); ?></a></div><br>
 	<?php endif; ?>
 	<?php if($this->showEdit): ?>
-	  <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])) ?>"><?php echo __('Continue Text Insertion'); ?></a></li>	  
+	  <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])) ?>"><?php echo __('Continue Text Insertion'); ?></a></div><br>	  
 	<?php endif; ?>
 	<?php if($this->canManage): ?>
-	  <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage Text's Privileges"); ?></a></li>
+	  <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage Text's Privileges"); ?></a></div><br>
 	<?php endif; ?>
-	</ul>
+	
 <?php endif; ?>
-</div>
+
 <?php if($this->showCreate){echo $this->tagForm; } ?>
 
-</div>
+</td>
 
 
-<div id = "right-column">
+<td id = "right-column">
 	<div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
 	<div class = "text"> 
 		<?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
@@ -41,7 +40,9 @@
 		<?php endforeach; ?>
 	</div>
 	<div class = "creator"> <?php echo (__('Text inserted by '));  echo ($this->work['creator']); ?> </div>
-</div> 
-
+</td>
+	</tr>
+</table> 
+</div>
 
 <?php $this->page_title = __("Read Text: ").$this->escape($this->work['title']); ?>

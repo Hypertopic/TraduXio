@@ -28,7 +28,8 @@ class IndexController extends Tdxio_Controller_Abstract
 	return $this->_helper->redirector('index','work');
     }
     
-    
+    public function tutorialAction()
+    {}
     
 	public function getRule($request){	
 		$action = $request->action;
@@ -44,4 +45,27 @@ class IndexController extends Tdxio_Controller_Abstract
 		}
 		return $rule;
 	}
+	  
+	  
+	function aboutAction() {
+	}
+
+	function feedbackAction() {
+      
+        $form = new Form_Feedback($type);
+        $request=$this->getRequest();
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $values=$form->getValues();
+                require_once "send_mail.php";
+                try {
+                    sendFeedback($values['title'],$values['body'],$values['emailaddress']);
+                    $this->view->sent=true;
+                } catch (Exception $e) {
+                    $this->view->error=$e->getMessage();
+                }
+            }
+        }
+        $this->view->form=$form;
+    }
 }

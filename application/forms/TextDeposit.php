@@ -78,7 +78,7 @@ class Form_TextDeposit extends Form_Abstract
         // language dropdown
         $this->addElement('select', 'language', array(
             'label'      => __('Source language'),
-            'multiOptions'=> array('ita'=>'italian','eng'=>'english','fra'=>'french'), //$this->_getLanguages(),
+            'multiOptions'=> array('ita'=>'Italian','eng'=>'English','fra'=>'French'), //$this->_getLanguages(),
             'required'   => true
         ));
 

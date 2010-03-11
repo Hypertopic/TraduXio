@@ -69,6 +69,7 @@ class WorkController extends Tdxio_Controller_Abstract
         $this->view->entries=$sort;
         $this->view->langs=$langs;
         $this->view->authors=$authors;
+        $this->view->home = true;
         Tdxio_Log::info($langs);
         Tdxio_Log::info($authors);
         Tdxio_Log::info($sort);
@@ -108,7 +109,7 @@ class WorkController extends Tdxio_Controller_Abstract
 		if(empty($work['Sentences'])){
 			return $this->_helper->redirector->gotoSimple('read','translation',null,array('id'=>$id));
 		}
-		
+		Tdxio_Log::info($work,'work read');
 		if ($this->getRequest()->isPost()) {
 		    
 			if ($tagForm->isValid($this->getRequest()->getPost())) {

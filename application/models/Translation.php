@@ -133,7 +133,25 @@ class Model_Translation extends Model_Abstract
 	{
 		$order='from_segment ASC';
 		$interpretations = $this->fetchByFields(array('original_work_id'=>$original_work_id),$order);
-		return $interpretations;
+		Tdxio_Log::info($interpretations,'interp...');
+		$translations = array();
+		
+		if(!empty($interpretations)){
+			foreach($interpretations as $key=>$interp){
+				$translations[$interp['work_id']][]=$interp;
+			}
+			$ids = array_keys($translations);
+			
+			Tdxio_Log::info($ids,'ids...');
+			$modelWork = new Model_Work();
+			$works = $modelWork->fetchWork($ids);
+
+			foreach($works as $key=>$work){
+				$translations[$work['id']]['work']=$work;			
+			}
+		}
+		Tdxio_Log::info($translations,'tr...');
+		return $translations;
 	}
 	
 	public function cut($transId,$segnum) {
