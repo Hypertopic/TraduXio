@@ -112,7 +112,7 @@ class Model_Privilege extends Model_Abstract
 				$select->where('visibility = ?', $privilege['visibility']);
 			}elseif($privilege['visibility']=='public' or $privilege['visibility']=='private')
 			$select->where('visibility = ?', $privilege['visibility']);
-			$select->where('work_id is NULL');
+			//$select->where('work_id is NULL');
 		}
 		
 		Tdxio_Log::info($select->__toString(),"risultato query");

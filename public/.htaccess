@@ -1,4 +1,8 @@
+
 SetEnv APPLICATION_ENV development
+php_flag magic_quotes_gpc Off
+php_flag magic_quotes_runtime Off
+
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]

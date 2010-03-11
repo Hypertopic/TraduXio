@@ -93,9 +93,10 @@ class Model_Translation extends Model_Abstract
 				$work['TranslationBlocks'][$key]['OriginalSentences'][$i]=$work['OriginalSentences'][$i];
 			}
 		}
+		$tags = $workModel->getTags($work_id);
+		$work['Tags'] = $tags[$work_id];
 		
-		Tdxio_Log::info('traduzione');
-		Tdxio_Log::alert($work);
+		Tdxio_Log::info($work,'traduzione');
 		return $work;
 	}
 		
@@ -145,7 +146,7 @@ class Model_Translation extends Model_Abstract
 			Tdxio_Log::info($ids,'ids...');
 			$modelWork = new Model_Work();
 			$works = $modelWork->fetchWork($ids);
-
+			Tdxio_Log::info($works,'works...');
 			foreach($works as $key=>$work){
 				$translations[$work['id']]['work']=$work;			
 			}

@@ -115,10 +115,12 @@ class WorkController extends Tdxio_Controller_Abstract
 			if ($tagForm->isValid($this->getRequest()->getPost())) {
 				
 				$data = $tagForm->getValues();
+						Tdxio_Log::info($data);
 				$this->tag($id,$data);
 				return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$id));
 			}
 		}
+		$this->view->canTag = $model->isAllowed('tag',$id);
 		$this->view->canManage = $model->isAllowed('manage',$id);
 		$this->view->work = $work;
 		$this->view->tagForm = $tagForm;

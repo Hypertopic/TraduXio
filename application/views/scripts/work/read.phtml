@@ -11,8 +11,9 @@
 	
 <?php endif; ?>
 
-<div class="left-section">
 <?php if($this->showCreate || $this->showEdit || $this->canManage): ?>
+
+<div class="left-section">
 	<?php echo __('Options'); ?></div>
 	<?php if($this->showCreate): ?>
 	  <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])) ?>"><?php echo __('Create a Translation'); ?></a></div><br>
@@ -25,9 +26,17 @@
 	<?php endif; ?>
 	
 <?php endif; ?>
-
-<?php if($this->showCreate){echo $this->tagForm; } ?>
-
+<br><br>
+<div id="tag-area">
+	<?php if(!empty($this->work['Tags'])): ?>
+	<?php foreach($this->work['Tags'] as $tag): ?>
+	<div class="tag-item"><?php echo $tag['comment']; ?></div>
+	<?php endforeach; ?>
+	<?php endif; ?>
+</div>
+<div id="tag-area">
+<?php if($this->canTag){echo $this->tagForm; } ?>
+</div>
 </td>
 
 

@@ -92,10 +92,14 @@ class Model_Work extends Model_Taggable
 	
 	public function fetchWork($id){
 		if(!is_array($id)){
-			return $this->fetchEntry($id);
+			$work = $this->fetchEntry($id);
+		//	$work['Tags'] = $this->getTags($id);
+			return $work;
 		}else{
 			$table=$this->_getTable();
-			return $table->fetchAll($table->select()->where('id IN (?)',$id))->toArray();
+			$works = $table->fetchAll($table->select()->where('id IN (?)',$id))->toArray();
+		//	$works['Tags'] = $this->getTags($id);
+			return $works;
 		}
 	}
 	
@@ -111,6 +115,8 @@ class Model_Work extends Model_Taggable
 		$work['the_text']=$content;
 		$translationModel = new Model_Translation();
 		$work['Interpretations'] = $translationModel->fetchSentencesInterpretations($work_id);	
+		$tags = $this->getTags($work_id);
+		$work['Tags'] = $tags[$work_id];
 		return $work;
 	}
 
@@ -190,6 +196,8 @@ class Model_Work extends Model_Taggable
 		return $translations;
 	}
 	
+	
+	
 	public function isOriginalWork($id)
 	{
 		$table = $this->_getTable();
@@ -265,7 +273,8 @@ class Model_Work extends Model_Taggable
 							'visibility' => $this->getAttribute($work_id, 'visibility')
 					);
 		$privilegeModel = new Model_Privilege();
-		return $privilegeModel->exist($privilege);  		
+		return $privilegeModel->exist($privilege); 
+		 		
 	}
 	
 	public function getWorkPrivileges($id){	

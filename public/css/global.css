@@ -358,7 +358,21 @@ padding:5px 10px;
 vertical-align:top;
 border-color: #AAA6AD;
 }
+div.tag-item{
+	float:left;
+	background-color:#E5E5E5;
+	color:#4D4D4D;
+	font-size:18px;
+	font-weight:bold;
+	padding:5px;
+	font-variant:small-caps;
+	margin:3px;
+}
 
+div#tag-area {
+	text-align:left;
+	clear:both;
+}
 
 #clear{
 	clear:both;
@@ -480,4 +494,10 @@ border-color: #AAA6AD;
 	font-size:200%;
 	color:#505050;
 
+}
+#autogrow_shadow {
+	border:1px solid;
+	left:-10000px;
+	position:absolute;
+	top:-10000px;
 }
