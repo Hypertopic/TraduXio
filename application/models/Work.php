@@ -115,8 +115,10 @@ class Model_Work extends Model_Taggable
 		$work['the_text']=$content;
 		$translationModel = new Model_Translation();
 		$work['Interpretations'] = $translationModel->fetchSentencesInterpretations($work_id);	
-		$tags = $this->getTags($work_id);
-		$work['Tags'] = $tags[$work_id];
+		$tags = ($this->getTags($work_id));
+        if(!empty($tags)){
+            $work['Tags'] = $this->normalizeTags($tags[$work_id]);
+        }
 		return $work;
 	}
 
@@ -212,17 +214,6 @@ class Model_Work extends Model_Taggable
 	
 	}
 	
-	public function tag($tag){
-		
-		$tagTable = new Model_DbTable_Tag;
-		$data = array('taggable' => $tag['work_id'],
-					  'user' => $tag['username'],
-				      //'genre' => $tag['comment'],
-					  'comment' => $tag['comment']
-					);
-		$newId = $tagTable->insert($data);
-		
-	}
 	
 	protected function addInterpretations($work_id,$fromseg,$toseg,$srcText){
 		

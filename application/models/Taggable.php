@@ -31,4 +31,26 @@ class Model_Taggable extends Model_Abstract
 		Tdxio_Log::info($result,"fetched tags");
 		return $result;
 	}
+	
+	
+	public function tag($tag){
+		
+		$tagTable = new Model_DbTable_Tag;
+		$data = array('taggable' => $tag['taggable_id'],
+					  'user' => $tag['username'],
+				      //'genre' => $tag['comment'],
+					  'comment' => $tag['comment']
+					);
+		Tdxio_Log::info($data);
+		$select = $tagTable->select()->where('comment = ?',$data['comment'])->where('taggable = ? ',$data['taggable']);
+		Tdxio_Log::info($select->toString,'selecttostring');
+		$result = $tagTable->fetchRow($select);
+		Tdxio_Log::info($result,'bidibodo');
+		if(!empty($result)){
+			$tagTable->update($data);			
+		}else{
+			$newId = $tagTable->insert($data);
+		}
+		
+	}
 }

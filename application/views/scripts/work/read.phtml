@@ -1,6 +1,7 @@
 <div class="central-home">
 <table class="full-width">
-<tr><td class = "left-column"> 
+<tr>
+<td class = "left-column"> 
 <?php if(!empty($this->work['Interpretations'])): ?>
 <div class="left-section"><?php echo __('Translations'); ?></div>
 	<?php foreach($this->work['Interpretations'] as $translation): ?>
@@ -30,7 +31,7 @@
 <div id="tag-area">
 	<?php if(!empty($this->work['Tags'])): ?>
 	<?php foreach($this->work['Tags'] as $tag): ?>
-	<div class="tag-item"><?php echo $tag['comment']; ?></div>
+	<div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*10) ?>px"><?php echo $tag['comment']; ?></div>
 	<?php endforeach; ?>
 	<?php endif; ?>
 </div>

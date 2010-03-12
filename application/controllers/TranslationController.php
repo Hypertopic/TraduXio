@@ -134,7 +134,7 @@ class TranslationController extends Tdxio_Controller_Abstract
 		
 		$model= new Model_Work();
 		$user = Tdxio_Auth::getUserName();
-		$tag = array('username'=> $user, 'work_id'=> $work_id, 'comment' => $data['tag_comment']);
+		$tag = array('username'=> $user, 'taggable_id'=> $work_id, 'comment' => $data['tag_comment']);
 		$model->tag($tag);
 	}
 	

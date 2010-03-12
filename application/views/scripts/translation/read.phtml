@@ -2,7 +2,6 @@
 <table class="full-width">
 <tr>
 <td class="left-column"> 
-
 <?php if($this->showEdit || $this->canManage): ?>
 <div class="left-section"><?php echo __('Options'); ?></div>
 	
@@ -18,7 +17,7 @@
 <div id="tag-area">
 	<?php if(!empty($this->translation['Tags'])): ?>
 	<?php foreach($this->translation['Tags'] as $tag): ?>
-	<div class="tag-item"><?php echo $tag['comment']; ?></div>
+	<div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*10) ?>px"><?php echo $tag['comment']; ?></div>
 	<?php endforeach; ?>
 	<?php endif; ?>
 </div>

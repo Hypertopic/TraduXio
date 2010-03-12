@@ -93,9 +93,10 @@ class Model_Translation extends Model_Abstract
 				$work['TranslationBlocks'][$key]['OriginalSentences'][$i]=$work['OriginalSentences'][$i];
 			}
 		}
-		$tags = $workModel->getTags($work_id);
-		$work['Tags'] = $tags[$work_id];
-		
+        $tags = $workModel->getTags($work_id);
+        if(!empty($tags)){
+            $work['Tags'] = $this->normalizeTags($tags[$work_id]);
+		}
 		Tdxio_Log::info($work,'traduzione');
 		return $work;
 	}

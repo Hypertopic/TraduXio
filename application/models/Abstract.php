@@ -44,6 +44,7 @@ class Model_Abstract {
 		$new_id = $table->insert($data);
 		return $new_id;
 	}
+
 	
 	public function fetchAll() {
 		$table=$this->_getTable();
@@ -95,5 +96,22 @@ class Model_Abstract {
 	protected function _extend($row,$recursive=1) {
 		return $row;
 	}
+    
+    public function entryExists($data){
+        $result = $this->fetchByFields($data);
+		return(!empty($result));
+    }
+
+    public function normalizeTags($tags){
+        $maxMult = 0;
+        foreach($tags as $key => $tag){
+            $maxMult=max($maxMult,$tag['multiplicity']);
+        }
+        Tdxio_Log::info($maxMult,'maxmult');
+        foreach($tags as $key => $tag){
+            $tags[$key]['multiplicity']/=$maxMult;
+        }
+        return $tags;
+    }
 
 }

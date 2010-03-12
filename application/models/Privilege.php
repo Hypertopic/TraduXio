@@ -37,9 +37,6 @@ class Model_Privilege extends Model_Abstract
 		
     }
 
-    public function update(array $data,$id)
-    {
-    }
 	
 	public function delete(array $id_list, array $attr_value)
 	{	
