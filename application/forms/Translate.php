@@ -47,7 +47,7 @@ class Form_Translate extends Form_Abstract
         // language dropdown
         $this->addElement('select', 'language', array(
             //'label'      => __('Source language'),
-            'multiOptions'=> array('ita','eng','fra'),
+            'multiOptions'=> array('ita'=>'Italian','eng'=>'English','fra'=>'French'),
             'required'   => true
         ));
 

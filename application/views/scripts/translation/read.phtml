@@ -4,24 +4,25 @@
 <td class="left-column"> 
 <?php if($this->showEdit || $this->canManage): ?>
 <div class="left-section"><?php echo __('Options'); ?></div>
-	
-		<?php if($this->showEdit): ?>
-			<div class="options"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])) ?>"><?php echo __('Edit this Translation'); ?></a></div>	  
-			<br>
-		<?php endif; ?>
-		<?php if($this->canManage): ?>
-			<div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->translation['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></div>	  
-		<?php endif; ?>
+    
+        <?php if($this->showEdit): ?>
+            <div class="options"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])) ?>"><?php echo __('Edit this Translation'); ?></a></div>      
+            <br>
+        <?php endif; ?>
+        <?php if($this->canManage): ?>
+            <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->translation['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></div>    
+        <?php endif; ?>
 <?php endif; ?>
 <br><br>
 <div id="tag-area">
-	<?php if(!empty($this->translation['Tags'])): ?>
-	<?php foreach($this->translation['Tags'] as $tag): ?>
-	<div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*10) ?>px"><?php echo $tag['comment']; ?></div>
-	<?php endforeach; ?>
-	<?php endif; ?>
+    <?php if(!empty($this->translation['Tags'])): ?>
+    <?php foreach($this->translation['Tags'] as $tag): ?>
+    <div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*10) ?>px"><?php echo $tag[0]['comment']; ?></div>
+    <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 <div id="tag-area">
+<?php if(!$this->canTag) {echo 'false';} else {echo 'true';}?>
 <?php if($this->canTag){echo $this->tagForm; } ?>
 </div>
 </td>
@@ -32,16 +33,16 @@
 <div class="title"><?php echo __('Original Text: ') ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
 <div class="language"><?php echo __($this->translation['OriginalWork']['language']); ?></div>
 <div class="original-text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
-				 <?php echo $sentence['content']; ?>
-				 <?php endforeach; ?>
+                 <?php echo $sentence['content']; ?>
+                 <?php endforeach; ?>
 </div>
 </td>
 <td  class="right-column"> 
 <div class="title"><?php echo __('Translation: ')?><?php echo $this->translation['title']; ?></div>
 <div class="language"><?php echo __($this->translation['language']); ?></div>
 <div class="translated-text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
-				 <?php echo $block['translation']; ?>
-				 <?php endforeach; ?>
+                 <?php echo $block['translation']; ?>
+                 <?php endforeach; ?>
 </div>
 </td>
 

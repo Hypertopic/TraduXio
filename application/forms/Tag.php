@@ -39,6 +39,7 @@ class Form_Tag extends Form_Abstract
 
         $tag=$this->createElement('text','tag_comment',array(
             'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
+            'filters' => array('StringTrim','StringToLower'),
             'required'=>true));
 
         $this->addElement($tag);
@@ -47,7 +48,7 @@ class Form_Tag extends Form_Abstract
             'label'    => __('TAG'),
         ));
 
-		$this->addDisplayGroup(array('tag_button','tag_comment'), 'tag_group');
+		$this->addDisplayGroup(array('tag_comment','tag_button'), 'tag_group');
 		
     }
 

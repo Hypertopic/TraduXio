@@ -3,55 +3,62 @@
 <tr>
 <td class = "left-column"> 
 <?php if(!empty($this->work['Interpretations'])): ?>
-<div class="left-section"><?php echo __('Translations'); ?></div>
-	<?php foreach($this->work['Interpretations'] as $translation): ?>
-		<span class="translation"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$translation['work']['id'])); ?>">
-		<?php echo $this->escape($translation['work']['title']); ?></a>(<?php echo $this->escape($translation['work']['language']); ?>)</span>
-		<br><br>
-	<?php endforeach; ?>
-	
+
+    <?php foreach($this->work['Interpretations'] as $translation): ?>
+    <?php if(isset($translation['work'])): ?>
+    
+    <?php if($flag == 0): ?><div class="left-section"><?php echo __('Translations'); ?></div><?php endif; ?>
+    <?php $flag = 1; ?>
+        <span class="translation"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$translation['work']['id'])); ?>">
+        <?php echo $this->escape($translation['work']['title']); ?></a>(<?php echo $this->escape($translation['work']['language']); ?>)</span>
+        <br><br>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    
 <?php endif; ?>
 
 <?php if($this->showCreate || $this->showEdit || $this->canManage): ?>
 
 <div class="left-section">
-	<?php echo __('Options'); ?></div>
-	<?php if($this->showCreate): ?>
-	  <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])) ?>"><?php echo __('Create a Translation'); ?></a></div><br>
-	<?php endif; ?>
-	<?php if($this->showEdit): ?>
-	  <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])) ?>"><?php echo __('Continue Text Insertion'); ?></a></div><br>	  
-	<?php endif; ?>
-	<?php if($this->canManage): ?>
-	  <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage Text's Privileges"); ?></a></div><br>
-	<?php endif; ?>
-	
+    <?php echo __('Options'); ?></div>
+    <?php if($this->showCreate): ?>
+      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])) ?>"><?php echo __('Create a Translation'); ?></a></div><br>
+    <?php endif; ?>
+    <?php if($this->showEdit): ?>
+      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])) ?>"><?php echo __('Continue Text Insertion'); ?></a></div><br>      
+    <?php endif; ?>
+    <?php if($this->canManage): ?>
+      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage Text's Privileges"); ?></a></div><br>
+    <?php endif; ?>
+    
 <?php endif; ?>
 <br><br>
 <div id="tag-area">
-	<?php if(!empty($this->work['Tags'])): ?>
-	<?php foreach($this->work['Tags'] as $tag): ?>
-	<div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*10) ?>px"><?php echo $tag['comment']; ?></div>
-	<?php endforeach; ?>
-	<?php endif; ?>
+    <?php if(!empty($this->work['Tags'])): ?>
+    <?php foreach($this->work['Tags'] as $tag): ?>
+    <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*10) ?>px"><?php echo $tag[0]['comment']; ?></div>
+    <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 <div id="tag-area">
+
+<?php if(!$this->canTag){ echo 'false';} else {echo 'true';}?>
 <?php if($this->canTag){echo $this->tagForm; } ?>
 </div>
 </td>
 
 
 <td id = "right-column">
-	<div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
-	<div class = "text"> 
-		<?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
-			<?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
-			<span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($sentence['content']); ?></span>
-		<?php endforeach; ?>
-	</div>
-	<div class = "creator"> <?php echo (__('Text inserted by '));  echo ($this->work['creator']); ?> </div>
+    <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
+    <div class = "text"> 
+        <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
+            <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
+            <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($sentence['content']); ?></span>
+        <?php endforeach; ?>
+    </div>
+    <div class = "creator"> <?php echo (__('Text inserted by '));  echo ($this->work['creator']); ?> </div>
 </td>
-	</tr>
+    </tr>
 </table> 
 </div>
 

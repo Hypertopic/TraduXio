@@ -1,13 +1,13 @@
 <div id="my-transl"><?php echo __('My Translations'); ?></div>
 <ul>
-
+<?php if(empty($this->myEntries)) {echo __("You have not inserted any text's translations");} ?>
 <?php foreach ($this->myEntries as $srcLang=>$trlLang):?>
 <?php foreach ($trlLang as $lang=>$texts):?>
-	<li class='srcLang'> <?php echo $srcLang;//$this->srcLangs[$srcLang]['ref_name'];?> <img src="<?php echo $this->makeUrl('/images/arrow-right.png'); ?>"> <?php echo $lang;//$this->trlLangs[$lang]['ref_name'];?></li>
-	<ul class='trl'>
+    <li class='srcLang'> <?php echo $srcLang;//$this->srcLangs[$srcLang]['ref_name'];?> <img src="<?php echo $this->makeUrl('/images/arrow-right.png'); ?>"> <?php echo $lang;//$this->trlLangs[$lang]['ref_name'];?></li>
+    <ul class='trl'>
 <?php foreach ($texts as $text): ?>
-	<li class='text'>
-	<a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$text['id'])) ?>"><?php echo $text['title']; ?></a></li>
+    <li class='text'>
+    <a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$text['id'])) ?>"><?php echo $text['title']; ?></a></li>
 <?php endforeach; ?>
 </ul>
 <?php endforeach; ?>
