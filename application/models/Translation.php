@@ -69,7 +69,7 @@ class Model_Translation extends Model_Abstract
     }   
 
     
-    public function fetchTranslationWork($work_id){
+    public function fetchTranslationWork($work_id,$computeMultiplicity = true){
         $workModel = new Model_Work();
         if(!$work = $workModel->fetchWork($work_id))
         {return null;}
@@ -79,7 +79,7 @@ class Model_Translation extends Model_Abstract
         $sentenceModel= new Model_Sentence();
         $work['OriginalSentences'] = $sentenceModel->fetchSentences($original_work_id);
         $work['OriginalWorkId'] = $original_work_id;
-        $work['OriginalWork'] = $workModel->fetchWork($original_work_id);
+        $work['OriginalWork'] = $workModel->fetchOriginalWork($original_work_id);
         
         $numberedSentences = array();
         foreach($work['OriginalSentences'] as $key => $sentence){
@@ -93,7 +93,8 @@ class Model_Translation extends Model_Abstract
             }
         }
         $tags = $workModel->getTags($work_id);
-        if(!empty($tags)){
+        $work['Tags'] = $tags[$work_id];
+        if(!empty($tags) && $computeMultiplicity==true){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
         }
         Tdxio_Log::info($work,'traduzione');

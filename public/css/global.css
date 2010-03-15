@@ -40,6 +40,7 @@ body
     padding:3px;
     font-size:120%;
     font-weight:bold;
+    clear:left;
 }
 .text{
     margin:5px 10px 10px 10px;
@@ -278,6 +279,10 @@ div#add-privilege,div#rem-privilege{
 select.manage-select{
     width:150px;
 }
+
+span.buttons{
+    text-align:right;
+}
 .privilege-form dt{
     font-size:80%;
     font-weight:bold;
@@ -319,6 +324,22 @@ color:#333333;
 font-weight:bold;
 text-decoration:none;
 }
+.remove-tags{
+    float:right;
+    width:50%;
+    text-align:left;
+}
+.up-section{
+    vertical-align:top;
+}
+a.delete{
+    font-size:10px;
+    font-weight:bold;
+    color:#4D4D4D;
+    background-color:#E5E5E5; 
+    vertical-align:center;
+
+}
 
 ul.hyphen li {
     list-style-type:circle;
@@ -328,9 +349,11 @@ td.right-column{
     padding:20px;
     width:50%;
 }
+.top-align{
+    vertical-align:top;
+}
 table.right-column{
     width:100%;
-    
 }
 
 div.original-text{
@@ -358,17 +381,39 @@ padding:5px 10px;
 vertical-align:top;
 border-color: #AAA6AD;
 }
+
+ td.textorig {
+    border-color: #AAA6AD;
+    background-color:#EEEEEE;    
+    width:50%;
+}
+ 
+
 div.tag-item{
     float:left;
     background-color:#E5E5E5;
     color:#4D4D4D;
-    font-size:18px;
-    font-weight:bold;
-    padding:5px;
-    font-variant:small-caps;
-    margin:3px;
+    font-size:12px;    
+    padding:2px;
+   /* font-variant:small-caps;
+    * font-weight:bold;*/
+    margin:2px;
 }
 
+textarea.autogrow, #autogrow_shadow {
+font-family:Verdana,Arial,Helvetica,sans-serif;
+font-size:14px;
+}
+textarea.autogrow {
+border-color:#FFFFFF;
+height:auto;
+overflow:hidden;
+width:100%;
+}
+
+
+
+/* IDs */
 div#tag-area {
     text-align:left;
     clear:both;
@@ -382,7 +427,7 @@ div#tag-area {
 #button{}
 
 #work-title{
-    margin:10px;
+    margin:10px 10px 0px 10px;
 }
 
 
@@ -402,12 +447,12 @@ div#tag-area {
 #right-column{
     width:75%;
     float:left;
-    border: 1px solid #DBDBDB;
+  /*  border: 1px solid #DBDBDB;*/
     max-width:800px;
     min-width:250px;
+    padding:20px;
+    vertical-align:top;
 }
-/* IDs */
-
 #left-options{
     background: transparent url(../images/vert-line.png);
     width: 200px;

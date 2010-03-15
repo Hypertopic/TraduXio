@@ -38,6 +38,14 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 <span class="buttons">
 <?php echo $this->form->buttons; ?>
 </span>
+<?php if(!empty($this->translation['Tags'])): ?>
+<div class="remove-tags">
+<?php foreach($this->translation['Tags'] as $key=>$tag): ?>
+<?php echo $tag['comment']; ?> <a class="delete" href="<?php echo $this->url(array('controller'=>'taggable','action'=>'deletetag','taggable_id'=>$this->translation['id'], 'tag_id'=>$tag['id']))?>"> X </a>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+
 <table class="right-column"><tr>
     <td class="view<?php echo $origDir; ?>"><div class="title">Original text :<?php echo $this->escape($this->translation['OriginalWork']['title']); ?></div></td>
     <td class="edit<?php echo $transDir; ?>"><div class="title">This translation :<?php echo $elements['title']->render() ?></div></td>
@@ -52,7 +60,7 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 
             $first=true;
             foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
-				<?php $segment = $segment['content']; ?>
+                <?php $segment = $segment['content']; ?>
                 <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
                 <?php if ($segnum<max(array_keys($block['OriginalSentences']))) {
                         $segment=$this->addCutSign($segment,$segnum);

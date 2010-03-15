@@ -51,5 +51,14 @@ class Model_Taggable extends Model_Abstract
             $newId = $tagTable->insert($data);
         }
         
+    }   
+    
+    public function deleteTag($tagId,$taggableId=null){
+        $tagTable = new Model_DbTable_Tag();
+        $where[] = $tagTable->getAdapter()->quoteInto('id = ?',$tagId);
+        if(!is_null($taggableId)){
+            $where[] = $tagTable->getAdapter()->quoteInto('taggable = ?',$taggableId);
+        }
+        $tagTable->delete($where);
     }
 }

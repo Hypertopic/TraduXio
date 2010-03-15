@@ -22,10 +22,12 @@
 class Form_TranslationEdit extends Form_Abstract
 {
     protected $_blocklist = null;
+    protected $_taglist = null;
 
-    public function __construct($blockList)
+    public function __construct($blockList,$tagList)
     {
         $this->_blocklist=$blockList;
+        $this->_taglist=$tagList;
         parent::__construct();
     }
 
@@ -54,6 +56,12 @@ class Form_TranslationEdit extends Form_Abstract
             'tabindex'=>$tabindex++
         ));
 
+     /*   if(!empty($this->_taglist)){
+        foreach ( $this->_taglist as $key => $tag) {
+            $tagElem=$this->createElement('submit','tag'.$tag['id'],array('label'=> 'X '.$tag['comment'],'decorators'=>array('ViewHelper')));
+            $this->addElement($tagElem);
+        }}
+       */ 
         foreach ($this->_blocklist as $id=>$length) {
             $blockElem=$this->createElement('textarea', 'block'.$id,array('disableLoadDefaultDecorators'=>true));
             $blockElem->addDecorator('ViewHelper');
@@ -64,9 +72,8 @@ class Form_TranslationEdit extends Form_Abstract
                 'tabindex'=>$tabindex++
             ));
             $this->addElement($blockElem);
-
         }
-
+        
 
         // add the submit button
         $this->addElement('submit', 'submit', array(

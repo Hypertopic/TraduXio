@@ -336,5 +336,6 @@ class Model_Work extends Model_Taggable
         $id=$privilegeModel->save($data);
         Tdxio_Log::info($id);
     }
+    
 
 }

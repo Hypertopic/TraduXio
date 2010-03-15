@@ -48,8 +48,8 @@ class Form_Tag extends Form_Abstract
             'label'    => __('TAG'),
         ));
 
-		$this->addDisplayGroup(array('tag_comment','tag_button'), 'tag_group');
-		
+        $this->addDisplayGroup(array('tag_comment','tag_button'), 'tag_group');
+        
     }
 
 }

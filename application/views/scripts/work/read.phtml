@@ -33,23 +33,22 @@
     
 <?php endif; ?>
 <br><br>
-<div id="tag-area">
-    <?php if(!empty($this->work['Tags'])): ?>
-    <?php foreach($this->work['Tags'] as $tag): ?>
-    <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*10) ?>px"><?php echo $tag[0]['comment']; ?></div>
-    <?php endforeach; ?>
-    <?php endif; ?>
-</div>
-<div id="tag-area">
 
-<?php if(!$this->canTag){ echo 'false';} else {echo 'true';}?>
 <?php if($this->canTag){echo $this->tagForm; } ?>
 </div>
 </td>
 
 
 <td id = "right-column">
+    <div id="tag-area">
+        <?php if(!empty($this->work['Tags'])): ?>
+        <?php foreach($this->work['Tags'] as $tag): ?>
+        <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?></div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
     <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
+    <div class="language"><?php echo __($this->work['language']); ?></div>
     <div class = "text"> 
         <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
             <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
