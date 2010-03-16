@@ -29,8 +29,14 @@
         <?php endif; ?>
     </div></td><td>   <div id="tag-area">
         <?php if(!empty($this->translation['Tags'])): ?>
-        <?php foreach($this->translation['Tags'] as $tag): ?>
-        <div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?></div>
+        <?php foreach($this->translation['Tags'] as $name=>$tag): ?>        
+            <div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?>
+            <?php $canRemove = false;?>
+            <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
+            <?php if($canRemove): ?>
+                <a class="delete_visible" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name))?>"> X </a>
+            <?php endif; ?>
+            </div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div></td>

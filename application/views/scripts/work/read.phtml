@@ -42,8 +42,14 @@
 <td id = "right-column">
     <div id="tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
-        <?php foreach($this->work['Tags'] as $tag): ?>
-        <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?></div>
+        <?php foreach($this->work['Tags'] as $name=>$tag): ?>
+        <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
+        <?php $canRemove = false;?>
+        <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
+        <?php if($canRemove): ?>
+            <a class="delete_visible" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->work['id'],'tag'=>$name))?>"> X </a>
+        <?php endif; ?>
+        </div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>

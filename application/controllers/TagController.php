@@ -50,8 +50,8 @@ class TagController extends Tdxio_Controller_Abstract
         switch($action){
             case 'tag': $rule = array('privilege'=> 'tag','work_id' => $resource_id);      
                         break; 
-            case 'deletetag': 
-                        $rule = array('privilege'=> 'iscreator','work_id' => $resource_id);       
+            case 'deletetag':
+                        $rule = array('privilege'=> 'read','work_id' => $resource_id);       
                         break; 
         }               
         return $rule;

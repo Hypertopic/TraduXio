@@ -391,7 +391,10 @@ border-color: #AAA6AD;
     width:50%;
 }
  
-
+div.removable-tag_visible{
+    float:left;
+    margin-right:10px;
+}
 div.tag-item{
     float:left;
     background-color:#E5E5E5;
