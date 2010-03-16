@@ -12,6 +12,8 @@
 class Model_Taggable extends Model_Abstract
 {
 
+    protected $_tableClass = 'Taggable';
+    
     public function __construct() {
         
         //parent::__construct($class_name,$idField,$contentField); 
@@ -53,12 +55,39 @@ class Model_Taggable extends Model_Abstract
         
     }   
     
-    public function deleteTag($tagId,$taggableId=null){
+    public function deleteTag($username,$taggableId,$tag){
         $tagTable = new Model_DbTable_Tag();
-        $where[] = $tagTable->getAdapter()->quoteInto('id = ?',$tagId);
-        if(!is_null($taggableId)){
+        if(!(is_null($username)||is_null($taggableId)||is_null($tag))){
+            $where[] = $tagTable->getAdapter()->quoteInto('"user" = ?',$username);
             $where[] = $tagTable->getAdapter()->quoteInto('taggable = ?',$taggableId);
+            $where[] = $tagTable->getAdapter()->quoteInto('"comment" = ?',$tag);
+            Tdxio_Log::info($where,'whereee');
+            return $tagTable->delete($where);
+           
         }
-        $tagTable->delete($where);
+        return 'not enough parameters to delete a tag';           
+    }
+    
+
+    public function normalizeTags($tags){
+        
+        $ntags = array();
+        foreach($tags as $key=>$tag){
+            $ntags[$tag['comment']][]=$tag;            
+        }
+        Tdxio_Log::info($ntags,'normalizedtags1');
+        $maxMult=1;
+        foreach($ntags as $key=>$tag){
+            $count = count($ntags[$key]);
+            Tdxio_Log::info($count,'count'.$key);
+            $ntags[$key]['multiplicity']=$count;
+            $maxMult = max($maxMult,$count);
+        }
+        
+        Tdxio_Log::info($ntags,'normalizedtags2');
+        foreach($ntags as $key => $tag){
+            $ntags[$key]['multiplicity']/=$maxMult;
+        }
+        return $ntags;
     }
 }

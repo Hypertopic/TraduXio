@@ -103,26 +103,4 @@ class Model_Abstract {
     }
 
 
-    public function normalizeTags($tags){
-        
-        $ntags = array();
-        foreach($tags as $key=>$tag){
-            $ntags[$tag['comment']][]=$tag;            
-        }
-        Tdxio_Log::info($ntags,'normalizedtags1');
-        $maxMult=1;
-        foreach($ntags as $key=>$tag){
-            $count = count($ntags[$key]);
-            Tdxio_Log::info($count,'count'.$key);
-            $ntags[$key]['multiplicity']=$count;
-            $maxMult = max($maxMult,$count);
-        }
-        
-        Tdxio_Log::info($ntags,'normalizedtags2');
-        foreach($ntags as $key => $tag){
-            $ntags[$key]['multiplicity']/=$maxMult;
-        }
-        return $ntags;
-    }
-
 }

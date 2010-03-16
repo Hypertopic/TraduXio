@@ -332,13 +332,16 @@ text-decoration:none;
 .up-section{
     vertical-align:top;
 }
-a.delete{
+a.delete_visible{
     font-size:10px;
     font-weight:bold;
     color:#4D4D4D;
     background-color:#E5E5E5; 
     vertical-align:center;
 
+}
+
+a.delete_hidden{visibility:hidden;
 }
 
 ul.hyphen li {
@@ -481,12 +484,12 @@ div#tag-area {
 #header-logo{
     float:left;
     margin:5px;
-    width:25%;
+    width:500px;
 }
 #header-navigation{
     float:right;
     margin:5px;
-    width:70%;
+    width:800px;
     text-align:right;
 }
 #header-navigation ul {

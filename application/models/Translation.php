@@ -9,7 +9,7 @@
  * @package    Traduxio
  * @subpackage Model
  */
-class Model_Translation extends Model_Abstract
+class Model_Translation extends Model_Taggable
 {
     protected $_tableClass = 'Interpretation';
     protected $_cutter;
@@ -92,7 +92,7 @@ class Model_Translation extends Model_Abstract
                 $work['TranslationBlocks'][$key]['OriginalSentences'][$i]=$work['OriginalSentences'][$i];
             }
         }
-        $tags = $workModel->getTags($work_id);
+        $tags = $this->getTags($work_id);
         $work['Tags'] = $tags[$work_id];
         if(!empty($tags) && $computeMultiplicity==true){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);

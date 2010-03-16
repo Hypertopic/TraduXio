@@ -115,9 +115,11 @@ class WorkController extends Tdxio_Controller_Abstract
             if ($tagForm->isValid($this->getRequest()->getPost())) {
                 
                 $data = $tagForm->getValues();
-                        Tdxio_Log::info($data);
-                $this->tag($id,$data);
-                return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$id));
+                        Tdxio_Log::info($data,'dataaaas');
+                        
+                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$id,'tag'=>$data['tag_comment']));        
+              //  $this->tag($id,$data);
+              //  return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$id));
             }
         }
         $this->view->canTag = $model->isAllowed('tag',$id);
@@ -300,25 +302,10 @@ class WorkController extends Tdxio_Controller_Abstract
         return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
     }
 
-    
-    protected function tag($work_id,$data){
-        
-        $model= $this->_getModel();
-        $user = Tdxio_Auth::getUserName();
-        $tag = array('username'=> $user, 'taggable_id'=> $work_id, 'comment' => $data['tag_comment']);
-        $model->tag($tag);
-    }
-    
     protected function tagSentence()
     {
         
-    }
-    
-/*  protected function getModel()
-    {
-        return new Model_Work();
-    }*/
-    
+    } 
 
     
     public function getRule($request){

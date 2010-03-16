@@ -60,6 +60,8 @@ class TranslationController extends Tdxio_Controller_Abstract
             }
             $form->setDefaults($work);
         }
+        $privilegeModel=new Model_Privilege();
+        $this->view->userIsAuthor=$privilegeModel->userIsAuthor(null,$translationId);
         $this->view->form=$form;
         $this->view->translation=$work;
     }
@@ -113,18 +115,6 @@ class TranslationController extends Tdxio_Controller_Abstract
 
     }
     
-    public function deletetagAction(){        
-        $request=$this->getRequest();
-        $translationId=$request->getParam('work_id');
-        $tagId=$request->getParam('tag_id');
-        Tdxio_Log::info($translationId,'ester');
-        Tdxio_Log::info($tagId,'ester');
-        $taggableModel = new Model_Taggable();
-        $taggableModel->deleteTag($tagId,$translationId);
-      
-        $this->_helper->redirector->gotoSimple('edit',null,null,array('id'=>$translationId));
-    
-    }
     
     public function readAction()
     {           
@@ -140,8 +130,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                 
                 $data = $tagForm->getValues();
                 Tdxio_Log::info($data,'dati di tag');
-                $this->tag($translationId,$data);
-                return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$translationId));
+                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$translationId,'tag'=>$data['tag_comment']));
             }
         }
                 
@@ -150,14 +139,6 @@ class TranslationController extends Tdxio_Controller_Abstract
         $this->view->canManage = $workModel->isAllowed('manage',$translationId);
         $this->view->tagForm = $tagForm;
         $this->view->translation = $translation;
-    }
-    
-    public function tag($work_id,$data){
-        
-        $model= new Model_Work();
-        $user = Tdxio_Auth::getUserName();
-        $tag = array('username'=> $user, 'taggable_id'=> $work_id, 'comment' => $data['tag_comment']);
-        $model->tag($tag);
     }
     
     protected function _getBlockList($transBlocks) 
