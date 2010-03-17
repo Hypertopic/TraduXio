@@ -22,11 +22,11 @@
 class Form_AddPrivilege extends Form_Abstract
 {
 
-	public $_privilegeList=null;
-	
+    public $_privilegeList=null;
+    
     function __construct($privilegeList,$type=null) {
         $this->_privilegeList=$privilegeList;
-	    parent::__construct();
+        parent::__construct();
     }
     /**
      * init() is the initialization routine called when Zend_Form objects are
@@ -43,24 +43,24 @@ class Form_AddPrivilege extends Form_Abstract
     {
         // set the method for the display form to POST
         $this->setMethod('post');
-		$this->setAttrib('class','privilege-form');
-		$this->setAttrib('id','addform');
-		
-		$this->addElement('select', 'user', array(
+        $this->setAttrib('class','privilege-form');
+        $this->setAttrib('id','addform');
+        
+        $this->addElement('select', 'user', array(
             'label'      => 'User',
             'multiOptions'=> $this->_getUsers(),
-			'id'   =>  'usersel',
-		//'required' => true,
-			'class' => 'manage-select'
-		));
-		$this->addElement('select', 'privilege', array(
-		'label'      => 'Privilege',
-		'multiOptions'=> $this->_privilegeList,
-		'id'   =>  'privsel',
-		//'required' => true,
-		'class' => 'manage-select'
-		));		
-		
+            'id'   =>  'usersel',
+        //'required' => true,
+            'class' => 'manage-select'
+        ));
+        $this->addElement('select', 'privilege', array(
+        'label'      => 'Privilege',
+        'multiOptions'=> $this->_privilegeList,
+        'id'   =>  'privsel',
+        //'required' => true,
+        'class' => 'manage-select'
+        ));     
+        
         // add the submit button
         $this->addElement('submit', 'submit', array(
             'label'    => __('Add Privilege'),
@@ -68,33 +68,33 @@ class Form_AddPrivilege extends Form_Abstract
 
     }
 
-	protected function _getUsers()
+    protected function _getUsers()
     {
-		$userModel = new Model_User();
-		$usersarray=$userModel->fetchAll();
-		Tdxio_Log::info('usersarray in addprivilege');
-		Tdxio_Log::info($usersarray->toArray());
-		$users['all']='all users';////////////////////////////////////////////??????????????????
-		foreach($usersarray as $key=>$user){
-			$users[$user['name']]=$user['name'];
-		}		
-		Tdxio_Log::info($users);
+        $userModel = new Model_User();
+        $usersarray=$userModel->fetchAll();
+        Tdxio_Log::info('usersarray in addprivilege');
+        Tdxio_Log::info($usersarray->toArray());
+        $users['all']='all users';////////////////////////////////////////////??????????????????
+        foreach($usersarray as $key=>$user){
+            $users[$user['name']]=$user['name'];
+        }       
+        Tdxio_Log::info($users);
         return $users;
     }
-	/* 
-	protected function _getTranslations()
+    /* 
+    protected function _getTranslations()
     {
         require_once APPLICATION_PATH . '/models/TextModel.php';
-		$txtModel = new TextModel();
-		$text=$txtModel->fetchEntry($this->_id);
-		$tempkey=0;
-		if(isset($text['Translations'])){
-			foreach ($text['Translations'] as $key=>$translation){
-				$translations[$key]=$translation['title'].' ('.$translation['language'].')';
-				$tempkey=$key;
-			}
-			if($tempkey>0){$translations[$tempkey+1]='all translations';}
-		}		        
+        $txtModel = new TextModel();
+        $text=$txtModel->fetchEntry($this->_id);
+        $tempkey=0;
+        if(isset($text['Translations'])){
+            foreach ($text['Translations'] as $key=>$translation){
+                $translations[$key]=$translation['title'].' ('.$translation['language'].')';
+                $tempkey=$key;
+            }
+            if($tempkey>0){$translations[$tempkey+1]='all translations';}
+        }               
         return $translations;
     } */
 

@@ -114,12 +114,8 @@ class WorkController extends Tdxio_Controller_Abstract
             
             if ($tagForm->isValid($this->getRequest()->getPost())) {
                 
-                $data = $tagForm->getValues();
-                        Tdxio_Log::info($data,'dataaaas');
-                        
-                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$id,'tag'=>$data['tag_comment']));        
-              //  $this->tag($id,$data);
-              //  return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$id));
+                $data = $tagForm->getValues();                        
+                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$id,'tag'=>$data['tag_comment']));  
             }
         }
         $this->view->canTag = $model->isAllowed('tag',$id);
@@ -348,7 +344,14 @@ class WorkController extends Tdxio_Controller_Abstract
                         $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                     }else{
                         $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility, 'notAllowed'=>true);    
-                    } break; 
+                    } break;
+            case 'switch':  
+            case 'manage':
+                if($request->isPost()){
+                        $rule = array('privilege'=> 'manage','work_id' => $resource_id,'visibility'=>$visibility);      
+                    }else{
+                        $rule = array('privilege'=> 'manage','work_id' => $resource_id, 'visibility'=>$visibility, 'notAllowed'=>true); 
+                    } break;            
             default:$rule = 'noAction';
         }               
         return $rule;

@@ -76,8 +76,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front = Zend_Controller_Front::getInstance();
         $aclPlugin = new Tdxio_Plugin_AclPlugin();
         $front->registerPlugin($aclPlugin); 
-    //    $memPlugin = new Tdxio_Plugin_MemTracePlugin();
-    //    $front->registerPlugin($memPlugin); 
+        $translatePlugin = new Tdxio_Plugin_TranslatePlugin();
+        $front->registerPlugin($translatePlugin); 
 
     }
         
@@ -99,5 +99,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $writer = new Zend_Log_Writer_Stream(TEMP_PATH.'/log.txt');
         $logger = new Zend_Log($writer);
     }
+    
+    //INITIALIZE TRANSLATE
+ /*   protected function _initTranslate(){
+        $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages','en');        
+        $translate->addTranslation(APPLICATION_PATH.'/../languages','fr');
+    }*/
     
 }

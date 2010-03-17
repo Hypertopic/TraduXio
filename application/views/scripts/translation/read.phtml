@@ -32,9 +32,9 @@
         <?php foreach($this->translation['Tags'] as $name=>$tag): ?>        
             <div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?>
             <?php $canRemove = false;?>
-            <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
+            <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
             <?php if($canRemove): ?>
-                <a class="delete_visible" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name))?>"> X </a>
+                <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name))?>"> X </a>
             <?php endif; ?>
             </div>
         <?php endforeach; ?>

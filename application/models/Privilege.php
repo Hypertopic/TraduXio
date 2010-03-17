@@ -80,7 +80,7 @@ class Model_Privilege extends Model_Abstract
     
     public function exist($privilege){
         
-        if((!is_null($privilege['work_id']) && !is_null($privilege['user_id']))||$privilege['privilege']=='iscreator'){
+        if((!is_null($privilege['work_id'])) && (!is_null($privilege['user_id']))){
             if($this->userIsAuthor($privilege['user_id'],$privilege['work_id']))
                 return true;
         }
@@ -124,7 +124,7 @@ class Model_Privilege extends Model_Abstract
     
     public function userIsAuthor($user_name=null,$work_id)
     {
-        if(is_null($user_name)) $user_name = Tdxio_Auth::getUserName();
+        if(is_null($user_name)){ $user_name = Tdxio_Auth::getUserName();}
         $workModel = new Model_Work();
         $result = $workModel->fetchByFields(array('id'=>$work_id, 'creator'=>$user_name));
         return !empty($result);

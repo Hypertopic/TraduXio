@@ -48,8 +48,8 @@ class Form_TextDeposit extends Form_Abstract
         ));
         $title->setAttrib('class',$title->getAttrib('class').' deposit');
         $title->addDecorator(array('Inline'=>'HtmlTag'),array('tag'=>'span','class'=>'inline tag'));
-		
-		$author=$this->createElement('text','author');
+        
+        $author=$this->createElement('text','author');
                 
         $author->setOptions(array(
             'label'      => 'Author',

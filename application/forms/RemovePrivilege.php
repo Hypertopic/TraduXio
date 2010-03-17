@@ -22,13 +22,13 @@
 class Form_RemovePrivilege extends Form_Abstract
 {
 
-	public $_id=null;
-	public $_list=null;
-	
+    public $_id=null;
+    public $_list=null;
+    
     function __construct($id,$list) {
-		$this->_id=$id;
+        $this->_id=$id;
         $this->_list=$list;
-		parent::__construct();
+        parent::__construct();
     }
     /**
      * init() is the initialization routine called when Zend_Form objects are
@@ -45,67 +45,67 @@ class Form_RemovePrivilege extends Form_Abstract
     {
         // set the method for the display form to POST
         $this->setMethod('post');
-		$this->setAttrib('class','privilege-form');
-		$this->setAttrib('id','remform');
+        $this->setAttrib('class','privilege-form');
+        $this->setAttrib('id','remform');
 
-		
-		foreach($this->_list as $key=>$privilege){
-		if(is_null($privilege['work_id'])){
-			$attrList=array(
-				'label' => $privilege['plaintext'],
-				'value' => $privilege['id'],
-				'required' => true,
-				'disabled'=>'disabled',
-				'display' => 'inline'
-			);
-		}
-		else{
-			$attrList=array(
-				'label' => $privilege['plaintext'],
-				'value' => $privilege['id'],
-				'required' => true,
-				'enabled'=> 'enabled',
-				'display' => 'inline'
-			);
-		
-		}
-			$this->addElement('checkbox', preg_quote($privilege['id']),$attrList);
+        
+        foreach($this->_list as $key=>$privilege){
+        if(is_null($privilege['work_id'])){
+            $attrList=array(
+                'label' => $privilege['plaintext'],
+                'value' => $privilege['id'],
+                'required' => true,
+                'disabled'=>'disabled',
+                'display' => 'inline'
+            );
+        }
+        else{
+            $attrList=array(
+                'label' => $privilege['plaintext'],
+                'value' => $privilege['id'],
+                'required' => true,
+                'enabled'=> 'enabled',
+                'display' => 'inline'
+            );
+        
+        }
+            $this->addElement('checkbox', preg_quote($privilege['id']),$attrList);
 
-		}
+        }
         // add the submit button
         $this->addElement('submit', 'submit', array(
             'label'    => __('Remove Privilege'),
-			'id' => 'remsubmit'
+            'id' => 'remsubmit'
         ));
 
     }
 
-	protected function _getUsers()
+    protected function _getUsers()
     {
         require_once APPLICATION_PATH . '/models/UserModel.php';
-		$userModel = new UserModel();
-		$usersarray=$userModel->fetchEntries();
-		$users[0]='all users';
-		foreach($usersarray as $key=>$user){
-			$users[$key+1]=$user['id'];
-		}
-		
+        $userModel = new UserModel();
+        $usersarray=$userModel->fetchEntries();
+        $users[0]='all users';
+        foreach($usersarray as $key=>$user){
+            $users[$key+1]=$user['id'];
+        }
+        
         return $users;
     }
-	
-	protected function _getTranslations()
+    
+    protected function _getTranslations()
     {
         require_once APPLICATION_PATH . '/models/TextModel.php';
-		$txtModel = new TextModel();
-		$text=$txtModel->fetchEntry($this->_id);
-		$tempkey=0;
-		if(isset($text['Translations'])){
-			foreach ($text['Translations'] as $key=>$translation){
-				$translations[$key]=$translation['title'].' ('.$translation['language'].')';
-				$tempkey=$key;
-			}
-			if($tempkey>0){$translations[$tempkey+1]='all translations';}
-		}		        
+        $txtModel = new TextModel();
+        $text=$txtModel->fetchEntry($this->_id);
+        $tempkey=0;
+        if(isset($text['Translations'])){
+            foreach ($text['Translations'] as $key=>$translation){
+                $translations[$key]=$translation['title'].' ('.$translation['language'].')';
+                $tempkey=$key;
+            }
+            if($tempkey>0){$translations[$tempkey+1]='all translations';}
+        }               
         return $translations;
     }
 

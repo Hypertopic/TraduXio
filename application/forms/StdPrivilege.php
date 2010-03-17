@@ -23,9 +23,9 @@ class Form_StdPrivilege extends Form_Abstract
 {
 
     protected $_type=null;
-	
+    
     function __construct() {
-	    parent::__construct();
+        parent::__construct();
     }
     /**
      * init() is the initialization routine called when Zend_Form objects are
@@ -42,19 +42,19 @@ class Form_StdPrivilege extends Form_Abstract
     {
         // set the method for the display form to POST
         $this->setMethod('post');
-		$this->setAttrib('class','privilege-form');
-		$this->setAttrib('id','stdform');
-		
-		$this->addElement('radio','visibility',array(
-			'label' => 'Text Visibility',
-			'multiOptions'  => array(
-				'private' => 'Private',
-				'public' => 'Public'
-			),
-			'id'   =>  'stdsel',
-			'class' => 'manage-select'
-		));
-		
+        $this->setAttrib('class','privilege-form');
+        $this->setAttrib('id','stdform');
+        
+        $this->addElement('radio','visibility',array(
+            'label' => 'Text Visibility',
+            'multiOptions'  => array(
+                'private' => 'Private',
+                'public' => 'Public'
+            ),
+            'id'   =>  'stdsel',
+            'class' => 'manage-select'
+        ));
+        
         // add the submit button
         $this->addElement('submit', 'submit', array(
             'label'    => __('Save'),

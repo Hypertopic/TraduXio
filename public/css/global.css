@@ -324,7 +324,7 @@ color:#333333;
 font-weight:bold;
 text-decoration:none;
 }
-.remove-tags{
+div#remove-tags{
     float:right;
     width:50%;
     text-align:left;
@@ -332,7 +332,7 @@ text-decoration:none;
 .up-section{
     vertical-align:top;
 }
-a.delete_visible{
+a.delete{
     font-size:10px;
     font-weight:bold;
     color:#4D4D4D;
@@ -341,8 +341,6 @@ a.delete_visible{
 
 }
 
-a.delete_hidden{visibility:hidden;
-}
 
 ul.hyphen li {
     list-style-type:circle;
@@ -390,11 +388,11 @@ border-color: #AAA6AD;
     background-color:#EEEEEE;    
     width:50%;
 }
- 
+ /*
 div.removable-tag_visible{
     float:left;
     margin-right:10px;
-}
+}*/
 div.tag-item{
     float:left;
     background-color:#E5E5E5;

@@ -93,6 +93,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
             }               
             $view->notAllowed=false;
         }
+    
         $request->setControllerName($controllername);
         $request->setActionName($actionName);
     }

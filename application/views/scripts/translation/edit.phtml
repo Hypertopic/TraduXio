@@ -39,11 +39,10 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 <?php echo $this->form->buttons; ?>
 </span>
 <?php if(!empty($this->translation['Tags'])): ?>
-<div class="remove-tags">
-<?php if($this->userIsAuthor==true||$this->preview==true): $classSuffix = 'visible'; else: $classSuffix = 'hidden'; endif;?>
+<div id="remove-tags">
 <?php foreach($this->translation['Tags'] as $key=>$tag): ?>
-    <div class="<?php echo "removable-tag_".$classSuffix; ?>"> <?php echo $tag['comment']." "?> 
-    <a class="<?php echo "delete_".$classSuffix; ?>" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$tag['comment']))?>"> X </a></div>
+    <div class="tag-item" ?> <?php echo $tag['comment']." "?> 
+    <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$tag['comment']))?>"> X </a></div>
 <?php endforeach; ?>
 </div>
 <?php endif; ?>

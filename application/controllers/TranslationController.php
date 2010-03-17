@@ -22,12 +22,13 @@ class TranslationController extends Tdxio_Controller_Abstract
         if(!$work=$model->fetchTranslationWork($translationId,false)){
             throw new Zend_Controller_Action_Exception(sprintf('Translation "%d" does not exist.', $translationId), 404);
         }
-        $form = new Form_TranslationEdit($this->_getBlockList($work['TranslationBlocks']),$work['Tags']);
-        
+        $form = new Form_TranslationEdit($this->_getBlockList($work['TranslationBlocks']));
+
+        // In the translation-edit page every user can see/remove only his tags
         $username=Tdxio_Auth::getUserName();
         if(!empty($work['Tags'])){
         foreach($work['Tags'] as $key=> $tag){
-            if(!$tag['user']== $username){
+            if(!($tag['user']== $username)){
                 unset($work['Tags'][$key]);
             }
         }
@@ -60,8 +61,6 @@ class TranslationController extends Tdxio_Controller_Abstract
             }
             $form->setDefaults($work);
         }
-        $privilegeModel=new Model_Privilege();
-        $this->view->userIsAuthor=$privilegeModel->userIsAuthor(null,$translationId);
         $this->view->form=$form;
         $this->view->translation=$work;
     }

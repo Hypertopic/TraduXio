@@ -20,8 +20,9 @@ defined('APPLICATION_ENV')
 
 //Define path to temporary files
 defined('TEMP_PATH')
-	|| define('TEMP_PATH', realpath(dirname(__FILE__) . '/../temp'));
-	
+    || define('TEMP_PATH', realpath(dirname(__FILE__) . '/../temp'));
+    
+    
 function __($text)
 {
     if (!false) {
@@ -29,7 +30,7 @@ function __($text)
         return $text;
     }
 }
-	
+    
 /** Zend_Application */
 require_once 'Zend/Application.php';  
 

@@ -54,8 +54,7 @@ class TagController extends Tdxio_Controller_Abstract
                         $rule = array('privilege'=> 'read','work_id' => $resource_id);       
                         break; 
         }               
-        return $rule;
-        
+        return $rule;        
     }
     
     
