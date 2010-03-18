@@ -19,7 +19,7 @@ class LoginController extends Tdxio_Controller_Abstract
             // however, the logout action should still be available
             if ('logout' != $this->getRequest()->getActionName()) {
             
-            $this->_helper->redirector('index', 'index');
+            $this->_redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
             // If they aren't, they can't logout, so that action should
@@ -32,13 +32,38 @@ class LoginController extends Tdxio_Controller_Abstract
     
     public function indexAction()
     {
-        $this->view->form = $this->getForm();
+        Tdxio_Log::info('set URI','indexAction');
+        $form = $this->getForm();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $values=$form->getValues();
+                // Get our authentication adapter and check credentials
+                $adapter = $this->getAuthAdapter($values);
+                $auth    = Zend_Auth::getInstance();
+                $result  = $auth->authenticate($adapter);
+                // $this->log($result);
+                if ($result->isValid()) {
+                    $user = Tdxio_Auth::getUserName();
+                    $model = new Model_User();          
+                    $model->registerUser($user);
+                        
+                    // We're authenticated! Redirect to the original page
+                    $this->_redirect($values['redirect']);
+                } else {
+                        // Invalid credentials
+                    $form->setDescription('Invalid credentials provided');
+                }
+            }
+        } else {
+            $form->getElement('redirect')->setValue($_SERVER['HTTP_REFERER']);
+        }
+        $this->view->form = $form;
     }
     
     
     public function processAction()
     {
-        $request = $this->getRequest();
 
         // Check if we have a POST request
         if (!$request->isPost()) {
@@ -46,30 +71,6 @@ class LoginController extends Tdxio_Controller_Abstract
         }
 
         // Get our form and validate it
-        $form = $this->getForm();
-        if (!$form->isValid($request->getPost())) {
-            // Invalid entries
-            $this->view->form = $form;
-            return $this->render('index'); // re-render the login form
-        }
-
-        // Get our authentication adapter and check credentials
-        $adapter = $this->getAuthAdapter($form->getValues());
-        $auth    = Zend_Auth::getInstance();
-        $result  = $auth->authenticate($adapter);
-        // $this->log($result);
-        if (!$result->isValid()) {
-            // Invalid credentials
-            $form->setDescription('Invalid credentials provided');
-            $this->view->form = $form;
-            return $this->render('index'); // re-render the login form
-        }
-        $user = Tdxio_Auth::getUserName();
-        $model = new Model_User();          
-        $model->registerUser($user);
-            
-        // We're authenticated! Redirect to the home page
-        $this->_helper->redirector('index', 'index');
     }
     
     public function logoutAction()
@@ -80,10 +81,10 @@ class LoginController extends Tdxio_Controller_Abstract
     
     public function getForm()
     {
-        return new Form_Login(array(
-            'action' => $this->view->makeUrl('/login/process'),
+        $form=new Form_Login(array(
             'method' => 'post'
         ));
+        return $form;
     }
     
      public function getAuthAdapter(array $params)

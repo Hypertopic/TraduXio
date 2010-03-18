@@ -40,6 +40,9 @@
 
 
 <td id = "right-column">
+<div id = "page-container">
+<div id = "TLcorner"></div><div id = "Tborder"></div><div id = "TRcorner"></div>
+<div id = "work-container">
     <div id="tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
         <?php foreach($this->work['Tags'] as $name=>$tag): ?>
@@ -62,6 +65,8 @@
         <?php endforeach; ?>
     </div>
     <div class = "creator"> <?php echo (__('Text inserted by '));  echo ($this->work['creator']); ?> </div>
+</div>    
+</div>
 </td>
     </tr>
 </table> 

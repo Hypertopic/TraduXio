@@ -22,13 +22,22 @@ defined('APPLICATION_ENV')
 defined('TEMP_PATH')
     || define('TEMP_PATH', realpath(dirname(__FILE__) . '/../temp'));
     
-    
+require_once 'Zend/Translate.php';
+require_once 'Tdxio/Log.php';
+
 function __($text)
 {
-    if (!false) {
+    $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en');        
+    $actual = $translate->getLocale();
+    $translate->setLocale("fr");
+    Tdxio_Log::info($actual,'locale');
+    $translate->addTranslation(APPLICATION_PATH.'/../languages/fr.mo','fr');
+   // $translate->addTranslation(APPLICATION_PATH.'/../languages/it.mo','it');
+    
+    if (is_null($trText)) {
         // if not found a translation, send back the original text
         return $text;
-    }
+    }else{ return $trText; }
 }
     
 /** Zend_Application */

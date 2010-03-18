@@ -76,8 +76,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front = Zend_Controller_Front::getInstance();
         $aclPlugin = new Tdxio_Plugin_AclPlugin();
         $front->registerPlugin($aclPlugin); 
-        $translatePlugin = new Tdxio_Plugin_TranslatePlugin();
-        $front->registerPlugin($translatePlugin); 
+     //   $translatePlugin = new Tdxio_Plugin_TranslatePlugin();
+     //   $front->registerPlugin($translatePlugin); 
 
     }
         

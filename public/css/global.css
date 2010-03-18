@@ -223,6 +223,30 @@ margin:30px auto;
 text-align:left;
 width:90%;
 }
+
+div#TLcorner{
+    float:left;
+    background-image:url(../images/TLcorner.png);
+    background-repeat:no-repeat;
+    width:21px;
+    height:21px;
+}
+div#TRcorner{
+    float:left;
+    background-image:url(../images/TRcorner.png);
+    background-repeat:no-repeat;
+    width:21px;
+    height:21px;
+}
+div#Tborder{
+    float:left;
+    background-image:url(../images/top-border.png);
+    background-repeat:horizontal-repeat;
+    width:600px;
+    height:21px;
+}
+
+
 li.language {
     font-variant:small-caps;
     font-size:16px;
@@ -452,8 +476,8 @@ div#tag-area {
     width:75%;
     float:left;
   /*  border: 1px solid #DBDBDB;*/
-    max-width:800px;
-    min-width:250px;
+    max-width:1000px;
+    min-width:800px;
     padding:20px;
     vertical-align:top;
 }

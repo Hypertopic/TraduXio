@@ -10,6 +10,7 @@ class Form_Login extends Zend_Form
             ),
             'required'   => true,
             'label'      => 'Your username:',
+            'value'    => 'atena'
         ));
 
         $password = $this->addElement('password', 'password', array(
@@ -20,7 +21,13 @@ class Form_Login extends Zend_Form
             'label'      => 'Password:',
         ));
 
-        $login = $this->addElement('submit', 'login', array(
+        $password = $this->addElement('text', 'redirect', array(
+            'validators' => array(
+            ),
+            'required'   => true,
+        ));
+
+         $login = $this->addElement('submit', 'login', array(
             'required' => false,
             'ignore'   => true,
             'label'    => 'Login',
