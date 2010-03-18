@@ -48,8 +48,14 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 <?php endif; ?>
 
 <table class="right-column"><tr>
-    <td class="view<?php echo $origDir; ?>"><div class="title">Original text :<?php echo $this->escape($this->translation['OriginalWork']['title']); ?></div></td>
-    <td class="edit<?php echo $transDir; ?>"><div class="title">This translation :<?php echo $elements['title']->render() ?></div></td>
+    <td class="view<?php echo $origDir; ?>">
+        <div class="title"><?php echo __('Original text').': ' ?><?php echo $this->escape($this->translation['OriginalWork']['title']); ?></div>
+        <div class="language"><?php echo __($this->translation['OriginalWork']['language']) ?></div>
+    </td>
+    <td class="edit<?php echo $transDir; ?>">
+        <div class="title"><?php echo __('This translation').': ' ?><?php echo $elements['title']->render() ?></div>
+        <div class="language"><?php echo __($this->translation['language']) ?></div>
+    </td>
 </tr>
 <?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
 <tr>
@@ -104,4 +110,4 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 </div>
 <?php //<div id="tdxio-text-div"/> ?>
 
-<?php  $this->page_title="Edit Translation: ".$this->escape($this->translation['title']); ?>
+<?php  $this->page_title=__("Edit Translation").': '.$this->escape($this->translation['title']); ?>

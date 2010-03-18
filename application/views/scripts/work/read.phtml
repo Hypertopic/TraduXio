@@ -40,10 +40,7 @@
 
 
 <td id = "right-column">
-<div id = "page-container">
-<div id = "TLcorner"></div><div id = "Tborder"></div><div id = "TRcorner"></div>
-<div id = "work-container">
-    <div id="tag-area">
+ <div id="tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
         <?php foreach($this->work['Tags'] as $name=>$tag): ?>
         <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
@@ -56,6 +53,11 @@
         <?php endforeach; ?>
         <?php endif; ?>
     </div>
+<div id = "page-container">
+<div id = "TLcorner"></div><div id = "Tborder"></div><div id = "TRcorner"></div>
+<div id = "Lborder"></div>
+<div id = "work-container">
+   
     <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
     <div class="language"><?php echo __($this->work['language']); ?></div>
     <div class = "text"> 
@@ -64,12 +66,14 @@
             <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($sentence['content']); ?></span>
         <?php endforeach; ?>
     </div>
-    <div class = "creator"> <?php echo (__('Text inserted by '));  echo ($this->work['creator']); ?> </div>
-</div>    
+    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->work['creator']); ?> </div>
+</div>   
+<div id = "Rborder"></div>
+<div id = "BLcorner"></div><div id = "Bborder"></div><div id = "BRcorner"></div>
 </div>
 </td>
     </tr>
 </table> 
 </div>
 
-<?php $this->page_title = __("Read Text: ").$this->escape($this->work['title']); ?>
+<?php $this->page_title = __("Read Text").': '.$this->escape($this->work['title']); ?>

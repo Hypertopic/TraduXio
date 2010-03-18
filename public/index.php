@@ -29,11 +29,14 @@ function __($text)
 {
     $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en');        
     $actual = $translate->getLocale();
-    $translate->setLocale("fr");
+    Tdxio_Log::info($actual,'default_locale');
+    $translate->setLocale("it_IT");
+    $actual = $translate->getLocale();
     Tdxio_Log::info($actual,'locale');
-    $translate->addTranslation(APPLICATION_PATH.'/../languages/fr.mo','fr');
+    $translate->addTranslation(APPLICATION_PATH.'/../languages/it_IT.mo','it');
    // $translate->addTranslation(APPLICATION_PATH.'/../languages/it.mo','it');
     
+    $trText = $translate->_($text);
     if (is_null($trText)) {
         // if not found a translation, send back the original text
         return $text;

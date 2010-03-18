@@ -28,21 +28,21 @@
 
      <div id="header">
         <span id="header-logo">
-            <b><a href="<?php echo $this->makeUrl('/'); ?>">Traduxio Project</a></b> - <?php echo $this->profileLink(); ?>
+            <b><a href="<?php echo $this->makeUrl('/'); ?>"><?php echo __('Traduxio Project') ?></a></b> - <?php echo $this->profileLink(); ?>
         </span>
         <span id="header-navigation">
             <ul>
-            <li> <a href="<?php echo $this->makeUrl('/work/index'); ?>"><?php echo __('Oeuvres'); ?></a></li>
-            <li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concordancier'); ?></a></li>
+            <li> <a href="<?php echo $this->makeUrl('/work/index'); ?>"><?php echo __('Works'); ?></a></li>
+            <li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concorder'); ?></a></li>
             <?php if($this->showCreate): ?>
             <li> <a href="<?php echo $this->makeUrl('/work/my'); ?>"><?php echo __('My Translations'); ?></a></li>
             <li> <a href="<?php echo $this->makeUrl('/work/deposit'); ?>"><?php echo __('New text'); ?></a> </li>   
             <?php endif; ?>
-            <li><a href="<?php echo $this->makeUrl('/index/tutorial');?>">Help</a></li>
+            <li><a href="<?php echo $this->makeUrl('/index/tutorial');?>"><?php echo __('Help'); ?></a></li>
         <?php if ($this->home) :?>
-            <li><a href="<?php echo $this->makeUrl('/index/about');?>">About</a></li>
+            <li><a href="<?php echo $this->makeUrl('/index/about');?>"><?php echo __('About'); ?></a></li>
         <?php endif; ?>
-            <li> <a href="<?php echo $this->makeUrl('/index/feedback');?>">Feedback</a> </li>
+            <li> <a href="<?php echo $this->makeUrl('/index/feedback');?>"><?php echo __('Feedback'); ?></a> </li>
             </ul>
             <!-- To keep urls consistent with the applications router (right now we
                  are using the default router), we will employ the use of the url
@@ -62,7 +62,7 @@
          footer for all pages. -->
 
     <div class="footer">
-    <span class="footer-text">Le logiciel <span class="highlight">traduXio</span> est développé par l'association <span class="highlight">Zanchin</span> et le laboratoire <span class="highlight">Tech-CICO</span> avec le soutien de l'<span class="highlight">Unesco</span> et de l'<span class="highlight">Institut de la francophonie numérique</span>.</span>
+    <span class="footer-text"><?php echo __('The application').' '; ?><span class="highlight">traduXio</span><?php echo ' '.__('has been developed by the').' '?><span class="highlight">Zanchin</span><?php echo ' '.__('association and the').' ' ?><span class="highlight">Tech-CICO</span><?php echo ' '.__('laboratory, supported by ') ?><span class="highlight">Unesco</span><?php echo ' '.__('and by the').' ' ?><span class="highlight">Institut de la francophonie numérique</span>.</span>
         <a href="http://validator.w3.org/check?uri=referer">
         <img src="http://www.w3.org/Icons/valid-xhtml11-blue"
             alt="Valid XHTML 1.1"/></a>
@@ -73,3 +73,6 @@
          
 </body>
 </html>
+
+
+<!--Le logiciel <span class="highlight">traduXio</span> est développé par l'association <span class="highlight">Zanchin</span> et le laboratoire <span class="highlight">Tech-CICO</span> avec le soutien de l'<span class="highlight">Unesco</span> et de l'<span class="highlight">Institut de la francophonie numérique</span>.</span>-->

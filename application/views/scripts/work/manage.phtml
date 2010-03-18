@@ -19,22 +19,22 @@
 <span class="manage-link"><a href="<?php echo $this->makeUrl('/work/switch/id/'.$this->work_id); ?>"><?php echo __($this->link); ?></a></span>
 
 <?php if($this->visibility=='public' or $this->visibility=='private'): ?>
-<div class="title">Standard Privileges</div>
+<div class="title"><?php echo __('Standard Privileges') ?></div>
 <?php echo $this->stdform; ?>
 <?php endif; ?>
 
 <?php if($this->visibility=='custom'): ?>
-<div class="title">Custom Privileges</div>
+<div class="title"><?php echo __('Custom Privileges') ?></div>
 <div id="custom">
 <?php if($this->remform): ?>
-<div id="rem-privilege" class="privilege-form" title="Select and click on Remove Privilege to delete a permission"> 
-<div class="title">Remove an existing permission </div>
-<!--Check the appropriate box and click on <b>Remove Privilege</b> to delete a permission.-->
+<div id="rem-privilege" class="privilege-form" title="<?php echo __('Select and click on Remove Privilege to delete a permission') ?>"> 
+<div class="title"><?php echo __('Remove an existing permission') ?> </div>
+
 <?php echo $this->remform; ?></div>
-<?php else: ?> <div id="rem-privilege" class="privilege-form"> <div class="title"> NO EXISTING PRIVILEGES </div></div>
+<?php else: ?> <div id="rem-privilege" class="privilege-form"> <div class="title"> <?php echo __('NO EXISTING PRIVILEGES') ?> </div></div>
 <?php endif; ?>
 <div id="add-privilege" class="privilege-form">
-<div class="title">Add a new permission</div>
+<div class="title"><?php echo __('Add a new permission') ?></div>
 <?php echo $this->addform; ?>
 </div>
 </div>

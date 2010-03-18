@@ -3,7 +3,7 @@
 <table class="home">
 <tr><td>
 <div class="logo"><img src="<?php echo $this->makeUrl('/images/traduxio_home_logo.jpg'); ?>">
-<div class="citation">Du point de vue de la communaut&eacute;, le langage n'est pas seulement un fait social , [...] il est par l'alt&eacute;rit&eacute; [...] le fondement de toute association humaine.<span class="author">Eugenio Coseriu</span></div>
+<div class="citation"><?php echo __('HOMEPAGE PHRASE') ?><span class="author">Eugenio Coseriu</span></div>
 <div class="site-title"><?php echo __('Translating cultural texts') ?></div>
 </div>
 </td>
@@ -43,4 +43,4 @@ foreach ($this->entries as $lang=>$authors) { ?>
 <!--</div>-->
 
 
-<?php $this->page_title="Homepage"; ?>
+<?php $this->page_title=__('Homepage'); ?>

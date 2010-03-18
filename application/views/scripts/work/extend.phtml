@@ -15,13 +15,13 @@
 <div class="central-home">
 
 <div class="title"><?php echo $this->escape($this->text['title']); ?></div>
-<div class="language"><?php echo $this->escape($this->text['Language']['ref_name']); ?></div>
-<br/><span class="label">Last segment of the text:</span>
+<div class="language"><?php echo __($this->escape($this->text['Language']['ref_name'])); ?></div>
+<br/><span class="label"><?php echo __('Last segment of the text').':' ?></span>
 
-<div class="text view<?php echo $textDir; ?>" lang="<?php echo $this->text['Language']['part1'] ?>">
+<div class="text view<?php echo $textDir; ?>" lang="<?php echo __($this->text['Language']['part1']) ?>">
 <span class="segment" id="<?php echo$this->text['id']?>"></span><?php echo $this->lasttext; ?>
 </div>
 <div class="form">
 <?php echo $this->form ?>
 </div></div>
-<?php $this->page_title="Continue Text Insertion: ".$this->escape($this->text['title']); ?>
+<?php $this->page_title=__('Continue Text Insertion').':'.$this->escape($this->text['title']); ?>

@@ -1,24 +1,24 @@
 <?php $elements=$this->form->getElements(); ?>
 
 <div class = "bounding-box">
-	<div id="clear"></div>
-	<form action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>">
-		<table class="full-width">
-			<tr>	
-				<td class="td-left"><div class="title"><?php echo $this->escape($this->origWork['title']); ?></div></td>
-				<td class="td-right"><?php echo $elements['title']->render() ?></td>
-			</tr>
-			<tr>
-				<td class="td-left"><div class="language"><?php echo('Language');// $this->origWork['Language']['ref_name'];?></div></td>
-				<td class="td-right"><?php echo $elements['language']->render() ?></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td id="button"><?php echo $elements['submit']; ?></div></td>
-			</tr>
-		</table>
-	</form>	
-	<div id="clear"></div>
+    <div id="clear"></div>
+    <form action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>">
+        <table class="full-width">
+            <tr>    
+                <td class="td-left"><div class="title"><?php echo $this->escape($this->origWork['title']); ?></div></td>
+                <td class="td-right"><?php echo $elements['title']->render() ?></td>
+            </tr>
+            <tr>
+                <td class="td-left"><div class="language"><?php echo('Language');// $this->origWork['Language']['ref_name'];?></div></td>
+                <td class="td-right"><?php echo $elements['language']->render() ?></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td id="button"><?php echo $elements['submit']; ?></div></td>
+            </tr>
+        </table>
+    </form> 
+    <div id="clear"></div>
 </div>
 
-<?php $this->page_title="Create Translation of ".$this->escape($this->origWork['title']); ?>
+<?php $this->page_title=__("Create Translation of").' '.$this->escape($this->origWork['title']); ?>
