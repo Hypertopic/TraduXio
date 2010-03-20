@@ -183,11 +183,12 @@ class Model_Work extends Model_Taggable
         $select1 = $this->getSelectCondOriginalWork('interpretation');
         $select2 = $table->select()->where('id IN (?)',$select1)->where('creator = ?',$user);
         $translations = $table->fetchAll($select2)->toArray();
-        $translations = $this->getOriginalWorksFromTranslations($translations);
+        $translations = $this->addOriginalWorksToTranslationWorks($translations);
         return $translations;
     }
     
-    public function getOriginalWorksFromTranslations($translations){
+    public function addOriginalWorksToTranslationWorks($translations){
+        
         if(!empty($translations)){
             $idList=array();
             foreach($translations as $key=>$trWork){

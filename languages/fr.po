@@ -1,0 +1,203 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Traduxio\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-18 11:18+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Diana <dianazambon@hotmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms/TranslationEdit.php:72
+#: forms/StdPrivilege.php:60
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: forms/TranslationEdit.php:75
+msgid "Save and quit"
+msgstr "Sauvegarder et Quitter"
+
+#: forms/TranslationEdit.php:78
+msgid "Cancel"
+msgstr "Annuler"
+
+#: forms/Tag.php:48
+msgid "TAG"
+msgstr "TAG"
+
+#: forms/AddPrivilege.php:66
+msgid "Add Privilege"
+msgstr "Ajouter Privilège"
+
+#: forms/Feedback.php:42
+msgid "Your email address"
+msgstr "Ton adresse email"
+
+#: forms/Feedback.php:50
+msgid "Subject"
+msgstr "Suject"
+
+#: forms/Feedback.php:58
+msgid "Your message"
+msgstr "Votre message"
+
+#: forms/Feedback.php:75
+msgid "Send"
+msgstr "Envoyer"
+
+#: forms/TextExtend.php:41
+msgid "Text to add"
+msgstr "Texte à rajouter"
+
+#: forms/TextExtend.php:53
+#: forms/TextDeposit.php:87
+msgid "Deposit"
+msgstr "Déposer"
+
+#: forms/TextDeposit.php:69
+msgid "Text content"
+msgstr "Text content"
+
+#: forms/TextDeposit.php:80
+msgid "Source language"
+msgstr "Source language"
+
+#: forms/RemovePrivilege.php:77
+msgid "Remove Privilege"
+msgstr "Remove Privilege"
+
+#: views/helpers/ProfileLink.php:9
+msgid "Welcome"
+msgstr "Welcome"
+
+#: views/helpers/ProfileLink.php:9
+msgid "Logout"
+msgstr "Logout"
+
+#: views/helpers/ProfileLink.php:11
+msgid "Login"
+msgstr "Login"
+
+#: layouts/scripts/layout.phtml:5
+#: layouts/scripts/layout.phtml:31
+msgid "Traduxio Project"
+msgstr "Traduxio Project"
+
+#: layouts/scripts/layout.phtml:35
+msgid "Works"
+msgstr "Works"
+
+#: layouts/scripts/layout.phtml:36
+#, fuzzy
+msgid "Concorder"
+msgstr "Concordancier"
+
+#: layouts/scripts/layout.phtml:38
+msgid "My Translations"
+msgstr "Mes Traductions"
+
+#: layouts/scripts/layout.phtml:39
+msgid "New text"
+msgstr "Nouveau texte"
+
+#: layouts/scripts/layout.phtml:41
+msgid "Help"
+msgstr "Aide"
+
+#: layouts/scripts/layout.phtml:43
+msgid "About"
+msgstr "Informations"
+
+#: layouts/scripts/layout.phtml:45
+msgid "Feedback"
+msgstr "Feedback"
+
+#: layouts/scripts/layout.phtml:65
+msgid "The application"
+msgstr "Le logiciel"
+
+#: layouts/scripts/layout.phtml:65
+msgid "has been developed by the"
+msgstr "has been developed by the"
+
+#: layouts/scripts/layout.phtml:65
+msgid "association and the"
+msgstr "association and the"
+
+#: layouts/scripts/layout.phtml:65
+msgid "laboratory, supported by "
+msgstr ", avec le soutien de l'"
+
+#: layouts/scripts/layout.phtml:65
+msgid "and by the"
+msgstr "and by the"
+
+#: views/scripts/work/manage.phtml:15
+msgid "Manage Text's Privileges"
+msgstr "Manage Text's Privileges"
+
+#: views/scripts/work/manage.phtml:18
+msgid "Back to the text"
+msgstr "Back to the text"
+
+#: views/scripts/work/my.phtml:3
+msgid "You have not inserted any text's translations"
+msgstr "You have not inserted any text's translations"
+
+#: views/scripts/work/index.phtml:6
+msgid "HOMEPAGE PHRASE"
+msgstr "Du point de vue de la communaut&eacute;, le langage n'est pas seulement un fait social , [...] il est par l'alt&eacute;rit&eacute; [...] le fondement de toute association humaine."
+
+#: views/scripts/work/index.phtml:7
+msgid "Translating cultural texts"
+msgstr "Le site des traducteurs de textes littéraires, philosophiques ou historiques"
+
+#: views/scripts/work/read.phtml:10
+msgid "Translations"
+msgstr "Traductions"
+
+#: views/scripts/work/read.phtml:23
+#: views/scripts/translation/backup-read_with_div.phtml:8
+#: views/scripts/translation/read.phtml:6
+msgid "Options"
+msgstr "Options"
+
+#: views/scripts/work/read.phtml:25
+msgid "Create a Translation"
+msgstr "Créer une Traduction"
+
+#: views/scripts/work/read.phtml:28
+msgid "Continue Text Insertion"
+msgstr "Continuer Insertion"
+
+#: views/scripts/work/read.phtml:67
+msgid "Text inserted by "
+msgstr "Texte ajouté par"
+
+#: views/scripts/work/read.phtml:75
+msgid "Read Text: "
+msgstr "Lecture du Texte"
+
+#: views/scripts/translation/backup-read_with_div.phtml:11
+#: views/scripts/translation/read.phtml:9
+msgid "Edit this Translation"
+msgstr "Edit this Translation"
+
+#: views/scripts/translation/backup-read_with_div.phtml:14
+#: views/scripts/translation/read.phtml:13
+msgid "Manage text's privileges"
+msgstr "Manage text's privileges"
+
+#: views/scripts/translation/read.phtml:46
+msgid "Original Text: "
+msgstr "Original Text: "
+
+#: views/scripts/translation/read.phtml:56
+msgid "Translation: "
+msgstr "Translation: "
+
+#~ msgid "Oeuvres"
+#~ msgstr "Oeuvres"
+

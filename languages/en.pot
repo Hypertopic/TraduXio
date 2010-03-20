@@ -1,0 +1,1531 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Traduxio\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-18 15:23+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Diana <dianazambon@hotmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_\n"
+"X-Poedit-Basepath: /var/www/new/traduxio/application/\n"
+"X-Poedit-SearchPath-0: controllers\n"
+"X-Poedit-SearchPath-1: forms\n"
+"X-Poedit-SearchPath-2: models\n"
+"X-Poedit-SearchPath-3: layouts\n"
+"X-Poedit-SearchPath-4: views/scripts/work\n"
+"X-Poedit-SearchPath-5: views/scripts/translation\n"
+"X-Poedit-SearchPath-6: views/scripts/login\n"
+"X-Poedit-SearchPath-7: views/scripts/error\n"
+"X-Poedit-SearchPath-8: views/scripts/index\n"
+"X-Poedit-SearchPath-9: views/helpers\n"
+
+#: forms/TranslationEdit.php:72
+#: forms/StdPrivilege.php:60
+msgid "Save"
+msgstr "Save"
+
+#: forms/TranslationEdit.php:75
+msgid "Save and quit"
+msgstr "Save and quit"
+
+#: forms/TranslationEdit.php:78
+msgid "Cancel"
+msgstr "Cancel"
+
+#: forms/Tag.php:48
+msgid "TAG"
+msgstr "TAG"
+
+#: forms/AddPrivilege.php:66
+msgid "Add Privilege"
+msgstr "Add Privilege"
+
+#: forms/Feedback.php:42
+msgid "Your email address"
+msgstr "Your email address"
+
+#: forms/Feedback.php:50
+msgid "Subject"
+msgstr "Subject"
+
+#: forms/Feedback.php:58
+msgid "Your message"
+msgstr "Your message"
+
+#: forms/Feedback.php:75
+msgid "Send"
+msgstr "Send"
+
+#: forms/TextExtend.php:41
+msgid "Text to add"
+msgstr "Text to add"
+
+#: forms/TextExtend.php:53
+#: forms/TextDeposit.php:87
+msgid "Deposit"
+msgstr "Deposit"
+
+#: forms/TextDeposit.php:69
+msgid "Text content"
+msgstr "Text content"
+
+#: forms/TextDeposit.php:80
+msgid "Source language"
+msgstr "Source language"
+
+#: forms/RemovePrivilege.php:77
+msgid "Remove Privilege"
+msgstr "Remove Privilege"
+
+#: views/helpers/ProfileLink.php:9
+msgid "Welcome"
+msgstr "Welcome"
+
+#: views/helpers/ProfileLink.php:9
+msgid "Logout"
+msgstr "Logout"
+
+#: views/helpers/ProfileLink.php:11
+msgid "Login"
+msgstr "Login"
+
+#: layouts/scripts/layout.phtml:5
+#: layouts/scripts/layout.phtml:31
+msgid "Traduxio Project"
+msgstr "Traduxio Project"
+
+#: layouts/scripts/layout.phtml:35
+msgid "Works"
+msgstr "Works"
+
+#: layouts/scripts/layout.phtml:36
+msgid "Concorder"
+msgstr "Concorder"
+
+#: layouts/scripts/layout.phtml:38
+msgid "My Translations"
+msgstr "My Translations"
+
+#: layouts/scripts/layout.phtml:39
+msgid "New text"
+msgstr "New text"
+
+#: layouts/scripts/layout.phtml:41
+msgid "Help"
+msgstr "Help"
+
+#: layouts/scripts/layout.phtml:43
+msgid "About"
+msgstr "About"
+
+#: layouts/scripts/layout.phtml:45
+msgid "Feedback"
+msgstr "Feedback"
+
+#: layouts/scripts/layout.phtml:65
+msgid "The application"
+msgstr "The application"
+
+#: layouts/scripts/layout.phtml:65
+msgid "has been developed by the"
+msgstr "has been developed by the"
+
+#: layouts/scripts/layout.phtml:65
+msgid "association and the"
+msgstr "association and the"
+
+#: layouts/scripts/layout.phtml:65
+msgid "laboratory, supported by "
+msgstr "laboratory, supported by "
+
+#: layouts/scripts/layout.phtml:65
+msgid "and by the"
+msgstr "and by the"
+
+#: views/scripts/work/manage.phtml:15
+msgid "Manage Text's Privileges"
+msgstr "Manage Text's Privileges"
+
+#: views/scripts/work/manage.phtml:18
+msgid "Back to the text"
+msgstr "Back to the text"
+
+#: views/scripts/work/manage.phtml:22
+msgid "Standard Privileges"
+msgstr "Standard Privileges"
+
+#: views/scripts/work/manage.phtml:27
+msgid "Custom Privileges"
+msgstr "Custom Privileges"
+
+#: views/scripts/work/manage.phtml:30
+msgid "Select and click on Remove Privilege to delete a permission"
+msgstr "Select and click on Remove Privilege to delete a permission"
+
+#: views/scripts/work/manage.phtml:31
+msgid "Remove an existing permission"
+msgstr "Remove an existing permission"
+
+#: views/scripts/work/manage.phtml:34
+msgid "NO EXISTING PRIVILEGES"
+msgstr "NO EXISTING PRIVILEGES"
+
+#: views/scripts/work/manage.phtml:37
+msgid "Add a new permission"
+msgstr "Add a new permission"
+
+#: views/scripts/work/extend.phtml:19
+msgid "Last segment of the text"
+msgstr "Last segment of the text"
+
+#: views/scripts/work/extend.phtml:27
+#: views/scripts/work/read.phtml:28
+msgid "Continue Text Insertion"
+msgstr "Continue Text Insertion"
+
+#: views/scripts/work/my.phtml:3
+msgid "You have not inserted any text's translations"
+msgstr "You have not inserted any text's translations"
+
+#: views/scripts/work/index.phtml:6
+msgid "HOMEPAGE PHRASE"
+msgstr "Du point de vue de la communauté, le langage n'est pas seulement un fait social , [...] il est par l'altérité [...] le fondement de toute association humaine."
+
+#: views/scripts/work/index.phtml:7
+msgid "Translating cultural texts"
+msgstr "Translating cultural texts"
+
+#: views/scripts/work/index.phtml:46
+msgid "Homepage"
+msgstr "Homepage"
+
+#: views/scripts/work/translate.phtml:24
+msgid "Create Translation of"
+msgstr "Create Translation of"
+
+#: views/scripts/work/read.phtml:10
+msgid "Translations"
+msgstr "Translations"
+
+#: views/scripts/work/read.phtml:23
+#: views/scripts/translation/backup-read_with_div.phtml:8
+#: views/scripts/translation/read.phtml:6
+msgid "Options"
+msgstr "Options"
+
+#: views/scripts/work/read.phtml:25
+msgid "Create a Translation"
+msgstr "Create a Translation"
+
+#: views/scripts/work/read.phtml:69
+msgid "Text inserted by"
+msgstr "Text inserted by"
+
+#: views/scripts/work/read.phtml:79
+msgid "Read Text"
+msgstr "Read Text"
+
+#: views/scripts/translation/edit.phtml:52
+#, fuzzy
+msgid "Original text"
+msgstr "Original Text"
+
+#: views/scripts/translation/edit.phtml:56
+msgid "This translation"
+msgstr "This translation"
+
+#: views/scripts/translation/edit.phtml:113
+msgid "Edit Translation"
+msgstr "Edit Translation"
+
+#: views/scripts/translation/backup-read_with_div.phtml:11
+#: views/scripts/translation/read.phtml:9
+msgid "Edit this Translation"
+msgstr "Edit this Translation"
+
+#: views/scripts/translation/backup-read_with_div.phtml:14
+msgid "Manage text's privileges"
+msgstr "Manage text's privileges"
+
+#: views/scripts/translation/read.phtml:13
+msgid "Manage Text's privileges"
+msgstr "Manage Text's privileges"
+
+#: views/scripts/translation/read.phtml:46
+msgid "Original Text"
+msgstr "Original Text"
+
+#: views/scripts/translation/read.phtml:56
+msgid "Translation"
+msgstr "Translation"
+
+#: views/scripts/translation/read.phtml:71
+msgid "Read Translation"
+msgstr "Read Translation"
+
+#~ msgid "Translation: "
+#~ msgstr "Translation: "
+#~ msgid "Oeuvres"
+#~ msgstr "Oeuvres"
+
+msgid "fas"
+msgstr "Persian"
+
+msgid "heb"
+msgstr "Hebrew"
+
+msgid "ara"
+msgstr "Arabic"
+
+msgid "aar"
+msgstr "Afar"
+
+msgid "abk"
+msgstr "Abkhazian"
+
+msgid "ace"
+msgstr "Achinese"
+
+msgid "ach"
+msgstr "Acoli"
+
+msgid "ada"
+msgstr "Adangme"
+
+msgid "ady"
+msgstr "Adyghe"
+
+msgid "afh"
+msgstr "Afrihili"
+
+msgid "afr"
+msgstr "Afrikaans"
+
+msgid "ain"
+msgstr "Ainu (Japan)"
+
+msgid "aka"
+msgstr "Akan"
+
+msgid "akk"
+msgstr "Akkadian"
+
+msgid "ale"
+msgstr "Aleut"
+
+msgid "alt"
+msgstr "Southern Altai"
+
+msgid "amh"
+msgstr "Amharic"
+
+msgid "ang"
+msgstr "Old English (ca. 450-1100)"
+
+msgid "anp"
+msgstr "Angika"
+
+msgid "arc"
+msgstr "Official Aramaic (700-300 BCE)"
+
+msgid "arg"
+msgstr "Aragonese"
+
+msgid "arn"
+msgstr "Mapudungun"
+
+msgid "arp"
+msgstr "Arapaho"
+
+msgid "arw"
+msgstr "Arawak"
+
+msgid "asm"
+msgstr "Assamese"
+
+msgid "ast"
+msgstr "Asturian"
+
+msgid "ava"
+msgstr "Avaric"
+
+msgid "ave"
+msgstr "Avestan"
+
+msgid "awa"
+msgstr "Awadhi"
+
+msgid "aym"
+msgstr "Aymara"
+
+msgid "aze"
+msgstr "Azerbaijani"
+
+msgid "bak"
+msgstr "Bashkir"
+
+msgid "bal"
+msgstr "Baluchi"
+
+msgid "bam"
+msgstr "Bambara"
+
+msgid "ban"
+msgstr "Balinese"
+
+msgid "bas"
+msgstr "Basa (Cameroon)"
+
+msgid "bej"
+msgstr "Beja"
+
+msgid "bel"
+msgstr "Belarusian"
+
+msgid "bem"
+msgstr "Bemba (Zambia)"
+
+msgid "ben"
+msgstr "Bengali"
+
+msgid "bho"
+msgstr "Bhojpuri"
+
+msgid "bik"
+msgstr "Bikol"
+
+msgid "bin"
+msgstr "Bini"
+
+msgid "bis"
+msgstr "Bislama"
+
+msgid "bla"
+msgstr "Siksika"
+
+msgid "bod"
+msgstr "Tibetan"
+
+msgid "bos"
+msgstr "Bosnian"
+
+msgid "bra"
+msgstr "Braj"
+
+msgid "bre"
+msgstr "Breton"
+
+msgid "bua"
+msgstr "Buriat"
+
+msgid "bug"
+msgstr "Buginese"
+
+msgid "bul"
+msgstr "Bulgarian"
+
+msgid "byn"
+msgstr "Bilin"
+
+msgid "cad"
+msgstr "Caddo"
+
+msgid "car"
+msgstr "Galibi Carib"
+
+msgid "cat"
+msgstr "Catalan"
+
+msgid "ceb"
+msgstr "Cebuano"
+
+msgid "ces"
+msgstr "Czech"
+
+msgid "cha"
+msgstr "Chamorro"
+
+msgid "chb"
+msgstr "Chibcha"
+
+msgid "che"
+msgstr "Chechen"
+
+msgid "chg"
+msgstr "Chagatai"
+
+msgid "chk"
+msgstr "Chuukese"
+
+msgid "chm"
+msgstr "Mari (Russia)"
+
+msgid "chn"
+msgstr "Chinook jargon"
+
+msgid "cho"
+msgstr "Choctaw"
+
+msgid "chp"
+msgstr "Chipewyan"
+
+msgid "chr"
+msgstr "Cherokee"
+
+msgid "chu"
+msgstr "Church Slavic"
+
+msgid "chv"
+msgstr "Chuvash"
+
+msgid "chy"
+msgstr "Cheyenne"
+
+msgid "cop"
+msgstr "Coptic"
+
+msgid "cor"
+msgstr "Cornish"
+
+msgid "cos"
+msgstr "Corsican"
+
+msgid "cre"
+msgstr "Cree"
+
+msgid "crh"
+msgstr "Crimean Tatar"
+
+msgid "csb"
+msgstr "Kashubian"
+
+msgid "cym"
+msgstr "Welsh"
+
+msgid "dak"
+msgstr "Dakota"
+
+msgid "dan"
+msgstr "Danish"
+
+msgid "dar"
+msgstr "Dargwa"
+
+msgid "del"
+msgstr "Delaware"
+
+msgid "den"
+msgstr "Slave (Athapascan)"
+
+msgid "deu"
+msgstr "German"
+
+msgid "dgr"
+msgstr "Dogrib"
+
+msgid "din"
+msgstr "Dinka"
+
+msgid "div"
+msgstr "Dhivehi"
+
+msgid "doi"
+msgstr "Dogri (macrolanguage)"
+
+msgid "dsb"
+msgstr "Lower Sorbian"
+
+msgid "dua"
+msgstr "Duala"
+
+msgid "dum"
+msgstr "Middle Dutch (ca. 1050-1350)"
+
+msgid "dyu"
+msgstr "Dyula"
+
+msgid "dzo"
+msgstr "Dzongkha"
+
+msgid "efi"
+msgstr "Efik"
+
+msgid "egy"
+msgstr "Egyptian (Ancient)"
+
+msgid "eka"
+msgstr "Ekajuk"
+
+msgid "ell"
+msgstr "Modern Greek (1453-)"
+
+msgid "elx"
+msgstr "Elamite"
+
+msgid "eng"
+msgstr "English"
+
+msgid "enm"
+msgstr "Middle English (1100-1500)"
+
+msgid "epo"
+msgstr "Esperanto"
+
+msgid "est"
+msgstr "Estonian"
+
+msgid "eus"
+msgstr "Basque"
+
+msgid "ewe"
+msgstr "Ewe"
+
+msgid "ewo"
+msgstr "Ewondo"
+
+msgid "fan"
+msgstr "Fang (Equatorial Guinea)"
+
+msgid "fao"
+msgstr "Faroese"
+
+msgid "fat"
+msgstr "Fanti"
+
+msgid "fij"
+msgstr "Fijian"
+
+msgid "fil"
+msgstr "Filipino"
+
+msgid "fin"
+msgstr "Finnish"
+
+msgid "fon"
+msgstr "Fon"
+
+msgid "fra"
+msgstr "French"
+
+msgid "frm"
+msgstr "Middle French (ca. 1400-1600)"
+
+msgid "fro"
+msgstr "Old French (842-ca. 1400)"
+
+msgid "frr"
+msgstr "Northern Frisian"
+
+msgid "frs"
+msgstr "Eastern Frisian"
+
+msgid "fry"
+msgstr "Western Frisian"
+
+msgid "ful"
+msgstr "Fulah"
+
+msgid "fur"
+msgstr "Friulian"
+
+msgid "gaa"
+msgstr "Ga"
+
+msgid "gay"
+msgstr "Gayo"
+
+msgid "gba"
+msgstr "Gbaya (Central African Republic)"
+
+msgid "gez"
+msgstr "Geez"
+
+msgid "gil"
+msgstr "Gilbertese"
+
+msgid "gla"
+msgstr "Scottish Gaelic"
+
+msgid "gle"
+msgstr "Irish"
+
+msgid "glg"
+msgstr "Galician"
+
+msgid "glv"
+msgstr "Manx"
+
+msgid "gmh"
+msgstr "Middle High German (ca. 1050-1500)"
+
+msgid "goh"
+msgstr "Old High German (ca. 750-1050)"
+
+msgid "gon"
+msgstr "Gondi"
+
+msgid "gor"
+msgstr "Gorontalo"
+
+msgid "got"
+msgstr "Gothic"
+
+msgid "grb"
+msgstr "Grebo"
+
+msgid "grc"
+msgstr "Ancient Greek (to 1453)"
+
+msgid "grn"
+msgstr "Guarani"
+
+msgid "gsw"
+msgstr "Swiss German"
+
+msgid "guj"
+msgstr "Gujarati"
+
+msgid "gwi"
+msgstr "Gwichʼin"
+
+msgid "hai"
+msgstr "Haida"
+
+msgid "hat"
+msgstr "Haitian"
+
+msgid "hau"
+msgstr "Hausa"
+
+msgid "haw"
+msgstr "Hawaiian"
+
+msgid "her"
+msgstr "Herero"
+
+msgid "hil"
+msgstr "Hiligaynon"
+
+msgid "hin"
+msgstr "Hindi"
+
+msgid "hit"
+msgstr "Hittite"
+
+msgid "hmn"
+msgstr "Hmong"
+
+msgid "hmo"
+msgstr "Hiri Motu"
+
+msgid "hrv"
+msgstr "Croatian"
+
+msgid "hsb"
+msgstr "Upper Sorbian"
+
+msgid "hun"
+msgstr "Hungarian"
+
+msgid "hup"
+msgstr "Hupa"
+
+msgid "hye"
+msgstr "Armenian"
+
+msgid "iba"
+msgstr "Iban"
+
+msgid "ibo"
+msgstr "Igbo"
+
+msgid "ido"
+msgstr "Ido"
+
+msgid "iii"
+msgstr "Sichuan Yi"
+
+msgid "iku"
+msgstr "Inuktitut"
+
+msgid "ile"
+msgstr "Interlingue"
+
+msgid "ilo"
+msgstr "Iloko"
+
+msgid "ina"
+msgstr "Interlingua (International Auxiliary Language Association)"
+
+msgid "ind"
+msgstr "Indonesian"
+
+msgid "inh"
+msgstr "Ingush"
+
+msgid "ipk"
+msgstr "Inupiaq"
+
+msgid "isl"
+msgstr "Icelandic"
+
+msgid "ita"
+msgstr "Italian"
+
+msgid "jav"
+msgstr "Javanese"
+
+msgid "jbo"
+msgstr "Lojban"
+
+msgid "jpn"
+msgstr "Japanese"
+
+msgid "jpr"
+msgstr "Judeo-Persian"
+
+msgid "jrb"
+msgstr "Judeo-Arabic"
+
+msgid "kaa"
+msgstr "Kara-Kalpak"
+
+msgid "kab"
+msgstr "Kabyle"
+
+msgid "kac"
+msgstr "Kachin"
+
+msgid "kal"
+msgstr "Kalaallisut"
+
+msgid "kam"
+msgstr "Kamba (Kenya)"
+
+msgid "kan"
+msgstr "Kannada"
+
+msgid "kas"
+msgstr "Kashmiri"
+
+msgid "kat"
+msgstr "Georgian"
+
+msgid "kau"
+msgstr "Kanuri"
+
+msgid "kaw"
+msgstr "Kawi"
+
+msgid "kaz"
+msgstr "Kazakh"
+
+msgid "kbd"
+msgstr "Kabardian"
+
+msgid "kha"
+msgstr "Khasi"
+
+msgid "khm"
+msgstr "Central Khmer"
+
+msgid "kho"
+msgstr "Khotanese"
+
+msgid "kik"
+msgstr "Kikuyu"
+
+msgid "kin"
+msgstr "Kinyarwanda"
+
+msgid "kir"
+msgstr "Kirghiz"
+
+msgid "kmb"
+msgstr "Kimbundu"
+
+msgid "kok"
+msgstr "Konkani (macrolanguage)"
+
+msgid "kom"
+msgstr "Komi"
+
+msgid "kon"
+msgstr "Kongo"
+
+msgid "kor"
+msgstr "Korean"
+
+msgid "kos"
+msgstr "Kosraean"
+
+msgid "kpe"
+msgstr "Kpelle"
+
+msgid "krc"
+msgstr "Karachay-Balkar"
+
+msgid "krl"
+msgstr "Karelian"
+
+msgid "kru"
+msgstr "Kurukh"
+
+msgid "kua"
+msgstr "Kuanyama"
+
+msgid "kum"
+msgstr "Kumyk"
+
+msgid "kur"
+msgstr "Kurdish"
+
+msgid "kut"
+msgstr "Kutenai"
+
+msgid "lad"
+msgstr "Ladino"
+
+msgid "lah"
+msgstr "Lahnda"
+
+msgid "lam"
+msgstr "Lamba"
+
+msgid "lao"
+msgstr "Lao"
+
+msgid "lat"
+msgstr "Latin"
+
+msgid "lav"
+msgstr "Latvian"
+
+msgid "lez"
+msgstr "Lezghian"
+
+msgid "lim"
+msgstr "Limburgan"
+
+msgid "lin"
+msgstr "Lingala"
+
+msgid "lit"
+msgstr "Lithuanian"
+
+msgid "lol"
+msgstr "Mongo"
+
+msgid "loz"
+msgstr "Lozi"
+
+msgid "ltz"
+msgstr "Luxembourgish"
+
+msgid "lua"
+msgstr "Luba-Lulua"
+
+msgid "lub"
+msgstr "Luba-Katanga"
+
+msgid "lug"
+msgstr "Ganda"
+
+msgid "lui"
+msgstr "Luiseno"
+
+msgid "lun"
+msgstr "Lunda"
+
+msgid "luo"
+msgstr "Luo (Kenya and Tanzania)"
+
+msgid "lus"
+msgstr "Lushai"
+
+msgid "mad"
+msgstr "Madurese"
+
+msgid "mag"
+msgstr "Magahi"
+
+msgid "mah"
+msgstr "Marshallese"
+
+msgid "mai"
+msgstr "Maithili"
+
+msgid "mak"
+msgstr "Makasar"
+
+msgid "mal"
+msgstr "Malayalam"
+
+msgid "man"
+msgstr "Mandingo"
+
+msgid "mar"
+msgstr "Marathi"
+
+msgid "mas"
+msgstr "Masai"
+
+msgid "mdf"
+msgstr "Moksha"
+
+msgid "mdr"
+msgstr "Mandar"
+
+msgid "men"
+msgstr "Mende (Sierra Leone)"
+
+msgid "mga"
+msgstr "Middle Irish (900-1200)"
+
+msgid "mic"
+msgstr "Mi'kmaq"
+
+msgid "min"
+msgstr "Minangkabau"
+
+msgid "mis"
+msgstr "Uncoded languages"
+
+msgid "mkd"
+msgstr "Macedonian"
+
+msgid "mlg"
+msgstr "Malagasy"
+
+msgid "mlt"
+msgstr "Maltese"
+
+msgid "mnc"
+msgstr "Manchu"
+
+msgid "mni"
+msgstr "Manipuri"
+
+msgid "moh"
+msgstr "Mohawk"
+
+msgid "mon"
+msgstr "Mongolian"
+
+msgid "mos"
+msgstr "Mossi"
+
+msgid "mri"
+msgstr "Maori"
+
+msgid "msa"
+msgstr "Malay (macrolanguage)"
+
+msgid "mul"
+msgstr "Multiple languages"
+
+msgid "mus"
+msgstr "Creek"
+
+msgid "mwl"
+msgstr "Mirandese"
+
+msgid "mwr"
+msgstr "Marwari"
+
+msgid "mya"
+msgstr "Burmese"
+
+msgid "myv"
+msgstr "Erzya"
+
+msgid "nap"
+msgstr "Neapolitan"
+
+msgid "nau"
+msgstr "Nauru"
+
+msgid "nav"
+msgstr "Navajo"
+
+msgid "nbl"
+msgstr "South Ndebele"
+
+msgid "nde"
+msgstr "North Ndebele"
+
+msgid "ndo"
+msgstr "Ndonga"
+
+msgid "nds"
+msgstr "Low German"
+
+msgid "nep"
+msgstr "Nepali"
+
+msgid "new"
+msgstr "Newari"
+
+msgid "nia"
+msgstr "Nias"
+
+msgid "niu"
+msgstr "Niuean"
+
+msgid "nld"
+msgstr "Dutch"
+
+msgid "nno"
+msgstr "Norwegian Nynorsk"
+
+msgid "nob"
+msgstr "Norwegian Bokmål"
+
+msgid "nog"
+msgstr "Nogai"
+
+msgid "non"
+msgstr "Old Norse"
+
+msgid "nor"
+msgstr "Norwegian"
+
+msgid "nqo"
+msgstr "N'Ko"
+
+msgid "nso"
+msgstr "Pedi"
+
+msgid "nwc"
+msgstr "Classical Newari"
+
+msgid "nya"
+msgstr "Nyanja"
+
+msgid "nym"
+msgstr "Nyamwezi"
+
+msgid "nyn"
+msgstr "Nyankole"
+
+msgid "nyo"
+msgstr "Nyoro"
+
+msgid "nzi"
+msgstr "Nzima"
+
+msgid "oci"
+msgstr "Occitan (post 1500)"
+
+msgid "oji"
+msgstr "Ojibwa"
+
+msgid "ori"
+msgstr "Oriya"
+
+msgid "orm"
+msgstr "Oromo"
+
+msgid "osa"
+msgstr "Osage"
+
+msgid "oss"
+msgstr "Ossetian"
+
+msgid "ota"
+msgstr "Ottoman Turkish (1500-1928)"
+
+msgid "pag"
+msgstr "Pangasinan"
+
+msgid "pal"
+msgstr "Pahlavi"
+
+msgid "pam"
+msgstr "Pampanga"
+
+msgid "pan"
+msgstr "Panjabi"
+
+msgid "pap"
+msgstr "Papiamento"
+
+msgid "pau"
+msgstr "Palauan"
+
+msgid "peo"
+msgstr "Old Persian (ca. 600-400 B.C.)"
+
+msgid "phn"
+msgstr "Phoenician"
+
+msgid "pli"
+msgstr "Pali"
+
+msgid "pol"
+msgstr "Polish"
+
+msgid "pon"
+msgstr "Pohnpeian"
+
+msgid "por"
+msgstr "Portuguese"
+
+msgid "pro"
+msgstr "Old Provençal (to 1500)"
+
+msgid "pus"
+msgstr "Pushto"
+
+msgid "que"
+msgstr "Quechua"
+
+msgid "raj"
+msgstr "Rajasthani"
+
+msgid "rap"
+msgstr "Rapanui"
+
+msgid "rar"
+msgstr "Rarotongan"
+
+msgid "roh"
+msgstr "Romansh"
+
+msgid "rom"
+msgstr "Romany"
+
+msgid "ron"
+msgstr "Romanian"
+
+msgid "run"
+msgstr "Rundi"
+
+msgid "rup"
+msgstr "Macedo-Romanian"
+
+msgid "rus"
+msgstr "Russian"
+
+msgid "sad"
+msgstr "Sandawe"
+
+msgid "sag"
+msgstr "Sango"
+
+msgid "sah"
+msgstr "Yakut"
+
+msgid "sam"
+msgstr "Samaritan Aramaic"
+
+msgid "san"
+msgstr "Sanskrit"
+
+msgid "sas"
+msgstr "Sasak"
+
+msgid "sat"
+msgstr "Santali"
+
+msgid "scn"
+msgstr "Sicilian"
+
+msgid "sco"
+msgstr "Scots"
+
+msgid "sel"
+msgstr "Selkup"
+
+msgid "sga"
+msgstr "Old Irish (to 900)"
+
+msgid "shn"
+msgstr "Shan"
+
+msgid "sid"
+msgstr "Sidamo"
+
+msgid "sin"
+msgstr "Sinhala"
+
+msgid "slk"
+msgstr "Slovak"
+
+msgid "slv"
+msgstr "Slovenian"
+
+msgid "sma"
+msgstr "Southern Sami"
+
+msgid "sme"
+msgstr "Northern Sami"
+
+msgid "smj"
+msgstr "Lule Sami"
+
+msgid "smn"
+msgstr "Inari Sami"
+
+msgid "smo"
+msgstr "Samoan"
+
+msgid "sms"
+msgstr "Skolt Sami"
+
+msgid "sna"
+msgstr "Shona"
+
+msgid "snd"
+msgstr "Sindhi"
+
+msgid "snk"
+msgstr "Soninke"
+
+msgid "sog"
+msgstr "Sogdian"
+
+msgid "som"
+msgstr "Somali"
+
+msgid "sot"
+msgstr "Southern Sotho"
+
+msgid "spa"
+msgstr "Spanish"
+
+msgid "sqi"
+msgstr "Albanian"
+
+msgid "srd"
+msgstr "Sardinian"
+
+msgid "srn"
+msgstr "Sranan Tongo"
+
+msgid "srp"
+msgstr "Serbian"
+
+msgid "srr"
+msgstr "Serer"
+
+msgid "ssw"
+msgstr "Swati"
+
+msgid "suk"
+msgstr "Sukuma"
+
+msgid "sun"
+msgstr "Sundanese"
+
+msgid "sus"
+msgstr "Susu"
+
+msgid "sux"
+msgstr "Sumerian"
+
+msgid "swa"
+msgstr "Swahili (macrolanguage)"
+
+msgid "swe"
+msgstr "Swedish"
+
+msgid "syc"
+msgstr "Classical Syriac"
+
+msgid "syr"
+msgstr "Syriac"
+
+msgid "tah"
+msgstr "Tahitian"
+
+msgid "tam"
+msgstr "Tamil"
+
+msgid "tat"
+msgstr "Tatar"
+
+msgid "tel"
+msgstr "Telugu"
+
+msgid "tem"
+msgstr "Timne"
+
+msgid "ter"
+msgstr "Tereno"
+
+msgid "tet"
+msgstr "Tetum"
+
+msgid "tgk"
+msgstr "Tajik"
+
+msgid "tgl"
+msgstr "Tagalog"
+
+msgid "tha"
+msgstr "Thai"
+
+msgid "tig"
+msgstr "Tigre"
+
+msgid "tir"
+msgstr "Tigrinya"
+
+msgid "tiv"
+msgstr "Tiv"
+
+msgid "tkl"
+msgstr "Tokelau"
+
+msgid "tlh"
+msgstr "Klingon"
+
+msgid "tli"
+msgstr "Tlingit"
+
+msgid "tmh"
+msgstr "Tamashek"
+
+msgid "tog"
+msgstr "Tonga (Nyasa)"
+
+msgid "ton"
+msgstr "Tonga (Tonga Islands)"
+
+msgid "tpi"
+msgstr "Tok Pisin"
+
+msgid "tsi"
+msgstr "Tsimshian"
+
+msgid "tsn"
+msgstr "Tswana"
+
+msgid "tso"
+msgstr "Tsonga"
+
+msgid "tuk"
+msgstr "Turkmen"
+
+msgid "tum"
+msgstr "Tumbuka"
+
+msgid "tur"
+msgstr "Turkish"
+
+msgid "tvl"
+msgstr "Tuvalu"
+
+msgid "twi"
+msgstr "Twi"
+
+msgid "tyv"
+msgstr "Tuvinian"
+
+msgid "udm"
+msgstr "Udmurt"
+
+msgid "uga"
+msgstr "Ugaritic"
+
+msgid "uig"
+msgstr "Uighur"
+
+msgid "ukr"
+msgstr "Ukrainian"
+
+msgid "umb"
+msgstr "Umbundu"
+
+msgid "und"
+msgstr "Undetermined"
+
+msgid "uzb"
+msgstr "Uzbek"
+
+msgid "vai"
+msgstr "Vai"
+
+msgid "ven"
+msgstr "Venda"
+
+msgid "vie"
+msgstr "Vietnamese"
+
+msgid "vol"
+msgstr "Volapük"
+
+msgid "vot"
+msgstr "Votic"
+
+msgid "wal"
+msgstr "Wolaytta"
+
+msgid "war"
+msgstr "Waray (Philippines)"
+
+msgid "was"
+msgstr "Washo"
+
+msgid "wln"
+msgstr "Walloon"
+
+msgid "wol"
+msgstr "Wolof"
+
+msgid "xal"
+msgstr "Kalmyk"
+
+msgid "xho"
+msgstr "Xhosa"
+
+msgid "yao"
+msgstr "Yao"
+
+msgid "yap"
+msgstr "Yapese"
+
+msgid "yid"
+msgstr "Yiddish"
+
+msgid "yor"
+msgstr "Yoruba"
+
+msgid "zap"
+msgstr "Zapotec"
+
+msgid "zbl"
+msgstr "Blissymbols"
+
+msgid "zen"
+msgstr "Zenaga"
+
+msgid "zha"
+msgstr "Zhuang"
+
+msgid "zho"
+msgstr "Chinese"
+
+msgid "zul"
+msgstr "Zulu"
+
+msgid "zun"
+msgstr "Zuni"
+
+msgid "zxx"
+msgstr "No linguistic content"
+
+msgid "zza"
+msgstr "Zaza"
+
+msgid "urd"
+msgstr "Urdu"
+
+msgid "vls"
+msgstr "Flemish"
+

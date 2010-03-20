@@ -1,7 +1,5 @@
-<div class="central-home">
-<table class="full-width">
-<tr>
-<td class = "left-column"> 
+
+<div class="left-menu">
 <?php if(!empty($this->work['Interpretations'])): ?>
 
     <?php foreach($this->work['Interpretations'] as $translation): ?>
@@ -36,11 +34,11 @@
 
 <?php if($this->canTag){echo $this->tagForm; } ?>
 </div>
-</td>
 
 
-<td id = "right-column">
- <div id="tag-area">
+<!--<td id = "right-column">-->
+<div class="right-container">
+ <div id="show-tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
         <?php foreach($this->work['Tags'] as $name=>$tag): ?>
         <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
@@ -55,7 +53,7 @@
     </div>
 <div id = "page-container">
 <div id = "TLcorner"></div><div id = "Tborder"></div><div id = "TRcorner"></div>
-<div id = "Lborder"></div>
+<!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
 <div id = "work-container">
    
     <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
@@ -68,12 +66,9 @@
     </div>
     <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->work['creator']); ?> </div>
 </div>   
-<div id = "Rborder"></div>
+<!--<div id = "Rborder"></div>-->
 <div id = "BLcorner"></div><div id = "Bborder"></div><div id = "BRcorner"></div>
 </div>
-</td>
-    </tr>
-</table> 
 </div>
 
 <?php $this->page_title = __("Read Text").': '.$this->escape($this->work['title']); ?>
