@@ -58,7 +58,6 @@ class IndexController extends Tdxio_Controller_Abstract
      
     public function getRule($request){  
         $action = $request->action;
-        $resource_id = $request->getParam('id');
         
         switch($action){
             case 'feedback': 

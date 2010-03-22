@@ -110,12 +110,10 @@ class WorkController extends Tdxio_Controller_Abstract
             return $this->_helper->redirector->gotoSimple('read','translation',null,array('id'=>$id));
         }
         Tdxio_Log::info($work,'work read');
-        if ($this->getRequest()->isPost()) {
-            
-            if ($tagForm->isValid($this->getRequest()->getPost())) {
-                
-                $data = $tagForm->getValues();                        
-                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$id,'tag'=>$data['tag_comment']));  
+        if ($this->getRequest()->isPost()) {            
+            if ($tagForm->isValid($this->getRequest()->getPost())) {                
+                $data = $tagForm->getValues();                     
+                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$id,'genre'=>$data['tag_genre'],'tag'=>$data['tag_comment']));  
             }
         }
         $this->view->canTag = $model->isAllowed('tag',$id);
@@ -307,10 +305,14 @@ class WorkController extends Tdxio_Controller_Abstract
     public function getRule($request){
         $action = $request->action;
         $resource_id = $request->getParam('id');
+        
         $rule = 'noAction';
         Tdxio_Log::info($request,'request');
         Tdxio_Log::info($resource_id,'resource_id');
+        
         if(!is_null($resource_id)){ 
+            if(!($this->_getModel()->entryExists(array('id'=>$resource_id))))
+            {throw new Zend_Exception(sprintf('Work Id "%d" does not exist.',$resource_id), 404);}
             $visibility=$this->_getModel()->getAttribute($resource_id,'visibility');
             Tdxio_Log::info($visibility,'visibilita');
         }
@@ -329,10 +331,13 @@ class WorkController extends Tdxio_Controller_Abstract
                     $rule = array('privilege'=> 'translate','work_id' => $resource_id);
                 }else{
                     $rule = array('privilege'=> 'read','work_id' => $resource_id, 'notAllowed'=>true);
-                }
+                }break;
             case 'read':
+                if($request->isPost()){
+                    $rule = array('privilege'=> 'tag','work_id' => $resource_id);
+                }else{
                         $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');      
-                        break;                      
+                }break;                      
 //          case 'edit':
 //                  if($request->isPost()){
 //                      $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        

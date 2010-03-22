@@ -1,7 +1,5 @@
-<div class="central-home">
-<table class="full-width">
-<tr>
-<td class="left-column"> 
+<div id="LRcontainer">
+<div class="left-menu">
 <?php if($this->showEdit || $this->canManage): ?>
 <div class="left-section"><?php echo __('Options'); ?></div>
     
@@ -17,32 +15,35 @@
 <div id="tag-area">
 <?php if($this->canTag){echo $this->tagForm; } ?>
 </div>
-</td>
+</div>
 
-<td class="top-align">
-<table  class="right-column">
-<tr class="up-section"><td> <div id="tag-area">
+<!--<table  class="right-column">
+<tr class="up-section"><td> --> 
+
+<table class="right-container">
+<tr><td></td></tr>
+<div id="tag-area">
         <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
         <?php foreach($this->translation['OriginalWork']['Tags'] as $tag): ?>
-        <div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?></div>
+        <div class="tag-item"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $tag[0]['comment']; ?></div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div></td><td>   <div id="tag-area">
         <?php if(!empty($this->translation['Tags'])): ?>
         <?php foreach($this->translation['Tags'] as $name=>$tag): ?>        
-            <div class="tag-item" style="font-size:<?php echo 10+ round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?>
+            <div class="tag-item" title="<?php echo strtolower($tag[0]['genre_name']); ?>" style="font-size:<?php echo 8+ round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?>
             <?php $canRemove = false;?>
             <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
             <?php if($canRemove): ?>
-                <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name))?>"> X </a>
+                <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name,'genre'=>$tag[0]['genre']))?>"> X </a>
             <?php endif; ?>
             </div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div></td>
-</tr>
+<!--</tr>
 <tr><td  class="right-column">
-   
+-->   
     <div class="title"><?php echo __('Original Text').': ' ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
     <div class="language"><?php echo __($this->translation['OriginalWork']['language']); ?></div>
     <div class="original-text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
@@ -63,10 +64,7 @@
 
 </tr>
 </table>
-
-</td>
-</tr>
-</table>
 </div>
+
 <?php $this->page_title=__("Read Translation").': '.$this->escape($this->translation['title']); ?>
 

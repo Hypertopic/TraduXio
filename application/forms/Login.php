@@ -10,7 +10,6 @@ class Form_Login extends Zend_Form
             ),
             'required'   => true,
             'label'      => 'Your username:',
-            'value'    => 'atena'
         ));
 
         $password = $this->addElement('password', 'password', array(

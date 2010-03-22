@@ -94,6 +94,7 @@ class Model_Translation extends Model_Taggable
         }
         $tags = $this->getTags($work_id);
         $work['Tags'] = $tags[$work_id];
+        Tdxio_Log::info($work['Tags'],"TCtags before normalization");
         if(!empty($tags) && $computeMultiplicity==true){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
         }

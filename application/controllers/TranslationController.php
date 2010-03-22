@@ -171,9 +171,12 @@ class TranslationController extends Tdxio_Controller_Abstract
         $action = $request->action;
         $resource_id = $request->getParam('id');
         
-        if(!is_null($resource_id)){
+        
+        if(!is_null($resource_id)){ 
+            if(!($this->_getModel()->entryExists(array('work_id'=>$resource_id))))
+            {throw new Zend_Exception(sprintf('Translation Id "%d" does not exist.',$resource_id), 404);}
             $workModel = new Model_Work();
-            $visibility = $workModel->getAttribute($resource_id,'visibility');
+            $visibility=$workModel->getAttribute($resource_id,'visibility');
         }
         
         switch($action){

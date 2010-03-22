@@ -27,10 +27,10 @@
         -->
 
      <div id="header">
-        <span id="header-logo">
+        <div id="header-logo">
             <b><a href="<?php echo $this->makeUrl('/'); ?>"><?php echo __('Traduxio Project') ?></a></b> - <?php echo $this->profileLink(); ?>
-        </span>
-        <span id="header-navigation">
+        </div>
+        <div id="header-navigation">
             <ul>
             <li> <a href="<?php echo $this->makeUrl('/work/index'); ?>"><?php echo __('Works'); ?></a></li>
             <li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concorder'); ?></a></li>
@@ -49,7 +49,7 @@
                  view helper
                  http://framework.zend.com/manual/en/zend.view.helpers.html
                  -->
-        </span>
+        </div>
     </div>
 
     <!-- This next call will now include any content that was generated in the

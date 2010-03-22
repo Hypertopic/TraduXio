@@ -1,4 +1,4 @@
-
+<div id="LRcontainer">
 <div class="left-menu">
 <?php if(!empty($this->work['Interpretations'])): ?>
 
@@ -40,14 +40,17 @@
 <div class="right-container">
  <div id="show-tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
-        <?php foreach($this->work['Tags'] as $name=>$tag): ?>
-        <div class="tag-item" style="font-size:<?php echo 10+round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
+        <?php// foreach($this->work['Tags'] as $name=>$tag): ?>
+        <?php foreach($this->work['Tags'] as $genre=>$names): ?>
+        <?php foreach($names as $name=>$tag): ?>
+        <div class="tag-item" title="<?php echo strtolower($tag[0]['genre_name']); ?>"> <!--style="font-size:<?php //echo 8+round($tag['multiplicity']*7) ?>px"--> <?php echo $name; ?>
         <?php $canRemove = false;?>
         <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
         <?php if($canRemove): ?>
-            <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->work['id'],'tag'=>$name))?>"> X </a>
+            <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->work['id'],'tag'=>$name,'genre'=>$genre))?>"> X </a>
         <?php endif; ?>
         </div>
+        <?php endforeach; ?>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>
@@ -70,5 +73,5 @@
 <div id = "BLcorner"></div><div id = "Bborder"></div><div id = "BRcorner"></div>
 </div>
 </div>
-
+</div>
 <?php $this->page_title = __("Read Text").': '.$this->escape($this->work['title']); ?>

@@ -38,18 +38,38 @@ class Form_Tag extends Form_Abstract
         $this->setMethod('post');
 
         $tag=$this->createElement('text','tag_comment',array(
-            'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
+            'decorators' => array('ViewHelper','Errors','Description','Label'),
             'filters' => array('StringTrim','StringToLower'),
-            'required'=>true));
-
+            'required'=>true,
+            'id'      => 'tag_input'));
         $this->addElement($tag);
+
+        $genre =$this->createElement('select','tag_genre', array(
+            'decorators' => array('FormElements','ViewHelper'),
+            'label'      => 'Genre',
+            'multiOptions'=> $this->_getGenres(),
+            'id'   =>  'genresel'
+            //,
+            //'class' => 'manage-select'
+        ));
+        $this->addElement($genre);        
+        
         // add the submit button
         $this->addElement('submit', 'tag_button', array(
+            'decorators' => array('FormElements','ViewHelper'),
             'label'    => __('TAG'),
         ));
 
-        $this->addDisplayGroup(array('tag_comment','tag_button'), 'tag_group');
+        $this->addDisplayGroup(array('tag_comment','tag_genre','tag_button'), 'tag_group');
         
+    }
+    
+    public function _getGenres(){
+        $genreModel = new Model_Genre();
+        $genres=$genreModel->getGenres();
+        Tdxio_Log::info($genres,'genres in Tag Form');
+      
+        return $genres;
     }
 
 }

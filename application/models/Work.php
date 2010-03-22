@@ -134,6 +134,7 @@ class Model_Work extends Model_Taggable
         $translationModel = new Model_Translation();
         $work['Interpretations'] = $translationModel->fetchSentencesInterpretations($work_id);  
         $tags = ($this->getTags($work_id));
+        Tdxio_Log::info($tags,"WCtags before normalization");
         if(!empty($tags)){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
         }
@@ -146,9 +147,9 @@ class Model_Work extends Model_Taggable
         $select1 = $this->getSelectCondOriginalWork('sentence');
         $select2 = $this->getSelectCondAllowedWork('read'); 
         if(is_null($idList)){           
-            $select = $table->select()->where('id IN (?)',$select1)->where('id IN (?)',$select2);
+            $select = $table->select()->from($table, array('id','title','author','language'))->where('id IN (?)',$select1)->where('id IN (?)',$select2);
         }else {//select only some specific original works
-            $select = $table->select()->where('id IN (?)',$select1)->where('id IN (?)',$select2)->where('id IN (?)',$idList);
+            $select = $table->select()->from($table, array('id','title','author','language'))->where('id IN (?)',$select1)->where('id IN (?)',$select2)->where('id IN (?)',$idList);
         }
         Tdxio_Log::info('stringa sql'.$select->__toString());
         return $table->fetchAll($select);

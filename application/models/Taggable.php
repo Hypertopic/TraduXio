@@ -26,8 +26,12 @@ class Model_Taggable extends Model_Abstract
         }else{
             $tags = $db->fetchAll($db->select()->from('tag')->where('taggable IN (?)',$taggable_id));
         }
+        Tdxio_Log::info($tags,'TaggableModel getTags');
+        $genreModel = new Model_Genre();
+        $genres=$genreModel->getGenres();
         $result=array();
         foreach($tags as $key=>$tag){
+            $tag['genre_name']=$genres[$tag['genre']];
             $result[$tag['taggable']][]=$tag;
         }
         Tdxio_Log::info($result,"fetched tags");
@@ -40,11 +44,13 @@ class Model_Taggable extends Model_Abstract
         $tagTable = new Model_DbTable_Tag;
         $data = array('taggable' => $tag['taggable_id'],
                       'user' => $tag['username'],
-                      //'genre' => $tag['comment'],
+                      'genre' => $tag['genre'],
                       'comment' => $tag['comment']
                     );
-        Tdxio_Log::info($data);
-        $select = $tagTable->select()->where('"comment" = ?',$data['comment'])->where('taggable = ? ',$data['taggable'])->where('"user" = ?',$data['user']);
+        Tdxio_Log::info($data,'gigigi');
+        $select = $tagTable->select()
+                            ->where('"comment" = ?',$data['comment'])->where('taggable = ? ',$data['taggable'])
+                            ->where('"user" = ?',$data['user'])->where('genre = ? ',$data['genre']);
         Tdxio_Log::info($select->__toString(),'selecttostring');
         $result = $tagTable->fetchRow($select);
         Tdxio_Log::info($result,'bidibodo');
@@ -55,23 +61,51 @@ class Model_Taggable extends Model_Abstract
         
     }   
     
-    public function deleteTag($username,$taggableId,$tag){
+    public function deleteTag($username,$taggableId,$tag,$genre){
         $tagTable = new Model_DbTable_Tag();
         if(!(is_null($username)||is_null($taggableId)||is_null($tag))){
             $where[] = $tagTable->getAdapter()->quoteInto('"user" = ?',$username);
             $where[] = $tagTable->getAdapter()->quoteInto('taggable = ?',$taggableId);
             $where[] = $tagTable->getAdapter()->quoteInto('"comment" = ?',$tag);
+            $where[] = $tagTable->getAdapter()->quoteInto('genre = ?',$genre);
             Tdxio_Log::info($where,'whereee');
-            return $tagTable->delete($where);
-           
+            return $tagTable->delete($where);           
         }
-        return 'not enough parameters to delete a tag';           
+        throw new Zend_Exception('Not enough parameters to delete a tag');           
     }
     
 
     public function normalizeTags($tags){
+      
+        $newtags=array();
+        foreach($tags as $key=>$tag){
+            if(!isset($newtags[$tag['genre']]))
+            {   $newtags[$tag['genre']]=array();}
+            if(!isset($newtags[$tag['genre']][$tag['comment']]))
+            {   $newtags[$tag['genre']][$tag['comment']]=array();}
+            $newtags[$tag['genre']][$tag['comment']][]=$tag;                
+        }
+        Tdxio_Log::info($newtags,'normalized tags new');
+        $maxMult=1;
+        foreach($newtags as $genre=>$names){
+            foreach($names as $name=>$tag){
+                $count = count($names[$name]);
+                Tdxio_Log::info($count,'count'.$name);
+                $newtags[$genre][$name]['multiplicity']=$count;
+                $maxMult = max($maxMult,$count);
+            }
+        }
+        Tdxio_Log::info($newtags,'normalized tags new 2');
+        foreach($newtags as $genre => $names){
+            foreach($names as $name=>$tag){
+                $newtags[$genre][$name]['multiplicity']/=$maxMult;
+            }
+        }
         
-        $ntags = array();
+        Tdxio_Log::info($newtags,'normalized tags new 3');
+        return $newtags; 
+
+    /*    $ntags = array();
         foreach($tags as $key=>$tag){
             $ntags[$tag['comment']][]=$tag;            
         }
@@ -88,6 +122,7 @@ class Model_Taggable extends Model_Abstract
         foreach($ntags as $key => $tag){
             $ntags[$key]['multiplicity']/=$maxMult;
         }
-        return $ntags;
+      return $ntags;
+      */
     }
 }

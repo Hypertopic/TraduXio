@@ -101,6 +101,5 @@ class Model_Abstract {
         $result = $this->fetchByFields($data);
         return(!empty($result));
     }
-
-
+    
 }
