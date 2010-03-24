@@ -129,7 +129,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                 
                 $data = $tagForm->getValues();
                 Tdxio_Log::info($data,'dati di tag');
-                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$translationId,'tag'=>$data['tag_comment']));
+                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$translationId,'genre'=>$data['tag_genre'],'tag'=>$data['tag_comment']));
             }
         }
                 

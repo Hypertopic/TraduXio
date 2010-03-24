@@ -38,39 +38,42 @@
 
 <!--<td id = "right-column">-->
 <div class="right-container">
- <div id="show-tag-area">
+ <div class="show-tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
         <?php// foreach($this->work['Tags'] as $name=>$tag): ?>
         <?php foreach($this->work['Tags'] as $genre=>$names): ?>
         <?php foreach($names as $name=>$tag): ?>
-        <div class="tag-item" title="<?php echo strtolower($tag[0]['genre_name']); ?>"> <!--style="font-size:<?php //echo 8+round($tag['multiplicity']*7) ?>px"--> <?php echo $name; ?>
+        <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>"> <!--style="font-size:<?php //echo 8+round($tag['multiplicity']*7) ?>px"--> <?php echo $name; ?>
         <?php $canRemove = false;?>
         <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
         <?php if($canRemove): ?>
             <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->work['id'],'tag'=>$name,'genre'=>$genre))?>"> X </a>
         <?php endif; ?>
-        </div>
+        </span>
         <?php endforeach; ?>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>
 <div id = "page-container">
-<div id = "TLcorner"></div><div id = "Tborder"></div><div id = "TRcorner"></div>
+<div id = "Tborder"><div id = "TLcorner"></div><div id = "TRcorner"></div></div>
 <!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
-<div id = "work-container">
-   
-    <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
-    <div class="language"><?php echo __($this->work['language']); ?></div>
-    <div class = "text"> 
-        <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
-            <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
-            <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($sentence['content']); ?></span>
-        <?php endforeach; ?>
-    </div>
-    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->work['creator']); ?> </div>
-</div>   
+        <div id="Lborder" class="hundred"><div id="Rborder" class="hundred">
+            <div id = "work-container" class="hundred">
+               
+                <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
+                <div class="language"><?php echo __($this->work['language']); ?></div>
+                <div class = "text"> 
+                    <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
+                        <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
+                        <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($sentence['content']); ?></span>
+                    <?php endforeach; ?>
+                </div>
+                <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->work['creator']); ?> </div>
+            </div>  
+        </div></div>
+    
 <!--<div id = "Rborder"></div>-->
-<div id = "BLcorner"></div><div id = "Bborder"></div><div id = "BRcorner"></div>
+<div id = "Bborder"><div id = "BLcorner"></div><div id = "BRcorner"></div></div>
 </div>
 </div>
 </div>

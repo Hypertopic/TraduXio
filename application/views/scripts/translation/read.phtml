@@ -17,54 +17,91 @@
 </div>
 </div>
 
-<!--<table  class="right-column">
-<tr class="up-section"><td> --> 
 
 <table class="right-container">
-<tr><td></td></tr>
-<div id="tag-area">
+<tr class="tag-line">
+    <td class="orig-column">   
+    <div class="show-tag-area">
         <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
-        <?php foreach($this->translation['OriginalWork']['Tags'] as $tag): ?>
-        <div class="tag-item"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $tag[0]['comment']; ?></div>
+        <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
+        <?php foreach($names as $name=>$tag): ?>
+        <div class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></div>
+        <?php endforeach; ?>
         <?php endforeach; ?>
         <?php endif; ?>
-    </div></td><td>   <div id="tag-area">
+    </div>
+    </td>
+    <td class="transl-column">
+    <div class="show-tag-area">
         <?php if(!empty($this->translation['Tags'])): ?>
-        <?php foreach($this->translation['Tags'] as $name=>$tag): ?>        
-            <div class="tag-item" title="<?php echo strtolower($tag[0]['genre_name']); ?>" style="font-size:<?php echo 8+ round($tag['multiplicity']*7) ?>px"><?php echo $tag[0]['comment']; ?>
+        <?php foreach($this->translation['Tags'] as $genre=>$names): ?>  
+        <?php foreach($names as $name=>$tag): ?>      
+            <div class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>" style="font-size:<?php echo 8+ round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
             <?php $canRemove = false;?>
             <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
             <?php if($canRemove): ?>
-                <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name,'genre'=>$tag[0]['genre']))?>"> X </a>
+                <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name,'genre'=>$genre))?>"> X </a>
             <?php endif; ?>
             </div>
+        <?php endforeach; ?>        
         <?php endforeach; ?>
         <?php endif; ?>
-    </div></td>
-<!--</tr>
-<tr><td  class="right-column">
--->   
-    <div class="title"><?php echo __('Original Text').': ' ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
-    <div class="language"><?php echo __($this->translation['OriginalWork']['language']); ?></div>
-    <div class="original-text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
-                     <?php echo $sentence['content']; ?>
-                     <?php endforeach; ?>
     </div>
-</td>
-<td  class="right-column"> 
-
- 
-    <div class="title"><?php echo __('Translation').': '?><?php echo $this->translation['title']; ?></div>
-    <div class="language"><?php echo __($this->translation['language']); ?></div>
-    <div class="translated-text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
-                     <?php echo $block['translation']; ?>
-                     <?php endforeach; ?>
-</div>
-</td>
-
+    </td>
+    <td></td>
 </tr>
+<tr class="hundred">
+<td class="orig-column hundred" id="Lborder"> 
+<!--  
+<div id="original-text-page">-->
+ 
+        <div id = "Tborder">
+            <div id = "TLcorner"></div><div id = "TRcorner"></div>
+        </div>
+        <div id="Lborder" class="hundred"><div id="Rborder" class="hundred">
+            <div id = "work-container" class="hundred">
+                <div class="title"><?php echo __('Original Text').': ' ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
+                <div class="language"><?php echo __($this->translation['OriginalWork']['language']); ?></div>
+                <div class="text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
+                                 <?php echo $sentence['content']; ?>
+                                 <?php endforeach; ?>
+                </div>
+                <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div>
+            </div>        
+        </div></div>
+        <div id = "Bborder">
+            <div id = "BLcorner"></div><div id = "BRcorner"></div>
+        </div>
+<!--</div>-->
+</td>
+
+<td class="transl-column hundred">
+
+<!-- <div id="translated-text-page">-->
+        <div id = "Tborder">
+            <div id = "TLcorner"></div><div id = "TRcorner"></div>
+        </div>
+        <!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
+        <div id="Lborder" class="hundred"><div id="Rborder" class="hundred">
+            <div id = "work-container" class="hundred">
+                <div class="title"><?php echo __('Translation').': '?><?php echo $this->translation['title']; ?></div>
+                <div class="language"><?php echo __($this->translation['language']); ?></div>
+                <div class="text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
+                                 <?php echo $block['translation']; ?>
+                                 <?php endforeach; ?>
+                </div>
+                <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['creator']); ?> </div>
+            </div>
+        </div></div>
+        <div id = "Bborder">
+            <div id = "BLcorner"></div><div id = "BRcorner"></div>
+        </div>
+<!-- </div>-->
+
+</td>
+<td></td>
+</tr><tr><td colspan="2" class="bottom-spacer"></td></tr>
 </table>
 </div>
 
 <?php $this->page_title=__("Read Translation").': '.$this->escape($this->translation['title']); ?>
-

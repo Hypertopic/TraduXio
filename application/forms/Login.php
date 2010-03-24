@@ -22,8 +22,8 @@ class Form_Login extends Zend_Form
 
         $password = $this->addElement('hidden', 'redirect', array(
             'validators' => array(
-            ),
-            'required'   => true,
+            )
+            //'required'   => true,
         ));
 
          $login = $this->addElement('submit', 'login', array(
