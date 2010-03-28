@@ -98,7 +98,6 @@ class Model_Translation extends Model_Taggable
         if(!empty($tags) && $computeMultiplicity==true){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
         }
-        Tdxio_Log::info($work,'traduzione');
         return $work;
     }
         
@@ -137,7 +136,6 @@ class Model_Translation extends Model_Taggable
         $order='from_segment ASC';
         
         $interpretations = $this->fetchByFields(array('original_work_id'=>$original_work_id),$order);
-        Tdxio_Log::info($interpretations,'interp...');
         $translations = array();
         
         if(!empty($interpretations)){
@@ -146,15 +144,12 @@ class Model_Translation extends Model_Taggable
             }
             $ids = array_keys($translations);
             
-            Tdxio_Log::info($ids,'ids...');
             $modelWork = new Model_Work();
             $works = $modelWork->fetchWork($ids);
-            Tdxio_Log::info($works,'works...');
             foreach($works as $key=>$work){
                 $translations[$work['id']]['work']=$work;           
             }
         }
-        Tdxio_Log::info($translations,'tr...');
         return $translations;
     }
     
@@ -222,8 +217,6 @@ class Model_Translation extends Model_Taggable
         }
     }
 
-    
-    
     protected function _getCutter() {
         if (null === $this->_cutter) {
             $this->_cutter = new Tdxio_Cutter();
@@ -231,5 +224,83 @@ class Model_Translation extends Model_Taggable
         return $this->_cutter;
     }
     
+    public function search($query,$transId=null,$from=null,$filters=array()) {
+        $table=$this->_getTable();
+        $where_filter = array();
+        Tdxio_Log::info($filters,'filters');
+        foreach ($filters as $type=>$filter) {
+            if (!$where_filter) $where_filter[]='';
+            foreach ($filter as $field=>$value) {
+				if ($field=='language' || $field=='author') {
+					$where_filter[] = $table->getAdapter()->quoteInto($type."_work.".$field."= ?",$value);
+				} else {
+					$where_filter[] = $type."_work.id IN (select taggable from tag join genre on genre.id=tag.genre where ".$table->getAdapter()->quoteInto("genre.id=?",$field)." and ".$table->getAdapter()->quoteInto("tag.comment=?",$value).")";
+				}
+            }
+        }
+        $where_filter = implode(" AND ",$where_filter);
+        Tdxio_Log::info($where_filter,"where filter");
+        $revalues=$values=array($query);
+        $sql="select original_work_id as src_id, work_id as dest_id, source, translation, ts_rank(to_tsvector(source),q) as rank, 
+					ts_headline(source,q,'StartSel={**},StopSel={**},HighlightAll=TRUE') as high_source,
+					src_work.title as src_title, dest_work.title as dest_title, 
+					src_work.language as src_language, dest_work.language as dest_language, 
+					src_work.author as src_author, dest_work.author as dest_author, false as reverse
+				from interpretation_sentence
+					join work as dest_work on dest_work.id=work_id
+					join work as src_work on src_work.id=original_work_id, 
+				plainto_tsquery(?) q
+				where ts_rank(to_tsvector(source),q) > 0.0001 AND translation IS NOT NULL AND translation <> ''";
+        $reversesql="select original_work_id as dest_id, work_id as src_id, source as translation, translation as source, ts_rank(to_tsvector(translation),q) as rank, 
+					ts_headline(translation,q,'StartSel={**},StopSel={**},HighlightAll=TRUE') as high_source,
+					src_work.title as src_title, dest_work.title as dest_title, 
+					src_work.language as src_language, dest_work.language as dest_language, 
+					src_work.author as src_author, dest_work.author as dest_author, true as reverse
+				from interpretation_sentence
+					join work as dest_work on dest_work.id=original_work_id
+					join work as src_work on src_work.id=work_id, 
+				plainto_tsquery(?) q
+				where ts_rank(to_tsvector(translation),q) > 0.0001 AND source IS NOT NULL AND source <> ''";
+        Tdxio_Log::info($sql);
+        Tdxio_Log::info($reversesql);
+
+        /*if ($destLang!=null) {
+            $sql.=" AND dest_text.language=?";
+            $reversesql.=" AND dest_text.language=?";
+            $values[]=$destLang;
+            $revalues[]=$destLang;
+        }*/
+        if ($transId!=null) {
+            $sql.=" AND (dest_text.id <> ?";
+            $values[]=$transId;
+            if ($from!=null) {
+                $sql.=" OR tb.from_segment <> ?";
+                $values[]=$from;
+            }
+            $sql.=")";
+        }
+        $sql.=" $where_filter
+            ORDER BY rank DESC";// LIMIT 10";
+        $reversesql.=" $where_filter
+            ORDER BY rank DESC";//LIMIT 10";
+        Tdxio_Log::info($values,$sql);
+        Tdxio_Log::info($revalues,$reversesql);
+        $stmt=$table->getAdapter()->query($sql,$values);
+        $rows=$stmt->fetchAll();
+
+        $reversestmt=$table->getAdapter()->query($reversesql,$revalues);
+        $reverserows=$reversestmt->fetchAll();
+        $rows=array_merge($rows,$reverserows);
+        return $rows;
+    }
+
+    public function getQuery($query) {
+        $sql="SELECT plainto_tsquery(?)::text";
+        $table=$this->_getTable();
+        $stmt=$table->getAdapter()->query($sql,array($query));
+        $result=$stmt->fetchColumn(0);
+        return $result;
+    }
+
 
 }

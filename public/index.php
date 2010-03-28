@@ -27,6 +27,8 @@ require_once 'Tdxio/Log.php';
 
 function __($text)
 {
+	static $translate=null;
+	if (!$translate) {
     $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en');        
     $actual = $translate->getLocale();
     Tdxio_Log::info($actual,'default_locale');
@@ -35,7 +37,7 @@ function __($text)
     Tdxio_Log::info($actual,'locale');
     $translate->addTranslation(APPLICATION_PATH.'/../languages/it_IT.mo','it');
    // $translate->addTranslation(APPLICATION_PATH.'/../languages/it.mo','it');
-    
+    }
     $trText = $translate->_($text);
     if (is_null($trText)) {
         // if not found a translation, send back the original text

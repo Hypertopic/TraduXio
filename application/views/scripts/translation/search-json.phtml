@@ -1,0 +1,13 @@
+<?php
+$this->layout()->setLayout('empty');
+foreach ($this->blocks as &$block) {
+    foreach ($block as $key=>$value) {
+        $block[$key]=$this->nlBr($value);
+    }
+}
+$array=array('values'=>$this->values,'results'=>$this->blocks,'filters'=>$this->filters,'metadata'=>$this->metadata,'metadatas'=>$this->metadatas);
+/*foreach ($this as $key=>$value) {
+    $array[$key]=$value;
+}*/
+?>
+<?php echo Zend_Json::encode($array); ?>

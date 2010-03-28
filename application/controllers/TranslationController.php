@@ -121,7 +121,6 @@ class TranslationController extends Tdxio_Controller_Abstract
         $translationId=$request->getParam('id');
         $translation = $this->_getModel()->fetchTranslationWork($translationId);
         
-        Tdxio_Log::info($translation,'readAction in translation');
         $tagForm = new Form_Tag();
         if ($this->getRequest()->isPost()) {
         
@@ -167,6 +166,122 @@ class TranslationController extends Tdxio_Controller_Abstract
     }
     
         
+    public function searchAction() {
+        static $params=array('query');
+        static $params_optional=array('transId','from','orig_filter','src_filter','dest_filter','returnStyle');
+        
+        $request=$this->getRequest();
+        if ($request->isPost()) {
+            $values=$request->getPost();
+            Tdxio_Log::info($values,'search values');
+            if ($this->_checkParams($params,$values,$params_optional)) {
+                Tdxio_Log::info($request->getRawBody(),'post');
+                $workModel=new Model_Work();
+                $taggableModel=new Model_Taggable();
+                $genreModel=new Model_Genre();
+                foreach ($values as $name=>$value) {
+                    $$name=$value;
+                    $this->view->$name=$value;
+                }
+                //$src_filter="release:2008/book:10";
+                //extract($values);
+                $filters=array();
+                $viewFilters=array();
+                //$metadatas=array();
+                $model=$this->_getModel();
+                foreach (array('src','dest') as $type) {
+                    $metadatas[$type]=array_merge($genreModel->getGenres(),array('author'=>'author','language'=>'language'));
+                    $var=$type."_filter";
+                    Tdxio_Log::info($$var,$var);
+                    if ($$var) {
+                        $temp_filter=explode('/',$$var);
+                        $filters[$type]=array();
+                        foreach ($temp_filter as $v) {
+                            list($field,$value) = explode(":",$v);
+                            if ($field && $value) {
+                                $filters[$type][$field]=$value;
+                                $viewFilters[$var][]=$v;
+                            }
+                        }
+                    }
+                    Tdxio_Log::info($$var,$var);
+                    //$this->view->$var=$$var;
+                }
+                //$this->log($metadatas,"metadatas");
+                $this->view->metadatas=$metadatas;
+                $blocks=$model->search($query,$transId,$from,$filters);
+                if ($blocks) {
+                    Tdxio_Log::info($blocks,"blocks");
+                    $criterii_translation1=array();
+                    $criterii_translation2=array();
+                    $ids=array();
+                    $fixedMetadatas=array();
+                    foreach ($blocks as $block) {
+                        foreach (array('src','dest')  as $type) {
+							$fixedMetadatas[$type]=array();
+                            if (!isset($ids[$type])) $ids[$type]=array();
+                            if (!in_array($block[$type.'_id'],$ids[$type])) {
+                                $ids[$type][]=$block[$type.'_id'];
+                            }
+                            foreach (array('author','language') as $fixedMeta) {
+								if (!isset($fixedMetadatas[$type][$fixedMeta])) $fixedMetadatas[$type][$fixedMeta]=array();
+								$fixedMetadatas[$type][$fixedMeta][$block[$type.'_'.$fixedMeta]]=$block[$type.'_'.$fixedMeta];
+							}
+                        }
+                    }
+                    $criterii=array();
+                    $this->view->metadata=array();
+                    foreach (array('src','dest')  as $type) {
+                        Tdxio_Log::info($ids[$type],"ids $type");
+                        $works=$workModel->fetchAllOriginalWorks($ids[$type]);
+                        $this->view->metadata[$type]=array_merge($this->_getMetadatasFromTags($taggableModel->getTags($ids[$type])),$fixedMetadatas);
+                        Tdxio_Log::info($this->view->metadata[$type],"criterii $type");
+                    }
+                }
+                //$this->view->texts=$texts;
+                $search=array('query'=>$query,'from'=>$from);
+                if ($viewFilters) $search['filters']=$viewFilters;
+                $this->view->filters=$filters;
+                $this->view->currentSearch=$search;
+                Tdxio_Log::info(count($texts));
+                $tq=$model->getQuery($query);
+                $this->view->transQuery=$tq;
+                Tdxio_Log::info($query,'query, '.count($blocks).' results');
+                $this->view->blocks=$blocks;
+                $this->view->values=$values;
+            }
+            $viewScript='search';
+            if (isset($returnStyle)) {
+                $viewScript.='-'.$returnStyle;
+            }
+            $this->_helper->viewRenderer($viewScript);
+        } else {
+            throw new Zend_Controller_Action_Exception('Incorrect query.', 500);
+        }
+        //$this->view->render('search-json.phtml');
+    }
+
+    protected function _checkParams($params,$values,$optionals=array()) {
+        $keys=array_keys($values);
+        foreach ($params as $param) {
+            if (in_array($param,$keys)) {
+                unset($values[$param]);
+            } else {
+                throw new Zend_Controller_Action_Exception('Incorrect query, missing value '.$param, 500);
+            }
+        }
+        foreach ($optionals as $optional) {
+            if (in_array($optional,$keys)) {
+                unset($values[$optional]);
+            }
+        }
+        if (count($values)) {
+            $incorrect=implode(',',array_keys($values));
+            throw new Zend_Controller_Action_Exception('Incorrect query ('.$incorrect.')', 500);
+        }
+        return true;
+    }
+    
     public function getRule($request){
         $action = $request->action;
         $resource_id = $request->getParam('id');
@@ -201,5 +316,20 @@ class TranslationController extends Tdxio_Controller_Abstract
         return $rule;
         
     }
+    
+	protected function _getMetadatasFromTags($tags_texts) {
+        $metadatas=array();
+        foreach ($tags_texts as $text) {
+            $this->_extractMetadata($text,$metadatas);
+        }
+        return $metadatas;
+    }
+
+    protected function _extractMetadata($text,&$metadata=array()) {
+        foreach ($text as $tag) {
+			$metadata[$tag['genre']][$tag['comment']]=$tag['comment'];
+        }
+    }
+
     
 }

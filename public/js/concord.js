@@ -62,7 +62,7 @@ if (typeof console == "undefined") console={log:function(){}};
                                         "<br/>"+res['src_author']+
                                         "<br/>"+res['src_release']+
                                         "</td>");
-                                var td_block=$('<td class="block">'+res['src_block']+"</td>");
+                                var td_block=$('<td class="block">'+res['source']+"</td>");
                                 if (res['src_language_rtl']=='1') {
                                     td_title.css('direction','rtl');
                                     td_block.css('direction','rtl');
@@ -74,7 +74,7 @@ if (typeof console == "undefined") console={log:function(){}};
                                         "<br/>"+res['dest_author']+
                                         "<br/>"+res['dest_release']+
                                         "</td>");
-                                var td_block=$('<td class="block">'+res['dest_block']+"</td>");
+                                var td_block=$('<td class="block">'+res['translation']+"</td>");
                                 if (res['dest_language_rtl']=='1') {
                                     td_title.css('direction','rtl');
                                     td_block.css('direction','rtl');
@@ -90,7 +90,7 @@ if (typeof console == "undefined") console={log:function(){}};
 
                             });
                             filters.empty();
-                            tdxio.textSearch.filter_layout(data,'orig',filters);
+                            //tdxio.textSearch.filter_layout(data,'orig',filters);
                             var filter_tr=$("<tr/>").append("<td/>").addClass('filters');
                             filters=$("<td/>");
                             tdxio.textSearch.filter_layout(data,'src',filters);

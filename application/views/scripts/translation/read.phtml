@@ -18,14 +18,14 @@
 </div>
 
 
-<table class="right-container">
+<table class="right-container" id="openbook">
 <tr class="tag-line">
     <td class="orig-column">   
     <div class="show-tag-area">
         <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
         <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
         <?php foreach($names as $name=>$tag): ?>
-        <div class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></div>
+        <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></span>
         <?php endforeach; ?>
         <?php endforeach; ?>
         <?php endif; ?>
@@ -36,13 +36,13 @@
         <?php if(!empty($this->translation['Tags'])): ?>
         <?php foreach($this->translation['Tags'] as $genre=>$names): ?>  
         <?php foreach($names as $name=>$tag): ?>      
-            <div class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>" style="font-size:<?php echo 8+ round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
+            <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>" style="font-size:<?php echo 8+ round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
             <?php $canRemove = false;?>
             <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
             <?php if($canRemove): ?>
                 <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name,'genre'=>$genre))?>"> X </a>
             <?php endif; ?>
-            </div>
+            </span>
         <?php endforeach; ?>        
         <?php endforeach; ?>
         <?php endif; ?>

@@ -699,3 +699,9 @@ td.transl-column{
     vertical-align:top;
     width:50%;/*500px;/*642px;*/
 }
+
+table#openbook{
+    border-spacing:0;
+    border-collapse:collapse;
+}
+
