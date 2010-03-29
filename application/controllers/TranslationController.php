@@ -190,7 +190,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                 //$metadatas=array();
                 $model=$this->_getModel();
                 foreach (array('src','dest') as $type) {
-                    $metadatas[$type]=array_merge($genreModel->getGenres(),array('author'=>'author','language'=>'language'));
+                    //$metadatas[$type]=array_merge($genreModel->getGenres(),array('author'=>'author','language'=>'language'));
                     $var=$type."_filter";
                     Tdxio_Log::info($$var,$var);
                     if ($$var) {
@@ -208,25 +208,25 @@ class TranslationController extends Tdxio_Controller_Abstract
                     //$this->view->$var=$$var;
                 }
                 //Tdxio_Log::info($metadatas,"metadatas");
-                $this->view->metadatas=$metadatas;
+                //$this->view->metadatas=$metadatas;
                 $blocks=$model->search($query,$transId,$from,$filters);
                 if ($blocks) {
-                    Tdxio_Log::info($blocks,"blocks");
                     $criterii_translation1=array();
                     $criterii_translation2=array();
                     $ids=array();
                     $fixedMetadatas=array();
-                    foreach ($blocks as $block) {
+                    foreach ($blocks as &$block) {
                         foreach (array('src','dest')  as $type) {
-                            $fixedMetadatas[$type]=array();
+                            if (!isset($fixedMetadatas[$type])) $fixedMetadatas[$type]=array();
                             if (!isset($ids[$type])) $ids[$type]=array();
                             if (!in_array($block[$type.'_id'],$ids[$type])) {
                                 $ids[$type][]=$block[$type.'_id'];
                             }
                             foreach (array('author','language') as $fixedMeta) {
                                 if (!isset($fixedMetadatas[$type][$fixedMeta])) $fixedMetadatas[$type][$fixedMeta]=array();
-                                $fixedMetadatas[$type][$fixedMeta][$block[$type.'_'.$fixedMeta]]=$block[$type.'_'.$fixedMeta];
+                                $fixedMetadatas[$type][$fixedMeta][$block[$type.'_'.$fixedMeta]]=__($block[$type.'_'.$fixedMeta]);
                             }
+                            $block[$type.'_language']=__($block[$type.'_language']);
                         }
                     }
                     $criterii=array();
@@ -234,7 +234,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                     foreach (array('src','dest')  as $type) {
                         Tdxio_Log::info($ids[$type],"ids $type");
                         $works=$workModel->fetchAllOriginalWorks($ids[$type]);
-                        $this->view->metadata[$type]=array_merge($this->_getMetadatasFromTags($taggableModel->getTags($ids[$type])),$fixedMetadatas);
+                        $this->view->metadata[$type]=array_merge($this->_getMetadatasFromTags($taggableModel->getTags($ids[$type])),$fixedMetadatas[$type]);
                         Tdxio_Log::info($this->view->metadata[$type],"criterii $type");
                     }
                 }
@@ -318,6 +318,7 @@ class TranslationController extends Tdxio_Controller_Abstract
     }
     
     protected function _getMetadatasFromTags($tags_texts) {
+        Tdxio_log::info($tags_texts,"tags_texts");
         $metadatas=array();
         foreach ($tags_texts as $text) {
             $this->_extractMetadata($text,$metadatas);
@@ -327,7 +328,7 @@ class TranslationController extends Tdxio_Controller_Abstract
 
     protected function _extractMetadata($text,&$metadata=array()) {
         foreach ($text as $tag) {
-            $metadata[$tag['genre']][$tag['comment']]=$tag['comment'];
+            $metadata[$tag['genre_name']][$tag['comment']]=$tag['comment'];
         }
     }
 

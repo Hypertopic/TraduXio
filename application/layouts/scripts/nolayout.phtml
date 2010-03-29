@@ -1,0 +1,35 @@
+<?php /* application/layouts/scripts/layout.phtml
+
+      This line outputs the doctype we set in the bootstrap */ ?>
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Traduxio Project - Test site</title>
+  <?php echo $this->headLink()->appendStylesheet($this->makeUrl('/css/global.css')) ?>
+  <?php $this->headScript()->prependScript("tdxio.baseUrl='".$this->makeUrl('',true)."';"); ?>
+  <?php $this->headScript()->prependFile($this->makeUrl('/js/tdxio.js')); ?>
+  <?php $this->headScript()->prependFile($this->makeUrl('/js/lib/jquery.min.js')); ?>
+  <?php echo $this->headScript(); ?>
+
+</head>
+<body>
+
+<?php /*
+    Layouts are a great place to put header and footer content that will be
+    needed on all pages that share the same layout.  To understand fully what
+    having layouts inside a MVC application mean, check out the Zend_Layout
+    section of the manual.
+    http://framework.zend.com/manual/en/zend.layout.html
+    */?>
+
+<!-- This next call will now include any content that was generated in the
+     dispatching of a controllers action (or series of actions).  -->
+<div id="content">
+<?php echo $this->layout()->content ?>
+</div>
+<!-- If your application requires it, this would be a great place to put a
+     footer for all pages. -->
+</body>
+</html>
+

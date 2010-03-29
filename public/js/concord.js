@@ -6,7 +6,7 @@ if (typeof console == "undefined") console={log:function(){}};
         filter_layout:function (data,type,div) {
             $.each(data.metadata[type],function (name,filter) {
                 var ul=$('<ul class="filter"/>');
-                ul.append('<li class="filter-title">'+data.metadatas[type][name]+'</li>').attr('name',name);
+                ul.append('<li class="filter-title">'+name+'</li>').attr('name',name);
                 $.each(filter,function (j,val) {
                     var li=$('<li class="filter-value"/>');
                     li.append(val).attr('name',j);

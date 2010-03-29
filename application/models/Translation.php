@@ -231,38 +231,36 @@ class Model_Translation extends Model_Taggable
         foreach ($filters as $type=>$filter) {
             if (!$where_filter) $where_filter[]='';
             foreach ($filter as $field=>$value) {
-				if ($field=='language' || $field=='author') {
-					$where_filter[] = $table->getAdapter()->quoteInto($type."_work.".$field."= ?",$value);
-				} else {
-					$where_filter[] = $type."_work.id IN (select taggable from tag join genre on genre.id=tag.genre where ".$table->getAdapter()->quoteInto("genre.id=?",$field)." and ".$table->getAdapter()->quoteInto("tag.comment=?",$value).")";
-				}
+                if ($field=='language' || $field=='author') {
+                    $where_filter[] = $table->getAdapter()->quoteInto($type."_work.".$field."= ?",$value);
+                } else {
+                    $where_filter[] = $type."_work.id IN (select taggable from tag join genre on genre.id=tag.genre where ".$table->getAdapter()->quoteInto("genre.name=?",$field)." and ".$table->getAdapter()->quoteInto("tag.comment=?",$value).")";
+                }
             }
         }
         $where_filter = implode(" AND ",$where_filter);
         Tdxio_Log::info($where_filter,"where filter");
         $revalues=$values=array($query);
-        $sql="select original_work_id as src_id, work_id as dest_id, source, translation, ts_rank(to_tsvector(source),q) as rank, 
-					ts_headline(source,q,'StartSel={**},StopSel={**},HighlightAll=TRUE') as high_source,
-					src_work.title as src_title, dest_work.title as dest_title, 
-					src_work.language as src_language, dest_work.language as dest_language, 
-					src_work.author as src_author, dest_work.author as dest_author, false as reverse
-				from interpretation_sentence
-					join work as dest_work on dest_work.id=work_id
-					join work as src_work on src_work.id=original_work_id, 
-				plainto_tsquery(?) q
-				where ts_rank(to_tsvector(source),q) > 0.0001 AND translation IS NOT NULL AND translation <> ''";
-        $reversesql="select original_work_id as dest_id, work_id as src_id, source as translation, translation as source, ts_rank(to_tsvector(translation),q) as rank, 
-					ts_headline(translation,q,'StartSel={**},StopSel={**},HighlightAll=TRUE') as high_source,
-					src_work.title as src_title, dest_work.title as dest_title, 
-					src_work.language as src_language, dest_work.language as dest_language, 
-					src_work.author as src_author, dest_work.author as dest_author, true as reverse
-				from interpretation_sentence
-					join work as dest_work on dest_work.id=original_work_id
-					join work as src_work on src_work.id=work_id, 
-				plainto_tsquery(?) q
-				where ts_rank(to_tsvector(translation),q) > 0.0001 AND source IS NOT NULL AND source <> ''";
-        Tdxio_Log::info($sql);
-        Tdxio_Log::info($reversesql);
+        $sql="select original_work_id as src_id, work_id as dest_id, translation, ts_rank(to_tsvector(source),q) as rank, 
+                    ts_headline(source,q,'StartSel={**},StopSel={**},HighlightAll=TRUE') as source,
+                    src_work.title as src_title, dest_work.title as dest_title, 
+                    src_work.language as src_language, dest_work.language as dest_language, 
+                    src_work.author as src_author, dest_work.author as dest_author, false as reverse
+                from interpretation_sentence
+                    join work as dest_work on dest_work.id=work_id
+                    join work as src_work on src_work.id=original_work_id, 
+                plainto_tsquery(?) q
+                where ts_rank(to_tsvector(source),q) > 0.0001 AND translation IS NOT NULL AND translation <> ''";
+        $reversesql="select original_work_id as dest_id, work_id as src_id, source as translation, ts_rank(to_tsvector(translation),q) as rank, 
+                    ts_headline(translation,q,'StartSel={**},StopSel={**},HighlightAll=TRUE') as source,
+                    src_work.title as src_title, dest_work.title as dest_title, 
+                    src_work.language as src_language, dest_work.language as dest_language, 
+                    src_work.author as src_author, dest_work.author as dest_author, true as reverse
+                from interpretation_sentence
+                    join work as dest_work on dest_work.id=original_work_id
+                    join work as src_work on src_work.id=work_id, 
+                plainto_tsquery(?) q
+                where ts_rank(to_tsvector(translation),q) > 0.0001 AND source IS NOT NULL AND source <> ''";
 
         /*if ($destLang!=null) {
             $sql.=" AND dest_text.language=?";
