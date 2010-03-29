@@ -70,9 +70,16 @@ class Model_Sentence extends Model_Taggable
 		
 	}
 	
-	public function fetchSentences($work_id){
+	public function fetchSentences($work_id,$from=null,$to=null){
 		$order='number ASC';
-		$sentences = $this->fetchByFields(array('work_id'=>$work_id),'number',$order);
+		$conds=array('work_id'=>$work_id);
+		if ($from) {
+			$conds['number >=']=$from;
+		}
+		if ($to) { 
+			$conds['number <=']=$to; 
+		}
+		$sentences = $this->fetchByFields($conds,'number',$order);
 		return $sentences;		
 	}
 	

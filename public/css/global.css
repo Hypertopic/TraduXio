@@ -36,12 +36,12 @@ body
 .highlight {
     font-weight:bold;
 }
-.title{
+div.title{
     padding:3px;
     font-size:120%;
     font-weight:bold;
 }
-.text{
+div.text{
     margin:5px 10px 10px 10px;
     padding:10px;
 }
@@ -204,6 +204,10 @@ background:#EEEEEE none repeat scroll 0 0;
 padding:10px;
 }
 
+div#results table {
+    width:100%;
+    border-collapse:collapse;
+}
 
 div#black-border{
     margin: 40px;
@@ -705,3 +709,107 @@ table#openbook{
     border-collapse:collapse;
 }
 
+
+body .filter-value.possible {
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+body .filter-value.selected {
+    font-weight:bold;
+    cursor:pointer;
+    background:#AAA6AD;
+    color:#fff;
+}
+
+body .filter-value.alone {
+    font-style:italic;
+}
+
+body .filter-remove {
+    cursor:pointer;
+    text-decoration:underline;
+    font-weight:normal;
+}
+td.title {
+    vertical-align:top;
+    width:10%;
+}
+td.block {
+    vertical-align:top;
+    width:40%;
+}
+
+ul.filter {
+    font-size:70%;
+}
+ul.filter li {
+    list-style:none;
+    display:inline;
+}
+li.filter-title {
+    padding-right:3em;
+    font-weight:bold;
+}
+li.filter-value {
+    padding:0.5em 1em;
+    margin:0 0.5em;
+    text-align:center;
+}
+
+div.scrollbutts {
+    float:left;
+}
+div.scrollbutts .button {
+    width:20px;
+    height:20px;
+    background-repeat:no-repeat;
+    cursor:pointer;
+}
+div.scrollbutts .button.disabled {
+    cursor:default;
+}
+div.scrollbutts .up {
+    background-image:url(../images/up.gif);
+}
+div.scrollbutts .down {
+    background-image:url(../images/down.gif);
+}
+div.scrollbutts div.down.disabled {
+    background-image:url(../images/down-dis.gif);
+}
+div.scrollbutts div.up.disabled {
+    background-image:url(../images/up-dis.gif);
+}
+div.scrollbutts div.disabled {
+    background-image:none;
+}
+#results tr.result td.block {
+    padding-left:2em;
+    padding-right:2em;
+}
+#results tr.result td.title {
+    padding-left:0;
+    padding-right:0;
+}
+#results tr.result td {
+    padding-top:1em;
+    padding-bottom:1em;
+    border-spacing:0;
+}
+#results tr.reverse {
+    background-image:url(../images/bigarrow-left.png);
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
+#results tr.altern {
+    background-color:#fff;
+}
+#results tr.altern {
+    background-color:#DDD;
+}
+#results tr.result {
+    height:50px;
+    overflow:hidden;
+}

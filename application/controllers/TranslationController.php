@@ -207,7 +207,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                     Tdxio_Log::info($$var,$var);
                     //$this->view->$var=$$var;
                 }
-                //$this->log($metadatas,"metadatas");
+                //Tdxio_Log::info($metadatas,"metadatas");
                 $this->view->metadatas=$metadatas;
                 $blocks=$model->search($query,$transId,$from,$filters);
                 if ($blocks) {
@@ -218,15 +218,15 @@ class TranslationController extends Tdxio_Controller_Abstract
                     $fixedMetadatas=array();
                     foreach ($blocks as $block) {
                         foreach (array('src','dest')  as $type) {
-							$fixedMetadatas[$type]=array();
+                            $fixedMetadatas[$type]=array();
                             if (!isset($ids[$type])) $ids[$type]=array();
                             if (!in_array($block[$type.'_id'],$ids[$type])) {
                                 $ids[$type][]=$block[$type.'_id'];
                             }
                             foreach (array('author','language') as $fixedMeta) {
-								if (!isset($fixedMetadatas[$type][$fixedMeta])) $fixedMetadatas[$type][$fixedMeta]=array();
-								$fixedMetadatas[$type][$fixedMeta][$block[$type.'_'.$fixedMeta]]=$block[$type.'_'.$fixedMeta];
-							}
+                                if (!isset($fixedMetadatas[$type][$fixedMeta])) $fixedMetadatas[$type][$fixedMeta]=array();
+                                $fixedMetadatas[$type][$fixedMeta][$block[$type.'_'.$fixedMeta]]=$block[$type.'_'.$fixedMeta];
+                            }
                         }
                     }
                     $criterii=array();
@@ -317,7 +317,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         
     }
     
-	protected function _getMetadatasFromTags($tags_texts) {
+    protected function _getMetadatasFromTags($tags_texts) {
         $metadatas=array();
         foreach ($tags_texts as $text) {
             $this->_extractMetadata($text,$metadatas);
@@ -327,7 +327,7 @@ class TranslationController extends Tdxio_Controller_Abstract
 
     protected function _extractMetadata($text,&$metadata=array()) {
         foreach ($text as $tag) {
-			$metadata[$tag['genre']][$tag['comment']]=$tag['comment'];
+            $metadata[$tag['genre']][$tag['comment']]=$tag['comment'];
         }
     }
 

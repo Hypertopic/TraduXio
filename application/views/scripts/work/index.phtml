@@ -13,10 +13,10 @@
 <ul>
 <?php
 foreach ($this->entries as $lang=>$authors) { ?>
-          <li class='language'><?php echo $this->langs[$lang];?>
+          <li class='language'><?php echo __($this->langs[$lang]);?>
           <ul class='authors'>
 <?php     foreach ($authors as $author=>$texts) { ?>
-              <li class='author closed'><?php echo $author;?>
+              <li class='author closed'><?php if($author==''){echo __('Anonymous');} else{ echo __($author);}?>
               <ul class='texts'>
 <?php         foreach ($texts as $text) { ?>
                  <li class='text'><a href="<?php echo $this->url(

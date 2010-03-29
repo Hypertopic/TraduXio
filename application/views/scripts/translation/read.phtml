@@ -61,7 +61,9 @@
         <div id="Lborder" class="hundred"><div id="Rborder" class="hundred">
             <div id = "work-container" class="hundred">
                 <div class="title"><?php echo __('Original Text').': ' ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
-                <div class="language"><?php echo __($this->translation['OriginalWork']['language']); ?></div>
+                <div class="language">
+                <?php $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');}?>
+                <?php echo $author.' - '.__($this->translation['OriginalWork']['language']); ?></div>
                 <div class="text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
                                  <?php echo $sentence['content']; ?>
                                  <?php endforeach; ?>
@@ -77,7 +79,6 @@
 
 <td class="transl-column hundred">
 
-<!-- <div id="translated-text-page">-->
         <div id = "Tborder">
             <div id = "TLcorner"></div><div id = "TRcorner"></div>
         </div>
@@ -85,7 +86,9 @@
         <div id="Lborder" class="hundred"><div id="Rborder" class="hundred">
             <div id = "work-container" class="hundred">
                 <div class="title"><?php echo __('Translation').': '?><?php echo $this->translation['title']; ?></div>
-                <div class="language"><?php echo __($this->translation['language']); ?></div>
+                <div class="language">
+                <?php $author = $this->translation['author']; if($author==''){$author=__('Anonymous');}?>
+                <?php echo $author.' - '.__($this->translation['language']); ?></div>
                 <div class="text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
                                  <?php echo $block['translation']; ?>
                                  <?php endforeach; ?>
@@ -96,7 +99,6 @@
         <div id = "Bborder">
             <div id = "BLcorner"></div><div id = "BRcorner"></div>
         </div>
-<!-- </div>-->
 
 </td>
 <td></td>

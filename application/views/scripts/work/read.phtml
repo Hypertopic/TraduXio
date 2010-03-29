@@ -40,7 +40,6 @@
 <div class="right-container">
  <div class="show-tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
-        <?php// foreach($this->work['Tags'] as $name=>$tag): ?>
         <?php foreach($this->work['Tags'] as $genre=>$names): ?>
         <?php foreach($names as $name=>$tag): ?>
         <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>"> <!--style="font-size:<?php //echo 8+round($tag['multiplicity']*7) ?>px"--> <?php echo $name; ?>
@@ -61,7 +60,8 @@
             <div id = "work-container" class="hundred">
                
                 <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
-                <div class="language"><?php echo __($this->work['language']); ?></div>
+                <div class="language"><?php $author=$this->work['author']; if($author==''){$author=__('Anonymous');}?>
+                <?php echo $author.' - '.__($this->work['language']); ?></div>
                 <div class = "text"> 
                     <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
                         <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>

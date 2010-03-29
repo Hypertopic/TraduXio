@@ -6,7 +6,7 @@ if (typeof console == "undefined") console={log:function(){}};
             var $e=$(e);
             $e.children().hide();
             $e.children(":first").show();
-            $e.prepend('<div class="scrollbutts"><div class="button up">UP</div><div class="button down">DOWN</div></div>');
+            $e.prepend('<div class="scrollbutts"><div class="button up"></div><div class="button down"></div></div>');
             tdxio.filterScroll.updateButtons($e);
         },
         registerButtons : function(filterScroll) {

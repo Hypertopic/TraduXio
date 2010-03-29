@@ -75,7 +75,6 @@ class Model_Abstract {
                 $select->where($fieldname . ' = ?', $value);
             }
             if ($order) $select->order($order);
-            Tdxio_Log::info($select);
             $result = $table->fetchAll($select);
             if ($result) $result=$this->_toArray($result);
         }

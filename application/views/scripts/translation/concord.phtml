@@ -8,8 +8,8 @@
 <?php if ($this->style=='pop') $this->layout()->setLayout('nolayout'); ?>
 <div id="searchbar">
 <form id="form-query"><input name="query" id="query-value" value="<?php echo $this->query; ?>"/>
-<input name="srclang" type="hidden" value="<?php echo $this->srclang; ?>"/>
-<input name="destlang" type="hidden" value="<?php echo $this->destlang; ?>"/>
+<input name="srclang" type="hidden" value="<?php echo __($this->srclang); ?>"/>
+<input name="destlang" type="hidden" value="<?php echo __($this->destlang); ?>"/>
 <input id="query-submit" type="submit" value="Search"/></form>
 </div>
 <div id="filters"></div>
@@ -17,4 +17,4 @@
 </div>
 </div>
 
-<?php $this->page_title="Search"; ?>
+<?php $this->page_title=__("Search"); ?>
