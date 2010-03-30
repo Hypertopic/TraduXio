@@ -121,9 +121,9 @@ class Model_Work extends Model_Taggable
   
     }
     
-    public function fetchOriginalWork($work_id){
+    public function fetchOriginalWork($work_id,$filter=true){
     
-        if(!$work = $this->fetchWork($work_id)){return null;}
+        if(!$work = $this->fetchWork($work_id,$filter)){return null;}
         $sentenceModel= new Model_Sentence();
         $work['Sentences'] = $sentenceModel->fetchSentences($work_id);
         $content = '';
@@ -204,7 +204,7 @@ class Model_Work extends Model_Taggable
                 $originalIds[$ids['work_id']]=$ids['original_work_id'];
             }       
             Tdxio_Log::info($originalIds,'originalIds');
-            $result=$this->fetchWork($originalIds);
+            $result=$this->fetchWork($originalIds,false);
             $originalWorks=array();
             foreach($result as $key=>$origWork){
                 $originalWorks[$origWork['id']]=$origWork;

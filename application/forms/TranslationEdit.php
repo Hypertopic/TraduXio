@@ -49,7 +49,15 @@ class Form_TranslationEdit extends Form_Abstract
         // title element
         $this->addElement('text', 'title', array(
             //'label'      => __('Translated title'),
-            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'div')),'Label'),
+            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
+            'required'   => true,
+            'tabindex'=>$tabindex++
+        ));
+        
+        // author element
+        $this->addElement('text', 'author', array(
+            'label'      => __('Author'),
+            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
             'required'   => true,
             'tabindex'=>$tabindex++
         ));

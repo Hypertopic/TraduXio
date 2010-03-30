@@ -43,8 +43,7 @@ class Form_TextDeposit extends Form_Abstract
         $title->setOptions(array(
             'label'      => 'Title',
             'required'   => true,
-            'class' => 'title'
-            
+            'class' => 'title'            
         ));
         $title->setAttrib('class',$title->getAttrib('class').' deposit');
         $title->addDecorator(array('Inline'=>'HtmlTag'),array('tag'=>'span','class'=>'inline tag'));
@@ -78,7 +77,7 @@ class Form_TextDeposit extends Form_Abstract
         // language dropdown
         $this->addElement('select', 'language', array(
             'label'      => __('Source language'),
-            'multiOptions'=> array('ita'=>'Italian','eng'=>'English','fra'=>'French'), //$this->_getLanguages(),
+            'multiOptions'=> $this->_getLanguages(),
             'required'   => true
         ));
 
@@ -89,6 +88,8 @@ class Form_TextDeposit extends Form_Abstract
         
     }
 
+
+ 
 
 }
 

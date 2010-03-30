@@ -65,7 +65,8 @@ class Model_Translation extends Model_Taggable
                 Tdxio_Log::info('block doesn\'t exist, create');
                 $table->insert($block);
             }
-        }       
+        }     
+        $this->updateWorkInfo(array('title'=>$data['title'],'author'=>$data['author']),$translationId);
     }   
 
     
@@ -79,7 +80,7 @@ class Model_Translation extends Model_Taggable
         $sentenceModel= new Model_Sentence();
         $work['OriginalSentences'] = $sentenceModel->fetchSentences($original_work_id);
         $work['OriginalWorkId'] = $original_work_id;
-        $work['OriginalWork'] = $workModel->fetchOriginalWork($original_work_id);
+        $work['OriginalWork'] = $workModel->fetchOriginalWork($original_work_id,false);
         
         $numberedSentences = array();
         foreach($work['OriginalSentences'] as $key => $sentence){
@@ -145,7 +146,7 @@ class Model_Translation extends Model_Taggable
             $ids = array_keys($translations);
             
             $modelWork = new Model_Work();
-            $works = $modelWork->fetchWork($ids);
+            $works = $modelWork->fetchWork($ids,true);
             foreach($works as $key=>$work){
                 $translations[$work['id']]['work']=$work;           
             }
@@ -298,6 +299,12 @@ class Model_Translation extends Model_Taggable
         $stmt=$table->getAdapter()->query($sql,array($query));
         $result=$stmt->fetchColumn(0);
         return $result;
+    }
+
+    public function updateWorkInfo($data,$id){
+        $workTable = new Model_DbTable_Work();
+        $where = $workTable->getAdapter()->quoteInto('id = ?',$id);
+        $workTable->update($data,$where);
     }
 
 

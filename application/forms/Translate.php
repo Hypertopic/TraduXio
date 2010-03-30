@@ -47,7 +47,7 @@ class Form_Translate extends Form_Abstract
         // language dropdown
         $this->addElement('select', 'language', array(
             //'label'      => __('Source language'),
-            'multiOptions'=> array('ita'=>'Italian','eng'=>'English','fra'=>'French'),
+            'multiOptions'=> $this->_getLanguages(),
             'required'   => true
         ));
 
@@ -57,16 +57,6 @@ class Form_Translate extends Form_Abstract
         ));
     }
 
-    protected function _getLanguages()
-    {
-        static $languageOptions=null;
-        if (null === $languagesOptions) {
-            require_once APPLICATION_PATH . '/models/LanguageModel.php';
-            $langModel = new LanguageModel();
-            $languageOptions=$langModel->fetchOptions();
-        }
-        return $languageOptions;
-    }
 
     public function blockList() {
         return array_keys($this->_block_list);

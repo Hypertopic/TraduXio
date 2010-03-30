@@ -51,15 +51,15 @@
     <td></td>
 </tr>
 <tr class="hundred">
-<td class="orig-column hundred" id="Lborder"> 
+<td class="orig-column hundred Lborder"> 
 <!--  
 <div id="original-text-page">-->
  
-        <div id = "Tborder">
-            <div id = "TLcorner"></div><div id = "TRcorner"></div>
+        <div class = "Tborder">
+            <div class = "TLcorner"></div><div class = "TRcorner"></div>
         </div>
-        <div id="Lborder" class="hundred"><div id="Rborder" class="hundred">
-            <div id = "work-container" class="hundred">
+        <div class="Lborder hundred"><div class="Rborder hundred">
+            <div class = "work-container hundred">
                 <div class="title"><?php echo __('Original Text').': ' ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
                 <div class="language">
                 <?php $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');}?>
@@ -71,21 +71,23 @@
                 <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div>
             </div>        
         </div></div>
-        <div id = "Bborder">
-            <div id = "BLcorner"></div><div id = "BRcorner"></div>
+        <div class = "Bborder">
+            <div class = "BLcorner"></div><div class = "BRcorner"></div>
         </div>
 <!--</div>-->
 </td>
 
 <td class="transl-column hundred">
 
-        <div id = "Tborder">
-            <div id = "TLcorner"></div><div id = "TRcorner"></div>
+        <div class = "Tborder">
+            <div class = "TLcorner"></div><div class = "TRcorner"></div>
         </div>
         <!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
-        <div id="Lborder" class="hundred"><div id="Rborder" class="hundred">
-            <div id = "work-container" class="hundred">
-                <div class="title"><?php echo __('Translation').': '?><?php echo $this->translation['title']; ?></div>
+        <div class="Lborder hundred"><div class="Rborder hundred">
+            <div class = "work-container hundred">
+                <div class="title"><?php echo __('Translation').': '?>
+                <?php $title = $this->escape($this->translation['title']);if($title==''){echo '<i>'.__('No Title').'</i>';} else{echo __($title);} ?>
+                </div>
                 <div class="language">
                 <?php $author = $this->translation['author']; if($author==''){$author=__('Anonymous');}?>
                 <?php echo $author.' - '.__($this->translation['language']); ?></div>
@@ -96,8 +98,8 @@
                 <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['creator']); ?> </div>
             </div>
         </div></div>
-        <div id = "Bborder">
-            <div id = "BLcorner"></div><div id = "BRcorner"></div>
+        <div class = "Bborder">
+            <div class = "BLcorner"></div><div class = "BRcorner"></div>
         </div>
 
 </td>

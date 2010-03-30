@@ -31,76 +31,155 @@ tdxio.translation.destLang = '<?php echo $this->translation['language']; ?>';
 if ($.browser.msie) document.write("you may experience display problems with ie, if so use Firefox");
 <?php $this->inlineScript()->captureEnd(); ?>
 <?php echo $this->inlineScript(); ?>
-<div class="central-home">
-<table class="full-width">
-<tr><!--<td class="leftmargin"></td>-->
-<td>
-<span class="buttons">
-<?php echo $this->form->buttons; ?>
-</span>
-<?php if(!empty($this->translation['Tags'])): ?>
-<div id="remove-tags">
-<?php foreach($this->translation['Tags'] as $key=>$tag): ?>
-    <div class="tag-item" ?> <?php echo $tag['comment']." "?> 
-    <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$tag['comment']))?>"> X </a></div>
-<?php endforeach; ?>
-</div>
-<?php endif; ?>
 
-<table class="right-column"><tr>
-    <td class="view<?php echo $origDir; ?>">
-        <div class="title"><?php echo __('Original text').': ' ?><?php echo $this->escape($this->translation['OriginalWork']['title']); ?></div>
-        <div class="language"><?php echo __($this->translation['OriginalWork']['language']) ?></div>
-    </td>
-    <td class="edit<?php echo $transDir; ?>">
-        <div class="title"><?php echo __('This translation').': ' ?><?php echo $elements['title']->render() ?></div>
-        <div class="language"><?php echo __($this->translation['language']) ?></div>
-    </td>
-</tr>
-<?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
-<tr>
-    <td class="textorig view<?php echo $origDir; ?>">
-        <?php $div_id="text".$this->translation['OriginalWork']['id']."-block-".$block['from_segment']."-".$block['to_segment']; ?>
-        <div class="block" id="<?php echo $div_id; ?>">
-        <?php
-            Tdxio_Log::info($block);
 
-            $first=true;
-            foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
-                <?php $segment = $segment['content']; ?>
-                <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
-                <?php if ($segnum<max(array_keys($block['OriginalSentences']))) {
-                        $segment=$this->addCutSign($segment,$segnum);
-                } else {
-                    if ($blocknum<max(array_keys($this->translation['TranslationBlocks']))) {
-                        $segment=$this->addMergeSign($segment,$segnum);
-                    } else {
-                        $segment=$this->prepareSegment($segment);
-                    }
-                }?>
-                <a name="segment-<?php echo $segnum; ?>"></a>
-                <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $segment; ?></span>
+<div id="LRcontainer">
+
+<table class="right-container" id="openbook">
+<tr class="button-line"><td></td><td>
+    <div class="buttons">
+        <?php echo $this->form->buttons; ?>
+    </div>
+</td></tr>
+<tr class="tag-line">
+    <td class="orig-column">   
+    <div class="show-tag-area">
+        <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
+        <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
+        <?php foreach($names as $name=>$tag): ?>
+        <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></span>
         <?php endforeach; ?>
-        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
     </td>
-    <td class="new_translation edit<?php echo $transDir; ?>"><div class="form"><?php echo $elements['block'.$blocknum]->render(); ?></div></td>
+    <td class="transl-column">
+    <div class="show-tag-area">
+        <?php if(!empty($this->translation['Tags'])): ?>
+        <?php foreach($this->translation['Tags'] as $key=>$tag): ?>  
+            <span class="tag-item" title="<?php echo __(strtolower($tag['genre_name'])); ?>"><?php echo $tag['comment']; ?>
+            <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$tag['comment'],'genre'=>$tag['genre']))?>"> X </a>
+            </span>
+        <?php endforeach; ?> 
+        <?php endif; ?>
+    </div>
+    </td>
+    <td></td>
 </tr>
-<?php endforeach; ?>
-
-<tr>
-<td><div class="language"><?php //echo $this->escape($this->translation['OriginalWork']['language']['ref_name']);?></div></td>
-<td><div class="language"><?php //echo $this->escape($this->translation['language']['ref_name']); ?></div></td>
-</tr>
-</table>
-<span class="buttons">
-<?php echo $this->form->buttons; ?>
-</span>
+<tr class="hundred">
+<td class="orig-column hundred" id="Lborder">  
+    <div class = "Tborder">
+        <div class = "TLcorner"></div><div class = "TRcorner"></div>
+    </div>
+    <div class="Lborder hundred">
+    <div class="Rborder hundred">
+        <div class = "work-container hundred">
+            <div class="title spaced"><?php echo __('Original text').': ' ?><?php echo $this->escape($this->translation['OriginalWork']['title']); ?></div>
+            <div class="language spaced">
+                <?php $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');}?>
+                <?php echo $author.' - '.__($this->translation['OriginalWork']['language']); ?>
+            </div>
+        </div>        
+    </div>    
+    </div>
 </td>
 
-<!--<td class="rightmargin"></td></tr>-->
-</table>
+<td class="transl-column hundred">
 
-</form>
+        <div class = "Tborder">
+            <div class = "TLcorner"></div><div class = "TRcorner"></div>
+        </div>
+        <div class="Lborder hundred">
+        <div class="Rborder hundred">
+            <div class = "work-container hundred">
+                <div class="title spaced"><?php echo __('This translation').': ' ?><?php echo $elements['title']->render() ?><span class="language"><?php echo $elements['author']->render() ?></span></div>
+                <div class="language spaced"><?php echo __($this->translation['language']) ?></div>
+                
+            </div>
+        </div>
+        </div>
+</td>
+</tr>
+
+<?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
+
+<tr class="hundred">
+    <td class="orig-column hundred Lborder">
+        <div class="Lborder hundred">
+        <div class="Rborder hundred">
+        <div class = "work-container upperblock hundred">        
+        <div class="block" id="<?php echo $div_id; ?>">
+        <?php
+        Tdxio_Log::info($block);
+
+        $first=true;
+        foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
+            <?php $segment = $segment['content']; ?>
+            <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
+            <?php if ($segnum<max(array_keys($block['OriginalSentences']))) {
+                    $segment=$this->addCutSign($segment,$segnum);
+            } else {
+                if ($blocknum<max(array_keys($this->translation['TranslationBlocks']))) {
+                    $segment=$this->addMergeSign($segment,$segnum);
+                } else {
+                    $segment=$this->prepareSegment($segment);
+                }
+            }?>
+            <a name="segment-<?php echo $segnum; ?>"></a>
+            <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $segment; ?></span>
+        <?php endforeach; ?>
+        </div>
+        </div>
+        </div>
+        </div>
+    </td>
+    
+    <td class="transl-column hundred edit<?php echo $transDir; ?>">
+        <div class="Lborder hundred">
+        <div class="Rborder hundred">
+        <div class = "work-container hundred">        
+    
+        <div class="form"><?php echo $elements['block'.$blocknum]->render(); ?></div>
+    
+        </div>
+        </div>
+        </div>
+    </td>
+</tr>
+<?php endforeach; ?>
+
+<tr class="hundred">
+    <td class="orig-column hundred Lborder">
+     <div class="Lborder hundred">
+        <div class="Rborder hundred">
+        <div class = "work-container hundred">    </div>
+        </div></div>
+        <div class = "Bborder">
+        <div class = "BLcorner"></div><div class = "BRcorner"></div>
+        </div>
+    </td>
+    <td class="transl-column hundred">
+    <div class="Lborder hundred">
+        <div class="Rborder hundred">
+         <div class = "work-container hundred">    </div>
+        </div></div>
+        <div class = "Bborder">
+        <div class = "BLcorner"></div><div class = "BRcorner"></div>
+        </div>
+    </td>
+</tr>
+<tr><td colspan="2" class="bottom-spacer"></td></tr>
+
+<tr class = "button-line"><td></td><td>
+<div class="buttons">
+<?php echo $this->form->buttons; ?>
+</div>
+</td></tr>
+
+
+
+
+</table>
 <form id="concord-query" action="<?php echo $this->makeUrl('/translation/concord'); ?>" method="post" target="concord" onsubmit="getConcord()">
 <input type="hidden" name="query" id="query-value" />
 <input type="hidden" name="srclang" value="<?php echo $this->translation['OriginalWork']['language']?>"/>
@@ -108,6 +187,5 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 <input type="hidden" name="style" value="pop"/>
 </form>
 </div>
-<?php //<div id="tdxio-text-div"/> ?>
+<?php $this->page_title=__("Edit Translation").': '.$this->escape($this->translation['title']); ?>
 
-<?php  $this->page_title=__("Edit Translation").': '.$this->escape($this->translation['title']); ?>

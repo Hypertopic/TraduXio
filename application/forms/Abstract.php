@@ -21,23 +21,17 @@
 
 class Form_Abstract extends Zend_Form
 {
-    protected $_logger=null;
-    public function log($message='',$title=null,$priority=1) {
-        if (!$this->_logger) {
-            global $logger;
-            $this->_logger=$logger;
-        }
-        if (is_null($message)) {
-            $message="{NULL}";
-        } elseif (is_bool($message)) {
-            $message="{".($message ? 'TRUE':'FALSE')."}";
-        } elseif (is_array($message) || is_object($message)) {
-            $message=print_r($message,true);
-        }
-        if (null !== $title) $message="[$title] : ".$message;
-        $message=
-        $this->_logger->log($message,$priority);
-    }
+    
+    protected function _getLanguages()
+    {
+        static $languageOptions=null;
 
+        if (null === $languagesOptions) {
+            $langModel = new Model_Language();
+            $languageOptions=$langModel->fetchOptions();
+        }
+     //   Tdxio_Log::info($languageOptions,'lang codes');
+        return $languageOptions;
+    }
 }
 

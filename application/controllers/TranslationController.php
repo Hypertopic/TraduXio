@@ -26,6 +26,7 @@ class TranslationController extends Tdxio_Controller_Abstract
 
         // In the translation-edit page every user can see/remove only his tags
         $username=Tdxio_Auth::getUserName();
+        Tdxio_Log::alert($work['Tags'],"tags da visualizzare in edit");
         if(!empty($work['Tags'])){
         foreach($work['Tags'] as $key=> $tag){
             if(!($tag['user']== $username)){
@@ -49,7 +50,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                             unset($data['block'.$id]);
                         }
                     }
-                    $model->update($data,$translationId);
+                    $model->update($data,$translationId);                    
                 }
             }
             if (isset($post['submitquit']) || isset($post['cancel'])) {

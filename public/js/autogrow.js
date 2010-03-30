@@ -13,9 +13,10 @@
                     var h1b=$("#autogrow_shadow").height();
                     h1=Math.max(h1,h1b);
                 }
-                var block=$(".block",$(this).parent().parent().prev());
+                var block=$(".block",$(this).parents().filter('tr'));
                 var h2=block.height();
                 var h=Math.max(h1,h2);
+                if (h==h2) h-=3;
                 $(this).css('height',h+'px');
                 if (!force) tdxio.autoGrow.block();
             }

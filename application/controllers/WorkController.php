@@ -39,7 +39,7 @@ class WorkController extends Tdxio_Controller_Abstract
         
         $sort=array();
         $langs=array();
-        $authors=array(-1=>array('name'=>'No Author'));
+        $authors=array(-1=>__('Anonymous'));
         if(!is_null($entries)){
             foreach ($entries as $entry) {
                 if (isset($entry['language'])) {
@@ -149,7 +149,6 @@ class WorkController extends Tdxio_Controller_Abstract
         if(!is_null($user)){
             $work = $this->_getModel();
             $myTranslations = $work->fetchMyTranslationWorks($user);
-                                
             $srcLangs=array();
             foreach($myTranslations as $trWork){
                 $srcLangs[$trWork['srcLang']][$trWork['language']][]=$trWork;
