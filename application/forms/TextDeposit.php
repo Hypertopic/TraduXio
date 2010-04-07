@@ -41,7 +41,7 @@ class Form_TextDeposit extends Form_Abstract
         //var_dump($title);
         
         $title->setOptions(array(
-            'label'      => 'Title',
+            'label'      => __('Title'),
             'required'   => true,
             'class' => 'title'            
         ));
@@ -51,7 +51,7 @@ class Form_TextDeposit extends Form_Abstract
         $author=$this->createElement('text','author');
                 
         $author->setOptions(array(
-            'label'      => 'Author',
+            'label'      => __('Author'),
             'required'   => true,
             'class' => 'author'
             

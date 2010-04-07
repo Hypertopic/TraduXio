@@ -134,6 +134,8 @@ class Model_Work extends Model_Taggable
         $translationModel = new Model_Translation();
         $work['Interpretations'] = $translationModel->fetchSentencesInterpretations($work_id);  
         $tags = ($this->getTags($work_id));
+        $work['Genres']=$tags['Genres'];
+        unset($tags['Genres']);
         Tdxio_Log::info($tags,"WCtags before normalization");
         if(!empty($tags)){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
@@ -147,16 +149,16 @@ class Model_Work extends Model_Taggable
         $select1 = $this->getSelectCondOriginalWork('sentence');
         $select2 = $this->getSelectCondAllowedWork('read'); 
         if(is_null($idList)){           
-            $select = $table->select()->from($table, array('id','title','author','language'))->where('id IN (?)',$select1)->where('id IN (?)',$select2);
+            $select = $table->select()->from($table, array('id','title','author','language','created','modified'))->where('id IN (?)',$select1)->where('id IN (?)',$select2);
         }else {//select only some specific original works
-            $select = $table->select()->from($table, array('id','title','author','language'))->where('id IN (?)',$select1)->where('id IN (?)',$select2)->where('id IN (?)',$idList);
+            $select = $table->select()->from($table, array('id','title','author','language','created','modified'))->where('id IN (?)',$select1)->where('id IN (?)',$select2)->where('id IN (?)',$idList);
         }
         Tdxio_Log::info('stringa sql'.$select->__toString());
-        return $table->fetchAll($select);
+        return $table->fetchAll($select)->toArray();
         
     }
     
-    public function getSelectCondOriginalWork($table_name){
+    public function getSelectCondOriginalWork($table_name='sentence'){
         $table = $this->_getTable();
         $db = $table->getAdapter();
         $select = $db->select()->distinct()->from($table_name,'work_id');
@@ -339,5 +341,22 @@ class Model_Work extends Model_Taggable
         Tdxio_Log::info($id);
     }
     
+    public function getNewModTransl(){
+    
+        $newModTransl = array();
+        $table = $this->_getTable();
+        
+        $selectInt = $this->getSelectCondOriginalWork('interpretation');
+        $selectAllowed = $this->getSelectCondAllowedWork('read');
+        $sqlcond = "created > current_date - integer '30'  OR modified > current_date - integer '30' ";
+        $selectNewModInt = $table->select()->where('id IN (?)',$selectInt)->where('id IN (?)',$selectAllowed)->where($sqlcond);
+        Tdxio_Log::info($selectNewModInt->__toString(),'sql_request');
+        $results = $table->fetchAll($selectNewModInt)->toArray();
+        
+        Tdxio_Log::info($results,'newmodints');
+        
+        return($results);
+    
+    }
 
 }

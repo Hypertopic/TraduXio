@@ -36,6 +36,24 @@ body
 .highlight {
     font-weight:bold;
 }
+td.logo{
+    width:300px;
+}
+td.news{
+    width:25%;
+    border:solid 1px #CCCCCC;
+    background-color:#F5F5F5
+}
+span.genre{
+    font-weight:bold;
+    font-variant:small-caps;
+    font-style:italic;
+}
+div.tag-group{
+    margin-left:20px;
+    margin-top:5px;
+}
+
 div.title{
     padding:3px;
     font-size:120%;
@@ -418,6 +436,17 @@ list-style-image:none;
 list-style-position:outside;
 list-style-type:none;
 }
+div.news-title{
+    font-size:1.2em;
+    text-transform:uppercase;
+    text-align:center;
+    margin:10px 0px;
+}
+div.news-paragraph{
+    margin-left:10px;
+    margin-bottom:10px;
+    list-style-image:url(../images/list-square.png);
+}
 
 .nutshell {
     border:2px dashed;
@@ -459,6 +488,8 @@ td.right-column{
 .top-align{
     vertical-align:top;
 }
+table.home{width:100%}
+
 table.right-column{
     width:100%;
 }

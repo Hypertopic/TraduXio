@@ -46,9 +46,12 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
     <div class="show-tag-area">
         <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
         <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
+        <div class="tag-group">
+        <span class="genre"><?php echo __($this->translation['Genres'][$genre]); ?></span>
         <?php foreach($names as $name=>$tag): ?>
         <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></span>
         <?php endforeach; ?>
+        </div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>
@@ -56,10 +59,15 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
     <td class="transl-column">
     <div class="show-tag-area">
         <?php if(!empty($this->translation['Tags'])): ?>
-        <?php foreach($this->translation['Tags'] as $key=>$tag): ?>  
+        <?php foreach($this->translation['Tags'] as $genre_name=>$tag_group): ?>  
+        <div class="tag-group">
+        <span class="genre"><?php echo __($genre_name); ?></span>
+        <?php foreach($tag_group as $key=>$tag): ?>  
             <span class="tag-item" title="<?php echo __(strtolower($tag['genre_name'])); ?>"><?php echo $tag['comment']; ?>
             <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$tag['comment'],'genre'=>$tag['genre']))?>"> X </a>
             </span>
+        <?php endforeach; ?> 
+        </div>
         <?php endforeach; ?> 
         <?php endif; ?>
     </div>

@@ -43,6 +43,8 @@
  <div class="show-tag-area">
         <?php if(!empty($this->work['Tags'])): ?>
         <?php foreach($this->work['Tags'] as $genre=>$names): ?>
+        <div class="tag-group">
+        <span class="genre"><?php echo __($this->work['Genres'][$genre]); ?></span>
         <?php foreach($names as $name=>$tag): ?>
         <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>"> <!--style="font-size:<?php //echo 8+round($tag['multiplicity']*7) ?>px"--> <?php echo $name; ?>
         <?php $canRemove = false;?>
@@ -52,6 +54,7 @@
         <?php endif; ?>
         </span>
         <?php endforeach; ?>
+        </div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>

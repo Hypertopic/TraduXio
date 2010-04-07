@@ -13,6 +13,7 @@ class WorkController extends Tdxio_Controller_Abstract
 {
     protected $_modelname='Work'; 
     public $_privilegeList=array('Read Text','Edit Text','Create Translation','Manage');
+    public $MONTHSEC = 1296000;
     
     public function init()
     {
@@ -36,44 +37,39 @@ class WorkController extends Tdxio_Controller_Abstract
         $work = $this->_getModel();
         $entries = $work->fetchAllOriginalWorks();
         //Tdxio_Log::info($entries);
-        
+                
+        $newModWorks = array();
         $sort=array();
-        $langs=array();
-        $authors=array(-1=>__('Anonymous'));
+
         if(!is_null($entries)){
             foreach ($entries as $entry) {
+                
+                if(!is_null($NMentry=$this->newModified($entry))){$newModWorks[$NMentry['NM']][]=$NMentry;}
+                
                 if (isset($entry['language'])) {
-                    $lang=$entry['language'];
+                    $lang=__($entry['language']);
                     if (!isset($sort[$lang])) {
                         $sort[$lang]=array();
                     }
-                    if (!isset($langs[$lang])) {
-                        $langs[$lang]=$entry['language'];
-
-                    }
                     if (!isset($entry['author']) || $entry['author']==='' ) {
-                        $entry['author']=-1;
+                        $entry['author']=__('Anonymous');
                     }
-                        $author=$entry['author'];
-                        if (!isset($sort[$lang][$author])) {
-                            $sort[$lang][$author]=array();
-                        }
-                        if (!isset($authors[$author])) {
-                            $authors[$author]=$entry['author'];
-                            
-                        }
-                        $sort[$lang][$author][]=$entry;
+                    $author=__($entry['author']);
+                    if(!isset($sort[$lang][$author])) {
+                        $sort[$lang][$author]=array();
+                    }
+                    $sort[$lang][$author][]=$entry;
                 }
             }
         }
-        $this->view->entries=$sort;
-        $this->view->langs=$langs;
-        $this->view->authors=$authors;
-        $this->view->home = true;
-        Tdxio_Log::info($langs);
-        Tdxio_Log::info($authors);
-        Tdxio_Log::info($sort);
+        $news = $this->getNews();
+        $news['Works'] = $this->sortByAge($newModWorks);
+        if(!empty($sort)){ksort($sort,SORT_STRING);}     
         
+        $this->view->entries=$sort;        
+        $this->view->home = true;
+        $this->view->news = $news;
+        Tdxio_Log::info($news,'newentries');
     }
         
         
@@ -299,7 +295,70 @@ class WorkController extends Tdxio_Controller_Abstract
     {
         
     } 
+    
+    public function newModified($item){
+        $NMitem=null;
+        if(isset($item['created'])){
+            if(((!isset($item['modified']))or($item['modified']-$item['created']<10))and(time() - strtotime($item['created']) < $this->MONTHSEC))
+            {
+                $NMitem=$item;
+                $NMitem['age']=time() - strtotime($item['created']);
+                $NMitem['NM']='New';
+            }elseif(($item['created'] < $item['modified']) and (time() - strtotime($item['modified']) < $this->MONTHSEC))
+            {
+                $NMitem=$item;
+                $NMitem['age']=time() - strtotime($item['modified']);
+                $NMitem['NM']='Mod';
+            }
+        }           
+        return $NMitem;
+    }
+    
+    public function getNews(){
+        // get visible texts inserted or modified in the last 30 days
+        $model = $this->_getModel();
+        $transl = $model->getNewModTransl();
+        $newModTransl = array();
+        
+        foreach($transl as $key=> $item){
+            if(!is_null($NMitem=$this->newModified($item))){$newModTransl[$NMitem['NM']][]=$NMitem;}
+        }
+        
+        // get tags inserted on own texts in the last 30 days
+        $taggModel = new Model_Taggable();
+        $tags = $taggModel->getNewModTags(Tdxio_Auth::getUserName());   
+        $newModTags = array();
+        
+        foreach($tags as $key=> $item){
+            if(!is_null($NMitem=$this->newModified($item))){$newModTags[$NMitem['NM']][]=$NMitem;}
+        }   
+        
+        $news['Transl'] = $this->sortByAge($newModTransl);
+        $news['Tags'] = $this->sortByAge($newModTags);
+    
+        return $news;
+    }
+    
+    public function sortByAge($list){
+        
+        $newList=array();
+        if(isset($list['New'])){
+            foreach($list['New'] as $key=>$item){
+                $newList['New'][$item['age']][]=$item;
+            }
+        }
+        if(!empty($newList['New'])){ksort($newList['New']);}
 
+        if(isset($list['Mod'])){
+            foreach($list['Mod'] as $key=>$item){
+                $newList['Mod'][$item['age']][]=$item;
+            }
+        }        
+        if(!empty($newList['Mod'])){ksort($newList['Mod']);}
+        
+        Tdxio_Log::info($newList,'sorted list');
+        return($newList);
+    }
     
     public function getRule($request){
         $action = $request->action;

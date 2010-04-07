@@ -24,9 +24,12 @@
     <div class="show-tag-area">
         <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
         <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
+        <div class="tag-group">
+        <span class="genre"><?php echo __($this->translation['Genres'][$genre]); ?></span>
         <?php foreach($names as $name=>$tag): ?>
         <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></span>
         <?php endforeach; ?>
+        </div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>
@@ -35,6 +38,8 @@
     <div class="show-tag-area">
         <?php if(!empty($this->translation['Tags'])): ?>
         <?php foreach($this->translation['Tags'] as $genre=>$names): ?>  
+        <div class="tag-group">
+        <span class="genre"><?php echo __($this->translation['Genres'][$genre]); ?></span>
         <?php foreach($names as $name=>$tag): ?>      
             <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>" style="font-size:<?php echo 8+ round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
             <?php $canRemove = false;?>
@@ -44,6 +49,7 @@
             <?php endif; ?>
             </span>
         <?php endforeach; ?>        
+        </div>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>

@@ -1,7 +1,7 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/close-ul.js')); ?>
 <!--<div class="central-home">-->
 <table class="home">
-<tr><td>
+<tr><td class="logo">
 <div class="logo"><img src="<?php echo $this->makeUrl('/images/traduxio_home_logo.jpg'); ?>">
 <div class="citation"><?php echo __('HOMEPAGE PHRASE') ?><span class="author">Eugenio Coseriu</span></div>
 <div class="site-title"><?php echo __('Translating cultural texts') ?></div>
@@ -13,10 +13,10 @@
 <ul>
 <?php
 foreach ($this->entries as $lang=>$authors) { ?>
-          <li class='language'><?php echo __($this->langs[$lang]);?>
+          <li class='language'><?php echo $lang;?>
           <ul class='authors'>
 <?php     foreach ($authors as $author=>$texts) { ?>
-              <li class='author closed'><?php if($author==''){echo __('Anonymous');} else{ echo __($this->authors[$author]);}?>
+              <li class='author closed'><?php echo $author; ?>
               <ul class='texts'>
 <?php         foreach ($texts as $text) { ?>
                  <li class='text'><a href="<?php echo $this->url(
@@ -37,6 +37,25 @@ foreach ($this->entries as $lang=>$authors) { ?>
                          <?php echo $this->escape($entry->title) ?></a></dt>
   <?php endforeach ?>
 </dl>
+</td>
+
+<td class="news hundred">
+    <div class="news-paragraph"><div class="news-title"><?php echo __('Latest News');?></div>
+    <?php foreach($this->news as $newsType=>$list): ?>
+        <?php foreach($list as $NMtype=> $items): ?>
+            <?php if(!empty($items)): ?>
+                <div class="news-title"><?php echo __($NMtype).' '.__($newsType);?></div>
+                <ul>
+                <?php foreach($items as $age=>$objects): ?>
+                    <?php foreach($objects as $object): ?>
+                        <li><?php if(isset($object['title'])){echo $object['title'];}else{echo $object['comment'];} ?></li>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+                </ul>
+            <?php endif;?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+    </div>
 </td>
 </tr>
 </table>

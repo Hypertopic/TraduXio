@@ -94,6 +94,8 @@ class Model_Translation extends Model_Taggable
             }
         }
         $tags = $this->getTags($work_id);
+        $work['Genres'] = $tags['Genres'];
+        unset($tags['Genres']);
         $work['Tags'] = $tags[$work_id];
         Tdxio_Log::info($work['Tags'],"TCtags before normalization");
         if(!empty($tags) && $computeMultiplicity==true){

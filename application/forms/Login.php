@@ -9,7 +9,7 @@ class Form_Login extends Zend_Form
             'validators' => array(
             ),
             'required'   => true,
-            'label'      => 'Your username:',
+            'label'      => __('Your username').':',
         ));
 
         $password = $this->addElement('password', 'password', array(
@@ -17,7 +17,7 @@ class Form_Login extends Zend_Form
             'validators' => array(
             ),
             'required'   => true,
-            'label'      => 'Password:',
+            'label'      => __('Password').':',
         ));
 
         $password = $this->addElement('hidden', 'redirect', array(
@@ -29,7 +29,7 @@ class Form_Login extends Zend_Form
          $login = $this->addElement('submit', 'login', array(
             'required' => false,
             'ignore'   => true,
-            'label'    => 'Login',
+            'label'    => __('Login'),
         ));
 
         // We want to display a 'failed authentication' message if necessary;

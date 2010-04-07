@@ -32,11 +32,9 @@ function __($text)
     $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en');        
     $actual = $translate->getLocale();
     Tdxio_Log::info($actual,'default_locale');
-    $translate->setLocale("it_IT");
-    $actual = $translate->getLocale();
-    Tdxio_Log::info($actual,'locale');
     $translate->addTranslation(APPLICATION_PATH.'/../languages/it_IT.mo','it');
-   // $translate->addTranslation(APPLICATION_PATH.'/../languages/it.mo','it');
+    $translate->addTranslation(APPLICATION_PATH.'/../languages/fr_FR.mo','fr');
+    $translate->setLocale("fr_FR");
     }
     $trText = $translate->_($text);
     if (is_null($trText)) {

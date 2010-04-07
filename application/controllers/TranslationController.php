@@ -28,12 +28,14 @@ class TranslationController extends Tdxio_Controller_Abstract
         $username=Tdxio_Auth::getUserName();
         Tdxio_Log::alert($work['Tags'],"tags da visualizzare in edit");
         if(!empty($work['Tags'])){
-        foreach($work['Tags'] as $key=> $tag){
-            if(!($tag['user']== $username)){
-                unset($work['Tags'][$key]);
+            $tags=array();
+            foreach($work['Tags'] as $key=> $tag){
+                if(!($tag['user']== $username)){
+                    unset($work['Tags'][$key]);
+                }else{$tags[$tag['genre_name']][]=$tag;}
             }
         }
-        }
+        $work['Tags']=$tags;
                    
         if ($request->isPost()) {
             $post=$request->getPost();
@@ -235,7 +237,9 @@ class TranslationController extends Tdxio_Controller_Abstract
                     foreach (array('src','dest')  as $type) {
                         Tdxio_Log::info($ids[$type],"ids $type");
                         $works=$workModel->fetchAllOriginalWorks($ids[$type]);
-                        $this->view->metadata[$type]=array_merge($this->_getMetadatasFromTags($taggableModel->getTags($ids[$type])),$fixedMetadatas[$type]);
+                        $tags = $taggableModel->getTags($ids[$type]);
+                        if(isset($tags['Genres'])){unset($tags['Genres']);}//temporaneo in attesa di decidere se lasciare tag id o no
+                        $this->view->metadata[$type]=array_merge($this->_getMetadatasFromTags($tags),$fixedMetadatas[$type]);
                         Tdxio_Log::info($this->view->metadata[$type],"criterii $type");
                     }
                 }

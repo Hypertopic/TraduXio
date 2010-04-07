@@ -34,6 +34,7 @@ class Model_Taggable extends Model_Abstract
             $tag['genre_name']=$genres[$tag['genre']];
             $result[$tag['taggable']][]=$tag;
         }
+        $result['Genres']=$genres;
         Tdxio_Log::info($result,"fetched tags");
         return $result;
     }
@@ -124,5 +125,21 @@ class Model_Taggable extends Model_Abstract
         }
       return $ntags;
       */
+    }
+    
+    
+    public function getNewModTags($user=null){
+        $tagTable = new Model_DbTable_Tag();
+        $sqlcond = "created > current_date - integer '30'  OR modified > current_date - integer '30' ";
+        if(!is_null($user)){
+            $selectMine = $tagTable->getAdapter()->select()->from('work','id')->where('creator = ?',$user);
+            $select = $tagTable->select()->where($sqlcond)->where('taggable IN (?)',$selectMine);
+        }else{
+            $select = $tagTable->select()->where($sqlcond);
+        }
+        Tdxio_Log::info($select->__toString(),'new_tag_request_string');
+        $results = $tagTable->fetchAll($select)->toArray();
+        Tdxio_Log::info($results,'new tags');
+        return $results;
     }
 }
