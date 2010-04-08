@@ -13,7 +13,7 @@ class WorkController extends Tdxio_Controller_Abstract
 {
     protected $_modelname='Work'; 
     public $_privilegeList=array('Read Text','Edit Text','Create Translation','Manage');
-    public $MONTHSEC = 1296000;
+    public $MONTHSEC = 1296000; //15 giorni
     
     public function init()
     {
@@ -44,7 +44,7 @@ class WorkController extends Tdxio_Controller_Abstract
         if(!is_null($entries)){
             foreach ($entries as $entry) {
                 
-                if(!is_null($NMentry=$this->newModified($entry))){$newModWorks[$NMentry['NM']][]=$NMentry;}
+                if(!is_null($NMentry=$this->newModified($entry,'orig'))){$newModWorks[]=$NMentry;}
                 
                 if (isset($entry['language'])) {
                     $lang=__($entry['language']);
@@ -62,14 +62,14 @@ class WorkController extends Tdxio_Controller_Abstract
                 }
             }
         }
-        $news = $this->getNews();
-        $news['Works'] = $this->sortByAge($newModWorks);
+        
+        $news = $this->sortByAge(array_merge($this->getNews(),$newModWorks));
+        Tdxio_Log::info($news,'newentries');
         if(!empty($sort)){ksort($sort,SORT_STRING);}     
         
         $this->view->entries=$sort;        
         $this->view->home = true;
         $this->view->news = $news;
-        Tdxio_Log::info($news,'newentries');
     }
         
         
@@ -296,9 +296,10 @@ class WorkController extends Tdxio_Controller_Abstract
         
     } 
     
-    public function newModified($item){
+    public function newModified($item,$type){
         $NMitem=null;
         if(isset($item['created'])){
+            $item['type']=$type;
             if(((!isset($item['modified']))or($item['modified']-$item['created']<10))and(time() - strtotime($item['created']) < $this->MONTHSEC))
             {
                 $NMitem=$item;
@@ -309,7 +310,7 @@ class WorkController extends Tdxio_Controller_Abstract
                 $NMitem=$item;
                 $NMitem['age']=time() - strtotime($item['modified']);
                 $NMitem['NM']='Mod';
-            }
+            }            
         }           
         return $NMitem;
     }
@@ -318,46 +319,31 @@ class WorkController extends Tdxio_Controller_Abstract
         // get visible texts inserted or modified in the last 30 days
         $model = $this->_getModel();
         $transl = $model->getNewModTransl();
-        $newModTransl = array();
+        $news = array();
         
         foreach($transl as $key=> $item){
-            if(!is_null($NMitem=$this->newModified($item))){$newModTransl[$NMitem['NM']][]=$NMitem;}
+            if(!is_null($NMitem=$this->newModified($item,'tra'))){$news[]=$NMitem;}
         }
         
         // get tags inserted on own texts in the last 30 days
         $taggModel = new Model_Taggable();
         $tags = $taggModel->getNewModTags(Tdxio_Auth::getUserName());   
-        $newModTags = array();
-        
+               
         foreach($tags as $key=> $item){
-            if(!is_null($NMitem=$this->newModified($item))){$newModTags[$NMitem['NM']][]=$NMitem;}
+            if(!is_null($NMitem=$this->newModified($item,'tag'))){$news[]=$NMitem;}
         }   
-        
-        $news['Transl'] = $this->sortByAge($newModTransl);
-        $news['Tags'] = $this->sortByAge($newModTags);
-    
         return $news;
     }
     
     public function sortByAge($list){
         
-        $newList=array();
-        if(isset($list['New'])){
-            foreach($list['New'] as $key=>$item){
-                $newList['New'][$item['age']][]=$item;
-            }
+        $sortedList=array();
+        foreach($list as $key=>$item){
+            $sortedList[$item['age']][]=$item;    
         }
-        if(!empty($newList['New'])){ksort($newList['New']);}
-
-        if(isset($list['Mod'])){
-            foreach($list['Mod'] as $key=>$item){
-                $newList['Mod'][$item['age']][]=$item;
-            }
-        }        
-        if(!empty($newList['Mod'])){ksort($newList['Mod']);}
         
-        Tdxio_Log::info($newList,'sorted list');
-        return($newList);
+        if(!empty($sortedList)){ksort($sortedList);}
+        return($sortedList);
     }
     
     public function getRule($request){

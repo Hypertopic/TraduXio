@@ -50,7 +50,9 @@ class Form_TranslationEdit extends Form_Abstract
         $this->addElement('text', 'title', array(
             //'label'      => __('Translated title'),
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
-            'required'   => true,
+            'validators' => array(
+            ),
+            'required'   => false,
             'tabindex'=>$tabindex++
         ));
         
@@ -58,7 +60,9 @@ class Form_TranslationEdit extends Form_Abstract
         $this->addElement('text', 'author', array(
             'label'      => __('Author'),
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
-            'required'   => true,
+            'validators' => array(
+            ),
+            'required'   => false,
             'tabindex'=>$tabindex++
         ));
 
@@ -89,6 +93,13 @@ class Form_TranslationEdit extends Form_Abstract
         $this->addDisplayGroup(array('submit','submitquit','cancel'),'buttons');
         $this->buttons->setDecorators(array('FormElements',array('HtmlTag',array('tag'=>'div'))));
        // $this->log($this->metadata->getDecorators(),'decorators');
+       
+               $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form')),
+            array('Description', array('placement' => 'prepend')),
+            'Form'
+        ));
     }
 
     public function blockList() {

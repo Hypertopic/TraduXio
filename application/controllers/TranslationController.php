@@ -38,16 +38,18 @@ class TranslationController extends Tdxio_Controller_Abstract
         $work['Tags']=$tags;
                    
         if ($request->isPost()) {
+            Tdxio_Log::info('REQUEST IS POST');
             $post=$request->getPost();
             if (!isset($post['cancel'])) {
                 if ($form->isValid($post)) {
                     $data=$form->getValues();
+                    Tdxio_Log::info($data,'transedit 1');
                     $data['TranslationBlocks']=array();
                     foreach ($work['TranslationBlocks']as $id=>$block) {
                         if (isset($data['block'.$id])) {
                             $data['TranslationBlocks'][]= array(
                                 'translation' => $data['block'.$id],
-                                'from_segment' => $id
+                                'from_segment' => $block['from_segment']
                                 );
                             unset($data['block'.$id]);
                         }
