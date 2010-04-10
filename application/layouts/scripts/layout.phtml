@@ -62,7 +62,16 @@
          footer for all pages. -->
 
     <div class="footer">
-    <span class="footer-text"><?php echo __('The application').' '; ?><span class="highlight">traduXio</span><?php echo ' '.__('has been developed by the').' '?><span class="highlight">Zanchin</span><?php echo ' '.__('association and the').' ' ?><span class="highlight">Tech-CICO</span><?php echo ' '.__('laboratory, supported by ') ?><span class="highlight">Unesco</span><?php echo ' '.__('and by the').' ' ?><span class="highlight">Institut de la francophonie numérique</span>.</span>
+    <span class="footer-text">
+    <?php $traduxio = '<span class="highlight">traduXio</span>';
+          $zanchin = '<span class="highlight">Zanchin</span>';
+          $techcico = '<span class="highlight">Tech-CICO</span>';
+          $unesco = '<span class="highlight">Unesco</span>';
+          $ifn = '<span class="highlight">Institut de la francophonie numérique</span>';
+          echo __("The application %1\$s has been developed by the %2\$s association and the %3\$s laboratory, supported by %4\$s and by the %5\$s.",$traduxio,$zanchin,$techcico,$unesco,$ifn);
+    ?>
+    
+    </span>
         <a href="http://validator.w3.org/check?uri=referer">
         <img src="http://www.w3.org/Icons/valid-xhtml11-blue"
             alt="Valid XHTML 1.1"/></a>

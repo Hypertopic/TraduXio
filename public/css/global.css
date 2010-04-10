@@ -503,6 +503,12 @@ border-color:#AAA6AD;
 span.translation {
 font-weight:bold;
 }
+
+span.age{
+font-size:0.7em;
+font-style:italic;
+}
+
 div.text {
 background-color:#FFFFFF;
 border: solid 1px #DBDBDB;

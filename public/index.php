@@ -27,20 +27,22 @@ require_once 'Tdxio/Log.php';
 
 function __($text)
 {
+    $args=func_get_args();
 	static $translate=null;
 	if (!$translate) {
-    $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en');        
-    $actual = $translate->getLocale();
-    Tdxio_Log::info($actual,'default_locale');
-    $translate->addTranslation(APPLICATION_PATH.'/../languages/it_IT.mo','it');
-    $translate->addTranslation(APPLICATION_PATH.'/../languages/fr_FR.mo','fr');
-    $translate->setLocale("fr_FR");
+        $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en');        
+        $actual = $translate->getLocale();
+        Tdxio_Log::info($actual,'default_locale');
+        $translate->addTranslation(APPLICATION_PATH.'/../languages/it_IT.mo','it');
+        $translate->addTranslation(APPLICATION_PATH.'/../languages/fr_FR.mo','fr');
+        $translate->setLocale("fr_FR");
     }
     $trText = $translate->_($text);
-    if (is_null($trText)) {
-        // if not found a translation, send back the original text
-        return $text;
-    }else{ return $trText; }
+    if (!is_null($trText)) {
+        array_shift($args);
+        array_unshift($args,$trText);
+    }
+    return call_user_func_array("sprintf",$args);
 }
     
 /** Zend_Application */

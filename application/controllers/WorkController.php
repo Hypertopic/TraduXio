@@ -304,12 +304,12 @@ class WorkController extends Tdxio_Controller_Abstract
             {
                 $NMitem=$item;
                 $NMitem['age']=time() - strtotime($item['created']);
-                $NMitem['NM']='New';
+                $NMitem['NM']='NEW';
             }elseif(($item['created'] < $item['modified']) and (time() - strtotime($item['modified']) < $this->MONTHSEC))
             {
                 $NMitem=$item;
                 $NMitem['age']=time() - strtotime($item['modified']);
-                $NMitem['NM']='Mod';
+                $NMitem['NM']='MOD';
             }            
         }           
         return $NMitem;
@@ -327,7 +327,8 @@ class WorkController extends Tdxio_Controller_Abstract
         
         // get tags inserted on own texts in the last 30 days
         $taggModel = new Model_Taggable();
-        $tags = $taggModel->getNewModTags(Tdxio_Auth::getUserName());   
+        if(is_null($user = Tdxio_Auth::getUserName())) $user = 'guest';
+        $tags = $taggModel->getNewModTags($user);   
                
         foreach($tags as $key=> $item){
             if(!is_null($NMitem=$this->newModified($item,'tag'))){$news[]=$NMitem;}

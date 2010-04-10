@@ -1,5 +1,5 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/close-ul.js')); ?>
-<!--<div class="central-home">-->
+
 <table class="home">
 <tr><td class="logo">
 <div class="logo"><img src="<?php echo $this->makeUrl('/images/traduxio_home_logo.jpg'); ?>">
@@ -41,25 +41,57 @@ foreach ($this->entries as $lang=>$authors) { ?>
 
 <td class="news hundred">
     <div class="news-paragraph"><div class="news-title"><?php echo __('Latest News');?></div>
-    <?php foreach($this->news as $newsType=>$list): ?>
-        <?php foreach($list as $NMtype=> $items): ?>
-            <?php if(!empty($items)): ?>
-                <div class="news-title"><?php echo __($NMtype).' '.__($newsType);?></div>
-                <ul>
-                <?php foreach($items as $age=>$objects): ?>
-                    <?php foreach($objects as $object): ?>
-                        <li><?php if(isset($object['title'])){echo $object['title'];}else{echo $object['comment'];} ?></li>
-                    <?php endforeach; ?>
-                <?php endforeach; ?>
-                </ul>
-            <?php endif;?>
+    <?php foreach($this->news as $ageInSec=>$list): ?>
+        <?php foreach($list as $key=> $item): ?>
+            <ul><li>
+            
+            <?php  if($item['type']=='orig'){
+                        $title = '<a href="'.$this->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';
+                        $user = 'TEMPUSER';
+                        if($item['NM']=='NEW'){
+                            echo __("\"%1\$s\", new text added by %2\$s",$title,$user);
+                        }
+                        elseif($item['NM']=='MOD'){
+                            echo __("\"%1\$s\", text modified by %2\$s",$title,$user);
+                        }
+                    }elseif($item['type']=='tra'){
+                        $title = '<a href="'.$this->makeUrl('/translation/read/id/'.$item['id']).'">'.$item['title'].'</a>';
+                        $origtitle = '<a href="'.$this->makeUrl('/work/read/id/'.$item['orig_id']).'">'.$item['orig_title'].'</a>';
+                        $user = 'TEMPUSER';
+                        if($item['NM']=='NEW'){
+                            echo __("\"%1\$s\", added translation of %2\$s by %3\$s",$title,$origtitle,$user);
+                        }
+                        elseif($item['NM']=='MOD'){
+                            echo __("\"%1\$s\", translation of %2\$s, modified by %3\$s",$title,$origtitle,$user);
+                        }
+                    }elseif($item['type']=='tag'){
+                        $tag = '<a href="'.$this->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['comment'].'</a>';
+                        $taggedText = '<a href="'.$this->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['commment'].'</a>';
+                        $user = 'TEMPUSER';
+                        if($item['NM']=='NEW'){
+                            echo __("\"%1\$s\", added (%2\$s) tag to text %3\$s by %4\$s",$tag,$item['genre'],$taggedText,$user);
+                        }
+                        elseif($item['NM']=='MOD'){
+                            echo __("\"%1\$s\" (%2\$s) tag on text %3\$s modified by %4\$s",$tag,$item['genre'],$taggedText,$user);
+                        }
+                    } 
+            ?>
+        
+            <?php $age=$item['age']; ?>
+            <span class="age">
+            <?php if($age < 60){$age = round($age);$units =__('seconds');}
+            elseif($age < 3600){$age = round($age/60); $units = __('minutes');}
+            elseif($age < 86400){$age = round($age/3600); $units = __('hours');}
+            elseif($age < 2592000){$age = round($age/86400); $units = __('days');}
+            echo __("%1\$s %2\$s ago",$age,$units);
+            ?>
+            </span>    
+            </li></ul>
         <?php endforeach; ?>
     <?php endforeach; ?>
     </div>
 </td>
 </tr>
 </table>
-<!--</div>-->
-
 
 <?php $this->page_title=__('Homepage'); ?>

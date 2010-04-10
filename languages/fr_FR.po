@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 23:41+0100\n"
+"POT-Creation-Date: 2010-04-10 23:52+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -12,7 +12,7 @@ msgstr ""
 
 #: controllers/WorkController.php:55
 msgid "Anonymous"
-msgstr "Anonimo"
+msgstr "Anonime"
 
 #: forms/TranslationEdit.php:61
 #: forms/TextDeposit.php:54
@@ -22,15 +22,15 @@ msgstr "Author"
 #: forms/TranslationEdit.php:84
 #: forms/StdPrivilege.php:60
 msgid "Save"
-msgstr "Salva"
+msgstr "Sauvegarder"
 
 #: forms/TranslationEdit.php:87
 msgid "Save and quit"
-msgstr "Salva ed esci"
+msgstr "Sauvegarder et Quitter"
 
 #: forms/TranslationEdit.php:90
 msgid "Cancel"
-msgstr "Annulla"
+msgstr "Annuler"
 
 #: forms/Tag.php:60
 msgid "TAG"
@@ -38,48 +38,48 @@ msgstr "TAG"
 
 #: forms/AddPrivilege.php:66
 msgid "Add Privilege"
-msgstr "Aggiungi Privilegio"
+msgstr "Ajouter Privilège"
 
 #: forms/Feedback.php:42
 msgid "Your email address"
-msgstr "Il tuo indirizzo email"
+msgstr "Ton adresse email"
 
 #: forms/Feedback.php:50
 msgid "Subject"
-msgstr "Oggetto"
+msgstr "Sujet"
 
 #: forms/Feedback.php:58
 msgid "Your message"
-msgstr "Il tuo messaggio"
+msgstr "Votre message"
 
 #: forms/Feedback.php:75
 msgid "Send"
-msgstr "Invio"
+msgstr "Envoyer"
 
 #: forms/TextExtend.php:41
 msgid "Text to add"
-msgstr "Testo da aggiungere"
+msgstr "Texte à rajouter"
 
 #: forms/TextExtend.php:53
 #: forms/TextDeposit.php:86
 msgid "Deposit"
-msgstr "Inserisci"
+msgstr "Déposer"
 
 #: forms/TextDeposit.php:44
 msgid "Title"
-msgstr "Titolo"
+msgstr "Titre"
 
 #: forms/TextDeposit.php:68
 msgid "Text content"
-msgstr "Contenuto del testo"
+msgstr "Contenu du Texte"
 
 #: forms/TextDeposit.php:79
 msgid "Source language"
-msgstr "Lingua sorgente"
+msgstr "Langue Original"
 
 #: forms/Login.php:12
 msgid "Your username"
-msgstr "Il tuo nome utente"
+msgstr "Votre nom utilisateur"
 
 #: forms/Login.php:20
 msgid "Password"
@@ -87,274 +87,274 @@ msgstr "Password"
 
 #: forms/Login.php:32
 msgid "Login"
-msgstr "Entra"
+msgstr "Acceder"
 
 #: forms/RemovePrivilege.php:77
 msgid "Remove Privilege"
-msgstr "Elimina Privilegio"
+msgstr "Eliminer le Privilège"
 
 #: views/helpers/ProfileLink.php:9
 msgid "Welcome"
-msgstr "Benvenuto"
+msgstr "Bienvenu"
 
 #: views/helpers/ProfileLink.php:9
 msgid "Logout"
-msgstr "Esci"
+msgstr "Sortir"
 
 #: layouts/scripts/layout.phtml:5
 #: layouts/scripts/layout.phtml:31
 msgid "Traduxio Project"
-msgstr "Progetto Traduxio"
+msgstr " Projet Traduxio"
 
 #: layouts/scripts/layout.phtml:35
 msgid "Works"
-msgstr "Opere"
+msgstr "Oeuvres"
 
 #: layouts/scripts/layout.phtml:36
 msgid "Concorder"
-msgstr "Ricerca"
+msgstr "Concordancier"
 
 #: layouts/scripts/layout.phtml:38
 #: views/scripts/work/my.phtml:1
 #: views/scripts/work/my.phtml:20
 msgid "My Translations"
-msgstr "Mie Traduzioni"
+msgstr "Mes Traductions"
 
 #: layouts/scripts/layout.phtml:39
 msgid "New text"
-msgstr "Nuovo Testo"
+msgstr "Nouveau texte"
 
 #: layouts/scripts/layout.phtml:41
 msgid "Help"
-msgstr "Aiuto"
+msgstr "Aide"
 
 #: layouts/scripts/layout.phtml:43
 msgid "About"
-msgstr "Informazioni"
+msgstr "Informations"
 
 #: layouts/scripts/layout.phtml:45
 msgid "Feedback"
-msgstr "Scrivici"
+msgstr "Feedback"
 
 #: layouts/scripts/layout.phtml:71
 #, php-format
-msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by and by the %4$s."
-msgstr "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by and by the %4$s."
+msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
+msgstr "Le logiciel %1$s est développé par l'association %2$s et le laboratoire %3$s avec le soutien de l'%4$s et de l'%5$s."
 
 #: views/scripts/work/manage.phtml:15
 #: views/scripts/work/read.phtml:31
 msgid "Manage Text's Privileges"
-msgstr "Gestione dei Privilegi del Testo"
+msgstr "Gestion des Privilèges du Texte"
 
 #: views/scripts/work/manage.phtml:18
 msgid "Back to the text"
-msgstr "Ritorna al testo"
+msgstr "Retour au texte"
 
 #: views/scripts/work/manage.phtml:22
 msgid "Standard Privileges"
-msgstr "Privilegi Standard"
+msgstr "Privilèges Standard"
 
 #: views/scripts/work/manage.phtml:27
 msgid "Custom Privileges"
-msgstr "Privilegi Personalizzati"
+msgstr "Privilèges Personnalisés"
 
 #: views/scripts/work/manage.phtml:30
 msgid "Select and click on Remove Privilege to delete a permission"
-msgstr "Seleziona e clicca su Rimuovi Privilegio per eliminare un permesso"
+msgstr "Sélectionner et cliquer sur Éliminer le Privilège pour éliminer une permission"
 
 #: views/scripts/work/manage.phtml:31
 msgid "Remove an existing permission"
-msgstr "Rimuovi permessi esistenti"
+msgstr "Éliminer une permission existante"
 
 #: views/scripts/work/manage.phtml:34
 msgid "NO EXISTING PRIVILEGES"
-msgstr "NON ESISTONO PRIVILEGI"
+msgstr "AUCUN PRIVILÈGE N'EXISTE"
 
 #: views/scripts/work/manage.phtml:37
 msgid "Add a new permission"
-msgstr "Aggiungi nuovi permessi"
+msgstr "Ajouter une permission"
 
 #: views/scripts/work/extend.phtml:19
 msgid "Last segment of the text"
-msgstr "Ultimo segmento del testo"
+msgstr "Dernier segment du texte "
 
 #: views/scripts/work/extend.phtml:27
 #: views/scripts/work/read.phtml:28
 msgid "Continue Text Insertion"
-msgstr "Continua Inserimento Testo"
+msgstr "Continuer Insertion"
 
 #: views/scripts/work/my.phtml:3
 msgid "You have not inserted any text's translations"
-msgstr "Non é stata inserita nessuna traduzione del testo"
+msgstr "Vous n'avez pas inséré de traductions"
 
 #: views/scripts/work/my.phtml:11
 #: views/scripts/work/index.phtml:24
 #: views/scripts/work/read.phtml:12
 msgid "No Title"
-msgstr "No Title"
+msgstr "Aucun Titre"
 
 #: views/scripts/work/index.phtml:6
 msgid "HOMEPAGE PHRASE"
-msgstr "Dal punto di vista della comunità, il linguaggio non è soltanto un fatto sociale , [...] è invece [...] il fondamento di ogni associazione umana."
+msgstr "Du point de vue de la communaut&eacute;, le langage n'est pas seulement un fait social , [...] il est par l'alt&eacute;rit&eacute; [...] le fondement de toute association humaine."
 
 #: views/scripts/work/index.phtml:7
 msgid "Translating cultural texts"
-msgstr "Traduzione di Testi Culturali"
+msgstr "Le site des traducteurs de textes littéraires, philosophiques ou historiques"
 
 #: views/scripts/work/index.phtml:43
 msgid "Latest News"
-msgstr "Latest News"
+msgstr "Nouveautés"
 
 #: views/scripts/work/index.phtml:52
 #, php-format
 msgid "\"%1$s\", new text added by %2$s"
-msgstr "\"%1$s\", new text added by %2$s"
+msgstr "\"%1$s\", nouveau texte ajouté par %2$s"
 
 #: views/scripts/work/index.phtml:55
 #, php-format
 msgid "\"%1$s\", text modified by %2$s"
-msgstr "\"%1$s\", text modified by %2$s"
+msgstr "\"%1$s\", texte modifié par %2$s"
 
 #: views/scripts/work/index.phtml:62
 #, php-format
 msgid "\"%1$s\", added translation of %2$s by %3$s"
-msgstr "\"%1$s\", added translation of %2$s by %3$s"
+msgstr "\"%1$s\", rajouté traduction de %2$s par %3$s"
 
 #: views/scripts/work/index.phtml:65
 #, php-format
 msgid "\"%1$s\", translation of %2$s, modified by %3$s"
-msgstr "\"%1$s\", translation of %2$s, modified by %3$s"
+msgstr "\"%1$s\", traduction de %2$s, modifié par %3$s"
 
 #: views/scripts/work/index.phtml:72
 #, php-format
 msgid "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
-msgstr "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
+msgstr "\"%1$s\", rajouté (%2$s) tag au texte %3$s par %4$s"
 
 #: views/scripts/work/index.phtml:75
 #, php-format
 msgid "\"%1$s\" (%2$s) tag on text %3$s modified by %4$s"
-msgstr "\"%1$s\" (%2$s) tag on text %3$s modified by %4$s"
+msgstr "\"%1$s\" (%2$s) tag du texte %3$s modifié par %4$s"
 
 #: views/scripts/work/index.phtml:82
 msgid "seconds"
-msgstr "secondi"
+msgstr "segondes"
 
 #: views/scripts/work/index.phtml:83
 msgid "minutes"
-msgstr "minuti"
+msgstr "minutes"
 
 #: views/scripts/work/index.phtml:84
 msgid "hours"
-msgstr "ore"
+msgstr "heures"
 
 #: views/scripts/work/index.phtml:85
 msgid "days"
-msgstr "days"
+msgstr "jours"
 
 #: views/scripts/work/index.phtml:86
 #, php-format
 msgid "%1$s %2$s ago"
-msgstr "%1$s %2$s ago"
+msgstr "il y a %1$s %2$s"
 
 #: views/scripts/work/index.phtml:97
 msgid "Homepage"
-msgstr "Pagina Principale"
+msgstr "Page Principale"
 
 #: views/scripts/work/translate.phtml:24
 msgid "Create Translation of"
-msgstr "Traduci"
+msgstr "Créer une Traduction de"
 
 #: views/scripts/work/read.phtml:8
 msgid "Translations"
-msgstr "Traduzioni"
+msgstr "Traductions"
 
 #: views/scripts/work/read.phtml:23
 msgid "Options"
-msgstr "Opzioni"
+msgstr "Options"
 
 #: views/scripts/work/read.phtml:25
 msgid "Create a Translation"
-msgstr "Creare una Traduzione"
+msgstr "Créer une Traduction"
 
 #: views/scripts/work/read.phtml:76
 msgid "Text inserted by"
-msgstr "Testo inserito da"
+msgstr "Texte ajouté par"
 
 #: views/scripts/work/read.phtml:85
 msgid "Read Text"
-msgstr "Leggi Testo"
+msgstr "Lecture du Texte"
 
 #: views/scripts/translation/edit.phtml:85
 #: views/scripts/translation/editold.phtml:55
 msgid "Original text"
-msgstr "Testo Originale"
+msgstr "Texte original"
 
 #: views/scripts/translation/edit.phtml:103
 #: views/scripts/translation/editold.phtml:59
 msgid "This translation"
-msgstr "Questa traduzione"
+msgstr "Traduction"
 
 #: views/scripts/translation/edit.phtml:198
 #: views/scripts/translation/editold.phtml:116
 msgid "Edit Translation"
-msgstr "Modifica Traduzione"
+msgstr "Modifier cette Traduction"
 
 #: views/scripts/translation/concord.phtml:20
 msgid "Search"
-msgstr "Ricerca"
+msgstr "Recherche"
 
 #: views/scripts/translation/read.phtml:7
 #: views/scripts/translation/backup/read-condiv.phtml:7
 #: views/scripts/translation/backup/backup-read_with_div.phtml:11
 msgid "Edit this Translation"
-msgstr "Modifica Traduzione"
+msgstr "Modifier cette Traduction"
 
 #: views/scripts/translation/read.phtml:11
 #: views/scripts/translation/backup/read-condiv.phtml:11
 msgid "Manage Text's privileges"
-msgstr "Gestione dei Privilegi del Testo"
+msgstr "Gestion des Privilèges du Texte"
 
 #: views/scripts/translation/read.phtml:69
 #: views/scripts/translation/backup/read-condiv.phtml:38
 msgid "Original Text"
-msgstr "Testo Originale"
+msgstr " Texte Original"
 
 #: views/scripts/translation/read.phtml:94
 #: views/scripts/translation/newedit.phtml:102
 #: views/scripts/translation/backup/read-condiv.phtml:71
 msgid "Translation"
-msgstr "Traduzione"
+msgstr "Traduction"
 
 #: views/scripts/translation/read.phtml:117
 #: views/scripts/translation/backup/read-condiv.phtml:85
 msgid "Read Translation"
-msgstr "Leggi Traduzione"
+msgstr "Lecture Traduction"
 
 #: views/scripts/translation/backup/backup-read_with_div.phtml:14
 msgid "Manage text's privileges"
-msgstr "Gestione dei Privilegi del Testo"
+msgstr "Gestion des Privilèges du Texte"
 
 #: views/scripts/login/index.phtml:2
 msgid "Please Login"
 msgstr "Please Login"
 
 msgid "fas"
-msgstr "Persiano"
+msgstr "Persan"
 
 msgid "heb"
-msgstr "Ebraico"
+msgstr "Hébreu"
 
 msgid "ara"
-msgstr "Arabo"
+msgstr "Arabe"
 
 msgid "aar"
 msgstr "Afar"
 
 msgid "abk"
-msgstr "Abkhazian"
+msgstr "Abkhaze"
 
 msgid "ace"
-msgstr "Achinese"
+msgstr "Aceh"
 
 msgid "ach"
 msgstr "Acoli"
@@ -363,7 +363,7 @@ msgid "ada"
 msgstr "Adangme"
 
 msgid "ady"
-msgstr "Adyghe"
+msgstr "Adyghé"
 
 msgid "afh"
 msgstr "Afrihili"
@@ -372,37 +372,37 @@ msgid "afr"
 msgstr "Afrikaans"
 
 msgid "ain"
-msgstr "Ainu (Giappone)"
+msgstr "Aïnou"
 
 msgid "aka"
 msgstr "Akan"
 
 msgid "akk"
-msgstr "Akkadian"
+msgstr "Akkadien"
 
 msgid "ale"
-msgstr "Aleut"
+msgstr "Aléoute"
 
 msgid "alt"
-msgstr "Altaiche Meridionali"
+msgstr "Altai du Sud"
 
 msgid "amh"
-msgstr "Amarico"
+msgstr "Amharique"
 
 msgid "ang"
-msgstr "Inglese Antico (ca. 450-1100)"
+msgstr "Anglo-Saxon (ca. 450-1100)"
 
 msgid "anp"
 msgstr "Angika"
 
 msgid "arc"
-msgstr "Aramaico (700-300 BCE)"
+msgstr "Araméen d'empire (700-300 BCE)"
 
 msgid "arg"
-msgstr "Aragonese"
+msgstr "Aragonais"
 
 msgid "arn"
-msgstr "Araucaniano"
+msgstr "Mapudungun"
 
 msgid "arp"
 msgstr "Arapaho"
@@ -411,16 +411,16 @@ msgid "arw"
 msgstr "Arawak"
 
 msgid "asm"
-msgstr "Assamese"
+msgstr "Assamais"
 
 msgid "ast"
-msgstr "Asturiano (Bable)"
+msgstr "Asturien"
 
 msgid "ava"
-msgstr "Avarico"
+msgstr "Avar"
 
 msgid "ave"
-msgstr "Avestano"
+msgstr "Avestique"
 
 msgid "awa"
 msgstr "Awadhi"
@@ -429,7 +429,7 @@ msgid "aym"
 msgstr "Aymara"
 
 msgid "aze"
-msgstr "Azero"
+msgstr "Azerbaijani"
 
 msgid "bak"
 msgstr "Bashkir"
@@ -444,13 +444,13 @@ msgid "ban"
 msgstr "Balinese"
 
 msgid "bas"
-msgstr "Basa (Camerun)"
+msgstr "Basa (Cameroon)"
 
 msgid "bej"
 msgstr "Beja"
 
 msgid "bel"
-msgstr "Bielorusso"
+msgstr "Belarusian"
 
 msgid "bem"
 msgstr "Bemba (Zambia)"
@@ -474,25 +474,25 @@ msgid "bla"
 msgstr "Siksika"
 
 msgid "bod"
-msgstr "Tibetano"
+msgstr "Tibetan"
 
 msgid "bos"
-msgstr "Bosniaco"
+msgstr "Bosniaque"
 
 msgid "bra"
 msgstr "Braj"
 
 msgid "bre"
-msgstr "Bretone"
+msgstr "Breton"
 
 msgid "bua"
-msgstr "Buriat"
+msgstr "Bouriate"
 
 msgid "bug"
-msgstr "Buginese"
+msgstr "Bugi"
 
 msgid "bul"
-msgstr "Bulgaro"
+msgstr "Bulgare"
 
 msgid "byn"
 msgstr "Bilin"
@@ -504,13 +504,13 @@ msgid "car"
 msgstr "Galibi Carib"
 
 msgid "cat"
-msgstr "Catalano"
+msgstr "Catalan; valencien"
 
 msgid "ceb"
 msgstr "Cebuano"
 
 msgid "ces"
-msgstr "Ceco"
+msgstr "Tchéque"
 
 msgid "cha"
 msgstr "Chamorro"
@@ -519,16 +519,16 @@ msgid "chb"
 msgstr "Chibcha"
 
 msgid "che"
-msgstr "Ceceno"
+msgstr "Tchétchène"
 
 msgid "chg"
-msgstr "Chagatai"
+msgstr "Djaghatai"
 
 msgid "chk"
 msgstr "Chuukese"
 
 msgid "chm"
-msgstr "Mari (Russia)"
+msgstr "Mari"
 
 msgid "chn"
 msgstr "Chinook jargon"
@@ -543,7 +543,7 @@ msgid "chr"
 msgstr "Cherokee"
 
 msgid "chu"
-msgstr "Slavo Liturgico"
+msgstr "Church Slavic"
 
 msgid "chv"
 msgstr "Chuvash"
@@ -552,31 +552,31 @@ msgid "chy"
 msgstr "Cheyenne"
 
 msgid "cop"
-msgstr "Copto"
+msgstr "Copte"
 
 msgid "cor"
-msgstr "Cornico"
+msgstr "Cornique"
 
 msgid "cos"
-msgstr "Corso"
+msgstr "Corse"
 
 msgid "cre"
 msgstr "Cree"
 
 msgid "crh"
-msgstr "Tataro della Crimea"
+msgstr "Crimean Tatar"
 
 msgid "csb"
-msgstr "Casciubo"
+msgstr "Kashubian"
 
 msgid "cym"
-msgstr "Gallese"
+msgstr "Gallois"
 
 msgid "dak"
 msgstr "Dakota"
 
 msgid "dan"
-msgstr "Danese"
+msgstr "Danois"
 
 msgid "dar"
 msgstr "Dargwa"
@@ -588,7 +588,7 @@ msgid "den"
 msgstr "Slave (Athapascan)"
 
 msgid "deu"
-msgstr "Tedesco"
+msgstr "Allemand"
 
 msgid "dgr"
 msgstr "Dogrib"
@@ -609,7 +609,7 @@ msgid "dua"
 msgstr "Duala"
 
 msgid "dum"
-msgstr "Middle Dutch (ca. 1050-1350)"
+msgstr "Néerlandais Moyen (ca. 1050-1350)"
 
 msgid "dyu"
 msgstr "Dyula"
@@ -621,31 +621,31 @@ msgid "efi"
 msgstr "Efik"
 
 msgid "egy"
-msgstr "Egiziano (Antico)"
+msgstr "Égyptien"
 
 msgid "eka"
 msgstr "Ekajuk"
 
 msgid "ell"
-msgstr "Greco Moderno (1453-)"
+msgstr "Grec Moderne (après 1453)"
 
 msgid "elx"
 msgstr "Elamite"
 
 msgid "eng"
-msgstr "Inglese"
+msgstr "Anglais"
 
 msgid "enm"
-msgstr "Inglese, Medio (1100-1500)"
+msgstr "Anglais Moyen (1100-1500)"
 
 msgid "epo"
-msgstr "Esperanto"
+msgstr "Espéranto"
 
 msgid "est"
-msgstr "Estone"
+msgstr "Estonien"
 
 msgid "eus"
-msgstr "Basco"
+msgstr "Basque"
 
 msgid "ewe"
 msgstr "Ewe"
@@ -669,19 +669,19 @@ msgid "fil"
 msgstr "Filipino"
 
 msgid "fin"
-msgstr "Finlandese"
+msgstr "Finnois"
 
 msgid "fon"
 msgstr "Fon"
 
 msgid "fra"
-msgstr "Francese"
+msgstr "Français"
 
 msgid "frm"
-msgstr "Francese Medio (ca. 1400-1600)"
+msgstr "Français Moyen (ca. 1400-1600)"
 
 msgid "fro"
-msgstr "Francese Antico (842-ca. 1400)"
+msgstr "Français Ancien (842-ca. 1400)"
 
 msgid "frr"
 msgstr "Northern Frisian"
@@ -696,7 +696,7 @@ msgid "ful"
 msgstr "Fulah"
 
 msgid "fur"
-msgstr "Friuliano"
+msgstr "Frioulan"
 
 msgid "gaa"
 msgstr "Ga"
@@ -714,13 +714,13 @@ msgid "gil"
 msgstr "Gilbertese"
 
 msgid "gla"
-msgstr "Gaelico"
+msgstr "Scottish Gaelic"
 
 msgid "gle"
-msgstr "Gaelico Irlandese"
+msgstr "Irlandais"
 
 msgid "glg"
-msgstr "Galiziano"
+msgstr "Galicien"
 
 msgid "glv"
 msgstr "Manx"
@@ -738,19 +738,19 @@ msgid "gor"
 msgstr "Gorontalo"
 
 msgid "got"
-msgstr "Gotico"
+msgstr "Gotique"
 
 msgid "grb"
 msgstr "Grebo"
 
 msgid "grc"
-msgstr "Greco Antico"
+msgstr "Grec Ancien (jusqu'à 1453)"
 
 msgid "grn"
 msgstr "Guarani"
 
 msgid "gsw"
-msgstr "Tedesco Svizzero"
+msgstr "Swiss German"
 
 msgid "guj"
 msgstr "Gujarati"
@@ -789,7 +789,7 @@ msgid "hmo"
 msgstr "Hiri Motu"
 
 msgid "hrv"
-msgstr "Croato"
+msgstr "Croatian"
 
 msgid "hsb"
 msgstr "Upper Sorbian"
@@ -837,10 +837,10 @@ msgid "ipk"
 msgstr "Inupiaq"
 
 msgid "isl"
-msgstr "Islandese"
+msgstr "Islandais"
 
 msgid "ita"
-msgstr "Italiano"
+msgstr "Italien"
 
 msgid "jav"
 msgstr "Javanese"
@@ -1143,13 +1143,13 @@ msgid "niu"
 msgstr "Niuean"
 
 msgid "nld"
-msgstr "Neerlandese"
+msgstr "Néerlandais; Flamand"
 
 msgid "nno"
-msgstr "Norvegese Nynorsk"
+msgstr "Norwegian Nynorsk"
 
 msgid "nob"
-msgstr "Norvegese Bokmål"
+msgstr "Norwegian Bokmål"
 
 msgid "nog"
 msgstr "Nogai"
@@ -1158,7 +1158,7 @@ msgid "non"
 msgstr "Old Norse"
 
 msgid "nor"
-msgstr "Norvegese"
+msgstr "Norwegian"
 
 msgid "nqo"
 msgstr "N'Ko"
@@ -1185,7 +1185,7 @@ msgid "nzi"
 msgstr "Nzima"
 
 msgid "oci"
-msgstr "Occitano"
+msgstr "Occitan (post 1500)"
 
 msgid "oji"
 msgstr "Ojibwa"
@@ -1200,13 +1200,13 @@ msgid "osa"
 msgstr "Osage"
 
 msgid "oss"
-msgstr "Osseto"
+msgstr "Ossetian"
 
 msgid "ota"
-msgstr "Turco Ottomano (1500-1928)"
+msgstr "Ottoman Turkish (1500-1928)"
 
 msgid "pag"
-msgstr "Pangasinano"
+msgstr "Pangasinan"
 
 msgid "pal"
 msgstr "Pahlavi"
@@ -1224,25 +1224,25 @@ msgid "pau"
 msgstr "Palauan"
 
 msgid "peo"
-msgstr "Persiano Antico (ca. 600-400 B.C.)"
+msgstr "Old Persian (ca. 600-400 B.C.)"
 
 msgid "phn"
-msgstr "Fenicio"
+msgstr "Phoenician"
 
 msgid "pli"
 msgstr "Pali"
 
 msgid "pol"
-msgstr "Polacco"
+msgstr "Polish"
 
 msgid "pon"
-msgstr "Pompeiano"
+msgstr "Pohnpei"
 
 msgid "por"
-msgstr "Portoghese"
+msgstr "Portuguese"
 
 msgid "pro"
-msgstr "Provenzale Antico (fino al 1500)"
+msgstr "Old Provençal (to 1500)"
 
 msgid "pus"
 msgstr "Pushto"
@@ -1260,13 +1260,13 @@ msgid "rar"
 msgstr "Rarotongan"
 
 msgid "roh"
-msgstr "Reto-Romanzo (Rumantsch Grischun)"
+msgstr "Romansh"
 
 msgid "rom"
-msgstr "Romanes"
+msgstr "Romany"
 
 msgid "ron"
-msgstr "Rumeno"
+msgstr "Romanien"
 
 msgid "run"
 msgstr "Rundi"
@@ -1275,7 +1275,7 @@ msgid "rup"
 msgstr "Macedo-Romanian"
 
 msgid "rus"
-msgstr "Russo"
+msgstr "Russe"
 
 msgid "sad"
 msgstr "Sandawe"
@@ -1287,10 +1287,10 @@ msgid "sah"
 msgstr "Yakut"
 
 msgid "sam"
-msgstr "Aramaico Samaritano"
+msgstr "Samaritan Aramaic"
 
 msgid "san"
-msgstr "Sanscrito"
+msgstr "Sanskrit"
 
 msgid "sas"
 msgstr "Sasak"
@@ -1299,10 +1299,10 @@ msgid "sat"
 msgstr "Santali"
 
 msgid "scn"
-msgstr "Siciliano"
+msgstr "Sicilian"
 
 msgid "sco"
-msgstr "Scozzese"
+msgstr "Scots"
 
 msgid "sel"
 msgstr "Selkup"
@@ -1320,10 +1320,10 @@ msgid "sin"
 msgstr "Sinhala"
 
 msgid "slk"
-msgstr "Slovacco"
+msgstr "Slovak"
 
 msgid "slv"
-msgstr "Sloveno"
+msgstr "Slovenian"
 
 msgid "sma"
 msgstr "Southern Sami"
@@ -1362,19 +1362,19 @@ msgid "sot"
 msgstr "Southern Sotho"
 
 msgid "spa"
-msgstr "Spagnolo"
+msgstr "Espanol"
 
 msgid "sqi"
-msgstr "Albanese"
+msgstr "Albanian"
 
 msgid "srd"
-msgstr "Sardo"
+msgstr "Sardinian"
 
 msgid "srn"
 msgstr "Sranan Tongo"
 
 msgid "srp"
-msgstr "Serbo"
+msgstr "Serbian"
 
 msgid "srr"
 msgstr "Serer"
@@ -1398,7 +1398,7 @@ msgid "swa"
 msgstr "Swahili (macrolanguage)"
 
 msgid "swe"
-msgstr "Svedese"
+msgstr "Swedish"
 
 msgid "syc"
 msgstr "Classical Syriac"
@@ -1461,7 +1461,7 @@ msgid "tog"
 msgstr "Tonga (Nyasa)"
 
 msgid "ton"
-msgstr "Tonga (Isole Tonga)"
+msgstr "Tongan (Iles Tonga"
 
 msgid "tpi"
 msgstr "Tok Pisin"
@@ -1503,16 +1503,16 @@ msgid "uig"
 msgstr "Uighur"
 
 msgid "ukr"
-msgstr "Ukraino"
+msgstr "Ukrainian"
 
 msgid "umb"
 msgstr "Umbundu"
 
 msgid "und"
-msgstr "Indeterminata"
+msgstr "Undetermined"
 
 msgid "uzb"
-msgstr "Uzbeco"
+msgstr "Uzbek"
 
 msgid "vai"
 msgstr "Vai"
@@ -1596,17 +1596,17 @@ msgid "vls"
 msgstr "Flemish"
 
 #~ msgid "The application"
-#~ msgstr "L'applicazione"
+#~ msgstr "Le logiciel"
 #~ msgid "has been developed by the"
-#~ msgstr "é stata sviluppata dall'associazione"
+#~ msgstr "a été développé par l'association"
 #~ msgid "association and the"
-#~ msgstr "e dal laboratorio"
+#~ msgstr "et le laboratoire"
 #~ msgid "laboratory, supported by "
-#~ msgstr "in collaborazione con l'"
+#~ msgstr ", avec le soutien de l'"
 #~ msgid "and by the"
-#~ msgstr "e con l'"
+#~ msgstr "et de l'"
 #~ msgid "Translation: "
-#~ msgstr "Traduzione:"
+#~ msgstr "Translation: "
 #~ msgid "Oeuvres"
-#~ msgstr "Opere"
+#~ msgstr "Oeuvres"
 
