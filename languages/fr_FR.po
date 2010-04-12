@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-12 15:07+0100\n"
+"POT-Creation-Date: 2010-04-12 20:23+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -14,32 +14,37 @@ msgstr ""
 msgid "Anonymous"
 msgstr "Anonime"
 
-#: controllers/WorkController.php:309
+#: controllers/WorkController.php:303
+#: controllers/WorkController.php:306
+msgid "No Title"
+msgstr "Aucun Titre"
+
+#: controllers/WorkController.php:315
 #, php-format
 msgid "\"%1$s\", new text added by %2$s"
 msgstr "\"%1$s\", nouveau texte ajouté par %2$s"
 
-#: controllers/WorkController.php:314
+#: controllers/WorkController.php:320
 #, php-format
 msgid "\"%1$s\", new translation of %2$s added by %3$s"
 msgstr "\"%1$s\", nouvelle traduction de %2$s ajouté par %3$s"
 
-#: controllers/WorkController.php:319
+#: controllers/WorkController.php:325
 #, php-format
 msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 msgstr "\"%1$s\" nouveau tag (%2$s) du texte %3$s ajouté par %4$s"
 
-#: controllers/WorkController.php:329
+#: controllers/WorkController.php:335
 #, php-format
 msgid "\"%1$s\", the text has been modified"
 msgstr "\"%1$s\", le texte a été modifié"
 
-#: controllers/WorkController.php:336
+#: controllers/WorkController.php:342
 #, php-format
 msgid "\"%1$s\", translation of %2$s, has been modified"
 msgstr "\"%1$s\", traduction de %2$s, a été modifié"
 
-#: controllers/WorkController.php:341
+#: controllers/WorkController.php:347
 #, php-format
 msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 msgstr "\"%1$s\" tag (%2$s) du texte %3$s modifié par %4$s"
@@ -47,7 +52,7 @@ msgstr "\"%1$s\" tag (%2$s) du texte %3$s modifié par %4$s"
 #: forms/TranslationEdit.php:61
 #: forms/TextDeposit.php:54
 msgid "Author"
-msgstr "Author"
+msgstr "Auteur"
 
 #: forms/TranslationEdit.php:84
 #: forms/StdPrivilege.php:60
@@ -72,7 +77,7 @@ msgstr "Ajouter Privilège"
 
 #: forms/Feedback.php:42
 msgid "Your email address"
-msgstr "Ton adresse email"
+msgstr "Votre adresse email"
 
 #: forms/Feedback.php:50
 msgid "Subject"
@@ -113,7 +118,7 @@ msgstr "Votre nom utilisateur"
 
 #: forms/Login.php:20
 msgid "Password"
-msgstr "Password"
+msgstr "Mot de passe"
 
 #: forms/Login.php:32
 msgid "Login"
@@ -145,8 +150,8 @@ msgid "Concorder"
 msgstr "Concordancier"
 
 #: layouts/scripts/layout.phtml:38
-#: views/scripts/work/my.phtml:1
-#: views/scripts/work/my.phtml:20
+#: views/scripts/work/my.phtml:2
+#: views/scripts/work/my.phtml:22
 msgid "My Translations"
 msgstr "Mes Traductions"
 
@@ -213,15 +218,9 @@ msgstr "Dernier segment du texte "
 msgid "Continue Text Insertion"
 msgstr "Continuer Insertion"
 
-#: views/scripts/work/my.phtml:3
+#: views/scripts/work/my.phtml:4
 msgid "You have not inserted any text's translations"
 msgstr "Vous n'avez pas inséré de traductions"
-
-#: views/scripts/work/my.phtml:11
-#: views/scripts/work/index.phtml:24
-#: views/scripts/work/read.phtml:12
-msgid "No Title"
-msgstr "Aucun Titre"
 
 #: views/scripts/work/index.phtml:6
 msgid "HOMEPAGE PHRASE"
@@ -231,32 +230,37 @@ msgstr "Du point de vue de la communaut&eacute;, le langage n'est pas seulement 
 msgid "Translating cultural texts"
 msgstr "Le site des traducteurs de textes littéraires, philosophiques ou historiques"
 
-#: views/scripts/work/index.phtml:43
+#: views/scripts/work/index.phtml:25
+#, php-format
+msgid "(%1$s Translations)"
+msgstr "(%1$s Traductions)"
+
+#: views/scripts/work/index.phtml:45
 msgid "Latest News"
 msgstr "Nouveautés"
 
-#: views/scripts/work/index.phtml:82
+#: views/scripts/work/index.phtml:84
 msgid "seconds"
 msgstr "secondes"
 
-#: views/scripts/work/index.phtml:83
+#: views/scripts/work/index.phtml:85
 msgid "minutes"
 msgstr "minutes"
 
-#: views/scripts/work/index.phtml:84
+#: views/scripts/work/index.phtml:86
 msgid "hours"
 msgstr "heures"
 
-#: views/scripts/work/index.phtml:85
+#: views/scripts/work/index.phtml:87
 msgid "days"
 msgstr "jours"
 
-#: views/scripts/work/index.phtml:86
+#: views/scripts/work/index.phtml:88
 #, php-format
 msgid "%1$s %2$s ago"
 msgstr "il y a %1$s %2$s"
 
-#: views/scripts/work/index.phtml:97
+#: views/scripts/work/index.phtml:99
 msgid "Homepage"
 msgstr "Page Principale"
 

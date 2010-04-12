@@ -13,21 +13,23 @@
 <ul>
 <?php
 foreach ($this->entries as $lang=>$authors) { ?>
-          <li class='language'><?php echo $lang;?>
-          <ul class='authors'>
-<?php     foreach ($authors as $author=>$texts) { ?>
-              <li class='author closed'><?php echo $author; ?>
-              <ul class='texts'>
-<?php         foreach ($texts as $text) { ?>
-                 <li class='text'><a href="<?php echo $this->url(
-            array('controller'=>'work','action'=>'read','id'=>$text['id'])) ?>">
-                        <?php if($text['title']==''){echo '<i>'.__('No Title').'</i>';}else{echo $text['title'];} ?></a></li>
-<?php         } ?>
-                </ul></li>
-<?php     } ?>
-          </ul></li>
+    <li class='language'><?php echo $lang;?>
+        <ul class='authors'>
+<?php   foreach ($authors as $author=>$texts) { ?>
+            <li class='author closed'><?php echo $author; ?>
+            <ul class='texts'>
+<?php       foreach ($texts as $text) { ?>
+                <li class='text'><a href="<?php echo $this->url(
+                    array('controller'=>'work','action'=>'read','id'=>$text['id'])) ?>">
+                    <?php if($text['title']==''){echo '<i>'.__('No Title').'</i>';}else{echo $text['title'];} ?></a>
+                    <?php if($text['count']>0):?><span class="trCount"> <?php echo __("(%1\$s Translations)",$text['count']);?></span><? endif; ?>
+                </li>
+<?php       } ?>
+            </ul></li>
 <?php   } ?>
-                  </ul>
+        </ul></li>
+<?php } ?>
+</ul>
           
 <dl>
     <!-- Loop through the entries that were provided to us by the controller -->

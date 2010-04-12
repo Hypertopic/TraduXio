@@ -570,6 +570,10 @@ div.right-container{
     color:#DBDBDB;    
 }
 
+div.my-transl{
+text-align:center;
+}
+
 
 .tag-item{
     background-color:#585858;
@@ -724,7 +728,7 @@ div.show-tag-area{
     display:inline;
     padding-left:40px;
 }
-#my-transl{
+div#my-transl-title{
     font-size:200%;
     color:#505050;
 

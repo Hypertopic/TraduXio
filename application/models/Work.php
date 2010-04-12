@@ -144,17 +144,23 @@ class Model_Work extends Model_Taggable
     }
 
     public function fetchAllOriginalWorks($idList=null)
-    {
+    { 
         $table = $this->_getTable();
-        $select1 = $this->getSelectCondOriginalWork('sentence');
-        $select2 = $this->getSelectCondAllowedWork('read'); 
-        if(is_null($idList)){           
-            $select = $table->select()->from($table, array('id','title','author','language','created','modified'))->where('id IN (?)',$select1)->where('id IN (?)',$select2);
-        }else {//select only some specific original works
-            $select = $table->select()->from($table, array('id','title','author','language','created','modified'))->where('id IN (?)',$select1)->where('id IN (?)',$select2)->where('id IN (?)',$idList);
+        $db = $table->getAdapter();
+        $select = $db->select();
+        $selectOrig = $this->getSelectCondOriginalWork('sentence');
+        $selectAlwd = $this->getSelectCondAllowedWork('read'); 
+        
+        $select->distinct()->from(array('work'=>'work'),array('id','title','author','language','created','modified'))
+                        ->joinLeft(array('i'=>'interpretation'),'i.original_work_id = work.id','count(distinct i.work_id)')
+                        ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified'))
+                        ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd);
+        
+        if(!is_null($idList)){           
+            $select->where('id IN (?)',$idList);
         }
-        Tdxio_Log::info('stringa sql'.$select->__toString());
-        return $table->fetchAll($select)->toArray();
+        Tdxio_Log::info($select->__toString(),'stringa sql');
+        return $db->fetchAll($select);
         
     }
     

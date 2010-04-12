@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-12 15:07+0100\n"
+"POT-Creation-Date: 2010-04-12 20:23+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -14,32 +14,37 @@ msgstr ""
 msgid "Anonymous"
 msgstr "Anonimo"
 
-#: controllers/WorkController.php:309
+#: controllers/WorkController.php:303
+#: controllers/WorkController.php:306
+msgid "No Title"
+msgstr "Nessun Titolo"
+
+#: controllers/WorkController.php:315
 #, php-format
 msgid "\"%1$s\", new text added by %2$s"
 msgstr "\"%1$s\", nuovo testo aggiunto da %2$s"
 
-#: controllers/WorkController.php:314
+#: controllers/WorkController.php:320
 #, php-format
 msgid "\"%1$s\", new translation of %2$s added by %3$s"
 msgstr "\"%1$s\", nuova traduzione di %2$s agiunta da %3$s"
 
-#: controllers/WorkController.php:319
+#: controllers/WorkController.php:325
 #, php-format
 msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 msgstr "\"%1$s\", nuovo tag (%2$s) del testo %3$s aggiunto da %4$s"
 
-#: controllers/WorkController.php:329
+#: controllers/WorkController.php:335
 #, php-format
 msgid "\"%1$s\", the text has been modified"
 msgstr "\"%1$s\", il testo è stato modificato"
 
-#: controllers/WorkController.php:336
+#: controllers/WorkController.php:342
 #, php-format
 msgid "\"%1$s\", translation of %2$s, has been modified"
 msgstr "\"%1$s\", traduzione di %2$s, è stata modificata"
 
-#: controllers/WorkController.php:341
+#: controllers/WorkController.php:347
 #, php-format
 msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 msgstr "\"%1$s\", tag (%2$s) del testo %3$s modificato da %4$s"
@@ -145,8 +150,8 @@ msgid "Concorder"
 msgstr "Ricerca"
 
 #: layouts/scripts/layout.phtml:38
-#: views/scripts/work/my.phtml:1
-#: views/scripts/work/my.phtml:20
+#: views/scripts/work/my.phtml:2
+#: views/scripts/work/my.phtml:22
 msgid "My Translations"
 msgstr "Mie Traduzioni"
 
@@ -213,15 +218,9 @@ msgstr "Ultimo segmento del testo"
 msgid "Continue Text Insertion"
 msgstr "Continua Inserimento Testo"
 
-#: views/scripts/work/my.phtml:3
+#: views/scripts/work/my.phtml:4
 msgid "You have not inserted any text's translations"
 msgstr "Non é stata inserita nessuna traduzione del testo"
-
-#: views/scripts/work/my.phtml:11
-#: views/scripts/work/index.phtml:24
-#: views/scripts/work/read.phtml:12
-msgid "No Title"
-msgstr "Nessun Titolo"
 
 #: views/scripts/work/index.phtml:6
 msgid "HOMEPAGE PHRASE"
@@ -231,32 +230,37 @@ msgstr "Dal punto di vista della comunità, il linguaggio non è soltanto un fat
 msgid "Translating cultural texts"
 msgstr "Traduzione di Testi Culturali"
 
-#: views/scripts/work/index.phtml:43
+#: views/scripts/work/index.phtml:25
+#, php-format
+msgid "(%1$s Translations)"
+msgstr "(%1$s Traduzioni)"
+
+#: views/scripts/work/index.phtml:45
 msgid "Latest News"
 msgstr "Ultimi Eventi"
 
-#: views/scripts/work/index.phtml:82
+#: views/scripts/work/index.phtml:84
 msgid "seconds"
 msgstr "secondi"
 
-#: views/scripts/work/index.phtml:83
+#: views/scripts/work/index.phtml:85
 msgid "minutes"
 msgstr "minuti"
 
-#: views/scripts/work/index.phtml:84
+#: views/scripts/work/index.phtml:86
 msgid "hours"
 msgstr "ore"
 
-#: views/scripts/work/index.phtml:85
+#: views/scripts/work/index.phtml:87
 msgid "days"
 msgstr "giorni"
 
-#: views/scripts/work/index.phtml:86
+#: views/scripts/work/index.phtml:88
 #, php-format
 msgid "%1$s %2$s ago"
 msgstr "%1$s %2$s fa"
 
-#: views/scripts/work/index.phtml:97
+#: views/scripts/work/index.phtml:99
 msgid "Homepage"
 msgstr "Pagina Principale"
 

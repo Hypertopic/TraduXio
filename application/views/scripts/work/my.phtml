@@ -1,4 +1,5 @@
-<div id="my-transl"><?php echo __('My Translations'); ?></div>
+<div class="my-transl">
+<div id="my-transl-title"><?php echo __('My Translations'); ?></div>
 <ul>
 <?php if(empty($this->myEntries)) {echo __("You have not inserted any text's translations");} ?>
 <?php foreach ($this->myEntries as $srcLang=>$trlLang):?>
@@ -12,9 +13,10 @@
     </a></li>
 <?php endforeach; ?>
 </ul>
+<br>
 <?php endforeach; ?>
 <?php endforeach; ?>
 
 </ul>
-
+</div>
 <?php $this->page_title = __("My Translations");?>
