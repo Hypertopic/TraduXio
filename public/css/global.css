@@ -508,6 +508,10 @@ span.age{
 font-size:0.7em;
 font-style:italic;
 }
+a.news_link{
+
+text-transform:uppercase;
+}
 
 div.text {
 background-color:#FFFFFF;

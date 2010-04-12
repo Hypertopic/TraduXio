@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 23:52+0100\n"
+"POT-Creation-Date: 2010-04-12 15:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -26,6 +26,36 @@ msgstr ""
 #: controllers/WorkController.php:55
 msgid "Anonymous"
 msgstr "Anonymous"
+
+#: controllers/WorkController.php:309
+#, php-format
+msgid "\"%1$s\", new text added by %2$s"
+msgstr "\"%1$s\", new text added by %2$s"
+
+#: controllers/WorkController.php:314
+#, php-format
+msgid "\"%1$s\", new translation of %2$s added by %3$s"
+msgstr "\"%1$s\", new translation of %2$s added by %3$s"
+
+#: controllers/WorkController.php:319
+#, php-format
+msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
+msgstr "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
+
+#: controllers/WorkController.php:329
+#, php-format
+msgid "\"%1$s\", the text has been modified"
+msgstr "\"%1$s\", the text has been modified"
+
+#: controllers/WorkController.php:336
+#, php-format
+msgid "\"%1$s\", translation of %2$s, has been modified"
+msgstr "\"%1$s\", translation of %2$s, has been modified"
+
+#: controllers/WorkController.php:341
+#, php-format
+msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
+msgstr "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 
 #: forms/TranslationEdit.php:61
 #: forms/TextDeposit.php:54
@@ -218,36 +248,6 @@ msgstr "Translating cultural texts"
 msgid "Latest News"
 msgstr "Latest News"
 
-#: views/scripts/work/index.phtml:52
-#, php-format
-msgid "\"%1$s\", new text added by %2$s"
-msgstr "\"%1$s\", new text added by %2$s"
-
-#: views/scripts/work/index.phtml:55
-#, php-format
-msgid "\"%1$s\", text modified by %2$s"
-msgstr "\"%1$s\", text modified by %2$s"
-
-#: views/scripts/work/index.phtml:62
-#, php-format
-msgid "\"%1$s\", added translation of %2$s by %3$s"
-msgstr "\"%1$s\", added translation of %2$s by %3$s"
-
-#: views/scripts/work/index.phtml:65
-#, php-format
-msgid "\"%1$s\", translation of %2$s, modified by %3$s"
-msgstr "\"%1$s\", translation of %2$s, modified by %3$s"
-
-#: views/scripts/work/index.phtml:72
-#, php-format
-msgid "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
-msgstr "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
-
-#: views/scripts/work/index.phtml:75
-#, php-format
-msgid "\"%1$s\" (%2$s) tag on text %3$s modified by %4$s"
-msgstr "\"%1$s\" (%2$s) tag on text %3$s modified by %4$s"
-
 #: views/scripts/work/index.phtml:82
 msgid "seconds"
 msgstr "seconds"
@@ -350,7 +350,6 @@ msgstr "Manage text's privileges"
 #: views/scripts/login/index.phtml:2
 msgid "Please Login"
 msgstr "Please Login"
-
 
 msgid "fas"
 msgstr "Persian"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 23:41+0100\n"
+"POT-Creation-Date: 2010-04-12 15:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -14,10 +14,40 @@ msgstr ""
 msgid "Anonymous"
 msgstr "Anonimo"
 
+#: controllers/WorkController.php:309
+#, php-format
+msgid "\"%1$s\", new text added by %2$s"
+msgstr "\"%1$s\", nuovo testo aggiunto da %2$s"
+
+#: controllers/WorkController.php:314
+#, php-format
+msgid "\"%1$s\", new translation of %2$s added by %3$s"
+msgstr "\"%1$s\", nuova traduzione di %2$s agiunta da %3$s"
+
+#: controllers/WorkController.php:319
+#, php-format
+msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
+msgstr "\"%1$s\", nuovo tag (%2$s) del testo %3$s aggiunto da %4$s"
+
+#: controllers/WorkController.php:329
+#, php-format
+msgid "\"%1$s\", the text has been modified"
+msgstr "\"%1$s\", il testo è stato modificato"
+
+#: controllers/WorkController.php:336
+#, php-format
+msgid "\"%1$s\", translation of %2$s, has been modified"
+msgstr "\"%1$s\", traduzione di %2$s, è stata modificata"
+
+#: controllers/WorkController.php:341
+#, php-format
+msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
+msgstr "\"%1$s\", tag (%2$s) del testo %3$s modificato da %4$s"
+
 #: forms/TranslationEdit.php:61
 #: forms/TextDeposit.php:54
 msgid "Author"
-msgstr "Author"
+msgstr "Autore"
 
 #: forms/TranslationEdit.php:84
 #: forms/StdPrivilege.php:60
@@ -138,8 +168,8 @@ msgstr "Scrivici"
 
 #: layouts/scripts/layout.phtml:71
 #, php-format
-msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by and by the %4$s."
-msgstr "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by and by the %4$s."
+msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
+msgstr "L'applicazione %1$s é sviluppata dall'associazione %2$s e dal laboratorio %3$s, con il supporto dell'%4$s e dell'%5$s."
 
 #: views/scripts/work/manage.phtml:15
 #: views/scripts/work/read.phtml:31
@@ -191,7 +221,7 @@ msgstr "Non é stata inserita nessuna traduzione del testo"
 #: views/scripts/work/index.phtml:24
 #: views/scripts/work/read.phtml:12
 msgid "No Title"
-msgstr "No Title"
+msgstr "Nessun Titolo"
 
 #: views/scripts/work/index.phtml:6
 msgid "HOMEPAGE PHRASE"
@@ -203,37 +233,7 @@ msgstr "Traduzione di Testi Culturali"
 
 #: views/scripts/work/index.phtml:43
 msgid "Latest News"
-msgstr "Latest News"
-
-#: views/scripts/work/index.phtml:52
-#, php-format
-msgid "\"%1$s\", new text added by %2$s"
-msgstr "\"%1$s\", new text added by %2$s"
-
-#: views/scripts/work/index.phtml:55
-#, php-format
-msgid "\"%1$s\", text modified by %2$s"
-msgstr "\"%1$s\", text modified by %2$s"
-
-#: views/scripts/work/index.phtml:62
-#, php-format
-msgid "\"%1$s\", added translation of %2$s by %3$s"
-msgstr "\"%1$s\", added translation of %2$s by %3$s"
-
-#: views/scripts/work/index.phtml:65
-#, php-format
-msgid "\"%1$s\", translation of %2$s, modified by %3$s"
-msgstr "\"%1$s\", translation of %2$s, modified by %3$s"
-
-#: views/scripts/work/index.phtml:72
-#, php-format
-msgid "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
-msgstr "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
-
-#: views/scripts/work/index.phtml:75
-#, php-format
-msgid "\"%1$s\" (%2$s) tag on text %3$s modified by %4$s"
-msgstr "\"%1$s\" (%2$s) tag on text %3$s modified by %4$s"
+msgstr "Ultimi Eventi"
 
 #: views/scripts/work/index.phtml:82
 msgid "seconds"
@@ -249,12 +249,12 @@ msgstr "ore"
 
 #: views/scripts/work/index.phtml:85
 msgid "days"
-msgstr "days"
+msgstr "giorni"
 
 #: views/scripts/work/index.phtml:86
 #, php-format
 msgid "%1$s %2$s ago"
-msgstr "%1$s %2$s ago"
+msgstr "%1$s %2$s fa"
 
 #: views/scripts/work/index.phtml:97
 msgid "Homepage"
@@ -1595,6 +1595,10 @@ msgstr "Urdu"
 msgid "vls"
 msgstr "Flemish"
 
+#~ msgid "\"%1$s\", added translation of %2$s by %3$s"
+#~ msgstr "\"%1$s\", aggiunta traduzione di %2$s da %3$s"
+#~ msgid "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
+#~ msgstr "\"%1$s\", aggiunto tag (%2$s) al testo %3$s da %4$s"
 #~ msgid "The application"
 #~ msgstr "L'applicazione"
 #~ msgid "has been developed by the"

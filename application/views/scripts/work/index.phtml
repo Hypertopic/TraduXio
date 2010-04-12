@@ -44,8 +44,8 @@ foreach ($this->entries as $lang=>$authors) { ?>
     <?php foreach($this->news as $ageInSec=>$list): ?>
         <?php foreach($list as $key=> $item): ?>
             <ul><li>
-            
-            <?php  if($item['type']=='orig'){
+            <?php echo $item['phrase']; ?>
+            <?php  /*if($item['type']=='orig'){
                         $title = '<a href="'.$this->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';
                         $user = 'TEMPUSER';
                         if($item['NM']=='NEW'){
@@ -74,7 +74,7 @@ foreach ($this->entries as $lang=>$authors) { ?>
                         elseif($item['NM']=='MOD'){
                             echo __("\"%1\$s\" (%2\$s) tag on text %3\$s modified by %4\$s",$tag,$item['genre'],$taggedText,$user);
                         }
-                    } 
+                    }*/ 
             ?>
         
             <?php $age=$item['age']; ?>

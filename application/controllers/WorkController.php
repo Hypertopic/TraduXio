@@ -297,21 +297,57 @@ class WorkController extends Tdxio_Controller_Abstract
     } 
     
     public function newModified($item,$type){
-        $NMitem=null;
+        
         if(isset($item['created'])){
-            $item['type']=$type;
+            if(($item['title']=='') OR (empty($item['title'])))
+            {$item['title']='<i>'.__('No Title').'</i>';}
+            
+            if(($item['orig_title']=='') OR (empty($item['orig_title'])))
+            {$item['orig_title']='<i>'.__('No Title').'</i>';}
+            
+            $NMitem=$item;
             if(((!isset($item['modified']))or($item['modified']-$item['created']<10))and(time() - strtotime($item['created']) < $this->MONTHSEC))
-            {
-                $NMitem=$item;
+            {                
                 $NMitem['age']=time() - strtotime($item['created']);
-                $NMitem['NM']='NEW';
+            
+                if($type=='orig'){
+                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';
+                    $NMitem['phrase'] = __("\"%1\$s\", new text added by %2\$s",$title,$item['creator']);
+                }
+                elseif($type=='tra'){
+                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$item['id']).'">'.$item['title'].'</a>';
+                    $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['original_work_id']).'">'.$item['orig_title'].'</a>';
+                    $NMitem['phrase'] = __("\"%1\$s\", new translation of %2\$s added by %3\$s",$title,$origtitle,$item['creator']);
+                }
+                elseif($type=='tag'){
+                    $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['comment'].'</a>';
+                    $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['title'].'</a>';
+                    $NMitem['phrase'] =  __("\"%1\$s\", new (%2\$s) tag for %3\$s added by %4\$s",$tag,$item['genre_name'],$taggedText,$item['user']);
+                }
             }elseif(($item['created'] < $item['modified']) and (time() - strtotime($item['modified']) < $this->MONTHSEC))
-            {
-                $NMitem=$item;
+            {                
                 $NMitem['age']=time() - strtotime($item['modified']);
-                $NMitem['NM']='MOD';
-            }            
-        }           
+            
+                if($type=='orig'){
+                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';
+                    //$user = 'TEMPUSER';
+                    //$NMitem['phrase'] =   __("\"%1\$s\", text modified by %2\$s",$title,$user);
+                    $NMitem['phrase'] =   __("\"%1\$s\", the text has been modified",$title);
+                }
+                elseif($type=='tra'){
+                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$item['id']).'">'.$item['title'].'</a>';
+                    $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['original_work_id']).'">'.$item['orig_title'].'</a>';
+                    //$user = 'TEMPUSER';
+                    //$NMitem['phrase'] =   __("\"%1\$s\", translation of %2\$s, modified by %3\$s",$title,$origtitle,$user);
+                    $NMitem['phrase'] =   __("\"%1\$s\", translation of %2\$s, has been modified",$title,$origtitle);
+                }
+                elseif($type=='tag'){
+                    $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['comment'].'</a>';
+                    $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['title'].'</a>';
+                    $NMitem['phrase'] =   __("\"%1\$s\" (%2\$s) tag for %3\$s has been modified by %4\$s",$tag,$item['genre_name'],$taggedText,$item['user']);
+                }
+            }else{return null;}            
+        }    
         return $NMitem;
     }
     

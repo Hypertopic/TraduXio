@@ -130,15 +130,24 @@ class Model_Taggable extends Model_Abstract
     
     public function getNewModTags($user=null){
         $tagTable = new Model_DbTable_Tag();
-        $sqlcond = "created > current_date - integer '30'  OR modified > current_date - integer '30' ";
+        $db = $tagTable->getAdapter();
+        $sqlcond = "tag.created > current_date - integer '30'  OR tag.modified > current_date - integer '30' ";
+        
+        $select = $db->select();
+        $select->distinct()->from(array('tag'=>'tag'),array('tag.*'))
+                        ->join(array('g'=>'genre'),'tag.genre = g.id',array('g.name as genre_name'))
+                        ->join(array('w'=>'work'),'tag.taggable = w.id',array('w.title'))
+                        ->where($sqlcond);
+                        
+                        
+        //$select = $tagTable->select()->where($sqlcond);
         if(!is_null($user)){
             $selectMine = $tagTable->getAdapter()->select()->from('work','id')->where('creator = ?',$user);
-            $select = $tagTable->select()->where($sqlcond)->where('taggable IN (?)',$selectMine);
-        }else{
-            $select = $tagTable->select()->where($sqlcond);
+            $select->where('taggable IN (?)',$selectMine);
         }
-        Tdxio_Log::info($select->__toString(),'new_tag_request_string');
-        $results = $tagTable->fetchAll($select)->toArray();
+        
+        Tdxio_Log::info($select->__toString(),'NEW_tag_request_string');
+        $results = $db->fetchAll($select);
         Tdxio_Log::info($results,'new tags');
         return $results;
     }

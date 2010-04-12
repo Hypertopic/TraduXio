@@ -348,11 +348,18 @@ class Model_Work extends Model_Taggable
         
         $selectInt = $this->getSelectCondOriginalWork('interpretation');
         $selectAllowed = $this->getSelectCondAllowedWork('read');
-        $sqlcond = "created > current_date - integer '30'  OR modified > current_date - integer '30' ";
-        $selectNewModInt = $table->select()->where('id IN (?)',$selectInt)->where('id IN (?)',$selectAllowed)->where($sqlcond);
-        Tdxio_Log::info($selectNewModInt->__toString(),'sql_request');
-        $results = $table->fetchAll($selectNewModInt)->toArray();
-        
+        $sqlcond = "work.created > current_date - integer '30'  OR work.modified > current_date - integer '30' ";
+        //$selectNewModInt = $table->select()->where('id IN (?)',$selectInt)->where('id IN (?)',$selectAllowed)->where($sqlcond);
+        $db = $table->getAdapter();
+        $select = $db->select();
+        $select->distinct()->from(array('work'=>'work'),array('work.*'))
+                        ->join(array('i'=>'interpretation'),'i.work_id = work.id',array('i.original_work_id'))
+                        ->join(array('ow'=>'work'),'i.original_work_id = ow.id',array('ow.title as orig_title'))
+                        ->where('work.id IN (?)',$selectInt)->where('work.id IN (?)',$selectAllowed)->where($sqlcond);
+                        
+        Tdxio_Log::info($select->__toString(),'sql_request');
+        $results = $db->fetchAll($select);
+
         Tdxio_Log::info($results,'newmodints');
         
         return($results);
