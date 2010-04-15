@@ -24,19 +24,56 @@ defined('TEMP_PATH')
     
 require_once 'Zend/Translate.php';
 require_once 'Tdxio/Log.php';
+require_once 'Zend/Registry.php';
+
+$translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en'); 
+Zend_Registry::set('Zend_Translate',$translate);
+    
+$lan = 'en';
+try{//refresh preferences with browser informations
+    $locale = new Zend_Locale(Zend_Locale::BROWSER);
+    $lan = $locale->getLanguage();
+    $reg = $locale->getRegion();
+    //$translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lan.'_'.$reg.'.mo',$lan);
+    //$options['lang']=$lan;//$this->setCurPref(array('lang'=>$lan));
+}catch(Zend_Locale_Exception $e) {}
+
+Zend_Registry::set('preferences',array('lang'=>$lan,'color'=>1));       
+
+
+/*
+try{    
+    $locale = new Zend_Locale(Zend_Locale::BROWSER);
+    $lan = $locale->getLanguage();
+    $reg = $locale->getRegion();
+    $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lan.'_'.$reg.'.mo',$lan);
+    Zend_Registry::set('default_options',array('lang'=>$lan,'color'=>1));       
+}catch(Zend_Locale_Exception $e) {
+    $locale = $translate->getLocale();
+}
+Zend_Registry::set('Zend_Locale',$locale);*/
+
+
 
 function __($text)
 {
     $args=func_get_args();
+    /*
 	static $translate=null;
 	if (!$translate) {
         $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en');        
-        $actual = $translate->getLocale();
-        Tdxio_Log::info($actual,'default_locale');
-        $translate->addTranslation(APPLICATION_PATH.'/../languages/it_IT.mo','it');
-        $translate->addTranslation(APPLICATION_PATH.'/../languages/fr_FR.mo','fr');
-        $translate->setLocale("fr_FR");
+        try{
+        $locale = new Zend_Locale(Zend_Locale::BROWSER);
+        $lan = $locale->getLanguage();
+        $reg = $locale->getRegion();
+        $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lan.'_'.$reg.'.mo',$lan);
+    }catch(Zend_Locale_Exception $e) {
+        $locale = $translate->getLocale();
     }
+        Tdxio_Log::info($locale,'locale browser');
+        
+    }*/
+    $translate = Zend_Registry::get('Zend_Translate');
     $trText = $translate->_($text);
     if (!is_null($trText)) {
         array_shift($args);

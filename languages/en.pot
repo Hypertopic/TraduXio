@@ -356,6 +356,21 @@ msgid "Please Login"
 msgstr "Please Login"
 
 
+msgid "second"
+msgstr "second"
+
+
+msgid "minute"
+msgstr "minute"
+
+
+msgid "hour"
+msgstr "hour"
+
+
+msgid "day"
+msgstr "day"
+
 msgid "fas"
 msgstr "Persian"
 

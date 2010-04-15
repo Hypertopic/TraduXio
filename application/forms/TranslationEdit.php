@@ -58,7 +58,7 @@ class Form_TranslationEdit extends Form_Abstract
         
         // author element
         $this->addElement('text', 'author', array(
-            'label'      => __('Author'),
+            'label'      => __('Author').': ',
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
             'validators' => array(
             ),

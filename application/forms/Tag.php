@@ -46,7 +46,7 @@ class Form_Tag extends Form_Abstract
 
         $genre =$this->createElement('select','tag_genre', array(
             'decorators' => array('FormElements','ViewHelper'),
-            'label'      => 'Genre',
+            'label'      => __('Genre'),
             'multiOptions'=> $this->_getGenres(),
             'id'   =>  'genresel'
             //,

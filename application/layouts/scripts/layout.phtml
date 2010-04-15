@@ -43,6 +43,7 @@
             <li><a href="<?php echo $this->makeUrl('/index/about');?>"><?php echo __('About'); ?></a></li>
         <?php endif; ?>
             <li> <a href="<?php echo $this->makeUrl('/index/feedback');?>"><?php echo __('Feedback'); ?></a> </li>
+            <li><?php echo $this->langform; ?></li>
             </ul>
             <!-- To keep urls consistent with the applications router (right now we
                  are using the default router), we will employ the use of the url
@@ -50,6 +51,7 @@
                  http://framework.zend.com/manual/en/zend.view.helpers.html
                  -->
         </div>
+       
     </div>
 
     <!-- This next call will now include any content that was generated in the

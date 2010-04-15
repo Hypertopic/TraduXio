@@ -1,4 +1,11 @@
-﻿-- View: interpretation_sentence
+﻿
+CREATE AGGREGATE concat(text) (
+    SFUNC = textcat,
+    STYPE = text,
+    INITCOND = ''
+);
+
+-- View: interpretation_sentence
 
 -- DROP VIEW interpretation_sentence;
 

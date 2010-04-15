@@ -342,6 +342,18 @@ msgstr "Gestione dei Privilegi del Testo"
 msgid "Please Login"
 msgstr "Please Login"
 
+msgid "second"
+msgstr "secondo"
+
+msgid "minute"
+msgstr "minuto"
+
+msgid "hour"
+msgstr "ora"
+
+msgid "day"
+msgstr "giorno"
+
 msgid "fas"
 msgstr "Persiano"
 
