@@ -23,7 +23,6 @@ tdxio.translation.destLang = '<?php echo $this->translation['language']; ?>';
 <?php $this->headScript()->captureEnd(); ?>
 <?php //if ($this->translation['srcText']['Language']['rtl']) $origDir=' rtl'; else $origDir=""; ?>
 <?php //if ($this->translation['Language']['rtl']) $transDir=' rtl'; else $transDir=""; ?>
-<h1><?php echo $this->title ?></h1>
 <?php $elements=$this->form->getElements(); ?>
 <form action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>">
 
@@ -35,7 +34,7 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 
 <div id="LRcontainer">
 
-<table class="right-container" id="openbook">
+<table class="right-container" id="openbook-edit">
 <tr class="button-line"><td></td><td>
     <div class="buttons">
         <?php echo $this->form->buttons; ?>

@@ -16,18 +16,17 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
 
     public function preDispatch($request)
     {
+        Tdxio_Log::info($_SESSION,'session');
         //Tdxio_Log::info($this->_defaultOptions,'locale pref construct');
         Tdxio_Log::info('flusso: 5 PLUGIN PREDISPATCH');
         $options = $this->getPref();
-        $this->setCurPref($options);//Zend_Registry::set('preferences',$options);
-        //$this->setCurLanguage($options);
+        $this->setCurPref($options);
         
         $controller = $request->getControllerName();
         $action = $request->getActionName();
         
         if(!empty($controller)){
-        $langform = new Form_LangSel();
-            Tdxio_Log::info('DEBUGGG');
+            $langform = new Form_LangSel();
             Tdxio_Log::info($controller,'controller');
             Tdxio_Log::info($action,'action');
             Tdxio_Log::info($request->isPost(),'ispost');
@@ -43,12 +42,13 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
                     $this->_response->setRedirect($request->getRequestUri());
                 }
             }
+            $layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
+            $view = $layout->getView();
+            $view->langform=$langform;        
+            
         }
             
         
-        $layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
-        $view = $layout->getView();
-        $view->langform=$langform;
         $view->prefs = $options;/* */
     }
         
@@ -56,6 +56,7 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
     public function postDispatch($request)
     {
         Tdxio_Log::info('flusso: 7 PLUGIN POSTDISPATCH');
+        
         try{
             $options = Zend_Registry::get('preferences');
             $this->savePref($options);
@@ -73,8 +74,9 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
     }
     
     protected function setCurPref(array $options){
-        Tdxio_Log::info('flusso: 9 PLUGIN SETCURPREF');
+        Tdxio_Log::info($options,'flusso: 9 PLUGIN SETCURPREF');
         //refreshes stored preferences with passed values, if not null
+        /*
         try{
             $stored_options = Zend_Registry::get('preferences');
         }catch(Zend_Exception $e){$stored_options = array();}
@@ -86,25 +88,30 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
                 }
             } 
         }
-        Zend_Registry::set('preferences',$newoptions);
-        $this->setCurLanguage($newoptions);
+        Zend_Registry::set('preferences',$newoptions);*/
+        $this->setSessionPrefs($options);
+        $this->setCurLanguage($options);
     }
     
-    protected function getPref($opt_name=null){
+    public function getPref($opt_name=null){
         Tdxio_Log::info('flusso: 10 PLUGIN GETPREF');
         
-        $options = Zend_Registry::get('preferences');  
-               
-        //if there are any user preferences in the db, refresh $options with those values
-        if(!is_null($this->_userid)){
-            $userModel = new Model_User();
-            $user_options = $userModel->getOptions($this->_userid,$opt_name);
-            if(!empty($user_options)){// if the user has no preferences, return the default ones
-                foreach($user_options as $key=>$val){
-                    if(!empty($val)){
-                        $options[$key]=$val;
-                    }
-                }                
+        $options = $this->getSessionPrefs();
+        if(empty($options)){
+        
+            $options = Zend_Registry::get('preferences');  
+                   
+            //if there are any user preferences in the db, refresh $options with those values
+            if(!is_null($this->_userid)){
+                $userModel = new Model_User();
+                $user_options = $userModel->getOptions($this->_userid,$opt_name);
+                if(!empty($user_options)){// if the user has no preferences, return the default ones
+                    foreach($user_options as $key=>$val){
+                        if(!empty($val)){
+                            $options[$key]=$val;
+                        }
+                    }                
+                }
             }
         }
         return $options;
@@ -125,4 +132,33 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
         }
     }
 
+    public function getSessionPrefs(){
+        
+        $tdxioPrefs = new Zend_Session_Namespace('Tdxio_Prefs');
+        $options = array();
+        if(isset($tdxioPrefs->preferences)){
+            $options = $tdxioPrefs->preferences;
+            Tdxio_Log::info($options,'GET SESSION PREF: session options exist');
+        }
+        return $options;
+    }
+    
+    public function setSessionPrefs($options){
+        $ses_options=$this->getSessionPrefs();
+        if(empty($ses_options)){
+            $ses_options = $options;
+        }else{
+            foreach($options as $name=>$opt){
+                if(!empty($opt)){
+                    $ses_options[$name]=$opt;
+                    Tdxio_Log::info($opt,'opt');
+                }
+            }
+        }
+        $tdxioPrefs = new Zend_Session_Namespace('Tdxio_Prefs');
+        $tdxioPrefs->preferences=$ses_options;
+        Tdxio_Log::info($_SESSION,'session after setsessionprefs');
+        return $ses_options;    
+    }
+    
 }

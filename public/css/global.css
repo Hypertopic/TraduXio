@@ -116,6 +116,9 @@ padding:6px 10px 4px 0;
 }
 
 .inline{
+display:inline;
+}
+.ex-inline{
     float:left;
 }
 .insert-text{
@@ -539,8 +542,8 @@ div.left-menu{
     float:left;
     margin:0px;
     width:18%;
-    min-width:150px;
-    max-width:250px;
+    /*min-width:150px;
+    max-width:250px;*/
     font-size:80%;
 /*  width:200px;*/
     padding:1%;
@@ -554,12 +557,15 @@ table.right-container{
     color:#DBDBDB;    
     border-collapse:collapse;
     border-spacing:0px;
+
 }
+
 .right-container td{
     border-style:hidden;
     border-width:0px;
     padding:0px;
 }
+
 .right-container tr{
     border-style:hidden;
     border-width:0px;
@@ -573,7 +579,10 @@ div.right-container{
 div.my-transl{
 text-align:center;
 }
-
+.lang-select{
+text-align:right;
+vertical-align:top;
+}
 
 .tag-item{
     background-color:#585858;
@@ -770,15 +779,18 @@ td.transl-column{
     width:50%;/*500px;/*642px;*/
 }
 
-table#openbook{
-    border-spacing:0;
-    border-collapse:collapse;
+table#openbook-read{
+    /*border-spacing:0;
+    border-collapse:collapse;*/
+    width: 80%;
 }
-/*
-table#openbook80{
-    border-spacing:0;
-    border-collapse:collapse;
-}*/
+
+table#openbook-edit{
+/*    border-spacing:0;
+    border-collapse:collapse;*/
+    width: 100%;
+}
+
 div#dark-back{
     background-color:#585858;
 }
@@ -894,4 +906,16 @@ div.scrollbutts div.disabled {
 tr.button-line{
     padding:5px;
     text-align:right;
+}
+
+span.title{
+    font-style:italic;
+    font-weight:normal;
+}
+span.author{
+    font-style:normal;
+    font-weight:normal;
+}
+.red{
+color:#D91919;
 }

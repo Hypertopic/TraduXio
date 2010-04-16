@@ -43,8 +43,11 @@ foreach ($this->entries as $lang=>$authors) { ?>
 
 <td class="news hundred">
     <div class="news-paragraph"><div class="news-title"><?php echo __('Latest News');?></div>
-    <?php foreach($this->news as $ageInSec=>$list): ?>
-        <?php foreach($list as $key=> $item): ?>
+    <?php $counter = 0; $MAX_NEWS = 15;
+        foreach($this->news as $ageInSec=>$list): ?>
+        <?php foreach($list as $key=> $item): 
+            $counter++; 
+            if($counter<=$MAX_NEWS):?>
             <ul><li>
             <?php echo $item['phrase']; ?>
            
@@ -59,7 +62,7 @@ foreach ($this->entries as $lang=>$authors) { ?>
             ?>
             </span>    
             </li></ul>
-        <?php endforeach; ?>
+        <?php endif; endforeach; ?>
     <?php endforeach; ?>
     </div>
 </td>
