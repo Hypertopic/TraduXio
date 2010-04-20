@@ -1,12 +1,10 @@
 <?php
 
-//require_once APPLICATION_PATH.'/models/PrivilegeModel.php'; 
-
 class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
 {
     public $_userid;
     public $_role;
-    public $_langFiles = array('en'=>'en','fr'=>'fr_FR','it'=>'it_IT','eng'=>'en','fra'=>'fr_FR','ita'=>'it_IT');
+    public $_langFiles = array('en'=>'en','fr'=>'fr_FR','it'=>'it_IT');
     
     public function __construct()
     {
@@ -16,40 +14,34 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
 
     public function preDispatch($request)
     {
+        $controller = $request->getControllerName();
+        $action = $request->getActionName();
+        Tdxio_Log::info($controller,'controller');
+        Tdxio_Log::info($action,'action');        
         Tdxio_Log::info($_SESSION,'session');
-        //Tdxio_Log::info($this->_defaultOptions,'locale pref construct');
         Tdxio_Log::info('flusso: 5 PLUGIN PREDISPATCH');
+        
         $options = $this->getPref();
         $this->setCurPref($options);
         
-        $controller = $request->getControllerName();
-        $action = $request->getActionName();
-        
         if(!empty($controller)){
             $langform = new Form_LangSel();
-            Tdxio_Log::info($controller,'controller');
-            Tdxio_Log::info($action,'action');
             Tdxio_Log::info($request->isPost(),'ispost');
             if($request->isPost()){
                 if ($langform->isValid($this->getRequest()->getPost())) {
                 
                     Tdxio_Log::info('flusso: 6 PLUGIN POST FORM');
-                    Tdxio_Log::info('prefplugin predispatch');
                     $lang_option = $langform->getValues();
                     $this->setCurPref($lang_option);
-                    Tdxio_Log::info($lang_option,'langoption prefplugin');
                     $langform = new Form_LangSel();
                     $this->_response->setRedirect($request->getRequestUri());
                 }
-            }
-            $layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
-            $view = $layout->getView();
-            $view->langform=$langform;        
-            
+            }                  
         }
-            
-        
-        $view->prefs = $options;/* */
+        $layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
+        $view = $layout->getView();
+        $view->langform=$langform;     
+        $view->prefs = $options;
     }
         
 
@@ -57,62 +49,31 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
     {
         Tdxio_Log::info('flusso: 7 PLUGIN POSTDISPATCH');
         
-        try{
-            $options = Zend_Registry::get('preferences');
-            $this->savePref($options);
-        }catch(Zend_Exception $e){
-            Tdxio_Log::info('Failed to save options in the db, there are no stored options in zend resgistry');
-        }
-    }
-    
-    protected function savePref($options){
-        Tdxio_Log::info('flusso: 8 PLUGIN SAVEPREF');
+        $options = $this->getPref();
         if(!is_null($this->_userid)){
-            $userModel = new Model_User();
-            $userModel->setOptions($this->_userid,$options);
-        }        
+            Tdxio_Preferences::setDbPrefs($this->_userid,$options);
+        }
     }
     
     protected function setCurPref(array $options){
         Tdxio_Log::info($options,'flusso: 9 PLUGIN SETCURPREF');
-        //refreshes stored preferences with passed values, if not null
-        /*
-        try{
-            $stored_options = Zend_Registry::get('preferences');
-        }catch(Zend_Exception $e){$stored_options = array();}
-        $newoptions = $stored_options;
-        if(!empty($options)){
-            foreach($options as $optKey=>$value){
-                if(!empty($value)){
-                    $newoptions[$optKey]=$value;
-                }
-            } 
-        }
-        Zend_Registry::set('preferences',$newoptions);*/
-        $this->setSessionPrefs($options);
+        Tdxio_Preferences::setSessionPrefs($options);
         $this->setCurLanguage($options);
     }
     
     public function getPref($opt_name=null){
         Tdxio_Log::info('flusso: 10 PLUGIN GETPREF');
-        
-        $options = $this->getSessionPrefs();
+        $options = array();
+        $options = Tdxio_Preferences::getSessionPrefs();
         if(empty($options)){
-        
-            $options = Zend_Registry::get('preferences');  
-                   
-            //if there are any user preferences in the db, refresh $options with those values
-            if(!is_null($this->_userid)){
-                $userModel = new Model_User();
-                $user_options = $userModel->getOptions($this->_userid,$opt_name);
-                if(!empty($user_options)){// if the user has no preferences, return the default ones
-                    foreach($user_options as $key=>$val){
-                        if(!empty($val)){
-                            $options[$key]=$val;
-                        }
-                    }                
-                }
-            }
+            $options = Tdxio_Preferences::getDbPrefs($this->_userid);
+        }
+        if(empty($options)){
+            try{
+                $options = Zend_Registry::get('preferences');
+            }catch(Zend_Exception $e){
+                Tdxio_Log::info('There are no stored options in zend registry');
+            }    
         }
         return $options;
     }
@@ -126,39 +87,14 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
             Tdxio_Log::info($lanPref,'aaaaa');            
             if(!empty($lanPref)){
                 $translate = Zend_Registry::get('Zend_Translate');
-                $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',substr($lanPref, 0,2));        
+                try{
+                    $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',substr($lanPref, 0,2));        
+                }catch(Zend_Exception $e){
+                    Tdxio_Log::info($e,'ERRORE IN SETCURLANGUAGE');
+                }
                 Tdxio_Log::info($translate->getLocale(),'locale after getPref');                    
             }
         }
     }
 
-    public function getSessionPrefs(){
-        
-        $tdxioPrefs = new Zend_Session_Namespace('Tdxio_Prefs');
-        $options = array();
-        if(isset($tdxioPrefs->preferences)){
-            $options = $tdxioPrefs->preferences;
-            Tdxio_Log::info($options,'GET SESSION PREF: session options exist');
-        }
-        return $options;
-    }
-    
-    public function setSessionPrefs($options){
-        $ses_options=$this->getSessionPrefs();
-        if(empty($ses_options)){
-            $ses_options = $options;
-        }else{
-            foreach($options as $name=>$opt){
-                if(!empty($opt)){
-                    $ses_options[$name]=$opt;
-                    Tdxio_Log::info($opt,'opt');
-                }
-            }
-        }
-        $tdxioPrefs = new Zend_Session_Namespace('Tdxio_Prefs');
-        $tdxioPrefs->preferences=$ses_options;
-        Tdxio_Log::info($_SESSION,'session after setsessionprefs');
-        return $ses_options;    
-    }
-    
 }

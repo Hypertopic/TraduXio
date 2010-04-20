@@ -47,7 +47,8 @@ class LoginController extends Tdxio_Controller_Abstract
                     $user = Tdxio_Auth::getUserName();
                     $model = new Model_User();          
                     $model->registerUser($user);
-                        
+                    
+                    Tdxio_Preferences::setSessionPrefs(Tdxio_Preferences::getDbPrefs($user));
                     // We're authenticated! Redirect to the original page
                     $this->_redirect($values['redirect']);
                 } else {

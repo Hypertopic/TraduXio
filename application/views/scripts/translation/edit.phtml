@@ -23,6 +23,7 @@ tdxio.translation.destLang = '<?php echo $this->translation['language']; ?>';
 <?php $this->headScript()->captureEnd(); ?>
 <?php //if ($this->translation['srcText']['Language']['rtl']) $origDir=' rtl'; else $origDir=""; ?>
 <?php //if ($this->translation['Language']['rtl']) $transDir=' rtl'; else $transDir=""; ?>
+
 <?php $elements=$this->form->getElements(); ?>
 <form action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>">
 
@@ -81,10 +82,14 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
     <div class="Lborder hundred">
     <div class="Rborder hundred">
         <div class = "work-container hundred">
-            <div class="title spaced"><?php echo __('Original text').': ' ?><?php echo $this->escape($this->translation['OriginalWork']['title']); ?></div>
-            <div class="language spaced">
-                <?php $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');}?>
-                <?php echo $author.' - '.__($this->translation['OriginalWork']['language']); ?>
+            <div class="title">
+            <?php //echo __('Original text').': ' 
+                $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');} ?>
+                <span class="author red"><?php echo $author.', ' ?></span>
+                <span class="title red"><?php echo $this->escape($this->translation['OriginalWork']['title']); ?></span>
+            </div>
+            <div class="language red">
+                <?php echo __($this->translation['OriginalWork']['language']); ?>
             </div>
         </div>        
     </div>    
@@ -99,7 +104,9 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
         <div class="Lborder hundred">
         <div class="Rborder hundred">
             <div class = "work-container hundred">
-                <div class="title spaced"><?php echo __('This translation').': ' ?><?php echo $elements['title']->render() ?><span class="language"><?php echo $elements['author']->render() ?></span></div>
+                <div class="title">
+                <span class="author"><?php echo __('Title').': ' ?></span>
+                <?php echo $elements['title']->render().'  ' ?><span class="author"><?php echo $elements['author']->render() ?></span></div>
                 <div class="language spaced"><?php echo __($this->translation['language']) ?></div>
                 
             </div>
@@ -187,6 +194,7 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 
 
 </table>
+</form>
 <form id="concord-query" action="<?php echo $this->makeUrl('/translation/concord'); ?>" method="post" target="concord" onsubmit="getConcord()">
 <input type="hidden" name="query" id="query-value" />
 <input type="hidden" name="srclang" value="<?php echo $this->translation['OriginalWork']['language']?>"/>

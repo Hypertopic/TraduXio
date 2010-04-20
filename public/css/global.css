@@ -311,9 +311,8 @@ div.work-container{
     margin:0 20px;
 }
 div.upperblock {
-    border:1px solid #DBDBDB
+    border:1px solid #DBDBDB;
 }
-
 td.bottom-spacer {
     height:42px;
 }
@@ -685,7 +684,7 @@ div.show-tag-area{
 #header-navigation{    
     margin-top:5px;
     min-width:600px;
-    width:55%;
+    width:60%;
     float:right;
     text-align:right;
 }

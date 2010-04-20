@@ -8,9 +8,9 @@ class Form_LangSel extends Zend_Form
     {
         Tdxio_Log::info('flusso: 12 FORM INIT');
         
-        $this->_langs=array('it'=>__('ita'),
-                           'fr'=>__('fra'),
-                           'en'=>__('eng'));
+        $this->_langs=array('it'=>'Italiano',
+                           'fr'=>'Français',
+                           'en'=>'English');
         asort($this->_langs);
         Tdxio_Log::info($this->_langs,' langs');
                            
@@ -19,7 +19,6 @@ class Form_LangSel extends Zend_Form
         
         $lang = $this->createElement('select','lang', array(
             'decorators' => array('FormElements','ViewHelper'),
-            //'label'      => __('Select Your Language'),
             'multiOptions'=> $this->_langs,
             'id'   =>  'langsel',
             'onChange' => 'this.form.submit();',
@@ -39,20 +38,12 @@ class Form_LangSel extends Zend_Form
         Tdxio_Log::info('flusso: 13 FORM GETPREFLANG');
         $prefLang = 'en';
         
-        $tdxioPrefs = new Zend_Session_Namespace('Tdxio_Prefs');
-        $prefs = array();
-        if(isset($tdxioPrefs->preferences)){
-            $prefs = $tdxioPrefs->preferences;
-            Tdxio_Log::info($prefs,'GETPREFLANG: session options exist');
-        }
+        $prefs = Tdxio_Preferences::getSessionPrefs();        
         
-        /*try{
-            $prefs = Zend_Registry::get('preferences');*/
-            if(isset($prefs['lang'])){  
-                Tdxio_Log::info($prefs['lang'],'lingua preferita nel select');
-                $prefLang = $prefs['lang'];
-           }/* 
-        }catch(Zend_Exception $e){}*/
+        if(isset($prefs['lang'])){  
+            Tdxio_Log::info($prefs['lang'],'lingua preferita nel select');
+            $prefLang = $prefs['lang'];
+        }
         Tdxio_Log::info($prefLang,'sel pref lang');
         return $prefLang;    
     }
