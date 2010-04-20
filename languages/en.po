@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-12 20:23+0100\n"
+"POT-Creation-Date: 2010-04-20 12:32+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPath-7: views/scripts/error\n"
 "X-Poedit-SearchPath-8: views/scripts/index\n"
 
-#: controllers/WorkController.php:55
+#: controllers/WorkController.php:56
 msgid "Anonymous"
 msgstr "Anonymous"
 
@@ -62,7 +62,6 @@ msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 msgstr "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 
 #: forms/TranslationEdit.php:61
-#: forms/TextDeposit.php:54
 msgid "Author"
 msgstr "Author"
 
@@ -78,6 +77,10 @@ msgstr "Save and quit"
 #: forms/TranslationEdit.php:90
 msgid "Cancel"
 msgstr "Cancel"
+
+#: forms/Tag.php:49
+msgid "Genre"
+msgstr "Genre"
 
 #: forms/Tag.php:60
 msgid "TAG"
@@ -108,7 +111,6 @@ msgid "Text to add"
 msgstr "Text to add"
 
 #: forms/TextExtend.php:53
-#: forms/TextDeposit.php:86
 msgid "Deposit"
 msgstr "Deposit"
 
@@ -183,7 +185,7 @@ msgstr "About"
 msgid "Feedback"
 msgstr "Feedback"
 
-#: layouts/scripts/layout.phtml:71
+#: layouts/scripts/layout.phtml:73
 #, php-format
 msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 msgstr "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
@@ -251,28 +253,12 @@ msgstr "(%1$s Translations)"
 msgid "Latest News"
 msgstr "Latest News"
 
-#: views/scripts/work/index.phtml:84
-msgid "seconds"
-msgstr "seconds"
-
-#: views/scripts/work/index.phtml:85
-msgid "minutes"
-msgstr "minutes"
-
-#: views/scripts/work/index.phtml:86
-msgid "hours"
-msgstr "hours"
-
-#: views/scripts/work/index.phtml:87
-msgid "days"
-msgstr "days"
-
-#: views/scripts/work/index.phtml:88
+#: views/scripts/work/index.phtml:61
 #, php-format
 msgid "%1$s %2$s ago"
 msgstr "%1$s %2$s ago"
 
-#: views/scripts/work/index.phtml:99
+#: views/scripts/work/index.phtml:72
 msgid "Homepage"
 msgstr "Homepage"
 
@@ -300,24 +286,24 @@ msgstr "Text inserted by"
 msgid "Read Text"
 msgstr "Read Text"
 
-#: views/scripts/translation/edit.phtml:85
-#: views/scripts/translation/editold.phtml:55
-msgid "Original text"
-msgstr "Original text"
-
-#: views/scripts/translation/edit.phtml:103
-#: views/scripts/translation/editold.phtml:59
-msgid "This translation"
-msgstr "This translation"
-
-#: views/scripts/translation/edit.phtml:198
-#: views/scripts/translation/editold.phtml:116
+#: views/scripts/translation/edit.phtml:205
 msgid "Edit Translation"
 msgstr "Edit Translation"
 
 #: views/scripts/translation/concord.phtml:20
 msgid "Search"
 msgstr "Search"
+
+#: views/scripts/translation/editold.phtml:55
+#: views/scripts/translation/edit-backup29mar10.phtml:52
+#: views/scripts/translation/newedit.phtml:84
+msgid "Original text"
+msgstr "Original text"
+
+#: views/scripts/translation/editold.phtml:59
+#: views/scripts/translation/edit-backup29mar10.phtml:56
+msgid "This translation"
+msgstr "This translation"
 
 #: views/scripts/translation/read.phtml:7
 #: views/scripts/translation/backup/read-condiv.phtml:7
@@ -330,18 +316,18 @@ msgstr "Edit this Translation"
 msgid "Manage Text's privileges"
 msgstr "Manage Text's privileges"
 
-#: views/scripts/translation/read.phtml:69
+#: views/scripts/translation/read.phtml:68
 #: views/scripts/translation/backup/read-condiv.phtml:38
 msgid "Original Text"
 msgstr "Original Text"
 
-#: views/scripts/translation/read.phtml:94
+#: views/scripts/translation/read.phtml:93
 #: views/scripts/translation/newedit.phtml:102
 #: views/scripts/translation/backup/read-condiv.phtml:71
 msgid "Translation"
 msgstr "Translation"
 
-#: views/scripts/translation/read.phtml:117
+#: views/scripts/translation/read.phtml:115
 #: views/scripts/translation/backup/read-condiv.phtml:85
 msgid "Read Translation"
 msgstr "Read Translation"
@@ -353,6 +339,39 @@ msgstr "Manage text's privileges"
 #: views/scripts/login/index.phtml:2
 msgid "Please Login"
 msgstr "Please Login"
+
+msgid "seconds"
+msgstr "seconds"
+
+msgid "minutes"
+msgstr "minutes"
+
+msgid "hours"
+msgstr "hours"
+
+msgid "days"
+msgstr "days"
+
+msgid "second"
+msgstr "second"
+
+msgid "minute"
+msgstr "minute"
+
+msgid "hour"
+msgstr "hour"
+
+msgid "day"
+msgstr "day"
+
+msgid "en"
+msgstr "English"
+
+msgid "fr_FR"
+msgstr "French"
+
+msgid "it_IT"
+msgstr "Italian"
 
 msgid "fas"
 msgstr "Persian"

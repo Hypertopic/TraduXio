@@ -57,4 +57,56 @@ class Tdxio_Preferences
         }   
     }
     
+    public static function mo($filename){
+        if((preg_match('/.mo$/',$filename)>0)AND(preg_match('/^languages/',$filename)<1))
+            return true;
+        else return false;
+            
+    }
+    
+    public static function getCurLanguage(){
+        Tdxio_Log::info('flusso: 14 PREFERENCES GETCURLANGUAGE');
+        $translate = Zend_Registry::get('Zend_Translate');
+        Tdxio_Log::info($translate->getLocale(),'locale getcurlanguage');
+        return $translate->getLocale();
+    }
+    
+    public static function setCurLanguage($options){
+        Tdxio_Log::info('flusso: 11 PLUGIN SETCURLANG');
+        if(isset($options['lang'])){
+            Tdxio_Log::info($options['lang'],'isset');
+            $lanPref = $options['lang'];
+            if(!empty($lanPref)){
+                $translate = Zend_Registry::get('Zend_Translate');
+                try{
+                    $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',$lanPref);        
+                }catch(Zend_Exception $e){
+                    Tdxio_Log::info($e,'ERRORE IN SETCURLANGUAGE');
+                }
+                Tdxio_Log::info($translate->getLocale(),'locale after setCurLanguage');                    
+            }
+        }
+    }
+    
+    public function getLanguageFiles(){
+        Tdxio_Log::info('flusso: 15 PREFERENCES GETLANGUAGEFILES');
+        $files = scandir(APPLICATION_PATH.'/../languages');
+        $mo_files = array_filter($files,"Tdxio_Preferences::mo");
+        Tdxio_Log::info($mo_files,'files in languages');
+        $languages = array();
+        $cur_lang = self::getCurLanguage();
+        foreach($mo_files as $key=>$name){
+            $name = substr($name,0,strlen($name)-3);
+            $languages[$name]=self::original($name);
+        }
+        self::setCurLanguage(array('lang'=>$cur_lang));
+        return $languages;
+    }
+    
+    public function original($langname){
+        Tdxio_Log::info('flusso: 8 PREFERENCES ORIGINAL');
+        self::setCurLanguage(array('lang'=>$langname));
+        $origname = __($langname);
+        return $origname;
+    }
 }

@@ -8,9 +8,7 @@ class Form_LangSel extends Zend_Form
     {
         Tdxio_Log::info('flusso: 12 FORM INIT');
         
-        $this->_langs=array('it'=>'Italiano',
-                           'fr'=>'Français',
-                           'en'=>'English');
+        $this->_langs=Tdxio_Preferences::getLanguageFiles();
         asort($this->_langs);
         Tdxio_Log::info($this->_langs,' langs');
                            

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-12 20:23+0100\n"
+"POT-Creation-Date: 2010-04-20 12:32+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: controllers/WorkController.php:55
+#: controllers/WorkController.php:56
 msgid "Anonymous"
 msgstr "Anonimo"
 
@@ -50,7 +50,6 @@ msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 msgstr "\"%1$s\", tag (%2$s) del testo %3$s modificato da %4$s"
 
 #: forms/TranslationEdit.php:61
-#: forms/TextDeposit.php:54
 msgid "Author"
 msgstr "Autore"
 
@@ -66,6 +65,10 @@ msgstr "Salva ed esci"
 #: forms/TranslationEdit.php:90
 msgid "Cancel"
 msgstr "Annulla"
+
+#: forms/Tag.php:49
+msgid "Genre"
+msgstr "Genere"
 
 #: forms/Tag.php:60
 msgid "TAG"
@@ -96,7 +99,6 @@ msgid "Text to add"
 msgstr "Testo da aggiungere"
 
 #: forms/TextExtend.php:53
-#: forms/TextDeposit.php:86
 msgid "Deposit"
 msgstr "Inserisci"
 
@@ -171,7 +173,7 @@ msgstr "Informazioni"
 msgid "Feedback"
 msgstr "Scrivici"
 
-#: layouts/scripts/layout.phtml:71
+#: layouts/scripts/layout.phtml:73
 #, php-format
 msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 msgstr "L'applicazione %1$s é sviluppata dall'associazione %2$s e dal laboratorio %3$s, con il supporto dell'%4$s e dell'%5$s."
@@ -239,28 +241,12 @@ msgstr "(%1$s Traduzioni)"
 msgid "Latest News"
 msgstr "Ultimi Eventi"
 
-#: views/scripts/work/index.phtml:84
-msgid "seconds"
-msgstr "secondi"
-
-#: views/scripts/work/index.phtml:85
-msgid "minutes"
-msgstr "minuti"
-
-#: views/scripts/work/index.phtml:86
-msgid "hours"
-msgstr "ore"
-
-#: views/scripts/work/index.phtml:87
-msgid "days"
-msgstr "giorni"
-
-#: views/scripts/work/index.phtml:88
+#: views/scripts/work/index.phtml:61
 #, php-format
 msgid "%1$s %2$s ago"
 msgstr "%1$s %2$s fa"
 
-#: views/scripts/work/index.phtml:99
+#: views/scripts/work/index.phtml:72
 msgid "Homepage"
 msgstr "Pagina Principale"
 
@@ -288,24 +274,24 @@ msgstr "Testo inserito da"
 msgid "Read Text"
 msgstr "Leggi Testo"
 
-#: views/scripts/translation/edit.phtml:85
-#: views/scripts/translation/editold.phtml:55
-msgid "Original text"
-msgstr "Testo Originale"
-
-#: views/scripts/translation/edit.phtml:103
-#: views/scripts/translation/editold.phtml:59
-msgid "This translation"
-msgstr "Questa traduzione"
-
-#: views/scripts/translation/edit.phtml:198
-#: views/scripts/translation/editold.phtml:116
+#: views/scripts/translation/edit.phtml:205
 msgid "Edit Translation"
 msgstr "Modifica Traduzione"
 
 #: views/scripts/translation/concord.phtml:20
 msgid "Search"
 msgstr "Ricerca"
+
+#: views/scripts/translation/editold.phtml:55
+#: views/scripts/translation/edit-backup29mar10.phtml:52
+#: views/scripts/translation/newedit.phtml:84
+msgid "Original text"
+msgstr "Testo Originale"
+
+#: views/scripts/translation/editold.phtml:59
+#: views/scripts/translation/edit-backup29mar10.phtml:56
+msgid "This translation"
+msgstr "Questa traduzione"
 
 #: views/scripts/translation/read.phtml:7
 #: views/scripts/translation/backup/read-condiv.phtml:7
@@ -318,18 +304,18 @@ msgstr "Modifica Traduzione"
 msgid "Manage Text's privileges"
 msgstr "Gestione dei Privilegi del Testo"
 
-#: views/scripts/translation/read.phtml:69
+#: views/scripts/translation/read.phtml:68
 #: views/scripts/translation/backup/read-condiv.phtml:38
 msgid "Original Text"
 msgstr "Testo Originale"
 
-#: views/scripts/translation/read.phtml:94
+#: views/scripts/translation/read.phtml:93
 #: views/scripts/translation/newedit.phtml:102
 #: views/scripts/translation/backup/read-condiv.phtml:71
 msgid "Translation"
 msgstr "Traduzione"
 
-#: views/scripts/translation/read.phtml:117
+#: views/scripts/translation/read.phtml:115
 #: views/scripts/translation/backup/read-condiv.phtml:85
 msgid "Read Translation"
 msgstr "Leggi Traduzione"
@@ -342,6 +328,18 @@ msgstr "Gestione dei Privilegi del Testo"
 msgid "Please Login"
 msgstr "Please Login"
 
+msgid "seconds"
+msgstr "secondi"
+
+msgid "minutes"
+msgstr "minuti"
+
+msgid "hours"
+msgstr "ore"
+
+msgid "days"
+msgstr "giorni"
+
 msgid "second"
 msgstr "secondo"
 
@@ -353,6 +351,15 @@ msgstr "ora"
 
 msgid "day"
 msgstr "giorno"
+
+msgid "en"
+msgstr "Inglese"
+
+msgid "fr_FR"
+msgstr "Francese"
+
+msgid "it_IT"
+msgstr "Italiano"
 
 msgid "fas"
 msgstr "Persiano"

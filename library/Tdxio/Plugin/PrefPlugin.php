@@ -4,7 +4,7 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
 {
     public $_userid;
     public $_role;
-    public $_langFiles = array('en'=>'en','fr'=>'fr_FR','it'=>'it_IT');
+    //public $_langFiles = array('en'=>'en','fr'=>'fr_FR','it'=>'it_IT');
     
     public function __construct()
     {
@@ -58,7 +58,7 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
     protected function setCurPref(array $options){
         Tdxio_Log::info($options,'flusso: 9 PLUGIN SETCURPREF');
         Tdxio_Preferences::setSessionPrefs($options);
-        $this->setCurLanguage($options);
+        Tdxio_Preferences::setCurLanguage($options);
     }
     
     public function getPref($opt_name=null){
@@ -78,23 +78,5 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
         return $options;
     }
     
-    //actuates language changes on the base of passed options
-    protected function setCurLanguage($options){
-        Tdxio_Log::info('flusso: 11 PLUGIN SETCURLANG');
-        if(isset($options['lang'])){
-            $lanPref = $this->_langFiles[$options['lang']];
-            Tdxio_Log::info($options['lang']);
-            Tdxio_Log::info($lanPref,'aaaaa');            
-            if(!empty($lanPref)){
-                $translate = Zend_Registry::get('Zend_Translate');
-                try{
-                    $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',substr($lanPref, 0,2));        
-                }catch(Zend_Exception $e){
-                    Tdxio_Log::info($e,'ERRORE IN SETCURLANGUAGE');
-                }
-                Tdxio_Log::info($translate->getLocale(),'locale after getPref');                    
-            }
-        }
-    }
-
+    
 }
