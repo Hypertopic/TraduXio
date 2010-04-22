@@ -34,9 +34,10 @@ class Form_LangSel extends Zend_Form
     
     public function _getPrefLang(){
         Tdxio_Log::info('flusso: 13 FORM GETPREFLANG');
-        $prefLang = 'en';
+       // $prefLang = 'en';
         
-        $prefs = Tdxio_Preferences::getSessionPrefs();        
+        //$prefs = Tdxio_Preferences::getSessionPrefs();        
+        $prefs = Tdxio_Preferences::getPref('lang');        
         
         if(isset($prefs['lang'])){  
             Tdxio_Log::info($prefs['lang'],'lingua preferita nel select');

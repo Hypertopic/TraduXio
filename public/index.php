@@ -28,17 +28,17 @@ require_once 'Zend/Registry.php';
 
 $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en'); 
 Zend_Registry::set('Zend_Translate',$translate);
-    
-$lan = 'en';
+$langname = 'en';
+
 try{//refresh preferences with browser informations
     $locale = new Zend_Locale(Zend_Locale::BROWSER);
     $lan = $locale->getLanguage();
     $reg = $locale->getRegion();
-    //$translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lan.'_'.$reg.'.mo',$lan);
-    //$options['lang']=$lan;//$this->setCurPref(array('lang'=>$lan));
+    $langname = (is_null($reg))?$lan:$lan.'_'.$reg;
 }catch(Zend_Locale_Exception $e) {}
 
-Zend_Registry::set('preferences',array('lang'=>$lan,'color'=>1));       
+Zend_Registry::set('preferences',array('lang'=>$langname,'color'=>1));       
+
 
 
 /*

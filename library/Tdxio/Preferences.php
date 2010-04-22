@@ -31,8 +31,7 @@ class Tdxio_Preferences
     }
     
     public static function getDbPrefs($user){
-        $options = Zend_Registry::get('preferences');  
-               
+    
         //if there are any user preferences in the db, refresh $options with those values
         if(!is_null($user)){
             $userModel = new Model_User();
@@ -45,6 +44,15 @@ class Tdxio_Preferences
                 }                
             }
         }
+        if(empty($options)){
+            try{
+                $options = Zend_Registry::get('preferences');
+                Tdxio_Log::info($options,'registry options');
+            }catch(Zend_Exception $e){
+                Tdxio_Log::info('There are no stored options in zend registry');
+            }
+        } 
+    
         return $options;
     }
     
@@ -82,11 +90,18 @@ class Tdxio_Preferences
                     $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',$lanPref);        
                 }catch(Zend_Exception $e){
                     Tdxio_Log::info($e,'ERRORE IN SETCURLANGUAGE');
+                    if(strlen($lanPref)==2){
+                        $lanPref=$lanPref.'_'.strtoupper($lanPref);
+                    }else{$lanPref=substr($lanPref,0,2);}
+                    try{
+                        $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',$lanPref);        
+                    }catch(Zend_Exception $e){Tdxio_Log::info($e,'ERRORE DEFINITIVO IN SETCURLANGUAGE');}
                 }
                 Tdxio_Log::info($translate->getLocale(),'locale after setCurLanguage');                    
             }
         }
     }
+    
     
     public function getLanguageFiles(){
         Tdxio_Log::info('flusso: 15 PREFERENCES GETLANGUAGEFILES');
@@ -108,5 +123,26 @@ class Tdxio_Preferences
         self::setCurLanguage(array('lang'=>$langname));
         $origname = __($langname);
         return $origname;
+    }
+    
+    public static function getPref($opt_name=null){
+        Tdxio_Log::info('flusso: 10 PLUGIN GETPREF');
+        $options = array();
+        $options = Tdxio_Preferences::getSessionPrefs();
+        Tdxio_Log::info($options,'session options');
+        if(empty($options)){
+            $user = Tdxio_Auth::getUserId();
+            $options = Tdxio_Preferences::getDbPrefs($user);
+            Tdxio_Log::info($options,'db options');
+        }       
+        Tdxio_Log::info($options,'opzioni all\'inizio');
+        if(!is_null($opt_name)){$options = array($opt_name=>$options[$opt_name]);}
+        return $options;
+    }
+    
+    public static function setCurPref(array $options){
+        Tdxio_Log::info($options,'flusso: 9 PLUGIN SETCURPREF');
+        Tdxio_Preferences::setSessionPrefs($options);
+        Tdxio_Preferences::setCurLanguage($options);
     }
 }

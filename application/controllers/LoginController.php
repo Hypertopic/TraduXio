@@ -77,6 +77,7 @@ class LoginController extends Tdxio_Controller_Abstract
     public function logoutAction()
     {
         Zend_Auth::getInstance()->clearIdentity();
+        Zend_Session::namespaceUnset('Tdxio_Prefs'); 
         $this->_helper->redirector('index','index'); // back to login page
     }
     
