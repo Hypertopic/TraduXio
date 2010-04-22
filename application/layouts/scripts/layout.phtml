@@ -34,15 +34,19 @@
             <ul>
             <li> <a href="<?php echo $this->makeUrl('/work/index'); ?>"><?php echo __('Works'); ?></a></li>
             <li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concorder'); ?></a></li>
-            <?php if($this->showCreate): ?>
+        <?php if($this->isMember): ?>
             <li> <a href="<?php echo $this->makeUrl('/work/my'); ?>"><?php echo __('My Translations'); ?></a></li>
+        <?php endif;
+            if($this->showCreate): ?>
             <li> <a href="<?php echo $this->makeUrl('/work/deposit'); ?>"><?php echo __('New text'); ?></a> </li>   
-            <?php endif; ?>
+        <?php endif; ?>
             <li><a href="<?php echo $this->makeUrl('/index/tutorial');?>"><?php echo __('Help'); ?></a></li>
         <?php if ($this->home) :?>
             <li><a href="<?php echo $this->makeUrl('/index/about');?>"><?php echo __('About'); ?></a></li>
-        <?php endif; ?>
+        <?php endif; 
+        if($this->isMember):?>
             <li> <a href="<?php echo $this->makeUrl('/index/feedback');?>"><?php echo __('Feedback'); ?></a> </li>
+        <?php endif; ?>
             <li><?php echo $this->langform; ?></li>
             </ul>
             <!-- To keep urls consistent with the applications router (right now we

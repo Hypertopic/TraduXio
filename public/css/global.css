@@ -167,11 +167,23 @@ div.central{
 }
 div.central-home{
     width:100%;
-    background-color: #FFF;
+    background-color: #F5F5F5;
     border:solid 1px;
     border-color:#DBDBDB;
 }
 
+
+div#error{
+    margin: 40px auto;
+    border: solid 40px;
+    border-color: #EDEDED;
+    background-color: #DCDCDC;
+    width:70%;
+}
+
+div#margin{
+    margin: 20px;
+}
 a:link, a:active {
 color:#0066B7;
 }
@@ -230,12 +242,6 @@ div#results table {
     border-collapse:collapse;
 }
 
-div#black-border{
-    margin: 40px;
-    border: solid 20px;
-    border-color: #333;
-    padding:20px;
-}
 div#tutorial-text {
 border-color:#DEDEDE;
 border-left:3px solid #DEDEDE;
@@ -316,7 +322,7 @@ div.upperblock {
 td.bottom-spacer {
     height:42px;
 }
-div#page-container{
+#page-container{
     text-align: center;
     vertical-align: middle;
     padding: 20px;
@@ -386,7 +392,9 @@ li.text a {
 dt {
 margin:10px 0 3px 30px;
 }
-
+input{
+    color:#585858;
+}
 div#add-privilege,div#rem-privilege{
     width:70%;
     margin:30px auto;
@@ -432,7 +440,16 @@ div.block{
 }
 .srcLang {
 font-variant:small-caps;
+color:#A0A0A0;
+margin-bottom:5px;
 }
+ul.trl{
+text-transform:capitalize;
+}
+li.my{
+    margin:3px;
+}
+
 li.srcLang, li.trlLang, li.srcAuth {
 list-style-image:none;
 list-style-position:outside;
@@ -576,7 +593,10 @@ div.right-container{
 }
 
 div.my-transl{
-text-align:center;
+text-align:left;
+margin: 30px 20px;
+background-color:#F5F5F5;
+border: 1px solid #CCCCCC;
 }
 .lang-select{
 text-align:right;
@@ -603,6 +623,7 @@ border:1px solid #DBDBDB;
 height:auto;
 overflow:hidden;
 width:100%;
+color:#585858;
 }
 
 
@@ -739,7 +760,8 @@ div.show-tag-area{
 div#my-transl-title{
     font-size:200%;
     color:#505050;
-
+    margin:20px;
+    height:50px;
 }
 #autogrow_shadow {
     border:1px solid;

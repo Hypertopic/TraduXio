@@ -52,7 +52,9 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         );  
         if ($privilegeModel->exist($create_privilege) || $view->preview){$view->showCreate=true;}
         else {$view->showCreate=false;}
-        
+        if($this->_role=='member'){
+            $view->isMember=true;
+        }else{$view->isMember=false;}
         
         Tdxio_Log::info($rule,'regola');
         if($rule == 'noAction')

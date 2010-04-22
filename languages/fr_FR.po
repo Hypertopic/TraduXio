@@ -12,7 +12,7 @@ msgstr ""
 
 #: controllers/WorkController.php:56
 msgid "Anonymous"
-msgstr "Anonime"
+msgstr "Anonyme"
 
 #: controllers/WorkController.php:303
 #: controllers/WorkController.php:306
@@ -124,15 +124,15 @@ msgstr "Mot de passe"
 
 #: forms/Login.php:32
 msgid "Login"
-msgstr "Acceder"
+msgstr "Accéder"
 
 #: forms/RemovePrivilege.php:77
 msgid "Remove Privilege"
-msgstr "Eliminer le Privilège"
+msgstr "Éliminer le Privilège"
 
 #: views/helpers/ProfileLink.php:9
 msgid "Welcome"
-msgstr "Bienvenu"
+msgstr "Bienvenue"
 
 #: views/helpers/ProfileLink.php:9
 msgid "Logout"
@@ -145,7 +145,7 @@ msgstr "Projet Traduxio"
 
 #: layouts/scripts/layout.phtml:35
 msgid "Works"
-msgstr "Oeuvres"
+msgstr "Œuvres"
 
 #: layouts/scripts/layout.phtml:36
 msgid "Concorder"
