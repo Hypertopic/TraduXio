@@ -1,5 +1,7 @@
 <div class="my-transl">
-<div id="my-transl-title"><?php echo __('My Translations'); ?></div>
+<div id="my-transl-title">
+<?php echo __('My translations'); ?>
+</div>
 <ul>
 <?php if(empty($this->myEntries)) {echo __("You have not inserted any text's translations");} ?>
 <?php foreach ($this->myEntries as $srcLang=>$trlLang):?>
@@ -7,7 +9,7 @@
     <li class='srcLang'> <?php echo __($srcLang);?> <img src="<?php echo $this->makeUrl('/images/arrow-right.png'); ?>"> <?php echo __($lang);?></li>
     <ul class='trl'>
 <?php foreach ($texts as $text): ?>
-    <li class='text'>
+    <li class='text my'>
     <a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$text['id'])) ?>">
         <?php if($text['title']==''){echo '<i>'.__('No Title').'</i>';}else{echo $text['title'];} ?>
     </a></li>
@@ -19,4 +21,4 @@
 
 </ul>
 </div>
-<?php $this->page_title = __("My Translations");?>
+<?php $this->page_title = __("My translations");?>

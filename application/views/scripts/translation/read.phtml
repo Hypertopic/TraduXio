@@ -1,16 +1,20 @@
 <div id="LRcontainer">
 <div class="left-menu">
-<?php if($this->showEdit || $this->canManage): ?>
 <div class="left-section"><?php echo __('Options'); ?></div>
+<?php if($this->isMember){$explainNA=__("You're not allowed to do this. Ask permissions to the text's owner");}
+      else{$explainNA=__("You're not allowed to do this. Please login");}
+        $a_nohref = 'class="idle" title="'.$explainNA.'"';?>
     
-        <?php if($this->showEdit): ?>
-            <div class="options"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])) ?>"><?php echo __('Edit this Translation'); ?></a></div>      
-            <br>
-        <?php endif; ?>
-        <?php if($this->canManage): ?>
-            <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->translation['id'])) ?>"><?php echo __("Manage Text's privileges"); ?></a></div>    
-        <?php endif; ?>
-<?php endif; ?>
+
+    <?php if($this->showEdit) {$href= 'href="'.$this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])).'"';}
+    else {$href = $a_nohref;}?>
+    <div class="options"><a <?php echo $href; ?>><?php echo __('Edit this translation'); ?></a></div>      
+    <br>
+    
+    <?php if($this->canManage): ?>
+      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->translation['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></div><br>
+    <?php endif; ?>
+
 <br><br>
 <div id="tag-area">
 <?php if($this->canTag){echo $this->tagForm; } ?>
@@ -72,6 +76,7 @@
                 <div class="text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
                                  <?php echo $sentence['content']; ?>
                                  <?php endforeach; ?>
+                                 
                 </div>
                 <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div>
             </div>        
@@ -112,4 +117,4 @@
 </table>
 </div>
 
-<?php $this->page_title=__("Read Translation").': '.$this->escape($this->translation['title']); ?>
+<?php $this->page_title=__("Read translation").': '.$this->escape($this->translation['title']); ?>

@@ -758,8 +758,8 @@ div.show-tag-area{
     padding-left:40px;
 }
 div#my-transl-title{
-    font-size:200%;
-    color:#505050;
+    font-size:1.8em;
+    color:#a0a0a0;/*#505050;*/
     margin:20px;
     height:50px;
 }
@@ -939,4 +939,8 @@ span.author{
 }
 .red{
 color:#D91919;
+}
+
+a.idle{
+color:#d0d0d0;
 }

@@ -17,21 +17,25 @@
     
 <?php endif; ?>
 
-<?php if($this->showCreate || $this->showEdit || $this->canManage): ?>
+<?php if($this->isMember){$explainNA=__("You're not allowed to do this. Ask permissions to the text's owner");}
+      else{$explainNA=__("You're not allowed to do this. Please login");}
+$a_nohref = 'class="idle" title="'.$explainNA.'"';?>
+
 
 <div class="left-section">
     <?php echo __('Options'); ?></div>
-    <?php if($this->showCreate): ?>
-      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])) ?>"><?php echo __('Create a Translation'); ?></a></div><br>
-    <?php endif; ?>
-    <?php if($this->showEdit): ?>
-      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])) ?>"><?php echo __('Continue Text Insertion'); ?></a></div><br>      
-    <?php endif; ?>
-    <?php if($this->canManage): ?>
-      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage Text's Privileges"); ?></a></div><br>
-    <?php endif; ?>
+
+    <?php if($this->showCreate){$href= 'href="'.$this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])).'"';}
+    else {$href = $a_nohref;}?>
+    <div class="options"><a <?php echo $href; ?>><?php echo __('Create a translation'); ?></a></div><br>
     
-<?php endif; ?>
+    <?php if($this->showEdit){$href= 'href="'.$this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])).'"';}
+    else {$href = $a_nohref;}?>
+    <div class="options"><a <?php echo $href; ?>><?php echo __('Continue text insertion'); ?></a></div><br>      
+
+    <?php if($this->canManage): ?>
+      <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></div><br>
+    <?php endif; ?>
 <br><br>
 
 <?php if($this->canTag){echo $this->tagForm; } ?>
@@ -82,4 +86,4 @@
 </div>
 </div>
 </div>
-<?php $this->page_title = __("Read Text").': '.$this->escape($this->work['title']); ?>
+<?php $this->page_title = __("Read text").': '.$this->escape($this->work['title']); ?>

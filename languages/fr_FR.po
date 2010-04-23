@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-20 12:32+0100\n"
+"POT-Creation-Date: 2010-04-23 11:03+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -152,36 +152,34 @@ msgid "Concorder"
 msgstr "Concordancier"
 
 #: layouts/scripts/layout.phtml:38
-#: views/scripts/work/my.phtml:2
-#: views/scripts/work/my.phtml:22
 msgid "My Translations"
 msgstr "Mes Traductions"
 
-#: layouts/scripts/layout.phtml:39
+#: layouts/scripts/layout.phtml:41
 msgid "New text"
 msgstr "Nouveau texte"
 
-#: layouts/scripts/layout.phtml:41
+#: layouts/scripts/layout.phtml:43
 msgid "Help"
 msgstr "Aide"
 
-#: layouts/scripts/layout.phtml:43
+#: layouts/scripts/layout.phtml:45
 msgid "About"
 msgstr "Informations"
 
-#: layouts/scripts/layout.phtml:45
+#: layouts/scripts/layout.phtml:48
 msgid "Feedback"
 msgstr "Feedback"
 
-#: layouts/scripts/layout.phtml:73
+#: layouts/scripts/layout.phtml:77
 #, php-format
 msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 msgstr "Le logiciel %1$s est développé par l'association %2$s et le laboratoire %3$s avec le soutien de l'%4$s et de l'%5$s."
 
 #: views/scripts/work/manage.phtml:15
-#: views/scripts/work/read.phtml:31
-msgid "Manage Text's Privileges"
-msgstr "Gestion des Privilèges du Texte"
+#: views/scripts/work/read.phtml:37
+msgid "Manage text's privileges"
+msgstr "Gestion des privilèges du texte"
 
 #: views/scripts/work/manage.phtml:18
 msgid "Back to the text"
@@ -216,11 +214,16 @@ msgid "Last segment of the text"
 msgstr "Dernier segment du texte "
 
 #: views/scripts/work/extend.phtml:27
-#: views/scripts/work/read.phtml:28
-msgid "Continue Text Insertion"
-msgstr "Continuer Insertion"
+#: views/scripts/work/read.phtml:34
+msgid "Continue text insertion"
+msgstr "Continuer l'insertion du texte"
 
-#: views/scripts/work/my.phtml:4
+#: views/scripts/work/my.phtml:3
+#: views/scripts/work/my.phtml:24
+msgid "My translations"
+msgstr "Mes traductions"
+
+#: views/scripts/work/my.phtml:6
 msgid "You have not inserted any text's translations"
 msgstr "Vous n'avez pas inséré de traductions"
 
@@ -250,6 +253,10 @@ msgstr "il y a %1$s %2$s"
 msgid "Homepage"
 msgstr "Page Principale"
 
+#: views/scripts/work/translate.phtml:12
+msgid "Language"
+msgstr "Langue"
+
 #: views/scripts/work/translate.phtml:24
 msgid "Create Translation of"
 msgstr "Créer une Traduction de"
@@ -258,75 +265,61 @@ msgstr "Créer une Traduction de"
 msgid "Translations"
 msgstr "Traductions"
 
-#: views/scripts/work/read.phtml:23
+#: views/scripts/work/read.phtml:20
+msgid "You're not allowed to do this. Ask permissions to the text's owner"
+msgstr "Vous n'avez pas le droits nécessaires. Demandez au propriétaire du texte."
+
+#: views/scripts/work/read.phtml:21
+msgid "You're not allowed to do this. Please login"
+msgstr "Vous n'avez pas le droits nécessaires. Identifiez vous"
+
+#: views/scripts/work/read.phtml:26
 msgid "Options"
 msgstr "Options"
 
-#: views/scripts/work/read.phtml:25
-msgid "Create a Translation"
-msgstr "Créer une Traduction"
+#: views/scripts/work/read.phtml:30
+msgid "Create a translation"
+msgstr "Créer une traduction"
 
-#: views/scripts/work/read.phtml:76
+#: views/scripts/work/read.phtml:80
 msgid "Text inserted by"
 msgstr "Texte ajouté par"
 
-#: views/scripts/work/read.phtml:85
-msgid "Read Text"
-msgstr "Lecture du Texte"
+#: views/scripts/work/read.phtml:89
+msgid "Read text"
+msgstr "Lecture du texte"
 
 #: views/scripts/translation/edit.phtml:205
-msgid "Edit Translation"
-msgstr "Modifier cette Traduction"
+msgid "Edit translation"
+msgstr "Modifier cette traduction"
 
 #: views/scripts/translation/concord.phtml:20
 msgid "Search"
 msgstr "Recherche"
 
-#: views/scripts/translation/editold.phtml:55
-#: views/scripts/translation/edit-backup29mar10.phtml:52
-#: views/scripts/translation/newedit.phtml:84
-msgid "Original text"
-msgstr "Texte original"
-
-#: views/scripts/translation/editold.phtml:59
-#: views/scripts/translation/edit-backup29mar10.phtml:56
-msgid "This translation"
-msgstr "Traduction"
-
-#: views/scripts/translation/read.phtml:7
-#: views/scripts/translation/backup/read-condiv.phtml:7
-#: views/scripts/translation/backup/backup-read_with_div.phtml:11
-msgid "Edit this Translation"
-msgstr "Modifier cette Traduction"
-
 #: views/scripts/translation/read.phtml:11
-#: views/scripts/translation/backup/read-condiv.phtml:11
-msgid "Manage Text's privileges"
-msgstr "Gestion des Privilèges du Texte"
+msgid "Edit this translation"
+msgstr "Modifier cette traduction"
 
-#: views/scripts/translation/read.phtml:68
-#: views/scripts/translation/backup/read-condiv.phtml:38
+#: views/scripts/translation/read.phtml:72
 msgid "Original Text"
 msgstr "Texte Original"
 
-#: views/scripts/translation/read.phtml:93
-#: views/scripts/translation/newedit.phtml:102
-#: views/scripts/translation/backup/read-condiv.phtml:71
+#: views/scripts/translation/read.phtml:98
 msgid "Translation"
 msgstr "Traduction"
 
-#: views/scripts/translation/read.phtml:115
-#: views/scripts/translation/backup/read-condiv.phtml:85
-msgid "Read Translation"
-msgstr "Lecture Traduction"
-
-#: views/scripts/translation/backup/backup-read_with_div.phtml:14
-msgid "Manage text's privileges"
-msgstr "Gestion des Privilèges du Texte"
+#: views/scripts/translation/read.phtml:120
+msgid "Read translation"
+msgstr "Lecture traduction"
 
 #: views/scripts/login/index.phtml:2
 msgid "Please Login"
 msgstr "Identifiez vous"
+
+#: views/scripts/index/feedback.phtml:16
+msgid "Send your feedback"
+msgstr "Envoyez votre message"
 
 msgid "seconds"
 msgstr "secondes"
@@ -1618,6 +1611,14 @@ msgstr "Urdu"
 msgid "vls"
 msgstr "Flemish"
 
+#~ msgid "Manage Text's Privileges"
+#~ msgstr "Gestion des Privilèges du Texte"
+#~ msgid "Original text"
+#~ msgstr "Texte original"
+#~ msgid "This translation"
+#~ msgstr "Traduction"
+#~ msgid "Manage Text's privileges"
+#~ msgstr "Gestion des Privilèges du Texte"
 #~ msgid "\"%1$s\", added translation of %2$s by %3$s"
 #~ msgstr "\"%1$s\", rajouté traduction de %2$s par %3$s"
 #~ msgid "\"%1$s\", added (%2$s) tag to text %3$s by %4$s"
