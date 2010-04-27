@@ -38,7 +38,8 @@ class Model_Work extends Model_Taggable
     
     public function update(array $data, $id)
     {
-        if (isset($data['insert_text']))  {
+        $table=$this->_getTable();
+        if (isset($data['insert_text']))  { // text added in text extension
             $sentences = $this->_getCutter()->getSentences($data['insert_text']);
             
             $sentenceModel=new Model_Sentence();
@@ -55,18 +56,15 @@ class Model_Work extends Model_Taggable
             Tdxio_Log::info($sentences_offset,'sentences aggiornate nella chiamata diretta');
             Tdxio_Log::info('fromseg is '.$fromseg.', toseg is '.$toseg);
             
-            $table=$this->_getTable();
             Tdxio_Log::info($data);
             $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
             
             //aggiungi un translation block ad ogni traduzione di $id
             $this->addInterpretations($id,$fromseg,$toseg,$data['insert_text']);            
         }
-        if (isset($data['visibility'])){
-            $table=$this->_getTable();
+        if (isset($data['visibility'])||isset($data['author'])||isset($data['title'])){
             $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
-            Tdxio_Log::info($new_id,'nuovo id');
-        }
+        }        
         return $new_id; 
     }
         
@@ -284,12 +282,20 @@ class Model_Work extends Model_Taggable
     public function getAttribute($work_id, $attrname){
 
         $work=$this->fetchWork($work_id,false);
-      
-        if(isset($work[$attrname])){
-            return $work[$attrname];
+        
+        if(!is_array($attrname)){$attrList = array($attrname);}
+        else{$attrList = $attrname;}
+        
+        $data = array();
+        foreach($attrList as $key => $attr){
+            if(isset($work[$attr])){
+                $data[$attr] = $work[$attr];
+            }
         }
-
-        throw new Zend_Exception('The specified attribute does not exist in the database.');
+        if(!empty($data)){
+            if(!is_array($attrname)){return $data[$attrname];}
+            else{return $data;}
+        }else{throw new Zend_Exception('The specified attribute does not exist in the database.');}
     }
 
     public function isAllowed($privilege_name,$work_id){

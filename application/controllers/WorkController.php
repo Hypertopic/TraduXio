@@ -184,7 +184,7 @@ class WorkController extends Tdxio_Controller_Abstract
         {           
             $form = new Form_TextExtend(); 
             $lastsentence = $sentenceModel->fetchSentence($id,$sentenceModel->getLastSentenceNumber($id));
-            Tdxio_Log::info($lastsentence,'pipipopo');
+            Tdxio_Log::info($lastsentence);
             $lasttext = ' '.$lastsentence[0]['content'];
             
             if ($this->getRequest()->isPost()) 
@@ -204,41 +204,36 @@ class WorkController extends Tdxio_Controller_Abstract
             $this->view->lasttext=$lasttext;
             
         }else {
-            throw new Zend_Exception("Couldn't find text $id");
+            throw new Zend_Exception(__("Couldn't find work %1\$d",$id));
         }
     }   
     
     public function editAction(){
-        /*
-         *  $request = $this->getRequest();
+        
+        $request = $this->getRequest();
         $id=$request->getParam('id');
         $model=$this->_getModel();
-        if ($id && ($text=$model->fetchEntry($id))) {
-            if ($text['translation_of']) {
-                $this->log('init form translation');
-                $form = $this->_getForm('edit','translation');
-            } else {
-                $form = $this->_getForm('edit');
-            }
-            if ($this->getRequest()->isPost()) {
-                if ($form->isValid($request->getPost())) {
-
-                    $model = $this->_getModel();
-                    $data=$form->getValues();
-                    $this->log($data);
-                    $newId=$model->update($data,$id);
-
-                    return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
+        if ($id && ($work=$model->fetchWork($id))) {
+            $form = new Form_WorkEdit($id);
+            
+            if ($request->isPost()) {
+                $post=$request->getPost();
+                if(!isset($post['cancel'])){
+                
+                    if ($form->isValid($post)) {
+                        
+                        $data=$form->getValues();
+                        Tdxio_Log::info($data,'dati form work edit');
+                        $newId=$model->update($data,$id);                        
+                    }
                 }
+                return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
             }
-            $form->setDefaults($text);
             $this->view->form=$form;
-            $this->view->text=$text;
+            $this->view->work=$work;
         } else {
-            throw new Zend_Exception("Couldn't find text $id");
+            throw new Zend_Exception("Couldn't find work $id");
         }
-         * 
-         * */
         
     }
 
@@ -466,10 +461,10 @@ class WorkController extends Tdxio_Controller_Abstract
                         $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');      
                 }break; 
             case 'edit':
-                /*      if($request->isPost()){
-                        $rule = array('privilege'=> 'edit','text_id' => $resource_id,'visibility'=>$visibility);        
-                    }else{$rule = array('privilege'=> 'edit','text_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);       
-                    } break; */
+                if($request->isPost()){
+                    $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
+                    }else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);       
+                    } break;
             case 'my': break;                   
             case 'extend':
                 if($request->isPost()){
