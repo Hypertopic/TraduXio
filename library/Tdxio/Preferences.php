@@ -36,7 +36,7 @@ class Tdxio_Preferences
         if(!is_null($user)){
             $userModel = new Model_User();
             $user_options = $userModel->getOptions($user,$opt_name);
-            if(!empty($user_options)){// if the user has no preferences, return the default ones
+            if(!empty($user_options)){
                 foreach($user_options as $key=>$val){
                     if(!empty($val)){
                         $options[$key]=$val;
@@ -44,7 +44,7 @@ class Tdxio_Preferences
                 }                
             }
         }
-        if(empty($options)){
+        if(empty($options)){// if the user has no preferences, return the default ones
             try{
                 $options = Zend_Registry::get('preferences');
                 Tdxio_Log::info($options,'registry options');
@@ -128,11 +128,11 @@ class Tdxio_Preferences
     public static function getPref($opt_name=null){
         Tdxio_Log::info('flusso: 10 PLUGIN GETPREF');
         $options = array();
-        $options = Tdxio_Preferences::getSessionPrefs();
+        $options = self::getSessionPrefs();
         Tdxio_Log::info($options,'session options');
         if(empty($options)){
             $user = Tdxio_Auth::getUserId();
-            $options = Tdxio_Preferences::getDbPrefs($user);
+            $options = self::getDbPrefs($user);
             Tdxio_Log::info($options,'db options');
         }       
         Tdxio_Log::info($options,'opzioni all\'inizio');
@@ -142,7 +142,7 @@ class Tdxio_Preferences
     
     public static function setCurPref(array $options){
         Tdxio_Log::info($options,'flusso: 9 PLUGIN SETCURPREF');
-        Tdxio_Preferences::setSessionPrefs($options);
-        Tdxio_Preferences::setCurLanguage($options);
+        self::setSessionPrefs($options);
+        self::setCurLanguage($options);
     }
 }

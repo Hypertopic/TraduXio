@@ -47,25 +47,39 @@ class Form_AddPrivilege extends Form_Abstract
         $this->setAttrib('id','addform');
         
         $this->addElement('select', 'user', array(
-            'label'      => 'User',
+            'label'      => __('User'),
             'multiOptions'=> $this->_getUsers(),
             'id'   =>  'usersel',
         //'required' => true,
             'class' => 'manage-select'
         ));
         $this->addElement('select', 'privilege', array(
-        'label'      => 'Privilege',
+        'label'      => __('Privilege'),
         'multiOptions'=> $this->_privilegeList,
         'id'   =>  'privsel',
         //'required' => true,
         'class' => 'manage-select'
         ));     
         
+        
+        
         // add the submit button
         $this->addElement('submit', 'submit', array(
-            'label'    => __('Add Privilege'),
+            'label'    => __('Add Privilege')
         ));
-
+        /*
+        $prv_type = $this->addElement('hidden', 'prv_type', array(
+            'value'     => 'ADDV',
+           // 'decorators' => array('Hidden'),
+            'validators' => array(
+            )
+            //'required'   => true,
+        ));
+        
+        $hiddenControl = $this->createElement('hidden', 'formtype');
+        $hiddenControl->setValue('test value');
+        $this->addElement($hiddenControl);
+*/
     }
 
     protected function _getUsers()
@@ -74,7 +88,7 @@ class Form_AddPrivilege extends Form_Abstract
         $usersarray=$userModel->fetchAll();
         Tdxio_Log::info('usersarray in addprivilege');
         Tdxio_Log::info($usersarray->toArray());
-        $users['all']='all users';////////////////////////////////////////////??????????????????
+        $users['all']=__('All users');////////////////////////////////////////////??????????????????
         foreach($usersarray as $key=>$user){
             $users[$user['name']]=$user['name'];
         }       

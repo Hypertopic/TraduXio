@@ -3,7 +3,7 @@
 <div class="left-section"><?php echo __('Options'); ?></div>
 <?php if($this->isMember){$explainNA=__("You're not allowed to do this. Ask permissions to the text's owner");}
       else{$explainNA=__("You're not allowed to do this. Please login");}
-        $a_nohref = 'class="idle" title="'.$explainNA.'"';?>
+      $a_nohref = 'class="idle" title="'.$explainNA.'"';?>
     
 
     <?php if($this->showEdit) {$href= 'href="'.$this->url(array('controller'=>'translation','action'=>'edit','id'=>$this->translation['id'])).'"';}
@@ -69,7 +69,12 @@
         </div>
         <div class="Lborder hundred"><div class="Rborder hundred">
             <div class = "work-container hundred">
-                <div class="title"><?php echo __('Original Text').': ' ?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])) ?>"><?php echo $this->translation['OriginalWork']['title']; ?></a></div>
+                <div class="title"><?php echo __('Original Text').': '?>
+                    <?php echo ($this->translation['OriginalWork']['canRead']); if($this->translation['OriginalWork']['canRead']==true)
+                    {$href= 'href="'.$this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])).'"';}
+                    else {$href = $a_nohref;}?>
+                    <a <?php echo $href; ?>><?php echo $this->translation['OriginalWork']['title']; ?></a>
+                </div>
                 <div class="language">
                 <?php $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');}?>
                 <?php echo $author.' - '.__($this->translation['OriginalWork']['language']); ?></div>

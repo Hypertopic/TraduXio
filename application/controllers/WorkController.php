@@ -12,13 +12,20 @@
 class WorkController extends Tdxio_Controller_Abstract
 {
     protected $_modelname='Work'; 
-    public $_privilegeList=array('Read Text','Edit Text','Create Translation','Manage');
+    public $_privilegeList=array();
     public $MONTHSEC = 1296000; //15 giorni
+    
+    public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
+    {
+        $this->_privilegeList = array( __('Read Text PRV'), __('Edit Text PRV'), __('Create Translation PRV'), __('Manage PRV'), __('Tag Text PRV'));
+        return parent::__construct($request, $response, $invokeArgs);
+    }
     
     public function init()
     {
         // Local to this controller only; affects all actions,
         // as loaded in init: 
+       
     }
 
         /**
@@ -34,13 +41,14 @@ class WorkController extends Tdxio_Controller_Abstract
          */
     public function indexAction()
     {
+        Tdxio_Log::info('flusso: 1 CONTROLLER INDEX');
         $work = $this->_getModel();
         $entries = $work->fetchAllOriginalWorks();
         //Tdxio_Log::info($entries);
                 
         $newModWorks = array();
         $sort=array();
-
+        
         if(!is_null($entries)){
             foreach ($entries as $entry) {
                 
@@ -64,9 +72,8 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         
         $news = $this->sortByAge(array_merge($this->getNews(),$newModWorks));
-        Tdxio_Log::info($news,'newentries');
+        Tdxio_Log::info($entries,'newentries');
         if(!empty($sort)){ksort($sort,SORT_STRING);}     
-        
         $this->view->entries=$sort;        
         $this->view->home = true;
         $this->view->news = $news;
@@ -100,8 +107,10 @@ class WorkController extends Tdxio_Controller_Abstract
         $tagForm = new Form_Tag();
         
         if (!$id || !($work=$model->fetchOriginalWork($id))) {
-            throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
+            
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
         }   
+        
         if(empty($work['Sentences'])){
             return $this->_helper->redirector->gotoSimple('read','translation',null,array('id'=>$id));
         }
@@ -198,6 +207,40 @@ class WorkController extends Tdxio_Controller_Abstract
             throw new Zend_Exception("Couldn't find text $id");
         }
     }   
+    
+    public function editAction(){
+        /*
+         *  $request = $this->getRequest();
+        $id=$request->getParam('id');
+        $model=$this->_getModel();
+        if ($id && ($text=$model->fetchEntry($id))) {
+            if ($text['translation_of']) {
+                $this->log('init form translation');
+                $form = $this->_getForm('edit','translation');
+            } else {
+                $form = $this->_getForm('edit');
+            }
+            if ($this->getRequest()->isPost()) {
+                if ($form->isValid($request->getPost())) {
+
+                    $model = $this->_getModel();
+                    $data=$form->getValues();
+                    $this->log($data);
+                    $newId=$model->update($data,$id);
+
+                    return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
+                }
+            }
+            $form->setDefaults($text);
+            $this->view->form=$form;
+            $this->view->text=$text;
+        } else {
+            throw new Zend_Exception("Couldn't find text $id");
+        }
+         * 
+         * */
+        
+    }
 
     public function manageAction(){
                 
@@ -217,14 +260,16 @@ class WorkController extends Tdxio_Controller_Abstract
                     if($remform->isValid($request->getPost())) {
                         Tdxio_Log::info('isvalid rem');
                         $data=$remform->getValues();
-                        if($data['submit']=="Remove Privilege"){
+                        if($data['submit']==__("Remove Privilege")){
+                            Tdxio_Log::info($data);
                             $remove_list=array_keys($data,1);
+                            Tdxio_Log::info($remove_list,'remove list');
                             if(!empty($remove_list)){                               
                                 $model->removePrivilege($remove_list,array());                              
                                 return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
                             }
                         }
-                        Tdxio_Log::info($data);
+                        Tdxio_Log::info($data,'dati privilege remove');
                     }
                     $this->view->remform=$remform;
                 }
@@ -234,8 +279,9 @@ class WorkController extends Tdxio_Controller_Abstract
                 if($addform->isValid($request->getPost())) {
                     Tdxio_Log::info('isvalid add');
                     $data=$addform->getValues();
-                    if($data['submit']=="Add Privilege"){
-                        Tdxio_Log::info($data);
+                    Tdxio_Log::info($data,'dati privilege add 1');
+                    if($data['submit']==__("Add Privilege")){
+                        Tdxio_Log::info($data,'dati privilege add 2');
                         unset($data['submit']);
                         $data['work_id']=$id;
                         $data['visibility']='custom';
@@ -244,7 +290,7 @@ class WorkController extends Tdxio_Controller_Abstract
                     }
                 }
             }
-            $this->view->link='Switch to Standard Privileges';
+            $this->view->link=__('Switch to Standard Privileges');
         }else{
             $stdform = new Form_StdPrivilege();
             $this->view->stdform=$stdform;
@@ -262,7 +308,7 @@ class WorkController extends Tdxio_Controller_Abstract
                 }
             }
             $this->view->stdform->setDefaults(array('visibility'=>$visibility));
-            $this->view->link='Switch to Custom Privileges';
+            $this->view->link=__('Switch to Custom Privileges');
         }           
         $this->view->visibility=$visibility;
         $this->view->work_id=$id;       
@@ -400,13 +446,13 @@ class WorkController extends Tdxio_Controller_Abstract
         
         switch($action){
             case 'index': 
-                        $rule = array('privilege'=> 'read','work_id' => null);      
-                        break; 
+                $rule = array('privilege'=> 'read','work_id' => null);      
+                break; 
             case 'deposit': 
-                        if($request->isPost()){
-                            $rule = array('privilege'=> 'create','work_id' => null );       
-                        }else{$rule = array('privilege'=> 'create','work_id' => null, 'notAllowed'=>true);} 
-                        break; 
+                if($request->isPost()){
+                    $rule = array('privilege'=> 'create','work_id' => null );       
+                }else{$rule = array('privilege'=> 'create','work_id' => null, 'notAllowed'=>true);} 
+                break; 
             case 'translate':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'translate','work_id' => $resource_id);
@@ -418,19 +464,19 @@ class WorkController extends Tdxio_Controller_Abstract
                     $rule = array('privilege'=> 'tag','work_id' => $resource_id);
                 }else{
                         $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');      
-                }break;                      
-//          case 'edit':
-//                  if($request->isPost()){
-//                      $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
-//                  }else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'notAllowed'=>true,'visibility'=>$visibility);       
-//                  } break; 
+                }break; 
+            case 'edit':
+                /*      if($request->isPost()){
+                        $rule = array('privilege'=> 'edit','text_id' => $resource_id,'visibility'=>$visibility);        
+                    }else{$rule = array('privilege'=> 'edit','text_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);       
+                    } break; */
             case 'my': break;                   
             case 'extend':
-                    if($request->isPost()){
-                        $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
-                    }else{
-                        $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility, 'notAllowed'=>true);    
-                    } break;
+                if($request->isPost()){
+                    $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
+                }else{
+                    $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility, 'notAllowed'=>true);    
+                } break;
             case 'switch':  
             case 'manage':
                 if($request->isPost()){

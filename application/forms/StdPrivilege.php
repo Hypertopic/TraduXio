@@ -46,10 +46,10 @@ class Form_StdPrivilege extends Form_Abstract
         $this->setAttrib('id','stdform');
         
         $this->addElement('radio','visibility',array(
-            'label' => 'Text Visibility',
+            'label' => __('Text visibility'),
             'multiOptions'  => array(
-                'private' => 'Private',
-                'public' => 'Public'
+                'private' => __('Private'),
+                'public' => __('Public')
             ),
             'id'   =>  'stdsel',
             'class' => 'manage-select'

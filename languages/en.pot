@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-23 11:03+0100\n"
+"POT-Creation-Date: 2010-04-26 11:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -23,41 +23,70 @@ msgstr ""
 "X-Poedit-SearchPath-8: views/scripts/index\n"
 "X-Poedit-SearchPath-9: views/helpers\n"
 
-#: controllers/WorkController.php:56
+#: controllers/WorkController.php:20
+msgid "Read Text PRV"
+msgstr "Read text"
+
+#: controllers/WorkController.php:20
+msgid "Edit Text PRV"
+msgstr "Edit text"
+
+#: controllers/WorkController.php:20
+msgid "Create Translation PRV"
+msgstr "Create translation"
+
+#: controllers/WorkController.php:20
+msgid "Manage PRV"
+msgstr "Manage"
+
+#: controllers/WorkController.php:63
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: controllers/WorkController.php:303
-#: controllers/WorkController.php:306
+#: controllers/WorkController.php:279
+#: forms/AddPrivilege.php:68
+msgid "Add Privilege"
+msgstr "Add Privilege"
+
+#: controllers/WorkController.php:289
+msgid "Switch to Standard Privileges"
+msgstr "Switch to Standard Privileges"
+
+#: controllers/WorkController.php:307
+msgid "Switch to Custom Privileges"
+msgstr "Switch to Custom Privileges"
+
+#: controllers/WorkController.php:345
+#: controllers/WorkController.php:348
 msgid "No Title"
 msgstr "No Title"
 
-#: controllers/WorkController.php:315
+#: controllers/WorkController.php:357
 #, php-format
 msgid "\"%1$s\", new text added by %2$s"
 msgstr "\"%1$s\", new text added by %2$s"
 
-#: controllers/WorkController.php:320
+#: controllers/WorkController.php:362
 #, php-format
 msgid "\"%1$s\", new translation of %2$s added by %3$s"
 msgstr "\"%1$s\", new translation of %2$s added by %3$s"
 
-#: controllers/WorkController.php:325
+#: controllers/WorkController.php:367
 #, php-format
 msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 msgstr "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 
-#: controllers/WorkController.php:335
+#: controllers/WorkController.php:377
 #, php-format
 msgid "\"%1$s\", the text has been modified"
 msgstr "\"%1$s\", the text has been modified"
 
-#: controllers/WorkController.php:342
+#: controllers/WorkController.php:384
 #, php-format
 msgid "\"%1$s\", translation of %2$s, has been modified"
 msgstr "\"%1$s\", translation of %2$s, has been modified"
 
-#: controllers/WorkController.php:347
+#: controllers/WorkController.php:389
 #, php-format
 msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 msgstr "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
@@ -87,9 +116,17 @@ msgstr "Genre"
 msgid "TAG"
 msgstr "TAG"
 
-#: forms/AddPrivilege.php:66
-msgid "Add Privilege"
-msgstr "Add Privilege"
+#: forms/AddPrivilege.php:50
+msgid "User"
+msgstr "Read Text PRV"
+
+#: forms/AddPrivilege.php:57
+msgid "Privilege"
+msgstr "Privilege"
+
+#: forms/AddPrivilege.php:91
+msgid "All users"
+msgstr "All users"
 
 #: forms/Feedback.php:42
 msgid "Your email address"
@@ -114,6 +151,18 @@ msgstr "Text to add"
 #: forms/TextExtend.php:53
 msgid "Deposit"
 msgstr "Deposit"
+
+#: forms/StdPrivilege.php:49
+msgid "Text visibility"
+msgstr "Text visibility"
+
+#: forms/StdPrivilege.php:51
+msgid "Private"
+msgstr "Private"
+
+#: forms/StdPrivilege.php:52
+msgid "Public"
+msgstr "Public"
 
 #: forms/TextDeposit.php:44
 msgid "Title"
@@ -142,6 +191,25 @@ msgstr "Login"
 #: forms/RemovePrivilege.php:77
 msgid "Remove Privilege"
 msgstr "Remove Privilege"
+
+#: models/Work.php:325
+msgid "All users are allowed to do everything for this text"
+msgstr "All users are allowed to do everything for this text"
+
+#: models/Work.php:327
+#, php-format
+msgid "All users are allowed to %1$s this text"
+msgstr "All users are allowed to %1$s this text"
+
+#: models/Work.php:330
+#, php-format
+msgid "User %1$s is allowed to do everything for this text"
+msgstr "User %1$s is allowed to do everything for this text"
+
+#: models/Work.php:332
+#, php-format
+msgid "User %1$s is allowed to %2$s this text"
+msgstr "User %1$s is allowed to %2$s this text"
 
 #: views/helpers/ProfileLink.php:9
 msgid "Welcome"
@@ -190,7 +258,8 @@ msgid "The application %1$s has been developed by the %2$s association and the %
 msgstr "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 
 #: views/scripts/work/manage.phtml:15
-#: views/scripts/work/read.phtml:37
+#: views/scripts/work/edit.phtml:40
+#: views/scripts/work/read.phtml:40
 msgid "Manage text's privileges"
 msgstr "Manage text's privileges"
 
@@ -222,14 +291,55 @@ msgstr "NO EXISTING PRIVILEGES"
 msgid "Add a new permission"
 msgstr "Add a new permission"
 
+#: views/scripts/work/edit.phtml:8
+#: views/scripts/work/read.phtml:8
+msgid "Translations"
+msgstr "Translations"
+
+#: views/scripts/work/edit.phtml:20
+#: views/scripts/work/read.phtml:20
+msgid "You're not allowed to do this. Ask permissions to the text's owner"
+msgstr "You're not allowed to do this. Ask permissions to the text's owner"
+
+#: views/scripts/work/edit.phtml:21
+#: views/scripts/work/read.phtml:21
+msgid "You're not allowed to do this. Please login"
+msgstr "You're not allowed to do this. Please login"
+
+#: views/scripts/work/edit.phtml:26
+#: views/scripts/work/read.phtml:26
+msgid "Options"
+msgstr "Options"
+
+#: views/scripts/work/edit.phtml:30
+#: views/scripts/work/read.phtml:30
+msgid "Create a translation"
+msgstr "Create a translation"
+
+#: views/scripts/work/edit.phtml:36
+#: views/scripts/work/extend.phtml:27
+#: views/scripts/work/read.phtml:36
+msgid "Continue text insertion"
+msgstr "Continue text insertion"
+
+#: views/scripts/work/edit.phtml:37
+#: views/scripts/work/read.phtml:37
+msgid "Edit the text"
+msgstr "Edit the text"
+
+#: views/scripts/work/edit.phtml:83
+#: views/scripts/work/read.phtml:83
+msgid "Text inserted by"
+msgstr "Text inserted by"
+
+#: views/scripts/work/edit.phtml:92
+#: views/scripts/work/read.phtml:92
+msgid "Read text"
+msgstr "Read text"
+
 #: views/scripts/work/extend.phtml:19
 msgid "Last segment of the text"
 msgstr "Last segment of the text"
-
-#: views/scripts/work/extend.phtml:27
-#: views/scripts/work/read.phtml:34
-msgid "Continue text insertion"
-msgstr "Continue text insertion"
 
 #: views/scripts/work/my.phtml:3
 #: views/scripts/work/my.phtml:24
@@ -274,34 +384,6 @@ msgstr "Language"
 msgid "Create Translation of"
 msgstr "Create Translation of"
 
-#: views/scripts/work/read.phtml:8
-msgid "Translations"
-msgstr "Translations"
-
-#: views/scripts/work/read.phtml:20
-msgid "You're not allowed to do this. Ask permissions to the text's owner"
-msgstr "You're not allowed to do this. Ask permissions to the text's owner"
-
-#: views/scripts/work/read.phtml:21
-msgid "You're not allowed to do this. Please login"
-msgstr "You're not allowed to do this. Please login"
-
-#: views/scripts/work/read.phtml:26
-msgid "Options"
-msgstr "Options"
-
-#: views/scripts/work/read.phtml:30
-msgid "Create a translation"
-msgstr "Create a translation"
-
-#: views/scripts/work/read.phtml:80
-msgid "Text inserted by"
-msgstr "Text inserted by"
-
-#: views/scripts/work/read.phtml:89
-msgid "Read text"
-msgstr "Read text"
-
 #: views/scripts/translation/edit.phtml:205
 msgid "Edit translation"
 msgstr "Edit translation"
@@ -334,6 +416,17 @@ msgstr "Please Login"
 msgid "Send your feedback"
 msgstr "Send your feedback"
 
+msgid "read"
+msgstr "read"
+
+msgid "edit"
+msgstr "edit"
+
+msgid "translate"
+msgstr "translate"
+
+msgid "manage"
+msgstr "manage"
 
 msgid "seconds"
 msgstr "seconds"

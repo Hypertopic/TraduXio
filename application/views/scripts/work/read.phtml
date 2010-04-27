@@ -29,9 +29,12 @@ $a_nohref = 'class="idle" title="'.$explainNA.'"';?>
     else {$href = $a_nohref;}?>
     <div class="options"><a <?php echo $href; ?>><?php echo __('Create a translation'); ?></a></div><br>
     
-    <?php if($this->showEdit){$href= 'href="'.$this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])).'"';}
-    else {$href = $a_nohref;}?>
-    <div class="options"><a <?php echo $href; ?>><?php echo __('Continue text insertion'); ?></a></div><br>      
+    <?php if($this->showEdit){
+        $href_extend= 'href="'.$this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])).'"';
+        $href_edit = 'href="'.$this->url(array('controller'=>'work','action'=>'edit','id'=>$this->work['id'])).'"';}
+    else {$href_extend = $href_edit = $a_nohref;}?>
+    <div class="options"><a <?php echo $href_extend; ?>><?php echo __('Continue text insertion'); ?></a></div><br>      
+    <div class="options"><a <?php echo $href_edit; ?>><?php echo __('Edit the text'); ?></a></div><br>      
 
     <?php if($this->canManage): ?>
       <div class="options"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></div><br>

@@ -81,6 +81,8 @@ class Model_Translation extends Model_Taggable
         $work['OriginalSentences'] = $sentenceModel->fetchSentences($original_work_id);
         $work['OriginalWorkId'] = $original_work_id;
         $work['OriginalWork'] = $workModel->fetchOriginalWork($original_work_id,false);
+        $work['OriginalWork']['canRead'] = $workModel->isAllowed('read',$original_work_id);
+        Tdxio_Log::info($work['OriginalWork']['canRead'],'DEBUG DEBUG');
         
         $numberedSentences = array();
         foreach($work['OriginalSentences'] as $key => $sentence){
@@ -101,6 +103,7 @@ class Model_Translation extends Model_Taggable
         if(!empty($tags) && $computeMultiplicity==true){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
         }
+        Tdxio_Log::info($work,'traddd');
         return $work;
     }
         

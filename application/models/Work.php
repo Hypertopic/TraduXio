@@ -123,7 +123,9 @@ class Model_Work extends Model_Taggable
     
     public function fetchOriginalWork($work_id,$filter=true){
     
+        Tdxio_Log::info('DEBUG D');
         if(!$work = $this->fetchWork($work_id,$filter)){return null;}
+        Tdxio_Log::info($work,'DEBUG E');
         $sentenceModel= new Model_Sentence();
         $work['Sentences'] = $sentenceModel->fetchSentences($work_id);
         $content = '';
@@ -178,11 +180,19 @@ class Model_Work extends Model_Taggable
         $db = $table->getAdapter();
         $user_name = Tdxio_Auth::getUserName();
         if(is_null($user_name)) $user_name = 'guest';
-        $visibility = 'public';
-    
+        $public_visibility = 'public';
+        
+        if($privilege!='read'){
+            $privilegeList = array($privilege);
+        }else{
+            $prv_model = new Model_Privilege();
+            $privilegeList = $prv_model->_includeReadList;
+        }
         $select = $db->select()->from('work','id')->where('creator = ?',$user_name)
-                                                  ->orWhere('visibility = ?',$visibility)
-                                                  ->orWhere('id IN (?)',$db->select()->from('privileges','work_id')->where('user_id = ?',$user_name)->where('privilege = ?',$privilege));       
+                                                  ->orWhere('visibility = ?',$public_visibility)
+                                                  ->orWhere('id IN (?)',$db->select()->from('privileges','work_id')->where('(user_id = ?',$user_name)
+                                                                                                                   ->orWhere('user_id is NULL )')
+                                                                                                                   ->where('privilege IN (?)',$privilegeList));       
         return $select;     
         
     }
@@ -319,9 +329,19 @@ class Model_Work extends Model_Taggable
         Tdxio_Log::info($list);
         $newlist=array();
         foreach($list as $key=>$item){
-            $item['user_id']=($item['user_id']=='')?'All users are ' : 'User '.$item['user_id'].' is ';
-            $item['privilege']=($item['privilege']=='')?' do everything for ':$item['privilege'];
-            $newlist[$key]['plaintext']= $item['user_id'].' allowed to '.$item['privilege'].' this text.';
+            $newlist[$key]['plaintext']=null;
+            if($item['user_id']=='')
+            {   if($item['privilege']=='')
+                {   $newlist[$key]['plaintext']=__("All users are allowed to do everything for this text");}
+                else
+                {   $newlist[$key]['plaintext']=__("All users are allowed to %1\$s this text",__($item['privilege']));}
+            }else
+            {   if($item['privilege']=='')
+                {   $newlist[$key]['plaintext']=__("User %1\$s is allowed to do everything for this text",$item['user_id']);}
+                else
+                {   $newlist[$key]['plaintext']=__("User %1\$s is allowed to %2\$s this text",$item['user_id'],__($item['privilege']));}
+            }
+            
             $newlist[$key]['id']=$item['id'];
             $newlist[$key]['work_id']=$item['work_id'];
         }       
@@ -336,7 +356,9 @@ class Model_Work extends Model_Taggable
     public function addPrivilege($data){
         $privilegeModel=new Model_Privilege();
         $userModel= new Model_User();
+        Tdxio_Log::info($data['privilege'],'DEBUG PRV');
         $data['privilege']=$privilegeModel->_dbPrivilegeList[$data['privilege']];
+        Tdxio_Log::info($data['privilege'],'DEBUG PRV2');
         $data['user_id']=($data['user']=='all')?null:$data['user'];
         unset($data['user']);
         

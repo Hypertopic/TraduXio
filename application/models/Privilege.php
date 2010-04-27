@@ -14,7 +14,8 @@ class Model_Privilege extends Model_Abstract
     protected $_tableClass = 'Privilege';
     
     
-    public $_dbPrivilegeList=array('read','edit','translate','manage');
+    public $_dbPrivilegeList=array('read','edit','translate','manage','tag');
+    public $_includeReadList = array('read','edit','translate','manage','tag');
     public $_dbPermissions=array('true','false');
     public $_contrary_id=array();
     /**
@@ -101,7 +102,12 @@ class Model_Privilege extends Model_Abstract
         }
         
         if(!is_null($privilege['privilege'])){
-            $select->where('(privilege = ?', $privilege['privilege'])->orWhere('privilege is NULL)');
+            
+            if($privilege['privilege']=='read'){
+                $select->where('(privilege IN (?)', $this->_includeReadList)->orWhere('privilege is NULL)');
+            }else{
+                $select->where('(privilege = ?', $privilege['privilege'])->orWhere('privilege is NULL)');
+            }
         }
         if(!is_null($privilege['work_id'])){
             if($privilege['visibility']=='custom'){
