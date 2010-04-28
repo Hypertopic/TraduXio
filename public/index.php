@@ -37,7 +37,8 @@ try{//refresh preferences with browser informations
     //$reg = $locale->getRegion();
     //$langname = ($reg=='')?$lan:$lan.'_'.$reg;
     $langname = $lan;
-}catch(Zend_Locale_Exception $e) {throw new Zend_Exception('la lingua del browser non è presa');}
+}catch(Zend_Locale_Exception $e) {//throw new Zend_Exception('la lingua del browser non è presa');
+}
 
 Zend_Registry::set('preferences',array('lang'=>$langname,'color'=>1));       
 
