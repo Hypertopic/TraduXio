@@ -250,6 +250,19 @@ class Model_Work extends Model_Taggable
     
     }
     
+    public function isTranslationWork($id)
+    {
+        $table = $this->_getTable();
+        $db = $table->getAdapter();
+        
+        $select = $db->select()->from('interpretation')->where('work_id = ?', $id);
+        $result = $db->fetchAll($select);
+        if(!empty($result))
+            return true;
+        else 
+            return false;           
+    }
+    
     
     protected function addInterpretations($work_id,$fromseg,$toseg,$srcText){
         
@@ -398,6 +411,44 @@ class Model_Work extends Model_Taggable
         
         return($results);
     
+    }
+    
+    public function hasTranslations($id){
+        $table = $this->_getTable();
+        $db = $table->getAdapter();
+        $select = $db->select()->distinct()->from('interpretation','work_id')->where('original_work_id = ?',$id);
+        $result = $db->fetchAll($select);
+        return (!empty($result));
+    }
+    
+    // DELETE A WORK FROM THE DB
+    public function delete($id){
+        
+        if(is_null($id)) return null;
+        $return_value = -1;
+        
+        //eliminare tutti i tag
+        $tagModel = new Model_Taggable();
+        $tagModel->deleteAllTaggableTags($id); 
+
+        if($this->isTranslationWork($id)){//se il work è una traduzione
+            $trlModel = new Model_Translation();
+            if(!is_null($trlWork = $trlModel->fetchTranslationWork($id))){
+                $trlModel->deleteTranslation($id);
+                $return_value = $trlWork['OriginalWorkId'];
+            }
+        }elseif($this->isOriginalWork($id)){
+            $sentModel = new Model_Sentence();
+            $sentModel->deleteSentences($id);            
+            $return_value = -2;
+        }
+        //eliminare tutti i privilegi del work
+        $prvModel = new Model_Privilege();
+        $prvModel->deleteWorkPrivileges($id);
+        
+        $table = $this->_getTable();
+        $table->delete($table->getAdapter()->quoteInto('id = ?',$id));        
+        return $return_value;
     }
 
 }

@@ -59,6 +59,13 @@
     </div>
     </td>
 </tr>
+<tr class="delete-line"><td></td><td>
+    <?php if($this->canDelete): $askConfirm = __("WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?");?>
+    <div class = "delete-work">
+    <a class = "delete-work" href="<?php echo $this->url(array('controller'=>'work','action'=>'delete','id'=>$this->translation['id']))?>" onCLick="<?php echo "return confirm('".$askConfirm."')" ?>" >
+        <?php echo __("Delete this translation"); ?></a></div>
+    <? endif; ?>
+</td></tr>
 <tr class="hundred">
 <td class="orig-column hundred Lborder"> 
 <!--  

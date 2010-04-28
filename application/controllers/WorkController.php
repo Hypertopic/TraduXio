@@ -331,6 +331,18 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
     }
+    
+    public function deleteAction(){
+        $request = $this->getRequest();
+        $id= $request->getParam('id');
+        $model=$this->_getModel();
+        if($model->hasTranslations($id)){throw new Zend_Controller_Action_Exception( sprintf(__("DELETION DENIED: you can't delete texts that have translations. Delete their translations first.")));}
+        else{$orig_id=$model->delete($id);}
+        
+        if( is_null($orig_id) ){ $this->_redirect($_SERVER['HTTP_REFERER']); }
+        elseif( $orig_id<0 ){ return $this->_helper->redirector('index'); }
+        else{ return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$orig_id)); }        
+    }
 
     protected function tagSentence()
     {
@@ -463,8 +475,8 @@ class WorkController extends Tdxio_Controller_Abstract
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
-                    }else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);       
-                    } break;
+                }else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);} 
+                break;
             case 'my': break;                   
             case 'extend':
                 if($request->isPost()){
@@ -478,7 +490,10 @@ class WorkController extends Tdxio_Controller_Abstract
                         $rule = array('privilege'=> 'manage','work_id' => $resource_id,'visibility'=>$visibility);      
                     }else{
                         $rule = array('privilege'=> 'manage','work_id' => $resource_id, 'visibility'=>$visibility, 'notAllowed'=>true); 
-                    } break;            
+                    } break;  
+            case 'delete':
+                $rule = array('privilege'=> 'delete','work_id' => $resource_id,'visibility'=>$visibility);      
+                break;
             default:$rule = 'noAction';
         }               
         return $rule;

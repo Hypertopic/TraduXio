@@ -136,6 +136,10 @@ class Model_Privilege extends Model_Abstract
         return !empty($result);
     }
     
+    public function deleteWorkPrivileges($id){
+        $table = $this->_getTable();
+        $table->delete($table->getAdapter()->quoteInto('work_id = ?',$id));       
+    }
     
     
 }

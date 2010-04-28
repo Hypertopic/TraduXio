@@ -72,7 +72,16 @@ class Model_Taggable extends Model_Abstract
             Tdxio_Log::info($where,'whereee');
             return $tagTable->delete($where);           
         }
-        throw new Zend_Exception('Not enough parameters to delete a tag');           
+        throw new Zend_Exception(__('Not enough parameters to delete a tag'));           
+    }
+    
+    public function deleteAllTaggableTags($taggableId){
+        $tagTable = new Model_DbTable_Tag();
+        if(!(is_null($taggableId))){
+            $where = $tagTable->getAdapter()->quoteInto('taggable = ?',$taggableId);
+            return $tagTable->delete($where);           
+        }
+        throw new Zend_Exception(__('No taggable-id specified'));           
     }
     
 

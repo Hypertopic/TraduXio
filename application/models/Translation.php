@@ -311,6 +311,12 @@ class Model_Translation extends Model_Taggable
         $where = $workTable->getAdapter()->quoteInto('id = ?',$id);
         $workTable->update($data,$where);
     }
+    
+    public function deleteTranslation($id){
+        $table = $this->_getTable();
+        $table->delete($table->getAdapter()->quoteInto('work_id = ?',$id));          
+    }
+
 
 
 }

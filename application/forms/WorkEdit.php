@@ -44,19 +44,6 @@ class Form_WorkEdit extends Form_Abstract
         // set the method for the display form to POST
         $this->setMethod('post');
 
-        /*$title=$this->createElement('text','title');
-        //var_dump($title);
-        $title->setOptions(array(
-            'label'      => 'Title',
-            'required'   => true
-        ));
-        $title->setAttrib('class','title');
-        $title->setAttrib('class',$title->getAttrib('class').' pouet');
-        $this->addElement($title);*/
-
-/*        require_once "TextMetadataDispGrp.php";
-        TextMetadataDispGrp::apply($this,$this->_type);
-*/
         $attrs = $this->_getAttributes();
         $this->addElement('text','title',array(
             'value' =>  $attrs['title'],
@@ -72,12 +59,19 @@ class Form_WorkEdit extends Form_Abstract
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
             ));
             
+            
+        $this->addDisplayGroup(array('title','author'),'tit_auth');
+        $this->tit_auth->setDecorators(array('FormElements',array('HtmlTag',array('tag'=>'div', 'class'=>'spaced'))));
+        
         $this->addElement('select', 'language', array(
             'label'      => __('Language'),
             'multiOptions'=> $this->_getLanguages(),
             'value'     => $attrs['language'],
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
         ));
+        
+        $this->addDisplayGroup(array('language'),'lang');
+        $this->lang->setDecorators(array('FormElements',array('HtmlTag',array('tag'=>'div', 'class'=>'spaced'))));
         
         // add the submit button
         $this->addElement('submit', 'submit', array(
@@ -89,6 +83,10 @@ class Form_WorkEdit extends Form_Abstract
             'label'    => __('Cancel'),
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span'))),
         ));
+        
+        $this->addDisplayGroup(array('submit','cancel'),'buttons');
+        $this->buttons->setDecorators(array('FormElements',array('HtmlTag',array('tag'=>'div', 'class'=>'spaced'))));
+
 
     }
 

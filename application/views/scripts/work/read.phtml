@@ -65,12 +65,17 @@ $a_nohref = 'class="idle" title="'.$explainNA.'"';?>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>
+<?php if($this->canDelete): $askConfirm = __("WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?");?>
+    <div class = "delete-work">
+    <a class = "delete-work" href="<?php echo $this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])) ?>" onCLick="<?php echo "return confirm('".$askConfirm."')" ?>" >
+    <?php echo __("Delete this text"); ?></a>
+    </div>
+<? endif; ?>
 <div id = "page-container">
 <div class = "Tborder"><div class = "TLcorner"></div><div class = "TRcorner"></div></div>
 <!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
         <div class="Lborder hundred"><div class="Rborder hundred">
             <div class = "work-container hundred">
-               
                 <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
                 <div class="language"><?php $author=$this->work['author']; if($author==''){$author=__('Anonymous');}?>
                 <?php echo $author.' - '.__($this->work['language']); ?></div>

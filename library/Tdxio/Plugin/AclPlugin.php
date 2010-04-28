@@ -59,7 +59,6 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         Tdxio_Log::info($rule,'regola');
         if($rule == 'noAction')
         {return;}
-        
                 
         $privilege = array(
                     'user_id' => $this->_userid,
@@ -95,7 +94,11 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
             }               
             $view->notAllowed=false;
         }
-    
+        
+        $deletePrivilege = $privilege;
+        $deletePrivilege['privilege']='delete';
+        $view->canDelete=$privilegeModel->exist($deletePrivilege);
+       
         $request->setControllerName($controllername);
         $request->setActionName($actionName);
     }
