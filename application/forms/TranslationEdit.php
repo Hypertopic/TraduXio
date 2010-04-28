@@ -92,9 +92,8 @@ class Form_TranslationEdit extends Form_Abstract
 
         $this->addDisplayGroup(array('submit','submitquit','cancel'),'buttons');
         $this->buttons->setDecorators(array('FormElements',array('HtmlTag',array('tag'=>'div'))));
-       // $this->log($this->metadata->getDecorators(),'decorators');
-       
-               $this->setDecorators(array(
+        
+        $this->setDecorators(array(
             'FormElements',
             array('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form')),
             array('Description', array('placement' => 'prepend')),

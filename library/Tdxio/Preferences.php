@@ -90,12 +90,13 @@ class Tdxio_Preferences
                     $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',$lanPref);        
                 }catch(Zend_Exception $e){
                     Tdxio_Log::info($e,'ERRORE IN SETCURLANGUAGE');
-                    if(strlen($lanPref)==2){
+                    /*if(strlen($lanPref)==2){
                         $lanPref=$lanPref.'_'.strtoupper($lanPref);
                     }else{$lanPref=substr($lanPref,0,2);}
                     try{
                         $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',$lanPref);        
                     }catch(Zend_Exception $e){Tdxio_Log::info($e,'ERRORE DEFINITIVO IN SETCURLANGUAGE');}
+                    */
                 }
                 Tdxio_Log::info($translate->getLocale(),'locale after setCurLanguage');                    
             }
@@ -115,6 +116,7 @@ class Tdxio_Preferences
             $languages[$name]=self::original($name);
         }
         self::setCurLanguage(array('lang'=>$cur_lang));
+        Tdxio_Log::info($languages,'languages in directory');
         return $languages;
     }
     

@@ -121,6 +121,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$id,'genre'=>$data['tag_genre'],'tag'=>$data['tag_comment']));  
             }
         }
+        
+        $this->view->hasTranslations=$model->hasTranslations($id);        
         $this->view->canTag = $model->isAllowed('tag',$id);
         $this->view->canManage = $model->isAllowed('manage',$id);
         $this->view->work = $work;
@@ -336,8 +338,7 @@ class WorkController extends Tdxio_Controller_Abstract
         $request = $this->getRequest();
         $id= $request->getParam('id');
         $model=$this->_getModel();
-        if($model->hasTranslations($id)){throw new Zend_Controller_Action_Exception( sprintf(__("DELETION DENIED: you can't delete texts that have translations. Delete their translations first.")));}
-        else{$orig_id=$model->delete($id);}
+        if(!($model->hasTranslations($id))){$orig_id=$model->delete($id);}
         
         if( is_null($orig_id) ){ $this->_redirect($_SERVER['HTTP_REFERER']); }
         elseif( $orig_id<0 ){ return $this->_helper->redirector('index'); }

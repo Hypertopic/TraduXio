@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-23 11:03+0100\n"
+"POT-Creation-Date: 2010-04-28 18:11+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -22,51 +22,124 @@ msgstr ""
 "X-Poedit-SearchPath-7: views/scripts/error\n"
 "X-Poedit-SearchPath-8: views/scripts/index\n"
 
-#: controllers/WorkController.php:56
+#: controllers/TranslationController.php:23
+#: controllers/TranslationController.php:81
+#: controllers/TranslationController.php:106
+#, php-format
+msgid "Translation %1$s does not exist."
+msgstr "Translation %1$s does not exist."
+
+#: controllers/TranslationController.php:87
+#, php-format
+msgid "Text Id %1$s does not exist."
+msgstr "Text Id %1$s does not exist."
+
+#: controllers/TranslationController.php:91
+#, php-format
+msgid "Can not cut here (%1$s)"
+msgstr "Can not cut here (%1$s)"
+
+#: controllers/ErrorController.php:32
+msgid "Page not found"
+msgstr "Page not found"
+
+#: controllers/ErrorController.php:38
+msgid "Application error"
+msgstr "Application error"
+
+#: controllers/WorkController.php:20
+msgid "Read Text PRV"
+msgstr "Read Text"
+
+#: controllers/WorkController.php:20
+msgid "Edit Text PRV"
+msgstr "Edit text"
+
+#: controllers/WorkController.php:20
+msgid "Create Translation PRV"
+msgstr "Create Translation"
+
+#: controllers/WorkController.php:20
+msgid "Manage PRV"
+msgstr "Manage"
+
+#: controllers/WorkController.php:20
+msgid "Tag Text PRV"
+msgstr "Tag Text"
+
+#: controllers/WorkController.php:63
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: controllers/WorkController.php:303
-#: controllers/WorkController.php:306
+#: controllers/WorkController.php:111
+#, php-format
+msgid "Work Id %1$s does not exist or you don't have the rights to see it "
+msgstr "Work Id %1$s does not exist or you don't have the rights to see it "
+
+#: controllers/WorkController.php:209
+#, php-format
+msgid "Couldn't find work %1$d"
+msgstr "Couldn't find work %1$d"
+
+#: controllers/WorkController.php:260
+msgid "Remove Privilege"
+msgstr "Remove Privilege"
+
+#: controllers/WorkController.php:280
+#: forms/AddPrivilege.php:68
+msgid "Add Privilege"
+msgstr "Add Privilege"
+
+#: controllers/WorkController.php:290
+msgid "Switch to Standard Privileges"
+msgstr "Switch to STANDARD PRIVILEGES"
+
+#: controllers/WorkController.php:308
+msgid "Switch to Custom Privileges"
+msgstr "Switch to CUSTOM PRIVILEGES"
+
+#: controllers/WorkController.php:357
+#: controllers/WorkController.php:360
 msgid "No Title"
 msgstr "No Title"
 
-#: controllers/WorkController.php:315
+#: controllers/WorkController.php:369
 #, php-format
 msgid "\"%1$s\", new text added by %2$s"
 msgstr "\"%1$s\", new text added by %2$s"
 
-#: controllers/WorkController.php:320
+#: controllers/WorkController.php:374
 #, php-format
 msgid "\"%1$s\", new translation of %2$s added by %3$s"
 msgstr "\"%1$s\", new translation of %2$s added by %3$s"
 
-#: controllers/WorkController.php:325
+#: controllers/WorkController.php:379
 #, php-format
 msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 msgstr "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 
-#: controllers/WorkController.php:335
+#: controllers/WorkController.php:389
 #, php-format
 msgid "\"%1$s\", the text has been modified"
 msgstr "\"%1$s\", the text has been modified"
 
-#: controllers/WorkController.php:342
+#: controllers/WorkController.php:396
 #, php-format
 msgid "\"%1$s\", translation of %2$s, has been modified"
 msgstr "\"%1$s\", translation of %2$s, has been modified"
 
-#: controllers/WorkController.php:347
+#: controllers/WorkController.php:401
 #, php-format
 msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 msgstr "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 
 #: forms/TranslationEdit.php:61
+#: forms/WorkEdit.php:58
 msgid "Author"
 msgstr "Author"
 
 #: forms/TranslationEdit.php:84
-#: forms/StdPrivilege.php:60
+#: forms/WorkEdit.php:78
 msgid "Save"
 msgstr "Save"
 
@@ -75,6 +148,7 @@ msgid "Save and quit"
 msgstr "Save and quit"
 
 #: forms/TranslationEdit.php:90
+#: forms/WorkEdit.php:83
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -86,9 +160,17 @@ msgstr "Genre"
 msgid "TAG"
 msgstr "TAG"
 
-#: forms/AddPrivilege.php:66
-msgid "Add Privilege"
-msgstr "Add Privilege"
+#: forms/AddPrivilege.php:50
+msgid "User"
+msgstr "User"
+
+#: forms/AddPrivilege.php:57
+msgid "Privilege"
+msgstr "Privilege"
+
+#: forms/AddPrivilege.php:91
+msgid "All users"
+msgstr "All users"
 
 #: forms/Feedback.php:42
 msgid "Your email address"
@@ -114,9 +196,25 @@ msgstr "Text to add"
 msgid "Deposit"
 msgstr "Deposit"
 
-#: forms/TextDeposit.php:44
+#: forms/WorkEdit.php:50
 msgid "Title"
 msgstr "Title"
+
+#: forms/WorkEdit.php:67
+msgid "Language"
+msgstr "Language"
+
+#: forms/StdPrivilege.php:49
+msgid "Text visibility"
+msgstr "Text visibility"
+
+#: forms/StdPrivilege.php:51
+msgid "Private"
+msgstr "Private"
+
+#: forms/StdPrivilege.php:52
+msgid "Public"
+msgstr "Public"
 
 #: forms/TextDeposit.php:68
 msgid "Text content"
@@ -138,9 +236,32 @@ msgstr "Password"
 msgid "Login"
 msgstr "Login"
 
-#: forms/RemovePrivilege.php:77
-msgid "Remove Privilege"
-msgstr "Remove Privilege"
+#: models/Taggable.php:75
+msgid "Not enough parameters to delete a tag"
+msgstr "Not enough parameters to delete a tag"
+
+#: models/Taggable.php:84
+msgid "No taggable-id specified"
+msgstr "No taggable-id specified"
+
+#: models/Work.php:354
+msgid "All users are allowed to do everything for this text"
+msgstr "All users are allowed to do everything for this text"
+
+#: models/Work.php:356
+#, php-format
+msgid "All users are allowed to %1$s this text"
+msgstr "All users are allowed to %1$s this text"
+
+#: models/Work.php:359
+#, php-format
+msgid "User %1$s is allowed to do everything for this text"
+msgstr "User %1$s is allowed to do everything for this text"
+
+#: models/Work.php:361
+#, php-format
+msgid "User %1$s is allowed to %2$s this text"
+msgstr "User %1$s is allowed to %2$s this text"
 
 #: views/helpers/ProfileLink.php:9
 msgid "Welcome"
@@ -189,7 +310,7 @@ msgid "The application %1$s has been developed by the %2$s association and the %
 msgstr "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 
 #: views/scripts/work/manage.phtml:15
-#: views/scripts/work/read.phtml:37
+#: views/scripts/work/read.phtml:41
 msgid "Manage text's privileges"
 msgstr "Manage text's privileges"
 
@@ -221,12 +342,16 @@ msgstr "NO EXISTING PRIVILEGES"
 msgid "Add a new permission"
 msgstr "Add a new permission"
 
+#: views/scripts/work/edit.phtml:6
+msgid "Edit text"
+msgstr "Edit text"
+
 #: views/scripts/work/extend.phtml:19
 msgid "Last segment of the text"
 msgstr "Last segment of the text"
 
 #: views/scripts/work/extend.phtml:27
-#: views/scripts/work/read.phtml:34
+#: views/scripts/work/read.phtml:37
 msgid "Continue text insertion"
 msgstr "Continue text insertion"
 
@@ -265,10 +390,6 @@ msgstr "%1$s %2$s ago"
 msgid "Homepage"
 msgstr "Homepage"
 
-#: views/scripts/work/translate.phtml:12
-msgid "Language"
-msgstr "Language"
-
 #: views/scripts/work/translate.phtml:24
 msgid "Create Translation of"
 msgstr "Create Translation of"
@@ -285,19 +406,35 @@ msgstr "You're not allowed to do this. Ask permissions to the text's owner"
 msgid "You're not allowed to do this. Please login"
 msgstr "You're not allowed to do this. Please login"
 
-#: views/scripts/work/read.phtml:26
+#: views/scripts/work/read.phtml:23
+msgid "You can't delete this text because it has some translations. Delete its translations first."
+msgstr "You can't delete this text because it has some translations. Delete its translations first."
+
+#: views/scripts/work/read.phtml:27
 msgid "Options"
 msgstr "Options"
 
-#: views/scripts/work/read.phtml:30
+#: views/scripts/work/read.phtml:31
 msgid "Create a translation"
 msgstr "Create a translation"
 
-#: views/scripts/work/read.phtml:80
+#: views/scripts/work/read.phtml:38
+msgid "Edit the text"
+msgstr "Edit the text"
+
+#: views/scripts/work/read.phtml:46
+msgid "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
+msgstr "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
+
+#: views/scripts/work/read.phtml:49
+msgid "Delete this text"
+msgstr "Delete this text"
+
+#: views/scripts/work/read.phtml:93
 msgid "Text inserted by"
 msgstr "Text inserted by"
 
-#: views/scripts/work/read.phtml:89
+#: views/scripts/work/read.phtml:102
 msgid "Read text"
 msgstr "Read text"
 
@@ -309,19 +446,27 @@ msgstr "Edit translation"
 msgid "Search"
 msgstr "Search"
 
-#: views/scripts/translation/read.phtml:11
+#: views/scripts/translation/read.phtml:7
+msgid "You can't delete this translation because it has some translations. Delete its translations first."
+msgstr "You can't delete this translation because it has some translations. Delete its translations first."
+
+#: views/scripts/translation/read.phtml:12
 msgid "Edit this translation"
 msgstr "Edit this translation"
 
-#: views/scripts/translation/read.phtml:72
+#: views/scripts/translation/read.phtml:24
+msgid "Delete this translation"
+msgstr "Delete this translation"
+
+#: views/scripts/translation/read.phtml:82
 msgid "Original Text"
 msgstr "Original Text"
 
-#: views/scripts/translation/read.phtml:98
+#: views/scripts/translation/read.phtml:113
 msgid "Translation"
 msgstr "Translation"
 
-#: views/scripts/translation/read.phtml:120
+#: views/scripts/translation/read.phtml:135
 msgid "Read translation"
 msgstr "Read translation"
 
@@ -329,9 +474,52 @@ msgstr "Read translation"
 msgid "Please Login"
 msgstr "Please Login"
 
+#: views/scripts/error/error.phtml:8
+msgid "An error occurred"
+msgstr "An error occurred"
+
+#: views/scripts/error/denied.phtml:4
+msgid "Error"
+msgstr "Error"
+
+#: views/scripts/error/denied.phtml:5
+msgid "Access denied"
+msgstr "Access denied"
+
+#: views/scripts/error/denied.phtml:6
+msgid "You are trying to access an area which you have not allowed."
+msgstr "You are trying to access an area which you have not allowed."
+
 #: views/scripts/index/feedback.phtml:16
 msgid "Send your feedback"
 msgstr "Send your feedback"
+
+msgid "release"
+msgstr "release"
+
+msgid "book"
+msgstr "book"
+
+msgid "genre"
+msgstr "genre"
+
+msgid "period"
+msgstr "period"
+
+msgid "comment"
+msgstr "comment"
+
+msgid "read"
+msgstr "read"
+
+msgid "edit"
+msgstr "edit"
+
+msgid "translate"
+msgstr "translate"
+
+msgid "manage"
+msgstr "manage"
 
 msgid "seconds"
 msgstr "seconds"
@@ -1631,8 +1819,6 @@ msgstr "Flemish"
 #~ msgstr "This translation"
 #~ msgid "Manage Text's privileges"
 #~ msgstr "Manage Text's privileges"
-#~ msgid "The application"
-#~ msgstr "The application"
 #~ msgid "has been developed by the"
 #~ msgstr "has been developed by the"
 #~ msgid "association and the"

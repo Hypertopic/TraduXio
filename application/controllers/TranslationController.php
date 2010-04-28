@@ -138,6 +138,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         }
                 
         $workModel = new Model_Work();
+        $this->view->hasTranslations=$workModel->hasTranslations($translationId);        
         $this->view->canTag = $workModel->isAllowed('tag',$translationId);
         $this->view->canManage = $workModel->isAllowed('manage',$translationId);
         $this->view->tagForm = $tagForm;

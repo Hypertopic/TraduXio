@@ -25,6 +25,7 @@ defined('TEMP_PATH')
 require_once 'Zend/Translate.php';
 require_once 'Tdxio/Log.php';
 require_once 'Zend/Registry.php';
+require_once 'Zend/Exception.php';
 
 $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en'); 
 Zend_Registry::set('Zend_Translate',$translate);
@@ -33,9 +34,10 @@ $langname = 'en';
 try{//refresh preferences with browser informations
     $locale = new Zend_Locale(Zend_Locale::BROWSER);
     $lan = $locale->getLanguage();
-    $reg = $locale->getRegion();
-    $langname = ($reg=='')?$lan:$lan.'_'.$reg;
-}catch(Zend_Locale_Exception $e) {}
+    //$reg = $locale->getRegion();
+    //$langname = ($reg=='')?$lan:$lan.'_'.$reg;
+    $langname = $lan;
+}catch(Zend_Locale_Exception $e) {throw new Zend_Exception('la lingua del browser non è presa');}
 
 Zend_Registry::set('preferences',array('lang'=>$langname,'color'=>1));       
 

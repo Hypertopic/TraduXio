@@ -191,21 +191,6 @@ a {
 text-decoration:none;
 }
 
-tr.delete-line{
-    text-align:right;
-}
-div.delete-work{
-    text-align:right;
-    padding:10px;
-}
-a.delete-work{
-    background-color:#FF0000;
-    color:#FFFFFF;
-    padding:5px;
-    font-weight:bold;
-    
-    margin:5px 3px;
-}
 div.logo {
     border-right: thick dotted;
     padding: 15px;

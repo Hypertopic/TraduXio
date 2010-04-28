@@ -29,13 +29,13 @@ class ErrorController extends Tdxio_Controller_Abstract
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
-                $this->view->message = 'Page not found';
+                $this->view->message = __('Page not found');
                 break;
 
             default:
                 // application error 
                 $this->getResponse()->setHttpResponseCode(500);
-                $this->view->message = 'Application error';
+                $this->view->message = __('Application error');
                 break;
         }
         $this->view->env       = $this->getInvokeArg('env'); 

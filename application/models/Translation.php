@@ -32,28 +32,31 @@ class Model_Translation extends Model_Taggable
         $table  = $this->_getTable();
             
         // control part
-        $oldBlocks = $this->fetchInterpretations($translationId);
+        $oldBlocks = $this->fetchInterpretations($translationId);// non indexées
         Tdxio_Log::info('old blocks');
         Tdxio_Log::info($oldBlocks);
         $newBlocks=$data['TranslationBlocks'];
         Tdxio_Log::info('new blocks');
         Tdxio_Log::info($newBlocks);
         // end control part
-        
+        $orderedBlocks=array();
+        foreach ($oldBlocks as $oldBlock) {
+            $orderedBlocks[$oldBlock['from_segment']]=$oldBlock;
+        }
         foreach ($newBlocks as $block) {
             $from=$block['from_segment'];
-            if (isset($oldBlocks[$from])) {
-                $oldBlock=$oldBlocks[$from];
+            if (isset($orderedBlocks[$from])) {
+                $oldBlock=$orderedBlocks[$from];//!!!!!!!
                 foreach ($block as $key=>$value) {
                     $oldBlock[$key]=$value;
                 }
                 $block=$oldBlock;
             }           
-            $oldBlocks[$from]=$block;
+            $orderedBlocks[$from]=$block;
         }
-        Tdxio_Log::info($oldBlocks,'modified blocks');
+        Tdxio_Log::info($orderedBlocks,'modified blocks');
         
-        foreach ($oldBlocks as $block) {
+        foreach ($orderedBlocks as $block) {
             $from=$block['from_segment'];
             $block['work_id']=$translationId;
             $where=$table->getAdapter()->quoteInto('work_id = ? AND ',$translationId).$table->getAdapter()->quoteInto('from_segment = ?',$from);

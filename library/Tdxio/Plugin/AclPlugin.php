@@ -97,6 +97,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         
         $deletePrivilege = $privilege;
         $deletePrivilege['privilege']='delete';
+        unset($deletePrivilege['visibility']);
         $view->canDelete=$privilegeModel->exist($deletePrivilege);
        
         $request->setControllerName($controllername);

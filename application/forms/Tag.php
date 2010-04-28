@@ -46,7 +46,7 @@ class Form_Tag extends Form_Abstract
 
         $genre =$this->createElement('select','tag_genre', array(
             'decorators' => array('FormElements','ViewHelper'),
-            'label'      => __('Genre'),
+            'label'      => __('Category'),
             'multiOptions'=> $this->_getGenres(),
             'id'   =>  'genresel'
             //,
@@ -56,7 +56,7 @@ class Form_Tag extends Form_Abstract
         
         // add the submit button
         $this->addElement('submit', 'tag_button', array(
-            'decorators' => array('FormElements','ViewHelper'),
+            'decorators' => array('ViewHelper'),
             'label'    => __('TAG'),
         ));
 
@@ -68,8 +68,13 @@ class Form_Tag extends Form_Abstract
         $genreModel = new Model_Genre();
         $genres=$genreModel->getGenres();
         Tdxio_Log::info($genres,'genres in Tag Form');
-      
-        return $genres;
+        $translated_genres = array();
+        if(is_array($genres)){
+            foreach($genres as $key=>$genre){
+                $translated_genres[$key] = __($genre);
+            }
+        }      
+        return $translated_genres;
     }
 
 }
