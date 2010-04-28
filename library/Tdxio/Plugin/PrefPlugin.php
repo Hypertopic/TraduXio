@@ -39,6 +39,7 @@ class Tdxio_Plugin_PrefPlugin extends Zend_Controller_Plugin_Abstract
         }
         $layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
         $view = $layout->getView();
+        $view->translate = Zend_Registry::get('Zend_Translate');
         $view->langform=$langform;     
         $view->prefs = $options;
     }

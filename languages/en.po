@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-28 18:11+0100\n"
+"POT-Creation-Date: 2010-04-28 23:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -153,8 +153,8 @@ msgid "Cancel"
 msgstr "Cancel"
 
 #: forms/Tag.php:49
-msgid "Genre"
-msgstr "Genre"
+msgid "Category"
+msgstr "Category"
 
 #: forms/Tag.php:60
 msgid "TAG"
@@ -381,12 +381,12 @@ msgstr "(%1$s Translations)"
 msgid "Latest News"
 msgstr "Latest News"
 
-#: views/scripts/work/index.phtml:61
+#: views/scripts/work/index.phtml:69
 #, php-format
-msgid "%1$s %2$s ago"
-msgstr "%1$s %2$s ago"
+msgid "%1$d %2$s ago"
+msgstr "%1$d %2$s ago"
 
-#: views/scripts/work/index.phtml:72
+#: views/scripts/work/index.phtml:80
 msgid "Homepage"
 msgstr "Homepage"
 
@@ -548,10 +548,10 @@ msgstr "day"
 msgid "en"
 msgstr "English"
 
-msgid "fr_FR"
+msgid "fr"
 msgstr "French"
 
-msgid "it_IT"
+msgid "it"
 msgstr "Italian"
 
 msgid "fas"
@@ -1811,6 +1811,12 @@ msgstr "Urdu"
 msgid "vls"
 msgstr "Flemish"
 
+#~ msgid "fr_FR"
+#~ msgstr "French"
+#~ msgid "it_IT"
+#~ msgstr "Italian"
+#~ msgid "Genre"
+#~ msgstr "Genre"
 #~ msgid "Manage Text's Privileges"
 #~ msgstr "Manage Text's Privileges"
 #~ msgid "Original text"

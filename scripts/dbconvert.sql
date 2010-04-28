@@ -1,4 +1,4 @@
-﻿BEGIN;
+BEGIN;
 
 INSERT INTO import.user (name, last_access)
 SELECT name, last_login FROM public.users WHERE last_login IS NOT NULL
@@ -7,6 +7,11 @@ SELECT name, now() FROM public.users WHERE last_login IS NULL
 ;
 
 INSERT INTO import.user (name,last_access) values('tdxioAnonymousUser',now());
+
+INSERT INTO import.user (name, last_access)
+SELECT distinct creator, now() FROM texts
+WHERE creator NOT IN (SELECT name from import.user);
+
 
 UPDATE public.texts SET creator='tdxioAnonymousUser' WHERE public.texts.creator IS NULL;
 
@@ -85,9 +90,15 @@ INSERT INTO import.tag (taggable, "user", created, "comment", genre)
 	FROM public.texts JOIN public.periods ON period=periods.id, import.genre 
 	WHERE public.texts.period IS NOT NULL AND genre.name='period'; 
 
+INSERT INTO import.genres (name,created) VALUES ('comment',now());
+
 DELETE FROM import.tag WHERE "comment" = '';
 
 --
+
+INSERT INTO import.languages SELECT * FROM public.languages;
+
+
 
 ALTER SCHEMA public RENAME TO olddb;
 ALTER SCHEMA import RENAME TO public;

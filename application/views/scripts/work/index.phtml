@@ -1,5 +1,12 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/close-ul.js')); ?>
-
+<?php 
+    function plural($sing, $plur, $number){
+        if($number==0 or $number == 1)
+            return __($sing);
+        else
+            return __($plur);
+    }
+?>
 <table class="home">
 <tr><td class="logo">
 <div class="logo"><img src="<?php echo $this->makeUrl('/images/traduxio_home_logo.jpg'); ?>">
@@ -53,12 +60,20 @@ foreach ($this->entries as $lang=>$authors) { ?>
            
             <?php $age=$item['age']; ?>
             <span class="age">
-            <?php $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en'); 
-            if($age < 60){$age = round($age);$units =__($translate->plural('second','seconds',$age));}
-            elseif($age < 3600){$age = round($age/60); $units = __($translate->plural('minute','minutes',$age));}
-            elseif($age < 86400){$age = round($age/3600); $units = __($translate->plural('hour','hours',$age));}
-            elseif($age < 2592000){$age = round($age/86400); $units = __($translate->plural('day','days',$age));}
-            echo __("%1\$s %2\$s ago",$age,$units);
+            <?php //$translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en'); 
+            $translate = $this->translate;
+          
+            if($age < 60){$age = round($age);$units =plural("second","seconds",$age);}
+            elseif($age < 3600){$age = round($age/60); $units = plural('minute','minutes',$age);}
+            elseif($age < 86400){$age = round($age/3600); $units = plural('hour','hours',$age);}
+            elseif($age < 2592000){$age = round($age/86400); $units = plural("day","days",$age);}
+            
+            /*if($age < 60){$age = round($age);$units =$translate->plural(__('second'),__('seconds'),$age);}
+            elseif($age < 3600){$age = round($age/60); $units = $translate->plural(__('minute'),__('minutes'),$age);}
+            elseif($age < 86400){$age = round($age/3600); $units = $translate->plural(__('hour'),__('hours'),$age);}
+            elseif($age < 2592000){$age = round($age/86400); $units = $translate->plural(__('day'),__('days'),$age);}*/
+          
+            echo __("%1\$d %2\$s ago",$age,$units);
             ?>
             </span>    
             </li></ul>
