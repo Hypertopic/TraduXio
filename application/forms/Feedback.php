@@ -37,12 +37,8 @@ class Form_Feedback extends Form_Abstract
         // set the method for the display form to POST
         $this->setMethod('post');
         $role = Tdxio_Auth::getUserRole();
-
-
-    
-        
+       
         $title=$this->createElement('text','title');
-        //var_dump($title);
         $title->setOptions(array(
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'div')),'Label'),
             'label'      => __('Subject'),
@@ -50,22 +46,24 @@ class Form_Feedback extends Form_Abstract
         ));
         $this->addElement($title);
         
-        if($role=="guest"){
         $email=$this->createElement('text','emailaddress',array(
-            'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
-            'required'=>true,'label'=>__('Your email address')));
-
+                'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
+                'label'=>__('Your email address')
+                ));
         $email->addValidator(new Zend_Validate_EmailAddress());
-                $this->addElement($email);
+        
+        if($role=="guest"){
+            $email->setOptions(array('required'=>true));
         }elseif($role=="member"){
             $username = Tdxio_Auth::getUserName();
-            $email=$this->createElement('text','username',array(
-                'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
-                'required'=>true,'label'=>__('Your username'),'value'=>$username));
-                        $this->addElement($email);
+            $userhidden = $this->createElement('hidden','username',array('value'=>$username));
+            $userhidden->removeDecorator( 'Label' );
+            $this->addElement($userhidden);
+            $email->setOptions(array('required'=>false));
         }
-
-
+        
+        $this->addElement($email);
+        
         $this->addElement('textarea', 'body', array(
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'div')),'Label'),
             'label'      => __('Your message'),
@@ -88,6 +86,7 @@ class Form_Feedback extends Form_Abstract
         // add the submit button
         $this->addElement('submit', 'submit', array(
             'label'    => __('Send'),
+            'decorators'=> array('ViewHelper',array('HtmlTag',array('tag'=>'div','id'=>'contacts-submit')))
         ));
 
     }
