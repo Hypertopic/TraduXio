@@ -36,13 +36,11 @@ class Form_Feedback extends Form_Abstract
     {
         // set the method for the display form to POST
         $this->setMethod('post');
+        $role = Tdxio_Auth::getUserRole();
 
-        $email=$this->createElement('text','emailaddress',array(
-            'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
-            'required'=>true,'label'=>__('Your email address')));
 
-        $email->addValidator(new Zend_Validate_EmailAddress());
-
+    
+        
         $title=$this->createElement('text','title');
         //var_dump($title);
         $title->setOptions(array(
@@ -51,7 +49,22 @@ class Form_Feedback extends Form_Abstract
             'required'   => true
         ));
         $this->addElement($title);
-        $this->addElement($email);
+        
+        if($role=="guest"){
+        $email=$this->createElement('text','emailaddress',array(
+            'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
+            'required'=>true,'label'=>__('Your email address')));
+
+        $email->addValidator(new Zend_Validate_EmailAddress());
+                $this->addElement($email);
+        }elseif($role=="member"){
+            $username = Tdxio_Auth::getUserName();
+            $email=$this->createElement('text','username',array(
+                'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
+                'required'=>true,'label'=>__('Your username'),'value'=>$username));
+                        $this->addElement($email);
+        }
+
 
         $this->addElement('textarea', 'body', array(
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'div')),'Label'),
@@ -62,13 +75,15 @@ class Form_Feedback extends Form_Abstract
             'cols'=>150
         ));
 
-        $this->addElement('captcha','captcha',array(
-    'label' => "Please verify you're a human",
-    'captcha' => array(
-        'captcha' => 'Figlet',
-        'wordLen' => 4,
-        'timeout' => 300,
-                      )));
+        if($role=="guest"){
+            $this->addElement('captcha','captcha',array(
+                'label' => __("Please verify you're a human"),
+                'captcha' => array(
+                'captcha' => 'Figlet',
+                'wordLen' => 4,
+                'timeout' => 300,
+            )));
+        }
 
         // add the submit button
         $this->addElement('submit', 'submit', array(

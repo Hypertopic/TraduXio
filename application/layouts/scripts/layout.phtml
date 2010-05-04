@@ -43,10 +43,9 @@
             <li><a href="<?php echo $this->makeUrl('/index/tutorial');?>"><?php echo __('Help'); ?></a></li>
         <?php if ($this->home) :?>
             <li><a href="<?php echo $this->makeUrl('/index/about');?>"><?php echo __('About'); ?></a></li>
-        <?php endif; 
-        if($this->isMember):?>
-            <li> <a href="<?php echo $this->makeUrl('/index/feedback');?>"><?php echo __('Feedback'); ?></a> </li>
         <?php endif; ?>
+        <li> <a href="<?php echo $this->makeUrl('/index/feedback');?>"><?php echo __('Feedback'); ?></a> </li>
+        
             <li><?php echo $this->langform; ?></li>
             </ul>
             <!-- To keep urls consistent with the applications router (right now we

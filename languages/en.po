@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-28 23:26+0100\n"
+"POT-Creation-Date: 2010-05-03 15:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -271,6 +271,1762 @@ msgstr "Welcome"
 msgid "Logout"
 msgstr "Logout"
 
+#: ../languages/ripristino/prova_ripristino.php:2
+msgid "release"
+msgstr "release"
+
+#: ../languages/ripristino/prova_ripristino.php:3
+msgid "book"
+msgstr "book"
+
+#: ../languages/ripristino/prova_ripristino.php:4
+msgid "genre"
+msgstr "genre"
+
+#: ../languages/ripristino/prova_ripristino.php:5
+msgid "period"
+msgstr "period"
+
+#: ../languages/ripristino/prova_ripristino.php:6
+msgid "comment"
+msgstr "comment"
+
+#: ../languages/ripristino/prova_ripristino.php:7
+msgid "read"
+msgstr "read"
+
+#: ../languages/ripristino/prova_ripristino.php:8
+msgid "edit"
+msgstr "edit"
+
+#: ../languages/ripristino/prova_ripristino.php:9
+msgid "translate"
+msgstr "translate"
+
+#: ../languages/ripristino/prova_ripristino.php:10
+msgid "manage"
+msgstr "manage"
+
+#: ../languages/ripristino/prova_ripristino.php:11
+msgid "seconds"
+msgstr "seconds"
+
+#: ../languages/ripristino/prova_ripristino.php:12
+msgid "minutes"
+msgstr "minutes"
+
+#: ../languages/ripristino/prova_ripristino.php:13
+msgid "hours"
+msgstr "hours"
+
+#: ../languages/ripristino/prova_ripristino.php:14
+msgid "days"
+msgstr "days"
+
+#: ../languages/ripristino/prova_ripristino.php:15
+msgid "second"
+msgstr "second"
+
+#: ../languages/ripristino/prova_ripristino.php:16
+msgid "minute"
+msgstr "minute"
+
+#: ../languages/ripristino/prova_ripristino.php:17
+msgid "hour"
+msgstr "hour"
+
+#: ../languages/ripristino/prova_ripristino.php:18
+msgid "day"
+msgstr "day"
+
+#: ../languages/ripristino/prova_ripristino.php:19
+msgid "LANGSEL_en"
+msgstr "English"
+
+#: ../languages/ripristino/prova_ripristino.php:20
+msgid "LANGSEL_fr"
+msgstr "Français"
+
+#: ../languages/ripristino/prova_ripristino.php:21
+msgid "LANGSEL_it"
+msgstr "Italiano"
+
+#: ../languages/ripristino/prova_ripristino.php:22
+msgid "fas"
+msgstr "Persian"
+
+#: ../languages/ripristino/prova_ripristino.php:23
+msgid "heb"
+msgstr "Hebrew"
+
+#: ../languages/ripristino/prova_ripristino.php:24
+msgid "ara"
+msgstr "Arabic"
+
+#: ../languages/ripristino/prova_ripristino.php:25
+msgid "aar"
+msgstr "Afar"
+
+#: ../languages/ripristino/prova_ripristino.php:26
+msgid "abk"
+msgstr "Abkhazian"
+
+#: ../languages/ripristino/prova_ripristino.php:27
+msgid "ace"
+msgstr "Achinese"
+
+#: ../languages/ripristino/prova_ripristino.php:28
+msgid "ach"
+msgstr "Acoli"
+
+#: ../languages/ripristino/prova_ripristino.php:29
+msgid "ada"
+msgstr "Adangme"
+
+#: ../languages/ripristino/prova_ripristino.php:30
+msgid "ady"
+msgstr "Adyghe"
+
+#: ../languages/ripristino/prova_ripristino.php:31
+msgid "afh"
+msgstr "Afrihili"
+
+#: ../languages/ripristino/prova_ripristino.php:32
+msgid "afr"
+msgstr "Afrikaans"
+
+#: ../languages/ripristino/prova_ripristino.php:33
+msgid "ain"
+msgstr "Ainu (Japan)"
+
+#: ../languages/ripristino/prova_ripristino.php:34
+msgid "aka"
+msgstr "Akan"
+
+#: ../languages/ripristino/prova_ripristino.php:35
+msgid "akk"
+msgstr "Akkadian"
+
+#: ../languages/ripristino/prova_ripristino.php:36
+msgid "ale"
+msgstr "Aleut"
+
+#: ../languages/ripristino/prova_ripristino.php:37
+msgid "alt"
+msgstr "Southern Altai"
+
+#: ../languages/ripristino/prova_ripristino.php:38
+msgid "amh"
+msgstr "Amharic"
+
+#: ../languages/ripristino/prova_ripristino.php:39
+msgid "ang"
+msgstr "Old English (ca. 450-1100)"
+
+#: ../languages/ripristino/prova_ripristino.php:40
+msgid "anp"
+msgstr "Angika"
+
+#: ../languages/ripristino/prova_ripristino.php:41
+msgid "arc"
+msgstr "Official Aramaic (700-300 BCE)"
+
+#: ../languages/ripristino/prova_ripristino.php:42
+msgid "arg"
+msgstr "Aragonese"
+
+#: ../languages/ripristino/prova_ripristino.php:43
+msgid "arn"
+msgstr "Mapudungun"
+
+#: ../languages/ripristino/prova_ripristino.php:44
+msgid "arp"
+msgstr "Arapaho"
+
+#: ../languages/ripristino/prova_ripristino.php:45
+msgid "arw"
+msgstr "Arawak"
+
+#: ../languages/ripristino/prova_ripristino.php:46
+msgid "asm"
+msgstr "Assamese"
+
+#: ../languages/ripristino/prova_ripristino.php:47
+msgid "ast"
+msgstr "Asturian"
+
+#: ../languages/ripristino/prova_ripristino.php:48
+msgid "ava"
+msgstr "Avaric"
+
+#: ../languages/ripristino/prova_ripristino.php:49
+msgid "ave"
+msgstr "Avestan"
+
+#: ../languages/ripristino/prova_ripristino.php:50
+msgid "awa"
+msgstr "Awadhi"
+
+#: ../languages/ripristino/prova_ripristino.php:51
+msgid "aym"
+msgstr "Aymara"
+
+#: ../languages/ripristino/prova_ripristino.php:52
+msgid "aze"
+msgstr "Azerbaijani"
+
+#: ../languages/ripristino/prova_ripristino.php:53
+msgid "bak"
+msgstr "Bashkir"
+
+#: ../languages/ripristino/prova_ripristino.php:54
+msgid "bal"
+msgstr "Baluchi"
+
+#: ../languages/ripristino/prova_ripristino.php:55
+msgid "bam"
+msgstr "Bambara"
+
+#: ../languages/ripristino/prova_ripristino.php:56
+msgid "ban"
+msgstr "Balinese"
+
+#: ../languages/ripristino/prova_ripristino.php:57
+msgid "bas"
+msgstr "Basa (Cameroon)"
+
+#: ../languages/ripristino/prova_ripristino.php:58
+msgid "bej"
+msgstr "Beja"
+
+#: ../languages/ripristino/prova_ripristino.php:59
+msgid "bel"
+msgstr "Belarusian"
+
+#: ../languages/ripristino/prova_ripristino.php:60
+msgid "bem"
+msgstr "Bemba (Zambia)"
+
+#: ../languages/ripristino/prova_ripristino.php:61
+msgid "ben"
+msgstr "Bengali"
+
+#: ../languages/ripristino/prova_ripristino.php:62
+msgid "bho"
+msgstr "Bhojpuri"
+
+#: ../languages/ripristino/prova_ripristino.php:63
+msgid "bik"
+msgstr "Bikol"
+
+#: ../languages/ripristino/prova_ripristino.php:64
+msgid "bin"
+msgstr "Bini"
+
+#: ../languages/ripristino/prova_ripristino.php:65
+msgid "bis"
+msgstr "Bislama"
+
+#: ../languages/ripristino/prova_ripristino.php:66
+msgid "bla"
+msgstr "Siksika"
+
+#: ../languages/ripristino/prova_ripristino.php:67
+msgid "bod"
+msgstr "Tibetan"
+
+#: ../languages/ripristino/prova_ripristino.php:68
+msgid "bos"
+msgstr "Bosnian"
+
+#: ../languages/ripristino/prova_ripristino.php:69
+msgid "bra"
+msgstr "Braj"
+
+#: ../languages/ripristino/prova_ripristino.php:70
+msgid "bre"
+msgstr "Breton"
+
+#: ../languages/ripristino/prova_ripristino.php:71
+msgid "bua"
+msgstr "Buriat"
+
+#: ../languages/ripristino/prova_ripristino.php:72
+msgid "bug"
+msgstr "Buginese"
+
+#: ../languages/ripristino/prova_ripristino.php:73
+msgid "bul"
+msgstr "Bulgarian"
+
+#: ../languages/ripristino/prova_ripristino.php:74
+msgid "byn"
+msgstr "Bilin"
+
+#: ../languages/ripristino/prova_ripristino.php:75
+msgid "cad"
+msgstr "Caddo"
+
+#: ../languages/ripristino/prova_ripristino.php:76
+msgid "car"
+msgstr "Galibi Carib"
+
+#: ../languages/ripristino/prova_ripristino.php:77
+msgid "cat"
+msgstr "Catalan"
+
+#: ../languages/ripristino/prova_ripristino.php:78
+msgid "ceb"
+msgstr "Cebuano"
+
+#: ../languages/ripristino/prova_ripristino.php:79
+msgid "ces"
+msgstr "Czech"
+
+#: ../languages/ripristino/prova_ripristino.php:80
+msgid "cha"
+msgstr "Chamorro"
+
+#: ../languages/ripristino/prova_ripristino.php:81
+msgid "chb"
+msgstr "Chibcha"
+
+#: ../languages/ripristino/prova_ripristino.php:82
+msgid "che"
+msgstr "Chechen"
+
+#: ../languages/ripristino/prova_ripristino.php:83
+msgid "chg"
+msgstr "Chagatai"
+
+#: ../languages/ripristino/prova_ripristino.php:84
+msgid "chk"
+msgstr "Chuukese"
+
+#: ../languages/ripristino/prova_ripristino.php:85
+msgid "chm"
+msgstr "Mari (Russia)"
+
+#: ../languages/ripristino/prova_ripristino.php:86
+msgid "chn"
+msgstr "Chinook jargon"
+
+#: ../languages/ripristino/prova_ripristino.php:87
+msgid "cho"
+msgstr "Choctaw"
+
+#: ../languages/ripristino/prova_ripristino.php:88
+msgid "chp"
+msgstr "Chipewyan"
+
+#: ../languages/ripristino/prova_ripristino.php:89
+msgid "chr"
+msgstr "Cherokee"
+
+#: ../languages/ripristino/prova_ripristino.php:90
+msgid "chu"
+msgstr "Church Slavic"
+
+#: ../languages/ripristino/prova_ripristino.php:91
+msgid "chv"
+msgstr "Chuvash"
+
+#: ../languages/ripristino/prova_ripristino.php:92
+msgid "chy"
+msgstr "Cheyenne"
+
+#: ../languages/ripristino/prova_ripristino.php:93
+msgid "cop"
+msgstr "Coptic"
+
+#: ../languages/ripristino/prova_ripristino.php:94
+msgid "cor"
+msgstr "Cornish"
+
+#: ../languages/ripristino/prova_ripristino.php:95
+msgid "cos"
+msgstr "Corsican"
+
+#: ../languages/ripristino/prova_ripristino.php:96
+msgid "cre"
+msgstr "Cree"
+
+#: ../languages/ripristino/prova_ripristino.php:97
+msgid "crh"
+msgstr "Crimean Tatar"
+
+#: ../languages/ripristino/prova_ripristino.php:98
+msgid "csb"
+msgstr "Kashubian"
+
+#: ../languages/ripristino/prova_ripristino.php:99
+msgid "cym"
+msgstr "Welsh"
+
+#: ../languages/ripristino/prova_ripristino.php:100
+msgid "dak"
+msgstr "Dakota"
+
+#: ../languages/ripristino/prova_ripristino.php:101
+msgid "dan"
+msgstr "Danish"
+
+#: ../languages/ripristino/prova_ripristino.php:102
+msgid "dar"
+msgstr "Dargwa"
+
+#: ../languages/ripristino/prova_ripristino.php:103
+msgid "del"
+msgstr "Delaware"
+
+#: ../languages/ripristino/prova_ripristino.php:104
+msgid "den"
+msgstr "Slave (Athapascan)"
+
+#: ../languages/ripristino/prova_ripristino.php:105
+msgid "deu"
+msgstr "German"
+
+#: ../languages/ripristino/prova_ripristino.php:106
+msgid "dgr"
+msgstr "Dogrib"
+
+#: ../languages/ripristino/prova_ripristino.php:107
+msgid "din"
+msgstr "Dinka"
+
+#: ../languages/ripristino/prova_ripristino.php:108
+msgid "div"
+msgstr "Dhivehi"
+
+#: ../languages/ripristino/prova_ripristino.php:109
+msgid "doi"
+msgstr "Dogri (macrolanguage)"
+
+#: ../languages/ripristino/prova_ripristino.php:110
+msgid "dsb"
+msgstr "Lower Sorbian"
+
+#: ../languages/ripristino/prova_ripristino.php:111
+msgid "dua"
+msgstr "Duala"
+
+#: ../languages/ripristino/prova_ripristino.php:112
+msgid "dum"
+msgstr "Middle Dutch (ca. 1050-1350)"
+
+#: ../languages/ripristino/prova_ripristino.php:113
+msgid "dyu"
+msgstr "Dyula"
+
+#: ../languages/ripristino/prova_ripristino.php:114
+msgid "dzo"
+msgstr "Dzongkha"
+
+#: ../languages/ripristino/prova_ripristino.php:115
+msgid "efi"
+msgstr "Efik"
+
+#: ../languages/ripristino/prova_ripristino.php:116
+msgid "egy"
+msgstr "Egyptian (Ancient)"
+
+#: ../languages/ripristino/prova_ripristino.php:117
+msgid "eka"
+msgstr "Ekajuk"
+
+#: ../languages/ripristino/prova_ripristino.php:118
+msgid "ell"
+msgstr "Modern Greek (1453-)"
+
+#: ../languages/ripristino/prova_ripristino.php:119
+msgid "elx"
+msgstr "Elamite"
+
+#: ../languages/ripristino/prova_ripristino.php:120
+msgid "eng"
+msgstr "English"
+
+#: ../languages/ripristino/prova_ripristino.php:121
+msgid "enm"
+msgstr "Middle English (1100-1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:122
+msgid "epo"
+msgstr "Esperanto"
+
+#: ../languages/ripristino/prova_ripristino.php:123
+msgid "est"
+msgstr "Estonian"
+
+#: ../languages/ripristino/prova_ripristino.php:124
+msgid "eus"
+msgstr "Basque"
+
+#: ../languages/ripristino/prova_ripristino.php:125
+msgid "ewe"
+msgstr "Ewe"
+
+#: ../languages/ripristino/prova_ripristino.php:126
+msgid "ewo"
+msgstr "Ewondo"
+
+#: ../languages/ripristino/prova_ripristino.php:127
+msgid "fan"
+msgstr "Fang (Equatorial Guinea)"
+
+#: ../languages/ripristino/prova_ripristino.php:128
+msgid "fao"
+msgstr "Faroese"
+
+#: ../languages/ripristino/prova_ripristino.php:129
+msgid "fat"
+msgstr "Fanti"
+
+#: ../languages/ripristino/prova_ripristino.php:130
+msgid "fij"
+msgstr "Fijian"
+
+#: ../languages/ripristino/prova_ripristino.php:131
+msgid "fil"
+msgstr "Filipino"
+
+#: ../languages/ripristino/prova_ripristino.php:132
+msgid "fin"
+msgstr "Finnish"
+
+#: ../languages/ripristino/prova_ripristino.php:133
+msgid "fon"
+msgstr "Fon"
+
+#: ../languages/ripristino/prova_ripristino.php:134
+msgid "fra"
+msgstr "French"
+
+#: ../languages/ripristino/prova_ripristino.php:135
+msgid "frm"
+msgstr "Middle French (ca. 1400-1600)"
+
+#: ../languages/ripristino/prova_ripristino.php:136
+msgid "fro"
+msgstr "Old French (842-ca. 1400)"
+
+#: ../languages/ripristino/prova_ripristino.php:137
+msgid "frr"
+msgstr "Northern Frisian"
+
+#: ../languages/ripristino/prova_ripristino.php:138
+msgid "frs"
+msgstr "Eastern Frisian"
+
+#: ../languages/ripristino/prova_ripristino.php:139
+msgid "fry"
+msgstr "Western Frisian"
+
+#: ../languages/ripristino/prova_ripristino.php:140
+msgid "ful"
+msgstr "Fulah"
+
+#: ../languages/ripristino/prova_ripristino.php:141
+msgid "fur"
+msgstr "Friulian"
+
+#: ../languages/ripristino/prova_ripristino.php:142
+msgid "gaa"
+msgstr "Ga"
+
+#: ../languages/ripristino/prova_ripristino.php:143
+msgid "gay"
+msgstr "Gayo"
+
+#: ../languages/ripristino/prova_ripristino.php:144
+msgid "gba"
+msgstr "Gbaya (Central African Republic)"
+
+#: ../languages/ripristino/prova_ripristino.php:145
+msgid "gez"
+msgstr "Geez"
+
+#: ../languages/ripristino/prova_ripristino.php:146
+msgid "gil"
+msgstr "Gilbertese"
+
+#: ../languages/ripristino/prova_ripristino.php:147
+msgid "gla"
+msgstr "Scottish Gaelic"
+
+#: ../languages/ripristino/prova_ripristino.php:148
+msgid "gle"
+msgstr "Irish"
+
+#: ../languages/ripristino/prova_ripristino.php:149
+msgid "glg"
+msgstr "Galician"
+
+#: ../languages/ripristino/prova_ripristino.php:150
+msgid "glv"
+msgstr "Manx"
+
+#: ../languages/ripristino/prova_ripristino.php:151
+msgid "gmh"
+msgstr "Middle High German (ca. 1050-1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:152
+msgid "goh"
+msgstr "Old High German (ca. 750-1050)"
+
+#: ../languages/ripristino/prova_ripristino.php:153
+msgid "gon"
+msgstr "Gondi"
+
+#: ../languages/ripristino/prova_ripristino.php:154
+msgid "gor"
+msgstr "Gorontalo"
+
+#: ../languages/ripristino/prova_ripristino.php:155
+msgid "got"
+msgstr "Gothic"
+
+#: ../languages/ripristino/prova_ripristino.php:156
+msgid "grb"
+msgstr "Grebo"
+
+#: ../languages/ripristino/prova_ripristino.php:157
+msgid "grc"
+msgstr "Ancient Greek (to 1453)"
+
+#: ../languages/ripristino/prova_ripristino.php:158
+msgid "grn"
+msgstr "Guarani"
+
+#: ../languages/ripristino/prova_ripristino.php:159
+msgid "gsw"
+msgstr "Swiss German"
+
+#: ../languages/ripristino/prova_ripristino.php:160
+msgid "guj"
+msgstr "Gujarati"
+
+#: ../languages/ripristino/prova_ripristino.php:161
+msgid "gwi"
+msgstr "Gwichʼin"
+
+#: ../languages/ripristino/prova_ripristino.php:162
+msgid "hai"
+msgstr "Haida"
+
+#: ../languages/ripristino/prova_ripristino.php:163
+msgid "hat"
+msgstr "Haitian"
+
+#: ../languages/ripristino/prova_ripristino.php:164
+msgid "hau"
+msgstr "Hausa"
+
+#: ../languages/ripristino/prova_ripristino.php:165
+msgid "haw"
+msgstr "Hawaiian"
+
+#: ../languages/ripristino/prova_ripristino.php:166
+msgid "her"
+msgstr "Herero"
+
+#: ../languages/ripristino/prova_ripristino.php:167
+msgid "hil"
+msgstr "Hiligaynon"
+
+#: ../languages/ripristino/prova_ripristino.php:168
+msgid "hin"
+msgstr "Hindi"
+
+#: ../languages/ripristino/prova_ripristino.php:169
+msgid "hit"
+msgstr "Hittite"
+
+#: ../languages/ripristino/prova_ripristino.php:170
+msgid "hmn"
+msgstr "Hmong"
+
+#: ../languages/ripristino/prova_ripristino.php:171
+msgid "hmo"
+msgstr "Hiri Motu"
+
+#: ../languages/ripristino/prova_ripristino.php:172
+msgid "hrv"
+msgstr "Croatian"
+
+#: ../languages/ripristino/prova_ripristino.php:173
+msgid "hsb"
+msgstr "Upper Sorbian"
+
+#: ../languages/ripristino/prova_ripristino.php:174
+msgid "hun"
+msgstr "Hungarian"
+
+#: ../languages/ripristino/prova_ripristino.php:175
+msgid "hup"
+msgstr "Hupa"
+
+#: ../languages/ripristino/prova_ripristino.php:176
+msgid "hye"
+msgstr "Armenian"
+
+#: ../languages/ripristino/prova_ripristino.php:177
+msgid "iba"
+msgstr "Iban"
+
+#: ../languages/ripristino/prova_ripristino.php:178
+msgid "ibo"
+msgstr "Igbo"
+
+#: ../languages/ripristino/prova_ripristino.php:179
+msgid "ido"
+msgstr "Ido"
+
+#: ../languages/ripristino/prova_ripristino.php:180
+msgid "iii"
+msgstr "Sichuan Yi"
+
+#: ../languages/ripristino/prova_ripristino.php:181
+msgid "iku"
+msgstr "Inuktitut"
+
+#: ../languages/ripristino/prova_ripristino.php:182
+msgid "ile"
+msgstr "Interlingue"
+
+#: ../languages/ripristino/prova_ripristino.php:183
+msgid "ilo"
+msgstr "Iloko"
+
+#: ../languages/ripristino/prova_ripristino.php:184
+msgid "ina"
+msgstr "Interlingua (International Auxiliary Language Association)"
+
+#: ../languages/ripristino/prova_ripristino.php:185
+msgid "ind"
+msgstr "Indonesian"
+
+#: ../languages/ripristino/prova_ripristino.php:186
+msgid "inh"
+msgstr "Ingush"
+
+#: ../languages/ripristino/prova_ripristino.php:187
+msgid "ipk"
+msgstr "Inupiaq"
+
+#: ../languages/ripristino/prova_ripristino.php:188
+msgid "isl"
+msgstr "Icelandic"
+
+#: ../languages/ripristino/prova_ripristino.php:189
+msgid "ita"
+msgstr "Italian"
+
+#: ../languages/ripristino/prova_ripristino.php:190
+msgid "jav"
+msgstr "Javanese"
+
+#: ../languages/ripristino/prova_ripristino.php:191
+msgid "jbo"
+msgstr "Lojban"
+
+#: ../languages/ripristino/prova_ripristino.php:192
+msgid "jpn"
+msgstr "Japanese"
+
+#: ../languages/ripristino/prova_ripristino.php:193
+msgid "jpr"
+msgstr "Judeo-Persian"
+
+#: ../languages/ripristino/prova_ripristino.php:194
+msgid "jrb"
+msgstr "Judeo-Arabic"
+
+#: ../languages/ripristino/prova_ripristino.php:195
+msgid "kaa"
+msgstr "Kara-Kalpak"
+
+#: ../languages/ripristino/prova_ripristino.php:196
+msgid "kab"
+msgstr "Kabyle"
+
+#: ../languages/ripristino/prova_ripristino.php:197
+msgid "kac"
+msgstr "Kachin"
+
+#: ../languages/ripristino/prova_ripristino.php:198
+msgid "kal"
+msgstr "Kalaallisut"
+
+#: ../languages/ripristino/prova_ripristino.php:199
+msgid "kam"
+msgstr "Kamba (Kenya)"
+
+#: ../languages/ripristino/prova_ripristino.php:200
+msgid "kan"
+msgstr "Kannada"
+
+#: ../languages/ripristino/prova_ripristino.php:201
+msgid "kas"
+msgstr "Kashmiri"
+
+#: ../languages/ripristino/prova_ripristino.php:202
+msgid "kat"
+msgstr "Georgian"
+
+#: ../languages/ripristino/prova_ripristino.php:203
+msgid "kau"
+msgstr "Kanuri"
+
+#: ../languages/ripristino/prova_ripristino.php:204
+msgid "kaw"
+msgstr "Kawi"
+
+#: ../languages/ripristino/prova_ripristino.php:205
+msgid "kaz"
+msgstr "Kazakh"
+
+#: ../languages/ripristino/prova_ripristino.php:206
+msgid "kbd"
+msgstr "Kabardian"
+
+#: ../languages/ripristino/prova_ripristino.php:207
+msgid "kha"
+msgstr "Khasi"
+
+#: ../languages/ripristino/prova_ripristino.php:208
+msgid "khm"
+msgstr "Central Khmer"
+
+#: ../languages/ripristino/prova_ripristino.php:209
+msgid "kho"
+msgstr "Khotanese"
+
+#: ../languages/ripristino/prova_ripristino.php:210
+msgid "kik"
+msgstr "Kikuyu"
+
+#: ../languages/ripristino/prova_ripristino.php:211
+msgid "kin"
+msgstr "Kinyarwanda"
+
+#: ../languages/ripristino/prova_ripristino.php:212
+msgid "kir"
+msgstr "Kirghiz"
+
+#: ../languages/ripristino/prova_ripristino.php:213
+msgid "kmb"
+msgstr "Kimbundu"
+
+#: ../languages/ripristino/prova_ripristino.php:214
+msgid "kok"
+msgstr "Konkani (macrolanguage)"
+
+#: ../languages/ripristino/prova_ripristino.php:215
+msgid "kom"
+msgstr "Komi"
+
+#: ../languages/ripristino/prova_ripristino.php:216
+msgid "kon"
+msgstr "Kongo"
+
+#: ../languages/ripristino/prova_ripristino.php:217
+msgid "kor"
+msgstr "Korean"
+
+#: ../languages/ripristino/prova_ripristino.php:218
+msgid "kos"
+msgstr "Kosraean"
+
+#: ../languages/ripristino/prova_ripristino.php:219
+msgid "kpe"
+msgstr "Kpelle"
+
+#: ../languages/ripristino/prova_ripristino.php:220
+msgid "krc"
+msgstr "Karachay-Balkar"
+
+#: ../languages/ripristino/prova_ripristino.php:221
+msgid "krl"
+msgstr "Karelian"
+
+#: ../languages/ripristino/prova_ripristino.php:222
+msgid "kru"
+msgstr "Kurukh"
+
+#: ../languages/ripristino/prova_ripristino.php:223
+msgid "kua"
+msgstr "Kuanyama"
+
+#: ../languages/ripristino/prova_ripristino.php:224
+msgid "kum"
+msgstr "Kumyk"
+
+#: ../languages/ripristino/prova_ripristino.php:225
+msgid "kur"
+msgstr "Kurdish"
+
+#: ../languages/ripristino/prova_ripristino.php:226
+msgid "kut"
+msgstr "Kutenai"
+
+#: ../languages/ripristino/prova_ripristino.php:227
+msgid "lad"
+msgstr "Ladino"
+
+#: ../languages/ripristino/prova_ripristino.php:228
+msgid "lah"
+msgstr "Lahnda"
+
+#: ../languages/ripristino/prova_ripristino.php:229
+msgid "lam"
+msgstr "Lamba"
+
+#: ../languages/ripristino/prova_ripristino.php:230
+msgid "lao"
+msgstr "Lao"
+
+#: ../languages/ripristino/prova_ripristino.php:231
+msgid "lat"
+msgstr "Latin"
+
+#: ../languages/ripristino/prova_ripristino.php:232
+msgid "lav"
+msgstr "Latvian"
+
+#: ../languages/ripristino/prova_ripristino.php:233
+msgid "lez"
+msgstr "Lezghian"
+
+#: ../languages/ripristino/prova_ripristino.php:234
+msgid "lim"
+msgstr "Limburgan"
+
+#: ../languages/ripristino/prova_ripristino.php:235
+msgid "lin"
+msgstr "Lingala"
+
+#: ../languages/ripristino/prova_ripristino.php:236
+msgid "lit"
+msgstr "Lithuanian"
+
+#: ../languages/ripristino/prova_ripristino.php:237
+msgid "lol"
+msgstr "Mongo"
+
+#: ../languages/ripristino/prova_ripristino.php:238
+msgid "loz"
+msgstr "Lozi"
+
+#: ../languages/ripristino/prova_ripristino.php:239
+msgid "ltz"
+msgstr "Luxembourgish"
+
+#: ../languages/ripristino/prova_ripristino.php:240
+msgid "lua"
+msgstr "Luba-Lulua"
+
+#: ../languages/ripristino/prova_ripristino.php:241
+msgid "lub"
+msgstr "Luba-Katanga"
+
+#: ../languages/ripristino/prova_ripristino.php:242
+msgid "lug"
+msgstr "Ganda"
+
+#: ../languages/ripristino/prova_ripristino.php:243
+msgid "lui"
+msgstr "Luiseno"
+
+#: ../languages/ripristino/prova_ripristino.php:244
+msgid "lun"
+msgstr "Lunda"
+
+#: ../languages/ripristino/prova_ripristino.php:245
+msgid "luo"
+msgstr "Luo (Kenya and Tanzania)"
+
+#: ../languages/ripristino/prova_ripristino.php:246
+msgid "lus"
+msgstr "Lushai"
+
+#: ../languages/ripristino/prova_ripristino.php:247
+msgid "mad"
+msgstr "Madurese"
+
+#: ../languages/ripristino/prova_ripristino.php:248
+msgid "mag"
+msgstr "Magahi"
+
+#: ../languages/ripristino/prova_ripristino.php:249
+msgid "mah"
+msgstr "Marshallese"
+
+#: ../languages/ripristino/prova_ripristino.php:250
+msgid "mai"
+msgstr "Maithili"
+
+#: ../languages/ripristino/prova_ripristino.php:251
+msgid "mak"
+msgstr "Makasar"
+
+#: ../languages/ripristino/prova_ripristino.php:252
+msgid "mal"
+msgstr "Malayalam"
+
+#: ../languages/ripristino/prova_ripristino.php:253
+msgid "man"
+msgstr "Mandingo"
+
+#: ../languages/ripristino/prova_ripristino.php:254
+msgid "mar"
+msgstr "Marathi"
+
+#: ../languages/ripristino/prova_ripristino.php:255
+msgid "mas"
+msgstr "Masai"
+
+#: ../languages/ripristino/prova_ripristino.php:256
+msgid "mdf"
+msgstr "Moksha"
+
+#: ../languages/ripristino/prova_ripristino.php:257
+msgid "mdr"
+msgstr "Mandar"
+
+#: ../languages/ripristino/prova_ripristino.php:258
+msgid "men"
+msgstr "Mende (Sierra Leone)"
+
+#: ../languages/ripristino/prova_ripristino.php:259
+msgid "mga"
+msgstr "Middle Irish (900-1200)"
+
+#: ../languages/ripristino/prova_ripristino.php:260
+msgid "mic"
+msgstr "Mi'kmaq"
+
+#: ../languages/ripristino/prova_ripristino.php:261
+msgid "min"
+msgstr "Minangkabau"
+
+#: ../languages/ripristino/prova_ripristino.php:262
+msgid "mis"
+msgstr "Uncoded languages"
+
+#: ../languages/ripristino/prova_ripristino.php:263
+msgid "mkd"
+msgstr "Macedonian"
+
+#: ../languages/ripristino/prova_ripristino.php:264
+msgid "mlg"
+msgstr "Malagasy"
+
+#: ../languages/ripristino/prova_ripristino.php:265
+msgid "mlt"
+msgstr "Maltese"
+
+#: ../languages/ripristino/prova_ripristino.php:266
+msgid "mnc"
+msgstr "Manchu"
+
+#: ../languages/ripristino/prova_ripristino.php:267
+msgid "mni"
+msgstr "Manipuri"
+
+#: ../languages/ripristino/prova_ripristino.php:268
+msgid "moh"
+msgstr "Mohawk"
+
+#: ../languages/ripristino/prova_ripristino.php:269
+msgid "mon"
+msgstr "Mongolian"
+
+#: ../languages/ripristino/prova_ripristino.php:270
+msgid "mos"
+msgstr "Mossi"
+
+#: ../languages/ripristino/prova_ripristino.php:271
+msgid "mri"
+msgstr "Maori"
+
+#: ../languages/ripristino/prova_ripristino.php:272
+msgid "msa"
+msgstr "Malay (macrolanguage)"
+
+#: ../languages/ripristino/prova_ripristino.php:273
+msgid "mul"
+msgstr "Multiple languages"
+
+#: ../languages/ripristino/prova_ripristino.php:274
+msgid "mus"
+msgstr "Creek"
+
+#: ../languages/ripristino/prova_ripristino.php:275
+msgid "mwl"
+msgstr "Mirandese"
+
+#: ../languages/ripristino/prova_ripristino.php:276
+msgid "mwr"
+msgstr "Marwari"
+
+#: ../languages/ripristino/prova_ripristino.php:277
+msgid "mya"
+msgstr "Burmese"
+
+#: ../languages/ripristino/prova_ripristino.php:278
+msgid "myv"
+msgstr "Erzya"
+
+#: ../languages/ripristino/prova_ripristino.php:279
+msgid "nap"
+msgstr "Neapolitan"
+
+#: ../languages/ripristino/prova_ripristino.php:280
+msgid "nau"
+msgstr "Nauru"
+
+#: ../languages/ripristino/prova_ripristino.php:281
+msgid "nav"
+msgstr "Navajo"
+
+#: ../languages/ripristino/prova_ripristino.php:282
+msgid "nbl"
+msgstr "South Ndebele"
+
+#: ../languages/ripristino/prova_ripristino.php:283
+msgid "nde"
+msgstr "North Ndebele"
+
+#: ../languages/ripristino/prova_ripristino.php:284
+msgid "ndo"
+msgstr "Ndonga"
+
+#: ../languages/ripristino/prova_ripristino.php:285
+msgid "nds"
+msgstr "Low German"
+
+#: ../languages/ripristino/prova_ripristino.php:286
+msgid "nep"
+msgstr "Nepali"
+
+#: ../languages/ripristino/prova_ripristino.php:287
+msgid "new"
+msgstr "Newari"
+
+#: ../languages/ripristino/prova_ripristino.php:288
+msgid "nia"
+msgstr "Nias"
+
+#: ../languages/ripristino/prova_ripristino.php:289
+msgid "niu"
+msgstr "Niuean"
+
+#: ../languages/ripristino/prova_ripristino.php:290
+msgid "nld"
+msgstr "Dutch"
+
+#: ../languages/ripristino/prova_ripristino.php:291
+msgid "nno"
+msgstr "Norwegian Nynorsk"
+
+#: ../languages/ripristino/prova_ripristino.php:292
+msgid "nob"
+msgstr "Norwegian Bokmål"
+
+#: ../languages/ripristino/prova_ripristino.php:293
+msgid "nog"
+msgstr "Nogai"
+
+#: ../languages/ripristino/prova_ripristino.php:294
+msgid "non"
+msgstr "Old Norse"
+
+#: ../languages/ripristino/prova_ripristino.php:295
+msgid "nor"
+msgstr "Norwegian"
+
+#: ../languages/ripristino/prova_ripristino.php:296
+msgid "nqo"
+msgstr "N'Ko"
+
+#: ../languages/ripristino/prova_ripristino.php:297
+msgid "nso"
+msgstr "Pedi"
+
+#: ../languages/ripristino/prova_ripristino.php:298
+msgid "nwc"
+msgstr "Classical Newari"
+
+#: ../languages/ripristino/prova_ripristino.php:299
+msgid "nya"
+msgstr "Nyanja"
+
+#: ../languages/ripristino/prova_ripristino.php:300
+msgid "nym"
+msgstr "Nyamwezi"
+
+#: ../languages/ripristino/prova_ripristino.php:301
+msgid "nyn"
+msgstr "Nyankole"
+
+#: ../languages/ripristino/prova_ripristino.php:302
+msgid "nyo"
+msgstr "Nyoro"
+
+#: ../languages/ripristino/prova_ripristino.php:303
+msgid "nzi"
+msgstr "Nzima"
+
+#: ../languages/ripristino/prova_ripristino.php:304
+msgid "oci"
+msgstr "Occitan (post 1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:305
+msgid "oji"
+msgstr "Ojibwa"
+
+#: ../languages/ripristino/prova_ripristino.php:306
+msgid "ori"
+msgstr "Oriya"
+
+#: ../languages/ripristino/prova_ripristino.php:307
+msgid "orm"
+msgstr "Oromo"
+
+#: ../languages/ripristino/prova_ripristino.php:308
+msgid "osa"
+msgstr "Osage"
+
+#: ../languages/ripristino/prova_ripristino.php:309
+msgid "oss"
+msgstr "Ossetian"
+
+#: ../languages/ripristino/prova_ripristino.php:310
+msgid "ota"
+msgstr "Ottoman Turkish (1500-1928)"
+
+#: ../languages/ripristino/prova_ripristino.php:311
+msgid "pag"
+msgstr "Pangasinan"
+
+#: ../languages/ripristino/prova_ripristino.php:312
+msgid "pal"
+msgstr "Pahlavi"
+
+#: ../languages/ripristino/prova_ripristino.php:313
+msgid "pam"
+msgstr "Pampanga"
+
+#: ../languages/ripristino/prova_ripristino.php:314
+msgid "pan"
+msgstr "Panjabi"
+
+#: ../languages/ripristino/prova_ripristino.php:315
+msgid "pap"
+msgstr "Papiamento"
+
+#: ../languages/ripristino/prova_ripristino.php:316
+msgid "pau"
+msgstr "Palauan"
+
+#: ../languages/ripristino/prova_ripristino.php:317
+msgid "peo"
+msgstr "Old Persian (ca. 600-400 B.C.)"
+
+#: ../languages/ripristino/prova_ripristino.php:318
+msgid "phn"
+msgstr "Phoenician"
+
+#: ../languages/ripristino/prova_ripristino.php:319
+msgid "pli"
+msgstr "Pali"
+
+#: ../languages/ripristino/prova_ripristino.php:320
+msgid "pol"
+msgstr "Polish"
+
+#: ../languages/ripristino/prova_ripristino.php:321
+msgid "pon"
+msgstr "Pohnpeian"
+
+#: ../languages/ripristino/prova_ripristino.php:322
+msgid "por"
+msgstr "Portuguese"
+
+#: ../languages/ripristino/prova_ripristino.php:323
+msgid "pro"
+msgstr "Old Provençal (to 1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:324
+msgid "pus"
+msgstr "Pushto"
+
+#: ../languages/ripristino/prova_ripristino.php:325
+msgid "que"
+msgstr "Quechua"
+
+#: ../languages/ripristino/prova_ripristino.php:326
+msgid "raj"
+msgstr "Rajasthani"
+
+#: ../languages/ripristino/prova_ripristino.php:327
+msgid "rap"
+msgstr "Rapanui"
+
+#: ../languages/ripristino/prova_ripristino.php:328
+msgid "rar"
+msgstr "Rarotongan"
+
+#: ../languages/ripristino/prova_ripristino.php:329
+msgid "roh"
+msgstr "Romansh"
+
+#: ../languages/ripristino/prova_ripristino.php:330
+msgid "rom"
+msgstr "Romany"
+
+#: ../languages/ripristino/prova_ripristino.php:331
+msgid "ron"
+msgstr "Romanian"
+
+#: ../languages/ripristino/prova_ripristino.php:332
+msgid "run"
+msgstr "Rundi"
+
+#: ../languages/ripristino/prova_ripristino.php:333
+msgid "rup"
+msgstr "Macedo-Romanian"
+
+#: ../languages/ripristino/prova_ripristino.php:334
+msgid "rus"
+msgstr "Russian"
+
+#: ../languages/ripristino/prova_ripristino.php:335
+msgid "sad"
+msgstr "Sandawe"
+
+#: ../languages/ripristino/prova_ripristino.php:336
+msgid "sag"
+msgstr "Sango"
+
+#: ../languages/ripristino/prova_ripristino.php:337
+msgid "sah"
+msgstr "Yakut"
+
+#: ../languages/ripristino/prova_ripristino.php:338
+msgid "sam"
+msgstr "Samaritan Aramaic"
+
+#: ../languages/ripristino/prova_ripristino.php:339
+msgid "san"
+msgstr "Sanskrit"
+
+#: ../languages/ripristino/prova_ripristino.php:340
+msgid "sas"
+msgstr "Sasak"
+
+#: ../languages/ripristino/prova_ripristino.php:341
+msgid "sat"
+msgstr "Santali"
+
+#: ../languages/ripristino/prova_ripristino.php:342
+msgid "scn"
+msgstr "Sicilian"
+
+#: ../languages/ripristino/prova_ripristino.php:343
+msgid "sco"
+msgstr "Scots"
+
+#: ../languages/ripristino/prova_ripristino.php:344
+msgid "sel"
+msgstr "Selkup"
+
+#: ../languages/ripristino/prova_ripristino.php:345
+msgid "sga"
+msgstr "Old Irish (to 900)"
+
+#: ../languages/ripristino/prova_ripristino.php:346
+msgid "shn"
+msgstr "Shan"
+
+#: ../languages/ripristino/prova_ripristino.php:347
+msgid "sid"
+msgstr "Sidamo"
+
+#: ../languages/ripristino/prova_ripristino.php:348
+msgid "sin"
+msgstr "Sinhala"
+
+#: ../languages/ripristino/prova_ripristino.php:349
+msgid "slk"
+msgstr "Slovak"
+
+#: ../languages/ripristino/prova_ripristino.php:350
+msgid "slv"
+msgstr "Slovenian"
+
+#: ../languages/ripristino/prova_ripristino.php:351
+msgid "sma"
+msgstr "Southern Sami"
+
+#: ../languages/ripristino/prova_ripristino.php:352
+msgid "sme"
+msgstr "Northern Sami"
+
+#: ../languages/ripristino/prova_ripristino.php:353
+msgid "smj"
+msgstr "Lule Sami"
+
+#: ../languages/ripristino/prova_ripristino.php:354
+msgid "smn"
+msgstr "Inari Sami"
+
+#: ../languages/ripristino/prova_ripristino.php:355
+msgid "smo"
+msgstr "Samoan"
+
+#: ../languages/ripristino/prova_ripristino.php:356
+msgid "sms"
+msgstr "Skolt Sami"
+
+#: ../languages/ripristino/prova_ripristino.php:357
+msgid "sna"
+msgstr "Shona"
+
+#: ../languages/ripristino/prova_ripristino.php:358
+msgid "snd"
+msgstr "Sindhi"
+
+#: ../languages/ripristino/prova_ripristino.php:359
+msgid "snk"
+msgstr "Soninke"
+
+#: ../languages/ripristino/prova_ripristino.php:360
+msgid "sog"
+msgstr "Sogdian"
+
+#: ../languages/ripristino/prova_ripristino.php:361
+msgid "som"
+msgstr "Somali"
+
+#: ../languages/ripristino/prova_ripristino.php:362
+msgid "sot"
+msgstr "Southern Sotho"
+
+#: ../languages/ripristino/prova_ripristino.php:363
+msgid "spa"
+msgstr "Spanish"
+
+#: ../languages/ripristino/prova_ripristino.php:364
+msgid "sqi"
+msgstr "Albanian"
+
+#: ../languages/ripristino/prova_ripristino.php:365
+msgid "srd"
+msgstr "Sardinian"
+
+#: ../languages/ripristino/prova_ripristino.php:366
+msgid "srn"
+msgstr "Sranan Tongo"
+
+#: ../languages/ripristino/prova_ripristino.php:367
+msgid "srp"
+msgstr "Serbian"
+
+#: ../languages/ripristino/prova_ripristino.php:368
+msgid "srr"
+msgstr "Serer"
+
+#: ../languages/ripristino/prova_ripristino.php:369
+msgid "ssw"
+msgstr "Swati"
+
+#: ../languages/ripristino/prova_ripristino.php:370
+msgid "suk"
+msgstr "Sukuma"
+
+#: ../languages/ripristino/prova_ripristino.php:371
+msgid "sun"
+msgstr "Sundanese"
+
+#: ../languages/ripristino/prova_ripristino.php:372
+msgid "sus"
+msgstr "Susu"
+
+#: ../languages/ripristino/prova_ripristino.php:373
+msgid "sux"
+msgstr "Sumerian"
+
+#: ../languages/ripristino/prova_ripristino.php:374
+msgid "swa"
+msgstr "Swahili (macrolanguage)"
+
+#: ../languages/ripristino/prova_ripristino.php:375
+msgid "swe"
+msgstr "Swedish"
+
+#: ../languages/ripristino/prova_ripristino.php:376
+msgid "syc"
+msgstr "Classical Syriac"
+
+#: ../languages/ripristino/prova_ripristino.php:377
+msgid "syr"
+msgstr "Syriac"
+
+#: ../languages/ripristino/prova_ripristino.php:378
+msgid "tah"
+msgstr "Tahitian"
+
+#: ../languages/ripristino/prova_ripristino.php:379
+msgid "tam"
+msgstr "Tamil"
+
+#: ../languages/ripristino/prova_ripristino.php:380
+msgid "tat"
+msgstr "Tatar"
+
+#: ../languages/ripristino/prova_ripristino.php:381
+msgid "tel"
+msgstr "Telugu"
+
+#: ../languages/ripristino/prova_ripristino.php:382
+msgid "tem"
+msgstr "Timne"
+
+#: ../languages/ripristino/prova_ripristino.php:383
+msgid "ter"
+msgstr "Tereno"
+
+#: ../languages/ripristino/prova_ripristino.php:384
+msgid "tet"
+msgstr "Tetum"
+
+#: ../languages/ripristino/prova_ripristino.php:385
+msgid "tgk"
+msgstr "Tajik"
+
+#: ../languages/ripristino/prova_ripristino.php:386
+msgid "tgl"
+msgstr "Tagalog"
+
+#: ../languages/ripristino/prova_ripristino.php:387
+msgid "tha"
+msgstr "Thai"
+
+#: ../languages/ripristino/prova_ripristino.php:388
+msgid "tig"
+msgstr "Tigre"
+
+#: ../languages/ripristino/prova_ripristino.php:389
+msgid "tir"
+msgstr "Tigrinya"
+
+#: ../languages/ripristino/prova_ripristino.php:390
+msgid "tiv"
+msgstr "Tiv"
+
+#: ../languages/ripristino/prova_ripristino.php:391
+msgid "tkl"
+msgstr "Tokelau"
+
+#: ../languages/ripristino/prova_ripristino.php:392
+msgid "tlh"
+msgstr "Klingon"
+
+#: ../languages/ripristino/prova_ripristino.php:393
+msgid "tli"
+msgstr "Tlingit"
+
+#: ../languages/ripristino/prova_ripristino.php:394
+msgid "tmh"
+msgstr "Tamashek"
+
+#: ../languages/ripristino/prova_ripristino.php:395
+msgid "tog"
+msgstr "Tonga (Nyasa)"
+
+#: ../languages/ripristino/prova_ripristino.php:396
+msgid "ton"
+msgstr "Tonga (Tonga Islands)"
+
+#: ../languages/ripristino/prova_ripristino.php:397
+msgid "tpi"
+msgstr "Tok Pisin"
+
+#: ../languages/ripristino/prova_ripristino.php:398
+msgid "tsi"
+msgstr "Tsimshian"
+
+#: ../languages/ripristino/prova_ripristino.php:399
+msgid "tsn"
+msgstr "Tswana"
+
+#: ../languages/ripristino/prova_ripristino.php:400
+msgid "tso"
+msgstr "Tsonga"
+
+#: ../languages/ripristino/prova_ripristino.php:401
+msgid "tuk"
+msgstr "Turkmen"
+
+#: ../languages/ripristino/prova_ripristino.php:402
+msgid "tum"
+msgstr "Tumbuka"
+
+#: ../languages/ripristino/prova_ripristino.php:403
+msgid "tur"
+msgstr "Turkish"
+
+#: ../languages/ripristino/prova_ripristino.php:404
+msgid "tvl"
+msgstr "Tuvalu"
+
+#: ../languages/ripristino/prova_ripristino.php:405
+msgid "twi"
+msgstr "Twi"
+
+#: ../languages/ripristino/prova_ripristino.php:406
+msgid "tyv"
+msgstr "Tuvinian"
+
+#: ../languages/ripristino/prova_ripristino.php:407
+msgid "udm"
+msgstr "Udmurt"
+
+#: ../languages/ripristino/prova_ripristino.php:408
+msgid "uga"
+msgstr "Ugaritic"
+
+#: ../languages/ripristino/prova_ripristino.php:409
+msgid "uig"
+msgstr "Uighur"
+
+#: ../languages/ripristino/prova_ripristino.php:410
+msgid "ukr"
+msgstr "Ukrainian"
+
+#: ../languages/ripristino/prova_ripristino.php:411
+msgid "umb"
+msgstr "Umbundu"
+
+#: ../languages/ripristino/prova_ripristino.php:412
+msgid "und"
+msgstr "Undetermined"
+
+#: ../languages/ripristino/prova_ripristino.php:413
+msgid "uzb"
+msgstr "Uzbek"
+
+#: ../languages/ripristino/prova_ripristino.php:414
+msgid "vai"
+msgstr "Vai"
+
+#: ../languages/ripristino/prova_ripristino.php:415
+msgid "ven"
+msgstr "Venda"
+
+#: ../languages/ripristino/prova_ripristino.php:416
+msgid "vie"
+msgstr "Vietnamese"
+
+#: ../languages/ripristino/prova_ripristino.php:417
+msgid "vol"
+msgstr "Volapük"
+
+#: ../languages/ripristino/prova_ripristino.php:418
+msgid "vot"
+msgstr "Votic"
+
+#: ../languages/ripristino/prova_ripristino.php:419
+msgid "wal"
+msgstr "Wolaytta"
+
+#: ../languages/ripristino/prova_ripristino.php:420
+msgid "war"
+msgstr "Waray (Philippines)"
+
+#: ../languages/ripristino/prova_ripristino.php:421
+msgid "was"
+msgstr "Washo"
+
+#: ../languages/ripristino/prova_ripristino.php:422
+msgid "wln"
+msgstr "Walloon"
+
+#: ../languages/ripristino/prova_ripristino.php:423
+msgid "wol"
+msgstr "Wolof"
+
+#: ../languages/ripristino/prova_ripristino.php:424
+msgid "xal"
+msgstr "Kalmyk"
+
+#: ../languages/ripristino/prova_ripristino.php:425
+msgid "xho"
+msgstr "Xhosa"
+
+#: ../languages/ripristino/prova_ripristino.php:426
+msgid "yao"
+msgstr "Yao"
+
+#: ../languages/ripristino/prova_ripristino.php:427
+msgid "yap"
+msgstr "Yapese"
+
+#: ../languages/ripristino/prova_ripristino.php:428
+msgid "yid"
+msgstr "Yiddish"
+
+#: ../languages/ripristino/prova_ripristino.php:429
+msgid "yor"
+msgstr "Yoruba"
+
+#: ../languages/ripristino/prova_ripristino.php:430
+msgid "zap"
+msgstr "Zapotec"
+
+#: ../languages/ripristino/prova_ripristino.php:431
+msgid "zbl"
+msgstr "Blissymbols"
+
+#: ../languages/ripristino/prova_ripristino.php:432
+msgid "zen"
+msgstr "Zenaga"
+
+#: ../languages/ripristino/prova_ripristino.php:433
+msgid "zha"
+msgstr "Zhuang"
+
+#: ../languages/ripristino/prova_ripristino.php:434
+msgid "zho"
+msgstr "Chinese"
+
+#: ../languages/ripristino/prova_ripristino.php:435
+msgid "zul"
+msgstr "Zulu"
+
+#: ../languages/ripristino/prova_ripristino.php:436
+msgid "zun"
+msgstr "Zuni"
+
+#: ../languages/ripristino/prova_ripristino.php:437
+msgid "zxx"
+msgstr "No linguistic content"
+
+#: ../languages/ripristino/prova_ripristino.php:438
+msgid "zza"
+msgstr "Zaza"
+
+#: ../languages/ripristino/prova_ripristino.php:439
+msgid "urd"
+msgstr "Urdu"
+
+#: ../languages/ripristino/prova_ripristino.php:440
+msgid "vls"
+msgstr "Flemish"
+
 #: layouts/scripts/layout.phtml:5
 #: layouts/scripts/layout.phtml:31
 msgid "Traduxio Project"
@@ -300,17 +2056,16 @@ msgstr "Help"
 msgid "About"
 msgstr "About"
 
-#: layouts/scripts/layout.phtml:48
+#: layouts/scripts/layout.phtml:47
 msgid "Feedback"
-msgstr "Feedback"
+msgstr "Contact us"
 
-#: layouts/scripts/layout.phtml:77
+#: layouts/scripts/layout.phtml:76
 #, php-format
 msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 msgstr "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 
 #: views/scripts/work/manage.phtml:15
-#: views/scripts/work/read.phtml:41
 msgid "Manage text's privileges"
 msgstr "Manage text's privileges"
 
@@ -342,21 +2097,24 @@ msgstr "NO EXISTING PRIVILEGES"
 msgid "Add a new permission"
 msgstr "Add a new permission"
 
+#: views/scripts/work/manage.phtml:43
+#: views/scripts/work/extend.phtml:27
+msgid "PAGETITLE_Continue text insertion"
+msgstr "Continue text insertion"
+
 #: views/scripts/work/edit.phtml:6
-msgid "Edit text"
+msgid "PAGETITLE_Edit text"
 msgstr "Edit text"
+
+#: views/scripts/work/deposit.phtml:6
+msgid "PAGETITLE_Deposit a new text"
+msgstr "Deposit a new text"
 
 #: views/scripts/work/extend.phtml:19
 msgid "Last segment of the text"
 msgstr "Last segment of the text"
 
-#: views/scripts/work/extend.phtml:27
-#: views/scripts/work/read.phtml:37
-msgid "Continue text insertion"
-msgstr "Continue text insertion"
-
 #: views/scripts/work/my.phtml:3
-#: views/scripts/work/my.phtml:24
 msgid "My translations"
 msgstr "My translations"
 
@@ -364,34 +2122,38 @@ msgstr "My translations"
 msgid "You have not inserted any text's translations"
 msgstr "You have not inserted any text's translations"
 
-#: views/scripts/work/index.phtml:6
+#: views/scripts/work/my.phtml:24
+msgid "PAGETITLE_My translations"
+msgstr "My translations"
+
+#: views/scripts/work/index.phtml:13
 msgid "HOMEPAGE PHRASE"
 msgstr "Du point de vue de la communauté, le langage n'est pas seulement un fait social , [...] il est par l'altérité [...] le fondement de toute association humaine."
 
-#: views/scripts/work/index.phtml:7
+#: views/scripts/work/index.phtml:14
 msgid "Translating cultural texts"
 msgstr "Translating cultural texts"
 
-#: views/scripts/work/index.phtml:25
+#: views/scripts/work/index.phtml:32
 #, php-format
 msgid "(%1$s Translations)"
 msgstr "(%1$s Translations)"
 
-#: views/scripts/work/index.phtml:45
+#: views/scripts/work/index.phtml:52
 msgid "Latest News"
 msgstr "Latest News"
 
-#: views/scripts/work/index.phtml:69
+#: views/scripts/work/index.phtml:76
 #, php-format
 msgid "%1$d %2$s ago"
 msgstr "%1$d %2$s ago"
 
-#: views/scripts/work/index.phtml:80
-msgid "Homepage"
+#: views/scripts/work/index.phtml:87
+msgid "PAGETITLE_Homepage"
 msgstr "Homepage"
 
 #: views/scripts/work/translate.phtml:24
-msgid "Create Translation of"
+msgid "PAGETITLE_Create Translation of"
 msgstr "Create Translation of"
 
 #: views/scripts/work/read.phtml:8
@@ -399,10 +2161,12 @@ msgid "Translations"
 msgstr "Translations"
 
 #: views/scripts/work/read.phtml:20
+#: views/scripts/translation/read.phtml:4
 msgid "You're not allowed to do this. Ask permissions to the text's owner"
 msgstr "You're not allowed to do this. Ask permissions to the text's owner"
 
 #: views/scripts/work/read.phtml:21
+#: views/scripts/translation/read.phtml:5
 msgid "You're not allowed to do this. Please login"
 msgstr "You're not allowed to do this. Please login"
 
@@ -411,6 +2175,7 @@ msgid "You can't delete this text because it has some translations. Delete its t
 msgstr "You can't delete this text because it has some translations. Delete its translations first."
 
 #: views/scripts/work/read.phtml:27
+#: views/scripts/translation/read.phtml:3
 msgid "Options"
 msgstr "Options"
 
@@ -418,11 +2183,16 @@ msgstr "Options"
 msgid "Create a translation"
 msgstr "Create a translation"
 
+#: views/scripts/work/read.phtml:37
+msgid "Continue text insertion"
+msgstr "Continue text insertion"
+
 #: views/scripts/work/read.phtml:38
 msgid "Edit the text"
 msgstr "Edit the text"
 
 #: views/scripts/work/read.phtml:46
+#: views/scripts/translation/read.phtml:21
 msgid "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
 msgstr "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
 
@@ -431,19 +2201,21 @@ msgid "Delete this text"
 msgstr "Delete this text"
 
 #: views/scripts/work/read.phtml:93
+#: views/scripts/translation/read.phtml:96
+#: views/scripts/translation/read.phtml:123
 msgid "Text inserted by"
 msgstr "Text inserted by"
 
 #: views/scripts/work/read.phtml:102
-msgid "Read text"
+msgid "PAGETITLE_Read text"
 msgstr "Read text"
 
 #: views/scripts/translation/edit.phtml:205
-msgid "Edit translation"
+msgid "PAGETITLE_Edit translation"
 msgstr "Edit translation"
 
 #: views/scripts/translation/concord.phtml:20
-msgid "Search"
+msgid "PAGETITLE_Search"
 msgstr "Search"
 
 #: views/scripts/translation/read.phtml:7
@@ -467,16 +2239,24 @@ msgid "Translation"
 msgstr "Translation"
 
 #: views/scripts/translation/read.phtml:135
-msgid "Read translation"
+msgid "PAGETITLE_Read translation"
 msgstr "Read translation"
 
 #: views/scripts/login/index.phtml:2
 msgid "Please Login"
 msgstr "Please Login"
 
+#: views/scripts/login/index.phtml:6
+msgid "PAGETITLE_Login"
+msgstr "Login"
+
 #: views/scripts/error/error.phtml:8
 msgid "An error occurred"
 msgstr "An error occurred"
+
+#: views/scripts/error/error.phtml:29
+msgid "PAGETITLE_Error"
+msgstr "Error"
 
 #: views/scripts/error/denied.phtml:4
 msgid "Error"
@@ -490,1327 +2270,32 @@ msgstr "Access denied"
 msgid "You are trying to access an area which you have not allowed."
 msgstr "You are trying to access an area which you have not allowed."
 
+#: views/scripts/error/denied.phtml:10
+msgid "PAGETITLE_Access denied"
+msgstr "Access denied"
+
+#: views/scripts/index/tutorial.phtml:131
+msgid "PAGETITLE_Tutorial"
+msgstr "Tutorial"
+
+#: views/scripts/index/about.phtml:92
+msgid "PAGETITLE_About Traduxio"
+msgstr "About Traduxio"
+
 #: views/scripts/index/feedback.phtml:16
-msgid "Send your feedback"
-msgstr "Send your feedback"
-
-msgid "release"
-msgstr "release"
-
-msgid "book"
-msgstr "book"
-
-msgid "genre"
-msgstr "genre"
-
-msgid "period"
-msgstr "period"
-
-msgid "comment"
-msgstr "comment"
-
-msgid "read"
-msgstr "read"
-
-msgid "edit"
-msgstr "edit"
-
-msgid "translate"
-msgstr "translate"
-
-msgid "manage"
-msgstr "manage"
-
-msgid "seconds"
-msgstr "seconds"
-
-msgid "minutes"
-msgstr "minutes"
-
-msgid "hours"
-msgstr "hours"
-
-msgid "days"
-msgstr "days"
-
-msgid "second"
-msgstr "second"
-
-msgid "minute"
-msgstr "minute"
-
-msgid "hour"
-msgstr "hour"
-
-msgid "day"
-msgstr "day"
-
-msgid "en"
-msgstr "English"
-
-msgid "fr"
-msgstr "French"
-
-msgid "it"
-msgstr "Italian"
-
-msgid "fas"
-msgstr "Persian"
-
-msgid "heb"
-msgstr "Hebrew"
-
-msgid "ara"
-msgstr "Arabic"
-
-msgid "aar"
-msgstr "Afar"
-
-msgid "abk"
-msgstr "Abkhazian"
-
-msgid "ace"
-msgstr "Achinese"
-
-msgid "ach"
-msgstr "Acoli"
-
-msgid "ada"
-msgstr "Adangme"
-
-msgid "ady"
-msgstr "Adyghe"
-
-msgid "afh"
-msgstr "Afrihili"
-
-msgid "afr"
-msgstr "Afrikaans"
-
-msgid "ain"
-msgstr "Ainu (Japan)"
-
-msgid "aka"
-msgstr "Akan"
-
-msgid "akk"
-msgstr "Akkadian"
-
-msgid "ale"
-msgstr "Aleut"
-
-msgid "alt"
-msgstr "Southern Altai"
-
-msgid "amh"
-msgstr "Amharic"
-
-msgid "ang"
-msgstr "Old English (ca. 450-1100)"
-
-msgid "anp"
-msgstr "Angika"
-
-msgid "arc"
-msgstr "Official Aramaic (700-300 BCE)"
-
-msgid "arg"
-msgstr "Aragonese"
-
-msgid "arn"
-msgstr "Mapudungun"
-
-msgid "arp"
-msgstr "Arapaho"
-
-msgid "arw"
-msgstr "Arawak"
-
-msgid "asm"
-msgstr "Assamese"
-
-msgid "ast"
-msgstr "Asturian"
-
-msgid "ava"
-msgstr "Avaric"
-
-msgid "ave"
-msgstr "Avestan"
-
-msgid "awa"
-msgstr "Awadhi"
-
-msgid "aym"
-msgstr "Aymara"
-
-msgid "aze"
-msgstr "Azerbaijani"
-
-msgid "bak"
-msgstr "Bashkir"
-
-msgid "bal"
-msgstr "Baluchi"
-
-msgid "bam"
-msgstr "Bambara"
-
-msgid "ban"
-msgstr "Balinese"
-
-msgid "bas"
-msgstr "Basa (Cameroon)"
-
-msgid "bej"
-msgstr "Beja"
-
-msgid "bel"
-msgstr "Belarusian"
-
-msgid "bem"
-msgstr "Bemba (Zambia)"
-
-msgid "ben"
-msgstr "Bengali"
-
-msgid "bho"
-msgstr "Bhojpuri"
-
-msgid "bik"
-msgstr "Bikol"
-
-msgid "bin"
-msgstr "Bini"
-
-msgid "bis"
-msgstr "Bislama"
-
-msgid "bla"
-msgstr "Siksika"
-
-msgid "bod"
-msgstr "Tibetan"
-
-msgid "bos"
-msgstr "Bosnian"
-
-msgid "bra"
-msgstr "Braj"
-
-msgid "bre"
-msgstr "Breton"
-
-msgid "bua"
-msgstr "Buriat"
-
-msgid "bug"
-msgstr "Buginese"
-
-msgid "bul"
-msgstr "Bulgarian"
-
-msgid "byn"
-msgstr "Bilin"
-
-msgid "cad"
-msgstr "Caddo"
-
-msgid "car"
-msgstr "Galibi Carib"
-
-msgid "cat"
-msgstr "Catalan"
-
-msgid "ceb"
-msgstr "Cebuano"
-
-msgid "ces"
-msgstr "Czech"
-
-msgid "cha"
-msgstr "Chamorro"
-
-msgid "chb"
-msgstr "Chibcha"
-
-msgid "che"
-msgstr "Chechen"
-
-msgid "chg"
-msgstr "Chagatai"
-
-msgid "chk"
-msgstr "Chuukese"
-
-msgid "chm"
-msgstr "Mari (Russia)"
-
-msgid "chn"
-msgstr "Chinook jargon"
-
-msgid "cho"
-msgstr "Choctaw"
-
-msgid "chp"
-msgstr "Chipewyan"
-
-msgid "chr"
-msgstr "Cherokee"
-
-msgid "chu"
-msgstr "Church Slavic"
-
-msgid "chv"
-msgstr "Chuvash"
-
-msgid "chy"
-msgstr "Cheyenne"
-
-msgid "cop"
-msgstr "Coptic"
-
-msgid "cor"
-msgstr "Cornish"
-
-msgid "cos"
-msgstr "Corsican"
-
-msgid "cre"
-msgstr "Cree"
-
-msgid "crh"
-msgstr "Crimean Tatar"
-
-msgid "csb"
-msgstr "Kashubian"
-
-msgid "cym"
-msgstr "Welsh"
-
-msgid "dak"
-msgstr "Dakota"
-
-msgid "dan"
-msgstr "Danish"
-
-msgid "dar"
-msgstr "Dargwa"
-
-msgid "del"
-msgstr "Delaware"
-
-msgid "den"
-msgstr "Slave (Athapascan)"
-
-msgid "deu"
-msgstr "German"
-
-msgid "dgr"
-msgstr "Dogrib"
-
-msgid "din"
-msgstr "Dinka"
-
-msgid "div"
-msgstr "Dhivehi"
-
-msgid "doi"
-msgstr "Dogri (macrolanguage)"
-
-msgid "dsb"
-msgstr "Lower Sorbian"
-
-msgid "dua"
-msgstr "Duala"
-
-msgid "dum"
-msgstr "Middle Dutch (ca. 1050-1350)"
-
-msgid "dyu"
-msgstr "Dyula"
-
-msgid "dzo"
-msgstr "Dzongkha"
-
-msgid "efi"
-msgstr "Efik"
-
-msgid "egy"
-msgstr "Egyptian (Ancient)"
-
-msgid "eka"
-msgstr "Ekajuk"
-
-msgid "ell"
-msgstr "Modern Greek (1453-)"
-
-msgid "elx"
-msgstr "Elamite"
-
-msgid "eng"
-msgstr "English"
-
-msgid "enm"
-msgstr "Middle English (1100-1500)"
-
-msgid "epo"
-msgstr "Esperanto"
-
-msgid "est"
-msgstr "Estonian"
-
-msgid "eus"
-msgstr "Basque"
-
-msgid "ewe"
-msgstr "Ewe"
-
-msgid "ewo"
-msgstr "Ewondo"
-
-msgid "fan"
-msgstr "Fang (Equatorial Guinea)"
-
-msgid "fao"
-msgstr "Faroese"
-
-msgid "fat"
-msgstr "Fanti"
-
-msgid "fij"
-msgstr "Fijian"
-
-msgid "fil"
-msgstr "Filipino"
-
-msgid "fin"
-msgstr "Finnish"
-
-msgid "fon"
-msgstr "Fon"
-
-msgid "fra"
-msgstr "French"
-
-msgid "frm"
-msgstr "Middle French (ca. 1400-1600)"
-
-msgid "fro"
-msgstr "Old French (842-ca. 1400)"
-
-msgid "frr"
-msgstr "Northern Frisian"
-
-msgid "frs"
-msgstr "Eastern Frisian"
-
-msgid "fry"
-msgstr "Western Frisian"
-
-msgid "ful"
-msgstr "Fulah"
-
-msgid "fur"
-msgstr "Friulian"
-
-msgid "gaa"
-msgstr "Ga"
-
-msgid "gay"
-msgstr "Gayo"
-
-msgid "gba"
-msgstr "Gbaya (Central African Republic)"
-
-msgid "gez"
-msgstr "Geez"
-
-msgid "gil"
-msgstr "Gilbertese"
-
-msgid "gla"
-msgstr "Scottish Gaelic"
-
-msgid "gle"
-msgstr "Irish"
-
-msgid "glg"
-msgstr "Galician"
-
-msgid "glv"
-msgstr "Manx"
-
-msgid "gmh"
-msgstr "Middle High German (ca. 1050-1500)"
-
-msgid "goh"
-msgstr "Old High German (ca. 750-1050)"
-
-msgid "gon"
-msgstr "Gondi"
-
-msgid "gor"
-msgstr "Gorontalo"
-
-msgid "got"
-msgstr "Gothic"
-
-msgid "grb"
-msgstr "Grebo"
-
-msgid "grc"
-msgstr "Ancient Greek (to 1453)"
-
-msgid "grn"
-msgstr "Guarani"
-
-msgid "gsw"
-msgstr "Swiss German"
-
-msgid "guj"
-msgstr "Gujarati"
-
-msgid "gwi"
-msgstr "Gwichʼin"
-
-msgid "hai"
-msgstr "Haida"
-
-msgid "hat"
-msgstr "Haitian"
-
-msgid "hau"
-msgstr "Hausa"
-
-msgid "haw"
-msgstr "Hawaiian"
-
-msgid "her"
-msgstr "Herero"
-
-msgid "hil"
-msgstr "Hiligaynon"
-
-msgid "hin"
-msgstr "Hindi"
-
-msgid "hit"
-msgstr "Hittite"
-
-msgid "hmn"
-msgstr "Hmong"
-
-msgid "hmo"
-msgstr "Hiri Motu"
-
-msgid "hrv"
-msgstr "Croatian"
-
-msgid "hsb"
-msgstr "Upper Sorbian"
-
-msgid "hun"
-msgstr "Hungarian"
-
-msgid "hup"
-msgstr "Hupa"
-
-msgid "hye"
-msgstr "Armenian"
-
-msgid "iba"
-msgstr "Iban"
-
-msgid "ibo"
-msgstr "Igbo"
-
-msgid "ido"
-msgstr "Ido"
-
-msgid "iii"
-msgstr "Sichuan Yi"
-
-msgid "iku"
-msgstr "Inuktitut"
-
-msgid "ile"
-msgstr "Interlingue"
-
-msgid "ilo"
-msgstr "Iloko"
-
-msgid "ina"
-msgstr "Interlingua (International Auxiliary Language Association)"
-
-msgid "ind"
-msgstr "Indonesian"
-
-msgid "inh"
-msgstr "Ingush"
-
-msgid "ipk"
-msgstr "Inupiaq"
-
-msgid "isl"
-msgstr "Icelandic"
-
-msgid "ita"
-msgstr "Italian"
-
-msgid "jav"
-msgstr "Javanese"
-
-msgid "jbo"
-msgstr "Lojban"
-
-msgid "jpn"
-msgstr "Japanese"
-
-msgid "jpr"
-msgstr "Judeo-Persian"
-
-msgid "jrb"
-msgstr "Judeo-Arabic"
-
-msgid "kaa"
-msgstr "Kara-Kalpak"
-
-msgid "kab"
-msgstr "Kabyle"
-
-msgid "kac"
-msgstr "Kachin"
-
-msgid "kal"
-msgstr "Kalaallisut"
-
-msgid "kam"
-msgstr "Kamba (Kenya)"
-
-msgid "kan"
-msgstr "Kannada"
-
-msgid "kas"
-msgstr "Kashmiri"
-
-msgid "kat"
-msgstr "Georgian"
-
-msgid "kau"
-msgstr "Kanuri"
-
-msgid "kaw"
-msgstr "Kawi"
-
-msgid "kaz"
-msgstr "Kazakh"
-
-msgid "kbd"
-msgstr "Kabardian"
-
-msgid "kha"
-msgstr "Khasi"
-
-msgid "khm"
-msgstr "Central Khmer"
-
-msgid "kho"
-msgstr "Khotanese"
-
-msgid "kik"
-msgstr "Kikuyu"
-
-msgid "kin"
-msgstr "Kinyarwanda"
-
-msgid "kir"
-msgstr "Kirghiz"
-
-msgid "kmb"
-msgstr "Kimbundu"
-
-msgid "kok"
-msgstr "Konkani (macrolanguage)"
-
-msgid "kom"
-msgstr "Komi"
-
-msgid "kon"
-msgstr "Kongo"
-
-msgid "kor"
-msgstr "Korean"
-
-msgid "kos"
-msgstr "Kosraean"
-
-msgid "kpe"
-msgstr "Kpelle"
-
-msgid "krc"
-msgstr "Karachay-Balkar"
-
-msgid "krl"
-msgstr "Karelian"
-
-msgid "kru"
-msgstr "Kurukh"
-
-msgid "kua"
-msgstr "Kuanyama"
-
-msgid "kum"
-msgstr "Kumyk"
-
-msgid "kur"
-msgstr "Kurdish"
-
-msgid "kut"
-msgstr "Kutenai"
-
-msgid "lad"
-msgstr "Ladino"
-
-msgid "lah"
-msgstr "Lahnda"
-
-msgid "lam"
-msgstr "Lamba"
-
-msgid "lao"
-msgstr "Lao"
-
-msgid "lat"
-msgstr "Latin"
-
-msgid "lav"
-msgstr "Latvian"
-
-msgid "lez"
-msgstr "Lezghian"
-
-msgid "lim"
-msgstr "Limburgan"
-
-msgid "lin"
-msgstr "Lingala"
-
-msgid "lit"
-msgstr "Lithuanian"
-
-msgid "lol"
-msgstr "Mongo"
-
-msgid "loz"
-msgstr "Lozi"
-
-msgid "ltz"
-msgstr "Luxembourgish"
-
-msgid "lua"
-msgstr "Luba-Lulua"
-
-msgid "lub"
-msgstr "Luba-Katanga"
-
-msgid "lug"
-msgstr "Ganda"
-
-msgid "lui"
-msgstr "Luiseno"
-
-msgid "lun"
-msgstr "Lunda"
-
-msgid "luo"
-msgstr "Luo (Kenya and Tanzania)"
-
-msgid "lus"
-msgstr "Lushai"
-
-msgid "mad"
-msgstr "Madurese"
-
-msgid "mag"
-msgstr "Magahi"
-
-msgid "mah"
-msgstr "Marshallese"
-
-msgid "mai"
-msgstr "Maithili"
-
-msgid "mak"
-msgstr "Makasar"
-
-msgid "mal"
-msgstr "Malayalam"
-
-msgid "man"
-msgstr "Mandingo"
-
-msgid "mar"
-msgstr "Marathi"
-
-msgid "mas"
-msgstr "Masai"
-
-msgid "mdf"
-msgstr "Moksha"
-
-msgid "mdr"
-msgstr "Mandar"
-
-msgid "men"
-msgstr "Mende (Sierra Leone)"
-
-msgid "mga"
-msgstr "Middle Irish (900-1200)"
-
-msgid "mic"
-msgstr "Mi'kmaq"
-
-msgid "min"
-msgstr "Minangkabau"
-
-msgid "mis"
-msgstr "Uncoded languages"
-
-msgid "mkd"
-msgstr "Macedonian"
-
-msgid "mlg"
-msgstr "Malagasy"
-
-msgid "mlt"
-msgstr "Maltese"
-
-msgid "mnc"
-msgstr "Manchu"
-
-msgid "mni"
-msgstr "Manipuri"
-
-msgid "moh"
-msgstr "Mohawk"
-
-msgid "mon"
-msgstr "Mongolian"
-
-msgid "mos"
-msgstr "Mossi"
-
-msgid "mri"
-msgstr "Maori"
-
-msgid "msa"
-msgstr "Malay (macrolanguage)"
-
-msgid "mul"
-msgstr "Multiple languages"
-
-msgid "mus"
-msgstr "Creek"
-
-msgid "mwl"
-msgstr "Mirandese"
-
-msgid "mwr"
-msgstr "Marwari"
-
-msgid "mya"
-msgstr "Burmese"
-
-msgid "myv"
-msgstr "Erzya"
-
-msgid "nap"
-msgstr "Neapolitan"
-
-msgid "nau"
-msgstr "Nauru"
-
-msgid "nav"
-msgstr "Navajo"
-
-msgid "nbl"
-msgstr "South Ndebele"
-
-msgid "nde"
-msgstr "North Ndebele"
-
-msgid "ndo"
-msgstr "Ndonga"
-
-msgid "nds"
-msgstr "Low German"
-
-msgid "nep"
-msgstr "Nepali"
-
-msgid "new"
-msgstr "Newari"
-
-msgid "nia"
-msgstr "Nias"
-
-msgid "niu"
-msgstr "Niuean"
-
-msgid "nld"
-msgstr "Dutch"
-
-msgid "nno"
-msgstr "Norwegian Nynorsk"
-
-msgid "nob"
-msgstr "Norwegian Bokmål"
-
-msgid "nog"
-msgstr "Nogai"
-
-msgid "non"
-msgstr "Old Norse"
-
-msgid "nor"
-msgstr "Norwegian"
-
-msgid "nqo"
-msgstr "N'Ko"
-
-msgid "nso"
-msgstr "Pedi"
-
-msgid "nwc"
-msgstr "Classical Newari"
-
-msgid "nya"
-msgstr "Nyanja"
-
-msgid "nym"
-msgstr "Nyamwezi"
-
-msgid "nyn"
-msgstr "Nyankole"
-
-msgid "nyo"
-msgstr "Nyoro"
-
-msgid "nzi"
-msgstr "Nzima"
-
-msgid "oci"
-msgstr "Occitan (post 1500)"
-
-msgid "oji"
-msgstr "Ojibwa"
-
-msgid "ori"
-msgstr "Oriya"
-
-msgid "orm"
-msgstr "Oromo"
-
-msgid "osa"
-msgstr "Osage"
-
-msgid "oss"
-msgstr "Ossetian"
-
-msgid "ota"
-msgstr "Ottoman Turkish (1500-1928)"
-
-msgid "pag"
-msgstr "Pangasinan"
-
-msgid "pal"
-msgstr "Pahlavi"
-
-msgid "pam"
-msgstr "Pampanga"
-
-msgid "pan"
-msgstr "Panjabi"
-
-msgid "pap"
-msgstr "Papiamento"
-
-msgid "pau"
-msgstr "Palauan"
-
-msgid "peo"
-msgstr "Old Persian (ca. 600-400 B.C.)"
-
-msgid "phn"
-msgstr "Phoenician"
-
-msgid "pli"
-msgstr "Pali"
-
-msgid "pol"
-msgstr "Polish"
-
-msgid "pon"
-msgstr "Pohnpeian"
-
-msgid "por"
-msgstr "Portuguese"
-
-msgid "pro"
-msgstr "Old Provençal (to 1500)"
-
-msgid "pus"
-msgstr "Pushto"
-
-msgid "que"
-msgstr "Quechua"
-
-msgid "raj"
-msgstr "Rajasthani"
-
-msgid "rap"
-msgstr "Rapanui"
-
-msgid "rar"
-msgstr "Rarotongan"
-
-msgid "roh"
-msgstr "Romansh"
-
-msgid "rom"
-msgstr "Romany"
-
-msgid "ron"
-msgstr "Romanian"
-
-msgid "run"
-msgstr "Rundi"
-
-msgid "rup"
-msgstr "Macedo-Romanian"
-
-msgid "rus"
-msgstr "Russian"
-
-msgid "sad"
-msgstr "Sandawe"
-
-msgid "sag"
-msgstr "Sango"
-
-msgid "sah"
-msgstr "Yakut"
-
-msgid "sam"
-msgstr "Samaritan Aramaic"
-
-msgid "san"
-msgstr "Sanskrit"
-
-msgid "sas"
-msgstr "Sasak"
-
-msgid "sat"
-msgstr "Santali"
-
-msgid "scn"
-msgstr "Sicilian"
-
-msgid "sco"
-msgstr "Scots"
-
-msgid "sel"
-msgstr "Selkup"
-
-msgid "sga"
-msgstr "Old Irish (to 900)"
-
-msgid "shn"
-msgstr "Shan"
-
-msgid "sid"
-msgstr "Sidamo"
-
-msgid "sin"
-msgstr "Sinhala"
-
-msgid "slk"
-msgstr "Slovak"
-
-msgid "slv"
-msgstr "Slovenian"
-
-msgid "sma"
-msgstr "Southern Sami"
-
-msgid "sme"
-msgstr "Northern Sami"
-
-msgid "smj"
-msgstr "Lule Sami"
-
-msgid "smn"
-msgstr "Inari Sami"
-
-msgid "smo"
-msgstr "Samoan"
-
-msgid "sms"
-msgstr "Skolt Sami"
-
-msgid "sna"
-msgstr "Shona"
-
-msgid "snd"
-msgstr "Sindhi"
-
-msgid "snk"
-msgstr "Soninke"
-
-msgid "sog"
-msgstr "Sogdian"
-
-msgid "som"
-msgstr "Somali"
-
-msgid "sot"
-msgstr "Southern Sotho"
-
-msgid "spa"
-msgstr "Spanish"
-
-msgid "sqi"
-msgstr "Albanian"
-
-msgid "srd"
-msgstr "Sardinian"
-
-msgid "srn"
-msgstr "Sranan Tongo"
-
-msgid "srp"
-msgstr "Serbian"
-
-msgid "srr"
-msgstr "Serer"
-
-msgid "ssw"
-msgstr "Swati"
-
-msgid "suk"
-msgstr "Sukuma"
-
-msgid "sun"
-msgstr "Sundanese"
-
-msgid "sus"
-msgstr "Susu"
-
-msgid "sux"
-msgstr "Sumerian"
-
-msgid "swa"
-msgstr "Swahili (macrolanguage)"
-
-msgid "swe"
-msgstr "Swedish"
-
-msgid "syc"
-msgstr "Classical Syriac"
-
-msgid "syr"
-msgstr "Syriac"
-
-msgid "tah"
-msgstr "Tahitian"
-
-msgid "tam"
-msgstr "Tamil"
-
-msgid "tat"
-msgstr "Tatar"
-
-msgid "tel"
-msgstr "Telugu"
-
-msgid "tem"
-msgstr "Timne"
-
-msgid "ter"
-msgstr "Tereno"
-
-msgid "tet"
-msgstr "Tetum"
-
-msgid "tgk"
-msgstr "Tajik"
-
-msgid "tgl"
-msgstr "Tagalog"
-
-msgid "tha"
-msgstr "Thai"
-
-msgid "tig"
-msgstr "Tigre"
-
-msgid "tir"
-msgstr "Tigrinya"
-
-msgid "tiv"
-msgstr "Tiv"
-
-msgid "tkl"
-msgstr "Tokelau"
-
-msgid "tlh"
-msgstr "Klingon"
-
-msgid "tli"
-msgstr "Tlingit"
-
-msgid "tmh"
-msgstr "Tamashek"
-
-msgid "tog"
-msgstr "Tonga (Nyasa)"
-
-msgid "ton"
-msgstr "Tonga (Tonga Islands)"
-
-msgid "tpi"
-msgstr "Tok Pisin"
-
-msgid "tsi"
-msgstr "Tsimshian"
-
-msgid "tsn"
-msgstr "Tswana"
-
-msgid "tso"
-msgstr "Tsonga"
-
-msgid "tuk"
-msgstr "Turkmen"
-
-msgid "tum"
-msgstr "Tumbuka"
-
-msgid "tur"
-msgstr "Turkish"
-
-msgid "tvl"
-msgstr "Tuvalu"
-
-msgid "twi"
-msgstr "Twi"
-
-msgid "tyv"
-msgstr "Tuvinian"
-
-msgid "udm"
-msgstr "Udmurt"
-
-msgid "uga"
-msgstr "Ugaritic"
-
-msgid "uig"
-msgstr "Uighur"
-
-msgid "ukr"
-msgstr "Ukrainian"
-
-msgid "umb"
-msgstr "Umbundu"
-
-msgid "und"
-msgstr "Undetermined"
-
-msgid "uzb"
-msgstr "Uzbek"
-
-msgid "vai"
-msgstr "Vai"
-
-msgid "ven"
-msgstr "Venda"
-
-msgid "vie"
-msgstr "Vietnamese"
-
-msgid "vol"
-msgstr "Volapük"
-
-msgid "vot"
-msgstr "Votic"
-
-msgid "wal"
-msgstr "Wolaytta"
-
-msgid "war"
-msgstr "Waray (Philippines)"
-
-msgid "was"
-msgstr "Washo"
-
-msgid "wln"
-msgstr "Walloon"
-
-msgid "wol"
-msgstr "Wolof"
-
-msgid "xal"
-msgstr "Kalmyk"
-
-msgid "xho"
-msgstr "Xhosa"
-
-msgid "yao"
-msgstr "Yao"
-
-msgid "yap"
-msgstr "Yapese"
-
-msgid "yid"
-msgstr "Yiddish"
-
-msgid "yor"
-msgstr "Yoruba"
-
-msgid "zap"
-msgstr "Zapotec"
-
-msgid "zbl"
-msgstr "Blissymbols"
-
-msgid "zen"
-msgstr "Zenaga"
-
-msgid "zha"
-msgstr "Zhuang"
-
-msgid "zho"
-msgstr "Chinese"
-
-msgid "zul"
-msgstr "Zulu"
-
-msgid "zun"
-msgstr "Zuni"
-
-msgid "zxx"
-msgstr "No linguistic content"
-
-msgid "zza"
-msgstr "Zaza"
-
-msgid "urd"
-msgstr "Urdu"
-
-msgid "vls"
-msgstr "Flemish"
-
+msgid "PAGETITLE_Contact us"
+msgstr "Contact us"
+
+#~ msgid "Search"
+#~ msgstr "Search"
+#~ msgid "Send your feedback"
+#~ msgstr "Send your feedback"
+#~ msgid "en"
+#~ msgstr "English"
+#~ msgid "fr"
+#~ msgstr "French"
+#~ msgid "it"
+#~ msgstr "Italian"
 #~ msgid "fr_FR"
 #~ msgstr "French"
 #~ msgid "it_IT"

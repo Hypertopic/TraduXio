@@ -1,0 +1,37 @@
+;; application/configs/application.ini
+;;
+;; This file replaces the one presented originally in the section entitled
+;; "Create a Configuration and Registry".
+;;
+;; This is a sample app.ini file.  Your application will dictate the format and the
+;; type of sections and data that can be found in this ini file.  It will also dictate
+;; how many ini files will be contained in your config/ directory.  For the puropose
+;; of our application, this one file makes the most sense.
+
+;; we always have our "production" section first, because it will define ALL of the
+;; keys that our application is expecting to see.
+
+[production]
+database.adapter         = "PDO_PGSQL"
+database.params.host     = "_DBHOST_"
+database.params.dbname   = "_DBNAME_"
+database.params.username = "_DBUSERNAME_"
+database.params.password = "_DBPASSWORD_"
+mail.feedback.from       = _FROMEMAIL_
+mail.smtp.server         = "_SMTPSERVER_"
+mail.feedback.to         = "_COMMA_SEPARATED_EMAIL_ADRESSES_"i
+#if mail server require authentication
+#mail.smtp.auth           = "login"
+#mail.smtp.username       = "_SMTPUSERNAME_"
+#mail.smtp.password       = "_SMTPPASSWORD_"
+
+[development : production]
+
+[testing : production]
+
+
+
+;; note: as you can see, we are able to use our APPLICATION_PATH constant in this ini file.
+;; this is important so that we can make the most self-contained, and modular application we
+;; can make.
+

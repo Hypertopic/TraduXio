@@ -10,6 +10,9 @@ class Form_LangSel extends Zend_Form
         
         $this->_langs=Tdxio_Preferences::getLanguageFiles();
         asort($this->_langs);
+        foreach($this->_langs as $key=>$langname){
+            $this->_langs[$key]="LANGSEL_".$langname;
+        }
         Tdxio_Log::info($this->_langs,' langs');
                            
         $this->setMethod('post');

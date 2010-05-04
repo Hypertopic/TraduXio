@@ -2,8 +2,7 @@
 <div class="central-home">
 <!--<div id="black-border">-->
 <div id="tutorial">
-<h1 LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Welcome to
-the Traduxio sandbox&nbsp;!</h1>
+<h1 LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><?php echo __("How to use Traduxio"); ?>&nbsp;</h1>
 <div id="tutorial-text">
 <P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
@@ -20,12 +19,11 @@ You may want to&nbsp;:</SPAN></P>
 <P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
 <OL>
-	<LI><P LANG="fr-FR" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B><a href="<?php echo $this->makeUrl("/text/deposit");?>">Deposit
+	<LI><P LANG="fr-FR" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B><a href="<?php echo $this->makeUrl("/work/deposit");?>">Deposit
 	a new text</a> </B></SPAN><SPAN LANG="en-GB"></SPAN></P>
 </OL>
 <P LANG="fr-FR" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><SPAN LANG="en-GB">Insert
-the title, the text and the metadata (genre, author, date (year only
-= 4 figures))&nbsp;; then&nbsp;&quot;deposit&quot;</SPAN></P>
+the title, the author, the text and the language&nbsp;; then&nbsp;&quot;deposit&quot;</SPAN></P>
 <P LANG="en-GB" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><BR>
 </P>
 <OL START=2>
@@ -128,3 +126,5 @@ Don’t forget to &quot;save&quot;&nbsp;– you can also choose to
 </div>
 <!--</div>-->
 </div>
+
+<?php $this->page_title=__('PAGETITLE_Tutorial'); ?>

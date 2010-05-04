@@ -419,6 +419,9 @@ div.buttons #submit{
 div.spaced{
     padding:20px;
 }
+div.TBspaced{
+    padding: 20px 0px;
+}
 div.block{
     padding:0px;
 }

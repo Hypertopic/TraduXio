@@ -43,9 +43,8 @@ class IndexController extends Tdxio_Controller_Abstract
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $values=$form->getValues();
-                require_once "send_mail.php";
                 try {
-                    sendFeedback($values['title'],$values['body'],$values['emailaddress']);
+                    Tdxio_SendMail::sendFeedback($values['title'],$values['body'],$values['emailaddress']);
                     $this->view->sent=true;
                 } catch (Exception $e) {
                     $this->view->error=$e->getMessage();
