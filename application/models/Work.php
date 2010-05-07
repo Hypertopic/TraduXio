@@ -112,15 +112,8 @@ class Model_Work extends Model_Taggable
             $works = $table->fetchAll($table->select()->where('id IN (?)',$ids))->toArray(); 
         }
         if(!is_array($id)){
-            $work = $works[0];
-            if($work['author']==''){$work['author']=__('Anonymous');}
-            if($work['title']==''){$work['title']=__('No Title');}
-            return $work;
+            return $works[0];
         }else {
-            foreach($works as $key=>$work){
-                if($work['author']==''){$works[$key]['author']=__('Anonymous');}
-                if($work['title']==''){$work['title']=__('No Title');}
-            }
             return $works;
         }
   
@@ -158,9 +151,9 @@ class Model_Work extends Model_Taggable
         $selectOrig = $this->getSelectCondOriginalWork('sentence');
         $selectAlwd = $this->getSelectCondAllowedWork('read'); 
         
-        $select->distinct()->from(array('work'=>'work'),array('id','title','author','language','created','modified'))
+        $select->distinct()->from(array('work'=>'work'),array('id','title','author','language','created','modified','creator'))
                         ->joinLeft(array('i'=>'interpretation'),'i.original_work_id = work.id','count(distinct i.work_id)')
-                        ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified'))
+                        ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified','work.creator'))
                         ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd);
         
         if(!is_null($idList)){           

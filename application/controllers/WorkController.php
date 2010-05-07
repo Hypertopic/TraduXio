@@ -14,7 +14,7 @@ class WorkController extends Tdxio_Controller_Abstract
     protected $_modelname='Work'; 
     public $_privilegeList=array();
     public $MONTHSEC = 1296000; //15 giorni
-    
+    public $CREATETIME = 900; //15 minuti
     public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
     {
         $this->_privilegeList = array( __('Read Text PRV'), __('Edit Text PRV'), __('Create Translation PRV'), __('Manage PRV'), __('Tag Text PRV'));
@@ -353,6 +353,9 @@ class WorkController extends Tdxio_Controller_Abstract
     public function newModified($item,$type){
         
         if(isset($item['created'])){
+            $item['created']=strtotime($item['created']);
+            if(isset($item['modified'])){ $item['modified']=strtotime($item['modified']);}
+
             if(($item['title']=='') OR (empty($item['title'])))
             {$item['title']='<i>'.__('No Title').'</i>';}
             
@@ -360,9 +363,11 @@ class WorkController extends Tdxio_Controller_Abstract
             {$item['orig_title']='<i>'.__('No Title').'</i>';}
             
             $NMitem=$item;
-            if(((!isset($item['modified']))or($item['modified']-$item['created']<10))and(time() - strtotime($item['created']) < $this->MONTHSEC))
+            Tdxio_Log::info($item['modified'],$item['created']);
+            Tdxio_Log::info($item['modified']-$item['created'],'infos C/M '.$item['title']);
+            if(((!isset($item['modified']))or($item['modified']-$item['created']<$CREATETIME))and(time() - $item['created'] < $this->MONTHSEC))
             {                
-                $NMitem['age']=time() - strtotime($item['created']);
+                $NMitem['age']=time() - $item['created'];
             
                 if($type=='orig'){
                     $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';
@@ -378,9 +383,9 @@ class WorkController extends Tdxio_Controller_Abstract
                     $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['title'].'</a>';
                     $NMitem['phrase'] =  __("\"%1\$s\", new (%2\$s) tag for %3\$s added by %4\$s",$tag,$item['genre_name'],$taggedText,$item['user']);
                 }
-            }elseif(($item['created'] < $item['modified']) and (time() - strtotime($item['modified']) < $this->MONTHSEC))
+            }elseif(($item['created'] < $item['modified']) and (time() - $item['modified'] < $this->MONTHSEC))
             {                
-                $NMitem['age']=time() - strtotime($item['modified']);
+                $NMitem['age']=time() - $item['modified'];
             
                 if($type=='orig'){
                     $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';

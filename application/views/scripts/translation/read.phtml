@@ -78,12 +78,17 @@
         <div class="Rborder hundred">
             <div class = "work-container hundred">
                 <div class="title">
-                    <span class="author red"><?php echo $this->translation['OriginalWork']['author'].', ' ?></span>
+                    <?php $author = $this->translation['OriginalWork']['author'];
+                    $title = $this->escape($this->translation['OriginalWork']['title']);
+                    if($author==''){$author=__('Anonymous');} 
+                    if($title==''){$title=__('No Title');} 
+                    ?>
+                    <span class="author red"><?php echo $author.', ' ?></span>
                     <span class="title red">
                     <?php if($this->translation['OriginalWork']['canRead']==true)
                     {$href= 'class="red" href="'.$this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])).'"';}
                     else {$href = $a_nohref;}?>
-                    <a <?php echo $href; ?>><?php echo $this->translation['OriginalWork']['title']; ?></a>
+                    <a <?php echo $href; ?>><?php echo $title; ?></a>
                     </span>
                 </div>
                 <div class="language TBspaced red">
@@ -103,8 +108,12 @@
         <div class="Rborder hundred">
             <div class = "work-container hundred">
                 <div class="title">          
-                    <span class="author red"><?php echo $this->translation['author'].', ' ?></span>
-                    <span class="title red"><?php echo $this->escape($this->translation['title']); ?></span>
+                    <?php $author = $this->translation['author'];
+                    $title = $this->escape($this->translation['title']);
+                    if($author==''){$author=__('Anonymous');} 
+                    if($title==''){$title=__('No Title');} ?>
+                    <span class="author red"><?php echo $author.', ' ?></span>
+                    <span class="title red"><?php echo $title ?></span>
                 </div>
                 <div class="language TBspaced red">
                     <?php echo __($this->translation['language']); ?>
