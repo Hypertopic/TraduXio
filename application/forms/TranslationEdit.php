@@ -46,16 +46,6 @@ class Form_TranslationEdit extends Form_Abstract
         // set the method for the display form to POST
         $this->setMethod('post');
 
-        // title element
-        $this->addElement('text', 'title', array(
-            //'label'      => __('Translated title'),
-            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
-            'validators' => array(
-            ),
-            'required'   => false,
-            'tabindex'=>$tabindex++
-        ));
-        
         // author element
         $this->addElement('text', 'author', array(
             'label'      => __('Author').': ',
@@ -65,6 +55,17 @@ class Form_TranslationEdit extends Form_Abstract
             'required'   => false,
             'tabindex'=>$tabindex++
         ));
+        
+        // title element
+        $this->addElement('text', 'title', array(
+            'label'      => __('Title'),
+            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'span')),'Label'),
+            'validators' => array(
+            ),
+            'required'   => false,
+            'tabindex'=>$tabindex++
+        ));
+        
 
         foreach ($this->_blocklist as $id=>$length) {
             $blockElem=$this->createElement('textarea', 'block'.$id,array('disableLoadDefaultDecorators'=>true));

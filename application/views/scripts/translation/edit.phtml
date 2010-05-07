@@ -83,9 +83,7 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
     <div class="Rborder hundred">
         <div class = "work-container hundred">
             <div class="title">
-            <?php //echo __('Original text').': ' 
-                $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');} ?>
-                <span class="author red"><?php echo $author.', ' ?></span>
+                <span class="author red"><?php echo $this->translation['OriginalWork']['author'].', ' ?></span>
                 <span class="title red"><?php echo $this->escape($this->translation['OriginalWork']['title']); ?></span>
             </div>
             <div class="language TBspaced red">
@@ -105,8 +103,8 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
         <div class="Rborder hundred">
             <div class = "work-container hundred">
                 <div class="title">
-                <span class="author"><?php echo __('Title').': ' ?></span>
-                <?php echo $elements['title']->render().'  ' ?><span class="author"><?php echo $elements['author']->render() ?></span></div>
+                <span class="author"><?php echo $elements['author']->render().'  '  ?></span>
+                <span class="author"><?php echo $elements['title']->render()?></span></div>
                 <div class="language TBspaced"><?php echo __($this->translation['language']) ?></div>
                 
             </div>
@@ -160,6 +158,29 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
         </div>
     </td>
 </tr>
+
+<!--
+<tr>
+<td> 
+    <div class="Lborder">
+        <div class="Rborder">
+            <div class = "space-container">
+            <br>
+            </div>
+        </div>
+    </div>
+</td>
+<td>
+    <div class="Lborder">
+        <div class="Rborder">
+            <div class = "space-container">
+            <br>  
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+-->
 <?php endforeach; ?>
 
 <tr class="hundred">

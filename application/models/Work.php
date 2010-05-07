@@ -112,8 +112,15 @@ class Model_Work extends Model_Taggable
             $works = $table->fetchAll($table->select()->where('id IN (?)',$ids))->toArray(); 
         }
         if(!is_array($id)){
-            return $works[0];
+            $work = $works[0];
+            if($work['author']==''){$work['author']=__('Anonymous');}
+            if($work['title']==''){$work['title']=__('No Title');}
+            return $work;
         }else {
+            foreach($works as $key=>$work){
+                if($work['author']==''){$works[$key]['author']=__('Anonymous');}
+                if($work['title']==''){$work['title']=__('No Title');}
+            }
             return $works;
         }
   

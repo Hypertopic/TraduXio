@@ -71,28 +71,113 @@
 </tr>
 <tr class="hundred">
 <td class="orig-column hundred Lborder"> 
-<!--  
-<div id="original-text-page">-->
- 
-        <div class = "Tborder">
-            <div class = "TLcorner"></div><div class = "TRcorner"></div>
-        </div>
-        <div class="Lborder hundred"><div class="Rborder hundred">
+    <div class = "Tborder">
+        <div class = "TLcorner"></div><div class = "TRcorner"></div>
+    </div>
+    <div class="Lborder hundred">
+        <div class="Rborder hundred">
             <div class = "work-container hundred">
-                <div class="title"><?php echo __('Original Text').': '?>
-                    <?php echo ($this->translation['OriginalWork']['canRead']); if($this->translation['OriginalWork']['canRead']==true)
-                    {$href= 'href="'.$this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])).'"';}
+                <div class="title">
+                    <span class="author red"><?php echo $this->translation['OriginalWork']['author'].', ' ?></span>
+                    <span class="title red">
+                    <?php if($this->translation['OriginalWork']['canRead']==true)
+                    {$href= 'class="red" href="'.$this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])).'"';}
                     else {$href = $a_nohref;}?>
                     <a <?php echo $href; ?>><?php echo $this->translation['OriginalWork']['title']; ?></a>
+                    </span>
                 </div>
-                <div class="language">
-                <?php $author = $this->translation['OriginalWork']['author']; if($author==''){$author=__('Anonymous');}?>
-                <?php echo $author.' - '.__($this->translation['OriginalWork']['language']); ?></div>
-                <div class="text"><?php foreach($this->translation['OriginalSentences'] as $key=>$sentence): ?>
-                                 <?php echo $this->nlBr($sentence['content']); ?>
-                                 <?php endforeach; ?>
-                                 
+                <div class="language TBspaced red">
+                    <?php echo __($this->translation['OriginalWork']['language']); ?>
                 </div>
+            </div>
+        </div>
+    </div>
+</td>
+
+<td class="transl-column hundred">
+    <div class = "Tborder">
+        <div class = "TLcorner"></div><div class = "TRcorner"></div>
+    </div>
+        <!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
+    <div class="Lborder hundred">
+        <div class="Rborder hundred">
+            <div class = "work-container hundred">
+                <div class="title">          
+                    <span class="author red"><?php echo $this->translation['author'].', ' ?></span>
+                    <span class="title red"><?php echo $this->escape($this->translation['title']); ?></span>
+                </div>
+                <div class="language TBspaced red">
+                    <?php echo __($this->translation['language']); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+<?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
+<tr class="hundred">
+<td class="orig-column hundred Lborder"> 
+    <div class="Lborder hundred">
+        <div class="Rborder hundred">
+            <div class = "work-container upperblock hundred">
+                <div class="block">
+                    <?php Tdxio_Log::info($block,'translation read');
+                    $first=true;
+                    foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
+                        <?php $segment = $segment['content']; ?>
+                        <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
+                        <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($segment); ?></span>
+
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</td>
+<td class="transl-column hundred">
+    <div class="Lborder hundred">
+        <div class="Rborder hundred">
+            <div class = "work-container upperblock hundred">
+                <div class="block" id="<?php echo $div_id; ?>">
+                    <?php Tdxio_Log::info($block,'translation read');
+                    $first=true;?>
+                    <span><?php echo $this->nlBr($block['translation']); ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+<!--
+<tr>
+<td> 
+    <div class="Lborder">
+        <div class="Rborder">
+            <div class = "space-container">
+            <br>
+            </div>
+        </div>
+    </div>
+</td>
+<td>
+    <div class="Lborder">
+        <div class="Rborder">
+            <div class = "space-container">
+            <br>  
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+-->
+<?php endforeach; ?>
+
+<tr class="hundred">
+<td class="orig-column hundred Lborder"> 
+    <div class="Lborder hundred">
+            <div class="Rborder hundred">
+             <div class = "work-container hundred">
                 <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div>
             </div>        
         </div></div>
@@ -103,23 +188,9 @@
 </td>
 
 <td class="transl-column hundred">
-
-        <div class = "Tborder">
-            <div class = "TLcorner"></div><div class = "TRcorner"></div>
-        </div>
-        <!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
-        <div class="Lborder hundred"><div class="Rborder hundred">
-            <div class = "work-container hundred">
-                <div class="title"><?php echo __('Translation').': '?>
-                <?php $title = $this->escape($this->translation['title']);if($title==''){echo '<i>'.__('No Title').'</i>';} else{echo __($title);} ?>
-                </div>
-                <div class="language">
-                <?php $author = $this->translation['author']; if($author==''){$author=__('Anonymous');}?>
-                <?php echo $author.' - '.__($this->translation['language']); ?></div>
-                <div class="text"><?php foreach($this->translation['TranslationBlocks'] as $key=>$block): ?>
-                                 <?php echo $this->nlBr($block['translation']); ?>
-                                 <?php endforeach; ?>
-                </div>
+    <div class="Lborder hundred">
+            <div class="Rborder hundred">
+  <div class = "work-container hundred">
                 <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['creator']); ?> </div>
             </div>
         </div></div>

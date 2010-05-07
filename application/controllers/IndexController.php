@@ -43,7 +43,9 @@ class IndexController extends Tdxio_Controller_Abstract
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $values=$form->getValues();
-                $values['body']=$values['body']."\n \n Message sent by user ".$values['username'];
+                if(isset($values['username'])){
+                    $values['body']=$values['body']."\n \n Message sent by user ".$values['username'];
+                }
                 try {
                     Tdxio_SendMail::sendFeedback($values['title'],$values['body'],$values['emailaddress']);
                     $this->view->sent=true;

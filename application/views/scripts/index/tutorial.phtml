@@ -1,17 +1,16 @@
-<?php $this->page_title="Tutorial"; ?>
 <div class="central-home">
-<!--<div id="black-border">-->
+
 <div id="tutorial">
-<h1 LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><?php echo __("How to use Traduxio"); ?>&nbsp;</h1>
-<div id="tutorial-text">
-<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-</P>
-<P LANG="fr-FR" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">You
-don’t know what to do or how to proceed&nbsp;?  Relax and try the
-following&nbsp;</SPAN><FONT COLOR="#ff0000"><SPAN LANG="en-GB">.</SPAN></FONT><SPAN LANG="en-GB">
-You may want to&nbsp;:</SPAN></P>
-<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-</P>
+
+<div class="tutorial-title">How to use Traduxio&nbsp;</div>
+
+<div class="comment centered">
+You don’t know what to do or how to proceed&nbsp;? Relax and try the
+following.&nbsp;
+You may want to&nbsp;:</div>
+
+<div class="tutorial-text">
+
 <OL>
 	<LI><P LANG="fr-FR" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B><a href="<?php echo $this->makeUrl("/work/deposit");?>">Deposit
 	a new text</a> </B></SPAN><SPAN LANG="en-GB"></SPAN></P>
@@ -20,6 +19,9 @@ You may want to&nbsp;:</SPAN></P>
 the title, the author, the text and the language&nbsp;; then&nbsp;&quot;deposit&quot;</SPAN></P>
 <P LANG="en-GB" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><BR>
 </P>
+</div>
+
+<div class="tutorial-text">
 <OL START=2>
 	<LI><P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Consult (or Edit)
 	a translation</B></P>
@@ -75,6 +77,9 @@ left-oriented Arrow appears if the translation results are reversed
 the original version being in English)</SPAN></P>
 <P LANG="en-GB" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><BR>
 </P>
+</div>
+
+<div class="tutorial-text">
 <OL START=3>
 	<LI><P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Create a
 	translation</B></P>
@@ -87,8 +92,7 @@ Then click on &quot;Create a translation&quot;</P>
 Insert the title and select the language of your translation&nbsp;;
 then &quot;save&quot;</P>
 <P LANG="fr-FR" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
-<SPAN LANG="en-GB">Insert metadata (author, </SPAN><SPAN LANG="en-GB">release
-date (year only = 4 figures) in the upper boxes</SPAN></P>
+<SPAN LANG="en-GB">Insert the author in the upper box</SPAN></P>
 <P LANG="en-GB" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
 Divide the source text using the small blue arrows</P>
 <P LANG="en-GB" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
@@ -103,6 +107,9 @@ Don’t forget to &quot;save&quot;&nbsp;– you can also choose to
 <P LANG="en-GB" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
 <BR>
 </P>
+</div>
+
+<div class="tutorial-text">
 <OL START=4>
 	<LI><P LANG="fr-FR" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Use the <a href="<?php echo $this->makeUrl("/translation/concord");?>">concordance</a> directly</B></SPAN><SPAN LANG="en-GB"></SPAN></P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">you can enter any word or group of word and check if they are present in the translation memory</P>
@@ -110,12 +117,15 @@ Don’t forget to &quot;save&quot;&nbsp;– you can also choose to
 </OL>
 <BR>
 </P>
+</div>
+
+<div class="tutorial-text">
 <OL START=5>
 	<LI><P LANG="fr-FR" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Send
-	us your <a href="mailto:traduxio.feedback@gmail.com">feedback</a></B></SPAN><SPAN LANG="en-GB"></SPAN></P>
+	us your <a href="<?php echo $this->makeUrl("/index/feedback");?>">feedback</a></B></SPAN><SPAN LANG="en-GB"></SPAN></P>
 </OL>
 <P LANG="en-GB" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
-… or even become one of our beta-testers&nbsp;! Thanks</p>
+… or even become one of our beta-testers&nbsp;! Thanks</p><BR></BR>
 </div>
 </div>
 <!--</div>-->

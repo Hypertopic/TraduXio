@@ -56,6 +56,7 @@ div.tag-group{
 
 div.title{
     padding:3px;
+    padding-top:30px;
     font-size:120%;
     font-weight:bold;
 }
@@ -240,13 +241,14 @@ div#results table {
     border-collapse:collapse;
 }
 
-div#tutorial-text {
+div.tutorial-text {
+background-color:#FFFFFF;
 border-color:#DEDEDE;
-border-left:3px solid #DEDEDE;
+border:3px solid #DEDEDE;
 padding-left:20px;
+margin:15px 0px;
 }
 div#tutorial {
-background-color:#FFFFFF;
 margin:30px auto;
 text-align:left;
 width:90%;
@@ -470,11 +472,11 @@ div.news-paragraph{
     list-style-image:url(../images/list-square.png);
 }
 
-.nutshell {
-    border:2px dashed;
+div.nutshell {
+    background-color:#FFFFFF;
+    border:3px dashed #DEDEDE;
     font-weight:bold;
-    margin:30px;
-    padding:5px;
+    padding:20px; 
 }
 .options{
 color:#333333;
@@ -704,11 +706,11 @@ div.show-tag-area{
     margin-top:5px;
     margin-left:1%;
     width:39%;
-    min-width:400px;
+/*    min-width:400px;*/
 }
 #header-navigation{    
     margin-top:5px;
-    min-width:600px;
+/*    min-width:600px;*/
     width:60%;
     float:right;
     text-align:right;
@@ -949,9 +951,32 @@ span.author{
     font-weight:normal;
 }
 .red{
-color:#D91919;
+color:#BB0000;
 }
 
 a.idle{
 color:#d0d0d0;
 }
+
+div.tutorial-title{
+font-size:2.2em;
+font-variant:small-caps;
+margin-bottom:30px;
+text-align:center;
+}
+
+div.comment{
+color:#A0A0A0;
+font-style:italic;
+font-size:1.2em;
+margin: 10px 0px;
+}
+
+.centered{
+text-align:center;
+}
+
+div.block, div.form textarea{
+padding: 5px;
+}
+
