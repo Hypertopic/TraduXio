@@ -459,7 +459,7 @@ class WorkController extends Tdxio_Controller_Abstract
         
         switch($action){
             case 'index': 
-                $rule = array('privilege'=> 'read','work_id' => null);      
+                //$rule = array('privilege'=> 'read','work_id' => null);      
                 break; 
             case 'deposit': 
                 if($request->isPost()){

@@ -144,12 +144,19 @@ class Model_Translation extends Model_Taggable
     {
         $order='from_segment ASC';
         
-        $interpretations = $this->fetchByFields(array('original_work_id'=>$original_work_id),$order);
-        $translations = array();
-        
+        $table = $this->_getTable();
+        $db = $table->getAdapter();
+        $workModel = new Model_Work();
+        $selectAlwd = $workModel->getSelectCondAllowedWork('read');
+            
+        $select = $db->select()->from('interpretation')->where('interpretation.original_work_id = ?', $original_work_id)
+                               ->where('interpretation.work_id IN (?)',$selectAlwd)->order($order);
+        $interpretations = $db->fetchAll($select);
+
+        $translations = array();     
         if(!empty($interpretations)){
             foreach($interpretations as $key=>$interp){
-                $translations[$interp['work_id']][]=$interp;
+                $translations[$interp['work_id']]['blocks'][]=$interp;
             }
             $ids = array_keys($translations);
             

@@ -109,14 +109,12 @@ class Model_Privilege extends Model_Abstract
                 $select->where('(privilege = ?', $privilege['privilege'])->orWhere('privilege is NULL)');
             }
         }
-        if(!is_null($privilege['work_id'])){
-            if($privilege['visibility']=='custom'){
-                $select->where('(work_id = ?', $privilege['work_id'])->orWhere('work_id is NULL)');
-                $select->where('visibility = ?', $privilege['visibility']);
-            }elseif($privilege['visibility']=='public' or $privilege['visibility']=='private')
-            $select->where('visibility = ?', $privilege['visibility']);
-            //$select->where('work_id is NULL');
-        }
+           
+        if(!is_null($privilege['work_id']))
+            $select->where('(work_id = ?', $privilege['work_id'])->orWhere('work_id is NULL)');
+        
+        if(!is_null($privilege['visibility']))
+            $select->where('(visibility = ?', $privilege['visibility'])->orWhere('visibility is NULL)');
         
         Tdxio_Log::info($select->__toString(),"risultato query");
         

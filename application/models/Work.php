@@ -154,7 +154,7 @@ class Model_Work extends Model_Taggable
         $select->distinct()->from(array('work'=>'work'),array('id','title','author','language','created','modified','creator'))
                         ->joinLeft(array('i'=>'interpretation'),'i.original_work_id = work.id','count(distinct i.work_id)')
                         ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified','work.creator'))
-                        ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd);
+                        ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd)->where('i.work_id IN (?)',$selectAlwd);
         
         if(!is_null($idList)){           
             $select->where('id IN (?)',$idList);
@@ -177,7 +177,8 @@ class Model_Work extends Model_Taggable
         $table = $this->_getTable();
         $db = $table->getAdapter();
         $user_name = Tdxio_Auth::getUserName();
-        if(is_null($user_name)) $user_name = 'guest';
+        if(is_null($user_name)) $userList = array('guest');
+        else $userList = array('member',$user_name);
         $public_visibility = 'public';
         
         if($privilege!='read'){
@@ -186,11 +187,15 @@ class Model_Work extends Model_Taggable
             $prv_model = new Model_Privilege();
             $privilegeList = $prv_model->_includeReadList;
         }
-        $select = $db->select()->from('work','id')->where('creator = ?',$user_name)
-                                                  ->orWhere('visibility = ?',$public_visibility)
-                                                  ->orWhere('id IN (?)',$db->select()->from('privileges','work_id')->where('(user_id = ?',$user_name)
-                                                                                                                   ->orWhere('user_id is NULL )')
-                                                                                                                   ->where('privilege IN (?)',$privilegeList));       
+        
+        $select =$db->select()->from('work','work.id')->joinCross('privileges',array())//,array('privileges.user_id','privileges.privilege','privileges.work_id','privileges.visibility'))
+                                            ->where('(privileges.privilege IN (?)',$privilegeList)->orWhere('privileges.privilege is NULL)')
+                                            ->where('(privileges.user_id IN (?)',$userList)->orWhere('privileges.user_id is NULL)')
+                                            ->where('work.id = privileges.work_id OR privileges.work_id is NULL')
+                                            ->where('work.visibility = privileges.visibility OR privileges.visibility is NULL');
+
+        Tdxio_Log::info($select->__toString(),'problemone');
+        
         return $select;     
         
     }

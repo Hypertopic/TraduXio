@@ -56,7 +56,7 @@ div.tag-group{
 
 div.title{
     padding:3px;
-    padding-top:30px;
+    padding-top:10px;
     font-size:120%;
     font-weight:bold;
 }
@@ -254,51 +254,72 @@ text-align:left;
 width:90%;
 }
 
-div.TLcorner,div.TRcorner,div.TCcorner,div.BCcorner,div.BLcorner,div.BRcorner{
+.TLcorner,.TRcorner,.TCcorner,.BCcorner,.BLcorner,.BRcorner{
     background-repeat:no-repeat;
     width:21px;
     height:21px;
 }
-div.TLcorner{
+.TLcorner{
     float:left;
     background-image:url(../images/TLcorner.png); 
 }
-div.TRcorner{
+.TRcorner{
     background-image:url(../images/TRcorner.png);
     float:right;
 }
-div.TCcorner{
+.TLcorner-ong{
+    background-image:url(../images/onglet-left.png); 
+    height:32px;
+    width:23px;
+    float:left;
+    background-repeat:no-repeat;
+}
+
+.TRcorner-ong{
+    background-image: url(../images/onglet-right-short.png); 
+    height:32px;
+    float:right;
+    width:23px;
+    background-repeat:no-repeat;
+}
+.Tborder-ong{
+    background-image:url(../images/onglet-top.png);
+    background-repeat:horizontal-repeat;
+    height:32px;
+}
+
+.TCcorner{
     background-image:url(../images/TCcorner.png);
     clear:none;
 }
-div.BCcorner{
+.BCcorner{
     background-image:url(../images/BCcorner.png);
     clear:none;
 }
-div.BLcorner{
+.BLcorner{
     float:left;
     background-image:url(../images/BLcorner.png); 
 }
-div.BRcorner{
+.BRcorner{
     background-image:url(../images/BRcorner.png);
     float:right;
 }
-div.Tborder{
+.Tborder{
     background-image:url(../images/top-border.png);
 }
-div.Bborder{
+.Bborder{
     background-image:url(../images/bottom-border.png);
 }
-div.Tborder, div.Bborder{
+.Tborder, .Bborder{
     background-repeat:horizontal-repeat;  
     height:21px;
 }
-div.Lborder{
+.Lborder{
     background-image:url(../images/left-border.png);
     background-repeat:repeat-y;
     background-position:left;
 }
-div.Rborder{
+.Rborder{
     background-image:url(../images/right-border.png);
     background-repeat:repeat-y;
     background-position:right;
@@ -941,6 +962,9 @@ tr.button-line{
     padding:5px;
     text-align:right;
 }
+tr.tag-line, tr.onglets-line{
+background-color:#585858;
+}
 
 span.title{
     font-style:italic;
@@ -980,3 +1004,94 @@ div.block, div.form textarea{
 padding: 5px;
 }
 
+.onglet{
+color:#5A5A5A;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.fl-left{
+float:left;
+width:30%;
+}
+
+.clear{
+clear:both;
+}
+
+
+ul.onglets{
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+margin:0;
+/*float:left;*/
+padding:0px;
+height:32px;
+}
+
+li.onglet{
+float:left;
+letter-spacing:1px;
+padding-left:10px;
+float:left;
+}
+
+.onglets li{
+background: transparent url(../images/onglet-left.png) no-repeat; 
+height:32px;
+display:block;
+padding-left:21px;
+}
+
+
+.onglets span{
+background: transparent url(../images/onglet-right.png) no-repeat scroll 100% 100%;
+display:block;
+height:32px;
+padding-right:21px;
+vertical-align:bottom;
+
+}
+
+.onglets a{
+vertical-align:bottom;
+display:block;
+padding-top:10px;
+}
+span.active{
+color:#585858;
+font-style:italic;
+}
+
+.onglets li.inactive{
+/*border-bottom:2px solid #585858;
+margin-top:-2px;*/
+}
+
+li.active{
+width:100%;
+}
+
+.upshift{
+margin-top:-2px;
+}
+
+#current-onglet{
+width:100%;
+position: relative;
+top:10px;
+}
+#other-onglet{
+display:inline;/*
+float:left;*/
+}
+
+#temp{
+width:100%;}
+
+.samelang, .samelang a:link, .samelang a:active, .samelang a:visited{
+color:#585858;
+}
+.difflang, .difflang a:link, .difflang a:active, .difflang a:visited{
+color:#989898;}
