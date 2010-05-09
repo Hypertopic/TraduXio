@@ -257,7 +257,7 @@ class WorkController extends Tdxio_Controller_Abstract
                     if($remform->isValid($request->getPost())) {
                         Tdxio_Log::info('isvalid rem');
                         $data=$remform->getValues();
-                        if($data['submit']==__("Remove Privilege")){
+                        if($data['submit']=="Remove Privilege"){
                             Tdxio_Log::info($data);
                             $remove_list=array_keys($data,1);
                             Tdxio_Log::info($remove_list,'remove list');
@@ -277,7 +277,7 @@ class WorkController extends Tdxio_Controller_Abstract
                     Tdxio_Log::info('isvalid add');
                     $data=$addform->getValues();
                     Tdxio_Log::info($data,'dati privilege add 1');
-                    if($data['submit']==__("Add Privilege")){
+                    if($data['submit']=="Add Privilege"){
                         Tdxio_Log::info($data,'dati privilege add 2');
                         unset($data['submit']);
                         $data['work_id']=$id;

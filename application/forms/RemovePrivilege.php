@@ -74,7 +74,7 @@ class Form_RemovePrivilege extends Form_Abstract
         }
         // add the submit button
         $this->addElement('submit', 'submit', array(
-            'label'    => __('Remove Privilege'),
+            'label'    => 'Remove Privilege',
             'id' => 'remsubmit'
         ));
 

@@ -1541,11 +1541,11 @@ msgstr "Pohnpei"
 
 #: ../languages/ripristino/prova_ripristino.php:322
 msgid "por"
-msgstr "Portuguese"
+msgstr "Portugais"
 
 #: ../languages/ripristino/prova_ripristino.php:323
 msgid "pro"
-msgstr "Old Provençal (to 1500)"
+msgstr "Provençal ancien (jusqu'à 1500)"
 
 #: ../languages/ripristino/prova_ripristino.php:324
 msgid "pus"
@@ -1573,11 +1573,11 @@ msgstr "Romansh"
 
 #: ../languages/ripristino/prova_ripristino.php:330
 msgid "rom"
-msgstr "Romany"
+msgstr "Tsigane"
 
 #: ../languages/ripristino/prova_ripristino.php:331
 msgid "ron"
-msgstr "Romanien"
+msgstr "Roumain"
 
 #: ../languages/ripristino/prova_ripristino.php:332
 msgid "run"
