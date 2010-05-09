@@ -179,7 +179,6 @@ class Model_Work extends Model_Taggable
         $user_name = Tdxio_Auth::getUserName();
         if(is_null($user_name)) $userList = array('guest');
         else $userList = array('member',$user_name);
-        $public_visibility = 'public';
         
         if($privilege!='read'){
             $privilegeList = array($privilege);
@@ -192,7 +191,8 @@ class Model_Work extends Model_Taggable
                                             ->where('(privileges.privilege IN (?)',$privilegeList)->orWhere('privileges.privilege is NULL)')
                                             ->where('(privileges.user_id IN (?)',$userList)->orWhere('privileges.user_id is NULL)')
                                             ->where('work.id = privileges.work_id OR privileges.work_id is NULL')
-                                            ->where('work.visibility = privileges.visibility OR privileges.visibility is NULL');
+                                            ->where('work.visibility = privileges.visibility OR privileges.visibility is NULL')
+                                            ->orWhere('work.creator IN (?)',$userList);
 
         Tdxio_Log::info($select->__toString(),'problemone');
         
