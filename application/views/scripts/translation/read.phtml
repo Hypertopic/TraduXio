@@ -94,7 +94,7 @@
         if($this->translation['id']!=$tr_id): ?>
             <li class="onglet inactive">
             <span class="<?php if($otherTrl['work']['language']==$this->translation['language']){echo 'samelang';}else{echo 'difflang';}?>" title="<?php echo __($otherTrl['work']['language']) ?>">
-                <a href="<?php echo $this->makeUrl('/translation/read/id/'.$otherTrl['work']['id']); ?>"><?php echo $otherTrl['work']['creator']; ?></a>
+                <a href="<?php echo $this->makeUrl('/translation/read/id/'.$otherTrl['work']['id']); ?>"><?php echo $otherTrl['work']['author']; ?></a>
             </span></li>
     <?php endif; endforeach; ?>
  </ul>
@@ -122,7 +122,7 @@
 </td>
 
 <td class="transl-column hundred">   
-<div class="Tborder-ong clear" ><span id="current-onglet" class="onglet active"><?php echo $this->translation['creator'] ?></span>
+<div class="Tborder-ong clear" ><span id="current-onglet" class="onglet active"><?php echo $this->translation['author'] ?></span>
         <div class = "TLcorner-ong"></div><div class = "TRcorner-ong"></div>
  </div>
  <div class="Lborder hundred clear">
