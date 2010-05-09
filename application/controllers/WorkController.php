@@ -253,11 +253,12 @@ class WorkController extends Tdxio_Controller_Abstract
                 $remform = new Form_RemovePrivilege($id,$privilegeList);
                 $this->view->remform=$remform;
                 if($this->getRequest()->isPost()) {
-                    Tdxio_Log::info('ispost rem');
-                    if($remform->isValid($request->getPost())) {
-                        Tdxio_Log::info('isvalid rem');
+                    $post = $request->getPost();
+                    Tdxio_Log::info($post,'ispost rem');
+                    if($remform->isValid($post)) {
+                        Tdxio_Log::info($post,'isvalid rem');
                         $data=$remform->getValues();
-                        if($data['submit']==__("Remove Privilege")){
+                        if($post['submit']==__("Remove Privilege")){
                             Tdxio_Log::info($data);
                             $remove_list=array_keys($data,1);
                             Tdxio_Log::info($remove_list,'remove list');
@@ -272,12 +273,13 @@ class WorkController extends Tdxio_Controller_Abstract
                 }
             }
             if($this->getRequest()->isPost()) {
-                Tdxio_Log::info('ispost add');
-                if($addform->isValid($request->getPost())) {
-                    Tdxio_Log::info('isvalid add');
+                $post = $request->getPost();
+                Tdxio_Log::info($post,'ispost add');
+                if($addform->isValid($post)) {
+                    Tdxio_Log::info($post,'isvalid add');
                     $data=$addform->getValues();
                     Tdxio_Log::info($data,'dati privilege add 1');
-                    if($data['submit']==__("Add Privilege")){
+                    if($post['submit']==__("Add Privilege")){
                         Tdxio_Log::info($data,'dati privilege add 2');
                         unset($data['submit']);
                         $data['work_id']=$id;
@@ -292,12 +294,13 @@ class WorkController extends Tdxio_Controller_Abstract
             $stdform = new Form_StdPrivilege();
             $this->view->stdform=$stdform;
             if($this->getRequest()->isPost()) {
-                Tdxio_Log::info('ispost std');
-                if($stdform->isValid($request->getPost())) {
-                    Tdxio_Log::info('isvalid std');
+                $post = $request->getPost();
+                Tdxio_Log::info($post,'ispost std');
+                if($stdform->isValid($post)) {
+                    Tdxio_Log::info($post,'isvalid std');
                     $data=$stdform->getValues();
                     Tdxio_Log::info($data,"dati privilege std");
-                    if($data['submit']==__("Save")){    
+                    if($post['submit']==__("Save")){    
                         Tdxio_Log::info($data,"manage data");                    
                         unset($data['submit']);
                         $model->update($data,$id);
