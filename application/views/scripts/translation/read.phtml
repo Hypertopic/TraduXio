@@ -94,7 +94,7 @@
         if($this->translation['id']!=$tr_id): ?>
             <li class="onglet inactive">
             <span class="<?php if($otherTrl['work']['language']==$this->translation['language']){echo 'samelang';}else{echo 'difflang';}?>" title="<?php echo __($otherTrl['work']['language']) ?>">
-                <a href="<?php echo $this->makeUrl('/translation/read/id/'.$otherTrl['work']['id']); ?>"><?php echo $otherTrl['work']['author']; ?></a>
+                <a href="<?php echo $this->makeUrl('/translation/read/id/'.$otherTrl['work']['id']); ?>"><?php if($otherTrl['work']['author']==''){echo __('Anonymous');}else{echo $otherTrl['work']['author'];} ?></a>
             </span></li>
     <?php endif; endforeach; ?>
  </ul>
