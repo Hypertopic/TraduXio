@@ -65,7 +65,8 @@ class Form_AddPrivilege extends Form_Abstract
         
         // add the submit button
         $this->addElement('submit', 'submit', array(
-            'label'    => 'Add Privilege'
+            'label'    => __('Add Privilege'),
+            'id' => 'addsubmit'
         ));
         /*
         $prv_type = $this->addElement('hidden', 'prv_type', array(

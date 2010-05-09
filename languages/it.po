@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-03 15:57+0100\n"
+"POT-Creation-Date: 2010-05-09 13:03+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -82,60 +82,66 @@ msgstr "Aggiungi Privilegio"
 msgid "Switch to Standard Privileges"
 msgstr "Passa ai PRIVILEGI STANDARD"
 
-#: controllers/WorkController.php:308
-msgid "Switch to Custom Privileges"
-msgstr "Passa ai PRIVILEGI PERSONALIZZATI"
-
-#: controllers/WorkController.php:357
-#: controllers/WorkController.php:360
-msgid "No Title"
-msgstr "Nessun Titolo"
-
-#: controllers/WorkController.php:369
-#, php-format
-msgid "\"%1$s\", new text added by %2$s"
-msgstr "\"%1$s\", nuovo testo aggiunto da %2$s"
-
-#: controllers/WorkController.php:374
-#, php-format
-msgid "\"%1$s\", new translation of %2$s added by %3$s"
-msgstr "\"%1$s\", nuova traduzione di %2$s agiunta da %3$s"
-
-#: controllers/WorkController.php:379
-#, php-format
-msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
-msgstr "\"%1$s\", nuovo tag (%2$s) del testo %3$s aggiunto da %4$s"
-
-#: controllers/WorkController.php:389
-#, php-format
-msgid "\"%1$s\", the text has been modified"
-msgstr "\"%1$s\", il testo è stato modificato"
-
-#: controllers/WorkController.php:396
-#, php-format
-msgid "\"%1$s\", translation of %2$s, has been modified"
-msgstr "\"%1$s\", traduzione di %2$s, è stata modificata"
-
-#: controllers/WorkController.php:401
-#, php-format
-msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
-msgstr "\"%1$s\", tag (%2$s) del testo %3$s modificato da %4$s"
-
-#: forms/TranslationEdit.php:61
-#: forms/WorkEdit.php:58
-msgid "Author"
-msgstr "Autore"
-
-#: forms/TranslationEdit.php:84
+#: controllers/WorkController.php:300
+#: forms/TranslationEdit.php:85
 #: forms/WorkEdit.php:78
 msgid "Save"
 msgstr "Salva"
 
-#: forms/TranslationEdit.php:87
+#: controllers/WorkController.php:309
+msgid "Switch to Custom Privileges"
+msgstr "Passa ai PRIVILEGI PERSONALIZZATI"
+
+#: controllers/WorkController.php:361
+#: controllers/WorkController.php:364
+msgid "No Title"
+msgstr "Nessun Titolo"
+
+#: controllers/WorkController.php:375
+#, php-format
+msgid "\"%1$s\", new text added by %2$s"
+msgstr "\"%1$s\", nuovo testo aggiunto da %2$s"
+
+#: controllers/WorkController.php:380
+#, php-format
+msgid "\"%1$s\", new translation of %2$s added by %3$s"
+msgstr "\"%1$s\", nuova traduzione di %2$s agiunta da %3$s"
+
+#: controllers/WorkController.php:385
+#, php-format
+msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
+msgstr "\"%1$s\", nuovo tag (%2$s) del testo %3$s aggiunto da %4$s"
+
+#: controllers/WorkController.php:395
+#, php-format
+msgid "\"%1$s\", the text has been modified"
+msgstr "\"%1$s\", il testo è stato modificato"
+
+#: controllers/WorkController.php:402
+#, php-format
+msgid "\"%1$s\", translation of %2$s, has been modified"
+msgstr "\"%1$s\", traduzione di %2$s, è stata modificata"
+
+#: controllers/WorkController.php:407
+#, php-format
+msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
+msgstr "\"%1$s\", tag (%2$s) del testo %3$s modificato da %4$s"
+
+#: forms/TranslationEdit.php:51
+#: forms/WorkEdit.php:58
+msgid "Author"
+msgstr "Autore"
+
+#: forms/TranslationEdit.php:61
+#: forms/WorkEdit.php:50
+msgid "Title"
+msgstr "Titolo"
+
+#: forms/TranslationEdit.php:88
 msgid "Save and quit"
 msgstr "Salva ed esci"
 
-#: forms/TranslationEdit.php:90
+#: forms/TranslationEdit.php:91
 #: forms/WorkEdit.php:83
 msgid "Cancel"
 msgstr "Annulla"
@@ -156,23 +162,27 @@ msgstr "Utente"
 msgid "Privilege"
 msgstr "Privilegio"
 
-#: forms/AddPrivilege.php:91
+#: forms/AddPrivilege.php:92
 msgid "All users"
 msgstr "Tutti gli utenti"
 
-#: forms/Feedback.php:42
-msgid "Your email address"
-msgstr "Il tuo indirizzo email"
-
-#: forms/Feedback.php:50
+#: forms/Feedback.php:44
 msgid "Subject"
 msgstr "Oggetto"
 
-#: forms/Feedback.php:58
+#: forms/Feedback.php:51
+msgid "Your email address"
+msgstr "Il tuo indirizzo email"
+
+#: forms/Feedback.php:69
 msgid "Your message"
 msgstr "Il tuo messaggio"
 
-#: forms/Feedback.php:75
+#: forms/Feedback.php:78
+msgid "Please verify you're a human"
+msgstr "Per favore, dimostra di essere un umano!"
+
+#: forms/Feedback.php:88
 msgid "Send"
 msgstr "Invio"
 
@@ -183,10 +193,6 @@ msgstr "Testo da aggiungere"
 #: forms/TextExtend.php:53
 msgid "Deposit"
 msgstr "Inserisci"
-
-#: forms/WorkEdit.php:50
-msgid "Title"
-msgstr "Titolo"
 
 #: forms/WorkEdit.php:67
 msgid "Language"
@@ -232,21 +238,21 @@ msgstr "Non sono stati definiti abbastanza parametri per eliminare il tag"
 msgid "No taggable-id specified"
 msgstr "Non è stato specificato nessun \"taggable-id\""
 
-#: models/Work.php:354
+#: models/Work.php:359
 msgid "All users are allowed to do everything for this text"
 msgstr "Tutti gli utenti sono autorizzati a fare tutto su questo testo"
 
-#: models/Work.php:356
+#: models/Work.php:361
 #, php-format
 msgid "All users are allowed to %1$s this text"
 msgstr "Tutti gli utenti sono autorizzati a %1$s questo testo"
 
-#: models/Work.php:359
+#: models/Work.php:364
 #, php-format
 msgid "User %1$s is allowed to do everything for this text"
 msgstr "L'utente %1$s è autorizzato a fare tutto su questo testo"
 
-#: models/Work.php:361
+#: models/Work.php:366
 #, php-format
 msgid "User %1$s is allowed to %2$s this text"
 msgstr "L'utente %1$s è autorizzato a %2$s questo testo"
@@ -328,15 +334,15 @@ msgid "day"
 msgstr "giorno"
 
 #: ../languages/ripristino/prova_ripristino.php:19
-msgid "LANGSEL_en"
-msgstr "English"
+msgid "en"
+msgstr "Inglese"
 
 #: ../languages/ripristino/prova_ripristino.php:20
-msgid "LANGSEL_fr"
-msgstr "Français"
+msgid "fr"
+msgstr "Francese"
 
 #: ../languages/ripristino/prova_ripristino.php:21
-msgid "LANGSEL_it"
+msgid "it"
 msgstr "Italiano"
 
 #: ../languages/ripristino/prova_ripristino.php:22
@@ -2189,8 +2195,8 @@ msgid "Delete this text"
 msgstr "Elimina questo testo"
 
 #: views/scripts/work/read.phtml:93
-#: views/scripts/translation/read.phtml:96
-#: views/scripts/translation/read.phtml:123
+#: views/scripts/translation/read.phtml:251
+#: views/scripts/translation/read.phtml:264
 msgid "Text inserted by"
 msgstr "Testo inserito da"
 
@@ -2198,7 +2204,7 @@ msgstr "Testo inserito da"
 msgid "PAGETITLE_Read text"
 msgstr "Leggi il testo"
 
-#: views/scripts/translation/edit.phtml:205
+#: views/scripts/translation/edit.phtml:230
 msgid "PAGETITLE_Edit translation"
 msgstr "Modifica traduzione"
 
@@ -2218,15 +2224,7 @@ msgstr "Modifica questa traduzione"
 msgid "Delete this translation"
 msgstr "Elimina questa traduzione"
 
-#: views/scripts/translation/read.phtml:82
-msgid "Original Text"
-msgstr "Testo Originale"
-
-#: views/scripts/translation/read.phtml:113
-msgid "Translation"
-msgstr "Traduzione"
-
-#: views/scripts/translation/read.phtml:135
+#: views/scripts/translation/read.phtml:276
 msgid "PAGETITLE_Read translation"
 msgstr "Leggi la traduzione"
 
@@ -2262,11 +2260,11 @@ msgstr "Si sta cercando di accedere ad un area non permessa."
 msgid "PAGETITLE_Access denied"
 msgstr "Accesso vietato"
 
-#: views/scripts/index/tutorial.phtml:131
+#: views/scripts/index/tutorial.phtml:139
 msgid "PAGETITLE_Tutorial"
 msgstr "Come usare Traduxio"
 
-#: views/scripts/index/about.phtml:92
+#: views/scripts/index/about.phtml:116
 msgid "PAGETITLE_About Traduxio"
 msgstr "A proposito di Traduxio"
 
@@ -2274,16 +2272,20 @@ msgstr "A proposito di Traduxio"
 msgid "PAGETITLE_Contact us"
 msgstr "Contattaci"
 
+#~ msgid "LANGSEL_en"
+#~ msgstr "English"
+#~ msgid "LANGSEL_fr"
+#~ msgstr "Français"
+#~ msgid "LANGSEL_it"
+#~ msgstr "Italiano"
+#~ msgid "Original Text"
+#~ msgstr "Testo Originale"
+#~ msgid "Translation"
+#~ msgstr "Traduzione"
 #~ msgid "Search"
 #~ msgstr "Ricerca"
 #~ msgid "Send your feedback"
 #~ msgstr "Manda il tuo messaggio"
-#~ msgid "en"
-#~ msgstr "Inglese"
-#~ msgid "fr"
-#~ msgstr "Francese"
-#~ msgid "it"
-#~ msgstr "Italiano"
 #~ msgid "fr_FR"
 #~ msgstr "Francese"
 #~ msgid "it_IT"
