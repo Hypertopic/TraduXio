@@ -91,9 +91,9 @@ class WorkController extends Tdxio_Controller_Abstract
                 $data = $form->getValues();
                 $data['creator']=Tdxio_Auth::getUserName();
                 $model = $this->_getModel();
-                $model->save($data);
+                $new_id = $model->save($data);
                 Tdxio_Log::info($data);
-                return $this->_helper->redirector('index');
+                return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$new_id));
             }
         }
         $this->view->form = $form;
