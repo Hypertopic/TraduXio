@@ -71,7 +71,7 @@ class Form_Tag extends Form_Abstract
         $translated_genres = array();
         if(is_array($genres)){
             foreach($genres as $key=>$genre){
-                $translated_genres[$key] = __($genre);
+                $translated_genres[$key] = ucfirst(__($genre));
             }
         }      
         return $translated_genres;

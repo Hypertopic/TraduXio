@@ -447,9 +447,6 @@ div.spaced{
 div.TBspaced{
     padding: 20px 0px;
 }
-div.block{
-    padding:0px;
-}
 
 .privilege-form .title{
     margin:auto;
@@ -974,7 +971,7 @@ span.author{
     font-style:normal;
     font-weight:normal;
 }
-.red{
+.red, .red a{
 color:#BB0000;
 }
 
@@ -1001,7 +998,7 @@ text-align:center;
 }
 
 div.block, div.form textarea{
-padding: 5px;
+padding: 5px 10px;
 }
 
 .onglet{
@@ -1059,29 +1056,17 @@ vertical-align:bottom;
 display:block;
 padding-top:10px;
 }
-span.active{
-color:#585858;
-font-style:italic;
-}
 
 .onglets li.inactive{
 /*border-bottom:2px solid #585858;
 margin-top:-2px;*/
 }
 
-li.active{
-width:100%;
-}
 
 .upshift{
 margin-top:-2px;
 }
 
-#current-onglet{
-width:100%;
-position: relative;
-top:10px;
-}
 #other-onglet{
 display:inline;/*
 float:left;*/

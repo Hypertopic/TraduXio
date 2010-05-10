@@ -279,7 +279,7 @@ msgstr "genre"
 
 #: ../languages/ripristino/prova_ripristino.php:5
 msgid "period"
-msgstr "periode"
+msgstr "période"
 
 #: ../languages/ripristino/prova_ripristino.php:6
 msgid "comment"
@@ -1995,7 +1995,7 @@ msgstr "Zhuang"
 
 #: ../languages/ripristino/prova_ripristino.php:434
 msgid "zho"
-msgstr "Chinese"
+msgstr "Chinois"
 
 #: ../languages/ripristino/prova_ripristino.php:435
 msgid "zul"

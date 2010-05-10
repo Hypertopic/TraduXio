@@ -125,6 +125,8 @@ class TranslationController extends Tdxio_Controller_Abstract
         $request=$this->getRequest();
         $translationId=$request->getParam('id');
         $translation = $this->_getModel()->fetchTranslationWork($translationId);
+        $showBlocks=$request->getParam('sb');
+        if(is_null($showBlocks)) $showBlocks = 1;
         
         $tagForm = new Form_Tag();
         if ($this->getRequest()->isPost()) {
@@ -144,6 +146,9 @@ class TranslationController extends Tdxio_Controller_Abstract
         $this->view->canManage = $workModel->isAllowed('manage',$translationId);
         $this->view->tagForm = $tagForm;
         $this->view->translation = $translation;
+        $this->view->showBlocks = $showBlocks;
+        $this->view->switchBlocks = ($showBlocks==1)?0:1;
+        $this->view->blockOption = ($showBlocks==1)?__('HIDE BLOCKS'):__('SHOW BLOCKS');
     }
     
     protected function _getBlockList($transBlocks) 

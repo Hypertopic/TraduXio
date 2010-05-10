@@ -1995,7 +1995,7 @@ msgstr "Zhuang"
 
 #: ../languages/ripristino/prova_ripristino.php:434
 msgid "zho"
-msgstr "Chinese"
+msgstr "Cinese"
 
 #: ../languages/ripristino/prova_ripristino.php:435
 msgid "zul"
