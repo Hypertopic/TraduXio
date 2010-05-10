@@ -151,8 +151,10 @@ class Model_Work extends Model_Taggable
         $selectOrig = $this->getSelectCondOriginalWork('sentence');
         $selectAlwd = $this->getSelectCondAllowedWork('read'); 
         
+        $selectIntAlwd = $db->select()->from('interpretation',array('original_work_id','work_id'))->where('work_id IN (?)', $selectAlwd);
+        
         $select->distinct()->from(array('work'=>'work'),array('id','title','author','language','created','modified','creator'))
-                        ->joinLeft(array('i'=>'interpretation'),'i.original_work_id = work.id','count(distinct i.work_id)')
+                        ->join(array('i'=>$selectIntAlwd),'i.original_work_id = work.id','count(distinct i.work_id)')
                         ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified','work.creator'))
                         ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd);
         
