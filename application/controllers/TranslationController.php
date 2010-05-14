@@ -54,7 +54,9 @@ class TranslationController extends Tdxio_Controller_Abstract
                             unset($data['block'.$id]);
                         }
                     }
-                    $model->update($data,$translationId);                    
+                    $model->update($data,$translationId);   
+                    $histModel = new Model_History();
+                    $histModel->addHistory($translationId,2);                   
                 }
             }
             if (isset($post['submitquit']) || isset($post['cancel'])) {
@@ -138,8 +140,8 @@ class TranslationController extends Tdxio_Controller_Abstract
                 return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$translationId,'genre'=>$data['tag_genre'],'tag'=>$data['tag_comment']));
             }
         }
-                
-        $this->view->otherTranslations=$translation['OriginalWork']['Interpretations'];
+        
+        $this->view->otherTranslations = $translation['OriginalWork']['Interpretations'];
         $workModel = new Model_Work();
         $this->view->hasTranslations=$workModel->hasTranslations($translationId);        
         $this->view->canTag = $workModel->isAllowed('tag',$translationId);
@@ -345,6 +347,4 @@ class TranslationController extends Tdxio_Controller_Abstract
             $metadata[$tag['genre_name']][$tag['comment']]=$tag['comment'];
         }
     }
-
-    
 }

@@ -46,8 +46,10 @@ $HTmessage = __("You can't delete this text because it has some translations. De
             $askConfirm = __("WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?");
             $href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
         else: $href = 'class="idle" title="'.$HTmessage.'"'; endif;?>
-        <div class = "options"><a <?php echo $href; ?> ><?php echo __("Delete this text"); ?></a></div>
+        <div class = "options"><a <?php echo $href; ?> ><?php echo __("Delete this text"); ?></a></div><br>
     <?endif; ?>
+    
+    <div class = "options"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("History of modifications"); ?></a></div>
 
 <br><br>
 
@@ -81,9 +83,13 @@ $HTmessage = __("You can't delete this text because it has some translations. De
 <!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
         <div class="Lborder hundred"><div class="Rborder hundred">
             <div class = "work-container hundred">
-                <div class = "title" id="work-title"> <?php echo $this->work['title']; ?> </div>
-                <div class="language"><?php $author=$this->work['author']; if($author==''){$author=__('Anonymous');}?>
-                <?php echo $author.' - '.__($this->work['language']); ?></div>
+                <div class = "title" id="work-title"><?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
+                <span class="author"><?php echo $author.', ' ?></span>
+                <span><?php echo $this->work['title']; ?></span>
+                </div>
+                
+                <div class="language">
+                <?php echo __($this->work['language']); ?></div>
                 <div class = "text"> 
                     <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
                         <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>

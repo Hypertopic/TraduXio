@@ -14,10 +14,6 @@ class Model_Taggable extends Model_Abstract
 
     protected $_tableClass = 'Taggable';
     
-    public function __construct() {
-        
-        //parent::__construct($class_name,$idField,$contentField); 
-    }
 
     public function getTags($taggable_id){
         $db = $this->_getTable()->getAdapter();

@@ -86,17 +86,10 @@ class Tdxio_Preferences
             $lanPref = $options['lang'];
             if(!empty($lanPref)){
                 $translate = Zend_Registry::get('Zend_Translate');
-                try{
-                    $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',$lanPref);        
+                try{   
+                    $translate->setLocale($lanPref);
                 }catch(Zend_Exception $e){
                     Tdxio_Log::info($e,'ERRORE IN SETCURLANGUAGE');
-                    /*if(strlen($lanPref)==2){
-                        $lanPref=$lanPref.'_'.strtoupper($lanPref);
-                    }else{$lanPref=substr($lanPref,0,2);}
-                    try{
-                        $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lanPref.'.mo',$lanPref);        
-                    }catch(Zend_Exception $e){Tdxio_Log::info($e,'ERRORE DEFINITIVO IN SETCURLANGUAGE');}
-                    */
                 }
                 Tdxio_Log::info($translate->getLocale(),'locale after setCurLanguage');                    
             }
@@ -111,8 +104,10 @@ class Tdxio_Preferences
         Tdxio_Log::info($mo_files,'files in languages');
         $languages = array();
         $cur_lang = self::getCurLanguage();
+        $translate = Zend_Registry::get('Zend_Translate');//NEW
         foreach($mo_files as $key=>$name){
             $name = substr($name,0,strlen($name)-3);
+            $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$name.'.mo',$name);//NEW
             $languages[$name]=self::original($name);
         }
         self::setCurLanguage(array('lang'=>$cur_lang));

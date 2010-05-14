@@ -45,15 +45,12 @@ class WorkController extends Tdxio_Controller_Abstract
         $work = $this->_getModel();
         $entries = $work->fetchAllOriginalWorks();
         //Tdxio_Log::info($entries);
-                
-        $newModWorks = array();
+         
         $sort=array();
         
         if(!is_null($entries)){
             foreach ($entries as $entry) {
-                
-                if(!is_null($NMentry=$this->newModified($entry,'orig'))){$newModWorks[]=$NMentry;}
-                
+                         
                 if (isset($entry['language'])) {
                     $lang=__($entry['language']);
                     if (!isset($sort[$lang])) {
@@ -70,9 +67,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 }
             }
         }
-        
-        $news = $this->sortByAge(array_merge($this->getNews(),$newModWorks));
-        Tdxio_Log::info($entries,'newentries');
+        $news = $this->getNews();
+        Tdxio_Log::info($news,'newentries');
         if(!empty($sort)){ksort($sort,SORT_STRING);}     
         $this->view->entries=$sort;        
         $this->view->home = true;
@@ -92,6 +88,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 $data['creator']=Tdxio_Auth::getUserName();
                 $model = $this->_getModel();
                 $new_id = $model->save($data);
+                $histModel = new Model_History();        
+                $histModel->addHistory($new_id,5);   
                 Tdxio_Log::info($data);
                 return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$new_id));
             }
@@ -198,6 +196,8 @@ class WorkController extends Tdxio_Controller_Abstract
                     unset($data['submit']);
                     
                     $newId=$model->update($data,$id);
+                    $histModel = new Model_History();
+                    $histModel->addHistory($id,1);  
                     return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
                 }
             }
@@ -226,7 +226,9 @@ class WorkController extends Tdxio_Controller_Abstract
                         
                         $data=$form->getValues();
                         Tdxio_Log::info($data,'dati form work edit');
-                        $newId=$model->update($data,$id);                        
+                        $newId=$model->update($data,$id); 
+                        $histModel = new Model_History();        
+                        $histModel->addHistory($id,0);               
                     }
                 }
                 return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
@@ -349,6 +351,15 @@ class WorkController extends Tdxio_Controller_Abstract
         else{ return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$orig_id)); }        
     }
 
+    public function historyAction(){
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        $model=$this->_getModel();
+        $histModel = new Model_History();
+        $this->view->work = $model->fetchWork($id);
+        $this->view->history = $histModel->getHistory($id);
+    }
+
     protected function tagSentence()
     {
         
@@ -369,7 +380,7 @@ class WorkController extends Tdxio_Controller_Abstract
             $NMitem=$item;
             Tdxio_Log::info($item['modified'],$item['created']);
             Tdxio_Log::info($item['modified']-$item['created'],'infos C/M '.$item['title']);
-            if(((!isset($item['modified']))or($item['modified']-$item['created']<$CREATETIME))and(time() - $item['created'] < $this->MONTHSEC))
+            if(((!isset($item['modified']))or($item['modified']-$item['created']<=$CREATETIME))and(time() - $item['created'] < $this->MONTHSEC))
             {                
                 $NMitem['age']=time() - $item['created'];
             
@@ -414,7 +425,7 @@ class WorkController extends Tdxio_Controller_Abstract
         return $NMitem;
     }
     
-    public function getNews(){
+/*    public function getNews(){
         // get visible texts inserted or modified in the last 30 days
         $model = $this->_getModel();
         $transl = $model->getNewModTransl();
@@ -430,10 +441,29 @@ class WorkController extends Tdxio_Controller_Abstract
         $tags = $taggModel->getNewModTags($user);   
                
         foreach($tags as $key=> $item){
-            if(!is_null($NMitem=$this->newModified($item,'tag'))){$news[]=$NMitem;}
+            $NMitem=$this->newModified($item,'tag');
+            if(!is_null($NMitem)){
+                Tdxio_Log::info('it is not null');
+                $news[]=$NMitem;
+            }
         }   
         return $news;
     }
+*/
+    public function getNews(){
+        $model = $this->_getModel();
+        $histModel = new Model_History();
+        $lastHistory = $histModel->getAllRecentHistory(15);//get history of last 15 days
+        Tdxio_Log::info($referenceRow,'riga di riferimento');
+        $selectedHistory[0]=$referenceRow = $lastHistory[0];
+        foreach($lastHistory as $key=>$row){
+            if(!($this->_equals($row,$referenceRow,array('user','date','work_id','message')))){
+                $selectedHistory[]=$row;
+            }            
+        }
+        return $selectedHistory;
+    }
+    
     
     public function sortByAge($list){
         
@@ -444,6 +474,10 @@ class WorkController extends Tdxio_Controller_Abstract
         
         if(!empty($sortedList)){ksort($sortedList);}
         return($sortedList);
+    }
+    
+    public function _equals(array $a, array $b, array $paramList){
+        return false;
     }
     
     public function getRule($request){
@@ -476,6 +510,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 }else{
                     $rule = array('privilege'=> 'read','work_id' => $resource_id, 'notAllowed'=>true);
                 }break;
+            
+            case 'history':
             case 'read':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'tag','work_id' => $resource_id);

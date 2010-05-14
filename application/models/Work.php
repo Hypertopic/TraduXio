@@ -115,8 +115,7 @@ class Model_Work extends Model_Taggable
             return $works[0];
         }else {
             return $works;
-        }
-  
+        }  
     }
     
     public function fetchOriginalWork($work_id,$filter=true){
@@ -453,9 +452,14 @@ class Model_Work extends Model_Taggable
         $prvModel = new Model_Privilege();
         $prvModel->deleteWorkPrivileges($id);
         
+        //eliminare tutta la history del work
+        $histTable = new Model_DbTable_History();
+        $histTable->delete($table->getAdapter()->quoteInto('work_id = ?',$id));
+        
+        //eliminare il work dalla tabella work
         $table = $this->_getTable();
         $table->delete($table->getAdapter()->quoteInto('id = ?',$id));        
         return $return_value;
-    }
-
+    }   
+    
 }

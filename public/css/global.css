@@ -552,7 +552,6 @@ font-style:italic;
 }
 a.news_link{
 
-text-transform:uppercase;
 }
 
 div.text {
@@ -646,7 +645,7 @@ border:1px solid #DBDBDB;
 /*border-color:#FFFFFF;*/
 height:auto;
 overflow:hidden;
-width:100%;
+width:98%;
 color:#585858;
 }
 
@@ -791,8 +790,7 @@ div.show-tag-area{
 div#gray-page-title{
     font-size:1.8em;
     color:#a0a0a0;
-    margin:20px;
-    height:50px;
+    margin:20px 20px 30px 20px;
 }
 #autogrow_shadow {
     border:1px solid;
@@ -1080,3 +1078,12 @@ color:#585858;
 }
 .difflang, .difflang a:link, .difflang a:active, .difflang a:visited{
 color:#989898;}
+
+.hist-date, .hist-user{
+font-style: italic;
+padding-right:10px;
+}
+.hist-msg{
+font-weight:bold;
+}
+.hist-tags{}

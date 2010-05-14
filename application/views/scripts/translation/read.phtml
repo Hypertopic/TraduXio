@@ -24,6 +24,8 @@
         <div class = "options"><a <?php echo $href; ?> ><?php echo __("Delete this translation"); ?></a></div> <br>
     <?endif; ?>
     
+    <div class = "options"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->translation['id']); ?>" ><?php echo __("History of modifications"); ?></a></div><br>
+    
     <div class="options"><a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$this->translation['id'],'sb'=>$this->switchBlocks)); ?>">
     <?php echo $this->blockOption; ?>
     </a></div>
@@ -166,10 +168,10 @@
         <div class="Rborder hundred">
             <div class = "work-container hundred">
                 <div class="title">          
-                    <?php $author = $this->translation['author'];
-                    $title = $this->escape($this->translation['title']);
-                    if($author==''){$author=__('Anonymous');} 
-                    if($title==''){$title=__('No Title');} ?>
+                    <?php 
+                        $title = ($this->translation['title']=='')?__('No Title'):$this->translation['title'];
+                        $author = ($this->translation['author']=='')?__('Anonymous'):$this->translation['author'];
+                    ?>
                     <span class="author red"><?php echo $author.', ' ?></span>
                     <span class="title red"><?php echo $title ?></span>
                 </div>

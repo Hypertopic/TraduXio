@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-09 13:03+0100\n"
+"POT-Creation-Date: 2010-05-12 19:02+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -38,6 +38,14 @@ msgstr "Text Id %1$s does not exist."
 #, php-format
 msgid "Can not cut here (%1$s)"
 msgstr "Can not cut here (%1$s)"
+
+#: controllers/TranslationController.php:151
+msgid "HIDE BLOCKS"
+msgstr "HIDE BLOCKS"
+
+#: controllers/TranslationController.php:151
+msgid "SHOW BLOCKS"
+msgstr "SHOW BLOCKS"
 
 #: controllers/ErrorController.php:32
 msgid "Page not found"
@@ -81,60 +89,60 @@ msgstr "Work Id %1$s does not exist or you don't have the rights to see it "
 msgid "Couldn't find work %1$d"
 msgstr "Couldn't find work %1$d"
 
-#: controllers/WorkController.php:260
+#: controllers/WorkController.php:261
 msgid "Remove Privilege"
 msgstr "Remove Privilege"
 
-#: controllers/WorkController.php:280
+#: controllers/WorkController.php:282
 #: forms/AddPrivilege.php:68
 msgid "Add Privilege"
 msgstr "Add Privilege"
 
-#: controllers/WorkController.php:290
+#: controllers/WorkController.php:292
 msgid "Switch to Standard Privileges"
 msgstr "Switch to STANDARD PRIVILEGES"
 
-#: controllers/WorkController.php:300
+#: controllers/WorkController.php:303
 #: forms/TranslationEdit.php:85
 #: forms/WorkEdit.php:78
 msgid "Save"
 msgstr "Save"
 
-#: controllers/WorkController.php:309
+#: controllers/WorkController.php:312
 msgid "Switch to Custom Privileges"
 msgstr "Switch to CUSTOM PRIVILEGES"
 
-#: controllers/WorkController.php:361
-#: controllers/WorkController.php:364
+#: controllers/WorkController.php:372
+#: controllers/WorkController.php:375
 msgid "No Title"
 msgstr "No Title"
 
-#: controllers/WorkController.php:375
+#: controllers/WorkController.php:386
 #, php-format
 msgid "\"%1$s\", new text added by %2$s"
 msgstr "\"%1$s\", new text added by %2$s"
 
-#: controllers/WorkController.php:380
+#: controllers/WorkController.php:391
 #, php-format
 msgid "\"%1$s\", new translation of %2$s added by %3$s"
 msgstr "\"%1$s\", new translation of %2$s added by %3$s"
 
-#: controllers/WorkController.php:385
+#: controllers/WorkController.php:396
 #, php-format
 msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 msgstr "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
 
-#: controllers/WorkController.php:395
+#: controllers/WorkController.php:406
 #, php-format
 msgid "\"%1$s\", the text has been modified"
 msgstr "\"%1$s\", the text has been modified"
 
-#: controllers/WorkController.php:402
+#: controllers/WorkController.php:413
 #, php-format
 msgid "\"%1$s\", translation of %2$s, has been modified"
 msgstr "\"%1$s\", translation of %2$s, has been modified"
 
-#: controllers/WorkController.php:407
+#: controllers/WorkController.php:418
 #, php-format
 msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
 msgstr "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
@@ -250,21 +258,21 @@ msgstr "Not enough parameters to delete a tag"
 msgid "No taggable-id specified"
 msgstr "No taggable-id specified"
 
-#: models/Work.php:359
+#: models/Work.php:361
 msgid "All users are allowed to do everything for this text"
 msgstr "All users are allowed to do everything for this text"
 
-#: models/Work.php:361
+#: models/Work.php:363
 #, php-format
 msgid "All users are allowed to %1$s this text"
 msgstr "All users are allowed to %1$s this text"
 
-#: models/Work.php:364
+#: models/Work.php:366
 #, php-format
 msgid "User %1$s is allowed to do everything for this text"
 msgstr "User %1$s is allowed to do everything for this text"
 
-#: models/Work.php:366
+#: models/Work.php:368
 #, php-format
 msgid "User %1$s is allowed to %2$s this text"
 msgstr "User %1$s is allowed to %2$s this text"
@@ -2108,6 +2116,24 @@ msgstr "Add a new permission"
 msgid "PAGETITLE_Continue text insertion"
 msgstr "Continue text insertion"
 
+#: views/scripts/work/history.phtml:12
+msgid "History of modifications"
+msgstr "History of modifications"
+
+#: views/scripts/work/history.phtml:24
+#, php-format
+msgid "%1$s: text modified by <i>%2$s</i>."
+msgstr "%1$s: text modified by <i>%2$s</i>."
+
+#: views/scripts/work/history.phtml:28
+#, php-format
+msgid "%1$s: text created by <i>%2$s</i>."
+msgstr "%1$s: text created by <i>%2$s</i>."
+
+#: views/scripts/work/history.phtml:34
+msgid "PAGETITLE_history of modifications"
+msgstr "history of modifications"
+
 #: views/scripts/work/edit.phtml:6
 msgid "PAGETITLE_Edit text"
 msgstr "Edit text"
@@ -2206,13 +2232,13 @@ msgstr "WARNING! Deletion is a definitive choice! Are you SURE you want to delet
 msgid "Delete this text"
 msgstr "Delete this text"
 
-#: views/scripts/work/read.phtml:93
-#: views/scripts/translation/read.phtml:251
-#: views/scripts/translation/read.phtml:264
+#: views/scripts/work/read.phtml:99
+#: views/scripts/translation/read.phtml:281
+#: views/scripts/translation/read.phtml:294
 msgid "Text inserted by"
 msgstr "Text inserted by"
 
-#: views/scripts/work/read.phtml:102
+#: views/scripts/work/read.phtml:108
 msgid "PAGETITLE_Read text"
 msgstr "Read text"
 
@@ -2236,7 +2262,7 @@ msgstr "Edit this translation"
 msgid "Delete this translation"
 msgstr "Delete this translation"
 
-#: views/scripts/translation/read.phtml:276
+#: views/scripts/translation/read.phtml:306
 msgid "PAGETITLE_Read translation"
 msgstr "Read translation"
 
