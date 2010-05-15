@@ -50,9 +50,8 @@ foreach ($this->entries as $lang=>$authors) { ?>
 
 <td class="news hundred">
     <div class="news-paragraph"><div class="news-title"><?php echo __('Latest News');?></div>
-    <?php $counter = 0; $MAX_NEWS = 15;
-        foreach($this->news as $ageInSec=>$list): ?>
-        <?php foreach($list as $key=> $item): 
+    <?php if(!empty($this->news)): $counter = 0; $MAX_NEWS = 15;
+        foreach($this->news as $key=> $item): 
             $counter++; 
             if($counter<=$MAX_NEWS):?>
             <ul><li>
@@ -77,8 +76,7 @@ foreach ($this->entries as $lang=>$authors) { ?>
             ?>
             </span>    
             </li></ul>
-        <?php endif; endforeach; ?>
-    <?php endforeach; ?>
+        <?php endif; endforeach; endif;?>
     </div>
 </td>
 </tr>

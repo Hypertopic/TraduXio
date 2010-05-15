@@ -1,0 +1,32 @@
+<div class="gray-square">   
+<?php $title = ($this->work['title']=='')?__('No Title'):$this->work['title'];
+      $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];
+?>  
+<div class="title">   
+    <span class="author"><?php echo $author.', ' ?></span>
+    <span class="title"><a href="<?php echo $this->makeUrl('/work/read/id/'.$this->work['id']); ?>"><?php echo $title ?></a></span>
+</div><span class="language">
+    <?php echo '('.__($this->work['language']).')'; ?>
+</span><div class="title"> 
+<div class="title">
+<span class="author"><?php echo __('History of modifications'); ?></span>
+</div>
+</div>
+
+<div>   
+<table class='history'>
+<?php foreach ($this->history as $key=>$row): 
+    $date = date('d F Y, H:i:s',strtotime($row['date']));?>
+    <tr>
+    <td class="hist-date"><?php echo $date; ?></td>
+    <td class="hist-user"><?php echo ' '.$row['user']; ?></td>
+    <td class="hist-msg"><?php echo ' '.$row['message']; ?></td>
+    <?php if(isset($row['params'])): ?>
+        <td class="hist-tags"><?php echo "[".$row['params']['genre'].": \"".$row['params']['tag']."\"]" ; ?></td>
+    <?php endif; ?>
+    </tr>
+<?php endforeach; ?>
+</table>
+</div>
+</div>
+<?php $this->page_title = $title.': '.__("PAGETITLE_history of modifications");?>

@@ -142,6 +142,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 $userid = Tdxio_Auth::getUserName();                
                 $data['creator']=$userid;
                 $newId=$model->createTranslation($data,$id);
+                $histModel = new Model_History();        
+                $histModel->addHistory($newId,5);   
                 return $this->_helper->redirector->gotoSimple('edit','translation',null,array('id'=>$newId));
             }
         }
@@ -364,101 +366,59 @@ class WorkController extends Tdxio_Controller_Abstract
     {
         
     } 
-    
-    public function newModified($item,$type){
         
-        if(isset($item['created'])){
-            $item['created']=strtotime($item['created']);
-            if(isset($item['modified'])){ $item['modified']=strtotime($item['modified']);}
-
-            if(($item['title']=='') OR (empty($item['title'])))
-            {$item['title']='<i>'.__('No Title').'</i>';}
-            
-            if(($item['orig_title']=='') OR (empty($item['orig_title'])))
-            {$item['orig_title']='<i>'.__('No Title').'</i>';}
-            
-            $NMitem=$item;
-            Tdxio_Log::info($item['modified'],$item['created']);
-            Tdxio_Log::info($item['modified']-$item['created'],'infos C/M '.$item['title']);
-            if(((!isset($item['modified']))or($item['modified']-$item['created']<=$CREATETIME))and(time() - $item['created'] < $this->MONTHSEC))
-            {                
-                $NMitem['age']=time() - $item['created'];
-            
-                if($type=='orig'){
-                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';
-                    $NMitem['phrase'] = __("\"%1\$s\", new text added by %2\$s",$title,$item['creator']);
-                }
-                elseif($type=='tra'){
-                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$item['id']).'">'.$item['title'].'</a>';
-                    $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['original_work_id']).'">'.$item['orig_title'].'</a>';
-                    $NMitem['phrase'] = __("\"%1\$s\", new translation of %2\$s added by %3\$s",$title,$origtitle,$item['creator']);
-                }
-                elseif($type=='tag'){
-                    $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['comment'].'</a>';
-                    $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['title'].'</a>';
-                    $NMitem['phrase'] =  __("\"%1\$s\", new (%2\$s) tag for %3\$s added by %4\$s",$tag,$item['genre_name'],$taggedText,$item['user']);
-                }
-            }elseif(($item['created'] < $item['modified']) and (time() - $item['modified'] < $this->MONTHSEC))
-            {                
-                $NMitem['age']=time() - $item['modified'];
-            
-                if($type=='orig'){
-                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['id']).'">'.$item['title'].'</a>';
-                    //$user = 'TEMPUSER';
-                    //$NMitem['phrase'] =   __("\"%1\$s\", text modified by %2\$s",$title,$user);
-                    $NMitem['phrase'] =   __("\"%1\$s\", the text has been modified",$title);
-                }
-                elseif($type=='tra'){
-                    $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$item['id']).'">'.$item['title'].'</a>';
-                    $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['original_work_id']).'">'.$item['orig_title'].'</a>';
-                    //$user = 'TEMPUSER';
-                    //$NMitem['phrase'] =   __("\"%1\$s\", translation of %2\$s, modified by %3\$s",$title,$origtitle,$user);
-                    $NMitem['phrase'] =   __("\"%1\$s\", translation of %2\$s, has been modified",$title,$origtitle);
-                }
-                elseif($type=='tag'){
-                    $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['comment'].'</a>';
-                    $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$item['taggable']).'">'.$item['title'].'</a>';
-                    $NMitem['phrase'] =   __("\"%1\$s\" (%2\$s) tag for %3\$s has been modified by %4\$s",$tag,$item['genre_name'],$taggedText,$item['user']);
-                }
-            }else{return null;}            
-        }    
-        return $NMitem;
+    public function codeList($code,array $params){
+        $codeList = array(
+            0=>__("%1\$s, text modified by %2\$s",$params[0],$params[1]),
+            1=>__("%1\$s, text extended by %2\$s",$params[0],$params[1]),
+            2=>__("%1\$s, translation of %2\$s modified by %3\$s",$params[0],$params[1],$params[2]),    
+            3=>__("New tag [%2\$s:%1\$s] for the text \"%3\$s\" added by %4\$s",$params[0],$params[1],$params[2],$params[3]),
+            4=>__("Removed tag [%2\$s:%1\$s] from the text \"%3\$s\" by %4\$s",$params[0],$params[1],$params[2],$params[3]),
+            5=>__("%1\$s, new text added by %2\$s",$params[0],$params[1]),
+            6=>__("%1\$s, new translation of %2\$s added by %3\$s",$params[0],$params[1],$params[2])         
+        );
+        return $codeList[$code];
     }
     
-/*    public function getNews(){
-        // get visible texts inserted or modified in the last 30 days
+    public function addInfo($row){
+        //$row has fields: [user][date][work_id][message]{[params]}[id][title][author][language][created][creator][visibility][modified]
         $model = $this->_getModel();
-        $transl = $model->getNewModTransl();
-        $news = array();
+        $row['date']=strtotime($row['date']);
+        $infoRow['age']=time() - $row['date'];
+          
+        if($row['message']==3 or $row['message']==4){
+            $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">'.$row['params']['tag'].'</a>';
+            $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">'.$row['title'].'</a>';
+            $infoRow['phrase'] =  $this->codeList($row['message'],array($tag,$row['params']['genre'],$taggedText,$row['user']));
+        }elseif($row['message']==0 or $row['message']==1){
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $infoRow['phrase'] =$this->codeList($row['message'],array($title,$row['user']));
+        }elseif($model->isTranslationWork($row['work_id'])){
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $trModel = new Model_Translation();
+            $trlWork = $trModel->fetchTranslationWork($row['work_id']);
+            $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$trlWork['OriginalWorkId']).'">"'.$trlWork['OriginalWork']['title'].'"</a>';
+            $newCode = ($row['message']==2)?2:6;
+            $infoRow['phrase'] = $this->codeList($newCode,array($title,$origtitle,$row['user'])); 
+        }elseif($row['message']==5){
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['id']).'">"'.$row['title'].'"</a>';
+            $infoRow['phrase'] = $this->codeList($row['message'],array($title,$row['creator']));
+        }else{$infoRow['phrase'] = 'il controllo perde alcuni casi';}
         
-        foreach($transl as $key=> $item){
-            if(!is_null($NMitem=$this->newModified($item,'tra'))){$news[]=$NMitem;}
-        }
-        
-        // get tags inserted on own texts in the last 30 days
-        $taggModel = new Model_Taggable();
-        if(is_null($user = Tdxio_Auth::getUserName())) $user = 'guest';
-        $tags = $taggModel->getNewModTags($user);   
-               
-        foreach($tags as $key=> $item){
-            $NMitem=$this->newModified($item,'tag');
-            if(!is_null($NMitem)){
-                Tdxio_Log::info('it is not null');
-                $news[]=$NMitem;
-            }
-        }   
-        return $news;
+        return $infoRow;
     }
-*/
     public function getNews(){
         $model = $this->_getModel();
         $histModel = new Model_History();
-        $lastHistory = $histModel->getAllRecentHistory(15);//get history of last 15 days
+        $lastHistory = $histModel->getAllRecentHistory(30);//get history of last 15 days
+        if(empty($lastHistory))return null;
+        $referenceRow = $lastHistory[0];
         Tdxio_Log::info($referenceRow,'riga di riferimento');
-        $selectedHistory[0]=$referenceRow = $lastHistory[0];
+        $selectedHistory[0]=$this->addInfo($lastHistory[0]);
         foreach($lastHistory as $key=>$row){
             if(!($this->_equals($row,$referenceRow,array('user','date','work_id','message')))){
-                $selectedHistory[]=$row;
+                $selectedHistory[]=$this->addInfo($row);
+                $referenceRow = $row;
             }            
         }
         return $selectedHistory;
@@ -477,7 +437,15 @@ class WorkController extends Tdxio_Controller_Abstract
     }
     
     public function _equals(array $a, array $b, array $paramList){
-        return false;
+        foreach($paramList as $param){
+            if($param=='date'){
+                if($a[$param]!=$b[$param])
+                    return false;
+            }elseif($a[$param]!=$b[$param]){
+                return false;
+            }
+        }
+        return true;
     }
     
     public function getRule($request){

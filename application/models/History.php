@@ -26,12 +26,12 @@ class Model_History extends Model_Abstract
                     5=>__('text created')
         ),
         'all'=>array(
-                    0=>__('work metadata modified'), 
-                    1=>__('text extended'), 
-                    2=>__('translation modified'), 
-                    3=>__('tag added'), 
-                    4=>__('tag removed'),
-                    5=>__('text created')
+                    0=>0, 
+                    1=>1, 
+                    2=>2, 
+                    3=>3, 
+                    4=>4,
+                    5=>5
         ));
         
         return parent::__construct();
@@ -69,7 +69,7 @@ class Model_History extends Model_Abstract
         $workModel = new Model_Work();
         $selectAlwd = $workModel->getSelectCondAllowedWork('read');         
         $sqlcond = "history.date > current_date - integer '".$days."'";
-        $select = $db->select()->from('history',array('user','date','work_id','message'))->where('work_id IN (?)',$selectAlwd)->where($sqlcond)->order('date DESC');
+        $select = $db->select()->from('history',array('user','date','work_id','message'))->join('work','work.id=history.work_id')->where('history.work_id IN (?)',$selectAlwd)->where($sqlcond)->order('date DESC');
         $rows = $db->fetchAll($select);
         $history = $this->extractInfo($rows,'all');
         Tdxio_Log::info($history,'all recent history');     

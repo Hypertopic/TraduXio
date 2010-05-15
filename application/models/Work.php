@@ -454,7 +454,7 @@ class Model_Work extends Model_Taggable
         
         //eliminare tutta la history del work
         $histTable = new Model_DbTable_History();
-        $histTable->delete($table->getAdapter()->quoteInto('work_id = ?',$id));
+        $histTable->delete($histTable->getAdapter()->quoteInto('work_id = ?',$id));
         
         //eliminare il work dalla tabella work
         $table = $this->_getTable();
