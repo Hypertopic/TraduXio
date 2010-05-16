@@ -73,6 +73,8 @@ class Model_History extends Model_Abstract
         $rows = $db->fetchAll($select);
         $history = $this->extractInfo($rows,'all');
         Tdxio_Log::info($history,'all recent history');     
+        //$history = array_filter($history,array(0=>$this,1=>'hideDeletion'));
+        Tdxio_Log::info($history,'all recent history after');     
         return $history;
     }
     
@@ -93,5 +95,11 @@ class Model_History extends Model_Abstract
             }
         }
         return $history;        
+    }
+    
+    public function hideDeletion($historyRow){
+        if($historyRow['message']==4)
+            return false;
+        else return true;        
     }
 }

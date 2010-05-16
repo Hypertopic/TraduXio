@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-12 19:02+0100\n"
+"POT-Creation-Date: 2010-05-16 14:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -11,29 +11,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: controllers/TranslationController.php:23
-#: controllers/TranslationController.php:81
-#: controllers/TranslationController.php:106
+#: controllers/TranslationController.php:83
+#: controllers/TranslationController.php:108
 #, php-format
 msgid "Translation %1$s does not exist."
 msgstr "La traduzione %1$s non esiste."
 
-#: controllers/TranslationController.php:87
+#: controllers/TranslationController.php:89
 #, php-format
 msgid "Text Id %1$s does not exist."
 msgstr "Il testo %1$s non esiste."
 
-#: controllers/TranslationController.php:91
+#: controllers/TranslationController.php:93
 #, php-format
 msgid "Can not cut here (%1$s)"
 msgstr "Non si può tagliare in questo punto (%1$s)"
 
-#: controllers/TranslationController.php:151
-msgid "HIDE BLOCKS"
-msgstr "NASCONDI BLOCCHI"
+#: controllers/TranslationController.php:153
+msgid "Hide blocks"
+msgstr "Nascondi i blocchi"
 
-#: controllers/TranslationController.php:151
-msgid "SHOW BLOCKS"
-msgstr "MOSTRA BLOCCHI"
+#: controllers/TranslationController.php:153
+msgid "Show blocks"
+msgstr "Mostra i blocchi"
 
 #: controllers/ErrorController.php:32
 msgid "Page not found"
@@ -63,77 +63,77 @@ msgstr "Gestire i privilegi"
 msgid "Tag Text PRV"
 msgstr "Inserire un tag per il testo"
 
-#: controllers/WorkController.php:63
+#: controllers/WorkController.php:60
 msgid "Anonymous"
 msgstr "Anonimo"
 
-#: controllers/WorkController.php:111
+#: controllers/WorkController.php:109
 #, php-format
 msgid "Work Id %1$s does not exist or you don't have the rights to see it "
 msgstr "L'opera con id %1$s non esiste o non si possiede il diritto di vederla"
 
-#: controllers/WorkController.php:209
+#: controllers/WorkController.php:211
 #, php-format
 msgid "Couldn't find work %1$d"
 msgstr "Opera %1$d non trovata"
 
-#: controllers/WorkController.php:261
+#: controllers/WorkController.php:265
 msgid "Remove Privilege"
 msgstr "Elimina Privilegio"
 
-#: controllers/WorkController.php:282
+#: controllers/WorkController.php:286
 #: forms/AddPrivilege.php:68
 msgid "Add Privilege"
 msgstr "Aggiungi Privilegio"
 
-#: controllers/WorkController.php:292
+#: controllers/WorkController.php:296
 msgid "Switch to Standard Privileges"
 msgstr "Passa ai PRIVILEGI STANDARD"
 
-#: controllers/WorkController.php:303
+#: controllers/WorkController.php:307
 #: forms/TranslationEdit.php:85
 #: forms/WorkEdit.php:78
 msgid "Save"
 msgstr "Salva"
 
-#: controllers/WorkController.php:312
+#: controllers/WorkController.php:316
 msgid "Switch to Custom Privileges"
 msgstr "Passa ai PRIVILEGI PERSONALIZZATI"
 
 #: controllers/WorkController.php:372
+#, php-format
+msgid "%1$s, text modified by %2$s"
+msgstr "%1$s: il testo è stato modificato da %2$s"
+
+#: controllers/WorkController.php:373
+#, php-format
+msgid "%1$s, text extended by %2$s"
+msgstr "%1$s: un nuovo blocco di testo è stato aggiunto da %2$s"
+
+#: controllers/WorkController.php:374
+#, php-format
+msgid "%1$s, translation of %2$s, modified by %3$s"
+msgstr "%1$s, traduzione di %2$s, è stato modificato da %3$s"
+
 #: controllers/WorkController.php:375
-msgid "No Title"
-msgstr "Nessun Titolo"
-
-#: controllers/WorkController.php:386
 #, php-format
-msgid "\"%1$s\", new text added by %2$s"
-msgstr "\"%1$s\", nuovo testo aggiunto da %2$s"
+msgid "New tag [%2$s:%1$s] for the text %3$s added by %4$s"
+msgstr "[%2$s:%1$s]: un nuovo tag per il testo %3$s è stato aggiunto da %4$s"
 
-#: controllers/WorkController.php:391
+#: controllers/WorkController.php:376
 #, php-format
-msgid "\"%1$s\", new translation of %2$s added by %3$s"
-msgstr "\"%1$s\", nuova traduzione di %2$s agiunta da %3$s"
+msgid "Removed tag [%2$s:%1$s] from the text %3$s by %4$s"
+msgstr "Il tag [%2$s:%1$s] del testo %3$s è stato rimosso da %4$s"
 
-#: controllers/WorkController.php:396
+#: controllers/WorkController.php:377
 #, php-format
-msgid "\"%1$s\", new (%2$s) tag for %3$s added by %4$s"
-msgstr "\"%1$s\", nuovo tag (%2$s) del testo %3$s aggiunto da %4$s"
+msgid "%1$s, new text added by %2$s"
+msgstr "%1$s: un nuovo testo è stato inserito da %2$s"
 
-#: controllers/WorkController.php:406
+#: controllers/WorkController.php:378
 #, php-format
-msgid "\"%1$s\", the text has been modified"
-msgstr "\"%1$s\", il testo è stato modificato"
-
-#: controllers/WorkController.php:413
-#, php-format
-msgid "\"%1$s\", translation of %2$s, has been modified"
-msgstr "\"%1$s\", traduzione di %2$s, è stata modificata"
-
-#: controllers/WorkController.php:418
-#, php-format
-msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
-msgstr "\"%1$s\", tag (%2$s) del testo %3$s modificato da %4$s"
+msgid "%1$s, new translation of %2$s added by %3$s"
+msgstr "%1$s: una nuova traduzione di %2$s è stata aggiunta da %3$s"
 
 #: forms/TranslationEdit.php:51
 #: forms/WorkEdit.php:58
@@ -238,29 +238,53 @@ msgstr "Password"
 msgid "Login"
 msgstr "Entra"
 
-#: models/Taggable.php:75
+#: models/Taggable.php:71
 msgid "Not enough parameters to delete a tag"
 msgstr "Non sono stati definiti abbastanza parametri per eliminare il tag"
 
-#: models/Taggable.php:84
+#: models/Taggable.php:80
 msgid "No taggable-id specified"
 msgstr "Non è stato specificato nessun \"taggable-id\""
 
-#: models/Work.php:361
+#: models/History.php:21
+msgid "work metadata modified"
+msgstr "le informazioni del testo sono state modificate"
+
+#: models/History.php:22
+msgid "text extended"
+msgstr "il testo è stato esteso"
+
+#: models/History.php:23
+msgid "translation modified"
+msgstr "traduzione modificata"
+
+#: models/History.php:24
+msgid "tag added"
+msgstr "un nuovo tag è stato aggiunto"
+
+#: models/History.php:25
+msgid "tag removed"
+msgstr "un tag è stato rimosso"
+
+#: models/History.php:26
+msgid "text created"
+msgstr "creazione del testo"
+
+#: models/Work.php:360
 msgid "All users are allowed to do everything for this text"
 msgstr "Tutti gli utenti sono autorizzati a fare tutto su questo testo"
 
-#: models/Work.php:363
+#: models/Work.php:362
 #, php-format
 msgid "All users are allowed to %1$s this text"
 msgstr "Tutti gli utenti sono autorizzati a %1$s questo testo"
 
-#: models/Work.php:366
+#: models/Work.php:365
 #, php-format
 msgid "User %1$s is allowed to do everything for this text"
 msgstr "L'utente %1$s è autorizzato a fare tutto su questo testo"
 
-#: models/Work.php:368
+#: models/Work.php:367
 #, php-format
 msgid "User %1$s is allowed to %2$s this text"
 msgstr "L'utente %1$s è autorizzato a %2$s questo testo"
@@ -2104,21 +2128,15 @@ msgstr "Aggiungi nuovi permessi"
 msgid "PAGETITLE_Continue text insertion"
 msgstr "Continua l'inserimento del testo"
 
+#: views/scripts/work/history.phtml:2
+msgid "No Title"
+msgstr "Nessun Titolo"
+
 #: views/scripts/work/history.phtml:12
 msgid "History of modifications"
 msgstr "Elenco delle modifiche"
 
-#: views/scripts/work/history.phtml:24
-#, php-format
-msgid "%1$s: text modified by <i>%2$s</i>."
-msgstr "%1$s: testo modificato da <i>%2$s</i>."
-
-#: views/scripts/work/history.phtml:28
-#, php-format
-msgid "%1$s: text created by <i>%2$s</i>."
-msgstr "%1$s: testo creato da <i>%2$s</i>."
-
-#: views/scripts/work/history.phtml:34
+#: views/scripts/work/history.phtml:32
 msgid "PAGETITLE_history of modifications"
 msgstr "elenco delle modifiche"
 
@@ -2163,12 +2181,12 @@ msgstr "(%1$s Traduzioni)"
 msgid "Latest News"
 msgstr "Ultimi Eventi"
 
-#: views/scripts/work/index.phtml:76
+#: views/scripts/work/index.phtml:75
 #, php-format
 msgid "%1$d %2$s ago"
 msgstr "%1$d %2$s fa"
 
-#: views/scripts/work/index.phtml:87
+#: views/scripts/work/index.phtml:85
 msgid "PAGETITLE_Homepage"
 msgstr "Pagina Principale"
 
@@ -2298,6 +2316,18 @@ msgstr "A proposito di Traduxio"
 msgid "PAGETITLE_Contact us"
 msgstr "Contattaci"
 
+#~ msgid "HIDE BLOCKS"
+#~ msgstr "NASCONDI BLOCCHI"
+#~ msgid "SHOW BLOCKS"
+#~ msgstr "MOSTRA BLOCCHI"
+#~ msgid "\"%1$s\", the text has been modified"
+#~ msgstr "\"%1$s\", il testo è stato modificato"
+#~ msgid "\"%1$s\", translation of %2$s, has been modified"
+#~ msgstr "\"%1$s\", traduzione di %2$s, è stata modificata"
+#~ msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
+#~ msgstr "\"%1$s\", tag (%2$s) del testo %3$s modificato da %4$s"
+#~ msgid "%1$s: text created by <i>%2$s</i>."
+#~ msgstr "%1$s: testo creato da <i>%2$s</i>."
 #~ msgid "LANGSEL_en"
 #~ msgstr "English"
 #~ msgid "LANGSEL_fr"
@@ -2306,12 +2336,12 @@ msgstr "Contattaci"
 #~ msgstr "Italiano"
 #~ msgid "Original Text"
 #~ msgstr "Testo Originale"
-#~ msgid "Translation"
-#~ msgstr "Traduzione"
 #~ msgid "Search"
 #~ msgstr "Ricerca"
 #~ msgid "Send your feedback"
 #~ msgstr "Manda il tuo messaggio"
+#~ msgid "Translation"
+#~ msgstr "Traduzione"
 #~ msgid "fr_FR"
 #~ msgstr "Francese"
 #~ msgid "it_IT"
@@ -2338,8 +2368,6 @@ msgstr "Contattaci"
 #~ msgstr "in collaborazione con l'"
 #~ msgid "and by the"
 #~ msgstr "e con l'"
-#~ msgid "Translation: "
-#~ msgstr "Traduzione:"
 #~ msgid "Oeuvres"
 #~ msgstr "Opere"
 

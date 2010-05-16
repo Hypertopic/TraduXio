@@ -150,7 +150,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         $this->view->translation = $translation;
         $this->view->showBlocks = $showBlocks;
         $this->view->switchBlocks = ($showBlocks==1)?0:1;
-        $this->view->blockOption = ($showBlocks==1)?__('HIDE BLOCKS'):__('SHOW BLOCKS');
+        $this->view->blockOption = ($showBlocks==1)?__('Hide blocks'):__('Show blocks');
     }
     
     protected function _getBlockList($transBlocks) 

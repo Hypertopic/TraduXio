@@ -369,13 +369,13 @@ class WorkController extends Tdxio_Controller_Abstract
         
     public function codeList($code,array $params){
         $codeList = array(
-            0=>__("%1\$s, text modified by %2\$s",$params[0],$params[1]),
-            1=>__("%1\$s, text extended by %2\$s",$params[0],$params[1]),
-            2=>__("%1\$s, translation of %2\$s modified by %3\$s",$params[0],$params[1],$params[2]),    
-            3=>__("New tag [%2\$s:%1\$s] for the text \"%3\$s\" added by %4\$s",$params[0],$params[1],$params[2],$params[3]),
-            4=>__("Removed tag [%2\$s:%1\$s] from the text \"%3\$s\" by %4\$s",$params[0],$params[1],$params[2],$params[3]),
-            5=>__("%1\$s, new text added by %2\$s",$params[0],$params[1]),
-            6=>__("%1\$s, new translation of %2\$s added by %3\$s",$params[0],$params[1],$params[2])         
+            0=>__("%1\$s, text modified by %2\$s",$params['title'],$params['user']),
+            1=>__("%1\$s, text extended by %2\$s",$params['title'],$params['user']),
+            2=>__("%1\$s, translation of %2\$s, modified by %3\$s",$params['title'],$params['origtitle'],$params['user']),    
+            3=>__("New tag [%2\$s:%1\$s] for the text %3\$s added by %4\$s",$params['tag'],$params['genre'],$params['taggedText'],$params['user']),
+            4=>__("Removed tag [%2\$s:%1\$s] from the text %3\$s by %4\$s",$params['tag'],$params['genre'],$params['taggedText'],$params['user']),
+            5=>__("%1\$s, new text added by %2\$s",$params['title'],$params['user']),
+            6=>__("%1\$s, new translation of %2\$s added by %3\$s",$params['title'],$params['origtitle'],$params['user'])         
         );
         return $codeList[$code];
     }
@@ -388,21 +388,21 @@ class WorkController extends Tdxio_Controller_Abstract
           
         if($row['message']==3 or $row['message']==4){
             $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">'.$row['params']['tag'].'</a>';
-            $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">'.$row['title'].'</a>';
-            $infoRow['phrase'] =  $this->codeList($row['message'],array($tag,$row['params']['genre'],$taggedText,$row['user']));
+            $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $infoRow['phrase'] =  $this->codeList($row['message'],array('tag'=>$tag,'genre'=>$row['params']['genre'],'taggedText'=>$taggedText,'user'=>$row['user']));
         }elseif($row['message']==0 or $row['message']==1){
             $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
-            $infoRow['phrase'] =$this->codeList($row['message'],array($title,$row['user']));
+            $infoRow['phrase'] =$this->codeList($row['message'],array('title'=>$title,'user'=>$row['user']));
         }elseif($model->isTranslationWork($row['work_id'])){
             $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $trModel = new Model_Translation();
             $trlWork = $trModel->fetchTranslationWork($row['work_id']);
             $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$trlWork['OriginalWorkId']).'">"'.$trlWork['OriginalWork']['title'].'"</a>';
             $newCode = ($row['message']==2)?2:6;
-            $infoRow['phrase'] = $this->codeList($newCode,array($title,$origtitle,$row['user'])); 
+            $infoRow['phrase'] = $this->codeList($newCode,array('title'=>$title,'origtitle'=>$origtitle,'user'=>$row['user'])); 
         }elseif($row['message']==5){
             $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['id']).'">"'.$row['title'].'"</a>';
-            $infoRow['phrase'] = $this->codeList($row['message'],array($title,$row['creator']));
+            $infoRow['phrase'] = $this->codeList($row['message'],array('title'=>$title,'user'=>$row['creator']));
         }else{$infoRow['phrase'] = 'il controllo perde alcuni casi';}
         
         return $infoRow;
@@ -410,15 +410,16 @@ class WorkController extends Tdxio_Controller_Abstract
     public function getNews(){
         $model = $this->_getModel();
         $histModel = new Model_History();
-        $lastHistory = $histModel->getAllRecentHistory(30);//get history of last 15 days
+        $lastHistory = $histModel->getAllRecentHistory(30);//get history of last 30 days
         if(empty($lastHistory))return null;
-        $referenceRow = $lastHistory[0];
+        $referenceRow = reset($lastHistory);
         Tdxio_Log::info($referenceRow,'riga di riferimento');
-        $selectedHistory[0]=$this->addInfo($lastHistory[0]);
+        $selectedHistory[]=$this->addInfo($referenceRow);
         foreach($lastHistory as $key=>$row){
-            if(!($this->_equals($row,$referenceRow,array('user','date','work_id','message')))){
-                $selectedHistory[]=$this->addInfo($row);
+            if(!($this->equivalent($referenceRow,$row,array('work_id','message','date','user')))){
                 $referenceRow = $row;
+                $selectedHistory[]=$this->addInfo($row);
+                
             }            
         }
         return $selectedHistory;
@@ -436,10 +437,15 @@ class WorkController extends Tdxio_Controller_Abstract
         return($sortedList);
     }
     
-    public function _equals(array $a, array $b, array $paramList){
+    public function equivalent(array $a, array $b, array $paramList){
         foreach($paramList as $param){
             if($param=='date'){
-                if($a[$param]!=$b[$param])
+                $adate = getdate(strtotime($a['date']));
+                $bdate = getdate(strtotime($b['date']));
+                Tdxio_Log::info($adate,'date1');
+                Tdxio_Log::info($bdate,'date2');
+                $diff = array_diff(array($adate['year'],$adate['yday']),array($bdate['year'],$bdate['yday']));
+                if(!empty($diff))
                     return false;
             }elseif($a[$param]!=$b[$param]){
                 return false;
