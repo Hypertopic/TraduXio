@@ -1,6 +1,7 @@
 <?php $elements=$this->form->getElements(); ?>
 
 <div class = "bounding-box">
+<div id="warning" class="centered"><?php echo __("Your text will automatically be private.&nbsp; Nobody will be able to see it unless you change the text's privileges.&nbsp;"); ?></div>
     <div id="clear"></div>
     <form action="<?php echo $this->form->getAction() ?>" method="<?php echo $this->form->getMethod() ?>">
         <table class="full-width">
