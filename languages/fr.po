@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-16 14:21+0100\n"
+"POT-Creation-Date: 2010-05-16 18:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -2144,7 +2144,11 @@ msgstr "historique des modifications"
 msgid "PAGETITLE_Edit text"
 msgstr "Modifier le texte"
 
-#: views/scripts/work/deposit.phtml:6
+#: views/scripts/work/deposit.phtml:2
+msgid "Your text will automatically be private.&nbsp; Nobody will be able to see it unless you change the text's privileges.&nbsp;"
+msgstr "Votre texte sera automatiquement privé.&nbsp; Personne ne pourra le voir si vous ne changez pas ses privilèges.&nbsp;"
+
+#: views/scripts/work/deposit.phtml:8
 msgid "PAGETITLE_Deposit a new text"
 msgstr "Déposer un nouveau texte"
 
