@@ -396,8 +396,8 @@ class WorkController extends Tdxio_Controller_Abstract
         }elseif($model->isTranslationWork($row['work_id'])){
             $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $trModel = new Model_Translation();
-            $trlWork = $trModel->fetchTranslationWork($row['work_id']);
-            $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$trlWork['OriginalWorkId']).'">"'.$trlWork['OriginalWork']['title'].'"</a>';
+            $origWork = $trModel->fetchTranslationOriginalWork($row['work_id']);
+            $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$origWork['id']).'">"'.$origWork['title'].'"</a>';
             $newCode = ($row['message']==2)?2:6;
             $infoRow['phrase'] = $this->codeList($newCode,array('title'=>$title,'origtitle'=>$origtitle,'user'=>$row['user'])); 
         }elseif($row['message']==5){

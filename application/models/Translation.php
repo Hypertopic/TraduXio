@@ -109,6 +109,14 @@ class Model_Translation extends Model_Taggable
         Tdxio_Log::info($work,'traddd');
         return $work;
     }
+    
+    public function fetchTranslationOriginalWork($translationId){
+        $db = $this->_getTable()->getAdapter();
+        $selectOrigId = $db->select()->distinct()->from('interpretation','original_work_id')->where('work_id = ?',$translationId);
+        $work = $db->fetchRow($db->select()->from('work',array('id','title'))->where('id = ?',$selectOrigId));
+        Tdxio_Log::info($work,'work originale');
+        return $work;
+    }
         
     protected function getSourceText($block,$numberedSentences=null){
         $sourceText='';
