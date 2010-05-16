@@ -96,32 +96,6 @@ class Tdxio_Preferences
         }
     }
     
-    
-    public function getLanguageFiles(){
-        Tdxio_Log::info('flusso: 15 PREFERENCES GETLANGUAGEFILES');
-        $files = scandir(APPLICATION_PATH.'/../languages');
-        $mo_files = array_filter($files,"Tdxio_Preferences::mo");
-        Tdxio_Log::info($mo_files,'files in languages');
-        $languages = array();
-        $cur_lang = self::getCurLanguage();
-        $translate = Zend_Registry::get('Zend_Translate');//NEW
-        foreach($mo_files as $key=>$name){
-            $name = substr($name,0,strlen($name)-3);
-            $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$name.'.mo',$name);//NEW
-            $languages[$name]=self::original($name);
-        }
-        self::setCurLanguage(array('lang'=>$cur_lang));
-        Tdxio_Log::info($languages,'languages in directory');
-        return $languages;
-    }
-    
-    public function original($langname){
-        Tdxio_Log::info('flusso: 8 PREFERENCES ORIGINAL');
-        self::setCurLanguage(array('lang'=>$langname));
-        $origname = __($langname);
-        return $origname;
-    }
-    
     public static function getPref($opt_name=null){
         Tdxio_Log::info('flusso: 10 PLUGIN GETPREF');
         $options = array();

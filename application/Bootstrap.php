@@ -82,6 +82,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      //   $front->registerPlugin($translatePlugin); 
 
     }
+    
+    protected function _initProfiler() {
+    		$this->bootstrap('db');
+    		$res=$this->getPluginResource('db');
+    		$dbAdapter=$res->getAdapter();
+    		
+    		$profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
+			$profiler->setEnabled(true);
+			
+			//$dbAdapter->setProfiler($profiler);
+
+    }
         
     //INITIALIZE HELPER PATH
     protected function _initHelperPath(){
@@ -102,10 +114,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $logger = new Zend_Log($writer);
     }
     
-    //INITIALIZE TRANSLATE
- /*   protected function _initTranslate(){
-        $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages','en');        
-        $translate->addTranslation(APPLICATION_PATH.'/../languages','fr');
-    }*/
+    //INITIALIZE TRANSLATE    
+    protected function _initTranslate(){
+       $translate = Zend_Registry::get('Zend_Translate');
+       
+       $files = scandir(APPLICATION_PATH.'/../languages');
+       $mo_files = array_filter($files,"Tdxio_Preferences::mo");
+       
+       $languages = array();
+       $cur_lang = $translate->getLocale();
+       
+       foreach($mo_files as $key=>$name){
+           $name = substr($name,0,strlen($name)-3);
+           $translate->addTranslation(APPLICATION_PATH.'/../languages/'.$name.'.mo',$name);
+           $languages[$name]=$translate->_($name,$name);
+       }
+       $translate->setLocale($cur_lang);
+       
+       Zend_Registry::set('languages',$languages);   
+    }
     
 }
