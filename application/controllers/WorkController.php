@@ -386,6 +386,8 @@ class WorkController extends Tdxio_Controller_Abstract
         $row['date']=strtotime($row['date']);
         $infoRow['age']=time() - $row['date'];
           
+        $row['title']=($row['title']=='')?'<i>No Title</i>':$row['title'];
+            
         if($row['message']==3 or $row['message']==4){
             $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">'.$row['params']['tag'].'</a>';
             $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
@@ -397,7 +399,8 @@ class WorkController extends Tdxio_Controller_Abstract
             $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $trModel = new Model_Translation();
             $origWork = $trModel->fetchTranslationOriginalWork($row['work_id']);
-            $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$origWork['id']).'">"'.$origWork['title'].'"</a>';
+            $tempTitle=($origWork['title']=='')?'<i>No Title</i>':$origWork['title'];
+            $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$origWork['id']).'">"'.$tempTitle.'"</a>';
             $newCode = ($row['message']==2)?2:6;
             $infoRow['phrase'] = $this->codeList($newCode,array('title'=>$title,'origtitle'=>$origtitle,'user'=>$row['user'])); 
         }elseif($row['message']==5){
@@ -418,8 +421,7 @@ class WorkController extends Tdxio_Controller_Abstract
         foreach($lastHistory as $key=>$row){
             if(!($this->equivalent($referenceRow,$row,array('work_id','message','date','user')))){
                 $referenceRow = $row;
-                $selectedHistory[]=$this->addInfo($row);
-                
+                $selectedHistory[]=$this->addInfo($row);                
             }            
         }
         return $selectedHistory;
