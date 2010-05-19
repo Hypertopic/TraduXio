@@ -34,16 +34,23 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 
 
 <div id="LRcontainer">
+<!------------------------------------------------------------------------------------------------------------------------>
+<table class="new-container" id="openbook-edit">
 
-<table class="right-container" id="openbook-edit">
-<tr class="button-line"><td></td><td>
-    <div class="buttons">
-        <?php echo $this->form->buttons; ?>
-    </div>
-</td></tr>
-<tr class="tag-line">
-    <td class="orig-column">   
-    <div class="show-tag-area">
+<tr class="button-line dark">
+<td class="w21"></td>
+<td></td>
+<td class="w21"></td>
+<td class="w21"></td>
+<td><div class="buttons">
+    <?php echo $this->form->buttons; ?>
+</div></td>
+<td class="w21"></td>
+</tr>
+
+<tr class="tag-line dark">
+<td class="w21"></td>
+<td><div class="show-tag-area">
         <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
         <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
         <div class="tag-group">
@@ -54,10 +61,10 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
         </div>
         <?php endforeach; ?>
         <?php endif; ?>
-    </div>
-    </td>
-    <td class="transl-column">
-    <div class="show-tag-area">
+    </div></td>
+<td class="w21"></td>
+<td class="w21"></td>
+<td><div class="show-tag-area">
         <?php if(!empty($this->translation['Tags'])): ?>
         <?php foreach($this->translation['Tags'] as $genre_name=>$tag_group): ?>  
         <div class="tag-group">
@@ -70,155 +77,130 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
         </div>
         <?php endforeach; ?> 
         <?php endif; ?>
-    </div>
-    </td>
-    <td></td>
+    </div></td>
+<td class="w21"></td>
 </tr>
+
+<tr class="full-width">
+<td class="w21"><div class="TLcorner w21"></div></td>
+<td><div class="Tborder minus1"></div></td>
+<td class="w21"><div class="TRcorner w21"></div></td>
+<td class="w21"><div class="TLcorner w21"></div></td>
+<td><div class="Tborder minus1"></div></td>
+<td class="w21"><div class="TRcorner w21"></div></td>
+</tr>
+
 <tr class="hundred">
-<td class="orig-column hundred" id="Lborder">  
-    <div class = "Tborder">
-        <div class = "TLcorner"></div><div class = "TRcorner"></div>
-    </div>
-    <div class="Lborder hundred">
-    <div class="Rborder hundred">
-        <div class = "work-container hundred">
-            <div class="title">
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred">
+    <div class = "work-container hundred">
+        <div class="title">
             <?php $author = $this->translation['OriginalWork']['author']; 
                   $title = $this->escape($this->translation['OriginalWork']['title']);
                   if($author==''){$author=__('Anonymous');} 
                   if($title==''){$author=__('No Title');} ?>
             <span class="author red"><?php echo $author.', ' ?></span>
             <span class="title red"><?php echo $title ?></span>
-            </div>
-            <div class="language TBspaced red">
-                <?php echo __($this->translation['OriginalWork']['language']); ?>
-            </div>
-        </div>        
-    </div>    
+        </div>
+        <div class="language TBspaced red">
+            <?php echo __($this->translation['OriginalWork']['language']); ?>
+        </div>
+    </div>
+    </td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred">
+    <div class = "work-container hundred">
+        <div class="title">
+            <span class="author"><?php echo $elements['author']->render().'  '  ?></span>
+            <span class="author"><?php echo $elements['title']->render()?></span></div>
+            <div class="language TBspaced"><?php echo __($this->translation['language']) ?></div>
+        </div>
     </div>
 </td>
-
-<td class="transl-column hundred">
-
-        <div class = "Tborder">
-            <div class = "TLcorner"></div><div class = "TRcorner"></div>
-        </div>
-        <div class="Lborder hundred">
-        <div class="Rborder hundred">
-            <div class = "work-container hundred">
-                <div class="title">
-                <span class="author"><?php echo $elements['author']->render().'  '  ?></span>
-                <span class="author"><?php echo $elements['title']->render()?></span></div>
-                <div class="language TBspaced"><?php echo __($this->translation['language']) ?></div>
-                
-            </div>
-        </div>
-        </div>
-</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
 </tr>
 
 <?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
+<tr>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="newblock hundred"><div class="pad10">
+<?php foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
+    <?php $segment = $segment['content']; ?>
+    <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
+    <?php if ($segnum<max(array_keys($block['OriginalSentences']))) {
+        $segment=$this->addCutSign($segment,$segnum);
+    } else {
+        if ($blocknum<max(array_keys($this->translation['TranslationBlocks']))) {
+            $segment=$this->addMergeSign($segment,$segnum);
+        } else {
+            $segment=$this->prepareSegment($segment);
+        }
+    }?>
+    <a name="segment-<?php echo $segnum; ?>"></a>
+    <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $segment; ?></span>
+<?php endforeach; ?>
+</div>
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="newblock hundred">
+<div  class="pad10"><?php echo $elements['block'.$blocknum]->render(); ?></div>
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+</tr>
 
 <tr class="hundred">
-    <td class="orig-column hundred Lborder">
-        <div class="Lborder hundred">
-        <div class="Rborder hundred">
-        <div class = "work-container upperblock hundred">        
-        <div class="block" id="<?php echo $div_id; ?>">
-        <?php
-        Tdxio_Log::info($block);
-
-        $first=true;
-        foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
-            <?php $segment = $segment['content']; ?>
-            <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
-            <?php if ($segnum<max(array_keys($block['OriginalSentences']))) {
-                    $segment=$this->addCutSign($segment,$segnum);
-            } else {
-                if ($blocknum<max(array_keys($this->translation['TranslationBlocks']))) {
-                    $segment=$this->addMergeSign($segment,$segnum);
-                } else {
-                    $segment=$this->prepareSegment($segment);
-                }
-            }?>
-            <a name="segment-<?php echo $segnum; ?>"></a>
-            <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $segment; ?></span>
-        <?php endforeach; ?>
-        </div>
-        </div>
-        </div>
-        </div>
-    </td>
-    
-    <td class="transl-column hundred edit<?php echo $transDir; ?>">
-        <div class="Lborder hundred">
-        <div class="Rborder hundred">
-        <div class = "work-container hundred">        
-    
-        <div class="form"><?php echo $elements['block'.$blocknum]->render(); ?></div>
-    
-        </div>
-        </div>
-        </div>
-    </td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred space">
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred space">
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
 </tr>
 
-<!--
-<tr>
-<td> 
-    <div class="Lborder">
-        <div class="Rborder">
-            <div class = "space-container">
-            <br>
-            </div>
-        </div>
-    </div>
-</td>
-<td>
-    <div class="Lborder">
-        <div class="Rborder">
-            <div class = "space-container">
-            <br>  
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
--->
 <?php endforeach; ?>
 
-<tr class="hundred">
-    <td class="orig-column hundred Lborder">
-     <div class="Lborder hundred">
-        <div class="Rborder hundred">
-        <div class = "work-container hundred">    </div>
-        </div></div>
-        <div class = "Bborder">
-        <div class = "BLcorner"></div><div class = "BRcorner"></div>
-        </div>
-    </td>
-    <td class="transl-column hundred">
-    <div class="Lborder hundred">
-        <div class="Rborder hundred">
-         <div class = "work-container hundred">    </div>
-        </div></div>
-        <div class = "Bborder">
-        <div class = "BLcorner"></div><div class = "BRcorner"></div>
-        </div>
-    </td>
+<tr class="h21">
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred"></td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred">
+    <div class = "work-container hundred">
+    </div>
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
 </tr>
-<tr><td colspan="2" class="bottom-spacer"></td></tr>
 
-<tr class = "button-line"><td></td><td>
-<div class="buttons">
-<?php echo $this->form->buttons; ?>
-</div>
-</td></tr>
+<tr width="100%">
+<td class="w21"><div class="BLcorner w21"></div></td>
+<td><div class="Bborder minus1"></div></td>
+<td class="w21"><div class="BRcorner w21"></div></td>
+<td class="w21"><div class="BLcorner w21"></div></td>
+<td><div class="Bborder minus1"></div></td>
+<td class="w21"><div class="BRcorner w21"></div></td>
+</tr>
 
-
-
+<tr class="button-line dark">
+<td class="w21"></td>
+<td></td>
+<td class="w21"></td>
+<td class="w21"></td>
+<td><div class="buttons">
+    <?php echo $this->form->buttons; ?>
+</div></td>
+<td class="w21"></td>
+</tr>
 
 </table>
+
+<!------------------------------------------------------------------------------------------------------------------------>
+
+
+
 </form>
 <form id="concord-query" action="<?php echo $this->makeUrl('/translation/concord'); ?>" method="post" target="concord" onsubmit="getConcord()">
 <input type="hidden" name="query" id="query-value" />

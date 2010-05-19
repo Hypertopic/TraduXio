@@ -641,7 +641,7 @@ font-family:Verdana,Arial,Helvetica,sans-serif;
 font-size:14px;
 }
 textarea.autogrow {
-border:1px solid #DBDBDB;
+border:none;
 /*border-color:#FFFFFF;*/
 height:auto;
 overflow:hidden;
@@ -649,6 +649,9 @@ width:98%;
 color:#585858;
 }
 
+div.form {
+border:1px solid #DBDBDB;
+}
 
 
 /* IDs */
@@ -660,6 +663,7 @@ div#tag-area {
 div.show-tag-area{
     margin-top:10px;
     margin-bottom:5px;
+    color:#DBDBDB;
 }
 #clear{
     clear:both;
@@ -770,7 +774,6 @@ div.show-tag-area{
 #warning {
     margin: 5px;
     color: #F14;
-    font-variant: small-caps; 
     font-weight:bold;
     clear:both;
 }
@@ -995,8 +998,12 @@ margin: 10px 0px;
 text-align:center;
 }
 
-div.block, div.form textarea{
-padding: 5px 10px;
+div.block{
+margin: 5px 10px;
+}
+
+div.form textarea{
+margin: 4px 10px;
 }
 
 .onglet{
@@ -1087,3 +1094,22 @@ padding-right:10px;
 font-weight:bold;
 }
 .hist-tags{}
+
+
+.nuovo textarea{height:100%;}
+
+.border1 {
+    border:1px solid #DBDBDB;
+}
+
+.w21{width:21px;}
+.h21{height:21px;}
+.space{height:10px;}
+.whiteback{background-color:#FFF;}
+.newblock{background-color:#FFF;border:1px solid #DBDBDB;color:#585858;width:50%;vertical-align:top;}
+.whback{background-color:#FFF;}
+.new-container,.new-container td,.new-container tr{padding:0;border-collapse:collapse;}
+/*table.new-container{background-color:#585858;}*/
+div.minus1{margin-left:-1px;}
+.pad10{padding:10px;}
+tr.dark{background-color:#585858;}
