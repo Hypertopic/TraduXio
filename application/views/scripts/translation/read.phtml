@@ -36,27 +36,27 @@
 </div>
 </div>
 
-
-<table class="right-container" id="openbook-read">
-
+<div class="right-container">
+<table class="new-container full-width">
+<!------------------------------------------------------------------------------------------------------------------------>
 <tr class="tag-line">
-    <td class="orig-column">   
-    <div class="show-tag-area">
-        <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
-        <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
+<td class="w21"></td>
+<td><div class="show-tag-area">
+<?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
+    <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
         <div class="tag-group">
         <span class="genre"><?php echo __($this->translation['Genres'][$genre]); ?></span>
         <?php foreach($names as $name=>$tag): ?>
         <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></span>
         <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
-    </td>
-    <td class="transl-column">
-    <div class="show-tag-area">
-        <?php if(!empty($this->translation['Tags'])): ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+</div></td>
+<td class="w21"></td>
+<td class="w21"></td>
+<td><div class="show-tag-area">
+<?php if(!empty($this->translation['Tags'])): ?>
         <?php foreach($this->translation['Tags'] as $genre=>$names): ?>  
         <div class="tag-group">
         <span class="genre"><?php echo __($this->translation['Genres'][$genre]); ?></span>
@@ -72,26 +72,15 @@
         </div>
         <?php endforeach; ?>
         <?php endif; ?>
-    </div>
-    </td>
+</div></td>
+<td class="w21"></td>
 </tr>
 
-<tr class="onglets-line hundred">
-<td class="orig-column hundred Lborder ">     
-    <div class = "Tborder-ong">
-        <div class = "TLcorner-ong"></div><div class = "TRcorner-ong"></div>
-        </div>
-        <div class="Lborder hundred">
-            <div class="Rborder hundred">
-                <div class = "work-container hundred"></div>
-            </div>
-        </div>
-    
-    
-</td>
-
-<td class="transl-column hundred">
-<div class="clear">
+<tr class="full-width hundred">
+<td class="w21 hundred"><div class="TLcorner-ong w21"></div><div class="Lborder hundred"></div></td>
+<td class="hundred"><div class="Tborder-ong minus1"></div><div class="whiteback hundred minus1"></div></td>
+<td class="w21 hundred"><div class="TRcorner-ong w21"></div><div class="Rborder hundred"></div></td>
+<td colspan="3"><div class="clear">
   
   <ul id="other-onglet" class="onglets">
     <?php foreach($this->otherTranslations as $tr_id=>$otherTrl): //['Interpretations']
@@ -106,40 +95,24 @@
             </span></li>
     <?php endforeach; ?>
  </ul>
- </div>
- 
-</td>
+ </div></td>
 </tr>
 
-<tr class="hundred">
-<td class="orig-column hundred Lborder"> 
-
-<div class="Lborder hundred">
-    <div class="Rborder hundred">
-    </div>
-    <div class="Lborder hundred clear">
-        <div class="Rborder hundred"> <div class = "work-container hundred"></div>
-        </div>
-    </div>
-</div>
+<tr class="full-width hundred">
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred"><div class="whiteback hundred minus1"></div>
 </td>
-
-<td class="transl-column hundred">   
-<div class="Tborder-ong clear" >
-        <div class = "TLcorner-ong"></div><div class = "TRcorner-ong"></div>
- </div>
- <div class="Lborder hundred clear">
-        <div class="Rborder hundred"><div class = "work-container hundred"></div>
-        </div>
-    </div>
-</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21"><div class="Lborder hundred w21"></div></td>
+<td><div class="Tborder minus1"></div></td>
+<td class="w21"><div class="TRcorner w21"></div></td>
 </tr>
 
+
 <tr class="hundred">
-<td class="orig-column hundred Lborder"> 
-<div class="Lborder hundred">
-    <div class="Rborder hundred">
-        <div class = "work-container hundred">
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred">
+<div class = "work-container hundred minus1">
             <div class="title">
                 <?php $author = $this->translation['OriginalWork']['author'];
                 $title = $this->escape($this->translation['OriginalWork']['title']);
@@ -158,15 +131,11 @@
                 <?php echo __($this->translation['OriginalWork']['language']); ?>
             </div>
         </div>
-    </div>
-</div>
 </td>
-
-<td class="transl-column hundred">   
- <div class="Lborder hundred clear">
-    <!--<div class="TRcorner upshift"></div>-->
-        <div class="Rborder hundred">
-            <div class = "work-container hundred">
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred">
+<div class = "work-container hundred minus1">
                 <div class="title">          
                     <?php 
                         $title = ($this->translation['title']=='')?__('No Title'):$this->translation['title'];
@@ -179,128 +148,93 @@
                     <?php echo __($this->translation['language']); ?>
                 </div>
             </div>
-        </div>
-    </div>
 </td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
 </tr>
 
 <?php if($this->showBlocks==1): ?>
+
 <?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
-<tr class="hundred">
-<td class="orig-column hundred Lborder"> 
-    <div class="Lborder hundred">
-        <div class="Rborder hundred">
-            <div class = "work-container upperblock hundred">
-                <div class="block">
-                    <?php Tdxio_Log::info($block,'translation read');
-                    $first=true;
-                    foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
+
+<tr>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="newblock hundred"><div class="pad10">
+<?php foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
                         <?php $segment = $segment['content']; ?>
                         <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
                         <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($segment); ?></span>
 
                     <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 </td>
-<td class="transl-column hundred">
-    <div class="Lborder hundred">
-        <div class="Rborder hundred">
-            <div class = "work-container upperblock hundred">
-                <div class="block" id="<?php echo $div_id; ?>">
-                    <?php Tdxio_Log::info($block,'translation read');
-                    $first=true;?>
-                    <span><?php echo $this->nlBr($block['translation']); ?></span>
-                </div>
-            </div>
-        </div>
-    </div>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="newblock hundred">
+<div  class="pad10"><span><?php echo $this->nlBr($block['translation']); ?></span></div>
 </td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
 </tr>
-<!--
-<tr>
-<td> 
-    <div class="Lborder">
-        <div class="Rborder">
-            <div class = "space-container">
-            <br>
-            </div>
-        </div>
-    </div>
-</td>
-<td>
-    <div class="Lborder">
-        <div class="Rborder">
-            <div class = "space-container">
-            <br>  
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
--->
-<?php endforeach; ?>
-<?php else: ?>
+
 <tr class="hundred">
-<td class="orig-column hundred Lborder"> 
-    <div class="Lborder hundred">
-        <div class="Rborder hundred">
-            <div class = "work-container upperblock hundred">
-            <div class="block">
-            <?php foreach($this->translation['OriginalSentences'] as $key=>$sentence):
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback space"><div class="whiteback space minus1" ></div>
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback space"><div class="whiteback space minus1" ></div>
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+</tr>
+<?php endforeach;?>
+<?php else: ?>
+
+<tr>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="newblock hundred"><div class="pad10">
+<?php foreach($this->translation['OriginalSentences'] as $key=>$sentence):
                     echo $this->nlBr($sentence['content']); 
                 endforeach; ?>
-            </div>
-            </div>
-        </div>
-    </div>
 </td>
-<td class="transl-column hundred">
-    <div class="Lborder hundred">
-        <div class="Rborder hundred">
-            <div class = "work-container upperblock hundred">
-            <div class="block">
-            <?php foreach($this->translation['TranslationBlocks'] as $key=>$block):
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="newblock hundred"><div class="pad10">
+<?php foreach($this->translation['TranslationBlocks'] as $key=>$block):
                    echo $this->nlBr($block['translation']).' '; 
-                endforeach; ?>
-            </div>
-            </div>
-        </div>
+                endforeach; ?>  
+                </div>
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+</tr>
+<?php endif;?>
+
+
+<tr class="h21">
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred"> <div class = "work-container hundred minus1">
+    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div></div>
+</td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="whiteback hundred">
+    <div class = "work-container hundred minus1">
+    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['creator']); ?> </div>
     </div>
 </td>
+<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
 </tr>
-<?php endif; ?>
 
-<tr class="hundred">
-<td class="orig-column hundred Lborder"> 
-    <div class="Lborder hundred">
-            <div class="Rborder hundred">
-             <div class = "work-container hundred">
-                <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div>
-            </div>        
-        </div></div>
-        <div class = "Bborder">
-            <div class = "BLcorner"></div><div class = "BRcorner"></div>
-        </div>
-<!--</div>-->
-</td>
+<tr class="full-width">
+<td class="w21"><div class="BLcorner w21"></div></td>
+<td><div class="Bborder minus1"></div></td>
+<td class="w21"><div class="BRcorner w21"></div></td>
+<td class="w21"><div class="BLcorner w21"></div></td>
+<td><div class="Bborder minus1"></div></td>
+<td class="w21"><div class="BRcorner w21"></div></td>
+</tr>
 
-<td class="transl-column hundred">
-    <div class="Lborder hundred">
-            <div class="Rborder hundred">
-  <div class = "work-container hundred">
-                <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['creator']); ?> </div>
-            </div>
-        </div></div>
-        <div class = "Bborder">
-            <div class = "BLcorner"></div><div class = "BRcorner"></div>
-        </div>
 
-</td>
-</tr><tr><td colspan="2" class="bottom-spacer"></td></tr>
 </table>
+<!------------------------------------------------------------------------------------------------------------------------>
 </div>
-
+</div>
 <?php $this->page_title=__("PAGETITLE_Read translation").': '.$this->escape($this->translation['title']); ?>
