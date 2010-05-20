@@ -77,9 +77,9 @@
 </tr>
 
 <tr class="full-width hundred">
-<td class="w21 hundred"><div class="TLcorner-ong w21"></div><div class="Lborder hundred"></div></td>
-<td class="hundred"><div class="Tborder-ong minus1"></div><div class="whiteback hundred minus1"></div></td>
-<td class="w21 hundred"><div class="TRcorner-ong w21"></div><div class="Rborder hundred"></div></td>
+<td class="w21 Lborder hundred whiteback"><div class="TLcorner-ong w21"></div></td>
+<td class="whiteback hundred"><div class="Tborder-ong whiteback minus1"></div></td>
+<td class="w21 Rborder hundred"><div class="TRcorner-ong w21"></div></td>
 <td colspan="3"><div class="clear">
   
   <ul id="other-onglet" class="onglets">
@@ -99,41 +99,40 @@
 </tr>
 
 <tr class="full-width hundred">
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="Lborder w21 hundred whiteback"></td>
 <td class="whiteback hundred"><div class="whiteback hundred minus1"></div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
-<td class="w21"><div class="Lborder hundred w21"></div></td>
+<td class="w21 hundred Rborder"></td>
+<td class="Lborder w21 hundred"></td>
 <td><div class="Tborder minus1"></div></td>
-<td class="w21"><div class="TRcorner w21"></div></td>
+<td class="TRcorner whiteback w21"><div class="w21 minus1"></div></td>
 </tr>
 
-
 <tr class="hundred">
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 hundred Lborder"></td>
 <td class="whiteback hundred">
 <div class = "work-container hundred minus1">
-            <div class="title">
-                <?php $author = $this->translation['OriginalWork']['author'];
-                $title = $this->escape($this->translation['OriginalWork']['title']);
-                if($author==''){$author=__('Anonymous');} 
-                if($title==''){$title=__('No Title');} 
-                ?>
-                <span class="author red"><?php echo $author.', ' ?></span>
-                <span class="title red">
-                <?php if($this->translation['OriginalWork']['canRead']==true)
-                {$href= 'class="red" href="'.$this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])).'"';}
-                else {$href = $a_nohref;}?>
-                <a <?php echo $href; ?>><?php echo $title; ?></a>
-                </span>
-            </div>
-            <div class="language TBspaced red">
-                <?php echo __($this->translation['OriginalWork']['language']); ?>
-            </div>
-        </div>
+    <div class="title">
+        <?php $author = $this->translation['OriginalWork']['author'];
+        $title = $this->escape($this->translation['OriginalWork']['title']);
+        if($author==''){$author=__('Anonymous');} 
+        if($title==''){$title=__('No Title');} 
+        ?>
+        <span class="author red"><?php echo $author.', ' ?></span>
+        <span class="title red">
+        <?php if($this->translation['OriginalWork']['canRead']==true)
+        {$href= 'class="red" href="'.$this->url(array('controller'=>'work','action'=>'read','id'=>$this->translation['OriginalWorkId'])).'"';}
+        else {$href = $a_nohref;}?>
+        <a <?php echo $href; ?>><?php echo $title; ?></a>
+        </span>
+    </div>
+    <div class="language TBspaced red">
+        <?php echo __($this->translation['OriginalWork']['language']); ?>
+    </div>
+</div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 hundred Rborder"></td>
+<td class="w21 hundred Lborder"></td>
 <td class="whiteback hundred">
 <div class = "work-container hundred minus1">
                 <div class="title">          
@@ -149,7 +148,7 @@
                 </div>
             </div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 hundred Rborder"></td>
 </tr>
 
 <?php if($this->showBlocks==1): ?>
@@ -157,7 +156,7 @@
 <?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
 
 <tr>
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 hundred Lborder"><div class="w21 hundred"></div></td>
 <td class="newblock hundred"><div class="pad10">
 <?php foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
                         <?php $segment = $segment['content']; ?>
@@ -167,69 +166,68 @@
                     <?php endforeach; ?>
 </div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 Rborder hundred"></td>
+<td class="w21 Lborder hundred"></td>
 <td class="newblock hundred">
-<div  class="pad10"><span><?php echo $this->nlBr($block['translation']); ?></span></div>
+<div class="pad10"><span><?php echo $this->nlBr($block['translation']); ?></span></div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 Rborder hundred"></td>
 </tr>
 
 <tr class="hundred">
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 Lborder hundred"></td>
 <td class="whiteback space"><div class="whiteback space minus1" ></div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 Rborder hundred"></td>
+<td class="w21 Lborder hundred"></td>
 <td class="whiteback space"><div class="whiteback space minus1" ></div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 Rborder hundred"></td>
 </tr>
 <?php endforeach;?>
 <?php else: ?>
 
 <tr>
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 Lborder hundred"></td>
 <td class="newblock hundred"><div class="pad10">
 <?php foreach($this->translation['OriginalSentences'] as $key=>$sentence):
                     echo $this->nlBr($sentence['content']); 
                 endforeach; ?>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<td class="w21 Rborder hundred"></td>
+<td class="w21 Lborder hundred"></td>
 <td class="newblock hundred"><div class="pad10">
 <?php foreach($this->translation['TranslationBlocks'] as $key=>$block):
                    echo $this->nlBr($block['translation']).' '; 
                 endforeach; ?>  
                 </div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="w21 Rborder hundred"></td>
 </tr>
 <?php endif;?>
 
 
-<tr class="h21">
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
-<td class="whiteback hundred"> <div class = "work-container hundred minus1">
-    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div></div>
-</td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
-<td class="w21 hundred"><div class="Lborder w21 hundred"></div></td>
+<tr class="h21 whiteback">
+<td class="w21 Lborder hundred"></td>
 <td class="whiteback hundred">
-    <div class = "work-container hundred minus1">
-    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['creator']); ?> </div>
-    </div>
+    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['OriginalWork']['creator']); ?> </div>
 </td>
-<td class="w21 hundred"><div class="Rborder w21 hundred"></div></td>
+<td class="Rborder hundred"><div class="w21 hundred minus1"></div></td>
+<td class="w21 Lborder hundred"></td>
+<td class="whiteback hundred">
+    <div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->translation['creator']); ?> </div>
+    
+</td>
+<td class="w21 Rborder hundred"><div class="w21 hundred"></div></td>
 </tr>
 
 <tr class="full-width">
+<td class="BLcorner w21"></td>
+<td class="Bborder whiteback"><div class="Bborder whiteback minus1"></div></td>
+<td class="BRcorner w21"></td>
 <td class="w21"><div class="BLcorner w21"></div></td>
 <td><div class="Bborder minus1"></div></td>
-<td class="w21"><div class="BRcorner w21"></div></td>
-<td class="w21"><div class="BLcorner w21"></div></td>
-<td><div class="Bborder minus1"></div></td>
-<td class="w21"><div class="BRcorner w21"></div></td>
+<td class="BRcorner w21"></td>
 </tr>
 
 
