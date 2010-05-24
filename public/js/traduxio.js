@@ -58,7 +58,7 @@ if (typeof console == "undefined") console={log:function(){}};
         modified : false
     };
     $(document).ready(function() {
-        $("div.block").mouseup(tdxio.textSearch.manageSelection).keyup(tdxio.textSearch.manageSelection);
+        $("td.newblock").mouseup(tdxio.textSearch.manageSelection).keyup(tdxio.textSearch.manageSelection);
         $("input,textarea").change(tdxio.textSearch.translationModified);
         $("a").click(tdxio.textSearch.allowSplit);
         $("#concord-query").submit(tdxio.textSearch.getConcord);
