@@ -18,12 +18,13 @@ class TranslationController extends Tdxio_Controller_Abstract
     public function editAction() {
         $request=$this->getRequest();
         $translationId=$request->getParam('id');
+        Tdxio_Log::info($request,'viaggio');
         $model= $this->_getModel();
         if(!$work=$model->fetchTranslationWork($translationId,false)){
             throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
         }
         $form = new Form_TranslationEdit($this->_getBlockList($work['TranslationBlocks']));
-
+        $form->setAction($request->getRequestUri());
         // In the translation-edit page every user can see/remove only his tags
         $username=Tdxio_Auth::getUserName();
         Tdxio_Log::alert($work['Tags'],"tags da visualizzare in edit");
@@ -93,7 +94,8 @@ class TranslationController extends Tdxio_Controller_Abstract
             throw new Zend_Controller_Action_Exception(sprintf(__("Can not cut here (%1\$s)", $segToCut)), 404);
         }
         $model->cut($translationId,$segToCut);
-        $this->_helper->redirector->gotoSimple('edit',null,null,array('id'=>$translationId));
+        $segToRedirect = $this->getFirstSegmentOf($segToCut,$translation);
+        $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
 
     }
     
@@ -117,7 +119,8 @@ class TranslationController extends Tdxio_Controller_Abstract
             throw new Zend_Controller_Action_Exception(sprintf('Can not merge here (%d)', $segToCut), 404);
         }
         $model->merge($translationId,$segToMerge);
-        $this->_helper->redirector->gotoSimple('edit',null,null,array('id'=>$translationId));
+        $segToRedirect = $this->getFirstSegmentOf($segToMerge,$translation);
+        $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
 
     }
     
@@ -346,5 +349,13 @@ class TranslationController extends Tdxio_Controller_Abstract
         foreach ($text as $tag) {
             $metadata[$tag['genre_name']][$tag['comment']]=$tag['comment'];
         }
+    }
+    
+    public function getFirstSegmentOf($seg,$translation){
+        foreach($translation['TranslationBlocks'] as $key=>$block){
+            if($block['from_segment']<=$seg and $seg<=$block['to_segment'])
+                return $block['from_segment'];
+        }
+        return null;        
     }
 }

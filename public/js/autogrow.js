@@ -61,6 +61,13 @@
         $(window).resize(tdxio.autoGrow.resize);
         $("textarea,input").focus(tdxio.autoGrow.focus);
         $("textarea,input").blur(tdxio.autoGrow.blur);
+        if((document.location.href).indexOf("#")!=-1) {
+            //var position=document.location.href.substring(document.location.href.indexOf("#")+1,document.location.href.length);
+            document.location.href = document.location.href;
+            
+            //document.location.href = document.location.href.substring(0,(document.location.href).indexOf("#"));
+        }
+        
     });
 
 })(jQuery);
