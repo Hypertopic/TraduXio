@@ -11,13 +11,18 @@
  */
 class Model_Privilege extends Model_Abstract
 {
-    protected $_tableClass = 'Privilege';
+    protected $_tableClass = 'Privilege';    
     
-    
-    public $_dbPrivilegeList=array('read','edit','translate','manage','tag');
+    public $_dbPrivilegeList=array();
     public $_includeReadList = array('read','edit','translate','manage','tag');
-    public $_dbPermissions=array('true','false');
-    public $_contrary_id=array();
+    
+    public function __construct($class_name=null,$idField=null,$contentField=null)
+    {
+        $this->_dbPrivilegeList=array('read'=>__('Read text'),'edit'=>__('Edit text'),'translate'=>__('Create translation'),'manage'=>__('Manage'),'tag'=>__('Tag text'));
+        return parent::__construct($class_name=null,$idField=null,$contentField=null);
+    }
+
+    
     /**
      * Save a new entry
      *
@@ -34,8 +39,7 @@ class Model_Privilege extends Model_Abstract
             $new_id=$table->insert($data);
             return $new_id; 
         }
-        return null;
-        
+        return null;        
     }
 
     
@@ -55,29 +59,7 @@ class Model_Privilege extends Model_Abstract
                 $table->delete($where);
             }
         }
-        
-        
     }
-    
-    
-
-/*  public function findResourceIdsByUserId($userid,$privilege)
-    {
-    // per il momento é un modo veloce per far funzionare le cose
-    // in seguito si dovrebbe accedere al db e prendere le stesse 
-    // informazioni dalla tabella privileges
-    
-        $table=$this->_getTable(); 
-        
-        $select=$table->select()->from($table,'work_id')->where('(user_id = ?', $userid)->orWhere('user_id is NULL)')->where('(privilege = ?', $privilege)->orWhere('privilege is NULL)');
-        Tdxio_Log::info('selezione');Tdxio_Log::info($select->__toString());
-        
-        $ids = $table->fetchAll($select)->toArray();
-        
-        Tdxio_Log::info($ids);
-            
-        return $ids;
-    }*/
     
     public function exist($privilege){
         

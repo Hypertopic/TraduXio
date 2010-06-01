@@ -24,9 +24,10 @@ class Form_AddPrivilege extends Form_Abstract
 
     public $_privilegeList=null;
     
-    function __construct($privilegeList,$type=null) {
-        $this->_privilegeList=$privilegeList;
-        parent::__construct();
+    function __construct() {
+        $privModel = new Model_Privilege();
+        $this->_privilegeList = $privModel->_dbPrivilegeList;
+        return parent::__construct();
     }
     /**
      * init() is the initialization routine called when Zend_Form objects are
@@ -53,34 +54,27 @@ class Form_AddPrivilege extends Form_Abstract
         //'required' => true,
             'class' => 'manage-select'
         ));
+        
         $this->addElement('select', 'privilege', array(
         'label'      => __('Privilege'),
         'multiOptions'=> $this->_privilegeList,
         'id'   =>  'privsel',
         //'required' => true,
         'class' => 'manage-select'
-        ));     
-        
-        
+        ));             
         
         // add the submit button
         $this->addElement('submit', 'submit', array(
             'label'    => __('Add Privilege'),
             'id' => 'addsubmit'
         ));
-        /*
-        $prv_type = $this->addElement('hidden', 'prv_type', array(
-            'value'     => 'ADDV',
-           // 'decorators' => array('Hidden'),
-            'validators' => array(
-            )
-            //'required'   => true,
-        ));
         
-        $hiddenControl = $this->createElement('hidden', 'formtype');
-        $hiddenControl->setValue('test value');
-        $this->addElement($hiddenControl);
-*/
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form')),
+            array('Description', array('placement' => 'prepend')),
+            'Form'
+        ));
     }
 
     protected function _getUsers()
@@ -89,29 +83,30 @@ class Form_AddPrivilege extends Form_Abstract
         $usersarray=$userModel->fetchAll();
         Tdxio_Log::info('usersarray in addprivilege');
         Tdxio_Log::info($usersarray->toArray());
-        $users['all']=__('All users');////////////////////////////////////////////??????????????????
+        $users['all']=__('All users');// All users, included unnregistered ones (guests)
+        $users['member']=__('All members');// All registered users
         foreach($usersarray as $key=>$user){
             $users[$user['name']]=$user['name'];
         }       
-        Tdxio_Log::info($users);
+        Tdxio_Log::info($users,'utenti registrati in db');
         return $users;
     }
-    /* 
-    protected function _getTranslations()
-    {
-        require_once APPLICATION_PATH . '/models/TextModel.php';
-        $txtModel = new TextModel();
-        $text=$txtModel->fetchEntry($this->_id);
-        $tempkey=0;
-        if(isset($text['Translations'])){
-            foreach ($text['Translations'] as $key=>$translation){
-                $translations[$key]=$translation['title'].' ('.$translation['language'].')';
-                $tempkey=$key;
+    
+    public function isValid($_POST){
+        $validParent = parent::isValid($_POST);
+        $valid = true;
+        $elements = $this->getElements();
+        if($elements['user']->getValue() =='all')
+        {           
+            $action = $elements['privilege']->getValue();
+            if( $action != 'read')//if the privilege is not a read privilege
+            {   
+                $this->setDescription(__("Privilege not added: you can't grant creation/edition privileges to unregistered users."));
+                $valid = false;
             }
-            if($tempkey>0){$translations[$tempkey+1]='all translations';}
-        }               
-        return $translations;
-    } */
-
+        }
+        $valid = $valid and $validParent; 
+        return ($valid);
+    }
 }
 

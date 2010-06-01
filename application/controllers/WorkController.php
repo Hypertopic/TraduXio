@@ -12,15 +12,11 @@
 class WorkController extends Tdxio_Controller_Abstract
 {
     protected $_modelname='Work'; 
-    public $_privilegeList=array();
     public $MONTHSEC = 1296000; //15 giorni
     public $CREATETIME = 900; //15 minuti
-    public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
-    {
-        $this->_privilegeList = array( __('Read Text PRV'), __('Edit Text PRV'), __('Create Translation PRV'), __('Manage PRV'), __('Tag Text PRV'));
-        return parent::__construct($request, $response, $invokeArgs);
-    }
-    
+    public $MAX_NEWS = 15; //maximum number of last news to see in last news section
+    public $MAX_TIME = 30; //maximum age in days of the news you want to visualize
+        
     public function init()
     {
         // Local to this controller only; affects all actions,
@@ -88,7 +84,7 @@ class WorkController extends Tdxio_Controller_Abstract
                 $data['creator']=Tdxio_Auth::getUserName();
                 $model = $this->_getModel();
                 $new_id = $model->save($data);
-                $histModel = new Model_History();        
+                $histModel = new Model_History();  
                 $histModel->addHistory($new_id,5);   
                 Tdxio_Log::info($data);
                 return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$new_id));
@@ -169,7 +165,6 @@ class WorkController extends Tdxio_Controller_Abstract
     public function extendAction(){
         $request = $this->getRequest();
         $id=$request->getParam('id');
-        
         $model=$this->_getModel(); 
         
         if (!$id || !($work=$model->fetchWork($id))) {
@@ -248,9 +243,10 @@ class WorkController extends Tdxio_Controller_Abstract
         $request = $this->getRequest();
         $id= $request->getParam('id');
         $model=$this->_getModel();
+        
         $visibility=$model->getAttribute($id,'visibility');
         if($visibility=='custom'){
-            $addform = new Form_AddPrivilege($this->_privilegeList);            
+            $addform = new Form_AddPrivilege();            
             $privilegeList=$model->getWorkPrivileges($id);          
             $this->view->addform=$addform;              
             if(!is_null($privilegeList)){
@@ -284,12 +280,13 @@ class WorkController extends Tdxio_Controller_Abstract
                     $data=$addform->getValues();
                     Tdxio_Log::info($data,'dati privilege add 1');
                     if($post['submit']==__("Add Privilege")){
-                        Tdxio_Log::info($data,'dati privilege add 2');
+                        Tdxio_Log::info($data,'dati privilege add 2');                    
                         unset($data['submit']);
                         $data['work_id']=$id;
                         $data['visibility']='custom';
-                        $model->addPrivilege($data);
-                        return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
+                        if(!is_null($model->addPrivilege($data)))
+                            return $this->_helper->redirector->gotoSimple('manage',null,null, array('id'=>$id));
+                        else $addform->setDescription(__("The privilege was not added because it already exists"));
                     }
                 }
             }
@@ -411,18 +408,20 @@ class WorkController extends Tdxio_Controller_Abstract
         return $infoRow;
     }
     public function getNews(){
-        $model = $this->_getModel();
         $histModel = new Model_History();
-        $lastHistory = $histModel->getAllRecentHistory(30);//get history of last 30 days
+        
+        $lastHistory = $histModel->getAllRecentHistory($this->MAX_TIME);//get history of last 30 days
         if(empty($lastHistory))return null;
         $referenceRow = reset($lastHistory);
         Tdxio_Log::info($referenceRow,'riga di riferimento');
         $selectedHistory[]=$this->addInfo($referenceRow);
         foreach($lastHistory as $key=>$row){
-            if(!($this->equivalent($referenceRow,$row,array('work_id','message','date','user')))){
-                $referenceRow = $row;
-                $selectedHistory[]=$this->addInfo($row);                
-            }            
+            if(count($selectedHistory) < $this->MAX_NEWS){
+                if(!($this->equivalent($referenceRow,$row,array('work_id','message','date','user')))){
+                    $referenceRow = $row;
+                    $selectedHistory[]=$this->addInfo($row);                
+                }  
+            }          
         }
         return $selectedHistory;
     }

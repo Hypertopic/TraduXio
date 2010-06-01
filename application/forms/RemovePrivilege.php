@@ -69,7 +69,7 @@ class Form_RemovePrivilege extends Form_Abstract
             );
         
         }
-            $this->addElement('checkbox', preg_quote($privilege['id']),$attrList);
+        $this->addElement('checkbox', preg_quote($privilege['id']),$attrList);
 
         }
         // add the submit button
@@ -79,35 +79,5 @@ class Form_RemovePrivilege extends Form_Abstract
         ));
 
     }
-
-    protected function _getUsers()
-    {
-        require_once APPLICATION_PATH . '/models/UserModel.php';
-        $userModel = new UserModel();
-        $usersarray=$userModel->fetchEntries();
-        $users[0]='all users';
-        foreach($usersarray as $key=>$user){
-            $users[$key+1]=$user['id'];
-        }
-        
-        return $users;
-    }
-    
-    protected function _getTranslations()
-    {
-        require_once APPLICATION_PATH . '/models/TextModel.php';
-        $txtModel = new TextModel();
-        $text=$txtModel->fetchEntry($this->_id);
-        $tempkey=0;
-        if(isset($text['Translations'])){
-            foreach ($text['Translations'] as $key=>$translation){
-                $translations[$key]=$translation['title'].' ('.$translation['language'].')';
-                $tempkey=$key;
-            }
-            if($tempkey>0){$translations[$tempkey+1]='all translations';}
-        }               
-        return $translations;
-    }
-
 }
 

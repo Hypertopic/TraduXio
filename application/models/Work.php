@@ -360,6 +360,11 @@ class Model_Work extends Model_Taggable
                 {   $newlist[$key]['plaintext']=__("All users are allowed to do everything for this text");}
                 else
                 {   $newlist[$key]['plaintext']=__("All users are allowed to %1\$s this text",__($item['privilege']));}
+            }elseif($item['user_id']=='member'){
+                if($item['privilege']=='')
+                {   $newlist[$key]['plaintext']=__("All members are allowed to do everything for this text");}
+                else
+                {   $newlist[$key]['plaintext']=__("All members are allowed to %1\$s this text",__($item['privilege']));}
             }else
             {   if($item['privilege']=='')
                 {   $newlist[$key]['plaintext']=__("User %1\$s is allowed to do everything for this text",$item['user_id']);}
@@ -382,8 +387,8 @@ class Model_Work extends Model_Taggable
         $privilegeModel=new Model_Privilege();
         $userModel= new Model_User();
         Tdxio_Log::info($data['privilege'],'DEBUG PRV');
-        $data['privilege']=$privilegeModel->_dbPrivilegeList[$data['privilege']];
-        Tdxio_Log::info($data['privilege'],'DEBUG PRV2');
+        //$data['privilege']=$privilegeModel->_dbPrivilegeList[$data['privilege']];
+        //Tdxio_Log::info($data['privilege'],'DEBUG PRV2');
         $data['user_id']=($data['user']=='all')?null:$data['user'];
         unset($data['user']);
         
@@ -392,6 +397,7 @@ class Model_Work extends Model_Taggable
         Tdxio_Log::info($data,'data da inserire');
         $id=$privilegeModel->save($data);
         Tdxio_Log::info($id);
+        return $id;
     }
     
     public function getNewModTransl(){

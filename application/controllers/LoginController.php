@@ -52,7 +52,7 @@ class LoginController extends Tdxio_Controller_Abstract
                     // We're authenticated! Redirect to the original page
                     $this->_redirect($values['redirect']);
                 } else {
-                        // Invalid credentials
+                    // Invalid credentials
                     $form->setDescription('Invalid credentials provided');
                 }
             }

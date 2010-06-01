@@ -84,14 +84,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initProfiler() {
-    		$this->bootstrap('db');
-    		$res=$this->getPluginResource('db');
-    		$dbAdapter=$res->getAdapter();
-    		
-    		$profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
-			$profiler->setEnabled(true);
-			
-			//$dbAdapter->setProfiler($profiler);
+            $this->bootstrap('db');
+            $res=$this->getPluginResource('db');
+            $dbAdapter=$res->getAdapter();
+            
+            $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
+            $profiler->setEnabled(true);
+            
+            //$dbAdapter->setProfiler($profiler);
 
     }
         

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-16 18:07+0100\n"
+"POT-Creation-Date: 2010-06-01 12:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -10,28 +10,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: controllers/TranslationController.php:23
-#: controllers/TranslationController.php:83
-#: controllers/TranslationController.php:108
+#: controllers/TranslationController.php:24
+#: controllers/TranslationController.php:84
+#: controllers/TranslationController.php:110
 #, php-format
 msgid "Translation %1$s does not exist."
 msgstr "La traduzione %1$s non esiste."
 
-#: controllers/TranslationController.php:89
+#: controllers/TranslationController.php:90
 #, php-format
 msgid "Text Id %1$s does not exist."
 msgstr "Il testo %1$s non esiste."
 
-#: controllers/TranslationController.php:93
+#: controllers/TranslationController.php:94
 #, php-format
 msgid "Can not cut here (%1$s)"
 msgstr "Non si può tagliare in questo punto (%1$s)"
 
-#: controllers/TranslationController.php:153
+#: controllers/TranslationController.php:156
 msgid "Hide blocks"
 msgstr "Nascondi i blocchi"
 
-#: controllers/TranslationController.php:153
+#: controllers/TranslationController.php:156
 msgid "Show blocks"
 msgstr "Mostra i blocchi"
 
@@ -43,94 +43,78 @@ msgstr "Pagina non trovata"
 msgid "Application error"
 msgstr "Errore dell'applicazione"
 
-#: controllers/WorkController.php:20
-msgid "Read Text PRV"
-msgstr "Leggere il testo"
-
-#: controllers/WorkController.php:20
-msgid "Edit Text PRV"
-msgstr "Modificare il testo"
-
-#: controllers/WorkController.php:20
-msgid "Create Translation PRV"
-msgstr "Tradurre il testo"
-
-#: controllers/WorkController.php:20
-msgid "Manage PRV"
-msgstr "Gestire i privilegi"
-
-#: controllers/WorkController.php:20
-msgid "Tag Text PRV"
-msgstr "Inserire un tag per il testo"
-
-#: controllers/WorkController.php:60
+#: controllers/WorkController.php:56
 msgid "Anonymous"
 msgstr "Anonimo"
 
-#: controllers/WorkController.php:109
+#: controllers/WorkController.php:105
 #, php-format
 msgid "Work Id %1$s does not exist or you don't have the rights to see it "
 msgstr "L'opera con id %1$s non esiste o non si possiede il diritto di vederla"
 
-#: controllers/WorkController.php:211
+#: controllers/WorkController.php:206
 #, php-format
 msgid "Couldn't find work %1$d"
 msgstr "Opera %1$d non trovata"
 
-#: controllers/WorkController.php:265
+#: controllers/WorkController.php:261
 msgid "Remove Privilege"
 msgstr "Elimina Privilegio"
 
-#: controllers/WorkController.php:286
+#: controllers/WorkController.php:282
 #: forms/AddPrivilege.php:68
 msgid "Add Privilege"
 msgstr "Aggiungi Privilegio"
 
-#: controllers/WorkController.php:296
+#: controllers/WorkController.php:289
+msgid "The privilege was not added because it already exists"
+msgstr "Il privilegio non è stato aggiunto perché è già presente."
+
+#: controllers/WorkController.php:293
 msgid "Switch to Standard Privileges"
 msgstr "Passa ai PRIVILEGI STANDARD"
 
-#: controllers/WorkController.php:307
+#: controllers/WorkController.php:304
 #: forms/TranslationEdit.php:85
 #: forms/WorkEdit.php:78
 msgid "Save"
 msgstr "Salva"
 
-#: controllers/WorkController.php:316
+#: controllers/WorkController.php:313
 msgid "Switch to Custom Privileges"
 msgstr "Passa ai PRIVILEGI PERSONALIZZATI"
 
-#: controllers/WorkController.php:372
+#: controllers/WorkController.php:369
 #, php-format
 msgid "%1$s, text modified by %2$s"
 msgstr "%1$s: il testo è stato modificato da %2$s"
 
-#: controllers/WorkController.php:373
+#: controllers/WorkController.php:370
 #, php-format
 msgid "%1$s, text extended by %2$s"
 msgstr "%1$s: un nuovo blocco di testo è stato aggiunto da %2$s"
 
-#: controllers/WorkController.php:374
+#: controllers/WorkController.php:371
 #, php-format
 msgid "%1$s, translation of %2$s, modified by %3$s"
 msgstr "%1$s, traduzione di %2$s, è stato modificato da %3$s"
 
-#: controllers/WorkController.php:375
+#: controllers/WorkController.php:372
 #, php-format
 msgid "New tag [%2$s:%1$s] for the text %3$s added by %4$s"
 msgstr "[%2$s:%1$s]: un nuovo tag per il testo %3$s è stato aggiunto da %4$s"
 
-#: controllers/WorkController.php:376
+#: controllers/WorkController.php:373
 #, php-format
 msgid "Removed tag [%2$s:%1$s] from the text %3$s by %4$s"
 msgstr "Il tag [%2$s:%1$s] del testo %3$s è stato rimosso da %4$s"
 
-#: controllers/WorkController.php:377
+#: controllers/WorkController.php:374
 #, php-format
 msgid "%1$s, new text added by %2$s"
 msgstr "%1$s: un nuovo testo è stato inserito da %2$s"
 
-#: controllers/WorkController.php:378
+#: controllers/WorkController.php:375
 #, php-format
 msgid "%1$s, new translation of %2$s added by %3$s"
 msgstr "%1$s: una nuova traduzione di %2$s è stata aggiunta da %3$s"
@@ -162,17 +146,25 @@ msgstr "Categoria"
 msgid "TAG"
 msgstr "TAG"
 
-#: forms/AddPrivilege.php:50
+#: forms/AddPrivilege.php:51
 msgid "User"
 msgstr "Utente"
 
-#: forms/AddPrivilege.php:57
+#: forms/AddPrivilege.php:59
 msgid "Privilege"
 msgstr "Privilegio"
 
-#: forms/AddPrivilege.php:92
+#: forms/AddPrivilege.php:86
 msgid "All users"
 msgstr "Tutti gli utenti"
+
+#: forms/AddPrivilege.php:87
+msgid "All members"
+msgstr "Tutti gli utenti registrati"
+
+#: forms/AddPrivilege.php:104
+msgid "Privilege not added: you can't grant creation/edition privileges to unregistered users."
+msgstr "Privilegio non aggiunto: non è possibile concedere privilegi di creazione/modifica ad utenti non registrati."
 
 #: forms/Feedback.php:44
 msgid "Subject"
@@ -246,6 +238,26 @@ msgstr "Non sono stati definiti abbastanza parametri per eliminare il tag"
 msgid "No taggable-id specified"
 msgstr "Non è stato specificato nessun \"taggable-id\""
 
+#: models/Privilege.php:21
+msgid "Read text"
+msgstr "Leggere il testo"
+
+#: models/Privilege.php:21
+msgid "Edit text"
+msgstr "Modificare il testo"
+
+#: models/Privilege.php:21
+msgid "Create translation"
+msgstr "Creare una traduzione"
+
+#: models/Privilege.php:21
+msgid "Manage"
+msgstr "Gestire i privilegi"
+
+#: models/Privilege.php:21
+msgid "Tag text"
+msgstr "Inserire un tag per il testo"
+
 #: models/History.php:21
 msgid "work metadata modified"
 msgstr "le informazioni del testo sono state modificate"
@@ -280,11 +292,20 @@ msgid "All users are allowed to %1$s this text"
 msgstr "Tutti gli utenti sono autorizzati a %1$s questo testo"
 
 #: models/Work.php:365
+msgid "All members are allowed to do everything for this text"
+msgstr "Tutti gli utenti sono autorizzati a fare tutto su questo testo"
+
+#: models/Work.php:367
+#, php-format
+msgid "All members are allowed to %1$s this text"
+msgstr "Tutti gli utenti sono autorizzati a %1$s questo testo"
+
+#: models/Work.php:370
 #, php-format
 msgid "User %1$s is allowed to do everything for this text"
 msgstr "L'utente %1$s è autorizzato a fare tutto su questo testo"
 
-#: models/Work.php:367
+#: models/Work.php:372
 #, php-format
 msgid "User %1$s is allowed to %2$s this text"
 msgstr "L'utente %1$s è autorizzato a %2$s questo testo"
@@ -2185,16 +2206,16 @@ msgstr "(%1$s Traduzioni)"
 msgid "Latest News"
 msgstr "Ultimi Eventi"
 
-#: views/scripts/work/index.phtml:75
+#: views/scripts/work/index.phtml:73
 #, php-format
 msgid "%1$d %2$s ago"
 msgstr "%1$d %2$s fa"
 
-#: views/scripts/work/index.phtml:85
+#: views/scripts/work/index.phtml:83
 msgid "PAGETITLE_Homepage"
 msgstr "Pagina Principale"
 
-#: views/scripts/work/translate.phtml:24
+#: views/scripts/work/translate.phtml:25
 msgid "PAGETITLE_Create Translation of"
 msgstr "Traduci"
 
@@ -2203,11 +2224,15 @@ msgid "Translations"
 msgstr "Traduzioni"
 
 #: views/scripts/work/read.phtml:20
+#: views/scripts/translation/nuovo_read_backup.phtml:4
+#: views/scripts/translation/read_backup.phtml:4
 #: views/scripts/translation/read.phtml:4
 msgid "You're not allowed to do this. Ask permissions to the text's owner"
 msgstr "Non avete i diritti necessari. Richiedeteli al proprietario del testo."
 
 #: views/scripts/work/read.phtml:21
+#: views/scripts/translation/nuovo_read_backup.phtml:5
+#: views/scripts/translation/read_backup.phtml:5
 #: views/scripts/translation/read.phtml:5
 msgid "You're not allowed to do this. Please login"
 msgstr "Non avete i diritti necessari. Effettuate l'accesso"
@@ -2217,6 +2242,8 @@ msgid "You can't delete this text because it has some translations. Delete its t
 msgstr "Questo testo possiede delle traduzioni. Per poter eliminare un testo se ne devono eliminare tutte le traduzioni."
 
 #: views/scripts/work/read.phtml:27
+#: views/scripts/translation/nuovo_read_backup.phtml:3
+#: views/scripts/translation/read_backup.phtml:3
 #: views/scripts/translation/read.phtml:3
 msgid "Options"
 msgstr "Opzioni"
@@ -2234,6 +2261,8 @@ msgid "Edit the text"
 msgstr "Modifica il testo"
 
 #: views/scripts/work/read.phtml:46
+#: views/scripts/translation/nuovo_read_backup.phtml:21
+#: views/scripts/translation/read_backup.phtml:21
 #: views/scripts/translation/read.phtml:21
 msgid "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
 msgstr "ATTENZIONE! La rimozione sarà definitiva! Si è sicuri di voler eliminare questo testo?"
@@ -2243,8 +2272,12 @@ msgid "Delete this text"
 msgstr "Elimina questo testo"
 
 #: views/scripts/work/read.phtml:99
-#: views/scripts/translation/read.phtml:281
-#: views/scripts/translation/read.phtml:294
+#: views/scripts/translation/nuovo_read_backup.phtml:214
+#: views/scripts/translation/nuovo_read_backup.phtml:220
+#: views/scripts/translation/read_backup.phtml:281
+#: views/scripts/translation/read_backup.phtml:294
+#: views/scripts/translation/read.phtml:213
+#: views/scripts/translation/read.phtml:218
 msgid "Text inserted by"
 msgstr "Testo inserito da"
 
@@ -2252,7 +2285,9 @@ msgstr "Testo inserito da"
 msgid "PAGETITLE_Read text"
 msgstr "Leggi il testo"
 
-#: views/scripts/translation/edit.phtml:230
+#: views/scripts/translation/edit_condueversioni.phtml:401
+#: views/scripts/translation/edit.phtml:212
+#: views/scripts/translation/edit_backup.phtml:230
 msgid "PAGETITLE_Edit translation"
 msgstr "Modifica traduzione"
 
@@ -2260,19 +2295,27 @@ msgstr "Modifica traduzione"
 msgid "PAGETITLE_Search"
 msgstr "Ricerca"
 
+#: views/scripts/translation/nuovo_read_backup.phtml:7
+#: views/scripts/translation/read_backup.phtml:7
 #: views/scripts/translation/read.phtml:7
 msgid "You can't delete this translation because it has some translations. Delete its translations first."
 msgstr "Questa traduzione possiede delle traduzioni. Per poter eliminare un testo se ne devono eliminare tutte le traduzioni."
 
+#: views/scripts/translation/nuovo_read_backup.phtml:12
+#: views/scripts/translation/read_backup.phtml:12
 #: views/scripts/translation/read.phtml:12
 msgid "Edit this translation"
 msgstr "Modifica questa traduzione"
 
+#: views/scripts/translation/nuovo_read_backup.phtml:24
+#: views/scripts/translation/read_backup.phtml:24
 #: views/scripts/translation/read.phtml:24
 msgid "Delete this translation"
 msgstr "Elimina questa traduzione"
 
-#: views/scripts/translation/read.phtml:306
+#: views/scripts/translation/nuovo_read_backup.phtml:240
+#: views/scripts/translation/read_backup.phtml:306
+#: views/scripts/translation/read.phtml:238
 msgid "PAGETITLE_Read translation"
 msgstr "Leggi la traduzione"
 
@@ -2320,6 +2363,10 @@ msgstr "A proposito di Traduxio"
 msgid "PAGETITLE_Contact us"
 msgstr "Contattaci"
 
+#~ msgid "Create Translation"
+#~ msgstr "Tradurre il testo"
+#~ msgid "Manage PRV"
+#~ msgstr "Gestire i privilegi"
 #~ msgid "HIDE BLOCKS"
 #~ msgstr "NASCONDI BLOCCHI"
 #~ msgid "SHOW BLOCKS"
