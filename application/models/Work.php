@@ -336,19 +336,19 @@ class Model_Work extends Model_Taggable
         $visibility=$this->getAttribute($id,'visibility');
         $privilegeModel= new Model_Privilege();
         $privilegeTable=$privilegeModel->_getTable();
+        $generalPrivileges = array('create','feedback');
         
         if($visibility=='custom'){
         
-        $select = $privilegeTable->select()->where('work_id = ?',$id)
-                                                  ->orWhere('work_id is NULL AND visibility = ?',$visibility);
-        
-        Tdxio_Log::info('stringa sql in getWorkPrivileges'.$select->__toString());
-          
-        $list = $privilegeTable->fetchAll($select);
-    
+            $select = $privilegeTable->select()->where('work_id = ?',$id)
+                                               ->orWhere('work_id is NULL AND visibility = ?',$visibility)
+                                               ->orWhere('work_id is NULL AND visibility is NULL AND privilege NOT IN (?)',$generalPrivileges);        
+            Tdxio_Log::info('stringa sql in getWorkPrivileges'.$select->__toString());              
+            $list = $privilegeTable->fetchAll($select);
         }else{
-            $list=$privilegeModel->fetchByFields(array('visibility = ?', $visibility));
-            $list = $list->toArray();
+            $select = $privilegeTable->select()->where('visibility = ?',$visibility)
+                                               ->orWhere('visibility is NULL AND privilege NOT IN (?)',$generalPrivileges);        
+            $list = $privilegeTable->fetchAll($select);
         }
         
         Tdxio_Log::info($list);

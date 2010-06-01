@@ -48,35 +48,46 @@ class Form_RemovePrivilege extends Form_Abstract
         $this->setAttrib('class','privilege-form');
         $this->setAttrib('id','remform');
 
-        
+        $listIsEmpty=true;
         foreach($this->_list as $key=>$privilege){
-        if(is_null($privilege['work_id'])){
-            $attrList=array(
-                'label' => $privilege['plaintext'],
-                'value' => $privilege['id'],
-                'required' => true,
-                'disabled'=>'disabled',
-                'display' => 'inline'
-            );
+            if(is_null($privilege['work_id'])){
+                /*$attrList=array(
+                    'label' => $privilege['plaintext'],
+                    'value' => $privilege['id'],
+                    'required' => true,
+                    'disabled'=>'disabled',
+                    'display' => 'inline'
+                );*/
+            }
+            else{
+                $listIsEmpty=false;
+                $attrList=array(
+                    'label' => $privilege['plaintext'],
+                    'value' => $privilege['id'],
+                    'required' => true,
+                    'enabled'=> 'enabled',
+                    'display' => 'inline'
+                );
+                $this->addElement('checkbox', preg_quote($privilege['id']),$attrList);
+            }
         }
-        else{
-            $attrList=array(
-                'label' => $privilege['plaintext'],
-                'value' => $privilege['id'],
-                'required' => true,
-                'enabled'=> 'enabled',
-                'display' => 'inline'
-            );
         
-        }
-        $this->addElement('checkbox', preg_quote($privilege['id']),$attrList);
-
-        }
-        // add the submit button
-        $this->addElement('submit', 'submit', array(
-            'label'    => __('Remove Privilege'),
-            'id' => 'remsubmit'
+        if(!$listIsEmpty){
+            // add the submit button
+            $this->addElement('submit', 'submit', array(
+                'label'    => __('Remove Privilege'),
+                'id' => 'remsubmit'
+            ));
+        }else{
+             $this->setDescription(__("There are no existing privileges for this text."));
+            
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form')),
+            array('Description', array('placement' => 'prepend')),
+            'Form'
         ));
+        }
 
     }
 }
