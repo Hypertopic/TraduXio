@@ -1093,7 +1093,7 @@ font-weight:bold;
 .h21{height:21px;}
 .space{height:10px;}
 .whiteback{background-color:#FFF;}
-.newblock{background-color:#FFF;border:1px solid #DBDBDB;color:#585858;width:50%;vertical-align:top;}
+.newblock,.trablock{background-color:#FFF;border:1px solid #DBDBDB;color:#585858;width:50%;vertical-align:top;}
 .new-container,.new-container td,.new-container tr{padding:0;border-collapse:collapse;vertical-align:top;}
 /*table.new-container{background-color:#585858;}*/
 div.minus1{margin-left:-1px;margin-right:-1px;}

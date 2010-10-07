@@ -25,7 +25,7 @@ class Tdxio_SendMail{
         $mail = new Zend_Mail('UTF8');
         $mail->setBodyText($body);
         $mail->setFrom($configuration->mail->feedback->from);
-        $mail->addHeader('Reply-To',$from);
+        $mail->setReplyTo($from);
         $tolist=$configuration->mail->feedback->to;
         if (!$tolist) throw new Zend_Mail_Exception("bad configuration (no to), please contact system administrator");
         $tos=explode(',',$tolist);
