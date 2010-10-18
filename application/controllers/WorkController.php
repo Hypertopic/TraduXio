@@ -14,8 +14,8 @@ class WorkController extends Tdxio_Controller_Abstract
     protected $_modelname='Work'; 
     public $MONTHSEC = 1296000; //15 giorni
     public $CREATETIME = 900; //15 minuti
-    public $MAX_NEWS = 15; //maximum number of last news to see in last news section
-    public $MAX_TIME = 30; //maximum age in days of the news you want to visualize
+    public $MAX_NEWS = 30; //maximum number of last news to see in last news section
+    public $MAX_TIME = 1000; //maximum age in days of the news you want to visualize
         
     public function init()
     {
@@ -41,7 +41,6 @@ class WorkController extends Tdxio_Controller_Abstract
         $work = $this->_getModel();
         $entries = $work->fetchAllOriginalWorks();
         //Tdxio_Log::info($entries);
-         
         $sort=array();
         
         if(!is_null($entries)){
@@ -63,12 +62,16 @@ class WorkController extends Tdxio_Controller_Abstract
                 }
             }
         }
-        $news = $this->getNews();
+        $langModel = new Model_Language();        
+        $browserLang = $langModel->getBrowserLang();
+        $news = $this->getNews($browserLang['id']);
+        Tdxio_Log::info($browserLang['id'],'bbbbrows');
         Tdxio_Log::info($news,'newentries');
         if(!empty($sort)){ksort($sort,SORT_STRING);}     
         $this->view->entries=$sort;        
-        $this->view->home = true;
+        //$this->view->home = true; //non serve più da quando è stato eliminato dal file layout.phtml
         $this->view->news = $news;
+        $this->view->newsLang = $browserLang['id'];
     }
         
         
@@ -159,7 +162,7 @@ class WorkController extends Tdxio_Controller_Abstract
             $this->view->myEntries = $srcLangs;
             
             Tdxio_Log::info($srcLangs,'my translations');       
-        }else return $this->_helper->redirector->gotoSimple('index','work');
+        }else return $this->_helper->redirector->gotoSimple('index','login');
     }
     
     public function extendAction(){
@@ -407,26 +410,14 @@ class WorkController extends Tdxio_Controller_Abstract
         
         return $infoRow;
     }
-    public function getNews(){
-        $histModel = new Model_History();
-        
-        $lastHistory = $histModel->getAllRecentHistory($this->MAX_TIME);//get history of last 30 days
-        if(empty($lastHistory))return null;
-        $referenceRow = reset($lastHistory);
-        Tdxio_Log::info($referenceRow,'riga di riferimento');
-        $selectedHistory[]=$this->addInfo($referenceRow);
-        foreach($lastHistory as $key=>$row){
-            if(count($selectedHistory) < $this->MAX_NEWS){
-                if(!($this->equivalent($referenceRow,$row,array('work_id','message','date','user')))){
-                    $referenceRow = $row;
-                    $selectedHistory[]=$this->addInfo($row);                
-                }  
-            }          
-        }
-        return $selectedHistory;
+    
+    public function getNews($lang){
+        $model = $this->_getModel();
+        $newTexts = $model->getNewTranslatedWorks($lang,$this->MAX_TIME,$this->MAX_NEWS);
+        return $newTexts;
     }
     
-    
+     /* no more used after news panel modification
     public function sortByAge($list){
         
         $sortedList=array();
@@ -438,6 +429,7 @@ class WorkController extends Tdxio_Controller_Abstract
         return($sortedList);
     }
     
+   
     public function equivalent(array $a, array $b, array $paramList){
         foreach($paramList as $param){
             if($param=='date'){
@@ -453,7 +445,8 @@ class WorkController extends Tdxio_Controller_Abstract
             }
         }
         return true;
-    }
+    }*/
+    
     
     public function getRule($request){
         $action = $request->action;
@@ -483,7 +476,7 @@ class WorkController extends Tdxio_Controller_Abstract
                 if($request->isPost()){
                     $rule = array('privilege'=> 'translate','work_id' => $resource_id);
                 }else{
-                    $rule = array('privilege'=> 'read','work_id' => $resource_id, 'notAllowed'=>true);
+                    $rule = array('privilege'=> 'translate','work_id' => $resource_id, 'notAllowed'=>true);
                 }break;
             
             case 'history':

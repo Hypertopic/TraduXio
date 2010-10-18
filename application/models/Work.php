@@ -147,7 +147,7 @@ class Model_Work extends Model_Taggable
         $table = $this->_getTable();
         $db = $table->getAdapter();
         $select = $db->select();
-        $selectOrig = $this->getSelectCondOriginalWork('sentence');
+        $selectOrig = $this->getSelectCondOriginalOrTransl('sentence');
         $selectAlwd = $this->getSelectCondAllowedWork('read'); 
         
         $selectIntAlwd = $db->select()->from('interpretation',array('original_work_id','work_id'))->where('work_id IN (?)', $selectAlwd);
@@ -165,7 +165,7 @@ class Model_Work extends Model_Taggable
         
     }
     
-    public function getSelectCondOriginalWork($table_name='sentence'){
+    public function getSelectCondOriginalOrTransl($table_name='sentence'){
         $table = $this->_getTable();
         $db = $table->getAdapter();
         $select = $db->select()->distinct()->from($table_name,'work_id');
@@ -203,7 +203,7 @@ class Model_Work extends Model_Taggable
     
     public function fetchMyTranslationWorks($user){
         $table = $this->_getTable();
-        $select1 = $this->getSelectCondOriginalWork('interpretation');
+        $select1 = $this->getSelectCondOriginalOrTransl('interpretation');
         $select2 = $table->select()->where('id IN (?)',$select1)->where('creator = ?',$user);
         $translations = $table->fetchAll($select2)->toArray();
         $translations = $this->addOriginalWorksToTranslationWorks($translations);
@@ -405,7 +405,7 @@ class Model_Work extends Model_Taggable
         $newModTransl = array();
         $table = $this->_getTable();
         
-        $selectInt = $this->getSelectCondOriginalWork('interpretation');
+        $selectInt = $this->getSelectCondOriginalOrTransl('interpretation');
         $selectAllowed = $this->getSelectCondAllowedWork('read');
         $sqlcond = "work.created > current_date - integer '30'  OR work.modified > current_date - integer '30' ";
         //$selectNewModInt = $table->select()->where('id IN (?)',$selectInt)->where('id IN (?)',$selectAllowed)->where($sqlcond);
@@ -467,5 +467,31 @@ class Model_Work extends Model_Taggable
         $table->delete($table->getAdapter()->quoteInto('id = ?',$id));        
         return $return_value;
     }   
-    
+
+    public function getNewTranslatedWorks($lang,$days,$number){
+        
+        $table = $this->_getTable();
+        $db = $table->getAdapter();
+        
+        $selectAlwd = $this->getSelectCondAllowedWork('read'); 
+       // $selectLang = $db->select()->from('languages','languages.id')->where('languages.part1 = ?',$lang);
+        
+        $selectTrsl = $db->select()->distinct()->from(array('i'=>'interpretation'),array('tr_id'=>'i.work_id','orig_id'=>'i.original_work_id','tr_created'=>'work.created','tr_lang'=>'work.language'))
+                                    ->joinLeft('work','work.id = i.work_id',array('tr_title'=>'work.title'))
+                                    //->where('work.language IN (?)',$selectLang)
+                                    ->where('work.language = ?',$lang)
+                                    ->where("work.created > current_date - integer '?'", $days)
+                                    ->where('i.work_id IN (?)',$selectAlwd);
+                                    
+        $select = $db->select()->from(array('w'=>'work'),array('orig_title'=>'w.title'))
+                                ->joinRight($selectTrsl,'w.id=orig_id')
+                                ->order('tr_created DESC')
+                                ->limit($number);
+        
+        Tdxio_Log::info($select->__toString(),'select nuove traduzioni');
+        $results = $db->fetchAll($select);
+        Tdxio_Log::info($results,'results nuove traduzioni');
+        return $results;
+    }
+        
 }

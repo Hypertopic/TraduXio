@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Traduxio Project - Test site</title>
+  <title><?php echo __('Traduxio Project'); if($this->page_title): echo " - "; echo __($this->page_title); endif;?></title>
   <?php echo $this->headLink()->appendStylesheet($this->makeUrl('/css/global.css')) ?>
   <?php $this->headScript()->prependScript("tdxio.baseUrl='".$this->makeUrl('',true)."';"); ?>
   <?php $this->headScript()->prependFile($this->makeUrl('/js/tdxio.js')); ?>

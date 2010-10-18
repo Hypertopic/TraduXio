@@ -16,7 +16,6 @@
 </td>
 <td class="lang-list">
 
-          
 <ul>
 <?php
 foreach ($this->entries as $lang=>$authors) { ?>
@@ -29,7 +28,7 @@ foreach ($this->entries as $lang=>$authors) { ?>
                 <li class='text'><a href="<?php echo $this->url(
                     array('controller'=>'work','action'=>'read','id'=>$text['id'])) ?>">
                     <?php if($text['title']==''){echo '<i>'.__('No Title').'</i>';}else{echo $text['title'];} ?></a>
-                    <?php if($text['count']>0):?><span class="trCount"> <?php echo __("(%1\$s Translations)",$text['count']);?></span><? endif; ?>
+                    <?php if($text['count']>0):?><span class="trCount"> <?php echo ($text['count']>1)?__("(%1\$s Translations)",$text['count']):__("(%1\$s Translation)",$text['count']);?></span><? endif; ?>
                 </li>
 <?php       } ?>
             </ul></li>
@@ -49,30 +48,12 @@ foreach ($this->entries as $lang=>$authors) { ?>
 </td>
 
 <td class="news hundred">
-    <div class="news-paragraph"><div class="news-title"><?php echo __('Latest News');?></div>
+    <div class="news-paragraph"><div class="news-title"><?php echo __("New translations in %1\$s",__($this->newsLang));?></div>
     <?php if(!empty($this->news)):
         foreach($this->news as $key=> $item): ?>
-            <ul><li>
-            <?php echo $item['phrase']; ?>
-           
-            <?php $age=$item['age']; ?>
-            <span class="age">
-            <?php //$translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en'); 
-            $translate = $this->translate;
-          
-            if($age < 60){$age = round($age);$units =plural("second","seconds",$age);}
-            elseif($age < 3600){$age = round($age/60); $units = plural('minute','minutes',$age);}
-            elseif($age < 86400){$age = round($age/3600); $units = plural('hour','hours',$age);}
-            elseif($age < 2592000){$age = round($age/86400); $units = plural("day","days",$age);}
-            
-            /*if($age < 60){$age = round($age);$units =$translate->plural(__('second'),__('seconds'),$age);}
-            elseif($age < 3600){$age = round($age/60); $units = $translate->plural(__('minute'),__('minutes'),$age);}
-            elseif($age < 86400){$age = round($age/3600); $units = $translate->plural(__('hour'),__('hours'),$age);}
-            elseif($age < 2592000){$age = round($age/86400); $units = $translate->plural(__('day'),__('days'),$age);}*/
-          
-            echo __("%1\$d %2\$s ago",$age,$units);
-            ?>
-            </span>    
+            <ul class = "new-translation"><li><a href = "<?php echo $this->url(
+            array('controller'=>'translation','action'=>'read','id'=>$item['tr_id'])) ?>">
+            <?php echo $item['orig_title']; ?></a>
             </li></ul>
         <?php endforeach; endif;?>
     </div>
