@@ -42,16 +42,20 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         $layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
         $view = $layout->getView();
         $view->userid=$this->_userid;
-        $view->preview = false;//view even unaccessible content
+//        $view->preview = false;//view even unaccessible content
         $privilegeModel = new Model_Privilege();
-        $create_privilege = array(
+        
+        /*$translate_privilege = array(
                     'user_id' => $this->_userid,
                     'role' => $this->_role,
-                    'privilege'=> 'create',
+                    'privilege'=> 'translate',
                     'work_id' => null
-        );  
-        if ($privilegeModel->exist($create_privilege) || $view->preview){$view->showCreate=true;}
-        else {$view->showCreate=false;}
+        );*/  
+        /*if ($privilegeModel->exist($translate_privilege) 
+         * //|| $view->preview
+         * ){$view->showCreate=true;}
+        else {$view->showCreate=false;}*/
+        
         if($this->_role=='member'){
             $view->isMember=true;
         }else{$view->isMember=false;}
@@ -61,7 +65,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         {return;}
                 
         $privilege = array(
-                    'user_id' => $this->_userid,
+                    'user_id' => (($this->_userid != null)?$this->_userid:$this->_role),
                     'role' => $this->_role,
                     'privilege'=> $rule['privilege'],
                     'work_id' => $rule['work_id'],
@@ -69,14 +73,19 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         );
         Tdxio_Log::info($privilege,'privilegio');
         $view->showEdit=false;
+        $view->showTranslate=false;
         
         if (!($privilegeModel->exist($privilege))){
             Tdxio_Log::info('the privilege does not exist');
-            if(isset($rule['notAllowed'])&&$view->preview){
-                $view->notAllowed=true;
-                return;
-            }
-            if ($this->_role=='guest'){
+            //if(isset($rule['notAllowed'])&&$view->preview){
+            //    $view->notAllowed=true;
+            //    return;
+            //}                
+            Tdxio_Log::info('requestUri1');
+            if ($this->_role=='guest'){                
+                Tdxio_Log::info('requestUri2');
+                $this->setLastRequestedUri($request); 
+                       
                 $controllername = $this->_noauth['controller'];
                 $actionName = $this->_noauth['action'];
             } else {
@@ -88,11 +97,19 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
             if(isset($rule['edit_privilege'])){
                 $editPrivilege=$privilege;
                 $editPrivilege['privilege']=$rule['edit_privilege'];
-                if(($privilegeModel->exist($editPrivilege))||$view->preview){
+                if(($privilegeModel->exist($editPrivilege))/*||$view->preview*/){
                     $view->showEdit=true;
                 }
-            }               
-            $view->notAllowed=false;
+            }
+            if(isset($rule['translate_privilege'])){
+                $translatePrivilege=$privilege;
+                $translatePrivilege['privilege']=$rule['translate_privilege'];
+                if(($privilegeModel->exist($translatePrivilege))/*||$view->preview*/){
+                    $view->showTranslate=true;
+                }
+            }     
+                      
+            //$view->notAllowed=false;
         }
         
         $deletePrivilege = $privilege;
@@ -102,6 +119,18 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
        
         $request->setControllerName($controllername);
         $request->setActionName($actionName);
+    }
+    
+    public function setLastRequestedUri($request){
+        
+        $requestUri = $request->getPathInfo();
+        Tdxio_Log::info($requestUri);
+        $session = new Zend_Session_Namespace('lastRequest');
+                
+        if((strpos($requestUri,'login')===false)||(strpos($requestUri,'logout')!==false)){
+            $session->lastRequestUri = $requestUri;                    
+        }   
+        
     }
     
 }

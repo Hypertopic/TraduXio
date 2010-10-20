@@ -42,15 +42,25 @@ class LoginController extends Tdxio_Controller_Abstract
                 $adapter = $this->getAuthAdapter($values);
                 $auth    = Zend_Auth::getInstance();
                 $result  = $auth->authenticate($adapter);
-                // $this->log($result);
+                
                 if ($result->isValid()) {
                     $user = Tdxio_Auth::getUserName();
                     $model = new Model_User();          
                     $model->registerUser($user);
                     
                     Tdxio_Preferences::setSessionPrefs(Tdxio_Preferences::getDbPrefs($user));
+                                                            
+                    // We're authenticated! Redirect to the page originally requested
+                    $session = new Zend_Session_Namespace('lastRequest');
+                    
+                    if (isset($session->lastRequestUri)) {
+                        Tdxio_Log::info($session->lastRequestUri,'redir after login');
+                        $this->_redirect($session->lastRequestUri);
+                        return;
+                    }
                     // We're authenticated! Redirect to the original page
                     $this->_redirect($values['redirect']);
+
                 } else {
                     // Invalid credentials
                     $form->setDescription('Invalid credentials provided');
@@ -59,6 +69,9 @@ class LoginController extends Tdxio_Controller_Abstract
         } else {
             $form->getElement('redirect')->setValue($_SERVER['HTTP_REFERER']);
         }
+        Tdxio_Log::info($_SERVER,'server');
+        Tdxio_Log::info($values['redirect'],'redirect');
+                
         $this->view->form = $form;
     }
     
@@ -78,7 +91,15 @@ class LoginController extends Tdxio_Controller_Abstract
     {
         Zend_Auth::getInstance()->clearIdentity();
         Zend_Session::namespaceUnset('Tdxio_Prefs'); 
-        $this->_helper->redirector('index','index'); // back to login page
+        /* //If I want to stay in the same (allowed) page after logging out
+         * $session = new Zend_Session_Namespace('lastRequest');
+                    
+                    if (isset($session->lastRequestUri)) {
+                        $this->_redirect($session->lastRequestUri);
+                        return;
+                    }*/
+        Zend_Session::namespaceUnset('lastRequest'); 
+        $this->_helper->redirector('index','index'); // back to homepage
     }
     
     public function getForm()

@@ -28,7 +28,7 @@ $HTmessage = __("You can't delete this text because it has some translations. De
     <?php echo __('Options'); ?></div>
 
     <?php $href= 'href="'.$this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])).'"';?> 
-    <div class="options"><a <?php echo $href.' '.($this->showCreate?'':$NRattrs); ?>><?php echo __('Create a translation'); ?></a></div><br>
+    <div class="options"><a <?php echo $href.' '.($this->showTranslate?'':$NRattrs); ?>><?php echo __('Create a translation'); ?></a></div><br>
     
     <?php 
         $href_extend= 'href="'.$this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])).'"';

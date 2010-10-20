@@ -64,8 +64,8 @@ class IndexController extends Tdxio_Controller_Abstract
         switch($action){
             case 'feedback': 
                     if($request->isPost()){
-                        $rule =array('privilege'=> 'feedback','work_id' => null) ;
-                    }else{$rule =array('privilege'=> 'feedback','work_id' => null, 'notAllowed'=>true) ;}
+                        $rule =array('privilege'=> 'feedback','work_id' => -1) ;
+                    }else{$rule =array('privilege'=> 'feedback','work_id' => -1, 'notAllowed'=>true) ;}
                     break;
         default: $rule = 'noAction';        
         }

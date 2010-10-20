@@ -162,7 +162,7 @@ class WorkController extends Tdxio_Controller_Abstract
             $this->view->myEntries = $srcLangs;
             
             Tdxio_Log::info($srcLangs,'my translations');       
-        }else return $this->_helper->redirector->gotoSimple('index','login');
+        }
     }
     
     public function extendAction(){
@@ -465,12 +465,12 @@ class WorkController extends Tdxio_Controller_Abstract
         
         switch($action){
             case 'index': 
-                //$rule = array('privilege'=> 'read','work_id' => null);      
+                //$rule = array('privilege'=> 'read','work_id' => -1);      
                 break; 
             case 'deposit': 
                 if($request->isPost()){
-                    $rule = array('privilege'=> 'create','work_id' => null );       
-                }else{$rule = array('privilege'=> 'create','work_id' => null, 'notAllowed'=>true);} 
+                    $rule = array('privilege'=> 'create','work_id' => -1 );       
+                }else{$rule = array('privilege'=> 'create','work_id' => -1, 'notAllowed'=>true);} 
                 break; 
             case 'translate':
                 if($request->isPost()){
@@ -479,19 +479,21 @@ class WorkController extends Tdxio_Controller_Abstract
                     $rule = array('privilege'=> 'translate','work_id' => $resource_id, 'notAllowed'=>true);
                 }break;
             
-            case 'history':
+            case 'history':$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility);   
+                break;
             case 'read':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'tag','work_id' => $resource_id);
                 }else{
-                        $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');      
+                        $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit','translate_privilege'=> 'translate');      
                 }break; 
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 }else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);} 
                 break;
-            case 'my': break;                   
+            case 'my': $rule = array('privilege'=> 'translate','work_id'=>-1); //work_id = -1 is to ensure it does not count privileges with work_id !=null
+                break;                   
             case 'extend':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
