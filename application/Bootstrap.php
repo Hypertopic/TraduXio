@@ -76,10 +76,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front = Zend_Controller_Front::getInstance();
         $aclPlugin = new Tdxio_Plugin_AclPlugin();
         $front->registerPlugin($aclPlugin); 
-        $prefPlugin = new Tdxio_Plugin_PrefPlugin();
-        $front->registerPlugin($prefPlugin); 
-     //   $translatePlugin = new Tdxio_Plugin_TranslatePlugin();
-     //   $front->registerPlugin($translatePlugin); 
+      /* $prefPlugin = new Tdxio_Plugin_PrefPlugin();
+        $front->registerPlugin($prefPlugin); */
 
     }
     
@@ -115,7 +113,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     //INITIALIZE TRANSLATE    
-    protected function _initTranslate(){
+  /*  protected function _initTranslate(){
+       
        $translate = Zend_Registry::get('Zend_Translate');
        
        $files = scandir(APPLICATION_PATH.'/../languages');
@@ -132,6 +131,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
        $translate->setLocale($cur_lang);
        
        Zend_Registry::set('languages',$languages);   
-    }
+    }*/
     
 }

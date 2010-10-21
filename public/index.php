@@ -30,7 +30,7 @@ require_once 'Zend/Exception.php';
 
 $translate = new Zend_Translate('gettext',APPLICATION_PATH.'/../languages/en.mo','en'); 
 Zend_Registry::set('Zend_Translate',$translate);
-$langname = 'en';
+$langname = $defaultLang ='en';
 
 Zend_Locale::setDefault('en');
 
@@ -42,6 +42,13 @@ try{//refresh preferences with browser informations
     $langname = $lan;
 }catch(Zend_Locale_Exception $e) {
 }
+/////////////////////////////////////////////to be redifined using setDefault and getDefault
+try{
+$translate->addTranslation(APPLICATION_PATH.'/../languages/'.$lan.'.mo',$lan);
+$translate->setLocale($lan);
+}catch(Zend_Translate_Exception $e) {
+$translate->setLocale($defaultLang);}
+////////////////////////////////////////////////
 
 Zend_Registry::set('preferences',array('lang'=>$langname,'color'=>1));       
 

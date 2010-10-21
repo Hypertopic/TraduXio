@@ -41,10 +41,16 @@
                  http://framework.zend.com/manual/en/zend.view.helpers.html
                  -->
         </div>
-        <div id="header-langsel">
-            <?php echo $this->langform; ?>
-        </div>
+        
+        <!--<div id="header-langsel">
+            <?php // echo $this->langform; ?>
+        </div>-->
     </div>
+    <?php if($this->isMember):?>
+    <div id="under-header">
+    <span id="username"><?php echo $this->userid.'   ' ?></span><a href="<?php echo $this->makeUrl('/login/logout');?>"><span id="logout">X</span></a> 
+    </div>
+    <?php endif; ?>
 
     <!-- This next call will now include any content that was generated in the
          dispatching of a controllers action (or series of actions).  -->
