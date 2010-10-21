@@ -53,11 +53,13 @@ class LoginController extends Tdxio_Controller_Abstract
                     // We're authenticated! Redirect to the page originally requested
                     $session = new Zend_Session_Namespace('lastRequest');
                     
+/*
                     if (isset($session->lastRequestUri)) {
                         Tdxio_Log::info($session->lastRequestUri,'redir after login');
                         $this->_redirect($session->lastRequestUri);
                         return;
                     }
+*/
                     // We're authenticated! Redirect to the original page
                     $this->_redirect($values['redirect']);
 
@@ -67,7 +69,15 @@ class LoginController extends Tdxio_Controller_Abstract
                 }
             }
         } else {
-            $form->getElement('redirect')->setValue($_SERVER['HTTP_REFERER']);
+            $requestUri = $request->getPathInfo();
+                    
+            Tdxio_Log::info($requestUri,'REQUESTURIb');
+            Tdxio_Log::info($request,'REQUESTURIb');
+            Tdxio_Log::info($request->getParam('controller'),'controller');
+            Tdxio_Log::info($request->getParam('action'),'action');
+            if(!(($request->getParam('controller')=='login')&&($request->getParam('action')=='index'))){
+                $form->getElement('redirect')->setValue($requestUri);
+            }   
         }
         Tdxio_Log::info($_SERVER,'server');
         Tdxio_Log::info($values['redirect'],'redirect');
