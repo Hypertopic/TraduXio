@@ -48,7 +48,7 @@
     </div>
     <?php if($this->isMember):?>
     <div id="under-header">
-    <span id="username"><?php echo $this->userid.'   ' ?></span><a href="<?php echo $this->makeUrl('/login/logout');?>"><span id="logout">X</span></a> 
+    <span id="username"><?php echo $this->userid.'   ' ?></span><a href="<?php echo $this->makeUrl('/login/logout');?>" title="<?php echo __("Logout");?>"><span id="logout">X</span></a> 
     </div>
     <?php endif; ?>
 

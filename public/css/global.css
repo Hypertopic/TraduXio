@@ -64,10 +64,6 @@ div.title{
     font-size:120%;
     font-weight:bold;
 }
-div.text{
-    margin:5px 10px 10px 10px;
-    padding:10px;
-}
 
 .leftColumn-inner {
 background:url(../images/nav_bg.jpg) repeat-y scroll 0 0 #F7F7E6;
@@ -342,6 +338,7 @@ div.work-container{
     color:#585858;
     background-repeat:no-repeat;
     margin:0 20px;
+    padding: 0 20px;
 }
 div.upperblock {
     border:1px solid #DBDBDB;
@@ -350,7 +347,7 @@ td.bottom-spacer {
     height:42px;
 }
 #page-container{
-    text-align: center;
+    /*text-align: center;*/
     vertical-align: middle;
     padding: 20px;
     background-color: #585858;
@@ -423,6 +420,9 @@ li.text a, .trCount {
 dt {
 margin:10px 0 3px 30px;
 }
+
+dt#insert_text-label{margin:30px;}
+
 input{
     color:#585858;
 }
@@ -507,8 +507,8 @@ ul.new-translation{
 padding-left:30px;
 }
 
-li.new-translation{
-padding-left:30px;
+.new-translation li{
+padding-bottom:10px;
 }
 
 div.nutshell {
@@ -585,12 +585,12 @@ border: solid 1px #DBDBDB;
 div.text, div.original-text, div.translated-text {
 /*border-left:15px solid;
 border-right:2px solid;*/
-margin-left:20px;
-margin-right:20px;
-margin-top:5px;
+/*margin-left:20px;
+margin-right:20px;*/
+margin-top:15px;
 padding:5px 10px;
 vertical-align:top;
-text-align:left;
+/*text-align:left;*/
 }
 
  td.textorig {
@@ -769,23 +769,29 @@ div.show-tag-area{
 }
 #under-header{
 height:17px;
-color:#FFFFFF;
+
+/*color:#999999;
+background-color:#e7e7e7;
+background-color:#999999;
+color:#fff;*/
+
 font-size:11px;
 font-weight:bold;
 text-align:right;
 padding:0px 25px 2px 25px;
+color:#ffffff;
 background-image: url(../images/under-line.png);
 }
 
 #logout{
-color:#FFFFFF;
+color:#ffffff;
 font-variant:small-caps;
 font-size:11px;
 font-family: Comic Sans MS,Verdana,Arial,Helvetica,sans-serif;
 }
 /*
 #content {
-    margin:5px;
+    margin-top:1px;
 }*/
 #LRcontainer{
     width:100%;    
@@ -1041,7 +1047,6 @@ letter-spacing:1px;
 
 .fl-left{
 float:left;
-width:30%;
 }
 
 .clear{

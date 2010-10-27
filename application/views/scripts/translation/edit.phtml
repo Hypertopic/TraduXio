@@ -32,6 +32,9 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 <?php $this->inlineScript()->captureEnd(); ?>
 <?php echo $this->inlineScript(); ?>
 
+<?php $tradDir = (($this->translation['rtl']==1)?'dir="rtl"':'');
+      $origDir = (($this->translation['OriginalWork']['rtl']==1)?'dir="rtl"':'');
+?>    
 
 <div id="LRcontainer">
 <!------------------------------------------------------------------------------------------------------------------------>
@@ -92,8 +95,8 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 
 <tr class="hundred">
 <td class="Lborder w21 hundred"></td>
-<td class="whiteback hundred">
-    <div class = "work-container hundred">
+<td class="whiteback hundred" <?php echo $origDir; ?>>
+    <!--<div class = "work-container hundred">-->
         <div class="title">
             <?php $author = $this->translation['OriginalWork']['author']; 
                   $title = $this->escape($this->translation['OriginalWork']['title']);
@@ -105,17 +108,17 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
         <div class="language TBspaced red">
             <?php echo __($this->translation['OriginalWork']['language']); ?>
         </div>
-    </div>
+    <!--</div>-->
     </td>
 <td class="Rborder w21 hundred"></td>
 <td class="Lborder w21 hundred"></td>
 <td class="whiteback hundred">
-    <div class = "work-container hundred">
+    <!--<div class = "work-container hundred">-->
         <div class="title">
             <span class="author"><?php echo $elements['author']->render().'  '  ?></span>
             <span class="author"><?php echo $elements['title']->render()?></span></div>
             <div class="language TBspaced"><?php echo __($this->translation['language']) ?></div>
-        </div>
+        <!--</div>-->
     </div>
 </td>
 <td class="Rborder w21 hundred"></td>
@@ -124,7 +127,7 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 <?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
 <tr>
 <td class="Lborder w21 hundred"></td>
-<td class="newblock hundred"><div class="pad10">
+<td class="newblock hundred" <?php echo $origDir; ?>><div class="pad10">
 <?php foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
     <?php $segment = $segment['content']; ?>
     <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
@@ -144,7 +147,7 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 </td>
 <td class="Rborder w21 hundred"></td>
 <td class="Lborder w21 hundred"></td>
-<td class="trablock hundred">
+<td class="trablock hundred" <?php echo $tradDir; ?>>
 <div  class="pad10"><?php echo $elements['block'.$blocknum]->render(); ?></div>
 </td>
 <td class="Rborder w21 hundred"></td>
@@ -169,8 +172,8 @@ if ($.browser.msie) document.write("you may experience display problems with ie,
 <td class="Rborder w21 hundred"></td>
 <td class="Lborder w21 hundred"></td>
 <td class="whiteback hundred">
-    <div class = "work-container hundred">
-    </div>
+    <!--<div class = "work-container hundred">
+    </div>-->
 </td>
 <td class="Rborder w21 hundred"></td>
 </tr>

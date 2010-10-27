@@ -36,6 +36,10 @@
 </div>
 </div>
 
+<?php $tradDir = (($this->translation['rtl']==1)?'dir="rtl"':'');
+      $origDir = (($this->translation['OriginalWork']['rtl']==1)?'dir="rtl"':'');
+?>      
+
 <div class="right-container">
 <table class="new-container full-width">
 <!------------------------------------------------------------------------------------------------------------------------>
@@ -110,8 +114,8 @@
 
 <tr class="hundred">
 <td class="w21 hundred Lborder"></td>
-<td class="whiteback hundred">
-<div class = "work-container hundred minus1">
+<td <?php echo $origDir;?>>
+<div class = "whiteback hundred minus1">
     <div class="title">
         <?php $author = $this->translation['OriginalWork']['author'];
         $title = $this->escape($this->translation['OriginalWork']['title']);
@@ -133,8 +137,8 @@
 </td>
 <td class="w21 hundred Rborder"></td>
 <td class="w21 hundred Lborder"></td>
-<td class="whiteback hundred">
-<div class = "work-container hundred minus1">
+<td <?php echo $tradDir; ?>>
+<div class = "whiteback hundred minus1">
                 <div class="title">          
                     <?php 
                         $title = ($this->translation['title']=='')?__('No Title'):$this->translation['title'];
@@ -157,7 +161,7 @@
 
 <tr>
 <td class="w21 hundred Lborder"><div class="w21 hundred"></div></td>
-<td class="newblock hundred"><div class="pad10">
+<td class="newblock hundred" <?php echo $origDir; ?>><div class="pad10">
 <?php foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
                         <?php $segment = $segment['content']; ?>
                         <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
@@ -168,7 +172,7 @@
 </td>
 <td class="w21 Rborder hundred"></td>
 <td class="w21 Lborder hundred"></td>
-<td class="newblock hundred">
+<td class="newblock hundred" <?php echo $tradDir; ?>>
 <div class="pad10"><span><?php echo $this->nlBr($block['translation']); ?></span></div>
 </td>
 <td class="w21 Rborder hundred"></td>
@@ -189,14 +193,14 @@
 
 <tr>
 <td class="w21 Lborder hundred"></td>
-<td class="newblock hundred"><div class="pad10">
+<td class="newblock hundred" <?php echo $origDir; ?>><div class="pad10">
 <?php foreach($this->translation['OriginalSentences'] as $key=>$sentence):
                     echo $this->nlBr($sentence['content']); 
                 endforeach; ?>
 </td>
 <td class="w21 Rborder hundred"></td>
 <td class="w21 Lborder hundred"></td>
-<td class="newblock hundred"><div class="pad10">
+<td class="newblock hundred" <?php echo $tradDir; ?>><div class="pad10">
 <?php foreach($this->translation['TranslationBlocks'] as $key=>$block):
                    echo $this->nlBr($block['translation']).' '; 
                 endforeach; ?>  

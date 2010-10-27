@@ -104,12 +104,23 @@ class Model_Work extends Model_Taggable
             $ids = array($id);
         } 
         $table=$this->_getTable();
+        $db = $table->getAdapter();
         $works = array();
         if($filter==true){
             $select = $this->getSelectCondAllowedWork('read'); 
-            $works = $table->fetchAll($table->select()->where('id IN (?)',$ids)->where('id IN (?)',$select))->toArray();
+            //$works = $table->fetchAll($table->select()->where('id IN (?)',$ids)->where('id IN (?)',$select))->toArray();
+            //RTL
+              $works = $db->fetchAll($db->select()->from('work')
+            ->joinLeft(array('l'=>'languages'),'work.language = l.id','rtl')
+            ->where('work.id IN (?)',$ids)->where('work.id IN (?)',$select));
+            //end rtl
         }else{ 
-            $works = $table->fetchAll($table->select()->where('id IN (?)',$ids))->toArray(); 
+            //$works = $table->fetchAll($table->select()->where('id IN (?)',$ids))->toArray();
+             //RTL
+             $works = $db->fetchAll($db->select()->from('work')
+            ->joinLeft(array('l'=>'languages'),'work.language = l.id','rtl')
+            ->where('work.id IN (?)',$ids));
+            //end rtl
         }
         if(!is_array($id)){
             return $works[0];
@@ -119,10 +130,8 @@ class Model_Work extends Model_Taggable
     }
     
     public function fetchOriginalWork($work_id,$filter=true){
-    
-        Tdxio_Log::info('DEBUG D');
         if(!$work = $this->fetchWork($work_id,$filter)){return null;}
-        Tdxio_Log::info($work,'DEBUG E');
+        
         $sentenceModel= new Model_Sentence();
         $work['Sentences'] = $sentenceModel->fetchSentences($work_id);
         $content = '';
@@ -153,12 +162,13 @@ class Model_Work extends Model_Taggable
         $selectIntAlwd = $db->select()->from('interpretation',array('original_work_id','work_id'))->where('work_id IN (?)', $selectAlwd);
         
         $select->distinct()->from(array('work'=>'work'),array('id','title','author','language','created','modified','creator'))
+                        /*RTL*/->joinLeft(array('l'=>'languages'),'work.language = l.id','l.rtl')
                         ->joinLeft(array('i'=>$selectIntAlwd),'i.original_work_id = work.id','count(distinct i.work_id)')
-                        ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified','work.creator'))
+                        ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified','work.creator','l.rtl'))
                         ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd);
         
         if(!is_null($idList)){           
-            $select->where('id IN (?)',$idList);
+            $select->where('work.id IN (?)',$idList);
         }
         Tdxio_Log::info($select->__toString(),'stringa sql');
         return $db->fetchAll($select);
@@ -204,8 +214,15 @@ class Model_Work extends Model_Taggable
     public function fetchMyTranslationWorks($user){
         $table = $this->_getTable();
         $select1 = $this->getSelectCondOriginalOrTransl('interpretation');
-        $select2 = $table->select()->where('id IN (?)',$select1)->where('creator = ?',$user);
-        $translations = $table->fetchAll($select2)->toArray();
+        
+        $db = $table->getAdapter();
+        $select2 = $db->select()->from('work')
+                        /*RTL*/->joinLeft(array('l'=>'languages'),'work.language = l.id','rtl') 
+                                ->where('work.id IN (?)',$select1)->where('work.creator = ?',$user);
+        
+        
+        //$select2 = $table->select()->where('id IN (?)',$select1)->where('creator = ?',$user);
+        $translations = $db->fetchAll($select2);
         $translations = $this->addOriginalWorksToTranslationWorks($translations);
         return $translations;
     }
@@ -219,7 +236,11 @@ class Model_Work extends Model_Taggable
             }
             $table = $this->_getTable();
             $db = $table->getAdapter();
-            $select = $db->select()->from('interpretation',array('work_id','original_work_id'))->where('work_id IN (?)', $idList);
+            $select = $db->select()->from('interpretation',array('work_id','original_work_id'))
+            //                        /*RTL*/->joinLeft(array('work'=>'work'),'work.id = interpretation.work_id','work.language')
+             //                       /*RTL*/->joinLeft(array('l'=>'languages'),'work.language = l.id','rtl')
+                                    ->where('work_id IN (?)', $idList);
+                                                
             $result = $db->fetchAll($select);
             $originalIds=array();
             foreach($result as $key=>$ids){
@@ -474,16 +495,15 @@ class Model_Work extends Model_Taggable
         $db = $table->getAdapter();
         
         $selectAlwd = $this->getSelectCondAllowedWork('read'); 
-       // $selectLang = $db->select()->from('languages','languages.id')->where('languages.part1 = ?',$lang);
         
         $selectTrsl = $db->select()->distinct()->from(array('i'=>'interpretation'),array('tr_id'=>'i.work_id','orig_id'=>'i.original_work_id','tr_created'=>'work.created','tr_lang'=>'work.language'))
                                     ->joinLeft('work','work.id = i.work_id',array('tr_title'=>'work.title'))
-                                    //->where('work.language IN (?)',$selectLang)
                                     ->where('work.language = ?',$lang)
                                     ->where("work.created > current_date - integer '?'", $days)
                                     ->where('i.work_id IN (?)',$selectAlwd);
                                     
         $select = $db->select()->from(array('w'=>'work'),array('orig_title'=>'w.title'))
+                        /*RTL*/->joinLeft(array('l'=>'languages'),'w.language = l.id','rtl')
                                 ->joinRight($selectTrsl,'w.id=orig_id')
                                 ->order('tr_created DESC')
                                 ->limit($number);

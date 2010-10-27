@@ -25,9 +25,9 @@ foreach ($this->entries as $lang=>$authors) { ?>
             <li class='author closed'><?php echo $author; ?>
             <ul class='texts'>
 <?php       foreach ($texts as $text) { ?>
-                <li class='text'><a href="<?php echo $this->url(
+                <li class='text'><span <?php if($text['rtl']==1){echo 'class="fl-left" dir="rtl"'; $nbsp = '&nbsp;';}else{$nbsp='';} ?>><a href="<?php echo $this->url(
                     array('controller'=>'work','action'=>'read','id'=>$text['id'])) ?>">
-                    <?php if($text['title']==''){echo '<i>'.__('No Title').'</i>';}else{echo $text['title'];} ?></a>
+                    <?php if($text['title']==''){echo '<i>'.__('No Title').'</i>';}else{echo $text['title'];} ?></a></span><?php echo $nbsp; ?>
                     <?php if($text['count']>0):?><span class="trCount"> <?php echo ($text['count']>1)?__("(%1\$s Translations)",$text['count']):__("(%1\$s Translation)",$text['count']);?></span><? endif; ?>
                 </li>
 <?php       } ?>
@@ -36,26 +36,18 @@ foreach ($this->entries as $lang=>$authors) { ?>
         </ul></li>
 <?php } ?>
 </ul>
-          
-<dl>
-    <!-- Loop through the entries that were provided to us by the controller -->
-    <?php foreach ($this->entries as $entry): ?>
-    <dt><a href="<?php echo $this->url(
-            array('controller'=>'work','action'=>'read','id'=>$entry['id'])) ?>">
-                         <?php echo $this->escape($entry->title) ?></a></dt>
-  <?php endforeach ?>
-</dl>
 </td>
 
 <td class="news hundred">
     <div class="news-paragraph"><div class="news-title"><?php echo __("New translations in %1\$s",__($this->newsLang));?></div>
-    <?php if(!empty($this->news)):
+    <?php if(!empty($this->news)):?><ul class = "new-translation"><?php 
         foreach($this->news as $key=> $item): ?>
-            <ul class = "new-translation"><li><a href = "<?php echo $this->url(
-            array('controller'=>'translation','action'=>'read','id'=>$item['tr_id'])) ?>">
+            <li><a href = "<?php echo $this->url(
+            array('controller'=>'translation','action'=>'read','id'=>$item['tr_id'])) ?>"
+            <?php if($item['rtl']==1) echo 'dir="rtl"'?> >
             <?php echo $item['orig_title']; ?></a>
-            </li></ul>
-        <?php endforeach; endif;?>
+            </li>
+        <?php endforeach; ?></ul><?php endif;?>
     </div>
 </td>
 </tr>
