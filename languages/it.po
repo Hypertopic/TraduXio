@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-18 16:59+0100\n"
+"POT-Creation-Date: 2010-12-16 10:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -52,69 +52,69 @@ msgstr "Anonimo"
 msgid "Work Id %1$s does not exist or you don't have the rights to see it "
 msgstr "L'opera con id %1$s non esiste o non si possiede il diritto di vederla"
 
-#: controllers/WorkController.php:209
+#: controllers/WorkController.php:210
 #, php-format
 msgid "Couldn't find work %1$d"
 msgstr "Opera %1$d non trovata"
 
-#: controllers/WorkController.php:264
+#: controllers/WorkController.php:265
 msgid "Remove Privilege"
 msgstr "Elimina Privilegio"
 
-#: controllers/WorkController.php:285
+#: controllers/WorkController.php:286
 #: forms/AddPrivilege.php:68
 msgid "Add Privilege"
 msgstr "Aggiungi Privilegio"
 
-#: controllers/WorkController.php:292
+#: controllers/WorkController.php:293
 msgid "The privilege was not added because it already exists"
 msgstr "Il privilegio non è stato aggiunto perché è già presente."
 
-#: controllers/WorkController.php:296
+#: controllers/WorkController.php:297
 msgid "Switch to Standard Privileges"
 msgstr "Passa ai PRIVILEGI STANDARD"
 
-#: controllers/WorkController.php:307
+#: controllers/WorkController.php:308
 #: forms/TranslationEdit.php:85
 #: forms/WorkEdit.php:78
 msgid "Save"
 msgstr "Salva"
 
-#: controllers/WorkController.php:316
+#: controllers/WorkController.php:317
 msgid "Switch to Custom Privileges"
 msgstr "Passa ai PRIVILEGI PERSONALIZZATI"
 
-#: controllers/WorkController.php:372
+#: controllers/WorkController.php:373
 #, php-format
 msgid "%1$s, text modified by %2$s"
 msgstr "%1$s: il testo è stato modificato da %2$s"
 
-#: controllers/WorkController.php:373
+#: controllers/WorkController.php:374
 #, php-format
 msgid "%1$s, text extended by %2$s"
 msgstr "%1$s: un nuovo blocco di testo è stato aggiunto da %2$s"
 
-#: controllers/WorkController.php:374
+#: controllers/WorkController.php:375
 #, php-format
 msgid "%1$s, translation of %2$s, modified by %3$s"
 msgstr "%1$s, traduzione di %2$s, è stato modificato da %3$s"
 
-#: controllers/WorkController.php:375
+#: controllers/WorkController.php:376
 #, php-format
 msgid "New tag [%2$s:%1$s] for the text %3$s added by %4$s"
 msgstr "[%2$s:%1$s]: un nuovo tag per il testo %3$s è stato aggiunto da %4$s"
 
-#: controllers/WorkController.php:376
+#: controllers/WorkController.php:377
 #, php-format
 msgid "Removed tag [%2$s:%1$s] from the text %3$s by %4$s"
 msgstr "Il tag [%2$s:%1$s] del testo %3$s è stato rimosso da %4$s"
 
-#: controllers/WorkController.php:377
+#: controllers/WorkController.php:378
 #, php-format
 msgid "%1$s, new text added by %2$s"
 msgstr "%1$s: un nuovo testo è stato inserito da %2$s"
 
-#: controllers/WorkController.php:378
+#: controllers/WorkController.php:379
 #, php-format
 msgid "%1$s, new translation of %2$s added by %3$s"
 msgstr "%1$s: una nuova traduzione di %2$s è stata aggiunta da %3$s"
@@ -286,30 +286,30 @@ msgstr "un tag è stato rimosso"
 msgid "text created"
 msgstr "creazione del testo"
 
-#: models/Work.php:360
+#: models/Work.php:381
 msgid "All users are allowed to do everything for this text"
 msgstr "Tutti gli utenti sono autorizzati a fare tutto su questo testo"
 
-#: models/Work.php:362
+#: models/Work.php:383
 #, php-format
 msgid "All users are allowed to %1$s this text"
 msgstr "Tutti gli utenti sono autorizzati a %1$s questo testo"
 
-#: models/Work.php:365
+#: models/Work.php:386
 msgid "All members are allowed to do everything for this text"
 msgstr "Tutti gli utenti sono autorizzati a fare tutto su questo testo"
 
-#: models/Work.php:367
+#: models/Work.php:388
 #, php-format
 msgid "All members are allowed to %1$s this text"
 msgstr "Tutti gli utenti sono autorizzati a %1$s questo testo"
 
-#: models/Work.php:370
+#: models/Work.php:391
 #, php-format
 msgid "User %1$s is allowed to do everything for this text"
 msgstr "L'utente %1$s è autorizzato a fare tutto su questo testo"
 
-#: models/Work.php:372
+#: models/Work.php:393
 #, php-format
 msgid "User %1$s is allowed to %2$s this text"
 msgstr "L'utente %1$s è autorizzato a %2$s questo testo"
@@ -319,6 +319,7 @@ msgid "Welcome"
 msgstr "Benvenuto"
 
 #: views/helpers/ProfileLink.php:9
+#: layouts/scripts/layout.phtml:51
 msgid "Logout"
 msgstr "Esci"
 
@@ -2109,7 +2110,7 @@ msgstr "Mie Traduzioni"
 msgid "Concorder"
 msgstr "Ricerca"
 
-#: layouts/scripts/layout.phtml:65
+#: layouts/scripts/layout.phtml:71
 #, php-format
 msgid "The application %1$s has been developed by the %2$s association and the %3$s laboratory, supported by %4$s and by the %5$s."
 msgstr "L'applicazione %1$s é sviluppata dall'associazione %2$s e dal laboratorio %3$s, con il supporto dell'%4$s e dell'%5$s."
@@ -2147,7 +2148,7 @@ msgid "Add a new permission"
 msgstr "Aggiungi nuovi permessi"
 
 #: views/scripts/work/manage.phtml:43
-#: views/scripts/work/extend.phtml:27
+#: views/scripts/work/extend.phtml:29
 msgid "PAGETITLE_Continue text insertion"
 msgstr "Continua l'inserimento del testo"
 
@@ -2175,9 +2176,41 @@ msgstr "Questo testo sarà automaticamente considerato privato.&nbsp; Nessuno po
 msgid "PAGETITLE_Deposit a new text"
 msgstr "Depositare un nuovo testo"
 
-#: views/scripts/work/extend.phtml:19
+#: views/scripts/work/extend.phtml:21
 msgid "Last segment of the text"
 msgstr "Ultimo segmento del testo"
+
+#: views/scripts/work/indextemp.phtml:13
+#: views/scripts/work/index.phtml:13
+msgid "HOMEPAGE PHRASE"
+msgstr "Dal punto di vista della comunità, il linguaggio non è soltanto un fatto sociale , [...] è invece [...] il fondamento di ogni associazione umana."
+
+#: views/scripts/work/indextemp.phtml:14
+msgid "Translating cultural texts"
+msgstr "Traduzione di testi culturali"
+
+#: views/scripts/work/indextemp.phtml:34
+#: views/scripts/work/index.phtml:31
+#, php-format
+msgid "(%1$s Translations)"
+msgstr "(%1$s Traduzioni)"
+
+#: views/scripts/work/indextemp.phtml:34
+#: views/scripts/work/index.phtml:31
+#, php-format
+msgid "(%1$s Translation)"
+msgstr "(%1$s Traduzione)"
+
+#: views/scripts/work/indextemp.phtml:55
+#: views/scripts/work/index.phtml:42
+#, php-format
+msgid "New translations in %1$s"
+msgstr "Nuove traduzioni in %1$s"
+
+#: views/scripts/work/indextemp.phtml:68
+#: views/scripts/work/index.phtml:56
+msgid "PAGETITLE_Homepage"
+msgstr "Pagina Principale"
 
 #: views/scripts/work/my.phtml:3
 msgid "My translations"
@@ -2190,33 +2223,6 @@ msgstr "Non é stata inserita nessuna traduzione del testo"
 #: views/scripts/work/my.phtml:24
 msgid "PAGETITLE_My translations"
 msgstr "Le mie traduzioni"
-
-#: views/scripts/work/index.phtml:13
-msgid "HOMEPAGE PHRASE"
-msgstr "Dal punto di vista della comunità, il linguaggio non è soltanto un fatto sociale , [...] è invece [...] il fondamento di ogni associazione umana."
-
-#: views/scripts/work/index.phtml:14
-msgid "Translating cultural texts"
-msgstr "Traduzione di testi culturali"
-
-#: views/scripts/work/index.phtml:31
-#, php-format
-msgid "(%1$s Translations)"
-msgstr "(%1$s Traduzioni)"
-
-#: views/scripts/work/index.phtml:31
-#, php-format
-msgid "(%1$s Translation)"
-msgstr "(%1$s Traduzione)"
-
-#: views/scripts/work/index.phtml:51
-#, php-format
-msgid "New translations in %1$s"
-msgstr "Nuove traduzioni in %1$s"
-
-#: views/scripts/work/index.phtml:64
-msgid "PAGETITLE_Homepage"
-msgstr "Pagina Principale"
 
 #: views/scripts/work/translate.phtml:25
 msgid "PAGETITLE_Create Translation of"
@@ -2240,43 +2246,43 @@ msgstr "Non avete i diritti necessari. Effettuate l'accesso"
 msgid "You can't delete this text because it has some translations. Delete its translations first."
 msgstr "Questo testo possiede delle traduzioni. Per poter eliminare un testo se ne devono eliminare tutte le traduzioni."
 
-#: views/scripts/work/read.phtml:28
+#: views/scripts/work/read.phtml:29
 #: views/scripts/translation/read.phtml:3
 msgid "Options"
 msgstr "Opzioni"
 
-#: views/scripts/work/read.phtml:31
+#: views/scripts/work/read.phtml:32
 msgid "Create a translation"
 msgstr "Crea una traduzione"
 
-#: views/scripts/work/read.phtml:37
+#: views/scripts/work/read.phtml:38
 msgid "Continue text insertion"
 msgstr "Continua l'inserimento del testo"
 
-#: views/scripts/work/read.phtml:38
+#: views/scripts/work/read.phtml:39
 msgid "Edit the text"
 msgstr "Modifica il testo"
 
-#: views/scripts/work/read.phtml:46
+#: views/scripts/work/read.phtml:47
 #: views/scripts/translation/read.phtml:21
 msgid "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
 msgstr "ATTENZIONE! La rimozione sarà definitiva! Si è sicuri di voler eliminare questo testo?"
 
-#: views/scripts/work/read.phtml:49
+#: views/scripts/work/read.phtml:50
 msgid "Delete this text"
 msgstr "Elimina questo testo"
 
-#: views/scripts/work/read.phtml:99
-#: views/scripts/translation/read.phtml:213
-#: views/scripts/translation/read.phtml:218
+#: views/scripts/work/read.phtml:100
+#: views/scripts/translation/read.phtml:217
+#: views/scripts/translation/read.phtml:222
 msgid "Text inserted by"
 msgstr "Testo inserito da"
 
-#: views/scripts/work/read.phtml:108
+#: views/scripts/work/read.phtml:109
 msgid "PAGETITLE_Read text"
 msgstr "Leggi il testo"
 
-#: views/scripts/translation/edit.phtml:212
+#: views/scripts/translation/edit.phtml:215
 msgid "PAGETITLE_Edit translation"
 msgstr "Modifica traduzione"
 
@@ -2296,7 +2302,7 @@ msgstr "Modifica questa traduzione"
 msgid "Delete this translation"
 msgstr "Elimina questa traduzione"
 
-#: views/scripts/translation/read.phtml:238
+#: views/scripts/translation/read.phtml:242
 msgid "PAGETITLE_Read translation"
 msgstr "Leggi la traduzione"
 
@@ -2333,6 +2339,7 @@ msgid "PAGETITLE_Access denied"
 msgstr "Accesso vietato"
 
 #: views/scripts/index/tutorial.phtml:139
+#: views/scripts/index/faq.phtml:139
 msgid "PAGETITLE_Tutorial"
 msgstr "Come usare Traduxio"
 
@@ -2340,10 +2347,39 @@ msgstr "Come usare Traduxio"
 msgid "PAGETITLE_About Traduxio"
 msgstr "A proposito di Traduxio"
 
+#: views/scripts/index/index.phtml:2
+msgid "Register"
+msgstr "Iscriversi"
+
+#: views/scripts/index/index.phtml:3
+msgid "Invite"
+msgstr "Invitare"
+
+#: views/scripts/index/index.phtml:4
+msgid "FAQ"
+msgstr "FAQ"
+
+#: views/scripts/index/index.phtml:5
+msgid "About Traduxio"
+msgstr "A proposito di Traduxio"
+
+#: views/scripts/index/index.phtml:8
+msgid "indexlogoEN"
+msgstr "indexlogoIT"
+
 #: views/scripts/index/feedback.phtml:16
+#: views/scripts/index/register.phtml:19
 msgid "PAGETITLE_Contact us"
 msgstr "Contattaci"
 
+#: views/scripts/index/register.phtml:3
+msgid "REGISTRATION_PHRASE"
+msgstr "Per iscriverti a TraduXio devi essere invitato da un membro della comunità. <br>Inserisci il tuo nome, cognome ed email e dicci qual è il tuo interesse per TraduXio.<br>Ti manderemo subito un invito ad unirti alla comunità!"
+
+#~ msgid "TRADUXIO_DEFINITION"
+#~ msgstr "l'ambiente per i traduttori di testi culturali"
+#~ msgid "TraduXio: an environment for translators of cultural texts"
+#~ msgstr "TraduXio: un ambiente per i traduttori di testi culturali"
 #~ msgid "New text"
 #~ msgstr "Nuovo Testo"
 #~ msgid "Help"

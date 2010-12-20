@@ -35,6 +35,7 @@ body
 }
 .highlight {
     font-weight:bold;
+    color:#ffffff;
 }
 td.logo{
     width:300px;
@@ -215,11 +216,20 @@ div.citation span.author {
     display:block;
     text-align:right;
 }
+
+div#traduxio{
+    font-size:2em;
+    font-weight:bold;
+    text-align:left;
+    margin: 30px 0 10px 50px;
+}
 div.site-title {
     font-size:2em;
     font-weight:bold;
-    text-align:right;
+    text-align:left;
+    margin: 10px 0 30px 100px;
 }
+
 div#searchbar {
 text-align:right;
 -moz-background-clip:border;
@@ -250,7 +260,7 @@ border:3px solid #DEDEDE;
 padding-left:20px;
 margin:15px 0px;
 }
-div#tutorial {
+div.tutorial {
 margin:30px auto;
 text-align:left;
 width:90%;
@@ -835,11 +845,14 @@ font-family: Comic Sans MS,Verdana,Arial,Helvetica,sans-serif;
     height:50px;
 }*/
 
-div#gray-page-title{
+.page-title, div#gray-page-title{
     font-size:1.8em;
-    color:#a0a0a0;
     margin:20px 20px 30px 20px;
 }
+div#gray-page-title{
+    color:#a0a0a0;
+}
+
 #autogrow_shadow {
     border:1px solid;
     left:-10000px;
@@ -1021,7 +1034,7 @@ text-align:center;
 }
 
 div.comment{
-color:#A0A0A0;
+color:#707070;
 font-style:italic;
 font-size:1.2em;
 margin: 10px 0px;
@@ -1147,3 +1160,94 @@ tr.dark{background-color:#585858;}
 tr.tag-line{vertical-align:top;}
 td div.show-tag-area{padding-left:0px;}
 .rminus1{margin-right:-1px;}
+
+
+#home-logo{
+margin:50px 10px;
+/*background-image:url(../images/ls3.png);
+background-image:url(../images/tralogo1.png);
+background-repeat:no-repeat;*/
+text-align:center;
+}
+
+img.home-logo{
+
+}
+
+.lightimage{
+margin-top:20px;
+margin-bottom:20px;
+margin-left:50px;
+/*height:80px;*/
+width:200px;
+height:30px;
+color:#555;
+font-size:20px;
+/*border-style:ridge;*/
+background: transparent url(../images/buttonlight.png) no-repeat scroll;
+vertical-align:middle;
+text-align:center;
+}
+
+#register{
+background-position: -50px -20px;
+}
+
+#invite{
+background-position: -50px -70px;
+}
+
+#faq{
+background-position: -50px -120px;
+}
+
+#plus{
+background-position: -50px -170px;
+}
+
+#letters{
+background: transparent url(../images/buttondark.png) no-repeat ;
+float:right;
+width:300px;
+text-align:center;
+margin-left:10px;
+margin-right:20px;
+}
+
+
+.tutorial-text{
+list-style:decimal;
+list-style-position:inside;
+}
+
+.question{
+font-size:1.3em;
+font-style:bolder;
+}
+
+.answer{
+padding:10px 20px;
+}
+
+
+#int,#comp,#par{
+font-size:40px;
+}
+
+#comp{
+padding:10px 10px 20px 30px;
+}
+
+#par{
+padding:170px 0px 0px 500px;
+}
+#int{
+padding:150px 10px 20px 0px;
+}
+
+#phrase{
+padding:250px 80px 0 0px;
+font-size: 1.6em;
+font-family:Arial;
+text-align:right;
+}

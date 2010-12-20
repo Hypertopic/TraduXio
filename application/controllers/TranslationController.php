@@ -329,7 +329,8 @@ class TranslationController extends Tdxio_Controller_Abstract
             case 'read': 
                 $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');  
                 break;  
-            case 'concord': break;
+            case 'concord': 
+            case 'search':  
             default:$rule = 'noAction';
         }               
         return $rule;
