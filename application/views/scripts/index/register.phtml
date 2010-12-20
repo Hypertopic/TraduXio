@@ -1,0 +1,26 @@
+<div class="gray-square">
+<div class="tutorial-title"><?php echo __("Registration"); ?></div>
+
+<div id="margin">
+
+<div class="comment centered">
+<?php if ($this->sent) : ?>
+<?php echo __("Your invitation request has been successfully sent; thank you for your interest, we will answer you as soon as possible.
+<br/>The <i>Traduxio</i> team.</p>"); ?>
+<?php else :?>
+<?php if ($this->error) : ?>
+<?php echo __("We encountered an error sending your message. Here is the error message : <i><?php echo $this->error; ?></i>.
+Sorry for the inconvenience, we're trying hard to fix it.
+<br/>The <i>Traduxio</i> team.</p>"); ?>
+<?php else :?>
+<?php echo __("REGISTRATION_PHRASE");  ?>
+<?php endif; ?>
+</div>
+
+<?php echo $this->form->render() ?>
+<?php endif;?>
+</div>
+</div>
+
+
+<?php $this->page_title=__("Register"); ?>
