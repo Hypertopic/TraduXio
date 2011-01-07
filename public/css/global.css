@@ -1161,14 +1161,14 @@ tr.tag-line{vertical-align:top;}
 td div.show-tag-area{padding-left:0px;}
 .rminus1{margin-right:-1px;}
 
-
+/*
 #home-logo{
 margin:50px 10px;
-/*background-image:url(../images/ls3.png);
+background-image:url(../images/ls3.png);
 background-image:url(../images/tralogo1.png);
-background-repeat:no-repeat;*/
+background-repeat:no-repeat;
 text-align:center;
-}
+}*/
 
 img.home-logo{
 
@@ -1251,3 +1251,28 @@ font-size: 1.6em;
 font-family:Arial;
 text-align:right;
 }
+
+div#traduxio_logo{
+margin:100px 20px 30px 200px;
+text-align:left;
+vertical-align:top;
+
+}
+
+div#logo_cip{
+text-align:center;
+margin-top:60px;
+margin-bottom:100px;
+}
+
+div#letters2{
+float:right;
+width:300px;
+}
+
+.indexopt{
+margin:0 20px 20px 20px;
+color:#99AAFF;
+font-size:20px;
+}
+

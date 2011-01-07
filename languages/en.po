@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-16 10:08+0100\n"
+"POT-Creation-Date: 2011-01-07 14:55+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -183,20 +183,32 @@ msgid "Subject"
 msgstr "Subject"
 
 #: forms/Feedback.php:51
+#: forms/Register.php:60
 msgid "Your email address"
 msgstr "Your email address"
 
 #: forms/Feedback.php:69
+#: forms/Register.php:69
 msgid "Your message"
 msgstr "Your message"
 
 #: forms/Feedback.php:78
+#: forms/Register.php:78
 msgid "Please verify you're a human"
 msgstr "Please verify you're a human"
 
 #: forms/Feedback.php:88
+#: forms/Register.php:88
 msgid "Send"
 msgstr "Send"
+
+#: forms/Register.php:46
+msgid "Your name"
+msgstr "Your name"
+
+#: forms/Register.php:53
+msgid "Your surname"
+msgstr "Your surname"
 
 #: forms/TextExtend.php:41
 msgid "Text to add"
@@ -2160,7 +2172,6 @@ msgid "Add a new permission"
 msgstr "Add a new permission"
 
 #: views/scripts/work/manage.phtml:43
-#: views/scripts/work/extend.phtml:29
 msgid "PAGETITLE_Continue text insertion"
 msgstr "Continue text insertion"
 
@@ -2351,7 +2362,6 @@ msgid "PAGETITLE_Access denied"
 msgstr "Access denied"
 
 #: views/scripts/index/tutorial.phtml:139
-#: views/scripts/index/faq.phtml:139
 msgid "PAGETITLE_Tutorial"
 msgstr "Tutorial"
 
@@ -2359,32 +2369,61 @@ msgstr "Tutorial"
 msgid "PAGETITLE_About Traduxio"
 msgstr "About Traduxio"
 
-#: views/scripts/index/index.phtml:2
+#: views/scripts/index/faq.phtml:29
+msgid "Frequently Asked Questions"
+msgstr "Frequently Asked Questions"
+
+#: views/scripts/index/index.phtml:3
+msgid "traduxio_en"
+msgstr "traduxio_en"
+
+#: views/scripts/index/index.phtml:3
+msgid "logoEN"
+msgstr "logoEN"
+
+#: views/scripts/index/index.phtml:5
+#: views/scripts/index/register.phtml:26
+#: views/scripts/index/index1.phtml:2
 msgid "Register"
 msgstr "Register"
 
-#: views/scripts/index/index.phtml:3
+#: views/scripts/index/index.phtml:6
+#: views/scripts/index/index1.phtml:3
 msgid "Invite"
 msgstr "Invite"
 
-#: views/scripts/index/index.phtml:4
+#: views/scripts/index/index.phtml:7
+#: views/scripts/index/index1.phtml:4
 msgid "FAQ"
 msgstr "FAQ"
 
-#: views/scripts/index/index.phtml:5
+#: views/scripts/index/index.phtml:8
+#: views/scripts/index/index1.phtml:5
 msgid "About Traduxio"
 msgstr "About Traduxio"
 
-#: views/scripts/index/index.phtml:8
+#: views/scripts/index/index.phtml:15
+#: views/scripts/index/index1.phtml:11
 msgid "indexlogoEN"
 msgstr "indexlogoEN"
 
 #: views/scripts/index/feedback.phtml:16
-#: views/scripts/index/register.phtml:19
 msgid "PAGETITLE_Contact us"
 msgstr "Contact us"
 
-#: views/scripts/index/register.phtml:3
+#: views/scripts/index/register.phtml:2
+msgid "Registration"
+msgstr "Registration"
+
+#: views/scripts/index/register.phtml:8
+msgid ""
+"Your invitation request has been successfully sent; thank you for your interest, we will answer you as soon as possible.\n"
+"<br/>The <i>Traduxio</i> team.</p>"
+msgstr ""
+"Your invitation request has been successfully sent; thank you for your interest, we will answer you as soon as possible.\n"
+"<br/>The <i>Traduxio</i> team.</p>"
+
+#: views/scripts/index/register.phtml:16
 msgid "REGISTRATION_PHRASE"
 msgstr "In order to register to TraduXio, you must be invited by a member of the community.<br>Fill the form with your name, surname and email and tell us why you're interested into TraduXio.<br>An invitation will be sent to you soon."
 
