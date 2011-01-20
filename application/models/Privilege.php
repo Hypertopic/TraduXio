@@ -95,8 +95,9 @@ class Model_Privilege extends Model_Abstract
         if(!is_null($privilege['work_id']))
             $select->where('(work_id = ?', $privilege['work_id'])->orWhere('work_id is NULL)');
         
-        if(!is_null($privilege['visibility']))
-            $select->where('(visibility = ?', $privilege['visibility'])->orWhere('visibility is NULL)');
+        if(array_key_exists('visibility',$privilege))
+            if(!is_null($privilege['visibility']))
+                $select->where('(visibility = ?', $privilege['visibility'])->orWhere('visibility is NULL)');
         
         Tdxio_Log::info($select->__toString(),"risultato query");
         

@@ -37,6 +37,10 @@ body
     font-weight:bold;
     color:#ffffff;
 }
+
+.search-highlight {
+    font-weight:bold;
+}
 td.logo{
     width:300px;
 }
@@ -147,7 +151,6 @@ width:200px;
 
 div.left-section {
 background-color:#585858;
-background-image:url(../images/vert-line-menu.png);
 border-color: #ffffff;
 border:2px 0 2px 2px;
 border-style:solid;
@@ -1208,9 +1211,10 @@ padding:10px 20px;
 }
 
 div#traduxio_logo{
-margin:30px 20px 20px 100px;
-text-align:left;
+margin:30px 20px 20px 1%;
+text-align:right;
 vertical-align:top;
+width:400px;
 }
 
 div#logo_cip{
@@ -1224,8 +1228,14 @@ width:300px;
 }
 
 .indexopt{
-margin:0 20px 20px 20px;
+margin:0 20px 15px 20px;
 color:#99AAFF;
 font-size:20px;
 }
 
+a#insert-text{
+color:#A5A5A5;
+font-weight:bold;
+font-size:1.2em;
+margin-left:30px;
+}

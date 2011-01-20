@@ -57,7 +57,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
                     'role' => $this->_role,
                     'privilege'=> $rule['privilege'],
                     'work_id' => $rule['work_id'],
-                    'visibility' => $rule['visibility']
+                    'visibility' => (array_key_exists('visibility',$rule))?$rule['visibility']:null
         );
         Tdxio_Log::info($privilege,'privilegio');
         $view->showEdit=false;
