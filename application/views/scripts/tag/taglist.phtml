@@ -1,0 +1,21 @@
+<?php
+?>
+<?php if(!empty($this->tags)): ?>
+<?php foreach($this->tags as $genre=>$names): ?>
+<div class="tag-group" id="group-<?php echo $genre?>">
+<span class="genre" id="<?php echo $genre?>"><?php echo __($this->genres[$genre]); ?></span>
+<?php foreach($names as $name=>$tag): ?>
+<span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>"> <!--style="font-size:<?php //echo 8+round($tag['multiplicity']*7) ?>px"--> <?php echo $name; ?>
+<?php $canRemove = false;?>
+<?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
+<?php if($canRemove): ?>
+    <!--<a class="delete" id="<?php// echo $genre.'-'.$name?>" href="<?php //echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->workid,'tag'=>$name,'genre'=>$genre))?>"> X </a>-->
+    <a class="delete" id="<?php echo $genre.'-'.$name?>" onmouseover="this.style.cursor= 'pointer'"> X </a>
+<?php endif; ?>
+</span>
+<?php endforeach; ?>
+</div>
+<?php endforeach; ?>
+<?php endif; ?>
+
+

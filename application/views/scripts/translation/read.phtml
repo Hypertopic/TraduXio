@@ -1,3 +1,5 @@
+<?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
+
 <div id="LRcontainer">
 <div class="left-menu">
 <div class="left-section"><?php echo __('Options'); ?></div>
@@ -59,7 +61,7 @@
 </div></td>
 <td class="w21"></td>
 <td class="w21"></td>
-<td><div class="show-tag-area">
+<td><div class="show-tag-area" id="show-tag-ajax">
 <?php if(!empty($this->translation['Tags'])): ?>
         <?php foreach($this->translation['Tags'] as $genre=>$names): ?>  
         <div class="tag-group">

@@ -1,5 +1,8 @@
+<?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
+
 <div id="LRcontainer">
 <div class="left-menu">
+<?php $flag = 0; ?>
 <?php if(!empty($this->work['Interpretations'])): ?>
 
     <?php foreach($this->work['Interpretations'] as $translation): ?>
@@ -57,26 +60,10 @@ $HTmessage = __("You can't delete this text because it has some translations. De
 <?php if($this->canTag){echo $this->tagForm; } ?>
 </div>
 
-
 <!--<td id = "right-column">-->
 <div class="right-container">
- <div class="show-tag-area">
-        <?php if(!empty($this->work['Tags'])): ?>
-        <?php foreach($this->work['Tags'] as $genre=>$names): ?>
-        <div class="tag-group">
-        <span class="genre"><?php echo __($this->work['Genres'][$genre]); ?></span>
-        <?php foreach($names as $name=>$tag): ?>
-        <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>"> <!--style="font-size:<?php //echo 8+round($tag['multiplicity']*7) ?>px"--> <?php echo $name; ?>
-        <?php $canRemove = false;?>
-        <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
-        <?php if($canRemove): ?>
-            <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->work['id'],'tag'=>$name,'genre'=>$genre))?>"> X </a>
-        <?php endif; ?>
-        </span>
-        <?php endforeach; ?>
-        </div>
-        <?php endforeach; ?>
-        <?php endif; ?>
+    <div class="show-tag-area" id="show-tag-ajax">
+        <?php echo $this->tagbody ?>
     </div>
 
 <div id = "page-container">

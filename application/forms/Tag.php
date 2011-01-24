@@ -35,7 +35,7 @@ class Form_Tag extends Form_Abstract
     public function init()
     {
         // set the method for the display form to POST
-        $this->setMethod('post');
+        //$this->setMethod('post');//comment for ajax
 
         $tag=$this->createElement('text','tag_comment',array(
             'decorators' => array('ViewHelper','Errors','Description','Label'),
@@ -61,7 +61,7 @@ class Form_Tag extends Form_Abstract
         ));
 
         $this->addDisplayGroup(array('tag_comment','tag_genre','tag_button'), 'tag_group');
-        
+        $this->setAttrib('id','tagform');
     }
     
     public function _getGenres(){

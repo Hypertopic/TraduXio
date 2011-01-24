@@ -134,6 +134,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         if(is_null($showBlocks)) $showBlocks = 1;
         
         $tagForm = new Form_Tag();
+/*
         if ($this->getRequest()->isPost()) {
         
             if ($tagForm->isValid($this->getRequest()->getPost())) {
@@ -143,6 +144,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                 return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$translationId,'genre'=>$data['tag_genre'],'tag'=>$data['tag_comment']));
             }
         }
+*/
         
         $this->view->otherTranslations = $translation['OriginalWork']['Interpretations'];
         $workModel = new Model_Work();

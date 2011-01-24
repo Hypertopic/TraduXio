@@ -12,6 +12,7 @@
   <?php echo $this->headLink(); ?>
   <?php $this->headScript()->prependScript("tdxio.baseUrl='".$this->makeUrl('',true)."';"); ?>
   <?php $this->headScript()->prependFile($this->makeUrl('/js/tdxio.js')); ?>
+  <?php $this->headScript()->prependFile($this->makeUrl('/js/lib/jquery.form.js')); ?>
   <?php $this->headScript()->prependFile($this->makeUrl('/js/lib/jquery.min.js')); ?>
   <?php echo $this->headScript(); ?>
   

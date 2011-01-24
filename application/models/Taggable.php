@@ -47,7 +47,8 @@ class Model_Taggable extends Model_Abstract
         Tdxio_Log::info($data,'gigigi');
         $select = $tagTable->select()
                             ->where('"comment" = ?',$data['comment'])->where('taggable = ? ',$data['taggable'])
-                            ->where('"user" = ?',$data['user'])->where('genre = ? ',$data['genre']);
+                            //->where('"user" = ?',$data['user'])->where('genre = ? ',$data['genre']);
+                            ->where('genre = ? ',$data['genre']);
         Tdxio_Log::info($select->__toString(),'selecttostring');
         $result = $tagTable->fetchRow($select);
         Tdxio_Log::info($result,'bidibodo');
@@ -55,7 +56,8 @@ class Model_Taggable extends Model_Abstract
         }else{
             $newId = $tagTable->insert($data);
         }
-        
+        $response = array('outcome'=>true,'message'=>null);
+        return $response;        //da verificare
     }   
     
     public function deleteTag($username,$taggableId,$tag,$genre){
@@ -66,7 +68,13 @@ class Model_Taggable extends Model_Abstract
             $where[] = $tagTable->getAdapter()->quoteInto('"comment" = ?',$tag);
             $where[] = $tagTable->getAdapter()->quoteInto('genre = ?',$genre);
             Tdxio_Log::info($where,'whereee');
-            return $tagTable->delete($where);           
+            $tagTable->delete($where); 
+            
+            $select = $tagTable->select()->where('taggable = ?',$taggableId)->where('genre=?',$genre);
+            $remainingTags = $tagTable->fetchAll($select)->toArray();
+            Tdxio_Log::info($remainingTags,'iriss');
+            return empty($remainingTags);
+                      
         }
         throw new Zend_Exception(__('Not enough parameters to delete a tag'));           
     }
