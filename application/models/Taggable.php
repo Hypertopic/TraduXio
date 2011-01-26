@@ -14,14 +14,24 @@ class Model_Taggable extends Model_Abstract
 
     protected $_tableClass = 'Taggable';
     
-
-    public function getTags($taggable_id){
+    public function getTags($taggable_id,$genre=null){
         $db = $this->_getTable()->getAdapter();
+        
+        Tdxio_Log::info($where,'ttdd');
         if(!is_array($taggable_id)){
-            $tags = $db->fetchAll($db->select()->from('tag')->where('taggable = ?',$taggable_id));
+            if(!is_null($genre)){
+                $tags = $db->fetchAll($db->select()->from('tag')->where('taggable = ?',$taggable_id)->where('genre = ?',$genre));
+            }else{           
+                $tags = $db->fetchAll($db->select()->from('tag')->where('taggable = ?',$taggable_id));
+            }
         }else{
-            $tags = $db->fetchAll($db->select()->from('tag')->where('taggable IN (?)',$taggable_id));
+            if(!is_null($genre)){
+                $tags = $db->fetchAll($db->select()->from('tag')->where('taggable IN (?)',$taggable_id)->where('genre = ?',$genre));
+            }else{           
+                $tags = $db->fetchAll($db->select()->from('tag')->where('taggable IN (?)',$taggable_id));
+            }
         }
+        
         Tdxio_Log::info($tags,'TaggableModel getTags');
         $genreModel = new Model_Genre();
         $genres=$genreModel->getGenres();
@@ -36,9 +46,11 @@ class Model_Taggable extends Model_Abstract
     }
     
     
+    
     public function tag($tag){
         
         $tagTable = new Model_DbTable_Tag;
+        $response = array();
         $data = array('taggable' => $tag['taggable_id'],
                       'user' => $tag['username'],
                       'genre' => $tag['genre'],
@@ -53,28 +65,24 @@ class Model_Taggable extends Model_Abstract
         $result = $tagTable->fetchRow($select);
         Tdxio_Log::info($result,'bidibodo');
         if(!empty($result)){
+            $response = array('outcome'=>false,'message'=>"The tag already exists.");
         }else{
             $newId = $tagTable->insert($data);
-        }
-        $response = array('outcome'=>true,'message'=>null);
-        return $response;        //da verificare
+            $response = array('outcome'=>true,'message'=>null,'newID'=>$newId);
+        }        
+        return $response;
     }   
     
-    public function deleteTag($username,$taggableId,$tag,$genre){
+    public function deleteTag($username,$tagId){
         $tagTable = new Model_DbTable_Tag();
-        if(!(is_null($username)||is_null($taggableId)||is_null($tag))){
+        if(!(is_null($username)||is_null($tagId))){
             $where[] = $tagTable->getAdapter()->quoteInto('"user" = ?',$username);
-            $where[] = $tagTable->getAdapter()->quoteInto('taggable = ?',$taggableId);
-            $where[] = $tagTable->getAdapter()->quoteInto('"comment" = ?',$tag);
-            $where[] = $tagTable->getAdapter()->quoteInto('genre = ?',$genre);
+            $where[] = $tagTable->getAdapter()->quoteInto('id = ?',$tagId);
             Tdxio_Log::info($where,'whereee');
-            $tagTable->delete($where); 
             
-            $select = $tagTable->select()->where('taggable = ?',$taggableId)->where('genre=?',$genre);
-            $remainingTags = $tagTable->fetchAll($select)->toArray();
-            Tdxio_Log::info($remainingTags,'iriss');
-            return empty($remainingTags);
-                      
+            return $tagTable->delete($where); 
+        }else{
+            return 0;
         }
         throw new Zend_Exception(__('Not enough parameters to delete a tag'));           
     }
@@ -90,6 +98,20 @@ class Model_Taggable extends Model_Abstract
     
 
     public function normalizeTags($tags){
+        $newtags=array();
+        
+        foreach($tags as $key=> $tag){
+            if(!isset($newtags[$tag['genre']]))
+            {   $newtags[$tag['genre']]=array();}
+            $newtags[$tag['genre']][]=$tag;
+        }
+        Tdxio_Log::info($newtags,'normalized tags new new');
+      
+        
+        return $newtags; 
+
+    }
+/*    public function normalizeTags($tags){
       
         $newtags=array();
         foreach($tags as $key=>$tag){
@@ -137,9 +159,9 @@ class Model_Taggable extends Model_Abstract
             $ntags[$key]['multiplicity']/=$maxMult;
         }
       return $ntags;
-      */
+      //here finished the inner comment
     }
-    
+*/    
     
     public function getNewModTags($user=null){
         $tagTable = new Model_DbTable_Tag();
@@ -163,5 +185,12 @@ class Model_Taggable extends Model_Abstract
         $results = $db->fetchAll($select);
         Tdxio_Log::info($results,'new tags');
         return $results;
+    }
+    
+    public function getTag($tagId){
+        $tagTable = new Model_DbTable_Tag();
+        $select = $tagTable->select()->where('id = ?',$tagId);
+        $result = $tagTable->fetchRow($select);
+        return $result;
     }
 }

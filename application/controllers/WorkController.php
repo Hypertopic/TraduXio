@@ -39,6 +39,7 @@ class WorkController extends Tdxio_Controller_Abstract
     {
         Tdxio_Log::info('flusso: 1 CONTROLLER INDEX');
         $work = $this->_getModel();
+        Tdxio_Log::info('not here');
         $entries = $work->fetchAllOriginalWorks();
         //Tdxio_Log::info($entries);
         $sort=array();
@@ -112,14 +113,7 @@ class WorkController extends Tdxio_Controller_Abstract
             return $this->_helper->redirector->gotoSimple('read','translation',null,array('id'=>$id));
         }
         Tdxio_Log::info($work,'work read');
-        /* Commented for js/ajax
-        if ($this->getRequest()->isPost()) {            
-            if ($tagForm->isValid($this->getRequest()->getPost())) {                
-                $data = $tagForm->getValues();                     
-                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$id,'genre'=>$data['tag_genre'],'tag'=>$data['tag_comment']));  
-            }
-        }*/
-        //test
+
         $taglist = new Zend_View();
         $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
         $taglist->assign('tags',$work['Tags']);
@@ -127,7 +121,6 @@ class WorkController extends Tdxio_Controller_Abstract
         $taglist->assign('workid',$work['id']);
         $taglist->assign('userid',$this->view->userid);
         $this->view->tagbody=$taglist->render('taglist.phtml');
-        //end test
         
         $this->view->hasTranslations=$model->hasTranslations($id);        
         $this->view->canTag = $model->isAllowed('tag',$id);

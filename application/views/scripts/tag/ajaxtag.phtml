@@ -2,15 +2,6 @@
 $this->layout()->setLayout('empty');
 $tags = array();
 $i=0; 
-/*
-foreach($this->tags as $index=>$tag)
-{
-    foreach($tag as $tag_value=>$tag_array){
-        $tags[$i] = array($index,$tag_value);
-        $i++;
-    }
-}
-$array=array('response'=>$this->response,'tags'=>$tags,'genres'=>$this->genres);*/
 $array=array('response'=>$this->response);
 Tdxio_Log::info(Zend_Json::encode($array),'dianazamb');
 echo Zend_Json::encode($array); 

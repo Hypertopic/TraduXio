@@ -49,11 +49,11 @@
 <td class="w21"></td>
 <td><div class="show-tag-area">
 <?php if(!empty($this->translation['OriginalWork']['Tags'])): ?>
-    <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$names): ?>
+    <?php foreach($this->translation['OriginalWork']['Tags'] as $genre=>$tags): ?>
         <div class="tag-group">
         <span class="genre"><?php echo __($this->translation['Genres'][$genre]); ?></span>
-        <?php foreach($names as $name=>$tag): ?>
-        <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name']));?>"><!-- style="font-size:<?php // echo 10+ round($tag['multiplicity']*7) ?>px"> --> <?php echo $name; ?></span>
+        <?php foreach($tags as $key=>$tag): ?>
+        <span class="tag-item" title="<?php echo __(strtolower($tag['genre_name']));?>"><?php echo $tag['comment']; ?></span>
         <?php endforeach; ?>
         </div>
     <?php endforeach; ?>
@@ -61,24 +61,11 @@
 </div></td>
 <td class="w21"></td>
 <td class="w21"></td>
-<td><div class="show-tag-area" id="show-tag-ajax">
-<?php if(!empty($this->translation['Tags'])): ?>
-        <?php foreach($this->translation['Tags'] as $genre=>$names): ?>  
-        <div class="tag-group">
-        <span class="genre"><?php echo __($this->translation['Genres'][$genre]); ?></span>
-        <?php foreach($names as $name=>$tag): ?>      
-            <span class="tag-item" title="<?php echo __(strtolower($tag[0]['genre_name'])); ?>" style="font-size:<?php echo 8+ round($tag['multiplicity']*7) ?>px"><?php echo $name; ?>
-            <?php $canRemove = false;?>
-            <?php foreach($tag as $key=>$elem) {if(is_array($elem)&&(!is_null($this->userid))&&(in_array($this->userid,$elem))){ $canRemove = true;} } ?>
-            <?php if($canRemove): ?>
-                <a class="delete" href="<?php echo $this->url(array('controller'=>'tag','action'=>'deletetag','id'=>$this->translation['id'],'tag'=>$name,'genre'=>$genre))?>"> X </a>
-            <?php endif; ?>
-            </span>
-        <?php endforeach; ?>        
-        </div>
-        <?php endforeach; ?>
-        <?php endif; ?>
-</div></td>
+<td>
+    <div class="show-tag-area" id="show-tag-ajax">
+        <?php echo $this->tagbody ?>
+    </div>
+</td>
 <td class="w21"></td>
 </tr>
 

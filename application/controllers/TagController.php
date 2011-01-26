@@ -50,15 +50,13 @@ class TagController extends Tdxio_Controller_Abstract
             $data = array('username'=> $user, 'taggable_id'=> $params['id'],'genre'=> $params['tag_genre'], 'comment' => $params['tag_comment']);
             $response = $model->tag($data);
             $tags = $model->getTags($params['id']);
-            $this->view->response=$response;            
-            $this->view->genres = $tags['Genres']; //as in model/Work.php
-            unset($tags['Genres']);//as in model/Work.php
-        /*
-            if(!empty($tags)){//as in model/Work.php
-                $this->view->tags = $model->normalizeTags($tags[$params['id']]);//as in model/Work.php
-            }//as in model/Work.php
-            Tdxio_Log::info($this->view->tags,'js tags');            
-            Tdxio_Log::info($this->view->genres,'js genres');            */
+            $this->view->response=$response;     
+            
+            if($response['outcome']==true){
+                $histModel = new Model_History();
+                Tdxio_Log::info('ADD HISTORY TAG');
+                $histModel->addHistory( $params['id'],3,array('tag'=>$params['tag_comment'],'genre'=>$params['tag_genre']));
+            }
         } else {
             Tdxio_Log('debug 1010');
             throw new Zend_Controller_Action_Exception('Incorrect query.', 500);
@@ -70,16 +68,21 @@ class TagController extends Tdxio_Controller_Abstract
         $username = Tdxio_Auth::getUserName();  
         $request=$this->getRequest();
         $taggableId=$request->getParam('id');
-        $tag=$request->getParam('tag');
+        $tagId=$request->getParam('tagid');
         $genre=$request->getParam('genre');
         $model= $this->_getModel();
-        $result = $model->deleteTag($username,$taggableId,$tag,$genre);
-        Tdxio_Log::info($result,'esito');
-        $this->view->last=$result;
-        $histModel = new Model_History();
-        $histModel->addHistory($taggableId,4,array('tag'=>$tag,'genre'=>$genre));   
-        //$this->_redirect($_SERVER['HTTP_REFERER']);
-   
+        $tag = $model->getTag($tagId);
+        $rowsAffected = $model->deleteTag($username,$tagId);
+        $this->view->response = ($rowsAffected>0);
+        Tdxio_Log::info($rowsAffected,'rows affected');
+        $result = $model->getTags($taggableId,$genre);
+        Tdxio_Log::info(empty($result[$taggableId]),'esito');
+        $this->view->last=empty($result[$taggableId]);
+        
+        if($rowsAffected>0){
+            $histModel = new Model_History();
+            $histModel->addHistory($taggableId,4,array('tag'=>$tag['comment'],'genre'=>$genre));   
+        }
     }
     
     public function getRule($request){

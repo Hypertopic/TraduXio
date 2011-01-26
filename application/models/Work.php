@@ -148,11 +148,13 @@ class Model_Work extends Model_Taggable
         if(!empty($tags)){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
         }
+        //$work['Tags'] = $tags[$work_id];
         return $work;
     }
 
     public function fetchAllOriginalWorks($idList=null)
     { 
+        Tdxio_Log::info('not even here');
         $table = $this->_getTable();
         $db = $table->getAdapter();
         $select = $db->select();

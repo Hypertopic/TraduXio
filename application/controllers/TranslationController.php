@@ -130,21 +130,19 @@ class TranslationController extends Tdxio_Controller_Abstract
         $request=$this->getRequest();
         $translationId=$request->getParam('id');
         $translation = $this->_getModel()->fetchTranslationWork($translationId);
+        Tdxio_Log::info($translation,'translation workk');
         $showBlocks=$request->getParam('sb');
         if(is_null($showBlocks)) $showBlocks = 1;
         
         $tagForm = new Form_Tag();
-/*
-        if ($this->getRequest()->isPost()) {
         
-            if ($tagForm->isValid($this->getRequest()->getPost())) {
-                
-                $data = $tagForm->getValues();
-                Tdxio_Log::info($data,'dati di tag');
-                return $this->_helper->redirector->gotoSimple('tag','tag',null,array('id'=>$translationId,'genre'=>$data['tag_genre'],'tag'=>$data['tag_comment']));
-            }
-        }
-*/
+        $taglist = new Zend_View();
+        $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+        $taglist->assign('tags',$translation['Tags']);
+        $taglist->assign('genres',$translation['Genres']);
+        $taglist->assign('workid',$translationId);
+        $taglist->assign('userid',$this->view->userid);
+        $this->view->tagbody=$taglist->render('taglist.phtml');
         
         $this->view->otherTranslations = $translation['OriginalWork']['Interpretations'];
         $workModel = new Model_Work();
