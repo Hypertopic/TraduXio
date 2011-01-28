@@ -28,15 +28,23 @@ class TranslationController extends Tdxio_Controller_Abstract
         // In the translation-edit page every user can see/remove only his tags
         $username=Tdxio_Auth::getUserName();
         Tdxio_Log::alert($work['Tags'],"tags da visualizzare in edit");
+        $tags=array();
         if(!empty($work['Tags'])){
-            $tags=array();
             foreach($work['Tags'] as $key=> $tag){
                 if(!($tag['user']== $username)){
                     unset($work['Tags'][$key]);
-                }else{$tags[$tag['genre_name']][]=$tag;}
+                }else{$tags[$tag['genre']][]=$tag;}
             }
         }
         $work['Tags']=$tags;
+        
+        $taglist = new Zend_View();
+        $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+        $taglist->assign('tags',$tags);
+        $taglist->assign('genres',$work['Genres']);
+        $taglist->assign('workid',$translationId);
+        $taglist->assign('userid',$this->view->userid);
+        $this->view->tagbody=$taglist->render('taglist.phtml');
                    
         if ($request->isPost()) {
             Tdxio_Log::info('REQUEST IS POST');
