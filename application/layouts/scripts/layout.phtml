@@ -63,22 +63,17 @@
          footer for all pages. -->
 
     <div class="footer">
-    <span class="footer-text">
-    <?php $traduxio = '<a href="'.$this->makeUrl('/index/index').'"><span class="highlight">TraduXio</span></a>';
-          $zanchin = '<span class="highlight">Zanchin</span>';
-          $techcico = '<span class="highlight">Tech-CICO</span>';
-          $unesco = '<span class="highlight">Unesco</span>';
-          $ifn = '<span class="highlight">Institut de la francophonie numérique</span>';
-          echo __("The application %1\$s has been developed by the %2\$s association and the %3\$s laboratory, supported by %4\$s and by the %5\$s.",$traduxio,$zanchin,$techcico,$unesco,$ifn);
-    ?>
+    <?php $traduxio = '<span class="highlight">TraduXio</span>';?>
+    <div id="faq-link"><a href="<?php echo $this->makeUrl('/index/faq'); ?>"><?php echo __("A propos de %1\$s",$traduxio);?></a></div>
+    <div id="copyright-link"><a href="<?php echo $this->makeUrl('/index/copyright'); ?>"><?php echo __("Droits d'auteur");?></a></div>
     
-    </span>
-        <a href="http://validator.w3.org/check?uri=referer">
+        <!--<a href="http://validator.w3.org/check?uri=referer">
         <img src="http://www.w3.org/Icons/valid-xhtml11-blue"
             alt="Valid XHTML 1.1"/></a>
         <a href="http://jigsaw.w3.org/css-validator/check/referer">
         <img src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
             alt="Valid CSS!" /></a>
+            -->
     </div>
          
 </body>

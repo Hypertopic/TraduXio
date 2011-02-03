@@ -34,6 +34,39 @@ class IndexController extends Tdxio_Controller_Abstract
     public function faqAction(){
     }
     
+    public function copyrightAction(){
+        
+        $request = $this->getRequest();
+        $form = new Form_Right();
+        
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $values=$form->getValues();
+                Tdxio_Log::info($values,'values cr');
+                $from = (!isset($values['emailaddress']))?'noreply@porphyry.org':$values['emailaddress'];
+                
+                $subject = "TraduXio: Copyright report ".(($values['error']==1)?"(Error) ":'').(($values['abuse']==1)?"(Abuse)":'');
+              $body = $subject."\n"."At the page: ".$values['url'];
+                if(isset($values['body'])){
+                    $body.=$values['body'];
+                }                
+                if(isset($values['username'])){
+                    $body.="\n \n Message sent by user ".$values['username'];
+                }
+                try {
+                    Tdxio_SendMail::sendFeedback($subject,$body,$from);
+                    $this->view->sent=true;
+                    $this->view->backUrl=$values['url'];
+                } catch (Exception $e) {
+                    $this->view->error=$e->getMessage();
+                }
+            }
+        }else{
+            $form->getElement('url')->setValue($_SERVER['HTTP_REFERER']);
+        }
+        $this->view->form = $form;
+    }
+    
     public function registerAction(){
         $form = new Form_Register();
         $request=$this->getRequest();

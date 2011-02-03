@@ -1,0 +1,24 @@
+<div class="central-home">
+<div id="margin">
+
+<div id="gray-page-title"><?php echo __("Report an on-line abuse"); ?></div>
+
+<?php if ($this->sent) : ?>
+<div><?php echo __("Your abuse report has been successfully sent; thank you for your help.");?>
+<br /><br /><?php echo __("The %1s team.","<i>Traduxio</i>"); ?>
+</div>
+<a href="<?php echo $this->backUrl; ?>"><div><?php echo __("Back to work")?></div></a>
+<?php else :?>
+<?php if ($this->error) : ?>
+<div><?php echo __("We encountered an error sending your message. Here is the error message : %1s.
+Sorry for the inconvenience, we're trying hard to fix it.","<i>".$this->error."</i>")?>
+<br /><?php echo __("The %1s team.","<i>Traduxio</i>"); ?>
+</div>
+<?php else: ?>
+<?php echo $this->form; ?>
+<?php endif; ?><?php endif; ?>
+<?php $this->page_title=__("PAGETITLE_Copyright"); ?>
+</div>
+</div>
+
+

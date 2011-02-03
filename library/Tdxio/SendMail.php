@@ -40,6 +40,7 @@ class Tdxio_SendMail{
         return true;
     }
     
+    
     public static function sendInscription($email,$body) {
         $configuration = new Zend_Config_Ini(
             APPLICATION_PATH . '/configs/application.ini',

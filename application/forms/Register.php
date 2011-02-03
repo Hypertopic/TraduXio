@@ -42,40 +42,65 @@ class Form_Register extends Form_Abstract
         $surname=$this->createElement('text','surname');
         
         $name->setOptions(array(
-            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'div')),'Label'),
-            'label'      => __('Your name'),
+            'decorators' => array(
+                'ViewHelper',
+                'Label',
+                'Errors',
+                array(array('data'=>'HtmlTag'), array('tag'=>'span')),
+                array('Label', array('tag' => 'span','requiredSuffix'=>' : ')),
+                array(array('row'=>'HtmlTag'),array('tag'=>'div','class'=>'input-line'))
+            ),
+            'label'      => __('Name'),
             'required'   => true
         ));
         $this->addElement($name);
         
         $surname->setOptions(array(
-            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'div')),'Label'),
-            'label'      => __('Your surname'),
+            'decorators' => array(
+                'ViewHelper',
+                'Label',
+                'Errors',
+                array(array('data'=>'HtmlTag'), array('tag'=>'span')),
+                array('Label', array('tag' => 'span','requiredSuffix'=>' : ')),
+                array(array('row'=>'HtmlTag'),array('tag'=>'div','class'=>'input-line'))
+            ),
+            'label'      => __('Surname'),
             'required'   => true
         ));
         $this->addElement($surname);
         
         $email=$this->createElement('text','emailaddress',array(
-                'decorators' => array('ViewHelper','Errors','Description',array('HtmlTag',array('tag'=>'div')),'Label'),
-                'label'=>__('Your email address')
+                'decorators' => array(
+                    'ViewHelper',
+                    'Label',
+                    'Errors',
+                    array(array('data'=>'HtmlTag'), array('tag'=>'span')),
+                    array('Label', array('tag' => 'span','requiredSuffix'=>' : ')),
+                    array(array('row'=>'HtmlTag'),array('tag'=>'div','class'=>'input-line'))
+                ),
+                'label'=>__('Email address'),
+                'required'=>true                
                 ));
         $email->addValidator(new Zend_Validate_EmailAddress());
-        
-        $email->setOptions(array('required'=>true));
         $this->addElement($email);
         
         $this->addElement('textarea', 'body', array(
-            'decorators' => array('ViewHelper',array('HtmlTag',array('tag'=>'div')),'Label'),
-            'label'      => __('Your message'),
+            'decorators' => array(
+                'ViewHelper',
+                array('HtmlTag',array('tag'=>'div')),
+                array('Errors', array('tag' => 'span','placement'=>'PREPEND')),
+                array('Label',array('requiredSuffix'=>" : ",'tag'=>'div'))),
+            'label'      => __('Your interest in TraduXio'),
             'required'   => true,
-            'rows' => 10,
+            'rows' => 6,
 //            'class' => 'interest',
-            'cols'=>150
+            'cols'=>80
         ));
 
         if($role=="guest"){
             $this->addElement('captcha','captcha',array(
-                'label' => __("Please verify you're a human"),
+                'decorators' => array(array('Label',array('requiredSuffix'=>" : ")),array('Errors', array('tag' => 'span','placement'=>'APPEND')),array('HtmlTag',array('tag'=>'div'))),
+                'label' => __("Anti-spam system"),
                 'captcha' => array(
                 'captcha' => 'Figlet',
                 'wordLen' => 4,
@@ -88,6 +113,9 @@ class Form_Register extends Form_Abstract
             'label'    => __('Send'),
             'decorators'=> array('ViewHelper',array('HtmlTag',array('tag'=>'div','id'=>'contacts-submit')))
         ));
+        
+        
+        $this->setAttrib('class','send-form');
 
     }
 

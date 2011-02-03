@@ -107,6 +107,7 @@ class TagController extends Tdxio_Controller_Abstract
             case 'deletetag':
                         $rule = array('privilege'=> 'read','work_id' => $resource_id);       
                         break; 
+            default:$rule = 'noAction';                        
         }               
         return $rule;        
     }
