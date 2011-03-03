@@ -53,7 +53,7 @@ msgstr "Автор не указан"
 #: controllers/WorkController.php:171
 #, php-format
 msgid "Work Id %1$s does not exist or you don't have the rights to see it "
-msgstr "Произведение Id %1$s не существует или у вас нет прав на его просмотр. "
+msgstr "Произведение Id %1$s не существует или у Вас нет прав на его просмотр. "
 
 #: controllers/WorkController.php:278
 #, php-format
@@ -71,7 +71,7 @@ msgstr "Добавить "
 
 #: controllers/WorkController.php:361
 msgid "The privilege was not added because it already exists"
-msgstr "Разрешение не добавлено: такое право доступа уже существует"
+msgstr "Ошибка добавления: такое право доступа уже существует"
 
 #: controllers/WorkController.php:365
 msgid "Switch to Standard Privileges"
@@ -143,12 +143,12 @@ msgstr "Категория"
 
 #: forms/Tag.php:60
 msgid "TAG"
-msgstr "Примечание"
+msgstr "Добавить"
 
 # I don't understand :-(
 #: forms/AddPrivilege.php:51
 msgid "User"
-msgstr "Read Text PRV"
+msgstr "Пользователь"
 
 #: forms/AddPrivilege.php:59
 msgid "Privilege"
@@ -164,7 +164,7 @@ msgstr "Все зарегистрированные пользователи"
 
 #: forms/AddPrivilege.php:104
 msgid "Privilege not added: you can't grant creation/edition privileges to unregistered users."
-msgstr "Разрешение не добавлено: вы не можете разрешить создание/изменение настроек конфиденциальности текста незарегистрированным пользователям."
+msgstr "Право доступа не добавлено: Вы не можете разрешить создание/изменение настроек конфиденциальности текста незарегистрированным пользователям."
 
 #: forms/Feedback.php:44
 msgid "Subject"
@@ -226,7 +226,7 @@ msgstr "Справочная информация (автор, издатель,
 
 #: forms/Right.php:39
 msgid "Publication of protected work non-comparable to a short quotation"
-msgstr "Публикация защищенного произведения не считается короткой цитатой"
+msgstr "Публикация защищенного произведения, не сопоставимая с короткой цитатой"
 
 #: forms/Right.php:60
 msgid "Details (optional)"
@@ -343,12 +343,12 @@ msgstr "Все пользователи могут %1$s текст"
 
 #: models/Work.php:390
 msgid "All members are allowed to do everything for this text"
-msgstr "Все зарегистрированные пользователи имеют полный доступ к тексту"
+msgstr "Все члены сообщества имеют полный доступ к тексту"
 
 #: models/Work.php:392
 #, php-format
 msgid "All members are allowed to %1$s this text"
-msgstr "Все зарегистрированные пользователи могут %1$s текст"
+msgstr "Все члены сообщества могут %1$s текст"
 
 #: models/Work.php:395
 #, php-format
@@ -2167,7 +2167,7 @@ msgstr "Мои переводы"
 
 #: layouts/scripts/layout.phtml:38
 msgid "Concorder"
-msgstr "Конкорданс"
+msgstr "Поиск лексических соответствий"
 
 #: layouts/scripts/layout.phtml:69
 #, php-format
@@ -2176,7 +2176,7 @@ msgstr "О %1$s"
 
 #: layouts/scripts/layout.phtml:70
 msgid "Copyrights"
-msgstr "Авторские права"
+msgstr "Copyrights"
 
 #: views/scripts/work/manage.phtml:15
 msgid "Manage text's privileges"
@@ -2200,7 +2200,7 @@ msgstr "Выделить и нажать на \"Удалить\" чтобы уд
 
 #: views/scripts/work/manage.phtml:31
 msgid "Remove an existing permission"
-msgstr "Удалить существующее разрешение"
+msgstr "Удалить существующие права доступа"
 
 #: views/scripts/work/manage.phtml:34
 msgid "NO EXISTING PRIVILEGES"
@@ -2208,7 +2208,7 @@ msgstr "ОТСУТСТВУЮТ ПРАВА ДОСТУПА"
 
 #: views/scripts/work/manage.phtml:37
 msgid "Add a new permission"
-msgstr "Добавить новое разрешение"
+msgstr "Добавить новое право доступа"
 
 #: views/scripts/work/manage.phtml:43
 msgid "PAGETITLE_Continue text insertion"
@@ -2233,7 +2233,7 @@ msgstr "Редактировать текст"
 #: views/scripts/work/deposit.phtml:2
 #: views/scripts/work/translate.phtml:4
 msgid "Your text will automatically be private.&nbsp; Nobody will be able to see it unless you change the text's privileges.&nbsp;"
-msgstr "Ваш текстпо умолчанию будет частным .&nbsp; Никто не сможет увидеть его пока вы не измените настройки конфиденциальности.&nbsp;"
+msgstr "Ваш текст по умолчанию будет частным .&nbsp; Никто не сможет увидеть его, пока Вы не измените настройки конфиденциальности.&nbsp;"
 
 #: views/scripts/work/deposit.phtml:8
 msgid "PAGETITLE_Deposit a new text"
@@ -2325,11 +2325,11 @@ msgstr "Разместить новый текст"
 #: views/scripts/work/index.phtml:44
 #, php-format
 msgid "New translations in %1$s"
-msgstr "Новый перевод в %1$s"
+msgstr "Новый перевод на %1$s"
 
 #: views/scripts/work/index.phtml:58
 msgid "PAGETITLE_Homepage"
-msgstr "Домашняя страница"
+msgstr "Стартовая страница"
 
 #: views/scripts/work/translate.phtml:25
 msgid "PAGETITLE_Create Translation of"
@@ -2431,7 +2431,7 @@ msgstr "logoEN"
 #: views/scripts/index/index.phtml:3
 #: views/scripts/index/register.phtml:26
 msgid "Register"
-msgstr "Зарегистрировать"
+msgstr "Регистрация"
 
 #: views/scripts/index/index.phtml:4
 msgid "Invite"
@@ -2461,7 +2461,7 @@ msgstr "Сообщить об он-лайн нарушении"
 
 #: views/scripts/index/copyright.phtml:8
 msgid "Your abuse report has been successfully sent; thank you for your help."
-msgstr "Ваше сообщение о нарушении было успешно отправлено; благодарим за вашу помощь."
+msgstr "Ваше сообщение о нарушении было успешно отправлено; благодарим за Вашу помощь."
 
 #: views/scripts/index/copyright.phtml:9
 #: views/scripts/index/copyright.phtml:16
@@ -2482,7 +2482,7 @@ msgid ""
 "We encountered an error sending your message. Here is the error message : %1$s.\n"
 "Sorry for the inconvenience, we're trying hard to fix it."
 msgstr ""
-"При отправлении вашего сообщения произошла ошибка. Сообщение об ошибке здесь: %1$s.\n"
+"При отправлении Вашего сообщения произошла ошибка. Сообщение об ошибке здесь: %1$s.\n"
 "Приносим извинения за доставленные неудобства, мы пытаемся устранить неисправность."
 
 #: views/scripts/index/copyright.phtml:21
@@ -2499,11 +2499,11 @@ msgstr "Регистрация"
 
 #: views/scripts/index/register.phtml:8
 msgid "Your invitation request has been successfully sent; thank you for your interest, we will answer you as soon as possible."
-msgstr "Ваш запрос на приглашение был успешно отправлен; благодарим за ваш интерес, мы ответим вам как можно скорее."
+msgstr "Ваш запрос на приглашение был успешно отправлен; благодарим за Ваш интерес, мы ответим Вам как можно скорее."
 
 #: views/scripts/index/register.phtml:16
 msgid "REGISTRATION_PHRASE"
-msgstr "Для регистрации в проекте TraduXio вы должны быть приглашены одним из участников сообщества.<br>Укажите в форме регистрации ваше имя, фамилию и напишите нам, почему вам интересен проект TraduXio.<br> Приглашение будет выслано вам в скором времени."
+msgstr "Для регистрации в проекте TraduXio, Вы должны быть приглашены одним из участников сообщества.<br>Укажите в форме регистрации ваше имя, фамилию и напишите нам, почему Вам интересен проект TraduXio.<br> Приглашение будет выслано Вам в скором времени."
 
 #~ msgid "Back to work"
 #~ msgstr "Back to work"

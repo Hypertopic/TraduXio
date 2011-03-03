@@ -145,10 +145,12 @@ class Model_Work extends Model_Taggable
         $work['Genres']=$tags['Genres'];
         unset($tags['Genres']);
         Tdxio_Log::info($tags,"WCtags before normalization");
+        
         if(!empty($tags)){
             $work['Tags'] = $this->normalizeTags($tags[$work_id]);
-        }
-        //$work['Tags'] = $tags[$work_id];
+        }else{
+            $work['Tags'] = array();
+        }        
         return $work;
     }
 

@@ -47,7 +47,7 @@ class Form_Register extends Form_Abstract
                 'Label',
                 'Errors',
                 array(array('data'=>'HtmlTag'), array('tag'=>'span')),
-                array('Label', array('tag' => 'span','requiredSuffix'=>' : ')),
+                array('Label', array('tag' => 'span','requiredSuffix'=>' : ','requiredPrefix'=>'*')),
                 array(array('row'=>'HtmlTag'),array('tag'=>'div','class'=>'input-line'))
             ),
             'label'      => __('Name'),
@@ -61,7 +61,7 @@ class Form_Register extends Form_Abstract
                 'Label',
                 'Errors',
                 array(array('data'=>'HtmlTag'), array('tag'=>'span')),
-                array('Label', array('tag' => 'span','requiredSuffix'=>' : ')),
+                array('Label', array('tag' => 'span','requiredSuffix'=>' : ','requiredPrefix'=>'*')),
                 array(array('row'=>'HtmlTag'),array('tag'=>'div','class'=>'input-line'))
             ),
             'label'      => __('Surname'),
@@ -75,7 +75,7 @@ class Form_Register extends Form_Abstract
                     'Label',
                     'Errors',
                     array(array('data'=>'HtmlTag'), array('tag'=>'span')),
-                    array('Label', array('tag' => 'span','requiredSuffix'=>' : ')),
+                    array('Label', array('tag' => 'span','requiredSuffix'=>' : ','requiredPrefix'=>'*')),
                     array(array('row'=>'HtmlTag'),array('tag'=>'div','class'=>'input-line'))
                 ),
                 'label'=>__('Email address'),
@@ -89,7 +89,7 @@ class Form_Register extends Form_Abstract
                 'ViewHelper',
                 array('HtmlTag',array('tag'=>'div')),
                 array('Errors', array('tag' => 'span','placement'=>'PREPEND')),
-                array('Label',array('requiredSuffix'=>" : ",'tag'=>'div'))),
+                array('Label',array('requiredSuffix'=>" : ",'tag'=>'div','requiredPrefix'=>'*'))),
             'label'      => __('Your interest in TraduXio'),
             'required'   => true,
             'rows' => 6,

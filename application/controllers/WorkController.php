@@ -130,6 +130,86 @@ class WorkController extends Tdxio_Controller_Abstract
         $this->view->tagForm = $tagForm;
     }
     
+       public function newreadAction(){
+    
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        $trId = $request->getParam('tr');
+        $model = $this->_getModel();
+        $tagForm = new Form_Tag();
+        Tdxio_Log::info('step1');
+        
+        $work=$model->fetchOriginalWork($id);
+        if (!$id || !$work || (empty($work['Sentences']))) {    
+            Tdxio_Log::info('get in here');        
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+        }   
+        Tdxio_Log::info($work,'work read');
+        if($trId && !(array_key_exists($trId,$work['Interpretations']))){
+            Tdxio_Log::info($trId,'newread doesn\'t exist trID');
+            $trId=NULL;
+        }
+        
+        $this->view->hasTranslations=$model->hasTranslations($id);        
+        $this->view->canTag = $model->isAllowed('tag',$id);
+        $this->view->canManage = $model->isAllowed('manage',$id);
+        $this->view->work = $work;
+        $this->view->trId = $trId;
+        if($trId){$this->view->translation = $work['Interpretations'][$trId];}
+
+    }
+   public function ajaxreadAction(){
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        Tdxio_Log::info($request,'ababa');
+        $qtity = $request->getParam('qtity');//numero di segmenti/sentences da scaricare
+        $translations = array();
+
+        $trWork = null;
+        $trId=$request->getParam('trId');
+        if($trId!=null){
+            Tdxio_Log::info($trId,'trid');
+            $trModel = new Model_Translation();
+            Tdxio_Log::info($trWork,'ajaxread0');  
+            //if (!$trId || !($tempWork=$model->fetchWork($trId))) {
+             //   throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+            //}  
+            $trWork = $trModel->fetchTranslationWork($trId);
+        }
+        $model = $this->_getModel();
+        if (!$id || !($work=$model->fetchOriginalWork($id))) {
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+        }else{
+            foreach($work['Interpretations'] as $id=>$trWork){
+                $translations[] = $trWork;
+            }
+            $work['Interpretations'] = $translations;
+        }
+        Tdxio_Log::info($work,'ajaxread00');
+       
+        
+     /*  $tagForm = new Form_Tag(); 
+        $model = $this->_getModel();
+        $tagForm = new Form_Tag();
+         $taglist = new Zend_View();
+        $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+        $taglist->assign('tags',$work['Tags']);
+        $taglist->assign('genres',$work['Genres']);
+        $taglist->assign('workid',$work['id']);
+        $taglist->assign('userid',$this->view->userid);
+        $this->view->tagbody=$taglist->render('taglist.phtml');
+       */ 
+        $this->view->hasTranslations=$model->hasTranslations($id);        
+        $this->view->canTag = $model->isAllowed('tag',$id);
+        $this->view->canManage = $model->isAllowed('manage',$id);
+        $this->view->work = $work;
+        $this->view->trWork = $trWork;
+        //$this->view->tagForm = $tagForm;
+        
+        Tdxio_Log::info($work,'ajaxread1');
+        Tdxio_Log::info($trWork,'ajaxread2');
+    }
+    
     public function translateAction(){
         $request = $this->getRequest();
         $id = $request->getParam('id');
@@ -485,6 +565,8 @@ class WorkController extends Tdxio_Controller_Abstract
             
             case 'history':$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility);   
                 break;
+            case 'ajaxread':
+            case 'newread':
             case 'read':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'tag','work_id' => $resource_id);

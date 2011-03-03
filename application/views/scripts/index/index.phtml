@@ -1,10 +1,10 @@
 <?php $phrase = __("frase_en"); $logo = __("logoEN");  ?> 
-<div id="index"> 
-  <a href="<?php echo $this->makeUrl('/index/register'); ?>"><div class="indexopt"><?php echo __("Register"); ?></div></a>
-  <a href="http://traduxio.community.hypertopic.org/" target="_blank" ><div class="indexopt"><?php echo __("Invite"); ?></div></a>
-  <a href="<?php echo $this->makeUrl('/index/faq'); ?>"><div class="indexopt"><?php echo __("FAQ"); ?></div></a>
-  <a href="http://sourceforge.net/apps/trac/traduxio/wiki" target="_blank"><div class="indexopt"><?php echo __("About Traduxio"); ?></div></a>
-  <a href="http://sourceforge.net/apps/trac/traduxio/wiki/HowTo" target="_blank"><div class="indexopt"><?php echo __("Help"); ?></div></a>
+<div id="homepage"><div id="index"> 
+  <div class="indexopt"><a href="<?php echo $this->makeUrl('/index/register'); ?>"><?php echo __("Register"); ?></a></div>
+  <div class="indexopt"><a href="http://traduxio.community.hypertopic.org/" target="_blank" ><?php echo __("Invite"); ?></a></div>
+  <div class="indexopt"><a href="<?php echo $this->makeUrl('/index/faq'); ?>"><?php echo __("FAQ"); ?></a></div>
+  <div class="indexopt"><a href="http://sourceforge.net/apps/trac/traduxio/wiki" target="_blank"><?php echo __("About Traduxio"); ?></a></div>
+  <div class="indexopt"><a href="http://sourceforge.net/apps/trac/traduxio/wiki/HowTo" target="_blank"><?php echo __("Help"); ?></a></div>
 </div>
 <div id="traduxio_logo">
     <div><img src="<?php echo $this->makeUrl('/images/toc.png') ?>"></div>
@@ -12,5 +12,5 @@
 </div>
 
 <div id="logo_cip"><img src="<?php echo $this->makeUrl('/images/'.$logo.'.png') ?>"></div>
-
+</div>
 <?php $image = __("indexlogoEN"); ?>

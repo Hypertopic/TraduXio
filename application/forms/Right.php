@@ -24,7 +24,7 @@ class Form_Right extends Form_Abstract
         $this->addElement($title);
 
         $check_error = $this->createElement('checkbox','error');
-        $check_error->setLabel(__("Référence erronée ou manquante (auteur, éditeur, licence)"));
+        $check_error->setLabel(__("Bad or missing reference (author, editor, license)"));
         $check_error->setDecorators(array(
                    'ViewHelper',
                    'Description',
@@ -36,7 +36,7 @@ class Form_Right extends Form_Abstract
         $this->addElement($check_error);    
         
         $check_abuse = $this->createElement('checkbox','abuse');
-        $check_abuse->setLabel(__("Diffusion d'une oeuvre protégée non-assimilable à une citation courte"));
+        $check_abuse->setLabel(__("Publication of protected work non-comparable to a short quotation"));
         $check_abuse->setDecorators(array(
                    'ViewHelper',
                    'Description',

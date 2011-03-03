@@ -1,0 +1,141 @@
+<?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
+<?php  $this->headScript()->appendFile($this->makeUrl('/js/page.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/jqueryslidemenu.js')); ?>
+<?php $this->layout()->setLayout('layout-black');?>
+
+<?php 
+$href= 'href="'.$this->url(array('controller'=>'work','action'=>'translate','id'=>$this->work['id'])).'"';
+$href_extend= 'href="'.$this->url(array('controller'=>'work','action'=>'extend','id'=>$this->work['id'])).'"';
+$href_edit = 'href="'.$this->url(array('controller'=>'work','action'=>'edit','id'=>$this->work['id'])).'"';
+$explainNA=($this->isMember)?__("You're not allowed to do this. Ask permissions to the text's owner"):__("You're not allowed to do this. Please login");
+$NRattrs = 'class="idle" title="'.$explainNA.'"';
+$HTmessage = __("You can't delete this text because it has some translations. Delete its translations first.");
+$askConfirm = __("WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?");
+$dir = (($this->work['rtl']==1)?'dir="rtl"':''); 
+?>
+<div id="test"></div>
+<div class="background">
+
+<div id="myslidemenu" class="jqueryslidemenu clear">
+    <ul>
+        <li><a href="#"><div id='options'></div></a>
+            <ul>
+                <li><a <?php echo $href.' '.($this->showTranslate?'':$NRattrs); ?>><?php echo __('Create a translation'); ?></a></li>
+                <li><a <?php echo $href_extend.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Continue text insertion'); ?></a></li>
+                <li><a <?php echo $href_edit.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Edit the text'); ?></a>    </li>
+                <?php if($this->canManage): ?>
+                <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>
+                <?php endif; ?>
+                <?php if($this->canDelete): 
+                    if($this->hasTranslations==false): 
+                        
+                        $href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
+                    else: $href = 'href="" class="idle" title="'.$HTmessage.'" onClick="alert(\''.addslashes($HTmessage).'\');"'; 
+                    endif;?>
+                    <li><a <?php echo $href; ?> ><?php echo __("Delete this text"); ?></a></li>
+                <?endif; ?>
+                <li><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("History of modifications"); ?></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+<!-------------------------------!-->
+<div class="tag-line clear">
+    <div class="show-tag-area" id="orig-tag">
+        <?php echo $this->tagbody ?>
+    </div>
+</div> 
+<div id="book"> 
+<div class="page-container" id="left-page" <?php echo $dir ?>>
+
+    <div class="clear">
+        <div class="TLcorner"></div>
+        <div class="Tborder center"></div>
+        <div class="TRcorner"></div>
+    </div>
+    
+    <div class="clear">
+        <div class="Lborder middle" id="prev-page" >
+            <a href="#"><img class="turn-page" src="<?php echo $this->makeUrl('/images/previous.png'); ?>"/></a>
+        </div>
+        <div class="text-container center" id="work">
+        <div class="work-title"> <?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
+            <span class="author red"><?php echo $author.', ' ?></span>
+            <span class="title red"><?php echo $this->work['title']; ?></span>
+        </div>
+       <!-- <div class="language TBspaced red"><?php //echo __($this->work['language']); ?></div> !-->
+        <div class="text">
+            <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
+                <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
+                <span class="segment" id="<?php echo $segment_id; ?>"><?php //echo $this->nlBr($sentence['content']); ?></span>
+            <?php endforeach; ?>
+        </div>            
+        </div>
+        <div class="Rborder middle"></div>
+    </div>
+    
+    <div class="clear">
+        <div class="BLcorner"></div>
+        <div class="Bborder center"></div>
+        <div class="BRcorner"></div>
+    </div>
+    
+</div>
+<div class="page-container" id="right-page">
+
+  <?php if(empty($this->work['Interpretations'])): ?>
+    <div class="clear">
+        <div class="TLcorner"></div>
+        <div class="Tborder center"></div>
+        <div class="TRcorner"></div>
+    </div>
+<?php else: ?>
+<div class="clear" id="plus" >
+<ul class="onglets">
+<?php foreach($this->work['Interpretations'] as $traId=>$trWork): ?>
+
+    <li class="onglet" id="onglet-<?php echo $traId;?>">
+        <span title="<?php echo __($trWork['work']['language']) ?>">
+            <a href="#<?php echo 'tr'.$traId; ?>"><?php echo $trWork['work']['creator'];?></a>
+        </span>
+    </li>    
+<?php endforeach; ?>
+<span id='more'>+</span>
+</ul>    
+</div>
+<?php endif; ?>
+    
+    <div class="clear">
+        <div class="Lborder middle"></div>
+        <div class="text-container center" id="translation">
+        <div class="work-title"> 
+            <span class="author red"></span>
+            <span class="title red"></span>
+        </div>
+        <div class="text">
+        <?php if(!$this->trId):?>
+        <div id="create"><?php echo __('Create a translation'); ?></div>
+        <?php endif; ?>
+        </div>            
+        </div>
+        <div class="Rborder middle" id="next-page" >
+            <a href="#"><img class = "turn-page" src="<?php echo $this->makeUrl('/images/next.png'); ?>" /></a>
+        </div>
+    </div>
+    
+    <div class="clear">
+        <div class="BLcorner"></div>
+        <div class="Bborder center"></div>
+        <div class="BRcorner"></div>
+    </div>
+    
+</div>
+</div>
+<div id="icons">
+<img src="<?php echo $this->makeUrl('/images/save.png'); ?>">
+</div>
+</div>
+
+<?php $this->page_title = __("PAGETITLE_Read text").': '.$this->escape($this->work['title']); ?>

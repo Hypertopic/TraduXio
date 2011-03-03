@@ -1,0 +1,18 @@
+
+<?php
+$this->layout()->setLayout('empty');
+$this->work['language']=__($this->work['language']);
+$translations = array();
+foreach($this->work['Sentences'] as $key=>$sentence){
+    $this->work['Sentences'][$key]['content'] = $this->nlBr($sentence['content']);
+}
+foreach($this->work['Interpretations'] as $key=>$trl){
+    foreach($trl['blocks'] as $ind=>$block){
+        $this->work['Interpretations'][$key]['blocks'][$ind]['translation'] = $this->nlBr($block['translation']);
+    }
+}
+$data=array('work'=>$this->work,'tags'=>$this->tagbody,'tagform'=>$this->tagform,'translation'=>$this->trWork);
+
+Tdxio_Log::info(Zend_Json::encode($data),'jsondata');
+
+echo Zend_Json::encode($data); 
