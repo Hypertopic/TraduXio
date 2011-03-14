@@ -78,14 +78,14 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     
     <div class="clear">
         <div class="BLcorner"></div>
-        <div class="Bborder center"></div>
+        <div class="Bborder center"><div class = "creator"> <?php echo (__('Text inserted by')).' ';  echo ($this->work['creator']); ?> </div></div>
         <div class="BRcorner"></div>
     </div>
     
 </div>
 <div class="page-container" id="right-page">
-
-  <?php if(empty($this->work['Interpretations'])): ?>
+<?php //if(empty($this->work['Interpretations'])): ?>
+<?php if(!$this->hasTranslations): ?>
     <div class="clear">
         <div class="TLcorner"></div>
         <div class="Tborder center"></div>

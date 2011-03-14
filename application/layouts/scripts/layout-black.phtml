@@ -9,11 +9,9 @@
       @see http://framework.zend.com/manual/en/zend.view.helpers.html
       -->
   <?php $this->headLink()->appendStylesheet($this->makeUrl('/css/globalnew.css')) ?>
-  <?php $this->headLink()->appendStylesheet($this->makeUrl('/css/jqueryslidemenu.css')) ?>
   <?php echo $this->headLink(); ?>
   <?php $this->headScript()->prependScript("tdxio.baseUrl='".$this->makeUrl('',true)."';"); ?>
   <?php $this->headScript()->prependFile($this->makeUrl('/js/tdxio.js')); ?>
-  <?php $this->headScript()->prependFile($this->makeUrl('/js/lib/jquery.url.js')); ?>
   <?php $this->headScript()->prependFile($this->makeUrl('/js/lib/jquery.form.js')); ?>
   <?php $this->headScript()->prependFile($this->makeUrl('/js/lib/jquery.min.js')); ?>
   <?php echo $this->headScript(); ?>
