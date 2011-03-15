@@ -26,7 +26,7 @@ class Form_Abstract extends Zend_Form
     {
         static $languageOptions=null;
 
-        if (null === $languagesOptions) {
+        if (null === $languageOptions) {
             $langModel = new Model_Language();
             $languageOptions=$langModel->fetchOptions();
         }

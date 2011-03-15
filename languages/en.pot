@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-14 16:37+0100\n"
+"POT-Creation-Date: 2011-03-15 17:56+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -2365,6 +2365,10 @@ msgstr "Options"
 msgid "PAGETITLE_Edit translation"
 msgstr "Edit translation"
 
+#: views/scripts/translation/concord.phtml:13
+msgid "Search"
+msgstr "Search"
+
 #: views/scripts/translation/concord.phtml:20
 msgid "PAGETITLE_Search"
 msgstr "Search"
@@ -2564,8 +2568,6 @@ msgstr "In order to register to TraduXio, you must be invited by a member of the
 #~ msgstr "Italiano"
 #~ msgid "Original Text"
 #~ msgstr "Original Text"
-#~ msgid "Search"
-#~ msgstr "Search"
 #~ msgid "Send your feedback"
 #~ msgstr "Send your feedback"
 
