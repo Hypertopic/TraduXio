@@ -4,7 +4,7 @@ if (typeof console == "undefined") console={log:function(){}};
     
     $.getDocHeight = function(){
       //  alert('1 getdocheight');
-    return Math.min(
+    return Math.max(
         $(document).height(),
         $(window).height(),
         /* For opera: */
@@ -127,32 +127,31 @@ if (typeof console == "undefined") console={log:function(){}};
             if(data.work.Sentences.length > 0){
                 $('div.text').height("");
                 $('div#test').height("");
+                $('#test').width($('#work div.text').width());
+                $('#work div.text').empty();
+                $('#test').empty();    
+                $('#translation div.text').empty();                
+
                 var sentences = data.work.Sentences;
-        
-                var maxH = Math.max(minHeight,$(window).height()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-$('#work div.text').outerHeight() +$('#work div.text').height()-60);
+                    //before there was $(window).height() instead of getDocHeight
+                var maxH = Math.max(minHeight,$.getDocHeight()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-$('#work div.text').outerHeight() +$('#work div.text').height()-60);
                 var next = 0;//data.work.Sentences[0].number;
                 var pre = "<span id='text"+data.work.id +"-segment";
+                
                 //if(data.work.Interpretations.length == 0){// there are no translations
                 if(trId == ''){// there are no translations
                     //display only the work
                     var len = sentences.length;
                     
-                    $('#translation .text span.text').html("Create a translation"); 
-                    $('#test').width($('#work div.text').width());
-                    $('#work div.text').empty();
-                    $('#test').empty();                    
-                    $('#work div.text').append(pre + sentences[begin].number +"'>" + sentences[begin].content +"</span>");
+                    $('#translation .text').append("<span class='text'>Create a translation</span>"); 
                     $('#test').append(pre + sentences[begin].number + "'>" + sentences[begin].content + "</span>");
-
+                    
                     if(backward===false){    
                         //alert('one:'+begin);
                         var i;
-                        if(begin+1<len){
-                            $('#test').append(pre + sentences[begin+1].number + "'>" +sentences[begin+1].content + "</span>");
-                        }
                         $('#next-page img').attr('id',begin);
                         
-                        for(i=begin+1; i<len && $('#test').height()<= maxH ; i++){
+                        for(i=begin; (i==begin) || (i<len && $('#test').height()<= maxH) ; i++){
                             $('#work div.text').append(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                           if(i+1<len){
                                 $('#test').append(pre + sentences[i+1].number + "'>" +sentences[i+1].content + "</span>");
@@ -162,16 +161,11 @@ if (typeof console == "undefined") console={log:function(){}};
                         $('#next-page img').css('visibility',(i<len)?'visible':'hidden');
                         $('#prev-page img').attr('id',(begin > 0) ? begin-1 : 0);                           
                         $('#prev-page img').css('visibility',(begin > 0)?'visible':'hidden');
-                        //~ //back=false;
-                    }else{//if backward == true                    
-                    //alert('two'+begin);
+                    }else{
                         var i;
-                        if(begin-1 >= 0){
-                            $('#test').prepend(pre + sentences[begin-1].number + "'>" +sentences[begin-1].content + "</span>");
-                        }                        
                         $('#prev-page img').attr('id',begin);
                         
-                        for(i=begin-1; i>=0 && $('#test').height()<= maxH ; i--){
+                        for(i=begin; (i==begin)|| (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                             if(i-1>=0){
                                 $('#test').prepend(pre + sentences[i-1].number + "'>" +sentences[i-1].content + "</span>");
@@ -182,7 +176,7 @@ if (typeof console == "undefined") console={log:function(){}};
                         $('#prev-page img').attr('id',(i>0)?i:0);                          
                         $('#prev-page img').css('visibility',(i > 0)?'visible':'hidden');
                         back=true;
-                    }                    
+                    }              
                 }else{
                     trWork = data.work.Interpretations[0];
                     
@@ -194,34 +188,26 @@ if (typeof console == "undefined") console={log:function(){}};
                     $('#translation .work-title span.title').html(trWork.work.title);                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var len = trWork.blocks.length;
-                    //var pre = "<span id='text"+data.work.id +"-segment";
                     var preblock = "<span id='block";
-                    $('#test').width($('#translation div.text').width());
-                    $('#translation div.text').empty();
-                    $('#work div.text').empty();
-                    $('#test').empty();
+                    
                     var beginBlock=0;
                     for(var y=0;y<len;y++){
-                        if(begin>=trWork.blocks[y].from_segment && begin<=trWork.blocks[y].to_segment)
+                        if(begin>=trWork.blocks[y].from_segment && begin<=trWork.blocks[y].to_segment){
                             beginBlock = y;
-                    }                    
-                    $('#translation div.text').append(preblock + beginBlock + "'>" + trWork.blocks[beginBlock].translation +"</span>");
-                    for(var x=trWork.blocks[beginBlock].from_segment; x<=trWork.blocks[beginBlock].to_segment; x++){
-                        $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
-                    }
+                            break;
+                        }
+                    }      
                     $('#test').append(preblock + beginBlock + "'>" + trWork.blocks[beginBlock].translation +"</span>");
                     if(backward===false){  
-                        //alert('three'+begin);
                         var i;
-                        if(beginBlock+1<len){
-                            $('#test').append(preblock + (beginBlock +1) + "'>" + trWork.blocks[beginBlock+1].translation +"</span>");
-                        }
+                        begin = trWork.blocks[beginBlock].from_segment;
                         $('#next-page img').attr('id',begin);
                         $('#next-page a').attr('href','#tr'+trId);
-                        for(i=beginBlock+1; i<len && $('#test').height()<= maxH ; i++){
+                        for(i=beginBlock;(i==beginBlock) || ( i<len && $('#test').height()<= maxH) ; i++){
                             $('#translation div.text').append(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
                             for(var x=trWork.blocks[i].from_segment; x<=trWork.blocks[i].to_segment; x++){
                                 $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
+                                $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
                             }
                             if(i+1<len){
                                 $('#test').append(preblock + (i+1) + "'>" +trWork.blocks[i+1].translation + "</span>");
@@ -233,14 +219,11 @@ if (typeof console == "undefined") console={log:function(){}};
                         $('#prev-page img').css('visibility',(beginBlock > 0)?'visible':'hidden');
                         back=false;                        
                     }else{
-                        //alert('four'+begin);
                         var i;
-                        if(beginBlock-1 >= 0){
-                            $('#test').prepend(preblock + (beginBlock-1) + "'>" +trWork.blocks[beginBlock-1].translation + "</span>");
-                        }                        
+                        begin = trWork.blocks[beginBlock].to_segment;
                         $('#prev-page img').attr('id',begin);
                         $('#prev-page a').attr('href','#tr'+trId);
-                        for(i=beginBlock-1; i>=0 && $('#test').height()<= maxH ; i--){
+                        for(i=beginBlock; (i==beginBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#translation div.text').prepend(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
                             for(var x=trWork.blocks[i].to_segment; x>=trWork.blocks[i].from_segment; x--){
                                 $('#work div.text').prepend(pre + x +"'>" + sentences[x].content +"</span>");
@@ -266,15 +249,7 @@ if (typeof console == "undefined") console={log:function(){}};
             
             $('span#more').css('visibility','hidden');
             $('.onglets li').css('z-index',-100);
-            $('.onglets li').css('visibility','hidden');            
-       /*    var selId = trls[0].work.id; 
-        * $('li#onglet-'+selId).attr('class','onglet first');
-            $('li#onglet-'+selId).css('z-index',N);
-            $('li#onglet-'+selId).css('visibility','visible');
-            $('li#onglet-'+selId).css('left',0 + 'px');
-            
-            var totWidth = $('li#onglet-'+selId).outerWidth();    
-         */   
+            $('.onglets li').css('visibility','hidden'); 
             var totWidth = 0;
             var overlap = 0;
             var ongClass='onglet first';
@@ -322,7 +297,7 @@ if (typeof console == "undefined") console={log:function(){}};
     var hash = document.location.hash.substr(1);
     var qtity=50;
     var params;  
-    var minHeight = 300;
+    var minHeight = 400;
    // var nextSegment;
    // var prevSegment;
     

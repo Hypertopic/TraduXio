@@ -394,7 +394,7 @@ div.scrollbutts .down {
     background-image:url(../images/down.gif);
 }
 div.scrollbutts div.down.disabled {
-    background-image:url(../images/down-dis.gif);
+    background-image:url(../images/down-dis.png);
 }
 div.scrollbutts div.up.disabled {
     background-image:url(../images/up-dis.gif);
