@@ -26,13 +26,11 @@ if (typeof console == "undefined") console={log:function(){}};
                     break;
                 }
             }
+            newArray = trArray.splice(index,L);     
             if(selected==false){
                 firstItem = trArray.splice(0,1);
-            }            
-            newArray = trArray.splice(index,L);          
-            if(trArray.length>0)
-                newArray = firstItem.concat(newArray.concat(trArray));                
-                     
+            }             
+            newArray = firstItem.concat(newArray,trArray);                
             return newArray;
         }
     }
@@ -66,93 +64,18 @@ if (typeof console == "undefined") console={log:function(){}};
             tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'));
             tdxio.page.resize();
         },
-        /*
-        writeTranslation:function(sentences, trWork, step){
-            $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
-            var len = trWork.blocks.length;
-            
-            var preblock = "<span id='block";
-            $('#test').width($('#translation div.text').width());
-            $('#translation div.text').empty();
-            $('#work div.text').empty();
-            $('#test').empty();
-            $('#translation div.text').append(preblock + begin + "'>" + trWork.blocks[begin].translation +"</span>");
-            for(var x=trWork.blocks[begin].from_segment; x<=trWork.blocks[begin].to_segment; x++){
-                        $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
-                    }
-                    $('#test').append(preblock + begin + "'>" + trWork.blocks[begin].translation +"</span>");
-                    if(backward===false){  
-                        var i;
-                        if(begin+1<len){
-                            $('#test').append(preblock + (begin +1) + "'>" + trWork.blocks[begin+1].translation +"</span>");
-                        }
-                        $('#next-page img').attr('id',begin);
-                        
-                        for(i=begin+1; i<len && $('#test').height()<= maxH ; i++){
-                            $('#translation div.text').append(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
-                            for(var x=trWork.blocks[i].from_segment; x<=trWork.blocks[i].to_segment; x++){
-                                $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
-                            }
-                            if(i+1<len){
-                                $('#test').append(preblock + (i+1) + "'>" +trWork.blocks[i+1].translation + "</span>");
-                            }
-                        }
-                        $('#next-page img').attr('id',(i<len)?i:0);
-                        $('#prev-page img').attr('id',(begin > 0) ? begin-1 : 0);
-                        $('#next-page img').css('visibility',(i<len-1)?'visible':'hidden');                           
-                        $('#prev-page img').css('visibility',(begin > 0)?'visible':'hidden');
-                        back=false;  
-            
-            
-        }*/
         writeWork: function(sentences,from,to, step){
             var pre = "<span id='text"+data.work.id +"-segment";
             for(var x=from; x<=to; x+=step){
                 $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
             }
         },
-      /*  writeWorkText: function(sentences,pre,backward){
-            var step;
-            var len = sentences.length;
-            var i;
-            var myBegin,myEnd;
-            if(backward===false){    
-                var i;
-                var len = sentences.length;
-                $('#test').append(pre + sentences[begin].number + "'>" + sentences[begin].content + "</span>");                    
-                for(i=begin; (i==begin) || (i<len && $('#test').height()<= maxH) ; i++){
-                    $('#work div.text').append(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
-                    if(i+1<len){
-                        $('#test').append(pre + sentences[i+1].number + "'>" +sentences[i+1].content + "</span>");
-                    }
-                    end=i;
-                }
-            }else{
-                for(i=end; (i==end)|| (i>=0 && $('#test').height()<= maxH) ; i--){
-                    $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
-                    if(i-1>=0){
-                        $('#test').prepend(pre + sentences[i-1].number + "'>" +sentences[i-1].content + "</span>");
-                    }
-                    begin=i;
-                }
-                $('#prev-page img').attr('id',(begin>0)?begin-1:0);                          
-                $('#prev-page img').css('visibility',(begin>0)?'visible':'hidden');
-                while((end+1<len)&&($('#test').height()<= maxH)){
-                    $('#test').append(pre + sentences[end+1].number + "'>" +sentences[end+1].content + "</span>");
-                    if($('#test').height()<= maxH){
-                        end++;
-                        $('#work div.text').append(pre + sentences[end].number + "'>" +sentences[end].content + "</span>");                                
-                    }
-                }
-            }
-        },*/
         
-        displayWork: function(data,trId,backward){//begin and end represent segments or sentences numbers
+        displayWork: function(data,trId,backward){
             if(data.work.Sentences.length > 0){
                 $('div#test').height("");
                 $('#translation div.text').height("");
                 $('#work div.text').height("");
-            //    alert($('#translation div.text').height()+' ' +$('#work div.text').height());
                 $('#work div.text').empty();
                 $('#test').empty();    
                 $('#translation div.text').empty();     
@@ -170,13 +93,11 @@ if (typeof console == "undefined") console={log:function(){}};
                 var len = sentences.length;                
                 //if(data.work.Interpretations.length == 0){// there are no translations
                 if(trId == ''){// there are no translations
-                    //alert('no translations');
                     //display only the work
                    
                     $('#translation .text').append("<span class='text'>Create a translation</span>"); 
                     
                     if(backward===false){    
-                  //      alert('one:'+begin);
                         var i;
                         $('#test').append(pre + sentences[begin].number + "'>" + sentences[begin].content + "</span>");                    
                         for(i=begin; (i==begin) || (i<len && $('#test').height()<= maxH) ; i++){
@@ -188,7 +109,6 @@ if (typeof console == "undefined") console={log:function(){}};
                         }                       
                     }else{
                         var i;
-                        //$('#prev-page img').attr('id',begin);
                         $('#test').append(pre + sentences[end].number + "'>" + sentences[end].content + "</span>");
                         for(i=end; (i==end)|| (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
@@ -207,7 +127,6 @@ if (typeof console == "undefined") console={log:function(){}};
                         back=true;
                     }      
                 }else{
-                   // alert('yes translations');
                     trWork = data.work.Interpretations[0];
                     
                     for(var j=0;j<data.work.Interpretations.length; j++){
@@ -222,25 +141,18 @@ if (typeof console == "undefined") console={log:function(){}};
                     
                     var beginBlock=0;
                     var endBlock=0;
-                //    alert(begin+' begin value;'+end+' end value');
                     for(var y=0;y<trlen;y++){
                         if((begin>=trWork.blocks[y].from_segment) && (begin<=trWork.blocks[y].to_segment)){
                             beginBlock=y;
-                //            alert('beginBlock changes:'+beginBlock);
                         }
                         if((end>=trWork.blocks[y].from_segment) && (end<=trWork.blocks[y].to_segment)){
                             endBlock=y;
-                   //         alert('endBlock changes:'+endBlock);
                             break;
                         }
                     }
-                    //$('#test').append(preblock + beginBlock + "'>" + trWork.blocks[beginBlock].translation +"</span>");
                     if(backward===false){  
                         var i;
-                   //     alert(beginBlock);
-                     //   alert(begin+'a');
                         begin = trWork.blocks[beginBlock].from_segment;
-                       // alert(begin+'b');
                         
                         for(i=beginBlock;(i==beginBlock) || ( i<trlen && $('#test').height()<= maxH) ; i++){
                             $('#translation div.text').append(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
@@ -303,34 +215,37 @@ if (typeof console == "undefined") console={log:function(){}};
         },
         
         displayOnglets: function(trls){
-         
             var N = trls.length;
-            var lineWidth = $("#right-page").width()-100;
-            
+            var lineWidth = $("#right-page").width()-30;
             $('span#more').css('visibility','hidden');
             $('.onglets li').css('z-index',-100);
             $('.onglets li').css('visibility','hidden'); 
             var totWidth = 0;
             var overlap = 0;
             var ongClass='onglet first';
-            var i=1;
+            var i,id;
+            
             for(i = 0;i==0 || (i<N && (totWidth<lineWidth));i++){
-               // alert('tot: '+totWidth +', lineW: '+lineWidth);
-                var id = trls[i].work.id;
+            //   alert('tot: '+totWidth +', lineW: '+lineWidth);
+                id = trls[i].work.id;
                 $('li#onglet-'+id).css('z-index',N-i);
                 $('li#onglet-'+id).css('left',totWidth-overlap);
                 $('li#onglet-'+id).attr('class',ongClass);
                 $('li#onglet-'+id).css('visibility','visible');
-                totWidth +=  $('li#onglet-'+id).outerWidth()-overlap;
-                var overlap = 15;
+                totWidth += $('li#onglet-'+id).outerWidth()-overlap;
+                overlap = 15;
                 ongClass='onglet';
             }
+            
+            if(totWidth>lineWidth){
+                $('li#onglet-'+id).css('visibility','hidden');
+                i--;
+            }//alert(totWidth+' <-tot : line->'+lineWidth);
             if(i<N){
-                nextHiddenId = i;
+                nextHiddenId = trls[i].work.id;
                 $('span#more').css('visibility','visible');
                // $('span#more').wrap('<a href="#tr'+trId+'" />');                
             }
-            return nextHiddenId;//to be changed
         },
         
         
@@ -443,19 +358,21 @@ if (typeof console == "undefined") console={log:function(){}};
             var newId = this.id.split("-")[1];
             trId = newId;
             translations = tdxio.array.trShift(work.Interpretations.slice(),newId,true);
-           /* nextHiddenId = tdxio.page.displayOnglets(translations);    */
+           /*tdxio.page.displayOnglets(translations);    */
            // alert('nId'+newId);
             //alert(ajaxData.work.Interpretations.length);
-            nextHiddenId = tdxio.page.displayOnglets(translations);
+            tdxio.page.displayOnglets(translations);
             tdxio.page.displayWork(ajaxData,newId,back);
             tdxio.page.resize();
         });
         
         $('span#more').click(function(){
-            alert(nextHiddenId);
+           // alert(nextHiddenId);
             if(nextHiddenId!=null)
-                translations = tdxio.array.trShift(data.work.Interpretations.slice(),nextHiddenId,false);
-                nextHiddenId = tdxio.page.displayOnglets(translations);
+            //alert('trL before: '+translations.length);
+                translations = tdxio.array.trShift(translations,nextHiddenId,false);
+               // alert('trL: '+translations.length);
+                tdxio.page.displayOnglets(translations);
         });
         
     });

@@ -645,6 +645,7 @@ padding:30px;}
 
 html{
 height:99.9%;
+width:99.9%;
 }
 
 div#options{
@@ -705,6 +706,9 @@ top:0px;}
  position:relative;
  bottom:-10px;
  right:10px;
+ cursor:pointer;
+ }
+ ul.onglets li{
  cursor:pointer;
  }
  
