@@ -39,41 +39,30 @@ if (typeof console == "undefined") console={log:function(){}};
         
     tdxio.page = {
         resize: function(){
-            /*      var D = $.getDocHeight();
-            //alert('D: '+D);
-            $('div#book').height(D-$('#header').outerHeight()-$('#under-header').outerHeight()-$('.background').css('padding-top')-$('.footer').outerHeight()-$('div.tag-line').outerHeight());
-            */
             // 1. Make the height of the translation and of the work texts the same
-            if($('#translation .text').height() > $('#work .text').height()){
-                $('#work .text').height($('#translation .text').height());
+            if(Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height())>maxH){
+                if($('#translation div.text').height() > $('#work div.text').height()){
+                    $('#work div.text').height($('#translation div.text').height());
+                }else{
+                    $('#translation div.text').height($('#work div.text').height());
+                }
             }else{
-                $('#translation .text').height($('#work .text').height());
+                $('#translation div.text').height(maxH);
+                $('#work div.text').height(maxH);
             }
-            //$('#translation .text,#work .text').height(Math.max($('#translation .text').height(),$('#work .text').height()));
-
-            //maxheight = Math.max($('div#work').height(),$('div#translation'));
             //2. Then (div#work and div#translation should have the same height)...
             if($('div#work').height()!=$('div#translation').height()){
                 alert('Change the code! #work and #translation have different heights');
             }
+            
             // ... change the borders' height
             $('div.Rborder, div.Lborder').height($('div#work').height());
-            
-            
-            /*$('#translation .text').height($('#work .text#'+id).height());
-            var id = $('#translation .text').attr('id');
-            for(var j=0; j<$('#translation .text').length; j++){
-            if(id){
-                $('#translation .text').height($('#work .text#'+id).height());
-            }
-            }*/
-            //$('.page-container div#translation').height(maxheight);
-            //$('#book').height($('.page-container').height());
         },
         
         turn: function(dir,index){
             begin = parseInt(index);
-            //alert(begin +' '+(dir=='prev-page'));
+            end=parseInt(index);
+         //   alert(begin +' '+(dir=='prev-page'));
             tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'));
             tdxio.page.resize();
         },
@@ -122,62 +111,103 @@ if (typeof console == "undefined") console={log:function(){}};
                 $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
             }
         },
+      /*  writeWorkText: function(sentences,pre,backward){
+            var step;
+            var len = sentences.length;
+            var i;
+            var myBegin,myEnd;
+            if(backward===false){    
+                var i;
+                var len = sentences.length;
+                $('#test').append(pre + sentences[begin].number + "'>" + sentences[begin].content + "</span>");                    
+                for(i=begin; (i==begin) || (i<len && $('#test').height()<= maxH) ; i++){
+                    $('#work div.text').append(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
+                    if(i+1<len){
+                        $('#test').append(pre + sentences[i+1].number + "'>" +sentences[i+1].content + "</span>");
+                    }
+                    end=i;
+                }
+            }else{
+                for(i=end; (i==end)|| (i>=0 && $('#test').height()<= maxH) ; i--){
+                    $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
+                    if(i-1>=0){
+                        $('#test').prepend(pre + sentences[i-1].number + "'>" +sentences[i-1].content + "</span>");
+                    }
+                    begin=i;
+                }
+                $('#prev-page img').attr('id',(begin>0)?begin-1:0);                          
+                $('#prev-page img').css('visibility',(begin>0)?'visible':'hidden');
+                while((end+1<len)&&($('#test').height()<= maxH)){
+                    $('#test').append(pre + sentences[end+1].number + "'>" +sentences[end+1].content + "</span>");
+                    if($('#test').height()<= maxH){
+                        end++;
+                        $('#work div.text').append(pre + sentences[end].number + "'>" +sentences[end].content + "</span>");                                
+                    }
+                }
+            }
+        },*/
         
         displayWork: function(data,trId,backward){//begin and end represent segments or sentences numbers
             if(data.work.Sentences.length > 0){
-                $('div.text').height("");
                 $('div#test').height("");
-                $('#test').width($('#work div.text').width());
+                $('#translation div.text').height("");
+                $('#work div.text').height("");
+            //    alert($('#translation div.text').height()+' ' +$('#work div.text').height());
                 $('#work div.text').empty();
                 $('#test').empty();    
-                $('#translation div.text').empty();                
-
+                $('#translation div.text').empty();     
+                $('#test').width($('#work div.text').width());
+                           
                 var sentences = data.work.Sentences;
-                    //before there was $(window).height() instead of getDocHeight
-                var maxH = Math.max(minHeight,$.getDocHeight()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-$('#work div.text').outerHeight() +$('#work div.text').height()-60);
-                var next = 0;//data.work.Sentences[0].number;
+                //var maxH = Math.max(minHeight,$(window).height()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-$('#work div.text').outerHeight() +$('#work div.text').height()-60);
+                //var stdTextHeight = $.getDocHeight()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-60;
+                var stdTextHeight = docHeight-$('#header').outerHeight(true)-$('.footer').outerHeight(true)-$('#under-header').outerHeight(true)-($('.tag-line').outerHeight(true)+15)-$('.Tborder').height()-$('.work-title').outerHeight(true)-($('#work div.text').outerHeight(true) -$('#work div.text').height())-$('.Bborder').height()-60-30;
+                maxH = Math.max(minHeight,stdTextHeight);
+//                alert(stdTextHeight + ' '+minHeight+' '+maxH); 
+//                ('getDocHeight: '+docHeight+'\n headerOH:'+$('#header').outerHeight()+'\n footerOH: '+$('.footer').outerHeight()+'\n underHeaderOH: '+$('#under-header').outerHeight()+'\n tagLineOH:'+$('.tag-line').outerHeight()+'\n workTitleOH: '+$('.work-title').outerHeight()+'\n TborderH: '+$('.Tborder').height()+'\n BborderH: '+$('.Bborder').height());
+
                 var pre = "<span id='text"+data.work.id +"-segment";
-                
+                var len = sentences.length;                
                 //if(data.work.Interpretations.length == 0){// there are no translations
                 if(trId == ''){// there are no translations
+                    //alert('no translations');
                     //display only the work
-                    var len = sentences.length;
-                    
+                   
                     $('#translation .text').append("<span class='text'>Create a translation</span>"); 
-                    $('#test').append(pre + sentences[begin].number + "'>" + sentences[begin].content + "</span>");
                     
                     if(backward===false){    
-                        //alert('one:'+begin);
+                  //      alert('one:'+begin);
                         var i;
-                        $('#next-page img').attr('id',begin);
-                        
+                        $('#test').append(pre + sentences[begin].number + "'>" + sentences[begin].content + "</span>");                    
                         for(i=begin; (i==begin) || (i<len && $('#test').height()<= maxH) ; i++){
                             $('#work div.text').append(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
-                          if(i+1<len){
+                            if(i+1<len){
                                 $('#test').append(pre + sentences[i+1].number + "'>" +sentences[i+1].content + "</span>");
                             }
-                        }
-                        $('#next-page img').attr('id',(i<len)?i:0);
-                        $('#next-page img').css('visibility',(i<len)?'visible':'hidden');
-                        $('#prev-page img').attr('id',(begin > 0) ? begin-1 : 0);                           
-                        $('#prev-page img').css('visibility',(begin > 0)?'visible':'hidden');
+                            end=i;
+                        }                       
                     }else{
                         var i;
-                        $('#prev-page img').attr('id',begin);
-                        
-                        for(i=begin; (i==begin)|| (i>=0 && $('#test').height()<= maxH) ; i--){
+                        //$('#prev-page img').attr('id',begin);
+                        $('#test').append(pre + sentences[end].number + "'>" + sentences[end].content + "</span>");
+                        for(i=end; (i==end)|| (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                             if(i-1>=0){
                                 $('#test').prepend(pre + sentences[i-1].number + "'>" +sentences[i-1].content + "</span>");
+                            }                            
+                        }
+                        begin=i+1;
+                        while((end+1<len)&&($('#test').height()<= maxH)){
+                            $('#test').append(pre + sentences[end+1].number + "'>" +sentences[end+1].content + "</span>");
+                            if($('#test').height()<= maxH){
+                                end++;
+                                $('#work div.text').append(pre + sentences[end].number + "'>" +sentences[end].content + "</span>");                                
                             }
                         }
-                        $('#next-page img').attr('id',(begin+1 <len ) ? begin+1 : 0);
-                        $('#next-page img').css('visibility',(begin+1<len)?'visible':'hidden'); 
-                        $('#prev-page img').attr('id',(i>0)?i:0);                          
-                        $('#prev-page img').css('visibility',(i > 0)?'visible':'hidden');
                         back=true;
-                    }              
+                    }      
                 }else{
+                   // alert('yes translations');
                     trWork = data.work.Interpretations[0];
                     
                     for(var j=0;j<data.work.Interpretations.length; j++){
@@ -187,58 +217,88 @@ if (typeof console == "undefined") console={log:function(){}};
                     $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author +', ':'');
                     $('#translation .work-title span.title').html(trWork.work.title);                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
-                    var len = trWork.blocks.length;
+                    var trlen = trWork.blocks.length;
                     var preblock = "<span id='block";
                     
                     var beginBlock=0;
-                    for(var y=0;y<len;y++){
-                        if(begin>=trWork.blocks[y].from_segment && begin<=trWork.blocks[y].to_segment){
-                            beginBlock = y;
+                    var endBlock=0;
+                //    alert(begin+' begin value;'+end+' end value');
+                    for(var y=0;y<trlen;y++){
+                        if((begin>=trWork.blocks[y].from_segment) && (begin<=trWork.blocks[y].to_segment)){
+                            beginBlock=y;
+                //            alert('beginBlock changes:'+beginBlock);
+                        }
+                        if((end>=trWork.blocks[y].from_segment) && (end<=trWork.blocks[y].to_segment)){
+                            endBlock=y;
+                   //         alert('endBlock changes:'+endBlock);
                             break;
                         }
-                    }      
-                    $('#test').append(preblock + beginBlock + "'>" + trWork.blocks[beginBlock].translation +"</span>");
+                    }
+                    //$('#test').append(preblock + beginBlock + "'>" + trWork.blocks[beginBlock].translation +"</span>");
                     if(backward===false){  
                         var i;
+                   //     alert(beginBlock);
+                     //   alert(begin+'a');
                         begin = trWork.blocks[beginBlock].from_segment;
-                        $('#next-page img').attr('id',begin);
-                        $('#next-page a').attr('href','#tr'+trId);
-                        for(i=beginBlock;(i==beginBlock) || ( i<len && $('#test').height()<= maxH) ; i++){
+                       // alert(begin+'b');
+                        
+                        for(i=beginBlock;(i==beginBlock) || ( i<trlen && $('#test').height()<= maxH) ; i++){
                             $('#translation div.text').append(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
                             for(var x=trWork.blocks[i].from_segment; x<=trWork.blocks[i].to_segment; x++){
                                 $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
-                                $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
                             }
-                            if(i+1<len){
-                                $('#test').append(preblock + (i+1) + "'>" +trWork.blocks[i+1].translation + "</span>");
+                            $('#test').html($('#work div.text').html());
+                            if(i+1<trlen){
+                                for(var x=trWork.blocks[i+1].from_segment; x<=trWork.blocks[i+1].to_segment; x++){
+                                    $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
+                                }
                             }
+                            end=trWork.blocks[i].to_segment;
                         }
-                        $('#next-page img').attr('id',(i<len)?trWork.blocks[i].from_segment:0);
-                        $('#next-page img').css('visibility',(i<len)?'visible':'hidden');                           
-                        $('#prev-page img').attr('id',(beginBlock > 0) ? begin-1 : 0);
-                        $('#prev-page img').css('visibility',(beginBlock > 0)?'visible':'hidden');
-                        back=false;                        
+                        back=false;
                     }else{
                         var i;
-                        begin = trWork.blocks[beginBlock].to_segment;
-                        $('#prev-page img').attr('id',begin);
-                        $('#prev-page a').attr('href','#tr'+trId);
-                        for(i=beginBlock; (i==beginBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
+                        end = trWork.blocks[endBlock].to_segment;
+                        
+                        for(i=endBlock; (i==endBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#translation div.text').prepend(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
                             for(var x=trWork.blocks[i].to_segment; x>=trWork.blocks[i].from_segment; x--){
                                 $('#work div.text').prepend(pre + x +"'>" + sentences[x].content +"</span>");
                             }
+                            $('#test').html($('#work div.text').html());
                             if(i-1>=0){
-                                $('#test').prepend(preblock + (i-1) + "'>" +trWork.blocks[i-1].translation + "</span>");
+                                for(var x=trWork.blocks[i-1].to_segment; x>=trWork.blocks[i-1].from_segment; x--){
+                                    $('#test').prepend(pre + x +"'>" + sentences[x].content +"</span>");
+                                }
                             }
                         }
-                        $('#prev-page img').attr('id',(i>=0)?trWork.blocks[i].to_segment:0);
-                        $('#prev-page img').css('visibility',(i >= 0)?'visible':'hidden');
-                        $('#next-page img').attr('id',(beginBlock+1 <len ) ? begin+1 : 0);
-                        $('#next-page img').css('visibility',(beginBlock+1<len)?'visible':'hidden');   
+                        $('#test').html($('#work div.text').html());
+                        begin=trWork.blocks[i+1].from_segment;
+                        while((endBlock+1<trlen)&&($('#test').height()<= maxH)){
+                            var from=trWork.blocks[endBlock+1].from_segment;
+                            var to=trWork.blocks[endBlock+1].to_segment;
+                            for(var x=from; x<=to; x++){
+                                $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
+                            }
+                            if($('#test').height()<= maxH){
+                                $('#translation div.text').append(preblock + (endBlock+1) + "'>" +trWork.blocks[endBlock+1].translation + "</span>");
+                                for(var x=from; x<=to; x++){
+                                    $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
+                                }
+                                end=to;
+                            }
+                            endBlock++;                            
+                        }                        
                         back=true;
-                    }                    
-                }   
+                    }
+                    $('#prev-page a').attr('href','#tr'+trId);
+                    $('#next-page a').attr('href','#tr'+trId);
+                }
+                //alert('begin: '+begin+', end: '+end );
+                $('#next-page img').attr('id',(end+1<len)?end+1:0);
+                $('#next-page img').css('visibility',(end+1<len)?'visible':'hidden');
+                $('#prev-page img').attr('id',(begin>0)?begin-1:0);                           
+                $('#prev-page img').css('visibility',(begin>0)?'visible':'hidden');    
             }
         },
         
@@ -287,6 +347,7 @@ if (typeof console == "undefined") console={log:function(){}};
     var dt = 100; 
     var trId = '';
     var begin = 0;// segment from which to begin the text's display - it can represent the first or the last segment (page-turn backward or forward)
+    var end = 0;
     var back = false;
     var work;
     var ajaxData;
@@ -298,8 +359,12 @@ if (typeof console == "undefined") console={log:function(){}};
     var qtity=50;
     var params;  
     var minHeight = 400;
+    var maxH;
+    var docHeight;
    // var nextSegment;
    // var prevSegment;
+    
+    
     
     function resizeDT() {
         if (new Date() - otime < dt) {
@@ -314,6 +379,7 @@ if (typeof console == "undefined") console={log:function(){}};
     
     $(document).ready(function() {
                 
+        docHeight = $.getDocHeight();
         if((hash==null)||(hash=='')||(hash==false)){
             params={'qtity':qtity};
         }else if(hash.match(/tr\d+/gi)!=null){

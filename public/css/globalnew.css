@@ -165,12 +165,11 @@ div#remove-tags{
 div.text {
 background-color:#FFFFFF;
 border: solid 1px #DBDBDB;
-}
-
-div.text{
 margin-top:15px;
 padding:5px 10px;
 vertical-align:top;
+height:100%;
+text-align:justify;
 }
 
 .tag-item{
@@ -563,7 +562,7 @@ margin: 8px 10px 8px 0;
 .background{
 background-color:#585858;
 color:#DBDBDB;  
-padding:30px;
+padding:10px 10px 30px 10px;
 }
 
 .page-container{
@@ -713,12 +712,10 @@ top:0px;}
  position:fixed;
  left:0px;
  top:0px;
+ text-align:justify;
  visibility:hidden;
  }
 
-div.text{
-height:100%;
-}
 /*
 #container-black #header{
 position:absolute;
@@ -727,8 +724,7 @@ left:0;
 }*/
 #container-black #content{
 height:100%;
-padding-top:30px;
-padding-bottom:30px;
+padding:30px;
 }
 
 a img{
