@@ -1,6 +1,8 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
 <?php  $this->headScript()->appendFile($this->makeUrl('/js/page.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/jqueryslidemenu.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/actions.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.scrollTo-min.js')); ?>
 <?php $this->layout()->setLayout('layout-black');?>
 
 <?php 
@@ -20,11 +22,11 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     <ul>
         <li><a href="#"><div id='options'></div></a>
             <ul>
-                <li><a <?php echo $href.' '.($this->showTranslate?'':$NRattrs); ?>><?php echo __('Create a translation'); ?></a></li>
-                <li><a <?php echo $href_extend.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Continue text insertion'); ?></a></li>
-                <li><a <?php echo $href_edit.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Edit the text'); ?></a>    </li>
+                <li id="translate"><a <?php echo $href.' '.($this->showTranslate?'':$NRattrs); ?>><?php echo __('Create a translation'); ?></a></li>
+                <li id="extend"><a <?php echo $href_extend.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Continue text insertion'); ?></a></li>
+                <li id="edit"><a <?php echo $href_edit.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Edit the text'); ?></a>    </li>
                 <?php if($this->canManage): ?>
-                <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>
+                <li id="manage"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>
                 <?php endif; ?>
                 <?php if($this->canDelete): 
                     if($this->hasTranslations==false): 
@@ -32,9 +34,9 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
                         $href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
                     else: $href = 'href="" class="idle" title="'.$HTmessage.'" onClick="alert(\''.addslashes($HTmessage).'\');"'; 
                     endif;?>
-                    <li><a <?php echo $href; ?> ><?php echo __("Delete this text"); ?></a></li>
+                    <li id="delete"><a <?php echo $href; ?> ><?php echo __("Delete this text"); ?></a></li>
                 <?endif; ?>
-                <li><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("History of modifications"); ?></a></li>
+                <li id="history"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("History of modifications"); ?></a></li>
             </ul>
         </li>
     </ul>
@@ -134,7 +136,8 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 </div>
 </div>
 <div id="icons">
-<img src="<?php echo $this->makeUrl('/images/save.png'); ?>">
+<div><img src="<?php echo $this->makeUrl('/images/save.png'); ?>"></div>
+<div><img src="<?php echo $this->makeUrl('/images/delete.png'); ?>"></div>
 </div>
 </div>
 

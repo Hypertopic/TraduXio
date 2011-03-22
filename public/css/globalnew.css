@@ -672,9 +672,13 @@ position:absolute;
 right:10px;
 top:20%;
 }
-#icons img{
+
+#icons div{
 cursor:pointer;
+margin:0 0 10px 0;
 }
+
+
 
 li.onglet span a{
 color:inherit;
@@ -836,5 +840,10 @@ left:10px;
 height:23px;
 width:20px;
 }
- 
+
+dd#extendtext-element{
+margin:0;
+padding:0;
+border:solid 1px #DBDBDB;
+}
 /* END SLIDE MENU */

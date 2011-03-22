@@ -32,7 +32,7 @@ class Model_Translation extends Model_Taggable
         $table  = $this->_getTable();
             
         // control part
-        $oldBlocks = $this->fetchInterpretations($translationId);// non indexées
+        $oldBlocks = $this->fetchInterpretations($translationId);// non indexees
         Tdxio_Log::info('old blocks');
         Tdxio_Log::info($oldBlocks);
         $newBlocks=$data['TranslationBlocks'];
@@ -63,13 +63,20 @@ class Model_Translation extends Model_Taggable
             Tdxio_Log::info($where,'where before');
             if ($table->fetchRow($table->select()->where($where))) {
                 Tdxio_Log::info('block exists, update');
-                $table->update($block,$where);
+                $result = $table->update($block,$where);
+                Tdxio_Log::info($result,'number of rows?');
             } else {
                 Tdxio_Log::info('block doesn\'t exist, create');
                 $table->insert($block);
             }
         }     
-        $this->updateWorkInfo(array('title'=>$data['title'],'author'=>$data['author']),$translationId);
+        $updateData = array();
+        if(isset($data['title']))
+            $updateData['title']=$data['title'];
+        if(isset($data['author']))
+            $updateData['author']=$data['author'];        
+        if(!empty($updateData))
+            $this->updateWorkInfo($updateData,$translationId);
     }   
 
     

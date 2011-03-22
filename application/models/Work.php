@@ -60,7 +60,7 @@ class Model_Work extends Model_Taggable
             $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
             
             //aggiungi un translation block ad ogni traduzione di $id
-            $this->addInterpretations($id,$fromseg,$toseg,$data['insert_text']);            
+            $this->addInterpretations($id,$fromseg,$toseg);            
         }
         if (isset($data['visibility'])||isset($data['author'])||isset($data['title'])){
             $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
@@ -295,7 +295,7 @@ class Model_Work extends Model_Taggable
     }
     
     
-    protected function addInterpretations($work_id,$fromseg,$toseg,$srcText){
+    protected function addInterpretations($work_id,$fromseg,$toseg){
         
         $table  = $this->_getTable();
         $intTable = new Model_DbTable_Interpretation();

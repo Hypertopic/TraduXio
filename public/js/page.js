@@ -85,6 +85,7 @@ if (typeof console == "undefined") console={log:function(){}};
                 //var maxH = Math.max(minHeight,$(window).height()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-$('#work div.text').outerHeight() +$('#work div.text').height()-60);
                 //var stdTextHeight = $.getDocHeight()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-60;
                 var stdTextHeight = docHeight-$('#header').outerHeight(true)-$('.footer').outerHeight(true)-$('#under-header').outerHeight(true)-($('.tag-line').outerHeight(true)+15)-$('.Tborder').height()-$('.work-title').outerHeight(true)-($('#work div.text').outerHeight(true) -$('#work div.text').height())-$('.Bborder').height()-60-30;
+                //alert(stdTextHeight);   
                 maxH = Math.max(minHeight,stdTextHeight);
 //                alert(stdTextHeight + ' '+minHeight+' '+maxH); 
 //                ('getDocHeight: '+docHeight+'\n headerOH:'+$('#header').outerHeight()+'\n footerOH: '+$('.footer').outerHeight()+'\n underHeaderOH: '+$('#under-header').outerHeight()+'\n tagLineOH:'+$('.tag-line').outerHeight()+'\n workTitleOH: '+$('.work-title').outerHeight()+'\n TborderH: '+$('.Tborder').height()+'\n BborderH: '+$('.Bborder').height());
@@ -95,7 +96,7 @@ if (typeof console == "undefined") console={log:function(){}};
                 if(trId == ''){// there are no translations
                     //display only the work
                    
-                    $('#translation .text').append("<span class='text'>Create a translation</span>"); 
+                    $('#translation .text').append("<div id='create'>Create a translation</div>"); 
                     
                     if(backward===false){    
                         var i;
@@ -207,9 +208,9 @@ if (typeof console == "undefined") console={log:function(){}};
                     $('#next-page a').attr('href','#tr'+trId);
                 }
                 //alert('begin: '+begin+', end: '+end );
-                $('#next-page img').attr('id',(end+1<len)?end+1:0);
+                $('#next-page img').attr('id','goto-'+((end+1<len)?end+1:0));
                 $('#next-page img').css('visibility',(end+1<len)?'visible':'hidden');
-                $('#prev-page img').attr('id',(begin>0)?begin-1:0);                           
+                $('#prev-page img').attr('id','goto-'+((begin>0)?begin-1:0));                           
                 $('#prev-page img').css('visibility',(begin>0)?'visible':'hidden');    
             }
         },
@@ -253,6 +254,7 @@ if (typeof console == "undefined") console={log:function(){}};
         translate: function(){
                 
         }
+        
             
     }; 
       
@@ -276,10 +278,6 @@ if (typeof console == "undefined") console={log:function(){}};
     var minHeight = 400;
     var maxH;
     var docHeight;
-   // var nextSegment;
-   // var prevSegment;
-    
-    
     
     function resizeDT() {
         if (new Date() - otime < dt) {
@@ -345,12 +343,12 @@ if (typeof console == "undefined") console={log:function(){}};
         }));
         
         $(".turn-page").bind("click",function() {
-            tdxio.page.turn($(this).parents('div').attr('id'),this.id);
+            tdxio.page.turn($(this).parents('div').attr('id'),this.id.split('-')[1]);
         });
        
         $('#text').empty();
         
-        $('div#create').click(function(){
+        $('div#create').live('click',function(){
             alert('Create translation');
         });
         

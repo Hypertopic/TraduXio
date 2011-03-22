@@ -246,7 +246,69 @@ class WorkController extends Tdxio_Controller_Abstract
             Tdxio_Log::info($srcLangs,'my translations');       
         }
     }
+    public function getformAction(){
+        $request = $this->getRequest();
+        $type=$request->getParam('type');
+        $formname = 'Form_AjaxWork'.ucfirst($type);
+        $form = new $formname;
+        Tdxio_Log::info($form,'quaqua');
+        $this->view->form = $form;
+        Tdxio_Log::info(json_encode($form),'tent');
+    }
     
+        
+    public function ajaxextendAction(){
+       /* $request = $this->getRequest();
+        $id=$request->getParam('id');
+        $model=$this->_getModel(); 
+        
+        if (!$id || !($work=$model->fetchWork($id))) {
+            throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
+        }   
+        
+        if(!$model->isOriginalWork($id)) {
+            throw new Zend_Controller_Action_Exception(sprintf('Cannot extend a translation. Edit it instead.'), 404);
+        }
+        
+        $sentenceModel = new Model_Sentence();
+        
+        if($id && $work=$model->fetchOriginalWork($id))
+        {  
+            if ($this->getRequest()->isPost()) 
+            {*//*
+            $values=$request->getPost();
+            $model= $this->_getModel();
+            $user = Tdxio_Auth::getUserName();
+            $user = !is_null($user)?$user:Tdxio_Auth::getUserRole();
+            $params = $request->getParams();
+            Tdxio_Log::info($params,'tagAction request params');
+            $data = array('username'=> $user, 'taggable_id'=> $params['id'],'genre'=> $params['tag_genre'], 'comment' => $params['tag_comment']);
+            $response = $model->tag($data);
+            $tags = $model->getTags($params['id']);
+            $this->view->response=$response;     
+            
+            if($response['outcome']==true){
+                $histModel = new Model_History();
+                Tdxio_Log::info('ADD HISTORY TAG');
+                $histModel->addHistory( $params['id'],3,array('tag'=>$params['tag_comment'],'genre'=>$params['tag_genre']));
+            }
+            */
+             /*   $model = $this->_getModel();
+                $values=$request->getPost();
+                Tdxio_Log::info($values,'valori form');                
+                unset($data['submit']);
+                
+                $newId=$model->update($data,$id);
+                $histModel = new Model_History();
+                $histModel->addHistory($id,1);  
+               
+            if($response['outcome']==true){
+                $histModel = new Model_History();
+                Tdxio_Log::info('ADD HISTORY TAG');
+                $histModel->addHistory( $params['id'],3,array('tag'=>$params['tag_comment'],'genre'=>$params['tag_genre']));
+            }*/
+         
+    }
     public function extendAction(){
         $request = $this->getRequest();
         $id=$request->getParam('id');
@@ -584,8 +646,9 @@ class WorkController extends Tdxio_Controller_Abstract
                 }else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);} 
                 break;
             case 'my': $rule = array('privilege'=> 'translate','work_id'=>-1); //work_id = -1 is to ensure it does not count privileges with work_id !=null
-                break;                   
-            case 'extend':
+                break;
+            case 'extend': 
+            case 'ajaxextend':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 }else{
