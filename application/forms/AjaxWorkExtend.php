@@ -5,17 +5,17 @@ public function init()
     {
         // set the method for the display form to POST
         $this->setMethod('post');
-        $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
+        //$this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 
         $this->addElement('textarea', 'extendtext', array(
             'required'   => true,
             'rows' => 10,
             'class' => 'autogrow mini',
             'cols'=>150,
-            'id' => 'extend-text'
+            'id' => 'insert-text'
         ));
 
-        $this->addElement('submit', 'submit', array(
+        $this->addElement('submit', 'extendsubmit', array(
             'label'    => __('Deposit'),
             'id'=> 'extend-submit'
         ));

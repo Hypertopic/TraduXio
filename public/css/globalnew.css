@@ -665,7 +665,8 @@ font-size:1.2em;
 text-align:center;
 font-size:1.2em;
 color:#929292;
-cursor:pointer;}
+cursor:pointer;
+display:block;}
 
 #icons{
 position:absolute;

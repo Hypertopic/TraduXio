@@ -1,8 +1,7 @@
 <?php
-$this->layout()->setLayout('empty');
+$this->layout()->setLayout('jsonlayout');
 $tags = array();
 $i=0; 
 $array=array('response'=>$this->response);
-Tdxio_Log::info(Zend_Json::encode($array),'dianazamb');
 echo Zend_Json::encode($array); 
 

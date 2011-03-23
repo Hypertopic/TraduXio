@@ -57,15 +57,15 @@ class Model_Work extends Model_Taggable
             Tdxio_Log::info('fromseg is '.$fromseg.', toseg is '.$toseg);
             
             Tdxio_Log::info($data);
-            $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
+            $result=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
             
             //aggiungi un translation block ad ogni traduzione di $id
             $this->addInterpretations($id,$fromseg,$toseg);            
         }
         if (isset($data['visibility'])||isset($data['author'])||isset($data['title'])){
-            $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
+            $result=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
         }        
-        return $new_id; 
+        return $result; 
     }
         
     public function createTranslation(array $data,$original_work_id)

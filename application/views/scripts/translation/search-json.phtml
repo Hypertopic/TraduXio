@@ -1,5 +1,5 @@
 <?php
-$this->layout()->setLayout('empty');
+$this->layout()->setLayout('jsonlayout');
 foreach ($this->blocks as &$block) {
     foreach ($block as $key=>$value) {
         $block[$key]=$this->nlBr($value);
