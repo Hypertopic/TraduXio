@@ -1,4 +1,16 @@
 if (typeof console == "undefined") console={log:function(){}};
+ 
+var trId = '';
+var begin = 0;// segment from which to begin the text's display - it can represent the first or the last segment (page-turn backward or forward)
+var end = 0;
+var back = false;
+var ajaxData;
+var translations;
+var nextHiddenId=null;    
+var id_str = document.location.pathname.match(/\/id\/\d+/);
+var minHeight = 400;
+var maxH;
+var docHeight;
 
 (function($) {
     
@@ -68,7 +80,7 @@ if (typeof console == "undefined") console={log:function(){}};
             begin = parseInt(index);
             end=parseInt(index);
          //   alert(begin +' '+(dir=='prev-page'));
-            tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'));
+            tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'),begin,end);
             tdxio.page.resize();
         },
         writeWork: function(sentences,from,to, step){
@@ -78,7 +90,7 @@ if (typeof console == "undefined") console={log:function(){}};
             }
         },
         
-        displayWork: function(data,trId,backward){
+        displayWork: function(data,trId,backward,beginSeg,endSeg){
             if(data.work.Sentences.length > 0){
                 $('div#test').height("");
                 $('#translation div.text').height("");
@@ -106,29 +118,29 @@ if (typeof console == "undefined") console={log:function(){}};
                     $('#translation .text').append("<span id='create'>Create a translation</span>"); 
                     if(backward===false){    
                         var i;
-                        $('#test').append(pre + sentences[begin].number + "'>" + sentences[begin].content + "</span>");                    
-                        for(i=begin; (i==begin) || (i<len && $('#test').height()<= maxH) ; i++){
+                        $('#test').append(pre + sentences[beginSeg].number + "'>" + sentences[beginSeg].content + "</span>");                    
+                        for(i=beginSeg; (i==beginSeg) || (i<len && $('#test').height()<= maxH) ; i++){
                             $('#work div.text').append(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                             if(i+1<len){
                                 $('#test').append(pre + sentences[i+1].number + "'>" +sentences[i+1].content + "</span>");
                             }
-                            end=i;
+                            endSeg=i;
                         }                       
                     }else{
                         var i;
-                        $('#test').append(pre + sentences[end].number + "'>" + sentences[end].content + "</span>");
-                        for(i=end; (i==end)|| (i>=0 && $('#test').height()<= maxH) ; i--){
+                        $('#test').append(pre + sentences[endSeg].number + "'>" + sentences[endSegSeg].content + "</span>");
+                        for(i=endSeg; (i==endSeg)|| (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                             if(i-1>=0){
                                 $('#test').prepend(pre + sentences[i-1].number + "'>" +sentences[i-1].content + "</span>");
                             }                            
                         }
-                        begin=i+1;
-                        while((end+1<len)&&($('#test').height()<= maxH)){
-                            $('#test').append(pre + sentences[end+1].number + "'>" +sentences[end+1].content + "</span>");
+                        beginSeg=i+1;
+                        while((endSeg+1<len)&&($('#test').height()<= maxH)){
+                            $('#test').append(pre + sentences[endSeg+1].number + "'>" +sentences[endSeg+1].content + "</span>");
                             if($('#test').height()<= maxH){
-                                end++;
-                                $('#work div.text').append(pre + sentences[end].number + "'>" +sentences[end].content + "</span>");                                
+                                endSeg++;
+                                $('#work div.text').append(pre + sentences[endSeg].number + "'>" +sentences[endSeg].content + "</span>");                                
                             }
                         }
                         back=true;
@@ -149,17 +161,17 @@ if (typeof console == "undefined") console={log:function(){}};
                     var beginBlock=0;
                     var endBlock=0;
                     for(var y=0;y<trlen;y++){
-                        if((begin>=trWork.blocks[y].from_segment) && (begin<=trWork.blocks[y].to_segment)){
+                        if((beginSeg>=trWork.blocks[y].from_segment) && (beginSeg<=trWork.blocks[y].to_segment)){
                             beginBlock=y;
                         }
-                        if((end>=trWork.blocks[y].from_segment) && (end<=trWork.blocks[y].to_segment)){
+                        if((endSeg>=trWork.blocks[y].from_segment) && (endSeg<=trWork.blocks[y].to_segment)){
                             endBlock=y;
                             break;
                         }
                     }
                     if(backward===false){  
                         var i;
-                        begin = trWork.blocks[beginBlock].from_segment;
+                        beginSeg = trWork.blocks[beginBlock].from_segment;
                         
                         for(i=beginBlock;(i==beginBlock) || ( i<trlen && $('#test').height()<= maxH) ; i++){
                             $('#translation div.text').append(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
@@ -172,12 +184,12 @@ if (typeof console == "undefined") console={log:function(){}};
                                     $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
                                 }
                             }
-                            end=trWork.blocks[i].to_segment;
+                            endSeg=trWork.blocks[i].to_segment;
                         }
                         back=false;
                     }else{
                         var i;
-                        end = trWork.blocks[endBlock].to_segment;
+                        endSeg = trWork.blocks[endBlock].to_segment;
                         
                         for(i=endBlock; (i==endBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#translation div.text').prepend(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
@@ -192,7 +204,7 @@ if (typeof console == "undefined") console={log:function(){}};
                             }
                         }
                         $('#test').html($('#work div.text').html());
-                        begin=trWork.blocks[i+1].from_segment;
+                        beginSeg=trWork.blocks[i+1].from_segment;
                         while((endBlock+1<trlen)&&($('#test').height()<= maxH)){
                             var from=trWork.blocks[endBlock+1].from_segment;
                             var to=trWork.blocks[endBlock+1].to_segment;
@@ -204,7 +216,7 @@ if (typeof console == "undefined") console={log:function(){}};
                                 for(var x=from; x<=to; x++){
                                     $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
                                 }
-                                end=to;
+                                endSeg=to;
                             }
                             endBlock++;                            
                         }                        
@@ -214,11 +226,14 @@ if (typeof console == "undefined") console={log:function(){}};
                     $('#next-page a').attr('href','#tr'+trId);
                 }
                 //alert('begin: '+begin+', end: '+end );
-                $('#next-page img').attr('id','goto-'+((end+1<len)?end+1:0));
-                $('#next-page img').css('visibility',(end+1<len)?'visible':'hidden');
-                $('#prev-page img').attr('id','goto-'+((begin>0)?begin-1:0));                           
-                $('#prev-page img').css('visibility',(begin>0)?'visible':'hidden');    
+                $('#next-page img').attr('id','goto-'+((endSeg+1<len)?endSeg+1:0));
+                $('#next-page img').css('visibility',(endSeg+1<len)?'visible':'hidden');
+                $('#prev-page img').attr('id','goto-'+((beginSeg>0)?beginSeg-1:0));                           
+                $('#prev-page img').css('visibility',(beginSeg>0)?'visible':'hidden');    
             }
+            $('#test').empty();
+            begin = beginSeg;
+            end = endSeg;
         },
         
         displayOnglets: function(trls){
@@ -268,37 +283,25 @@ if (typeof console == "undefined") console={log:function(){}};
     var tout = false;
     var otime = new Date(10, 10, 2010, 10,10,10);
     var dt = 100; 
-    var trId = '';
-    var begin = 0;// segment from which to begin the text's display - it can represent the first or the last segment (page-turn backward or forward)
-    var end = 0;
-    var back = false;
-    var work;
-    var ajaxData;
-    var translations;
-    var nextHiddenId=null;    
-    var id_str = document.location.pathname.match(/\/id\/\d+/);
-    var url = tdxio.baseUrl+"/work/ajaxread"+id_str;
-    var hash = document.location.hash.substr(1);
-    var qtity=50;
-    var params;  
-    var minHeight = 400;
-    var maxH;
-    var docHeight;
     
     function resizeDT() {
         if (new Date() - otime < dt) {
             setTimeout(resizeDT, dt);
         } else {
             tout = false;
-            tdxio.page.displayWork(ajaxData,trId,back);//refresh arrows
+            tdxio.page.displayWork(ajaxData,trId,back,begin,end);//refresh arrows
             tdxio.page.resize();
             tdxio.page.displayOnglets(translations);
         }                
     };
-    
     $(document).ready(function() {
        // $.checkBlocked();
-                
+
+        var url = tdxio.baseUrl+"/work/ajaxread"+id_str;
+        var hash = document.location.hash.substr(1);
+        var qtity=50;
+        var params;                
+        
         docHeight = $.getDocHeight();
         if((hash==null)||(hash=='')||(hash==false)){
             params={'qtity':qtity};
@@ -308,30 +311,29 @@ if (typeof console == "undefined") console={log:function(){}};
             if((beginHash!=null)&&(beginHash!='')){begin = beginHash[0].substr(4);}
             params={'qtity':qtity,'trId':trId};
         }
-        
+                      
         $.ajax({
             type:"get",
             url:encodeURI(url),
             dataType: "json",
             data: params,
-            success: function(data){
-                if(data.work.Interpretations.length>0){
+            success: function(rdata){
+                if(rdata.work.Interpretations.length>0){
                     var exists=false;
-                    for(var k=0;k<data.work.Interpretations.length;k++){
-                        if(trId == data.work.Interpretations[k].work.id){
+                    for(var k=0;k<rdata.work.Interpretations.length;k++){
+                        if(trId == rdata.work.Interpretations[k].work.id){
                             exists = true;
                             break;
                         }
                     }
-                    trId = (exists)?trId:data.work.Interpretations[0].work.id;
+                    trId = (exists)?trId:rdata.work.Interpretations[0].work.id;
                     document.location.hash='tr'+trId;
-                    //trId = (trId=='')?data.work.Interpretations[0].work.id:trId;
-                    translations = tdxio.array.trShift(data.work.Interpretations.slice(),trId,true);
+                    //trId = (trId=='')?rdata.work.Interpretations[0].work.id:trId;
+                    translations = tdxio.array.trShift(rdata.work.Interpretations.slice(),trId,true);
                     tdxio.page.displayOnglets(translations);
                 }
-                work = data.work;
-                ajaxData = data;
-                tdxio.page.displayWork(data,trId,false);
+                ajaxData = rdata;
+                tdxio.page.displayWork(rdata,trId,false,begin,end);
                 tdxio.page.resize();
             },
             error: function() {
@@ -362,12 +364,12 @@ if (typeof console == "undefined") console={log:function(){}};
         $('ul.onglets li').live('click',function(){
             var newId = this.id.split("-")[1];
             trId = newId;
-            translations = tdxio.array.trShift(work.Interpretations.slice(),newId,true);
+            translations = tdxio.array.trShift(ajaxData.work.Interpretations.slice(),newId,true);
            /*tdxio.page.displayOnglets(translations);    */
            // alert('nId'+newId);
             //alert(ajaxData.work.Interpretations.length);
             tdxio.page.displayOnglets(translations);
-            tdxio.page.displayWork(ajaxData,newId,back);
+            tdxio.page.displayWork(ajaxData,newId,back,begin,end);
             tdxio.page.resize();
         });
         

@@ -1,7 +1,7 @@
 <?php
 $this->layout()->setLayout('jsonlayout');
-$tags = array();
-$i=0; 
-$array=array('response'=>$this->response);
-echo Zend_Json::encode($array); 
+
+Tdxio_Log::info(Zend_Json::encode($this->rdata),'log tag json data');
+echo Zend_Json::encode($this->rdata); 
+
 

@@ -1,0 +1,9 @@
+<?php
+$this->layout()->setLayout('jsonlayout');
+Tdxio_Log::info(Zend_Json::encode($this->form->__toString()),'form');
+
+//$form = json_encode($this->form->__toString());
+$data = Zend_Json::encode(array('response'=>true,'form'=>$this->form->__toString(),'message'=>__('OK')));
+
+Tdxio_Log::info($data,'json_form');
+echo $data;

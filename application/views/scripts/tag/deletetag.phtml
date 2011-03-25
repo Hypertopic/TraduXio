@@ -1,7 +1,7 @@
 <?php
 $this->layout()->setLayout('jsonlayout');
 
-$data = array("last"=>$this->last,"outcome"=>$this->response);
-Tdxio_Log::info(Zend_Json::encode($data),'dati delete');
-echo Zend_Json::encode($data); 
+$rdata = array("response"=>$this->response,"last"=>$this->last,"message"=>$this->message);
+Tdxio_Log::info(Zend_Json::encode($rdata),'dati delete');
+echo Zend_Json::encode($rdata); 
 

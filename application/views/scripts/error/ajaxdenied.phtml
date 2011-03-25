@@ -1,0 +1,7 @@
+<?php
+$this->layout()->setLayout('jsonlayout');
+
+$data=array('response'=>false,'message'=>$this->message);
+
+echo Zend_Json::encode($data); 
+

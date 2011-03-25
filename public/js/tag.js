@@ -35,23 +35,23 @@ if (typeof console == "undefined") console={log:function(){}};
                     type: "post",
                     url: url,
                     dataType: "json",
-                    success:function(data,status){
-                        if(data.response.outcome==true){
+                    success:function(rdata){
+                        if(rdata.response==true){
                             var genre=$("#genresel")[0].options[$("#genresel")[0].selectedIndex].text.toLowerCase();
                             var genreId=$("#genresel").val();
                             var tag = $('#tag_input').val(); 
-                            tdxio.tag.print_tags(tag,genre,genreId,data.response.newID);
+                            tdxio.tag.print_tags(tag,genre,genreId,rdata.newID);
                             $('#tagform').resetForm();
                         }
                         else{
-                            alert(data.response.message);
+                            alert(rdata.message);
                         }
                     },
                     error:function() {
                         alert("error storing the tag");
                     },
                     complete:function() {
-                        
+                        alert('complete');
                     }
                 });
             }else{
@@ -73,8 +73,8 @@ if (typeof console == "undefined") console={log:function(){}};
                 type:"post",
                 url:encodeURI(url),
                 dataType: "json",
-                success: function(data){
-                    if(data.last){
+                success: function(rdata){
+                    if(rdata.last){
                         $(elID).parent('span').parent('span').parent('div').remove();
                     }
                     else{

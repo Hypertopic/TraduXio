@@ -283,8 +283,13 @@ class WorkController extends Tdxio_Controller_Abstract
                 if($result>0){
                     $histModel = new Model_History();
                     $histModel->addHistory($id,1);  
-                    $this->view->result=$result;
-                    $this->view->addedText = $values['extendtext'];        
+                    $this->view->response=true;
+                    $this->view->addedText = $values['extendtext'];
+                    $this->view->message = __("OK");
+                }else{
+                    $this->view->response = false;
+                    $this->view->addedText = '';    
+                    $this->view->message = __("DB not modified");
                 }
             }
         }
@@ -578,7 +583,7 @@ class WorkController extends Tdxio_Controller_Abstract
     public function getRule($request){
         $action = $request->action;
         $resource_id = $request->getParam('id');
-        
+        $visibility = null;
         $rule = 'noAction';
         Tdxio_Log::info($request,'request');
         Tdxio_Log::info($resource_id,'resource_id');
@@ -623,6 +628,7 @@ class WorkController extends Tdxio_Controller_Abstract
                 }else{
                         $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit','translate_privilege'=> 'translate');      
                 }break; 
+            case 'getform':
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        

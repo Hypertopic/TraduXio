@@ -48,11 +48,11 @@ class TagController extends Tdxio_Controller_Abstract
             $params = $request->getParams();
             Tdxio_Log::info($params,'tagAction request params');
             $data = array('username'=> $user, 'taggable_id'=> $params['id'],'genre'=> $params['tag_genre'], 'comment' => $params['tag_comment']);
-            $response = $model->tag($data);
+            $result = $model->tag($data);
             $tags = $model->getTags($params['id']);
-            $this->view->response=$response;     
+            $this->view->rdata=$result;     
             
-            if($response['outcome']==true){
+            if($result['response']==true){
                 $histModel = new Model_History();
                 Tdxio_Log::info('ADD HISTORY TAG');
                 $histModel->addHistory( $params['id'],3,array('tag'=>$params['tag_comment'],'genre'=>$params['tag_genre']));
@@ -78,10 +78,13 @@ class TagController extends Tdxio_Controller_Abstract
         $result = $model->getTags($taggableId,$genre);
         Tdxio_Log::info(empty($result[$taggableId]),'esito');
         $this->view->last=empty($result[$taggableId]);
-        
+
         if($rowsAffected>0){
             $histModel = new Model_History();
-            $histModel->addHistory($taggableId,4,array('tag'=>$tag['comment'],'genre'=>$genre));   
+            $histModel->addHistory($taggableId,4,array('tag'=>$tag['comment'],'genre'=>$genre));  
+            $this->view->message = __("OK"); 
+        }else{
+            $this->view->message = __("No tag removed"); 
         }
     }
     
