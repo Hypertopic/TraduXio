@@ -68,7 +68,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
             <span class="title red"><?php echo $this->work['title']; ?></span>
         </div>
        <!-- <div class="language TBspaced red"><?php //echo __($this->work['language']); ?></div> !-->
-        <div class="text">
+        <div class="text show">
             <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
                 <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
                 <span class="segment" id="<?php echo $segment_id; ?>"><?php //echo $this->nlBr($sentence['content']); ?></span>
@@ -116,7 +116,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
             <span class="author red"></span>
             <span class="title red"></span>
         </div>
-        <div class="text">
+        <div class="text show">
         <?php if(!$this->trId):?>
         <span id="create"><?php echo __('Create a translation'); ?></span>
         <?php endif; ?>
@@ -136,8 +136,9 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 </div>
 </div>
 <div id="icons">
-<div><img src="<?php echo $this->makeUrl('/images/save.png'); ?>"></div>
-<div><img src="<?php echo $this->makeUrl('/images/delete.png'); ?>"></div>
+<div id="editbtn" title="<?php echo __("Edit mode"); ?>"></div>
+<div id="savebtn" title="<?php echo __("Save"); ?>"></div>
+<div id="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
 </div>
 </div>
 

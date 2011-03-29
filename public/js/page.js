@@ -11,8 +11,15 @@ var id_str = document.location.pathname.match(/\/id\/\d+/);
 var minHeight = 400;
 var maxH;
 var docHeight;
+var blocked=false;
 
 (function($) {
+    
+    $.fn.addText = function(x0,x1,pre,post,sentences) {
+        for(var x=0; x<=x1; x++){               
+            $(this).append(pre + x +"'>" + sentences[x].content + post);
+        }
+    }
     
     $.getDocHeight = function(){
       //  alert('1 getdocheight');
@@ -24,13 +31,9 @@ var docHeight;
         );
     };
     
-  /*  $.checkBlocked = function(){
-        if($('#blocked').attr('title')=='true'){
-            exit(0);           
-        }
-        return;
-    }
-*/    
+    $.getBlocked = function(){return blocked;}
+    $.setBlocked = function(val){blocked = val;}
+    
     tdxio.array = {
         trShift : function(trArray,id,selected){
             var index = 0;
@@ -55,9 +58,10 @@ var docHeight;
     }
         
     tdxio.page = {
+        
         resize: function(){
             // 1. Make the height of the translation and of the work texts the same
-            if(Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height())>maxH){
+            /*if(Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height())>maxH){
                 if($('#translation div.text').height() > $('#work div.text').height()){
                     $('#work div.text').height($('#translation div.text').height());
                 }else{
@@ -66,7 +70,10 @@ var docHeight;
             }else{
                 $('#translation div.text').height(maxH);
                 $('#work div.text').height(maxH);
-            }
+            }*/
+            var maxtemp = Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height());
+            $('#translation div.text').height(maxtemp);
+            $('#work div.text').height(maxtemp);
             //2. Then (div#work and div#translation should have the same height)...
             if($('div#work').height()!=$('div#translation').height()){
                 alert('Change the code! #work and #translation have different heights');
@@ -74,6 +81,7 @@ var docHeight;
             
             // ... change the borders' height
             $('div.Rborder, div.Lborder').height($('div#work').height());
+        
         },
         
         turn: function(dir,index){
@@ -81,6 +89,7 @@ var docHeight;
             end=parseInt(index);
          //   alert(begin +' '+(dir=='prev-page'));
             tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'),begin,end);
+            tdxio.page.adjust();
             tdxio.page.resize();
         },
         writeWork: function(sentences,from,to, step){
@@ -89,12 +98,31 @@ var docHeight;
                 $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
             }
         },
+        resetHeight : function(){
+            $('div#test').height("");
+            $('#translation div.text').height("");
+            $('#work div.text').height("");
+        },
+        adjust : function(){
+            if($("#editbtn").attr('class')=='on'){
+                $('.block').toggleClass('show',true);
+                 
+                $('#translation div.text span.block').each(function(index,el){
+                    var oid = 'o'+el.id;
+                    if($(el).height()>$('#'+oid).height()){
+                        $('#'+oid).height($(el).height());
+                    }else{
+                        $(el).height($('#'+oid).height());
+                    }
+                });
+            }
+        },
         
         displayWork: function(data,trId,backward,beginSeg,endSeg){
+            
             if(data.work.Sentences.length > 0){
-                $('div#test').height("");
-                $('#translation div.text').height("");
-                $('#work div.text').height("");
+                
+                tdxio.page.resetHeight();
                 $('#work div.text').empty();
                 $('#test').empty();     
                 $('#translation div.text').empty();     
@@ -156,7 +184,8 @@ var docHeight;
                     $('#translation .work-title span.title').html(trWork.work.title);                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var trlen = trWork.blocks.length;
-                    var preblock = "<span id='block";
+                    var preblock = "<span class='block' id='block";
+                    var outblock = "<span class='block' id='oblock";
                     
                     var beginBlock=0;
                     var endBlock=0;
@@ -171,13 +200,16 @@ var docHeight;
                     }
                     if(backward===false){  
                         var i;
+                        var text;
                         beginSeg = trWork.blocks[beginBlock].from_segment;
                         
                         for(i=beginBlock;(i==beginBlock) || ( i<trlen && $('#test').height()<= maxH) ; i++){
                             $('#translation div.text').append(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
-                            for(var x=trWork.blocks[i].from_segment; x<=trWork.blocks[i].to_segment; x++){
-                                $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
+                            
+                            for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
+                                text += pre + x +"'>" + sentences[x].content +"</span>";
                             }
+                            $('#work div.text').append(outblock + i + "'>"+text+"</span>");
                             $('#test').html($('#work div.text').html());
                             if(i+1<trlen){
                                 for(var x=trWork.blocks[i+1].from_segment; x<=trWork.blocks[i+1].to_segment; x++){
@@ -189,13 +221,15 @@ var docHeight;
                         back=false;
                     }else{
                         var i;
+                        var text;
                         endSeg = trWork.blocks[endBlock].to_segment;
                         
                         for(i=endBlock; (i==endBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#translation div.text').prepend(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
-                            for(var x=trWork.blocks[i].to_segment; x>=trWork.blocks[i].from_segment; x--){
-                                $('#work div.text').prepend(pre + x +"'>" + sentences[x].content +"</span>");
+                             for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
+                                text += pre + x +"'>" + sentences[x].content +"</span>";
                             }
+                            $('#work div.text').prepend(outblock + i + "'>"+text+"</span>");
                             $('#test').html($('#work div.text').html());
                             if(i-1>=0){
                                 for(var x=trWork.blocks[i-1].to_segment; x>=trWork.blocks[i-1].from_segment; x--){
@@ -213,9 +247,10 @@ var docHeight;
                             }
                             if($('#test').height()<= maxH){
                                 $('#translation div.text').append(preblock + (endBlock+1) + "'>" +trWork.blocks[endBlock+1].translation + "</span>");
-                                for(var x=from; x<=to; x++){
-                                    $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
+                                for(var x=from,text=''; x<=to; x++){
+                                    text += pre + x +"'>" + sentences[x].content +"</span>";
                                 }
+                                $('#work div.text').append(outblock + (endBlock+1) + "'>"+text+"</span>");
                                 endSeg=to;
                             }
                             endBlock++;                            
@@ -234,6 +269,7 @@ var docHeight;
             $('#test').empty();
             begin = beginSeg;
             end = endSeg;
+            
         },
         
         displayOnglets: function(trls){
@@ -295,8 +331,7 @@ var docHeight;
         }                
     };
     $(document).ready(function() {
-       // $.checkBlocked();
-
+       
         var url = tdxio.baseUrl+"/work/ajaxread"+id_str;
         var hash = document.location.hash.substr(1);
         var qtity=50;
@@ -341,13 +376,16 @@ var docHeight;
             }
         }); 
         
-
+   
+        
         
         $(window).bind('resize',(function() {
-            otime = new Date();
-            if (tout === false) {
-                tout = true;
-                setTimeout(resizeDT, dt);
+            if(!blocked){
+                otime = new Date();
+                if (tout === false) {
+                    tout = true;
+                    setTimeout(resizeDT, dt);
+                }
             }
         }));
         
@@ -362,6 +400,7 @@ var docHeight;
         });
         
         $('ul.onglets li').live('click',function(){
+            $.setBlocked(false);
             var newId = this.id.split("-")[1];
             trId = newId;
             translations = tdxio.array.trShift(ajaxData.work.Interpretations.slice(),newId,true);
@@ -370,6 +409,7 @@ var docHeight;
             //alert(ajaxData.work.Interpretations.length);
             tdxio.page.displayOnglets(translations);
             tdxio.page.displayWork(ajaxData,newId,back,begin,end);
+            tdxio.page.adjust();
             tdxio.page.resize();
         });
         

@@ -9,9 +9,22 @@ if (typeof console == "undefined") console={log:function(){}};
     outerLabel = {        
         fname1: function(){                
         }            
-    };       
+    };    
+
+    $.setState = function(mode){
+        if(mode=='reset'){
+            $.setBlocked(false);
+            $('.text').toggleClass('show',true);
+            $('.block').toggleClass('show',false);
+            $('#icons div').toggleClass('on',false);
+        }else if(mode=='edit'){
+            
+        }
+        
+    },
         
     $.transform = function(action,data){
+        $.setState('reset');
         switch(action)
         {
         case 'extend':
@@ -32,21 +45,22 @@ if (typeof console == "undefined") console={log:function(){}};
         default:
           
         }
-        $("#work div.text").height("");
+        tdxio.page.resetHeight();
         tdxio.page.resize();
         
         $.scrollTo($('#insert-text'));
-      //  alert('transform '+action+' resized');
+        //  alert('transform '+action+' resized');
+        $.setBlocked(true);
     };
     
     $.update = function(action,data){
-        alert('update '+action);
+        //alert('update '+action);
         switch(action)
         {
         case 'extend':
             $('form#extend-form').remove();
             var lastId = $("#work div.text span:last")[0].id;
-            alert(lastId);
+          //  alert(lastId);
             var newId = lastId;
             newId = newId.replace(/\d+$/,parseInt(lastId.match(/\d+$/))+1);
             $('#'+lastId).after("<span id='"+newId+"'>"+data.addedtext+"</span>" );
@@ -63,8 +77,23 @@ if (typeof console == "undefined") console={log:function(){}};
         }
         $("#work div.text").height("");
         tdxio.page.resize();
+        $.setBlocked(false);
     }
-
+    
+    $.showBlocks = function(show){
+        if(show){
+            $('.text').css('border','none');
+            
+        }else{
+            $('.text').css('border','');
+            
+        }
+      /*  window.ajaxData
+        window.trId
+        window.begin
+        window.end*/
+        
+    }
     
     $(document).ready(function() {
         var url;
@@ -122,12 +151,24 @@ if (typeof console == "undefined") console={log:function(){}};
                     alert("error posting the form");
                 },
                 complete:function() {
-                    alert('complete');    
+                    //alert('complete');    
                 }
             });
             //alert('after ajax'); 
             //event.preventDefault();
             return false; 
+        });
+        
+        $("#editbtn").click(function(){
+            $('#icons div').toggleClass('on');
+            var active = $(this).attr('class')=='on';
+            $('.text').toggleClass('show');
+            $('.block').toggleClass('show');
+            $.setState(active?'edit':'reset');
+            $.setBlocked(active);
+            tdxio.page.resetHeight();
+            tdxio.page.adjust();
+            tdxio.page.resize();
         });
     });
     
