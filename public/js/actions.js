@@ -11,23 +11,13 @@ if (typeof console == "undefined") console={log:function(){}};
         }            
     };    
 
-    $.setState = function(mode){
-        if(mode=='reset'){
-            $.setBlocked(false);
-            $('.text').toggleClass('show',true);
-            $('.block').toggleClass('show',false);
-            $('#icons div').toggleClass('on',false);
-        }else if(mode=='edit'){
-            
-        }
-        
-    },
         
     $.transform = function(action,data){
-        $.setState('reset');
+
         switch(action)
         {
         case 'extend':
+        tdxio.page.setState('reset');
         //go to the last page, if you're not in it
         tdxio.page.displayWork(window.ajaxData,window.trId,true,window.ajaxData.work.Sentences.length-1,window.ajaxData.work.Sentences.length-1);
         tdxio.page.resize();
@@ -53,8 +43,17 @@ if (typeof console == "undefined") console={log:function(){}};
         $.setBlocked(true);
     };
     
+    $.updateTranslation = function(translation){
+        window.translations[0] = data.translation;
+        window.ajaxData.work.Interpretations.each(function(index,el){if(el.work.id==window.trId)window.ajaxData.work.Interpretations[index]=data.translation;});
+        tdxio.page.displayWork(window.ajaxData,window.trId,window.back,window.begin,window.end);
+        tdxio.page.setState('edit');
+        tdxio.page.adjust();
+        tdxio.page.resize();
+    };
+    
     $.update = function(action,data){
-        //alert('update '+action);
+        alert('update '+action);
         switch(action)
         {
         case 'extend':
@@ -67,8 +66,15 @@ if (typeof console == "undefined") console={log:function(){}};
 
             //append(data.addedtext);
             break;
-        case 'edit':
-
+        case 'cut':
+            
+            $.updateTranslation(data.translation);
+            var segId = data;
+            $('#'+segId).after('test');
+        break;
+        case 'merge':
+            var segId = data;
+            $('#'+segId).after('test');
           break;
         case 'translate':
           break;
@@ -100,8 +106,26 @@ if (typeof console == "undefined") console={log:function(){}};
         var action;
         var idstr = document.location.pathname.match(/\/id\/\d+/);
         var workId = parseInt(idstr[0].match(/\d+/));
+        
+        url=encodeURI(tdxio.baseUrl+"/translation/save");
+        
+        $('#translation div.text .block.show.editable').live('hover',function(){$(this).editable(url,{ 
+            submitdata: {'id': window.trId},
+            type      : 'textarea',
+            cancel    : 'Cancel',
+            submit    : 'Save',
+            indicator : $(this).html(),
+            tooltip   : 'Click to edit...',
+            intercept : function (jsondata) {
+                obj = jQuery.parseJSON(jsondata);
+                if(obj.response!=null && obj.response===false)
+                    {alert(obj.message);return;}
+                // do something with obj.status and obj.other
+                return(obj.result);
+            }
+        });});
        
-       $("div#myslidemenu ul li ul li a").live('click',function(event){
+        $("div#myslidemenu ul li ul li a").live('click',function(event){
             event.preventDefault();
            /* if($(this).attr('class')=='idle'){
                 window.location.replace(tdxio.baseUrl+"/login/index");
@@ -164,12 +188,37 @@ if (typeof console == "undefined") console={log:function(){}};
             var active = $(this).attr('class')=='on';
             $('.text').toggleClass('show');
             $('.block').toggleClass('show');
-            $.setState(active?'edit':'reset');
+            tdxio.page.setState(active?'edit':'reset');
             $.setBlocked(active);
             tdxio.page.resetHeight();
             tdxio.page.adjust();
             tdxio.page.resize();
         });
+        
+        
+        $(".merge , .cut").live('click',function(){
+            var op = $(this).attr('class');
+            alert(op);
+            var segId = (op=='merge')?$(this).prev('span.block').children()[$(this).prev('span.block').children().length-1].id:$(this).prev('span.segment').attr('id'); 
+            var after = segId.split('segment')[1];
+            $.ajax({
+                type:"get",
+                url:encodeURI(tdxio.baseUrl+"/translation/ajax"+op),
+                data: {'id':window.trId,'after':after},
+                dataType: "json",
+                success: function(rdata,status){
+                    if (rdata.response==false) {
+                        alert(rdata.message);
+                    }else{
+                        $.update(op,segId);
+                    }
+                },
+                error: function() {
+                    alert("Error merging");
+                }
+            });
+        });
+            
     });
     
     

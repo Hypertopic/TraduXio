@@ -81,6 +81,17 @@ class TranslationController extends Tdxio_Controller_Abstract
         $this->view->translation=$work;
     }
     
+    public function saveAction()
+    {
+        $request=$this->getRequest();
+        $post = $request->getPost();
+        Tdxio_Log::info($post,'posted');      
+        
+        $value = $this->_getParam('value', '');
+       
+        $this->view->newText = $value;
+    }
+    
     
     public function cutAction() 
     {
@@ -105,6 +116,24 @@ class TranslationController extends Tdxio_Controller_Abstract
         $segToRedirect = $this->getFirstSegmentOf($segToCut,$translation);
         $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
 
+    }
+    
+    public function ajaxcutAction(){
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        
+        $model = $this->_getModel();
+        $this->view->data = array('response'=> true,'message'=>'Cut ok');
+        $this->_helper->viewRenderer('refresh');
+    }
+    
+    public function ajaxmergeAction(){
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        
+        $model = $this->_getModel();
+        $this->view->data = array('response'=>true,'message'=>'Merge ok');
+        $this->_helper->viewRenderer('refresh');
     }
     
     public function mergeAction() 
@@ -322,15 +351,18 @@ class TranslationController extends Tdxio_Controller_Abstract
         }
         
         switch($action){
+            case 'save':
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 }else{
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility, 'notAllowed'=>true);        
                 } break; 
+            case 'ajaxcut':
             case 'cut':
                 $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);    
                 break;
+            case 'ajaxmerge':
             case 'merge': 
                 $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 break;              

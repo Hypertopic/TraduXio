@@ -25,13 +25,14 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
     public function preDispatch($request)
     {
         $isXml = $request->isXmlHttpRequest();
-        if($request->isXmlHttpRequest()){
-            Tdxio_Log::info($request->getActionName(),'yes it is');}
-        else{Tdxio_Log::info('no it is not');}
         
         $controllername = $request->getControllerName();
         $controllername[0]=strtoupper($controllername[0]);
         $actionName = $request->getActionName();
+        
+        if($isXml){
+            Tdxio_Log::info($actionName,'yes it is');}
+        else{Tdxio_Log::info('no it is not');}
         
         //If the request is not for a controller we can just exit here without doing anything
         if(empty($controllername))

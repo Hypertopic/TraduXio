@@ -880,9 +880,30 @@ display:block;
 padding:5px 10px;
 }
 
-span.show{
-margin-bottom:15px;
+#translation span.show{
+margin-bottom:19px;/* this value must be equal to .merge height +3px*/
 }
+
+.cut{
+background:transparent url(../images/split.png) no-repeat;
+height:16px;
+width:16px;
+display:inline-block;
+cursor:pointer;
+}
+.merge{
+background:transparent url(../images/merge.png) no-repeat;
+height:16px;
+width:16px;
+display:inline-block;
+cursor:pointer;
+}
+
+.editable textarea{
+border:none;
+font:inherit;
+}
+
 
 
 /* END SLIDE MENU */

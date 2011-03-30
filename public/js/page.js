@@ -58,7 +58,6 @@ var blocked=false;
     }
         
     tdxio.page = {
-        
         resize: function(){
             // 1. Make the height of the translation and of the work texts the same
             /*if(Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height())>maxH){
@@ -89,11 +88,12 @@ var blocked=false;
             end=parseInt(index);
          //   alert(begin +' '+(dir=='prev-page'));
             tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'),begin,end);
+            tdxio.page.setState($('#editbtn').attr('class')=='on'?'edit':'reset');
             tdxio.page.adjust();
             tdxio.page.resize();
         },
         writeWork: function(sentences,from,to, step){
-            var pre = "<span id='text"+data.work.id +"-segment";
+            var pre = "<span class='segment' id='text"+data.work.id +"-segment";
             for(var x=from; x<=to; x+=step){
                 $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
             }
@@ -106,7 +106,7 @@ var blocked=false;
         adjust : function(){
             if($("#editbtn").attr('class')=='on'){
                 $('.block').toggleClass('show',true);
-                 
+                                 
                 $('#translation div.text span.block').each(function(index,el){
                     var oid = 'o'+el.id;
                     if($(el).height()>$('#'+oid).height()){
@@ -114,8 +114,31 @@ var blocked=false;
                     }else{
                         $(el).height($('#'+oid).height());
                     }
+                    $(el).offsetParent($('#'+oid).offsetParent());
                 });
+                
             }
+        },
+        
+        setState : function(mode){
+            if(mode=='reset'){
+                $.setBlocked(false);
+                $('.text').toggleClass('show',true);
+                $('.block').toggleClass('show',false);
+                $('#translation .block').toggleClass('editable',false);
+                $('#icons div').toggleClass('on',false);
+                $('.cut').remove();
+                $('.merge').remove();
+            }else if(mode=='edit'){
+                $.setBlocked(true);
+                $('.text').toggleClass('show',false);
+                $('.block').toggleClass('show',true);
+                $('#translation .block').toggleClass('editable',true);
+                $('#icons div').toggleClass('on',true);
+                $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
+                $('#work span.block').after('<span class="merge" title="Merge here"></span>');
+                $('#work span.block.show span.cut:last-child').remove();
+            }            
         },
         
         displayWork: function(data,trId,backward,beginSeg,endSeg){
@@ -137,7 +160,7 @@ var blocked=false;
 //                alert(stdTextHeight + ' '+minHeight+' '+maxH); 
 //                ('getDocHeight: '+docHeight+'\n headerOH:'+$('#header').outerHeight()+'\n footerOH: '+$('.footer').outerHeight()+'\n underHeaderOH: '+$('#under-header').outerHeight()+'\n tagLineOH:'+$('.tag-line').outerHeight()+'\n workTitleOH: '+$('.work-title').outerHeight()+'\n TborderH: '+$('.Tborder').height()+'\n BborderH: '+$('.Bborder').height());
 
-                var pre = "<span id='text"+data.work.id +"-segment";
+                var pre = "<span class='segment' id='text"+data.work.id +"-segment";
                 var len = sentences.length;                
                 //if(data.work.Interpretations.length == 0){// there are no translations
                 if(trId == ''){// there are no translations
@@ -331,7 +354,7 @@ var blocked=false;
         }                
     };
     $(document).ready(function() {
-       
+        
         var url = tdxio.baseUrl+"/work/ajaxread"+id_str;
         var hash = document.location.hash.substr(1);
         var qtity=50;
@@ -409,6 +432,7 @@ var blocked=false;
             //alert(ajaxData.work.Interpretations.length);
             tdxio.page.displayOnglets(translations);
             tdxio.page.displayWork(ajaxData,newId,back,begin,end);
+            tdxio.page.setState($('#editbtn').attr('class')=='on'?'edit':'reset');
             tdxio.page.adjust();
             tdxio.page.resize();
         });
