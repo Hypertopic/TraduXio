@@ -23,6 +23,7 @@ class Tdxio_Cutter{
         //$text=preg_replace('/(\r?\n)*$/','',$text);
         $this->_cutPos=0;
         $this->_targetPos=$pos;
+        Tdxio_Log::info($text,'text before match');
         $text=preg_replace_callback($this->_cutRegExp,array($this,'_cutTextMatch'),$text);
         $parts=explode($this->_cutSign,$text);
         if (!isset($parts[1])) {
@@ -42,9 +43,12 @@ class Tdxio_Cutter{
     }
 
     protected function _cutTextMatch($matches) {
+        $prefix = '';
+        $suffix = '';
         if (++$this->_cutPos==$this->_targetPos) {
             $i=1;
             while (isset($matches[$i])) {
+                Tdxio_Log::info($matches,'matches');
                 $prefix.=$matches[$i];
                 $suffix.=$matches[$i+1];
                 $i+=2;

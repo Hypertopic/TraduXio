@@ -100,39 +100,85 @@ class TranslationController extends Tdxio_Controller_Abstract
         $translationId=$request->getParam('id');
         $model = $this->_getModel();
         if (!$translation=$model->fetchTranslationWork($translationId)) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
         $workModel = new Model_Work();
             
         $srcTextId=$translation['OriginalWorkId'];
         if (!$srcText=$workModel->fetchOriginalWork($srcTextId)) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Text Id %1\$s does not exist.", $srcTextId)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Text Id %1\$d does not exist.", $srcTextId)), 404);
         }
         $segToCut=$request->getParam('after');
         if ($segToCut<0 || $segToCut>=array_keys($srcText['Sentences'])) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Can not cut here (%1\$s)", $segToCut)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Can not cut here (%1\$d)", $segToCut)), 404);
         }
         $model->cut($translationId,$segToCut);
-        $segToRedirect = $this->getFirstSegmentOf($segToCut,$translation);
+        $segToRedirect = $this->getFirstSegmentOf($segToCut,$translation['TranslationBlocks']);
         $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
 
     }
     
     public function ajaxcutAction(){
-        $request = $this->getRequest();
-        $id = $request->getParam('id');
+        $request=$this->getRequest();
+        $translationId=$request->getParam('id');
+        $segToCut=$request->getParam('after');
+        $model=$this->_getModel();
+        $workModel = new Model_Work();
         
-        $model = $this->_getModel();
-        $this->view->data = array('response'=> true,'message'=>'Cut ok');
+        if ((!$work=$workModel->fetchWork($translationId))||!($workModel->isTranslationWork($translationId))) {
+            $this->view->data = array('response'=>false,'Message'=>__("Translation %1\$d does not exist.", $translationId));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
+        }
+             
+        $blocks=$model->fetchInterpretations($translationId);
+        $lastBlock = end($blocks);
+        if ($segToCut<0 || $segToCut>=$lastBlock['to_segment']) {
+            $this->view->data = array('response'=>false,'Message'=>__("Can not merge here %1\$d", $segToCut));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here %1\$d", $segToCut)), 404);
+        }
+        
+        $result = $model->cut($translationId,$segToCut);
+        if($result==0){
+            $segToRedirect = $this->getFirstSegmentOf($segToCut,$blocks);
+//        $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
+        
+            $blocks = $model->fetchInterpretations($translationId);
+            Tdxio_Log::info($blocks,'blocks after cut');
+            $this->view->data = array('response'=>true,'message'=>'Cut ok','newblocks'=>$blocks,'segToRed'=>$segToRedirect);
+        }else{
+            $this->view->data = array('response'=>false,'message'=>__("ERROR, couldn't cut on position %1\$d ",$segToCut));
+        }
         $this->_helper->viewRenderer('refresh');
     }
     
     public function ajaxmergeAction(){
-        $request = $this->getRequest();
-        $id = $request->getParam('id');
+        $request=$this->getRequest();
+        $translationId=$request->getParam('id');      
+        $segToMerge=$request->getParam('after');
+        $model=$this->_getModel();
+        $workModel = new Model_Work();
+        $model=$this->_getModel();
         
-        $model = $this->_getModel();
-        $this->view->data = array('response'=>true,'message'=>'Merge ok');
+        if ((!$work=$workModel->fetchWork($translationId))||!($workModel->isTranslationWork($translationId))) {
+            $this->view->data = array('response'=>false,'Message'=>__("Translation %1\$s does not exist.", $translationId));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
+        }
+                
+        $blocks=$model->fetchInterpretations($translationId);
+        $lastBlock = end($blocks);
+        if ($segToMerge<0 || $segToMerge>=$lastBlock['to_segment']) {
+            $this->view->data = array('response'=>false,'Message'=>__("Can not merge here %1\$d", $segToMerge));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here %1\$d", $segToMerge)), 404);
+        }
+        $result = $model->merge($translationId,$segToMerge);
+        if($result==0){
+            $segToRedirect = $this->getFirstSegmentOf($segToMerge,$blocks);             
+            $blocks = $model->fetchInterpretations($translationId);
+            Tdxio_Log::info($blocks,'blocks after merge');
+            $this->view->data = array('response'=>true,'message'=>'Merge ok','newblocks'=>$blocks,'segToRed'=>$segToRedirect);
+        }else{
+            $this->view->data = array('response'=>false,'message'=>__("ERROR, couldn't merge on position %1\$d ",$segToMerge));
+        } 
         $this->_helper->viewRenderer('refresh');
     }
     
@@ -153,10 +199,10 @@ class TranslationController extends Tdxio_Controller_Abstract
         }
         $segToMerge=$request->getParam('after');
         if ($segToMerge<0 || $segToMerge>=array_keys($srcText['Sentences'])) {
-            throw new Zend_Controller_Action_Exception(sprintf('Can not merge here (%d)', $segToCut), 404);
+            throw new Zend_Controller_Action_Exception(sprintf('Can not merge here (%d)', $segToMerge), 404);
         }
         $model->merge($translationId,$segToMerge);
-        $segToRedirect = $this->getFirstSegmentOf($segToMerge,$translation);
+        $segToRedirect = $this->getFirstSegmentOf($segToMerge,$translation['TranslationBlocks']);
         $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
 
     }
@@ -392,8 +438,8 @@ class TranslationController extends Tdxio_Controller_Abstract
         }
     }
     
-    public function getFirstSegmentOf($seg,$translation){
-        foreach($translation['TranslationBlocks'] as $key=>$block){
+    public function getFirstSegmentOf($seg,$blocks){
+        foreach($blocks as $key=>$block){
             if($block['from_segment']<=$seg and $seg<=$block['to_segment'])
                 return $block['from_segment'];
         }

@@ -142,7 +142,6 @@ var blocked=false;
         },
         
         displayWork: function(data,trId,backward,beginSeg,endSeg){
-            
             if(data.work.Sentences.length > 0){
                 
                 tdxio.page.resetHeight();
@@ -157,8 +156,6 @@ var blocked=false;
                 var stdTextHeight = docHeight-$('#header').outerHeight(true)-$('.footer').outerHeight(true)-$('#under-header').outerHeight(true)-($('.tag-line').outerHeight(true)+15)-$('.Tborder').height()-$('.work-title').outerHeight(true)-($('#work div.text').outerHeight(true) -$('#work div.text').height())-$('.Bborder').height()-60-30;
                 //alert(stdTextHeight);   
                 maxH = Math.max(minHeight,stdTextHeight);
-//                alert(stdTextHeight + ' '+minHeight+' '+maxH); 
-//                ('getDocHeight: '+docHeight+'\n headerOH:'+$('#header').outerHeight()+'\n footerOH: '+$('.footer').outerHeight()+'\n underHeaderOH: '+$('#under-header').outerHeight()+'\n tagLineOH:'+$('.tag-line').outerHeight()+'\n workTitleOH: '+$('.work-title').outerHeight()+'\n TborderH: '+$('.Tborder').height()+'\n BborderH: '+$('.Bborder').height());
 
                 var pre = "<span class='segment' id='text"+data.work.id +"-segment";
                 var len = sentences.length;                
@@ -207,6 +204,7 @@ var blocked=false;
                     $('#translation .work-title span.title').html(trWork.work.title);                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var trlen = trWork.blocks.length;
+               //     alert('trlen: '+trlen);
                     var preblock = "<span class='block' id='block";
                     var outblock = "<span class='block' id='oblock";
                     
@@ -227,7 +225,7 @@ var blocked=false;
                         beginSeg = trWork.blocks[beginBlock].from_segment;
                         
                         for(i=beginBlock;(i==beginBlock) || ( i<trlen && $('#test').height()<= maxH) ; i++){
-                            $('#translation div.text').append(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
+                            $('#translation div.text').append(preblock + i + "'>" +((trWork.blocks[i].translation)?trWork.blocks[i].translation:'') + "</span>");
                             
                             for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
                                 text += pre + x +"'>" + sentences[x].content +"</span>";
@@ -248,7 +246,7 @@ var blocked=false;
                         endSeg = trWork.blocks[endBlock].to_segment;
                         
                         for(i=endBlock; (i==endBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
-                            $('#translation div.text').prepend(preblock + i + "'>" +trWork.blocks[i].translation + "</span>");
+                            $('#translation div.text').prepend(preblock + i + "'>" +((trWork.blocks[i].translation)?trWork.blocks[i].translation:'') + "</span>");
                              for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
                                 text += pre + x +"'>" + sentences[x].content +"</span>";
                             }
@@ -269,7 +267,7 @@ var blocked=false;
                                 $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
                             }
                             if($('#test').height()<= maxH){
-                                $('#translation div.text').append(preblock + (endBlock+1) + "'>" +trWork.blocks[endBlock+1].translation + "</span>");
+                                $('#translation div.text').append(preblock + (endBlock+1) + "'>" +((trWork.blocks[endBlock+1].translation)?trWork.blocks[i].translation:'') + "</span>");
                                 for(var x=from,text=''; x<=to; x++){
                                     text += pre + x +"'>" + sentences[x].content +"</span>";
                                 }

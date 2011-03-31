@@ -145,6 +145,7 @@ class Model_Translation extends Model_Taggable
         for( $i=$from; $i<=$to; $i++){              
             $sourceText=$sourceText.$numberedSentences[$i]['content'];
         }   
+        Tdxio_Log::info($sourceText,'source text');
         return $sourceText;
     }
     
@@ -221,8 +222,9 @@ class Model_Translation extends Model_Taggable
             $table->insert($block2);
         } else {
             Tdxio_Log::error("ERROR, couldn't find block containing segment $segnum",__FUNCTION__);
+            return 1;
         }
-
+        return 0;
     }
     
     public function merge($transId,$segnum) {
@@ -249,7 +251,9 @@ class Model_Translation extends Model_Taggable
             $table->update($newBlock,$updateCond);
         } else {
             Tdxio_Log::error("ERROR, couldn't merge on position $segnum",__FUNCTION__);
+            return 1;
         }
+        return 0;
     }
 
     protected function _getCutter() {

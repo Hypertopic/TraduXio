@@ -1,5 +1,7 @@
 if (typeof console == "undefined") console={log:function(){}};
 
+var workId;
+
 (function($) {
     var url;
     
@@ -20,9 +22,12 @@ if (typeof console == "undefined") console={log:function(){}};
         tdxio.page.setState('reset');
         //go to the last page, if you're not in it
         tdxio.page.displayWork(window.ajaxData,window.trId,true,window.ajaxData.work.Sentences.length-1,window.ajaxData.work.Sentences.length-1);
+        tdxio.page.resetHeight();
         tdxio.page.resize();
+        $.scrollTo($('#insert-text'));
+        $.setBlocked(true);
         //append the form
-            $('#work div.text').append(data.form);
+        $('#work div.text').append(data.form);
           /*  $('#myForm').ajaxForm(function() { 
                 alert("The text has been successfully extended!"); 
             });*/
@@ -35,25 +40,26 @@ if (typeof console == "undefined") console={log:function(){}};
         default:
           
         }
-        tdxio.page.resetHeight();
-        tdxio.page.resize();
-        
-        $.scrollTo($('#insert-text'));
-        //  alert('transform '+action+' resized');
-        $.setBlocked(true);
+     
     };
     
-    $.updateTranslation = function(translation){
-        window.translations[0] = data.translation;
-        window.ajaxData.work.Interpretations.each(function(index,el){if(el.work.id==window.trId)window.ajaxData.work.Interpretations[index]=data.translation;});
+    $.updateTranslation = function(newBlocks){
+        window.translations[0].blocks = newBlocks;
+
+        for(var i = 0; i<window.ajaxData.work.Interpretations.length;i++){
+            if(window.ajaxData.work.Interpretations[i].work.id==window.trId){
+                window.ajaxData.work.Interpretations[i].blocks=newBlocks;
+                break;
+            }
+        }  
         tdxio.page.displayWork(window.ajaxData,window.trId,window.back,window.begin,window.end);
-        tdxio.page.setState('edit');
+        tdxio.page.setState($('#editbtn').attr('class')=='on'?'edit':'reset');
         tdxio.page.adjust();
         tdxio.page.resize();
     };
     
     $.update = function(action,data){
-        alert('update '+action);
+        //alert('update '+action);
         switch(action)
         {
         case 'extend':
@@ -63,27 +69,21 @@ if (typeof console == "undefined") console={log:function(){}};
             var newId = lastId;
             newId = newId.replace(/\d+$/,parseInt(lastId.match(/\d+$/))+1);
             $('#'+lastId).after("<span id='"+newId+"'>"+data.addedtext+"</span>" );
-
-            //append(data.addedtext);
+            $("#work div.text").height("");
+            tdxio.page.resize();
+            $.setBlocked(false);
             break;
         case 'cut':
-            
-            $.updateTranslation(data.translation);
-            var segId = data;
-            $('#'+segId).after('test');
-        break;
-        case 'merge':
-            var segId = data;
-            $('#'+segId).after('test');
-          break;
+        case 'merge':    
+            $.updateTranslation(data.newblocks);                        
+            $.scrollTo($('#text'+workId+'-segment'+data.segToRed));
+        break;        
         case 'translate':
           break;
         default:
           
         }
-        $("#work div.text").height("");
-        tdxio.page.resize();
-        $.setBlocked(false);
+
     }
     
     $.showBlocks = function(show){
@@ -105,7 +105,7 @@ if (typeof console == "undefined") console={log:function(){}};
         var url;
         var action;
         var idstr = document.location.pathname.match(/\/id\/\d+/);
-        var workId = parseInt(idstr[0].match(/\d+/));
+        workId = parseInt(idstr[0].match(/\d+/));
         
         url=encodeURI(tdxio.baseUrl+"/translation/save");
         
@@ -116,6 +116,7 @@ if (typeof console == "undefined") console={log:function(){}};
             submit    : 'Save',
             indicator : $(this).html(),
             tooltip   : 'Click to edit...',
+            placeholder: '',
             intercept : function (jsondata) {
                 obj = jQuery.parseJSON(jsondata);
                 if(obj.response!=null && obj.response===false)
@@ -198,7 +199,7 @@ if (typeof console == "undefined") console={log:function(){}};
         
         $(".merge , .cut").live('click',function(){
             var op = $(this).attr('class');
-            alert(op);
+          //  alert(op);
             var segId = (op=='merge')?$(this).prev('span.block').children()[$(this).prev('span.block').children().length-1].id:$(this).prev('span.segment').attr('id'); 
             var after = segId.split('segment')[1];
             $.ajax({
@@ -210,11 +211,11 @@ if (typeof console == "undefined") console={log:function(){}};
                     if (rdata.response==false) {
                         alert(rdata.message);
                     }else{
-                        $.update(op,segId);
+                        $.update(op,rdata);
                     }
                 },
                 error: function() {
-                    alert("Error merging");
+                    alert("Error merging or cutting");
                 }
             });
         });
