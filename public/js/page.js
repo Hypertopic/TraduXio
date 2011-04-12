@@ -59,25 +59,15 @@ var blocked=false;
         
     tdxio.page = {
         resize: function(){
-            // 1. Make the height of the translation and of the work texts the same
-            /*if(Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height())>maxH){
-                if($('#translation div.text').height() > $('#work div.text').height()){
-                    $('#work div.text').height($('#translation div.text').height());
-                }else{
-                    $('#translation div.text').height($('#work div.text').height());
-                }
-            }else{
-                $('#translation div.text').height(maxH);
-                $('#work div.text').height(maxH);
-            }*/
+            // 1. Make the height of the translation and of the work texts the same            
             var maxtemp = Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height());
             $('#translation div.text').height(maxtemp);
             $('#work div.text').height(maxtemp);
+            
             //2. Then (div#work and div#translation should have the same height)...
             if($('div#work').height()!=$('div#translation').height()){
                 alert('Change the code! #work and #translation have different heights');
-            }
-            
+            }            
             // ... change the borders' height
             $('div.Rborder, div.Lborder').height($('div#work').height());
         
@@ -88,7 +78,7 @@ var blocked=false;
             end=parseInt(index);
          //   alert(begin +' '+(dir=='prev-page'));
             tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'),begin,end);
-            tdxio.page.setState($('#editbtn').attr('class')=='on'?'edit':'reset');
+            tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
             tdxio.page.adjust();
             tdxio.page.resize();
         },
@@ -129,16 +119,24 @@ var blocked=false;
                 $('#icons div').toggleClass('on',false);
                 $('.cut').remove();
                 $('.merge').remove();
-            }else if(mode=='edit'){
+            }else if(mode=='editable'){
                 $.setBlocked(true);
                 $('.text').toggleClass('show',false);
                 $('.block').toggleClass('show',true);
                 $('#translation .block').toggleClass('editable',true);
-                $('#icons div').toggleClass('on',true);
+                $('#editbtn').toggleClass('on',true);
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
                 $('#work span.block').after('<span class="merge" title="Merge here"></span>');
                 $('#work span.block.show span.cut:last-child').remove();
-            }            
+            }else if(mode=='editing'){
+				$("#translation div.text").wrap('<form id="edit-form" />');
+				$("span.block.show.editable").wrapInner("<textarea class='autogrow' />");
+				$('#icons #savebtn').toggleClass('on',true);
+			}else if(mode=='stop-edit'){
+				$('#icons #savebtn').toggleClass('on',false);
+				var textsA = $("textarea.autogrow").detach();
+				var editF = $("#edit-form").detach();
+			}        
         },
         
         displayWork: function(data,trId,backward,beginSeg,endSeg){
@@ -331,8 +329,63 @@ var blocked=false;
         
         translate: function(){
                 
-        }
+        },
         
+        getWork: function(){
+			var url = tdxio.baseUrl+"/work/ajaxread"+id_str;
+			var hash = document.location.hash.substr(1);
+			var qtity=50;
+			var params;                
+			docHeight = $.getDocHeight();
+			if((hash==null)||(hash=='')||(hash==false)){
+				params={'qtity':qtity};
+			}else if(hash.match(/tr\d+/gi)!=null){
+				trId = hash.match(/tr\d+/gi)[0].substr(2);
+				beginHash = hash.match(/#beg\d+/gi);
+				if((beginHash!=null)&&(beginHash!='')){begin = beginHash[0].substr(4);}
+				params={'qtity':qtity,'trId':trId};
+			}
+						  
+			$.ajax({
+				type:"get",
+				url:encodeURI(url),
+				dataType: "json",
+				data: params,
+				success: function(rdata){
+					if(rdata.work.Interpretations.length>0){
+						var exists=false;
+						for(var k=0;k<rdata.work.Interpretations.length;k++){
+							if(trId == rdata.work.Interpretations[k].work.id){
+								exists = true;
+								break;
+							}
+						}
+						trId = (exists)?trId:rdata.work.Interpretations[0].work.id;
+						document.location.hash='tr'+trId;
+						//trId = (trId=='')?rdata.work.Interpretations[0].work.id:trId;
+						translations = tdxio.array.trShift(rdata.work.Interpretations.slice(),trId,true);
+						tdxio.page.displayOnglets(translations);
+					}
+					ajaxData = rdata;
+					tdxio.page.displayWork(rdata,trId,false,begin,end);
+					tdxio.page.resize();
+				},
+				error: function() {
+					alert("error reading the workk");
+				}
+			}); 
+		},
+		
+		gotoTransl: function(newId){
+            trId = newId;
+            translations = tdxio.array.trShift(ajaxData.work.Interpretations.slice(),newId,true);
+           /*tdxio.page.displayOnglets(translations);    */
+            tdxio.page.displayOnglets(translations);
+            tdxio.page.displayWork(ajaxData,newId,back,begin,end);
+            tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
+            tdxio.page.adjust();
+            tdxio.page.resize();
+		}
             
     }; 
       
@@ -351,54 +404,10 @@ var blocked=false;
             tdxio.page.displayOnglets(translations);
         }                
     };
+    
     $(document).ready(function() {
         
-        var url = tdxio.baseUrl+"/work/ajaxread"+id_str;
-        var hash = document.location.hash.substr(1);
-        var qtity=50;
-        var params;                
-        
-        docHeight = $.getDocHeight();
-        if((hash==null)||(hash=='')||(hash==false)){
-            params={'qtity':qtity};
-        }else if(hash.match(/tr\d+/gi)!=null){
-            trId = hash.match(/tr\d+/gi)[0].substr(2);
-            beginHash = hash.match(/#beg\d+/gi);
-            if((beginHash!=null)&&(beginHash!='')){begin = beginHash[0].substr(4);}
-            params={'qtity':qtity,'trId':trId};
-        }
-                      
-        $.ajax({
-            type:"get",
-            url:encodeURI(url),
-            dataType: "json",
-            data: params,
-            success: function(rdata){
-                if(rdata.work.Interpretations.length>0){
-                    var exists=false;
-                    for(var k=0;k<rdata.work.Interpretations.length;k++){
-                        if(trId == rdata.work.Interpretations[k].work.id){
-                            exists = true;
-                            break;
-                        }
-                    }
-                    trId = (exists)?trId:rdata.work.Interpretations[0].work.id;
-                    document.location.hash='tr'+trId;
-                    //trId = (trId=='')?rdata.work.Interpretations[0].work.id:trId;
-                    translations = tdxio.array.trShift(rdata.work.Interpretations.slice(),trId,true);
-                    tdxio.page.displayOnglets(translations);
-                }
-                ajaxData = rdata;
-                tdxio.page.displayWork(rdata,trId,false,begin,end);
-                tdxio.page.resize();
-            },
-            error: function() {
-                alert("error reading the workk");
-            }
-        }); 
-        
-   
-        
+        tdxio.page.getWork();
         
         $(window).bind('resize',(function() {
             if(!blocked){
@@ -421,27 +430,14 @@ var blocked=false;
         });
         
         $('ul.onglets li').live('click',function(){
-            $.setBlocked(false);
-            var newId = this.id.split("-")[1];
-            trId = newId;
-            translations = tdxio.array.trShift(ajaxData.work.Interpretations.slice(),newId,true);
-           /*tdxio.page.displayOnglets(translations);    */
-           // alert('nId'+newId);
-            //alert(ajaxData.work.Interpretations.length);
-            tdxio.page.displayOnglets(translations);
-            tdxio.page.displayWork(ajaxData,newId,back,begin,end);
-            tdxio.page.setState($('#editbtn').attr('class')=='on'?'edit':'reset');
-            tdxio.page.adjust();
-            tdxio.page.resize();
+			$.setBlocked(false);
+			gotoTransl(this.id.split("-")[1]);
         });
         
         $('span#more').click(function(){
-           // alert(nextHiddenId);
-            if(nextHiddenId!=null)
-            //alert('trL before: '+translations.length);
+			if(nextHiddenId!=null)
                 translations = tdxio.array.trShift(translations,nextHiddenId,false);
-               // alert('trL: '+translations.length);
-                tdxio.page.displayOnglets(translations);
+            tdxio.page.displayOnglets(translations);
         });
         
     });

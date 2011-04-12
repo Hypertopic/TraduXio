@@ -23,14 +23,15 @@ var workId;
         //go to the last page, if you're not in it
         tdxio.page.displayWork(window.ajaxData,window.trId,true,window.ajaxData.work.Sentences.length-1,window.ajaxData.work.Sentences.length-1);
         tdxio.page.resetHeight();
-        tdxio.page.resize();
-        $.scrollTo($('#insert-text'));
-        $.setBlocked(true);
+        
         //append the form
         $('#work div.text').append(data.form);
           /*  $('#myForm').ajaxForm(function() { 
                 alert("The text has been successfully extended!"); 
-            });*/
+		});*/
+		tdxio.page.resize();
+		$.scrollTo($('#insert-text'));
+		$.setBlocked(true);
             break;
         case 'edit':
 
@@ -53,7 +54,7 @@ var workId;
             }
         }  
         tdxio.page.displayWork(window.ajaxData,window.trId,window.back,window.begin,window.end);
-        tdxio.page.setState($('#editbtn').attr('class')=='on'?'edit':'reset');
+        tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
         tdxio.page.adjust();
         tdxio.page.resize();
     };
@@ -108,8 +109,9 @@ var workId;
         workId = parseInt(idstr[0].match(/\d+/));
         
         url=encodeURI(tdxio.baseUrl+"/translation/save");
-        
-        $('#translation div.text .block.show.editable').live('hover',function(){$(this).editable(url,{ 
+        /*
+        $('#translation div.text span.block.show.editable').live('hover',function(){
+			$(this).editable(url,{ 
             submitdata: {'id': window.trId},
             type      : 'textarea',
             cancel    : 'Cancel',
@@ -125,33 +127,41 @@ var workId;
                 return(obj.result);
             }
         });});
-       
-        $("div#myslidemenu ul li ul li a").live('click',function(event){
-            event.preventDefault();
-           /* if($(this).attr('class')=='idle'){
-                window.location.replace(tdxio.baseUrl+"/login/index");
-            }*/
-            url = $(this).attr("href");
-            action=url.split("/work/")[1].split("/")[0];
-           //alert(url);
-            $.ajax({
-                type:"get",
-                url:encodeURI(tdxio.baseUrl+"/work/getform"),
-                dataType: "json",
-                data:{'type':action},
-                success: function(rdata,status){
-                    if (rdata.response==false) {
-                        alert(rdata.message);
-                    }else{
-                        $.transform(action,rdata);
-                    }
-                },
-                error: function() {
-                    alert("error getting the form");
-                }
-            });   
-            return false;
-        });
+       */
+		var editformCnt = 0;
+		$('#translation div.text span.block.show.editable').live('click',function(){
+			if(editformCnt==0){
+				tdxio.page.setState('editing');
+				editformCnt=1;
+			}
+		});
+	   
+		$("div#myslidemenu ul li ul li a").live('click',function(event){
+			event.preventDefault();
+			/* if($(this).attr('class')=='idle'){
+			window.location.replace(tdxio.baseUrl+"/login/index");
+			}*/
+			url = $(this).attr("href");
+			action=url.split("/work/")[1].split("/")[0];
+			//alert(url);
+			$.ajax({
+				type:"get",
+				url:encodeURI(tdxio.baseUrl+"/work/getform"),
+				dataType: "json",
+				data:{'type':action},
+				success: function(rdata,status){
+					if (rdata.response==false) {
+						alert(rdata.message);
+					}else{
+						$.transform(action,rdata);
+					}
+				},
+				error: function() {
+					alert("error getting the form");
+				}
+			});   
+			return false;
+		});
         
        $("form").live("submit",function() {
            
@@ -189,11 +199,12 @@ var workId;
             var active = $(this).attr('class')=='on';
             $('.text').toggleClass('show');
             $('.block').toggleClass('show');
-            tdxio.page.setState(active?'edit':'reset');
+            tdxio.page.setState(active?'editable':'reset');
             $.setBlocked(active);
             tdxio.page.resetHeight();
             tdxio.page.adjust();
             tdxio.page.resize();
+            //if(active){$('form#modified-text').}else{}
         });
         
         
@@ -219,6 +230,8 @@ var workId;
                 }
             });
         });
+        
+        $('#work .segment').live('hover',function(){$(this).attr('title','Right click to add a comment for this segment of the text');});
             
     });
     

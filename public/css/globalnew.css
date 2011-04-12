@@ -671,7 +671,7 @@ display:block;}
 #icons{
 position:absolute;
 right:10px;
-top:20%;
+top:100px;
 }
 
 #icons div{
@@ -903,6 +903,8 @@ cursor:pointer;
 border:none;
 font:inherit;
 }
+
+textarea.autogrow{color:#000000;}
 
 
 
