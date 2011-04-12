@@ -71,14 +71,14 @@ class Model_Language extends Model_Abstract {
     }
     
     
-    public function getBrowserLang(){
+    public function getBrowserLang($code){
         $table = $this->_getTable();
         $lang_reg = new Zend_Locale(Zend_Locale::BROWSER);
         $lang2 = substr($lang_reg,0,2);
         //$select = $table->select()->from($table,'id')->where('part1 = ?',$lang2);
         $result = $this->fetchByFields(array('part1'=>$lang2));
-        Tdxio_Log::info($result[0],'browserLang 3');
-        return $result[0];        
+        Tdxio_Log::info($result[0],' browserLang 3');
+        return ($code==2?$lang2:$result[0]);        
     }
 
 }

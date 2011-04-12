@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-03-15 17:56+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Diana <dianazambon@hotmail.com>\n"
+"Last-Translator: Diana Zambon <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,15 +38,15 @@ msgstr "Texto com Id %1$s inexistente."
 #: controllers/TranslationController.php:102
 #, php-format
 msgid "Can not cut here (%1$s)"
-msgstr "Nã é possível inserir corte aqui (%1$s)"
+msgstr "Não é possível inserir corte aqui (%1$s)"
 
 #: controllers/TranslationController.php:164
 msgid "Hide blocks"
-msgstr "Esconder blocos"
+msgstr "Esconder segmentação"
 
 #: controllers/TranslationController.php:164
 msgid "Show blocks"
-msgstr "Mostrar blocos"
+msgstr "Mostrar segmentação"
 
 #: controllers/ErrorController.php:32
 msgid "Page not found"
@@ -65,7 +65,7 @@ msgstr "Anônimo"
 #: controllers/WorkController.php:173
 #, php-format
 msgid "Work Id %1$s does not exist or you don't have the rights to see it "
-msgstr "Id de trabalho %1$s inexistente ou você não possui os privilégios para vê-la"
+msgstr "Id de trabalho %1$s inexistente ou você não está autorizado a vê-la"
 
 #: controllers/WorkController.php:291
 #, php-format
@@ -96,7 +96,7 @@ msgstr "Salvar"
 
 #: controllers/WorkController.php:398
 msgid "Switch to Custom Privileges"
-msgstr "Mudar para Privilégios Customizados"
+msgstr "Mudar para Privilégios Personalizados"
 
 #: controllers/WorkController.php:454
 #, php-format
@@ -221,11 +221,11 @@ msgstr "Sistema anti-spam"
 
 #: forms/TextExtend.php:41
 msgid "Text to add"
-msgstr "Texto a adicionar"
+msgstr "Texto a ser adicionado"
 
 #: forms/TextExtend.php:53
 msgid "Deposit"
-msgstr "Depositar"
+msgstr "Adicionar"
 
 #: forms/Right.php:20
 msgid "at the page"
@@ -233,7 +233,7 @@ msgstr "na página"
 
 #: forms/Right.php:27
 msgid "Bad or missing reference (author, editor, license)"
-msgstr "Referência inválida ou ausente (autor, editor, licença)"
+msgstr "Referência inválida ou inexistente (autor, editor, licença)"
 
 #: forms/Right.php:39
 msgid "Publication of protected work non-comparable to a short quotation"
@@ -269,7 +269,7 @@ msgstr "Público"
 
 #: forms/TextDeposit.php:68
 msgid "Text content"
-msgstr "Conteúdo do texto"
+msgstr "Texto"
 
 #: forms/TextDeposit.php:79
 msgid "Source language"
@@ -301,7 +301,7 @@ msgstr "Taggable-id não especificada"
 
 #: models/Privilege.php:21
 msgid "Read text"
-msgstr "Ler text"
+msgstr "Ler texto"
 
 #: models/Privilege.php:21
 msgid "Edit text"
@@ -367,12 +367,12 @@ msgstr "Todos os membros estão habilitados a %1$s esse texto"
 #: models/Work.php:395
 #, php-format
 msgid "User %1$s is allowed to do everything for this text"
-msgstr "Usuário %1$s está habilitado(a) a fazer tudo nesse texto"
+msgstr "Usuário(a) %1$s está habilitado(a) a fazer tudo nesse texto"
 
 #: models/Work.php:397
 #, php-format
 msgid "User %1$s is allowed to %2$s this text"
-msgstr "Usuário %1$s está habilitado(a) a %2$s esse texto"
+msgstr "Usuário(a) %1$s está habilitado(a) a %2$s esse texto"
 
 #: views/helpers/ProfileLink.php:9
 msgid "Welcome"
@@ -1682,6 +1682,7 @@ msgstr "Polonês"
 msgid "pon"
 msgstr "Pohnpeian"
 
+# Il faudrait différencier le portugais (Brésil) du portugais (Portual)
 #: ../languages/ripristino/prova_ripristino.php:327
 msgid "por"
 msgstr "Português"
@@ -2200,27 +2201,27 @@ msgstr "Voltar ao texto"
 
 #: views/scripts/work/manage.phtml:22
 msgid "Standard Privileges"
-msgstr "Privilégios padrão"
+msgstr "Privilégios Padrão"
 
 #: views/scripts/work/manage.phtml:27
 msgid "Custom Privileges"
-msgstr "Privilégios customizados"
+msgstr "Privilégios Personalizados"
 
 #: views/scripts/work/manage.phtml:30
 msgid "Select and click on Remove Privilege to delete a permission"
-msgstr "Selecione e clique em Remover Privilégio para suprimir uma permissão"
+msgstr "Selecione e clique em Remover Privilégio para suprimir um privilégio"
 
 #: views/scripts/work/manage.phtml:31
 msgid "Remove an existing permission"
-msgstr "Remover uma permissão existente"
+msgstr "Remover uma privilégio existente"
 
 #: views/scripts/work/manage.phtml:34
 msgid "NO EXISTING PRIVILEGES"
-msgstr "Privilégios não atribuídos"
+msgstr "PRIVILÉGIOS INEXISTENTES"
 
 #: views/scripts/work/manage.phtml:37
 msgid "Add a new permission"
-msgstr "Adicionar uma nova permissão"
+msgstr "Adicionar um novo privilégio"
 
 #: views/scripts/work/manage.phtml:43
 msgid "PAGETITLE_Continue text insertion"
@@ -2232,11 +2233,11 @@ msgstr "Sem título"
 
 #: views/scripts/work/history.phtml:12
 msgid "History of modifications"
-msgstr "Histórico de modificações"
+msgstr "Histórico das modificações"
 
 #: views/scripts/work/history.phtml:32
 msgid "PAGETITLE_history of modifications"
-msgstr "Histórico de modificações"
+msgstr "Histórico das modificações"
 
 #: views/scripts/work/edit.phtml:6
 msgid "PAGETITLE_Edit text"
@@ -2249,13 +2250,17 @@ msgstr "Seu texto será automaticamente privado.&nbsp; Ninguém poderá vê-lo a
 
 #: views/scripts/work/deposit.phtml:8
 msgid "PAGETITLE_Deposit a new text"
-msgstr "Depositar um novo texto"
+msgstr "Adicionar um novo texto"
 
+# Au fait, je trouve la formule "text's owner" assez bizarre, notamment en portugais
+# il s'agit de l'auteur de la traduction plutôt que le "propriétaire du texte", non?
+# Si c'est le cas la traduction (de la deuxième frase) suivante est plus adequate:
+# Peça permissão ao autor da tradução
 #: views/scripts/work/newread.phtml:10
 #: views/scripts/work/read.phtml:23
 #: views/scripts/translation/read.phtml:7
 msgid "You're not allowed to do this. Ask permissions to the text's owner"
-msgstr "Você não está autorizado a fazer isso.Peça permissão ao propritário do texto"
+msgstr "Você não está autorizado a fazer isso. Peça permissão ao propritário do texto "
 
 #: views/scripts/work/newread.phtml:10
 #: views/scripts/work/read.phtml:24
@@ -2266,13 +2271,13 @@ msgstr "Você não está autorizado a fazer isso. Por favor, faça o login "
 #: views/scripts/work/newread.phtml:12
 #: views/scripts/work/read.phtml:27
 msgid "You can't delete this text because it has some translations. Delete its translations first."
-msgstr "Você não pode suprimir esse texto porque ele contém algumas traduções. Apague antes as traduções."
+msgstr "Você não pode suprimir esse texto porque ele contém algumas traduções. Apague as traduções antes."
 
 #: views/scripts/work/newread.phtml:13
 #: views/scripts/work/read.phtml:50
 #: views/scripts/translation/read.phtml:24
 msgid "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
-msgstr "ATENÇÃO! A supressão é um ato definitivo! Você tem CERTEZA de que quer sumprimir esse texto?"
+msgstr "ATENÇÃO! A supressão é um ato definitivo! Você tem CERTEZA de que quer suprimir esse texto?"
 
 #: views/scripts/work/newread.phtml:23
 #: views/scripts/work/newread.phtml:119
@@ -2317,7 +2322,7 @@ msgstr "Minhas traduções"
 
 #: views/scripts/work/my.phtml:6
 msgid "You have not inserted any text's translations"
-msgstr "Você não inseriu nenhuma tradução ao texto"
+msgstr "Você não possui nenhuma tradução"
 
 #: views/scripts/work/my.phtml:24
 msgid "PAGETITLE_My translations"
@@ -2339,7 +2344,7 @@ msgstr "(%1$s Tradução)"
 
 #: views/scripts/work/index.phtml:40
 msgid "Deposit a new text"
-msgstr "Depositar um novo texto"
+msgstr "Adicionar um novo texto"
 
 #: views/scripts/work/index.phtml:44
 #, php-format
@@ -2377,7 +2382,7 @@ msgstr "Buscar"
 
 #: views/scripts/translation/read.phtml:11
 msgid "You can't delete this translation because it has some translations. Delete its translations first."
-msgstr "Você não pode suprimir esse texto porque ele contém algumas traduções. Apague antes as traduções."
+msgstr "Você não pode suprimir esse texto porque ele contém algumas traduções. Apague as traduções antes."
 
 #: views/scripts/translation/read.phtml:15
 msgid "Edit this translation"
@@ -2417,7 +2422,7 @@ msgstr "Accesso negado"
 
 #: views/scripts/error/denied.phtml:5
 msgid "You are trying to access an area which you have not allowed."
-msgstr "Você esá tentando acesssar uma área para qual não possui permissão."
+msgstr "Você esá tentando acesssar uma área para qual não está autorizado(a)."
 
 #: views/scripts/error/denied.phtml:9
 msgid "PAGETITLE_Access denied"
@@ -2516,7 +2521,7 @@ msgstr "Seu pedido de convite foi enviado com sucesso; obrigado pelo seu interes
 
 #: views/scripts/index/register.phtml:16
 msgid "REGISTRATION_PHRASE"
-msgstr "Para inscrever-se em TraduXio, você deve ser convidado por um membro da comunidade.<br>Preencha o formulário com seu nome, sobrenome e email e nos diga qual seu interesse em TraduXio.<br>Um convite lhe será enviado em breve."
+msgstr "Para inscrever-se em TraduXio, você deve ser convidado por um membro da comunidade.<br>Preencha o formulário abaixo com seu nome, sobrenome e email e nos diga qual seu interesse em TraduXio.<br> Você receberá um convite em breve."
 
 #~ msgid "Back to work"
 #~ msgstr "Back to work"

@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-03-15 17:56+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Diana <dianazambon@hotmail.com>\n"
+"Last-Translator: Diana Zambon <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2377,7 +2377,7 @@ msgstr "Leggi la traduzione"
 
 #: views/scripts/login/index.phtml:2
 msgid "Please Login"
-msgstr "Effettuare l'accesso"
+msgstr "Effettua l'accesso"
 
 #: views/scripts/login/index.phtml:6
 msgid "PAGETITLE_Login"
@@ -2492,7 +2492,7 @@ msgstr "Contattaci"
 
 #: views/scripts/index/register.phtml:5
 msgid "Registration"
-msgstr "Registrazion"
+msgstr "Registrazione"
 
 #: views/scripts/index/register.phtml:8
 msgid "Your invitation request has been successfully sent; thank you for your interest, we will answer you as soon as possible."

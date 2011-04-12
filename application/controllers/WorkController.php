@@ -64,7 +64,7 @@ class WorkController extends Tdxio_Controller_Abstract
             }
         }
         $langModel = new Model_Language();        
-        $browserLang = $langModel->getBrowserLang();
+        $browserLang = $langModel->getBrowserLang(3);
         $news = $this->getNews($browserLang['id']);
         Tdxio_Log::info($browserLang['id'],'bbbbrows');
         Tdxio_Log::info($news,'newentries');

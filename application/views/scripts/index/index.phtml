@@ -1,4 +1,4 @@
-<?php $phrase = __("frase_en"); $logo = __("logoEN");  ?> 
+<?php $phrase = "frase_".$this->lang; $logo = "logo".strtoupper($this->lang);  ?> 
 <div id="homepage"><div id="index"> 
   <div class="indexopt"><a href="<?php echo $this->makeUrl('/index/register'); ?>"><?php echo __("Register"); ?></a></div>
   <div class="indexopt"><a href="http://traduxio.community.hypertopic.org/" target="_blank" ><?php echo __("Invite"); ?></a></div>

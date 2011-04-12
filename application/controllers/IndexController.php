@@ -25,6 +25,9 @@ class IndexController extends Tdxio_Controller_Abstract
      */
     public function indexAction()
     {   
+		$langModel = new Model_Language();        
+		$browserLang = $langModel->getBrowserLang(2);
+		$this->view->lang=$browserLang;
         //return $this->_helper->redirector('index','work');
     }
     
