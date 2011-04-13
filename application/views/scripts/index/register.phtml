@@ -6,12 +6,12 @@
 <div class="comment">
 <?php if ($this->sent) : ?>
 <?php echo __("Your invitation request has been successfully sent; thank you for your interest, we will answer you as soon as possible.");?>
-<br/><?php echo __("The %1s team.","<i>Traduxio</i>"); ?>
+<br/><br/><?php echo __("The %1\$s team.","<i>Traduxio</i>"); ?>
 <?php else :?>
 <?php if ($this->error) : ?>
-<?php echo __("We encountered an error sending your message. Here is the error message : %1s.
+<?php echo __("We encountered an error sending your message. Here is the error message : %1\$s.
 Sorry for the inconvenience, we're trying hard to fix it.","<i>".$this->error."</i>")?>
-<br/><?php echo __("The %1s team.","<i>Traduxio</i>"); ?>
+<br/><?php echo __("The %1\$s team.","<i>Traduxio</i>"); ?>
 <?php else :?>
 <?php echo __("REGISTRATION_PHRASE");  ?>
 <?php endif; ?>

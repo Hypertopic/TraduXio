@@ -63,13 +63,19 @@ class Model_Translation extends Model_Taggable
             Tdxio_Log::info($where,'where before');
             if ($table->fetchRow($table->select()->where($where))) {
                 Tdxio_Log::info('block exists, update');
-                $table->update($block,$where);
+                $result = $table->update($block,$where);
             } else {
                 Tdxio_Log::info('block doesn\'t exist, create');
                 $table->insert($block);
             }
-        }     
-        $this->updateWorkInfo(array('title'=>$data['title'],'author'=>$data['author']),$translationId);
+        }   
+        $updateData = array();
+        if(isset($data['title']))
+            $updateData['title']=$data['title'];
+        if(isset($data['author']))
+            $updateData['author']=$data['author'];        
+        if(!empty($updateData))
+            $this->updateWorkInfo($updateData,$translationId);
     }   
 
     

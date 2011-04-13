@@ -25,6 +25,9 @@ class IndexController extends Tdxio_Controller_Abstract
      */
     public function indexAction()
     {   
+		$langModel = new Model_Language();        
+		$browserLang = $langModel->getBrowserLang(2);
+		$this->view->lang=$browserLang;
         //return $this->_helper->redirector('index','work');
     }
     
@@ -46,7 +49,7 @@ class IndexController extends Tdxio_Controller_Abstract
                 $from = (!isset($values['emailaddress']))?'noreply@porphyry.org':$values['emailaddress'];
                 
                 $subject = "TraduXio: Copyright report ".(($values['error']==1)?"(Error) ":'').(($values['abuse']==1)?"(Abuse)":'');
-              $body = $subject."\n"."At the page: ".$values['url'];
+              $body = $subject."\n"."At the page: ".$values['url']."\n\n";
                 if(isset($values['body'])){
                     $body.=$values['body'];
                 }                
