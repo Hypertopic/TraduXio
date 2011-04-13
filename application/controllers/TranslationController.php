@@ -15,6 +15,27 @@ class TranslationController extends Tdxio_Controller_Abstract
     
     public function init(){}
     
+    public function ajaxeditAction() {
+		$request=$this->getRequest();
+        $translationId=$request->getParam('id'); 
+        
+        $model= $this->_getModel(); 
+        
+        if ($request->isPost()) {
+            $values=$request->getPost();
+            Tdxio_Log::info($values,'trajaxedit');  
+		}
+		$result = 0;
+		//$result = $model->merge($translationId,$segToMerge);
+        if($result==0){
+            Tdxio_Log::info($values,'form values in trajedit');
+            $this->view->data = array('response'=>true,'message'=>'Edit ok');
+        }else{
+            $this->view->data = array('response'=>false,'message'=>__("ERROR, couldn't save the translation"));
+        } 
+		$this->_helper->viewRenderer('refresh');
+	}
+
     public function editAction() {
         $request=$this->getRequest();
         $translationId=$request->getParam('id');
@@ -398,6 +419,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         
         switch($action){
             case 'save':
+            case 'ajaxedit':
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        

@@ -12,6 +12,7 @@ var minHeight = 400;
 var maxH;
 var docHeight;
 var blocked=false;
+var state = 'reset';//'reset' 'editable' 'editing'
 
 (function($) {
     
@@ -31,8 +32,6 @@ var blocked=false;
         );
     };
     
-    $.getBlocked = function(){return blocked;}
-    $.setBlocked = function(val){blocked = val;}
     
     tdxio.array = {
         trShift : function(trArray,id,selected){
@@ -58,7 +57,11 @@ var blocked=false;
     }
         
     tdxio.page = {
-        resize: function(){
+		
+		getBlocked : function(){return blocked;},
+		setBlocked : function(val){blocked = val;},
+    
+        resize: function(){//alert('4');
             // 1. Make the height of the translation and of the work texts the same            
             var maxtemp = Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height());
             $('#translation div.text').height(maxtemp);
@@ -73,31 +76,34 @@ var blocked=false;
         
         },
         
-        turn: function(dir,index){
+        turn: function(dir,index){//alert('3');
             begin = parseInt(index);
             end=parseInt(index);
          //   alert(begin +' '+(dir=='prev-page'));
             tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'),begin,end);
-            tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
+           // tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
+            tdxio.page.setState((window.state=='editing' || window.state=='editable')?'editable':'reset');
             tdxio.page.adjust();
             tdxio.page.resize();
         },
-        writeWork: function(sentences,from,to, step){
+        writeWork: function(sentences,from,to, step){//alert('2');
             var pre = "<span class='segment' id='text"+data.work.id +"-segment";
             for(var x=from; x<=to; x+=step){
                 $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
             }
         },
         resetHeight : function(){
+			//alert('1');
             $('div#test').height("");
             $('#translation div.text').height("");
             $('#work div.text').height("");
         },
         adjust : function(){
+			//alert('adjust');
             if($("#editbtn").attr('class')=='on'){
                 $('.block').toggleClass('show',true);
                                  
-                $('#translation div.text span.block').each(function(index,el){
+                $('#translation div.text .block').each(function(index,el){
                     var oid = 'o'+el.id;
                     if($(el).height()>$('#'+oid).height()){
                         $('#'+oid).height($(el).height());
@@ -110,17 +116,38 @@ var blocked=false;
             }
         },
         
+        replaceTag: function(oldTagId,newTagName){
+			$(oldTagId).each(function(index,el){
+				var w = $(this).width();
+				var h = $(this).height();
+				var cl = $(this).attr('class');
+				$(this).replaceWith( "<"+ newTagName +" class=\"" + cl + "\" id=\""+ el.id +"\" >" + $(this).text() + "</"+ newTagName +">");
+				if($("#edit-form")){
+					alert('exists form');
+					$("#edit-form").append("#"+el.id);
+				}
+				$("#"+el.id).height(h);
+				$("#"+el.id).width(w);
+			});
+		},
+        
+        
         setState : function(mode){
             if(mode=='reset'){
-                $.setBlocked(false);
+                tdxio.page.replaceTag("textarea.block.show.editable","span");
+                tdxio.page.setBlocked(false);
                 $('.text').toggleClass('show',true);
                 $('.block').toggleClass('show',false);
+                //$("span.block.show.editable textarea").each(function(){$(this).replaceWith($(this).text());});
+                //$("#translation span textarea").contents().unwrap();
+               
+				$("#edit-form").replaceWith($("#edit-form").html());
                 $('#translation .block').toggleClass('editable',false);
                 $('#icons div').toggleClass('on',false);
                 $('.cut').remove();
                 $('.merge').remove();
             }else if(mode=='editable'){
-                $.setBlocked(true);
+                tdxio.page.setBlocked(true);
                 $('.text').toggleClass('show',false);
                 $('.block').toggleClass('show',true);
                 $('#translation .block').toggleClass('editable',true);
@@ -128,15 +155,17 @@ var blocked=false;
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
                 $('#work span.block').after('<span class="merge" title="Merge here"></span>');
                 $('#work span.block.show span.cut:last-child').remove();
+			    tdxio.page.replaceTag("textarea.block.show.editable","span");
             }else if(mode=='editing'){
-				$("#translation div.text").wrap('<form id="edit-form" />');
-				$("span.block.show.editable").wrapInner("<textarea class='autogrow' />");
-				$('#icons #savebtn').toggleClass('on',true);
-			}else if(mode=='stop-edit'){
-				$('#icons #savebtn').toggleClass('on',false);
-				var textsA = $("textarea.autogrow").detach();
-				var editF = $("#edit-form").detach();
+				tdxio.page.setBlocked(true);
+				if(window.state!=mode){
+					$("div#translation").wrapInner('<form id="edit-form" />');
+					tdxio.page.replaceTag("span.block.show.editable","textarea");			
+					//$("span.block.show.editable").wrapInner("<textarea class='autogrow' />");
+					//$("span.block.show.editable textarea").each(function(){$(this).height($(this).parent().height());});
+				}
 			}        
+			window.state = mode;
         },
         
         displayWork: function(data,trId,backward,beginSeg,endSeg){
@@ -382,7 +411,8 @@ var blocked=false;
            /*tdxio.page.displayOnglets(translations);    */
             tdxio.page.displayOnglets(translations);
             tdxio.page.displayWork(ajaxData,newId,back,begin,end);
-            tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
+           // tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
+			tdxio.page.setState((window.state=='editing' || window.state=='editable')?'editable':'reset');
             tdxio.page.adjust();
             tdxio.page.resize();
 		}
@@ -410,7 +440,7 @@ var blocked=false;
         tdxio.page.getWork();
         
         $(window).bind('resize',(function() {
-            if(!blocked){
+            if(tdxio.page.getBlocked()!=true){
                 otime = new Date();
                 if (tout === false) {
                     tout = true;
@@ -430,8 +460,8 @@ var blocked=false;
         });
         
         $('ul.onglets li').live('click',function(){
-			$.setBlocked(false);
-			gotoTransl(this.id.split("-")[1]);
+			tdxio.page.setBlocked(false);
+			tdxio.page.gotoTransl(this.id.split("-")[1]);
         });
         
         $('span#more').click(function(){
@@ -439,6 +469,128 @@ var blocked=false;
                 translations = tdxio.array.trShift(translations,nextHiddenId,false);
             tdxio.page.displayOnglets(translations);
         });
+        
+		var url;
+        var action;
+        var idstr = document.location.pathname.match(/\/id\/\d+/);
+        workId = parseInt(idstr[0].match(/\d+/));
+        
+        url=encodeURI(tdxio.baseUrl+"/translation/save");
+   
+        
+		$('#translation div.text span.block.show.editable').live('click',function(){
+			if(window.state=='editable')
+				tdxio.page.setState('editing');
+		});
+		
+		$("div#myslidemenu ul li ul li a").live('click',function(event){
+			event.preventDefault();
+			/* if($(this).attr('class')=='idle'){
+			window.location.replace(tdxio.baseUrl+"/login/index");
+			}*/
+			url = $(this).attr("href");
+			action=url.split("/work/")[1].split("/")[0];
+			//alert(url);
+			$.ajax({
+				type:"get",
+				url:encodeURI(tdxio.baseUrl+"/work/getform"),
+				dataType: "json",
+				data:{'type':action},
+				success: function(rdata,status){
+					if (rdata.response==false) {
+						alert(rdata.message);
+					}else{
+						window.$.transform(action,rdata);
+					}
+				},
+				error: function() {
+					alert("error getting the form");
+				}
+			});   
+			return false;
+		});
+		$("form").live("submit",function() {
+           
+           url = tdxio.baseUrl+"/work/ajax"+(this.id.split('-')[0]);
+     //      alert('submit '+url);
+           
+        // submit the form 
+            $(this).ajaxSubmit({
+                type: "post",
+                url: encodeURI(url),
+                dataType: "json",
+                data: {'id':workId},
+                clearForm: true,
+                success:function(rdata,status){
+                    if (rdata.response==false) {//error somewhere
+                        alert(rdata.message);
+                    }else {
+                        window.$.update(action,rdata);
+                    }
+                },
+                error:function() {
+                    alert("error posting the form");
+                },
+                complete:function() {
+                    //alert('complete');    
+                }
+            });
+            //alert('after ajax'); 
+            //event.preventDefault();
+            return false; 
+        });
+        
+	   $("#editbtn").click(function(){
+        //    $('#icons div').toggleClass('on');
+           var active = $(this).attr('class')=='on';
+         //   $('.text').toggleClass('show');
+         //   $('.block').toggleClass('show');
+            switch(window.state){
+				case 'reset': tdxio.page.setState('editable');break;
+				case 'editable': tdxio.page.setState('reset');break;
+				case 'editing': //confirm("If you change visualisation you will loose unsaved modifications.Continue?");
+					tdxio.page.setState('reset');break;
+			}
+            //tdxio.page.setState(active?'editable':'reset');
+            tdxio.page.setBlocked(!active);
+            tdxio.page.resetHeight();
+            tdxio.page.adjust();
+            tdxio.page.resize();
+            //if(active){$('form#modified-text').}else{}
+        });
+           
+        $(".merge , .cut").live('click',function(){
+            var op = $(this).attr('class');
+          //  alert(op);
+            var segId = (op=='merge')?$(this).prev('span.block').children()[$(this).prev('span.block').children().length-1].id:$(this).prev('span.segment').attr('id'); 
+            var after = segId.split('segment')[1];
+            $.ajax({
+                type:"get",
+                url:encodeURI(tdxio.baseUrl+"/translation/ajax"+op),
+                data: {'id':window.trId,'after':after},
+                dataType: "json",
+                success: function(rdata,status){
+                    if (rdata.response==false) {
+                        alert(rdata.message);
+                    }else{
+                        window.$.update(op,rdata);
+                    }
+                },
+                error: function() {
+                    alert("Error merging or cutting");
+                }
+            });
+        });
+        
+        $('#work .segment').live('hover',function(){$(this).attr('title','Right click to add a comment for this segment of the text');});
+            
+        $('textarea.block.show.editable').live('change',function(){
+			$('#savebtn').toggleClass('on',true);
+		});
+		
+		$("#savebtn.on").live('click',function(){
+			//$(this).append("#translation textarea");
+			window.$.submitTranslation();});
         
     });
     

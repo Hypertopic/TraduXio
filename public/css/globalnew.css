@@ -190,7 +190,7 @@ textarea.autogrow {
 border:none;
 /*border-color:#FFFFFF;*/
 height:auto;
-overflow:hidden;
+overflow:auto;
 width:98%;
 color:#585858;
 }
@@ -869,18 +869,18 @@ background: transparent url(../images/deloff.png) no-repeat;
 background: transparent url(../images/delon.png) no-repeat; 
 }
 
-span.block{
+span.block,textarea.block{
 display:inline;
 border:none;
 }
 
-span.show, div.show{
+span.show, div.show, textarea.show{
 border:solid 1px #dbdbdb;
 display:block;
 padding:5px 10px;
 }
 
-#translation span.show{
+#translation span.show,#translation textarea.show{
 margin-bottom:19px;/* this value must be equal to .merge height +3px*/
 }
 
@@ -904,7 +904,11 @@ border:none;
 font:inherit;
 }
 
-textarea.autogrow{color:#000000;}
+#translation textarea{
+color:#000000;font:inherit;
+font-size:0.9em;
+overflow:auto;
+}
 
 
 
