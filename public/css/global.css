@@ -1300,3 +1300,34 @@ font-size:0.9em;
 color:#FF0000;
 }
 /* end copyright.phtml*/
+
+
+div.login{
+height:200px;
+width:470px;
+padding:40px 30px;
+margin:50px auto;
+/*border:solid #dbdbdb 1px;*/
+background-image:url('../images/login.png');
+background-repeat:no-repeat;
+}
+
+.login input{
+width:200px;
+float:right;
+margin-right:20px;
+}
+.login input#login{
+width:100px;
+}
+
+div.login div{
+clear:both;
+margin-bottom:20px;
+}
+div#page-title {
+	font-size:1.8em;
+    color: #909090;
+    font-variant: small-caps;
+    font-weight: normal;
+}
