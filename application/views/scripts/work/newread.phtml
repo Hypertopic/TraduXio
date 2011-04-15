@@ -4,6 +4,7 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/actions.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.scrollTo-min.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.jeditable.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/nl2br.js')); ?>
 <?php $this->layout()->setLayout('layout-black');?>
 
 <?php 
@@ -139,7 +140,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 <div id="icons">
 <div id="editbtn" title="<?php echo __("Edit mode"); ?>"></div>
 <div id="savebtn" title="<?php echo __("Save"); ?>"></div>
-<div id="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
+<!--<div id="delbtn" title="<?php //echo __("Delete this translation"); ?>"></div>-->
 </div>
 </div>
 

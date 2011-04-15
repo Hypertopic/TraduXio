@@ -670,8 +670,9 @@ display:block;}
 
 #icons{
 position:absolute;
-right:10px;
-top:100px;
+right:20px;
+top:50px;
+float:right;
 }
 
 #icons div{
@@ -679,6 +680,7 @@ cursor:pointer;
 margin:0 0 10px 0;
 width: 40px;
 height:40px;
+float:left;
 }
 
 
@@ -851,10 +853,10 @@ border:solid 1px #DBDBDB;
 }
 
 #editbtn{
-background: transparent url(../images/editoff.png) no-repeat; 
+background: transparent url(../images/editon.png) no-repeat; 
 }
 #editbtn.on{
-background: transparent url(../images/editon.png) no-repeat; 
+background: transparent url(../images/editonsel.png) no-repeat; 
 }
 #savebtn{
 background: transparent url(../images/saveoff.png) no-repeat; 

@@ -16,19 +16,38 @@ class TranslationController extends Tdxio_Controller_Abstract
     public function init(){}
     
     public function ajaxeditAction() {
-		$request=$this->getRequest();
+		$request=$this->getRequest(); 
+		$model= $this->_getModel();
         $translationId=$request->getParam('id'); 
+        if(!$work=$model->fetchTranslationWork($translationId,false)){
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
+        }
         
-        $model= $this->_getModel(); 
-        
+         
         if ($request->isPost()) {
-            $values=$request->getPost();
-            Tdxio_Log::info($values,'trajaxedit');  
+            $data=$request->getPost();
+            
+            Tdxio_Log::info($data,'trajaxedit');  
+            $data['TranslationBlocks']=array();                   
+			foreach ($work['TranslationBlocks']as $id=>$block) {
+				if (isset($data['block'.$id])) {
+					Tdxio_Log::info('block'.$id.' is set');
+					$data['TranslationBlocks'][]= array(
+						'translation' => $data['block'.$id],
+						'from_segment' => $block['from_segment']
+						);
+						Tdxio_Log::info($data);
+					unset($data['block'.$id]);
+				}
+			}
+			$model->update($data,$translationId);   
+			$histModel = new Model_History();
+			$histModel->addHistory($translationId,2);  
 		}
 		$result = 0;
 		//$result = $model->merge($translationId,$segToMerge);
         if($result==0){
-            Tdxio_Log::info($values,'form values in trajedit');
+            Tdxio_Log::info($data,'form values in trajedit');
             $this->view->data = array('response'=>true,'message'=>'Edit ok');
         }else{
             $this->view->data = array('response'=>false,'message'=>__("ERROR, couldn't save the translation"));

@@ -13,6 +13,7 @@ var maxH;
 var docHeight;
 var blocked=false;
 var state = 'reset';//'reset' 'editable' 'editing'
+var trBlocks;
 
 (function($) {
     
@@ -89,7 +90,7 @@ var state = 'reset';//'reset' 'editable' 'editing'
         writeWork: function(sentences,from,to, step){//alert('2');
             var pre = "<span class='segment' id='text"+data.work.id +"-segment";
             for(var x=from; x<=to; x+=step){
-                $('#work div.text').append(pre + x +"'>" + sentences[x].content +"</span>");
+                $('#work div.text').append(pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>");
             }
         },
         resetHeight : function(){
@@ -121,14 +122,17 @@ var state = 'reset';//'reset' 'editable' 'editing'
 				var w = $(this).width();
 				var h = $(this).height();
 				var cl = $(this).attr('class');
-				$(this).replaceWith( "<"+ newTagName +" class=\"" + cl + "\" id=\""+ el.id +"\" >" + $(this).text() + "</"+ newTagName +">");
-				if($("#edit-form")){
+				var id = this.id;
+				var txt = (newTagName=='span')?nl2br($(this).val(),false):trWork.blocks[id.match(/\d+/)].translation;
+				$(this).replaceWith( "<"+ newTagName +" class=\"" + cl + "\" name=\""+ el.id+ "\" id=\""+ el.id +"\" >" + txt + "</"+ newTagName +">");
+/*				if($("#edit-form")){
 					alert('exists form');
 					$("#edit-form").append("#"+el.id);
-				}
+				}*/
 				$("#"+el.id).height(h);
 				$("#"+el.id).width(w);
 			});
+			//window.newBlocks = $.makeArray($("#translation div.text .block.show.editable"));
 		},
         
         
@@ -141,25 +145,25 @@ var state = 'reset';//'reset' 'editable' 'editing'
                 //$("span.block.show.editable textarea").each(function(){$(this).replaceWith($(this).text());});
                 //$("#translation span textarea").contents().unwrap();
                
-				$("#edit-form").replaceWith($("#edit-form").html());
+				//$("#edit-form").replaceWith($("#edit-form").html());
                 $('#translation .block').toggleClass('editable',false);
                 $('#icons div').toggleClass('on',false);
                 $('.cut').remove();
                 $('.merge').remove();
             }else if(mode=='editable'){
                 tdxio.page.setBlocked(true);
+                tdxio.page.replaceTag("textarea.block.show.editable","span");
                 $('.text').toggleClass('show',false);
                 $('.block').toggleClass('show',true);
                 $('#translation .block').toggleClass('editable',true);
                 $('#editbtn').toggleClass('on',true);
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
                 $('#work span.block').after('<span class="merge" title="Merge here"></span>');
-                $('#work span.block.show span.cut:last-child').remove();
-			    tdxio.page.replaceTag("textarea.block.show.editable","span");
+                $('#work span.block.show span.cut:last-child').remove();			    
             }else if(mode=='editing'){
 				tdxio.page.setBlocked(true);
 				if(window.state!=mode){
-					$("div#translation").wrapInner('<form id="edit-form" />');
+				//$("div#translation").wrapInner('<form id="edit-form" />');
 					tdxio.page.replaceTag("span.block.show.editable","textarea");			
 					//$("span.block.show.editable").wrapInner("<textarea class='autogrow' />");
 					//$("span.block.show.editable textarea").each(function(){$(this).height($(this).parent().height());});
@@ -193,17 +197,17 @@ var state = 'reset';//'reset' 'editable' 'editing'
                     $('#translation .text').append("<span id='create'>Create a translation</span>"); 
                     if(backward===false){    
                         var i;
-                        $('#test').append(pre + sentences[beginSeg].number + "'>" + sentences[beginSeg].content + "</span>");                    
+                        $('#test').append(pre + sentences[beginSeg].number + "'>" + nl2br(sentences[beginSeg].content,false) + "</span>");                    
                         for(i=beginSeg; (i==beginSeg) || (i<len && $('#test').height()<= maxH) ; i++){
-                            $('#work div.text').append(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
+                            $('#work div.text').append(pre + sentences[i].number + "'>" +nl2br(sentences[i].content,false) + "</span>");
                             if(i+1<len){
-                                $('#test').append(pre + sentences[i+1].number + "'>" +sentences[i+1].content + "</span>");
+                                $('#test').append(pre + sentences[i+1].number + "'>" +nl2br(sentences[i+1].content,false) + "</span>");
                             }
                             endSeg=i;
                         }                       
                     }else{
                         var i;
-                        $('#test').append(pre + sentences[endSeg].number + "'>" + sentences[endSegSeg].content + "</span>");
+                        $('#test').append(pre + sentences[endSeg].number + "'>" + nl2br(sentences[endSegSeg].content,false) + "</span>");
                         for(i=endSeg; (i==endSeg)|| (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                             if(i-1>=0){
@@ -212,10 +216,10 @@ var state = 'reset';//'reset' 'editable' 'editing'
                         }
                         beginSeg=i+1;
                         while((endSeg+1<len)&&($('#test').height()<= maxH)){
-                            $('#test').append(pre + sentences[endSeg+1].number + "'>" +sentences[endSeg+1].content + "</span>");
+                            $('#test').append(pre + sentences[endSeg+1].number + "'>" +nl2br(sentences[endSeg+1].content,false) + "</span>");
                             if($('#test').height()<= maxH){
                                 endSeg++;
-                                $('#work div.text').append(pre + sentences[endSeg].number + "'>" +sentences[endSeg].content + "</span>");                                
+                                $('#work div.text').append(pre + sentences[endSeg].number + "'>" +nl2br(sentences[endSeg].content,false) + "</span>");                                
                             }
                         }
                         back=true;
@@ -252,16 +256,16 @@ var state = 'reset';//'reset' 'editable' 'editing'
                         beginSeg = trWork.blocks[beginBlock].from_segment;
                         
                         for(i=beginBlock;(i==beginBlock) || ( i<trlen && $('#test').height()<= maxH) ; i++){
-                            $('#translation div.text').append(preblock + i + "'>" +((trWork.blocks[i].translation)?trWork.blocks[i].translation:'') + "</span>");
+                            $('#translation div.text').append(preblock + i + "'>" +nl2br((trWork.blocks[i].translation)?trWork.blocks[i].translation:'',false) + "</span>");
                             
                             for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
-                                text += pre + x +"'>" + sentences[x].content +"</span>";
+                                text += pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>";
                             }
                             $('#work div.text').append(outblock + i + "'>"+text+"</span>");
                             $('#test').html($('#work div.text').html());
                             if(i+1<trlen){
                                 for(var x=trWork.blocks[i+1].from_segment; x<=trWork.blocks[i+1].to_segment; x++){
-                                    $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
+                                    $('#test').append(pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>");
                                 }
                             }
                             endSeg=trWork.blocks[i].to_segment;
@@ -273,7 +277,7 @@ var state = 'reset';//'reset' 'editable' 'editing'
                         endSeg = trWork.blocks[endBlock].to_segment;
                         
                         for(i=endBlock; (i==endBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
-                            $('#translation div.text').prepend(preblock + i + "'>" +((trWork.blocks[i].translation)?trWork.blocks[i].translation:'') + "</span>");
+                            $('#translation div.text').prepend(preblock + i + "'>" +nl2br((trWork.blocks[i].translation)?trWork.blocks[i].translation:'',false) + "</span>");
                              for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
                                 text += pre + x +"'>" + sentences[x].content +"</span>";
                             }
@@ -281,7 +285,7 @@ var state = 'reset';//'reset' 'editable' 'editing'
                             $('#test').html($('#work div.text').html());
                             if(i-1>=0){
                                 for(var x=trWork.blocks[i-1].to_segment; x>=trWork.blocks[i-1].from_segment; x--){
-                                    $('#test').prepend(pre + x +"'>" + sentences[x].content +"</span>");
+                                    $('#test').prepend(pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>");
                                 }
                             }
                         }
@@ -291,14 +295,15 @@ var state = 'reset';//'reset' 'editable' 'editing'
                             var from=trWork.blocks[endBlock+1].from_segment;
                             var to=trWork.blocks[endBlock+1].to_segment;
                             for(var x=from; x<=to; x++){
-                                $('#test').append(pre + x +"'>" + sentences[x].content +"</span>");
+                                $('#test').append(pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>");
                             }
                             if($('#test').height()<= maxH){
-                                $('#translation div.text').append(preblock + (endBlock+1) + "'>" +((trWork.blocks[endBlock+1].translation)?trWork.blocks[i].translation:'') + "</span>");
+                                $('#translation div.text').append(preblock + (endBlock+1) + "'>" +nl2br((trWork.blocks[endBlock+1].translation)?trWork.blocks[i].translation:'',false) + "</span>");
                                 for(var x=from,text=''; x<=to; x++){
-                                    text += pre + x +"'>" + sentences[x].content +"</span>";
+                                    text += pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>";
                                 }
                                 $('#work div.text').append(outblock + (endBlock+1) + "'>"+text+"</span>");
+                                //window.trBlocks.(endBlock+1)=outblock + (endBlock+1) + "'>"+text+"</span>");
                                 endSeg=to;
                             }
                             endBlock++;                            
@@ -438,7 +443,10 @@ var state = 'reset';//'reset' 'editable' 'editing'
     $(document).ready(function() {
         
         tdxio.page.getWork();
-        
+       
+  
+     //   var blocks = $("#translation div.text span").map(function(){return this.id;}).get().join(',');
+      //  alert('ids '+blocks);
         $(window).bind('resize',(function() {
             if(tdxio.page.getBlocked()!=true){
                 otime = new Date();
@@ -483,7 +491,7 @@ var state = 'reset';//'reset' 'editable' 'editing'
 				tdxio.page.setState('editing');
 		});
 		
-		$("div#myslidemenu ul li ul li a").live('click',function(event){
+		$("ul li#extend a").live('click',function(event){
 			event.preventDefault();
 			/* if($(this).attr('class')=='idle'){
 			window.location.replace(tdxio.baseUrl+"/login/index");
