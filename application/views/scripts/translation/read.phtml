@@ -1,4 +1,5 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
+<?php $this->headLink()->appendStylesheet($this->makeUrl('/css/oldpage.css')) ?>
 
 <div id="LRcontainer">
 <div class="left-menu">
@@ -159,12 +160,12 @@
                     <?php endforeach; ?>
 </div>
 </td>
-<td class="w21 Rborder hundred"></td>
-<td class="w21 Lborder hundred"></td>
+<td class="w21 Rborder hundred"><div class="w21 hundred"></div></td>
+<td class="w21 Lborder hundred"><div class="w21 hundred"></div></td>
 <td class="newblock hundred" <?php echo $tradDir; ?>>
 <div class="pad10"><span><?php echo $this->nlBr($block['translation']); ?></span></div>
 </td>
-<td class="w21 Rborder hundred"></td>
+<td class="w21 Rborder hundred"><div class="w21 hundred"></div></td>
 </tr>
 
 <tr class="hundred">

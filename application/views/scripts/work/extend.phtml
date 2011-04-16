@@ -11,7 +11,9 @@
  * GNU General Public License for more details.
  **/
 
-?><?php echo $this->headScript()->appendFile($this->makeUrl('/js/autogrow.js')); ?>
+?>
+<?php $this->headLink()->appendStylesheet($this->makeUrl('/css/oldpage.css')) ?>
+<?php echo $this->headScript()->appendFile($this->makeUrl('/js/autogrow.js')); ?>
 <?php $dir = (($this->text['rtl']==1)?'dir="rtl"':''); ?>
 
 <div class="central-home">
