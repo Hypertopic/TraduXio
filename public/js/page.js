@@ -207,7 +207,7 @@ var trBlocks;
                         }                       
                     }else{
                         var i;
-                        $('#test').append(pre + sentences[endSeg].number + "'>" + nl2br(sentences[endSegSeg].content,false) + "</span>");
+                        $('#test').append(pre + sentences[endSeg].number + "'>" + nl2br(sentences[endSeg].content,false) + "</span>");
                         for(i=endSeg; (i==endSeg)|| (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                             if(i-1>=0){
