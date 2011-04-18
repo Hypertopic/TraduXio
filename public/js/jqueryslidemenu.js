@@ -26,7 +26,7 @@ buildmenu:function(menuid, arrowsvar){
 			$curobj.children("a:eq(0)").css(this.istopheader? {paddingRight: arrowsvar.down[2]} : {}).append(
 				'<img src="'+ (this.istopheader? arrowsvar.down[1] : arrowsvar.right[1])
 				+'" class="' + (this.istopheader? arrowsvar.down[0] : arrowsvar.right[0])
-				+ '" style="border:0;" />'
+				+ '" style="border:0;" alt="submenu" />'
 			)
 			$curobj.hover(
 				function(e){

@@ -6,7 +6,7 @@
 <?php if(empty($this->myEntries)) {echo __("You have not inserted any text's translations");} ?>
 <?php foreach ($this->myEntries as $srcLang=>$trlLang):?>
 <?php foreach ($trlLang as $lang=>$texts):?>
-    <li class='srcLang'> <?php echo __($srcLang);?> <img src="<?php echo $this->makeUrl('/images/arrow-right.png'); ?>"> <?php echo __($lang);?></li>
+    <li class='srcLang'> <?php echo __($srcLang);?> <img src="<?php echo $this->makeUrl('/images/arrow-right.png'); ?>" alt="->"/> <?php echo __($lang);?></li>
     <ul class='trl'>
 <?php foreach ($texts as $text): ?>
     <li class='text my'>

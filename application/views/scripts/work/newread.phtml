@@ -58,7 +58,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     
     <div class="clear">
         <div class="Lborder middle" id="prev-page" >
-            <a href="#"><img class="turn-page" src="<?php echo $this->makeUrl('/images/previous.png'); ?>"/></a>
+            <a href="#"><img class="turn-page" src="<?php echo $this->makeUrl('/images/previous.png'); ?>" alt="previous"/></a>
         </div>
         <div class="text-container center" id="work">
         <div class="work-title"> <?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
@@ -121,7 +121,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         </div>            
         </div>
         <div class="Rborder middle" id="next-page" >
-            <a href="#"><img class = "turn-page" src="<?php echo $this->makeUrl('/images/next.png'); ?>" /></a>
+            <a href="#"><img class = "turn-page" src="<?php echo $this->makeUrl('/images/next.png'); ?>" alt="next" /></a>
         </div>
     </div>
     
@@ -134,7 +134,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 </div>
 </div>
 <div id="icons">
-<img src="<?php echo $this->makeUrl('/images/save.png'); ?>">
+<img src="<?php echo $this->makeUrl('/images/save.png'); ?>" alt="<?php echo __("Save"); ?>" />
 </div>
 </div>
 

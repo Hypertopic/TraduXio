@@ -152,7 +152,7 @@ width:200px;
 div.left-section {
 background-color:#585858;
 border-color: #ffffff;
-border:2px 0 2px 2px;
+border:2px 0px 2px 2px;
 border-style:solid;
 color:#FFFFFF;
 font-size:120%;
@@ -1209,7 +1209,7 @@ list-style-position:inside;
 
 .question{
 font-size:1.3em;
-font-style:bolder;
+font-style:bold;
 }
 
 .answer{
