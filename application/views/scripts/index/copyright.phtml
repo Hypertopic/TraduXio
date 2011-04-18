@@ -1,7 +1,8 @@
+<?php ?>
 <div class="central-home">
 <div id="margin">
 
-<div id="gray-page-title"><?php echo __("Report an on-line abuse"); ?></div>
+<div id="gray-page-title"><?php echo __("Report a copyright abuse"); ?></div>
 
 <?php if ($this->sent) : ?>
 <div class="comment">
@@ -11,8 +12,7 @@
 <br /><div class="comment"><a href="<?php echo $this->backUrl; ?>"><?php echo __("Continue")?></a></div>
 <?php else :?>
 <?php if ($this->error) : ?>
-<div class="comment"><?php echo __("We encountered an error sending your message. Here is the error message : %1\$s.
-Sorry for the inconvenience, we're trying hard to fix it.","<i>".$this->error."</i>")?>
+<div class="comment"><?php echo __("We encountered an error sending your message. Here is the error message : %1\$s. \nSorry for the inconvenience, we're trying hard to fix it.","<i>".$this->error."</i>")?>
 <br /><?php echo __("The %1\$s team.","<i>Traduxio</i>"); ?>
 </div>
 <?php else: ?>

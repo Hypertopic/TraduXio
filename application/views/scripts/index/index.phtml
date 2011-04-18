@@ -1,9 +1,9 @@
-<?php $phrase = "frase_".$this->lang; $logo = "logo".strtoupper($this->lang);  ?> 
+<?php $phrase = "frase".strtoupper($this->lang); $logo = "logo".strtoupper($this->lang);  ?> 
 <div id="homepage"><div id="index"> 
   <div class="indexopt"><a href="<?php echo $this->makeUrl('/index/register'); ?>"><?php echo __("Register"); ?></a></div>
   <div class="indexopt"><a href="http://traduxio.community.hypertopic.org/" target="_blank" ><?php echo __("Invite"); ?></a></div>
   <div class="indexopt"><a href="<?php echo $this->makeUrl('/index/faq'); ?>"><?php echo __("FAQ"); ?></a></div>
-  <div class="indexopt"><a href="http://sourceforge.net/apps/trac/traduxio/wiki" target="_blank"><?php echo __("About Traduxio"); ?></a></div>
+  <div class="indexopt"><a href="http://traduxio.sourceforge.net/" target="_blank"><?php echo __("About Traduxio"); ?></a></div>
   <div class="indexopt"><a href="http://sourceforge.net/apps/trac/traduxio/wiki/HowTo" target="_blank"><?php echo __("Help"); ?></a></div>
 </div>
 <div id="traduxio_logo">
@@ -13,4 +13,4 @@
 
 <div id="logo_cip"><img src="<?php echo $this->makeUrl('/images/'.$logo.'.png') ?>"></div>
 </div>
-<?php $image = __("indexlogoEN"); ?>
+

@@ -1,140 +1,114 @@
+<?php ?>
+ 
 <div class="central-home">
 
 <div class="tutorial">
 
-<div class="tutorial-title">Frequently Asked Questions&nbsp;</div>
+<div class="tutorial-title"><?php echo __("Frequently Asked Questions");?></div>
 <ol>
 <div class="tutorial-text">
-<div class="question"><li>What is TraduXio?</li></div>
+<div class="question"><li><?php echo __("FAQuestion1") ?></li></div>
 <div class="answer">
-TraduXio is a participative platform for cultural texts translators.
-<br> For a detailed description, visit the <a href="http://sourceforge.net/apps/trac/traduxio/wiki" target="_blank">official page on SourceForge</a>.</div>
+<?php echo __("FAQanswer1",'<a href="http://traduxio.sourceforge.net/" target="_blank">','</a>');?>
+</div>
 </div>
 
 <div class="tutorial-text">
-<div class="question"><li>How does it work?</li></div>
-<div class="answer"><a href="http://sourceforge.net/apps/trac/traduxio/wiki/HowTo" target="_blank">Here</a> you can find a "How To", explaining Traduxio's basic functionalities.</div>
+<div class="question"><li><?php echo __("FAQuestion2");?></li></div>
+<div class="answer"><?php echo __("FAQanswer2",'<a href="http://sourceforge.net/apps/trac/traduxio/wiki/HowTo" target="_blank">','</a>');?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-So you are just another Translation Memory?
-</li></div>
-<div class="answer">No. Strictly speaking, TraduXio is not a Translation Memory. 
-Whereas traditional Translation Memory devices are limited to two languages (source/target), Traduxio allows the comparison between many different versions of the same text. 
-Moreover, for TraduXio offers a (social) tagging/classification system of the source-text (according to its literary genre, author, historical period, etc.), it enables a better management of translated texts.
-</div>
+<?php echo __("FAQuestion3");?></li></div>
+<div class="answer"><?php echo __("FAQanswer3");?></div>
 </div>
 
 <div class="tutorial-text">
 <div class="question"><li>
-Should I register? How can I do it?
-</li></div>
+<?php echo __("FAQuestion4");?></li></div>
 <div class="answer">
-Yes, you need to register to get a log in. In order to be invited by a member of the community, click on <a href="<?php echo $this->makeUrl('/index/register'); ?>">“Register”, on the right side of the <a href="<?php echo $this->makeUrl('/index/index'); ?>">Front Page</a> menu, and send us an e-mail.
-</div>
+<?php echo __("FAQanswer4",'<a href="<?php echo $this->makeUrl(\'/index/register\'); ?>">','</a>','<a href="<?php echo $this->makeUrl(\'/index/index\'); ?>">','</a>');?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-Am I forced to share all my work? Who can have access to my translations?
-</li></div>
+<?php echo __("FAQuestion5");?></li></div>
 <div class="answer">
-By default, all your work will remain private and invisible to the others. You manage the text’s privileges (access, edit, translate, etc.) the way you want, at all time. You can build your own community with your own sharing rules.
-</div>
+<?php echo __("FAQanswer5");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-What about authors/translators’ rights?
-</li></div>
+<?php echo __("FAQuestion6");?></li></div>
 <div class="answer">
-TraduXio respects copyright (and “droit d’auteur”) regulations. The site contains only works taken from the public domain. Translations of protected texts are possible but require previous authorization from copyright holders.
-TraduXio would like to value the work of translators and their rights, while promoting a spirit of mutualisation, through the use of open licenses. 
-</div>
+<?php echo __("FAQanswer6");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-What kind of legal license does TraduXio use for the texts?
-</li></div>
+<?php echo __("FAQuestion7");?></li></div>
 <div class="answer">
-TraduXio is very liberal, so you remain free to choose which kind of license suits you best, for each text, and for the sets of texts. We recommend the use of “open” licenses, of the Creative Commons type.
-</div>
+<?php echo __("FAQanswer7");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-Is it free of use?
-</li></div>
+<?php echo __("FAQuestion8");?></li></div>
 <div class="answer">
-Yes. TraduXio is and will remain durably free of use.
-</div>
+<?php echo __("FAQanswer8");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-Is it free software or open source?
-</li></div>
+<?php echo __("FAQuestion9");?></li></div>
 <div class="answer">
-Yes. The software is developed with a GNU/GPL3 license.
-</div>
+<?php echo __("FAQanswer9");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-Can I have then “my own” TraduXio?
-</li></div>
+<?php echo __("FAQuestion10");?></li></div>
 <div class="answer">
-Yes, since the code is open, you are free to build your own translation platform, provided you respect the original license (GNU/GPL3).
-</div>
+<?php echo __("FAQanswer10");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-Do I need to download it on my PC?
-</li></div>
+<?php echo __("FAQuestion11");?></li></div>
 <div class="answer">
-No, TraduXio is Web based. It is an online workbench.
-</div>
+<?php echo __("FAQanswer11");?></div>
 </div>
 
 <div class="tutorial-text">
 <div class="question"><li>
-Is TraduXio a publishing device?
-</li></div>
+<?php echo __("FAQuestion12");?></li></div>
 <div class="answer">
-No. It is meant to be a collaborative Platform and network connecting users/translators worldwide. You decide whether you want to make your translations public, how, and under what legal conditions. You remain free to remove your translations and keep control over your datas, at all time.
-</div>
+<?php echo __("FAQanswer12");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-Why do we need a specific device for Literary Translation anyway?
-</li></div>
+<?php echo __("FAQuestion13");?></li></div>
 <div class="answer">
-Although machine translation and translation memories are frequently used in business, they are inadequate to translate a text from a culture to another one. When faced with philosophy, literature or ancient texts, professional translators have to cope with the fact that the most important things to "translate" are often in the style, in details, or even unwritten. 
-</div>
+<?php echo __("FAQanswer13");?></div>
 </div>
 
 
 <div class="tutorial-text">
 <div class="question"><li>
-Who makes TraduXio?
-</li></div>
+<?php echo __("FAQuestion14");?></li></div>
 <div class="answer">
-The project was launched and is currently led by the French NGO “Zanchin” (“association loi 1901”), based in Paris. 
-The scientific direction is ensured by the Tech-Cico department of the University of Technology of Troyes (France). Other partners (DGLFLF, UNESCO …) are involved in the project, providing either financial or institutional support. 
-</div>
+<?php echo __("FAQanswer14");?></div>
 </div>
 
 
