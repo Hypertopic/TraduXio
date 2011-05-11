@@ -57,9 +57,6 @@ span.genre{
     font-variant:small-caps;
     font-style:italic;
 }
-div.tag-group{
-    margin-top:5px;
-}
 
 div.title{
     padding:3px;
@@ -583,7 +580,7 @@ font-family: Comic Sans MS,Verdana,Arial,Helvetica,sans-serif;
 
 #fieldset-tag_group{
     border:0px;
-    background-color:#E5E5E5;
+   /* background-color:#E5E5E5;*/
 }
 #tag_group-element{
     margin:0px;

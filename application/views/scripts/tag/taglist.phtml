@@ -1,5 +1,6 @@
-<?php
-?>
+<?php 
+$this->layout()->setLayout('empty');?>
+<div class="add-tag" title="<?php echo __("Add a new tag");?>">+</div>		 
 <?php if(!empty($this->tags)): ?>
 <?php foreach($this->tags as $genre=>$tags): ?>
 <div class="tag-group" id="group-<?php echo $genre?>">

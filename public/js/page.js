@@ -1,6 +1,7 @@
 if (typeof console == "undefined") console={log:function(){}};
  
 var trId = '';
+var workId;
 var begin = 0;// segment from which to begin the text's display - it can represent the first or the last segment (page-turn backward or forward)
 var end = 0;
 var back = false;
@@ -298,7 +299,7 @@ var trBlocks;
                                 $('#test').append(pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>");
                             }
                             if($('#test').height()<= maxH){
-                                $('#translation div.text').append(preblock + (endBlock+1) + "'>" +nl2br((trWork.blocks[endBlock+1].translation)?trWork.blocks[i].translation:'',false) + "</span>");
+                                $('#translation div.text').append(preblock + (endBlock+1) + "'>" +nl2br((trWork.blocks[endBlock+1].translation)?trWork.blocks[endBlock+1].translation:'',false) + "</span>");
                                 for(var x=from,text=''; x<=to; x++){
                                     text += pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>";
                                 }
@@ -359,8 +360,17 @@ var trBlocks;
             }
         },
         
-        
-        
+ /*       writeTags: function(elId,tags){
+			if(tags.length)
+				for(var i=0; i<tags.length; i++){
+					var elem = "div#"+elId+" div#group-"tags[i].genre;
+					if($(elem).length>0)
+						$(elem).append(<span class="tag-item" title=tags[i].genre_name>);
+						
+					
+				}
+		},
+   */     
         translate: function(){
                 
         },
@@ -399,6 +409,7 @@ var trBlocks;
 						//trId = (trId=='')?rdata.work.Interpretations[0].work.id:trId;
 						translations = tdxio.array.trShift(rdata.work.Interpretations.slice(),trId,true);
 						tdxio.page.displayOnglets(translations);
+						$("#tr-tag").append(rdata.tagbody);
 					}
 					ajaxData = rdata;
 					tdxio.page.displayWork(rdata,trId,false,begin,end);
@@ -416,6 +427,22 @@ var trBlocks;
            /*tdxio.page.displayOnglets(translations);    */
             tdxio.page.displayOnglets(translations);
             tdxio.page.displayWork(ajaxData,newId,back,begin,end);
+            $.ajax({
+				type:"get",
+				url:encodeURI(tdxio.baseUrl+"/tag/gettags"),
+				dataType: "json",
+				data:{'id':newId},
+				success: function(rdata,status){
+					if (rdata.response==false) {
+						alert(rdata.message);
+					}else{
+						$("div#tr-tag").empty().append(rdata.taglist);
+					}
+				},
+				error: function() {
+					alert("error getting the tags' list");
+				}
+			});  
            // tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
 			tdxio.page.setState((window.state=='editing' || window.state=='editable')?'editable':'reset');
             tdxio.page.adjust();
@@ -517,7 +544,7 @@ var trBlocks;
 			});   
 			return false;
 		});
-		$("form").live("submit",function() {
+		$("form#extend-form").live("submit",function() {
            
            url = tdxio.baseUrl+"/work/ajax"+(this.id.split('-')[0]);
      //      alert('submit '+url);

@@ -13,6 +13,22 @@ class TagController extends Tdxio_Controller_Abstract
 {
     protected $_modelname='Taggable'; 
     
+    public function getformAction(){ 
+		$request=$this->getRequest();
+		$id = $request->getParam('id');
+		$form = new Form_Tag();     
+        Tdxio_Log::info($request,'getformAction request');
+        $renderView = new Zend_View();
+		$renderView->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+		$wModel = new Model_Work();
+		if($wModel->isAllowed('tag',$id)){
+			$tagForm = new Form_Tag(); 
+			$renderView->assign('content',$tagForm);
+			$this->view->tagform=$renderView->render('render.phtml');
+        }
+	}
+    
+    
     protected function tagSentence()
     {
         
@@ -62,6 +78,32 @@ class TagController extends Tdxio_Controller_Abstract
             throw new Zend_Controller_Action_Exception('Incorrect query.', 500);
         }
     }
+    
+    public function gettagsAction(){
+		$username = Tdxio_Auth::getUserName();  
+        $request=$this->getRequest();
+        $id=$request->getParam('id');
+        $model= $this->_getModel();
+		$tags = $model->getTags($id);
+		Tdxio_Log::info($tags,'abcdefg');
+		$genres=$tags['Genres'];
+        unset($tags['Genres']);
+        
+        if(!empty($tags)){
+            $tags = $model->normalizeTags($tags[$id]);
+        }else{
+            $tags = array();
+        }        
+		
+		$renderView = new Zend_View();
+		$renderView->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+		$renderView->assign('tags',$tags);
+		$renderView->assign('genres',$genres);
+		$renderView->assign('userid',$username);
+		
+		$this->view->taglist=$renderView->render('taglist.phtml');
+        		
+	}
      
     public function deletetagAction(){      
         Tdxio_Log::info('entra in deletetagAction');

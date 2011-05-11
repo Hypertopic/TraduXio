@@ -1,7 +1,7 @@
-<?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/page.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/jqueryslidemenu.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/actions.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.scrollTo-min.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.jeditable.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/nl2br.js')); ?>
@@ -48,7 +48,9 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 <!-------------------------------!-->
 <div class="tag-line clear">
     <div class="show-tag-area" id="orig-tag">
-        <?php echo $this->tagbody ?>
+		 <?php echo $this->tagbody; ?>
+    </div>
+    <div class="show-tag-area" id="tr-tag">		
     </div>
 </div> 
 <div id="book"> 

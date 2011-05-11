@@ -209,14 +209,13 @@ overflow:hidden;
 }
 
 div.show-tag-area{
-    padding-top:10px;
-    margin-bottom:5px;
     color:#DBDBDB;
-    vertical-align:top;
+    float:left;
+    margin-bottom:5px;    
     margin-left:auto;
     margin-right:auto;
+    vertical-align:top;
     width:50%;
-    float:left;
 }
 div.tag-line{
 width:96%;
@@ -526,6 +525,16 @@ bottom:0;
 left:0;
 }
 
+form, form fieldset, form dd, form dl,form dt{
+border: 0px;
+padding:0px;
+margin:0px;
+}
 
+form dl dt{
+display:none;}
+
+.add-tag{
+cursor:pointer;}
 
 /* END SLIDE MENU */

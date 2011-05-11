@@ -147,10 +147,21 @@ class WorkController extends Tdxio_Controller_Abstract
         if((!$id) || (!$model->isOriginalWork($id)) || (!$work)){
             Tdxio_Log::info('get in here');        
             throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
-        }  
+        }
+        $taglist = new Zend_View();
+		$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+		$taglist->assign('tags',$work['Tags']);
+		$taglist->assign('genres',$work['Genres']);
+		$taglist->assign('workid',$work['id']);
+		$taglist->assign('userid',$this->view->userid);
+		if($model->isAllowed('tag',$id)){
+			$tagForm = new Form_Tag(); 
+			$taglist->assign('form',$tagForm);
+		}       
+		$this->view->tagbody=$taglist->render('taglist.phtml');
+        $this->view->canTag = $model->isAllowed('tag',$id);
         $this->view->hasTranslations=$model->hasTranslations($id);   
         Tdxio_Log::info($this->view->hasTranslations,'hastrans');     
-        $this->view->canTag = $model->isAllowed('tag',$id);
         $this->view->canManage = $model->isAllowed('manage',$id);
         $this->view->work = $work;
         
@@ -170,7 +181,7 @@ class WorkController extends Tdxio_Controller_Abstract
         
         $model = $this->_getModel();
         if (!$id || !($work=$model->fetchOriginalWork($id))) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
         }else{
             if($trId!=null){
                 $trId = (array_key_exists($trId,$work['Interpretations']))?$trId:key($work['Interpretations']);
@@ -182,27 +193,22 @@ class WorkController extends Tdxio_Controller_Abstract
             }
             $work['Interpretations'] = $translations;
         }
+        $taglist = new Zend_View();
+		$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+		$taglist->assign('tags',$trWork['Tags']);
+		$taglist->assign('genres',$trWork['Genres']);
+		$taglist->assign('workid',$trWork['id']);
+		$taglist->assign('userid',$this->view->userid);
+		   
+		$this->view->tagbody=$taglist->render('taglist.phtml');
         
         Tdxio_Log::info($work,'ajaxread00');
        
-        
-     /*  $tagForm = new Form_Tag(); 
-        $model = $this->_getModel();
-        $tagForm = new Form_Tag();
-         $taglist = new Zend_View();
-        $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
-        $taglist->assign('tags',$work['Tags']);
-        $taglist->assign('genres',$work['Genres']);
-        $taglist->assign('workid',$work['id']);
-        $taglist->assign('userid',$this->view->userid);
-        $this->view->tagbody=$taglist->render('taglist.phtml');
-       */ 
         $this->view->hasTranslations=$model->hasTranslations($id);        
         $this->view->canTag = $model->isAllowed('tag',$id);
         $this->view->canManage = $model->isAllowed('manage',$id);
         $this->view->work = $work;
         $this->view->trWork = $trWork;
-        //$this->view->tagForm = $tagForm;
         
         Tdxio_Log::info($work,'ajaxread1');
         Tdxio_Log::info($trWork,'ajaxread2');

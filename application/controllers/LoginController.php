@@ -80,7 +80,6 @@ class LoginController extends Tdxio_Controller_Abstract
             }   
         }
         Tdxio_Log::info($_SERVER,'server');
-        Tdxio_Log::info($values['redirect'],'redirect');
                 
         $this->view->form = $form;
     }

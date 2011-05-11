@@ -17,7 +17,7 @@ if(!empty($this->work['Interpretations'])){
     }
 }
 
-$data=array('work'=>$this->work,'tags'=>$this->tagbody,'tagform'=>$this->tagform,'translation'=>$this->trWork);
+$data=array('work'=>$this->work,'tags'=>$this->tagbody,'tagform'=>$this->tagform,'translation'=>$this->trWork,'tagbody'=>$this->tagbody);
 
 Tdxio_Log::info(Zend_Json::encode($data),'jsondata');
 
