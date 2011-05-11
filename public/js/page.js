@@ -232,7 +232,7 @@ var trBlocks;
                         if(data.work.Interpretations[j].work.id==trId)
                             trWork = data.work.Interpretations[j];
                     }
-                    $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author +', ':'');
+                    $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author:'');
                     $('#translation .work-title span.title').html(trWork.work.title);                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var trlen = trWork.blocks.length;
@@ -359,18 +359,7 @@ var trBlocks;
                // $('span#more').wrap('<a href="#tr'+trId+'" />');                
             }
         },
-        
- /*       writeTags: function(elId,tags){
-			if(tags.length)
-				for(var i=0; i<tags.length; i++){
-					var elem = "div#"+elId+" div#group-"tags[i].genre;
-					if($(elem).length>0)
-						$(elem).append(<span class="tag-item" title=tags[i].genre_name>);
-						
-					
-				}
-		},
-   */     
+    
         translate: function(){
                 
         },
@@ -516,6 +505,36 @@ var trBlocks;
 		$('#translation div.text span.block.show.editable').live('click',function(){
 			if(window.state=='editable')
 				tdxio.page.setState('editing');
+		});
+		
+		$('.work-title span').live('dblclick',function(){
+			var content = $(this).html();
+			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\"value=\""+content+"\" />");
+		});
+		
+		$('.work-title input').live('focusout',function(){
+			var textId = ($(this).parent('div').parent('div.text-container').attr('id')=='work')?window.workId:window.trId;
+			var value = $(this).val();
+			var elName = $(this).attr('class');
+			var params=elName == 'author'?{'author':value}:{'title':value};
+			$(this).replaceWith("<span class=\""+$(this).attr('class')+"\">"+value+"</span>");	
+			$.ajax({
+                type: "post",
+                url: encodeURI(tdxio.baseUrl+"/work/metaedit/id/"+textId),
+                dataType: "json",
+                data: params,
+                success:function(rdata,status){
+                    if (rdata.response==false) {//error somewhere
+                        alert(rdata.message);
+                    }else {
+						alert('success');
+                    }
+                },
+                error:function() {
+                    alert("Error in the saving process");
+                },
+            });
+			//save modified filed
 		});
 		
 		$("ul li#extend a").live('click',function(event){

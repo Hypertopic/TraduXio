@@ -537,4 +537,8 @@ display:none;}
 .add-tag{
 cursor:pointer;}
 
+.work-title input{
+width:100px;
+}
+
 /* END SLIDE MENU */

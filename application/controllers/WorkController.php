@@ -378,6 +378,24 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         
     }
+    
+    public function metaeditAction(){
+		$request = $this->getRequest();
+        $id=$request->getParam('id');
+        $model=$this->_getModel();
+		$author = $request->getParam('author');
+		$title = $request->getParam('title');
+		$data = array();
+		if(!is_null($author))
+			$data['author']=$author;
+		if(!is_null($title))
+			$data['title']=$title;
+		Tdxio_Log::info($data,'datata');
+		$newId=$model->update($data,$id); 
+		$histModel = new Model_History();        
+		$histModel->addHistory($id,0);  
+		$this->view->newText = is_null($author)?$title:$author;
+	}
 
     public function manageAction(){
                 

@@ -740,7 +740,7 @@ span.author{
     font-style:normal;
     font-weight:normal;
 }
-.red, .red a{
+.red, .red a, .red span, .red input{
 color:#BB0000;
 }
 

@@ -67,9 +67,10 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
             <a href="#"><img class="turn-page" src="<?php echo $this->makeUrl('/images/previous.png'); ?>"/></a>
         </div>
         <div class="text-container center" id="work">
-        <div class="work-title"> <?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
-            <span class="author red"><?php echo $author.', ' ?></span>
-            <span class="title red"><?php echo $this->work['title']; ?></span>
+        <div class="work-title red"> <?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
+            <span class="author"><?php echo $author ?></span>
+            ,
+            <span class="title"><?php echo $this->work['title']; ?></span>
         </div>
        <!-- <div class="language TBspaced red"><?php //echo __($this->work['language']); ?></div> !-->
         <div class="text show">
@@ -116,9 +117,10 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     <div class="clear">
         <div class="Lborder middle"></div>
         <div class="text-container center" id="translation">
-        <div class="work-title"> 
-            <span class="author red"></span>
-            <span class="title red"></span>
+        <div class="work-title red"> 
+            <span class="author"></span>
+            ,
+            <span class="title"></span>
         </div>
         <div class="text show">
         <?php if(!$this->trId):?>
