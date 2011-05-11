@@ -93,7 +93,7 @@ class TagController extends Tdxio_Controller_Abstract
         if(!is_null($resource_id)){ 
             $taggableModel = new Model_Taggable();
             if(!($taggableModel->entryExists(array('id'=>$resource_id))))
-            {throw new Zend_Exception(sprintf('Taggable Id "%d" does not exist.',$resource_id), 404);}
+            {throw new Zend_Exception(sprintf(__("Taggable object %1\$d does not exist.",$resource_id)), 404);}
         }
         Tdxio_Log::info('supera controllo risorsa');
         

@@ -106,7 +106,7 @@ class WorkController extends Tdxio_Controller_Abstract
         
         if (!$id || !($work=$model->fetchOriginalWork($id))) {
             
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
         }   
         
         if(empty($work['Sentences'])){
@@ -142,7 +142,7 @@ class WorkController extends Tdxio_Controller_Abstract
         $work=$model->fetchOriginalWork($id);
         if (!$id || !$work || (empty($work['Sentences']))) {    
             Tdxio_Log::info('get in here');        
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
         }   
         Tdxio_Log::info($work,'work read');
         if($trId && !(array_key_exists($trId,$work['Interpretations']))){
@@ -172,13 +172,13 @@ class WorkController extends Tdxio_Controller_Abstract
             $trModel = new Model_Translation();
             Tdxio_Log::info($trWork,'ajaxread0');  
             //if (!$trId || !($tempWork=$model->fetchWork($trId))) {
-             //   throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+             //   throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
             //}  
             $trWork = $trModel->fetchTranslationWork($trId);
         }
         $model = $this->_getModel();
         if (!$id || !($work=$model->fetchOriginalWork($id))) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
         }else{
             foreach($work['Interpretations'] as $id=>$trWork){
                 $translations[] = $trWork;
@@ -215,7 +215,7 @@ class WorkController extends Tdxio_Controller_Abstract
         $id = $request->getParam('id');
         $model = $this->_getModel();     
         if (!$id || !$origWork=$model->fetchOriginalWork($id)) {
-            throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist.", $id)), 404);
         }
         $form = new Form_Translate();
         
@@ -255,11 +255,11 @@ class WorkController extends Tdxio_Controller_Abstract
         $model=$this->_getModel(); 
         
         if (!$id || !($work=$model->fetchWork($id))) {
-            throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist.", $id)), 404);
         }   
         
         if(!$model->isOriginalWork($id)) {
-            throw new Zend_Controller_Action_Exception(sprintf('Cannot extend a translation. Edit it instead.'), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Cannot extend a translation. Edit it instead.")), 404);
         }
         
         $sentenceModel = new Model_Sentence();
@@ -542,7 +542,7 @@ class WorkController extends Tdxio_Controller_Abstract
         
         if(!is_null($resource_id)){ 
             if(!($this->_getModel()->entryExists(array('id'=>$resource_id))))
-            {throw new Zend_Exception(sprintf('Work Id "%d" does not exist.',$resource_id), 404);}
+            {throw new Zend_Exception(sprintf(__("Work %1\$d does not exist.",$resource_id)), 404);}
             $visibility=$this->_getModel()->getAttribute($resource_id,'visibility');
             Tdxio_Log::info($visibility,'visibilita');
         }

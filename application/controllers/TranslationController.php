@@ -21,7 +21,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         Tdxio_Log::info($request,'viaggio');
         $model= $this->_getModel();
         if(!$work=$model->fetchTranslationWork($translationId,false)){
-            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
         $form = new Form_TranslationEdit($this->_getBlockList($work['TranslationBlocks']));
         $form->setAction($request->getRequestUri());
@@ -89,17 +89,17 @@ class TranslationController extends Tdxio_Controller_Abstract
         $translationId=$request->getParam('id');
         $model = $this->_getModel();
         if (!$translation=$model->fetchTranslationWork($translationId)) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
         $workModel = new Model_Work();
             
         $srcTextId=$translation['OriginalWorkId'];
         if (!$srcText=$workModel->fetchOriginalWork($srcTextId)) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Text Id %1\$s does not exist.", $srcTextId)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist.", $srcTextId)), 404);
         }
         $segToCut=$request->getParam('after');
         if ($segToCut<0 || $segToCut>=array_keys($srcText['Sentences'])) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Can not cut here (%1\$s)", $segToCut)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Can not cut here (%1\$d)", $segToCut)), 404);
         }
         $model->cut($translationId,$segToCut);
         $segToRedirect = $this->getFirstSegmentOf($segToCut,$translation);
@@ -115,16 +115,16 @@ class TranslationController extends Tdxio_Controller_Abstract
       
         $model=$this->_getModel();
         if (!$translation=$model->fetchTranslationWork($translationId)) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
         $workModel = new Model_Work();
         $srcTextId = $translation['OriginalWorkId'];
         if (!$srcText=$workModel->fetchOriginalWork($srcTextId)) {
-            throw new Zend_Controller_Action_Exception(sprintf('Text Id "%d" does not exist.', $srcTextId), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist.", $srcTextId)), 404);
         }
         $segToMerge=$request->getParam('after');
         if ($segToMerge<0 || $segToMerge>=array_keys($srcText['Sentences'])) {
-            throw new Zend_Controller_Action_Exception(sprintf('Can not merge here (%d)', $segToCut), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here (%1\$d)", $segToCut)), 404);
         }
         $model->merge($translationId,$segToMerge);
         $segToRedirect = $this->getFirstSegmentOf($segToMerge,$translation);
@@ -316,7 +316,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         
         if(!is_null($resource_id)){ 
             if(!($this->_getModel()->entryExists(array('work_id'=>$resource_id))))
-            {throw new Zend_Exception(sprintf('Translation Id "%d" does not exist.',$resource_id), 404);}
+            {throw new Zend_Exception(sprintf(__("Translation %1\$d does not exist.",$resource_id)), 404);}
             $workModel = new Model_Work();
             $visibility=$workModel->getAttribute($resource_id,'visibility');
         }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traduxio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-18 17:24+0100\n"
+"POT-Creation-Date: 2011-05-11 10:38+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Diana Zambon <dianazambon@hotmail.com>\n"
 "Language-Team: \n"
@@ -21,9 +21,23 @@ msgstr "Автор не указан"
 #: controllers/WorkController.php:109
 #: controllers/WorkController.php:145
 #: controllers/WorkController.php:181
-#, php-format
-msgid "Work Id %1$s does not exist or you don't have the rights to see it "
+#, fuzzy, php-format
+msgid "Work %1$d does not exist or you don't have the rights to see it."
 msgstr "Произведение Id %1$s не существует или у Вас нет прав на его просмотр. "
+
+#: controllers/WorkController.php:218
+#: controllers/WorkController.php:258
+#: controllers/WorkController.php:545
+#: controllers/TranslationController.php:98
+#: controllers/TranslationController.php:123
+#, fuzzy, php-format
+msgid "Work %1$d does not exist."
+msgstr "Текст Id %1$s не существует."
+
+#: controllers/WorkController.php:262
+#, fuzzy
+msgid "Cannot extend a translation. Edit it instead."
+msgstr ""
 
 #: controllers/WorkController.php:293
 #, php-format
@@ -92,21 +106,27 @@ msgstr "Новый текст %1$s добавлен %2$s"
 msgid "%1$s, new translation of %2$s added by %3$s"
 msgstr "%1$s, новый перевод текста %2$s добавлен %3$s"
 
+#: controllers/TagController.php:96
+#, fuzzy, php-format
+msgid "Taggable object %1$d does not exist."
+msgstr "Текст Id %1$s не существует."
+
 #: controllers/TranslationController.php:24
 #: controllers/TranslationController.php:92
 #: controllers/TranslationController.php:118
-#, php-format
-msgid "Translation %1$s does not exist."
+#: controllers/TranslationController.php:319
+#, fuzzy, php-format
+msgid "Translation %1$d does not exist."
 msgstr "Перевод %1$s не существует."
 
-#: controllers/TranslationController.php:98
-#, php-format
-msgid "Text Id %1$s does not exist."
-msgstr "Текст Id %1$s не существует."
-
 #: controllers/TranslationController.php:102
-#, php-format
-msgid "Can not cut here (%1$s)"
+#, fuzzy, php-format
+msgid "Can not cut here (%1$d)"
+msgstr "Невозможно разделить здесь (%1$s)"
+
+#: controllers/TranslationController.php:127
+#, fuzzy, php-format
+msgid "Can not merge here (%1$d)"
 msgstr "Невозможно разделить здесь (%1$s)"
 
 #: controllers/TranslationController.php:164
@@ -211,15 +231,15 @@ msgstr "Категория"
 msgid "TAG"
 msgstr "Добавить"
 
-#: forms/Login.php:12
+#: forms/Login.php:24
 msgid "Your username"
 msgstr "Ваше имя пользователя"
 
-#: forms/Login.php:20
+#: forms/Login.php:40
 msgid "Password"
 msgstr "Пароль"
 
-#: forms/Login.php:32
+#: forms/Login.php:61
 msgid "Login"
 msgstr "Войти"
 
@@ -372,63 +392,78 @@ msgid "Logout"
 msgstr "Выйти из системы"
 
 #: ../languages/ripristino/prova_ripristino.php:2
+#, fuzzy
+msgid "Compare, Interpret, Share"
+msgstr ""
+"Сравнивать\n"
+" Выражать\n"
+" Делиться"
+
+#: ../languages/ripristino/prova_ripristino.php:3
+#, fuzzy
+msgid "the environment for translators of cultural texts"
+msgstr ""
+"рабочее пространство для переводчиков\n"
+"литературных текстов"
+
+#: ../languages/ripristino/prova_ripristino.php:4
 msgid "create"
 msgstr "создавать"
 
-#: ../languages/ripristino/prova_ripristino.php:3
-#: ../languages/ripristino/prova_ripristino.php:14
+#: ../languages/ripristino/prova_ripristino.php:5
+#: ../languages/ripristino/prova_ripristino.php:16
 msgid "edit"
 msgstr "редактировать"
 
-#: ../languages/ripristino/prova_ripristino.php:4
+#: ../languages/ripristino/prova_ripristino.php:6
 msgid "tag"
 msgstr "добалять примечания"
 
-#: ../languages/ripristino/prova_ripristino.php:5
-#: ../languages/ripristino/prova_ripristino.php:15
+#: ../languages/ripristino/prova_ripristino.php:7
+#: ../languages/ripristino/prova_ripristino.php:17
 msgid "translate"
 msgstr "переводить"
 
-#: ../languages/ripristino/prova_ripristino.php:6
+#: ../languages/ripristino/prova_ripristino.php:8
 msgid "delete"
 msgstr "удалять"
 
-#: ../languages/ripristino/prova_ripristino.php:7
+#: ../languages/ripristino/prova_ripristino.php:9
 msgid "release"
 msgstr "год издания"
 
-#: ../languages/ripristino/prova_ripristino.php:8
+#: ../languages/ripristino/prova_ripristino.php:10
 msgid "book"
 msgstr "книга"
 
-#: ../languages/ripristino/prova_ripristino.php:9
+#: ../languages/ripristino/prova_ripristino.php:11
 msgid "genre"
 msgstr "жанр"
 
-#: ../languages/ripristino/prova_ripristino.php:10
+#: ../languages/ripristino/prova_ripristino.php:12
 msgid "period"
 msgstr "период"
 
-#: ../languages/ripristino/prova_ripristino.php:11
+#: ../languages/ripristino/prova_ripristino.php:13
 msgid "comment"
 msgstr "комментарий"
 
-#: ../languages/ripristino/prova_ripristino.php:12
+#: ../languages/ripristino/prova_ripristino.php:14
 msgid "copyright"
 msgstr "copyright"
 
-#: ../languages/ripristino/prova_ripristino.php:13
+#: ../languages/ripristino/prova_ripristino.php:15
 msgid "read"
 msgstr "читать"
 
-#: ../languages/ripristino/prova_ripristino.php:16
+#: ../languages/ripristino/prova_ripristino.php:18
 msgid "manage"
 msgstr "управлять настройками"
 
 # "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 # where nplurals is the number of possibilities, plural is the expression for the index
 # another presentation: "Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n
-#: ../languages/ripristino/prova_ripristino.php:17
+#: ../languages/ripristino/prova_ripristino.php:19
 #, php-format
 msgid "%1$d seconds"
 msgstr "msgstr[0] \"%1$d секунда\" msgstr[1] \"%1$d секунды\" msgstr[2] \"%1$d секунд\""
@@ -436,7 +471,7 @@ msgstr "msgstr[0] \"%1$d секунда\" msgstr[1] \"%1$d секунды\" msgs
 # "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 # where nplurals is the number of possibilities, plural is the expression for the index
 # another presentation: "Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n
-#: ../languages/ripristino/prova_ripristino.php:18
+#: ../languages/ripristino/prova_ripristino.php:20
 #, php-format
 msgid "%1$d minutes"
 msgstr "msgstr[0] \"%1$d минута\" msgstr[1] \"%1$d минуты\" msgstr[2] \"%1$d минут\""
@@ -444,7 +479,7 @@ msgstr "msgstr[0] \"%1$d минута\" msgstr[1] \"%1$d минуты\" msgstr[2
 # "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 # where nplurals is the number of possibilities, plural is the expression for the index
 # another presentation: "Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n
-#: ../languages/ripristino/prova_ripristino.php:19
+#: ../languages/ripristino/prova_ripristino.php:21
 #, php-format
 msgid "%1$d hours"
 msgstr "msgstr[0] \"%1$d час\" msgstr[1] \"%1$d часа\" msgstr[2] \"%1$d часов\""
@@ -452,1713 +487,1713 @@ msgstr "msgstr[0] \"%1$d час\" msgstr[1] \"%1$d часа\" msgstr[2] \"%1$d �
 # "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 # where nplurals is the number of possibilities, plural is the expression for the index
 # another presentation: "Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n
-#: ../languages/ripristino/prova_ripristino.php:20
+#: ../languages/ripristino/prova_ripristino.php:22
 #, php-format
 msgid "%1$d days"
 msgstr "msgstr[0] \"%1$d день\" msgstr[1] \"%1$d дня\" msgstr[2] \"%1$d дней\""
 
 # does it mean " a second ago " ?
-#: ../languages/ripristino/prova_ripristino.php:21
+#: ../languages/ripristino/prova_ripristino.php:23
 msgid "second"
 msgstr "секунда"
 
-#: ../languages/ripristino/prova_ripristino.php:22
+#: ../languages/ripristino/prova_ripristino.php:24
 msgid "minute"
 msgstr "минута"
 
-#: ../languages/ripristino/prova_ripristino.php:23
+#: ../languages/ripristino/prova_ripristino.php:25
 msgid "hour"
 msgstr "час"
 
-#: ../languages/ripristino/prova_ripristino.php:24
+#: ../languages/ripristino/prova_ripristino.php:26
 msgid "day"
 msgstr "день"
 
-#: ../languages/ripristino/prova_ripristino.php:25
+#: ../languages/ripristino/prova_ripristino.php:27
 msgid "en"
 msgstr "Английский"
 
-#: ../languages/ripristino/prova_ripristino.php:26
+#: ../languages/ripristino/prova_ripristino.php:28
 msgid "fr"
 msgstr "Французский"
 
-#: ../languages/ripristino/prova_ripristino.php:27
+#: ../languages/ripristino/prova_ripristino.php:29
 msgid "it"
 msgstr "Итальянский"
 
-#: ../languages/ripristino/prova_ripristino.php:28
+#: ../languages/ripristino/prova_ripristino.php:30
 msgid "fas"
 msgstr "Фарси"
 
-#: ../languages/ripristino/prova_ripristino.php:29
+#: ../languages/ripristino/prova_ripristino.php:31
 msgid "heb"
 msgstr "Иврит"
 
-#: ../languages/ripristino/prova_ripristino.php:30
+#: ../languages/ripristino/prova_ripristino.php:32
 msgid "ara"
 msgstr "Арабский"
 
-#: ../languages/ripristino/prova_ripristino.php:31
+#: ../languages/ripristino/prova_ripristino.php:33
 msgid "aar"
 msgstr "Афарский"
 
-#: ../languages/ripristino/prova_ripristino.php:32
+#: ../languages/ripristino/prova_ripristino.php:34
 msgid "abk"
 msgstr "Абхазский"
 
-#: ../languages/ripristino/prova_ripristino.php:33
+#: ../languages/ripristino/prova_ripristino.php:35
 msgid "ace"
 msgstr "Ачехский"
 
-#: ../languages/ripristino/prova_ripristino.php:34
+#: ../languages/ripristino/prova_ripristino.php:36
 msgid "ach"
 msgstr "Ачоли"
 
-#: ../languages/ripristino/prova_ripristino.php:35
+#: ../languages/ripristino/prova_ripristino.php:37
 msgid "ada"
 msgstr "Адангме"
 
-#: ../languages/ripristino/prova_ripristino.php:36
+#: ../languages/ripristino/prova_ripristino.php:38
 msgid "ady"
 msgstr "Адыгейский"
 
-#: ../languages/ripristino/prova_ripristino.php:37
+#: ../languages/ripristino/prova_ripristino.php:39
 msgid "afh"
 msgstr "Африхили"
 
-#: ../languages/ripristino/prova_ripristino.php:38
+#: ../languages/ripristino/prova_ripristino.php:40
 msgid "afr"
 msgstr "Африкаанс"
 
-#: ../languages/ripristino/prova_ripristino.php:39
+#: ../languages/ripristino/prova_ripristino.php:41
 msgid "ain"
 msgstr "Айнский (Япония)"
 
-#: ../languages/ripristino/prova_ripristino.php:40
+#: ../languages/ripristino/prova_ripristino.php:42
 msgid "aka"
 msgstr "Акан"
 
-#: ../languages/ripristino/prova_ripristino.php:41
+#: ../languages/ripristino/prova_ripristino.php:43
 msgid "akk"
 msgstr "Аккадский"
 
-#: ../languages/ripristino/prova_ripristino.php:42
+#: ../languages/ripristino/prova_ripristino.php:44
 msgid "ale"
 msgstr "Алеутский"
 
-#: ../languages/ripristino/prova_ripristino.php:43
+#: ../languages/ripristino/prova_ripristino.php:45
 msgid "alt"
 msgstr "Южно-Алтайский"
 
-#: ../languages/ripristino/prova_ripristino.php:44
+#: ../languages/ripristino/prova_ripristino.php:46
 msgid "amh"
 msgstr "Амхарский"
 
-#: ../languages/ripristino/prova_ripristino.php:45
+#: ../languages/ripristino/prova_ripristino.php:47
 msgid "ang"
 msgstr "Древнеанглийский (450-1100 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:46
+#: ../languages/ripristino/prova_ripristino.php:48
 msgid "anp"
 msgstr "Ангский"
 
-#: ../languages/ripristino/prova_ripristino.php:47
+#: ../languages/ripristino/prova_ripristino.php:49
 msgid "arc"
 msgstr "Древний Арамейский (700-300 гг до н.э.)"
 
-#: ../languages/ripristino/prova_ripristino.php:48
+#: ../languages/ripristino/prova_ripristino.php:50
 msgid "arg"
 msgstr "Арагонский"
 
-#: ../languages/ripristino/prova_ripristino.php:49
+#: ../languages/ripristino/prova_ripristino.php:51
 msgid "arn"
 msgstr "Арауканский"
 
-#: ../languages/ripristino/prova_ripristino.php:50
+#: ../languages/ripristino/prova_ripristino.php:52
 msgid "arp"
 msgstr "Арапахо"
 
-#: ../languages/ripristino/prova_ripristino.php:51
+#: ../languages/ripristino/prova_ripristino.php:53
 msgid "arw"
 msgstr "Аравакские языки"
 
-#: ../languages/ripristino/prova_ripristino.php:52
+#: ../languages/ripristino/prova_ripristino.php:54
 msgid "asm"
 msgstr "Ассамский"
 
-#: ../languages/ripristino/prova_ripristino.php:53
+#: ../languages/ripristino/prova_ripristino.php:55
 msgid "ast"
 msgstr "Астурийский"
 
-#: ../languages/ripristino/prova_ripristino.php:54
+#: ../languages/ripristino/prova_ripristino.php:56
 msgid "ava"
 msgstr "Аварский"
 
-#: ../languages/ripristino/prova_ripristino.php:55
+#: ../languages/ripristino/prova_ripristino.php:57
 msgid "ave"
 msgstr "Авестийский"
 
-#: ../languages/ripristino/prova_ripristino.php:56
+#: ../languages/ripristino/prova_ripristino.php:58
 msgid "awa"
 msgstr "Авадхи"
 
-#: ../languages/ripristino/prova_ripristino.php:57
+#: ../languages/ripristino/prova_ripristino.php:59
 msgid "aym"
 msgstr "Аймара"
 
-#: ../languages/ripristino/prova_ripristino.php:58
+#: ../languages/ripristino/prova_ripristino.php:60
 msgid "aze"
 msgstr "Айзербайджанский"
 
-#: ../languages/ripristino/prova_ripristino.php:59
+#: ../languages/ripristino/prova_ripristino.php:61
 msgid "bak"
 msgstr "Башкирский"
 
-#: ../languages/ripristino/prova_ripristino.php:60
+#: ../languages/ripristino/prova_ripristino.php:62
 msgid "bal"
 msgstr "Белуджский"
 
-#: ../languages/ripristino/prova_ripristino.php:61
+#: ../languages/ripristino/prova_ripristino.php:63
 msgid "bam"
 msgstr "Бамана"
 
-#: ../languages/ripristino/prova_ripristino.php:62
+#: ../languages/ripristino/prova_ripristino.php:64
 msgid "ban"
 msgstr "Балийский"
 
-#: ../languages/ripristino/prova_ripristino.php:63
+#: ../languages/ripristino/prova_ripristino.php:65
 msgid "bas"
 msgstr "Баса (Камерун)"
 
-#: ../languages/ripristino/prova_ripristino.php:64
+#: ../languages/ripristino/prova_ripristino.php:66
 msgid "bej"
 msgstr "Беджа"
 
-#: ../languages/ripristino/prova_ripristino.php:65
+#: ../languages/ripristino/prova_ripristino.php:67
 msgid "bel"
 msgstr "Белорусский"
 
-#: ../languages/ripristino/prova_ripristino.php:66
+#: ../languages/ripristino/prova_ripristino.php:68
 msgid "bem"
 msgstr "Бемба (Замбия)"
 
-#: ../languages/ripristino/prova_ripristino.php:67
+#: ../languages/ripristino/prova_ripristino.php:69
 msgid "ben"
 msgstr "Бенгальский"
 
-#: ../languages/ripristino/prova_ripristino.php:68
+#: ../languages/ripristino/prova_ripristino.php:70
 msgid "bho"
 msgstr "Бходжпури"
 
-#: ../languages/ripristino/prova_ripristino.php:69
+#: ../languages/ripristino/prova_ripristino.php:71
 msgid "bik"
 msgstr "Бикольский"
 
-#: ../languages/ripristino/prova_ripristino.php:70
+#: ../languages/ripristino/prova_ripristino.php:72
 msgid "bin"
 msgstr "Эдо"
 
-#: ../languages/ripristino/prova_ripristino.php:71
+#: ../languages/ripristino/prova_ripristino.php:73
 msgid "bis"
 msgstr "Бислама"
 
-#: ../languages/ripristino/prova_ripristino.php:72
+#: ../languages/ripristino/prova_ripristino.php:74
 msgid "bla"
 msgstr "Блекфут"
 
-#: ../languages/ripristino/prova_ripristino.php:73
+#: ../languages/ripristino/prova_ripristino.php:75
 msgid "bod"
 msgstr "Тибетский"
 
-#: ../languages/ripristino/prova_ripristino.php:74
+#: ../languages/ripristino/prova_ripristino.php:76
 msgid "bos"
 msgstr "Боснийский"
 
-#: ../languages/ripristino/prova_ripristino.php:75
+#: ../languages/ripristino/prova_ripristino.php:77
 msgid "bra"
 msgstr "Брадж"
 
-#: ../languages/ripristino/prova_ripristino.php:76
+#: ../languages/ripristino/prova_ripristino.php:78
 msgid "bre"
 msgstr "Бретонский"
 
-#: ../languages/ripristino/prova_ripristino.php:77
+#: ../languages/ripristino/prova_ripristino.php:79
 msgid "bua"
 msgstr "Бурятский"
 
-#: ../languages/ripristino/prova_ripristino.php:78
+#: ../languages/ripristino/prova_ripristino.php:80
 msgid "bug"
 msgstr "Бугийский"
 
-#: ../languages/ripristino/prova_ripristino.php:79
+#: ../languages/ripristino/prova_ripristino.php:81
 msgid "bul"
 msgstr "Болгарский"
 
-#: ../languages/ripristino/prova_ripristino.php:80
+#: ../languages/ripristino/prova_ripristino.php:82
 msgid "byn"
 msgstr "Билин"
 
-#: ../languages/ripristino/prova_ripristino.php:81
+#: ../languages/ripristino/prova_ripristino.php:83
 msgid "cad"
 msgstr "Кэддо"
 
-#: ../languages/ripristino/prova_ripristino.php:82
+#: ../languages/ripristino/prova_ripristino.php:84
 msgid "car"
 msgstr "Карибский "
 
-#: ../languages/ripristino/prova_ripristino.php:83
+#: ../languages/ripristino/prova_ripristino.php:85
 msgid "cat"
 msgstr "Каталанский"
 
-#: ../languages/ripristino/prova_ripristino.php:84
+#: ../languages/ripristino/prova_ripristino.php:86
 msgid "ceb"
 msgstr "Себуанский"
 
-#: ../languages/ripristino/prova_ripristino.php:85
+#: ../languages/ripristino/prova_ripristino.php:87
 msgid "ces"
 msgstr "Чешский"
 
-#: ../languages/ripristino/prova_ripristino.php:86
+#: ../languages/ripristino/prova_ripristino.php:88
 msgid "cha"
 msgstr "Чаморро"
 
-#: ../languages/ripristino/prova_ripristino.php:87
+#: ../languages/ripristino/prova_ripristino.php:89
 msgid "chb"
 msgstr "Чибча"
 
-#: ../languages/ripristino/prova_ripristino.php:88
+#: ../languages/ripristino/prova_ripristino.php:90
 msgid "che"
 msgstr "Чеченский"
 
-#: ../languages/ripristino/prova_ripristino.php:89
+#: ../languages/ripristino/prova_ripristino.php:91
 msgid "chg"
 msgstr "Чагатайский"
 
-#: ../languages/ripristino/prova_ripristino.php:90
+#: ../languages/ripristino/prova_ripristino.php:92
 msgid "chk"
 msgstr "Трукский"
 
-#: ../languages/ripristino/prova_ripristino.php:91
+#: ../languages/ripristino/prova_ripristino.php:93
 msgid "chm"
 msgstr "Марийский (Россия)"
 
-#: ../languages/ripristino/prova_ripristino.php:92
+#: ../languages/ripristino/prova_ripristino.php:94
 msgid "chn"
 msgstr "Чинукский жаргон"
 
-#: ../languages/ripristino/prova_ripristino.php:93
+#: ../languages/ripristino/prova_ripristino.php:95
 msgid "cho"
 msgstr "Чокто"
 
-#: ../languages/ripristino/prova_ripristino.php:94
+#: ../languages/ripristino/prova_ripristino.php:96
 msgid "chp"
 msgstr "Дене"
 
-#: ../languages/ripristino/prova_ripristino.php:95
+#: ../languages/ripristino/prova_ripristino.php:97
 msgid "chr"
 msgstr "Чероки"
 
-#: ../languages/ripristino/prova_ripristino.php:96
+#: ../languages/ripristino/prova_ripristino.php:98
 msgid "chu"
 msgstr "Церковнославянский "
 
-#: ../languages/ripristino/prova_ripristino.php:97
+#: ../languages/ripristino/prova_ripristino.php:99
 msgid "chv"
 msgstr "Чувашский"
 
-#: ../languages/ripristino/prova_ripristino.php:98
+#: ../languages/ripristino/prova_ripristino.php:100
 msgid "chy"
 msgstr "Шайеннский"
 
-#: ../languages/ripristino/prova_ripristino.php:99
+#: ../languages/ripristino/prova_ripristino.php:101
 msgid "cop"
 msgstr "Коптский"
 
-#: ../languages/ripristino/prova_ripristino.php:100
+#: ../languages/ripristino/prova_ripristino.php:102
 msgid "cor"
 msgstr "Корнский"
 
-#: ../languages/ripristino/prova_ripristino.php:101
+#: ../languages/ripristino/prova_ripristino.php:103
 msgid "cos"
 msgstr "Корсиканский"
 
-#: ../languages/ripristino/prova_ripristino.php:102
+#: ../languages/ripristino/prova_ripristino.php:104
 msgid "cre"
 msgstr "Кри"
 
-#: ../languages/ripristino/prova_ripristino.php:103
+#: ../languages/ripristino/prova_ripristino.php:105
 msgid "crh"
 msgstr "Крымскотатарский"
 
-#: ../languages/ripristino/prova_ripristino.php:104
+#: ../languages/ripristino/prova_ripristino.php:106
 msgid "csb"
 msgstr "Кашубский"
 
-#: ../languages/ripristino/prova_ripristino.php:105
+#: ../languages/ripristino/prova_ripristino.php:107
 msgid "cym"
 msgstr "Валлийский"
 
-#: ../languages/ripristino/prova_ripristino.php:106
+#: ../languages/ripristino/prova_ripristino.php:108
 msgid "dak"
 msgstr "Дакота"
 
-#: ../languages/ripristino/prova_ripristino.php:107
+#: ../languages/ripristino/prova_ripristino.php:109
 msgid "dan"
 msgstr "Датский"
 
-#: ../languages/ripristino/prova_ripristino.php:108
+#: ../languages/ripristino/prova_ripristino.php:110
 msgid "dar"
 msgstr "Даргинский"
 
-#: ../languages/ripristino/prova_ripristino.php:109
+#: ../languages/ripristino/prova_ripristino.php:111
 msgid "del"
 msgstr "Делаварские языки"
 
-#: ../languages/ripristino/prova_ripristino.php:110
+#: ../languages/ripristino/prova_ripristino.php:112
 msgid "den"
 msgstr "Слейви"
 
-#: ../languages/ripristino/prova_ripristino.php:111
+#: ../languages/ripristino/prova_ripristino.php:113
 msgid "deu"
 msgstr "Немецкий"
 
-#: ../languages/ripristino/prova_ripristino.php:112
+#: ../languages/ripristino/prova_ripristino.php:114
 msgid "dgr"
 msgstr "Догриб"
 
-#: ../languages/ripristino/prova_ripristino.php:113
+#: ../languages/ripristino/prova_ripristino.php:115
 msgid "din"
 msgstr "Динка"
 
-#: ../languages/ripristino/prova_ripristino.php:114
+#: ../languages/ripristino/prova_ripristino.php:116
 msgid "div"
 msgstr "Мальдивский"
 
-#: ../languages/ripristino/prova_ripristino.php:115
+#: ../languages/ripristino/prova_ripristino.php:117
 msgid "doi"
 msgstr "Догри (макроязык)"
 
-#: ../languages/ripristino/prova_ripristino.php:116
+#: ../languages/ripristino/prova_ripristino.php:118
 msgid "dsb"
 msgstr "Нижнелужицкий"
 
-#: ../languages/ripristino/prova_ripristino.php:117
+#: ../languages/ripristino/prova_ripristino.php:119
 msgid "dua"
 msgstr "Дуала"
 
-#: ../languages/ripristino/prova_ripristino.php:118
+#: ../languages/ripristino/prova_ripristino.php:120
 msgid "dum"
 msgstr "Средненидерландский (1050-1350 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:119
+#: ../languages/ripristino/prova_ripristino.php:121
 msgid "dyu"
 msgstr "Дьюла"
 
-#: ../languages/ripristino/prova_ripristino.php:120
+#: ../languages/ripristino/prova_ripristino.php:122
 msgid "dzo"
 msgstr "Дзонг-кэ"
 
-#: ../languages/ripristino/prova_ripristino.php:121
+#: ../languages/ripristino/prova_ripristino.php:123
 msgid "efi"
 msgstr "Эфик"
 
-#: ../languages/ripristino/prova_ripristino.php:122
+#: ../languages/ripristino/prova_ripristino.php:124
 msgid "egy"
 msgstr "Древнеегипетский"
 
-#: ../languages/ripristino/prova_ripristino.php:123
+#: ../languages/ripristino/prova_ripristino.php:125
 msgid "eka"
 msgstr "Экаджук"
 
-#: ../languages/ripristino/prova_ripristino.php:124
+#: ../languages/ripristino/prova_ripristino.php:126
 msgid "ell"
 msgstr "Новогреческий (1453-н.д.)"
 
-#: ../languages/ripristino/prova_ripristino.php:125
+#: ../languages/ripristino/prova_ripristino.php:127
 msgid "elx"
 msgstr "Эламский"
 
-#: ../languages/ripristino/prova_ripristino.php:126
+#: ../languages/ripristino/prova_ripristino.php:128
 msgid "eng"
 msgstr "Английский"
 
-#: ../languages/ripristino/prova_ripristino.php:127
+#: ../languages/ripristino/prova_ripristino.php:129
 msgid "enm"
 msgstr "Среднеанглийский (1100-1500 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:128
+#: ../languages/ripristino/prova_ripristino.php:130
 msgid "epo"
 msgstr "Эсперанто"
 
-#: ../languages/ripristino/prova_ripristino.php:129
+#: ../languages/ripristino/prova_ripristino.php:131
 msgid "est"
 msgstr "Эстонский"
 
-#: ../languages/ripristino/prova_ripristino.php:130
+#: ../languages/ripristino/prova_ripristino.php:132
 msgid "eus"
 msgstr "Баскский"
 
-#: ../languages/ripristino/prova_ripristino.php:131
+#: ../languages/ripristino/prova_ripristino.php:133
 msgid "ewe"
 msgstr "Эве"
 
-#: ../languages/ripristino/prova_ripristino.php:132
+#: ../languages/ripristino/prova_ripristino.php:134
 msgid "ewo"
 msgstr "Эвондо"
 
-#: ../languages/ripristino/prova_ripristino.php:133
+#: ../languages/ripristino/prova_ripristino.php:135
 msgid "fan"
 msgstr "Фанг (Экваториальная Гвинея)"
 
-#: ../languages/ripristino/prova_ripristino.php:134
+#: ../languages/ripristino/prova_ripristino.php:136
 msgid "fao"
 msgstr "Фарерский"
 
-#: ../languages/ripristino/prova_ripristino.php:135
+#: ../languages/ripristino/prova_ripristino.php:137
 msgid "fat"
 msgstr "Фанти"
 
-#: ../languages/ripristino/prova_ripristino.php:136
+#: ../languages/ripristino/prova_ripristino.php:138
 msgid "fij"
 msgstr "Фиджи"
 
-#: ../languages/ripristino/prova_ripristino.php:137
+#: ../languages/ripristino/prova_ripristino.php:139
 msgid "fil"
 msgstr "Филипинский"
 
-#: ../languages/ripristino/prova_ripristino.php:138
+#: ../languages/ripristino/prova_ripristino.php:140
 msgid "fin"
 msgstr "Финский"
 
-#: ../languages/ripristino/prova_ripristino.php:139
+#: ../languages/ripristino/prova_ripristino.php:141
 msgid "fon"
 msgstr "Фон"
 
-#: ../languages/ripristino/prova_ripristino.php:140
+#: ../languages/ripristino/prova_ripristino.php:142
 msgid "fra"
 msgstr "Французский"
 
-#: ../languages/ripristino/prova_ripristino.php:141
+#: ../languages/ripristino/prova_ripristino.php:143
 msgid "frm"
 msgstr "Среднефранцузский (1400-1600 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:142
+#: ../languages/ripristino/prova_ripristino.php:144
 msgid "fro"
 msgstr "Старофранцузский (842-1400 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:143
+#: ../languages/ripristino/prova_ripristino.php:145
 msgid "frr"
 msgstr "Северофризский"
 
-#: ../languages/ripristino/prova_ripristino.php:144
+#: ../languages/ripristino/prova_ripristino.php:146
 msgid "frs"
 msgstr "Восточнофризский"
 
-#: ../languages/ripristino/prova_ripristino.php:145
+#: ../languages/ripristino/prova_ripristino.php:147
 msgid "fry"
 msgstr "Западнофризский"
 
-#: ../languages/ripristino/prova_ripristino.php:146
+#: ../languages/ripristino/prova_ripristino.php:148
 msgid "ful"
 msgstr "Фула"
 
-#: ../languages/ripristino/prova_ripristino.php:147
+#: ../languages/ripristino/prova_ripristino.php:149
 msgid "fur"
 msgstr "Фриульский"
 
-#: ../languages/ripristino/prova_ripristino.php:148
+#: ../languages/ripristino/prova_ripristino.php:150
 msgid "gaa"
 msgstr "Га"
 
-#: ../languages/ripristino/prova_ripristino.php:149
+#: ../languages/ripristino/prova_ripristino.php:151
 msgid "gay"
 msgstr "Гайо"
 
-#: ../languages/ripristino/prova_ripristino.php:150
+#: ../languages/ripristino/prova_ripristino.php:152
 msgid "gba"
 msgstr "Гбая (Центральноафриканская Республика)"
 
-#: ../languages/ripristino/prova_ripristino.php:151
+#: ../languages/ripristino/prova_ripristino.php:153
 msgid "gez"
 msgstr "Геэз"
 
-#: ../languages/ripristino/prova_ripristino.php:152
+#: ../languages/ripristino/prova_ripristino.php:154
 msgid "gil"
 msgstr "Гилтбертский"
 
-#: ../languages/ripristino/prova_ripristino.php:153
+#: ../languages/ripristino/prova_ripristino.php:155
 msgid "gla"
 msgstr "Гаэльский"
 
-#: ../languages/ripristino/prova_ripristino.php:154
+#: ../languages/ripristino/prova_ripristino.php:156
 msgid "gle"
 msgstr "Ирландский"
 
-#: ../languages/ripristino/prova_ripristino.php:155
+#: ../languages/ripristino/prova_ripristino.php:157
 msgid "glg"
 msgstr "Галисийский"
 
-#: ../languages/ripristino/prova_ripristino.php:156
+#: ../languages/ripristino/prova_ripristino.php:158
 msgid "glv"
 msgstr "Мэнский"
 
-#: ../languages/ripristino/prova_ripristino.php:157
+#: ../languages/ripristino/prova_ripristino.php:159
 msgid "gmh"
 msgstr "Средневерхненемецкий (1050-1500 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:158
+#: ../languages/ripristino/prova_ripristino.php:160
 msgid "goh"
 msgstr "Староверхненемецкий (750-1050 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:159
+#: ../languages/ripristino/prova_ripristino.php:161
 msgid "gon"
 msgstr "Гонди"
 
-#: ../languages/ripristino/prova_ripristino.php:160
+#: ../languages/ripristino/prova_ripristino.php:162
 msgid "gor"
 msgstr "Горонтало"
 
-#: ../languages/ripristino/prova_ripristino.php:161
+#: ../languages/ripristino/prova_ripristino.php:163
 msgid "got"
 msgstr "Готский"
 
-#: ../languages/ripristino/prova_ripristino.php:162
+#: ../languages/ripristino/prova_ripristino.php:164
 msgid "grb"
 msgstr "Гребо"
 
-#: ../languages/ripristino/prova_ripristino.php:163
+#: ../languages/ripristino/prova_ripristino.php:165
 msgid "grc"
 msgstr "Древнегреческий (до 1453 г.)"
 
-#: ../languages/ripristino/prova_ripristino.php:164
+#: ../languages/ripristino/prova_ripristino.php:166
 msgid "grn"
 msgstr "Гуарани"
 
-#: ../languages/ripristino/prova_ripristino.php:165
+#: ../languages/ripristino/prova_ripristino.php:167
 msgid "gsw"
 msgstr "Швейцарский диалект"
 
-#: ../languages/ripristino/prova_ripristino.php:166
+#: ../languages/ripristino/prova_ripristino.php:168
 msgid "guj"
 msgstr "Гуджарати"
 
-#: ../languages/ripristino/prova_ripristino.php:167
+#: ../languages/ripristino/prova_ripristino.php:169
 msgid "gwi"
 msgstr "Гвичин"
 
-#: ../languages/ripristino/prova_ripristino.php:168
+#: ../languages/ripristino/prova_ripristino.php:170
 msgid "hai"
 msgstr "Хайда"
 
-#: ../languages/ripristino/prova_ripristino.php:169
+#: ../languages/ripristino/prova_ripristino.php:171
 msgid "hat"
 msgstr "Гаитянский креольский"
 
-#: ../languages/ripristino/prova_ripristino.php:170
+#: ../languages/ripristino/prova_ripristino.php:172
 msgid "hau"
 msgstr "Хауса"
 
-#: ../languages/ripristino/prova_ripristino.php:171
+#: ../languages/ripristino/prova_ripristino.php:173
 msgid "haw"
 msgstr "Гавайский"
 
-#: ../languages/ripristino/prova_ripristino.php:172
+#: ../languages/ripristino/prova_ripristino.php:174
 msgid "her"
 msgstr "Гереро"
 
-#: ../languages/ripristino/prova_ripristino.php:173
+#: ../languages/ripristino/prova_ripristino.php:175
 msgid "hil"
 msgstr "Хилигайнон"
 
-#: ../languages/ripristino/prova_ripristino.php:174
+#: ../languages/ripristino/prova_ripristino.php:176
 msgid "hin"
 msgstr "Хинди"
 
-#: ../languages/ripristino/prova_ripristino.php:175
+#: ../languages/ripristino/prova_ripristino.php:177
 msgid "hit"
 msgstr "Хеттский"
 
-#: ../languages/ripristino/prova_ripristino.php:176
+#: ../languages/ripristino/prova_ripristino.php:178
 msgid "hmn"
 msgstr "Мяо"
 
-#: ../languages/ripristino/prova_ripristino.php:177
+#: ../languages/ripristino/prova_ripristino.php:179
 msgid "hmo"
 msgstr "Хиримоту"
 
-#: ../languages/ripristino/prova_ripristino.php:178
+#: ../languages/ripristino/prova_ripristino.php:180
 msgid "hrv"
 msgstr "Хорватский"
 
-#: ../languages/ripristino/prova_ripristino.php:179
+#: ../languages/ripristino/prova_ripristino.php:181
 msgid "hsb"
 msgstr "Верхнелужицкий"
 
-#: ../languages/ripristino/prova_ripristino.php:180
+#: ../languages/ripristino/prova_ripristino.php:182
 msgid "hun"
 msgstr "Венгерский"
 
-#: ../languages/ripristino/prova_ripristino.php:181
+#: ../languages/ripristino/prova_ripristino.php:183
 msgid "hup"
 msgstr "Хупа"
 
-#: ../languages/ripristino/prova_ripristino.php:182
+#: ../languages/ripristino/prova_ripristino.php:184
 msgid "hye"
 msgstr "Армянский"
 
-#: ../languages/ripristino/prova_ripristino.php:183
+#: ../languages/ripristino/prova_ripristino.php:185
 msgid "iba"
 msgstr "Ибанский"
 
-#: ../languages/ripristino/prova_ripristino.php:184
+#: ../languages/ripristino/prova_ripristino.php:186
 msgid "ibo"
 msgstr "Игбо"
 
-#: ../languages/ripristino/prova_ripristino.php:185
+#: ../languages/ripristino/prova_ripristino.php:187
 msgid "ido"
 msgstr "Идо"
 
-#: ../languages/ripristino/prova_ripristino.php:186
+#: ../languages/ripristino/prova_ripristino.php:188
 msgid "iii"
 msgstr "Носу"
 
-#: ../languages/ripristino/prova_ripristino.php:187
+#: ../languages/ripristino/prova_ripristino.php:189
 msgid "iku"
 msgstr "Инуктитут"
 
-#: ../languages/ripristino/prova_ripristino.php:188
+#: ../languages/ripristino/prova_ripristino.php:190
 msgid "ile"
 msgstr "Интерлингве"
 
-#: ../languages/ripristino/prova_ripristino.php:189
+#: ../languages/ripristino/prova_ripristino.php:191
 msgid "ilo"
 msgstr "Илоко"
 
-#: ../languages/ripristino/prova_ripristino.php:190
+#: ../languages/ripristino/prova_ripristino.php:192
 msgid "ina"
 msgstr "Интерлингва (IALA)"
 
-#: ../languages/ripristino/prova_ripristino.php:191
+#: ../languages/ripristino/prova_ripristino.php:193
 msgid "ind"
 msgstr "Индонезийский"
 
-#: ../languages/ripristino/prova_ripristino.php:192
+#: ../languages/ripristino/prova_ripristino.php:194
 msgid "inh"
 msgstr "Ингушский"
 
-#: ../languages/ripristino/prova_ripristino.php:193
+#: ../languages/ripristino/prova_ripristino.php:195
 msgid "ipk"
 msgstr "Инупиак"
 
-#: ../languages/ripristino/prova_ripristino.php:194
+#: ../languages/ripristino/prova_ripristino.php:196
 msgid "isl"
 msgstr "Исландский"
 
-#: ../languages/ripristino/prova_ripristino.php:195
+#: ../languages/ripristino/prova_ripristino.php:197
 msgid "ita"
 msgstr "Итальянский"
 
-#: ../languages/ripristino/prova_ripristino.php:196
+#: ../languages/ripristino/prova_ripristino.php:198
 msgid "jav"
 msgstr "Яванский"
 
-#: ../languages/ripristino/prova_ripristino.php:197
+#: ../languages/ripristino/prova_ripristino.php:199
 msgid "jbo"
 msgstr "Ложбан"
 
-#: ../languages/ripristino/prova_ripristino.php:198
+#: ../languages/ripristino/prova_ripristino.php:200
 msgid "jpn"
 msgstr "Японский"
 
-#: ../languages/ripristino/prova_ripristino.php:199
+#: ../languages/ripristino/prova_ripristino.php:201
 msgid "jpr"
 msgstr "Еврейско-персидский"
 
-#: ../languages/ripristino/prova_ripristino.php:200
+#: ../languages/ripristino/prova_ripristino.php:202
 msgid "jrb"
 msgstr "Еврейско-арабский"
 
-#: ../languages/ripristino/prova_ripristino.php:201
+#: ../languages/ripristino/prova_ripristino.php:203
 msgid "kaa"
 msgstr "Каракалпакский"
 
-#: ../languages/ripristino/prova_ripristino.php:202
+#: ../languages/ripristino/prova_ripristino.php:204
 msgid "kab"
 msgstr "Кабильский"
 
-#: ../languages/ripristino/prova_ripristino.php:203
+#: ../languages/ripristino/prova_ripristino.php:205
 msgid "kac"
 msgstr "Качинский"
 
-#: ../languages/ripristino/prova_ripristino.php:204
+#: ../languages/ripristino/prova_ripristino.php:206
 msgid "kal"
 msgstr "Гренландский"
 
-#: ../languages/ripristino/prova_ripristino.php:205
+#: ../languages/ripristino/prova_ripristino.php:207
 msgid "kam"
 msgstr "Камба (Кения)"
 
-#: ../languages/ripristino/prova_ripristino.php:206
+#: ../languages/ripristino/prova_ripristino.php:208
 msgid "kan"
 msgstr "Каннада"
 
-#: ../languages/ripristino/prova_ripristino.php:207
+#: ../languages/ripristino/prova_ripristino.php:209
 msgid "kas"
 msgstr "Кашмири"
 
-#: ../languages/ripristino/prova_ripristino.php:208
+#: ../languages/ripristino/prova_ripristino.php:210
 msgid "kat"
 msgstr "Грузинский"
 
-#: ../languages/ripristino/prova_ripristino.php:209
+#: ../languages/ripristino/prova_ripristino.php:211
 msgid "kau"
 msgstr "Канури"
 
-#: ../languages/ripristino/prova_ripristino.php:210
+#: ../languages/ripristino/prova_ripristino.php:212
 msgid "kaw"
 msgstr "Кави"
 
-#: ../languages/ripristino/prova_ripristino.php:211
+#: ../languages/ripristino/prova_ripristino.php:213
 msgid "kaz"
 msgstr "Казахский"
 
-#: ../languages/ripristino/prova_ripristino.php:212
+#: ../languages/ripristino/prova_ripristino.php:214
 msgid "kbd"
 msgstr "Кабардино-черкесский"
 
-#: ../languages/ripristino/prova_ripristino.php:213
+#: ../languages/ripristino/prova_ripristino.php:215
 msgid "kha"
 msgstr "Кхаси"
 
-#: ../languages/ripristino/prova_ripristino.php:214
+#: ../languages/ripristino/prova_ripristino.php:216
 msgid "khm"
 msgstr "Кхмерский"
 
-#: ../languages/ripristino/prova_ripristino.php:215
+#: ../languages/ripristino/prova_ripristino.php:217
 msgid "kho"
 msgstr "Хотанский"
 
-#: ../languages/ripristino/prova_ripristino.php:216
+#: ../languages/ripristino/prova_ripristino.php:218
 msgid "kik"
 msgstr "Кикуйю"
 
-#: ../languages/ripristino/prova_ripristino.php:217
+#: ../languages/ripristino/prova_ripristino.php:219
 msgid "kin"
 msgstr "Руанда"
 
-#: ../languages/ripristino/prova_ripristino.php:218
+#: ../languages/ripristino/prova_ripristino.php:220
 msgid "kir"
 msgstr "Киргизский"
 
-#: ../languages/ripristino/prova_ripristino.php:219
+#: ../languages/ripristino/prova_ripristino.php:221
 msgid "kmb"
 msgstr "Северный мбунду"
 
-#: ../languages/ripristino/prova_ripristino.php:220
+#: ../languages/ripristino/prova_ripristino.php:222
 msgid "kok"
 msgstr "Конкани (макроязык)"
 
-#: ../languages/ripristino/prova_ripristino.php:221
+#: ../languages/ripristino/prova_ripristino.php:223
 msgid "kom"
 msgstr "Коми"
 
-#: ../languages/ripristino/prova_ripristino.php:222
+#: ../languages/ripristino/prova_ripristino.php:224
 msgid "kon"
 msgstr "Конго"
 
-#: ../languages/ripristino/prova_ripristino.php:223
+#: ../languages/ripristino/prova_ripristino.php:225
 msgid "kor"
 msgstr "Корейский"
 
-#: ../languages/ripristino/prova_ripristino.php:224
+#: ../languages/ripristino/prova_ripristino.php:226
 msgid "kos"
 msgstr "Кусаие"
 
-#: ../languages/ripristino/prova_ripristino.php:225
+#: ../languages/ripristino/prova_ripristino.php:227
 msgid "kpe"
 msgstr "Кпелле"
 
-#: ../languages/ripristino/prova_ripristino.php:226
+#: ../languages/ripristino/prova_ripristino.php:228
 msgid "krc"
 msgstr "Карачаево-балкарский"
 
-#: ../languages/ripristino/prova_ripristino.php:227
+#: ../languages/ripristino/prova_ripristino.php:229
 msgid "krl"
 msgstr "Карельский"
 
-#: ../languages/ripristino/prova_ripristino.php:228
+#: ../languages/ripristino/prova_ripristino.php:230
 msgid "kru"
 msgstr "Курух"
 
-#: ../languages/ripristino/prova_ripristino.php:229
+#: ../languages/ripristino/prova_ripristino.php:231
 msgid "kua"
 msgstr "Киньяма"
 
-#: ../languages/ripristino/prova_ripristino.php:230
+#: ../languages/ripristino/prova_ripristino.php:232
 msgid "kum"
 msgstr "Кумыкский"
 
-#: ../languages/ripristino/prova_ripristino.php:231
+#: ../languages/ripristino/prova_ripristino.php:233
 msgid "kur"
 msgstr "Курдский"
 
-#: ../languages/ripristino/prova_ripristino.php:232
+#: ../languages/ripristino/prova_ripristino.php:234
 msgid "kut"
 msgstr "Кутенаи"
 
-#: ../languages/ripristino/prova_ripristino.php:233
+#: ../languages/ripristino/prova_ripristino.php:235
 msgid "lad"
 msgstr "Ладино"
 
-#: ../languages/ripristino/prova_ripristino.php:234
+#: ../languages/ripristino/prova_ripristino.php:236
 msgid "lah"
 msgstr "Лахнда"
 
-#: ../languages/ripristino/prova_ripristino.php:235
+#: ../languages/ripristino/prova_ripristino.php:237
 msgid "lam"
 msgstr "Ламба"
 
-#: ../languages/ripristino/prova_ripristino.php:236
+#: ../languages/ripristino/prova_ripristino.php:238
 msgid "lao"
 msgstr "Лаосский"
 
-#: ../languages/ripristino/prova_ripristino.php:237
+#: ../languages/ripristino/prova_ripristino.php:239
 msgid "lat"
 msgstr "Латинский"
 
-#: ../languages/ripristino/prova_ripristino.php:238
+#: ../languages/ripristino/prova_ripristino.php:240
 msgid "lav"
 msgstr "Латышский"
 
-#: ../languages/ripristino/prova_ripristino.php:239
+#: ../languages/ripristino/prova_ripristino.php:241
 msgid "lez"
 msgstr "Лезгинский"
 
-#: ../languages/ripristino/prova_ripristino.php:240
+#: ../languages/ripristino/prova_ripristino.php:242
 msgid "lim"
 msgstr "Лимбургский"
 
-#: ../languages/ripristino/prova_ripristino.php:241
+#: ../languages/ripristino/prova_ripristino.php:243
 msgid "lin"
 msgstr "Лингала"
 
-#: ../languages/ripristino/prova_ripristino.php:242
+#: ../languages/ripristino/prova_ripristino.php:244
 msgid "lit"
 msgstr "Литовский"
 
-#: ../languages/ripristino/prova_ripristino.php:243
+#: ../languages/ripristino/prova_ripristino.php:245
 msgid "lol"
 msgstr "Монго"
 
-#: ../languages/ripristino/prova_ripristino.php:244
+#: ../languages/ripristino/prova_ripristino.php:246
 msgid "loz"
 msgstr "Лози"
 
-#: ../languages/ripristino/prova_ripristino.php:245
+#: ../languages/ripristino/prova_ripristino.php:247
 msgid "ltz"
 msgstr "Люксембургский"
 
-#: ../languages/ripristino/prova_ripristino.php:246
+#: ../languages/ripristino/prova_ripristino.php:248
 msgid "lua"
 msgstr "Луба"
 
-#: ../languages/ripristino/prova_ripristino.php:247
+#: ../languages/ripristino/prova_ripristino.php:249
 msgid "lub"
 msgstr "Луба-катанга"
 
-#: ../languages/ripristino/prova_ripristino.php:248
+#: ../languages/ripristino/prova_ripristino.php:250
 msgid "lug"
 msgstr "Ганда"
 
-#: ../languages/ripristino/prova_ripristino.php:249
+#: ../languages/ripristino/prova_ripristino.php:251
 msgid "lui"
 msgstr "Луисеньо"
 
-#: ../languages/ripristino/prova_ripristino.php:250
+#: ../languages/ripristino/prova_ripristino.php:252
 msgid "lun"
 msgstr "Лунда"
 
-#: ../languages/ripristino/prova_ripristino.php:251
+#: ../languages/ripristino/prova_ripristino.php:253
 msgid "luo"
 msgstr "Луо (Кения и Танзания)"
 
-#: ../languages/ripristino/prova_ripristino.php:252
+#: ../languages/ripristino/prova_ripristino.php:254
 msgid "lus"
 msgstr "Мизо"
 
-#: ../languages/ripristino/prova_ripristino.php:253
+#: ../languages/ripristino/prova_ripristino.php:255
 msgid "mad"
 msgstr "Мадурский"
 
-#: ../languages/ripristino/prova_ripristino.php:254
+#: ../languages/ripristino/prova_ripristino.php:256
 msgid "mag"
 msgstr "Магахи"
 
-#: ../languages/ripristino/prova_ripristino.php:255
+#: ../languages/ripristino/prova_ripristino.php:257
 msgid "mah"
 msgstr "Маршалльский"
 
-#: ../languages/ripristino/prova_ripristino.php:256
+#: ../languages/ripristino/prova_ripristino.php:258
 msgid "mai"
 msgstr "Майтхили"
 
-#: ../languages/ripristino/prova_ripristino.php:257
+#: ../languages/ripristino/prova_ripristino.php:259
 msgid "mak"
 msgstr "Макассарский"
 
-#: ../languages/ripristino/prova_ripristino.php:258
+#: ../languages/ripristino/prova_ripristino.php:260
 msgid "mal"
 msgstr "Малаялам"
 
-#: ../languages/ripristino/prova_ripristino.php:259
+#: ../languages/ripristino/prova_ripristino.php:261
 msgid "man"
 msgstr "Мандинго"
 
-#: ../languages/ripristino/prova_ripristino.php:260
+#: ../languages/ripristino/prova_ripristino.php:262
 msgid "mar"
 msgstr "Маратхи"
 
-#: ../languages/ripristino/prova_ripristino.php:261
+#: ../languages/ripristino/prova_ripristino.php:263
 msgid "mas"
 msgstr "Масаи"
 
-#: ../languages/ripristino/prova_ripristino.php:262
+#: ../languages/ripristino/prova_ripristino.php:264
 msgid "mdf"
 msgstr "Мокшанский"
 
-#: ../languages/ripristino/prova_ripristino.php:263
+#: ../languages/ripristino/prova_ripristino.php:265
 msgid "mdr"
 msgstr "Мандар"
 
-#: ../languages/ripristino/prova_ripristino.php:264
+#: ../languages/ripristino/prova_ripristino.php:266
 msgid "men"
 msgstr "Менде (Сьерра-Леоне)"
 
-#: ../languages/ripristino/prova_ripristino.php:265
+#: ../languages/ripristino/prova_ripristino.php:267
 msgid "mga"
 msgstr "Среднеирландский (900-1200 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:266
+#: ../languages/ripristino/prova_ripristino.php:268
 msgid "mic"
 msgstr "Микмак"
 
-#: ../languages/ripristino/prova_ripristino.php:267
+#: ../languages/ripristino/prova_ripristino.php:269
 msgid "min"
 msgstr "Минангкабау"
 
-#: ../languages/ripristino/prova_ripristino.php:268
+#: ../languages/ripristino/prova_ripristino.php:270
 msgid "mis"
 msgstr "Смешанные (другие)"
 
-#: ../languages/ripristino/prova_ripristino.php:269
+#: ../languages/ripristino/prova_ripristino.php:271
 msgid "mkd"
 msgstr "Македонский"
 
-#: ../languages/ripristino/prova_ripristino.php:270
+#: ../languages/ripristino/prova_ripristino.php:272
 msgid "mlg"
 msgstr "Малагасийский"
 
-#: ../languages/ripristino/prova_ripristino.php:271
+#: ../languages/ripristino/prova_ripristino.php:273
 msgid "mlt"
 msgstr "Мальтийский"
 
-#: ../languages/ripristino/prova_ripristino.php:272
+#: ../languages/ripristino/prova_ripristino.php:274
 msgid "mnc"
 msgstr "Маньчжурский"
 
-#: ../languages/ripristino/prova_ripristino.php:273
+#: ../languages/ripristino/prova_ripristino.php:275
 msgid "mni"
 msgstr "Манипури"
 
-#: ../languages/ripristino/prova_ripristino.php:274
+#: ../languages/ripristino/prova_ripristino.php:276
 msgid "moh"
 msgstr "Мохаук"
 
-#: ../languages/ripristino/prova_ripristino.php:275
+#: ../languages/ripristino/prova_ripristino.php:277
 msgid "mon"
 msgstr "Монгольский"
 
-#: ../languages/ripristino/prova_ripristino.php:276
+#: ../languages/ripristino/prova_ripristino.php:278
 msgid "mos"
 msgstr "Мооре"
 
-#: ../languages/ripristino/prova_ripristino.php:277
+#: ../languages/ripristino/prova_ripristino.php:279
 msgid "mri"
 msgstr "Маори"
 
-#: ../languages/ripristino/prova_ripristino.php:278
+#: ../languages/ripristino/prova_ripristino.php:280
 msgid "msa"
 msgstr "Малайский (макроязык)"
 
-#: ../languages/ripristino/prova_ripristino.php:279
+#: ../languages/ripristino/prova_ripristino.php:281
 msgid "mul"
 msgstr "Разных семей языки"
 
-#: ../languages/ripristino/prova_ripristino.php:280
+#: ../languages/ripristino/prova_ripristino.php:282
 msgid "mus"
 msgstr "Крик"
 
-#: ../languages/ripristino/prova_ripristino.php:281
+#: ../languages/ripristino/prova_ripristino.php:283
 msgid "mwl"
 msgstr "Мирандский"
 
-#: ../languages/ripristino/prova_ripristino.php:282
+#: ../languages/ripristino/prova_ripristino.php:284
 msgid "mwr"
 msgstr "Марвари"
 
-#: ../languages/ripristino/prova_ripristino.php:283
+#: ../languages/ripristino/prova_ripristino.php:285
 msgid "mya"
 msgstr "Бирманский"
 
-#: ../languages/ripristino/prova_ripristino.php:284
+#: ../languages/ripristino/prova_ripristino.php:286
 msgid "myv"
 msgstr "Эрзянский"
 
-#: ../languages/ripristino/prova_ripristino.php:285
+#: ../languages/ripristino/prova_ripristino.php:287
 msgid "nap"
 msgstr "Неаполитанский"
 
-#: ../languages/ripristino/prova_ripristino.php:286
+#: ../languages/ripristino/prova_ripristino.php:288
 msgid "nau"
 msgstr "Науру"
 
-#: ../languages/ripristino/prova_ripristino.php:287
+#: ../languages/ripristino/prova_ripristino.php:289
 msgid "nav"
 msgstr "Навахо"
 
-#: ../languages/ripristino/prova_ripristino.php:288
+#: ../languages/ripristino/prova_ripristino.php:290
 msgid "nbl"
 msgstr "Ндебеле южный"
 
-#: ../languages/ripristino/prova_ripristino.php:289
+#: ../languages/ripristino/prova_ripristino.php:291
 msgid "nde"
 msgstr "Ндебеле северный"
 
-#: ../languages/ripristino/prova_ripristino.php:290
+#: ../languages/ripristino/prova_ripristino.php:292
 msgid "ndo"
 msgstr "Ндунга"
 
-#: ../languages/ripristino/prova_ripristino.php:291
+#: ../languages/ripristino/prova_ripristino.php:293
 msgid "nds"
 msgstr "Нижненемецкий"
 
-#: ../languages/ripristino/prova_ripristino.php:292
+#: ../languages/ripristino/prova_ripristino.php:294
 msgid "nep"
 msgstr "Непальский"
 
-#: ../languages/ripristino/prova_ripristino.php:293
+#: ../languages/ripristino/prova_ripristino.php:295
 msgid "new"
 msgstr "Неварский"
 
-#: ../languages/ripristino/prova_ripristino.php:294
+#: ../languages/ripristino/prova_ripristino.php:296
 msgid "nia"
 msgstr "Ниасский "
 
-#: ../languages/ripristino/prova_ripristino.php:295
+#: ../languages/ripristino/prova_ripristino.php:297
 msgid "niu"
 msgstr "Ниуэ"
 
-#: ../languages/ripristino/prova_ripristino.php:296
+#: ../languages/ripristino/prova_ripristino.php:298
 msgid "nld"
 msgstr "Нидерландский (Голландский)"
 
-#: ../languages/ripristino/prova_ripristino.php:297
+#: ../languages/ripristino/prova_ripristino.php:299
 msgid "nno"
 msgstr "Нюнорск (новонорвежский)"
 
-#: ../languages/ripristino/prova_ripristino.php:298
+#: ../languages/ripristino/prova_ripristino.php:300
 msgid "nob"
 msgstr "Букмол"
 
-#: ../languages/ripristino/prova_ripristino.php:299
+#: ../languages/ripristino/prova_ripristino.php:301
 msgid "nog"
 msgstr "Ногайский"
 
-#: ../languages/ripristino/prova_ripristino.php:300
+#: ../languages/ripristino/prova_ripristino.php:302
 msgid "non"
 msgstr "Старонорвежский"
 
-#: ../languages/ripristino/prova_ripristino.php:301
+#: ../languages/ripristino/prova_ripristino.php:303
 msgid "nor"
 msgstr "Норвежский"
 
-#: ../languages/ripristino/prova_ripristino.php:302
+#: ../languages/ripristino/prova_ripristino.php:304
 msgid "nqo"
 msgstr "Нко"
 
-#: ../languages/ripristino/prova_ripristino.php:303
+#: ../languages/ripristino/prova_ripristino.php:305
 msgid "nso"
 msgstr "Сото северный"
 
-#: ../languages/ripristino/prova_ripristino.php:304
+#: ../languages/ripristino/prova_ripristino.php:306
 msgid "nwc"
 msgstr "Классический неварский"
 
-#: ../languages/ripristino/prova_ripristino.php:305
+#: ../languages/ripristino/prova_ripristino.php:307
 msgid "nya"
 msgstr "Ньянджа"
 
-#: ../languages/ripristino/prova_ripristino.php:306
+#: ../languages/ripristino/prova_ripristino.php:308
 msgid "nym"
 msgstr "Ньямвези"
 
-#: ../languages/ripristino/prova_ripristino.php:307
+#: ../languages/ripristino/prova_ripristino.php:309
 msgid "nyn"
 msgstr "Ньянколе"
 
-#: ../languages/ripristino/prova_ripristino.php:308
+#: ../languages/ripristino/prova_ripristino.php:310
 msgid "nyo"
 msgstr "Ньоро"
 
-#: ../languages/ripristino/prova_ripristino.php:309
+#: ../languages/ripristino/prova_ripristino.php:311
 msgid "nzi"
 msgstr "Нзима"
 
-#: ../languages/ripristino/prova_ripristino.php:310
+#: ../languages/ripristino/prova_ripristino.php:312
 msgid "oci"
 msgstr "Окситанский (после 1500 г)"
 
-#: ../languages/ripristino/prova_ripristino.php:311
+#: ../languages/ripristino/prova_ripristino.php:313
 msgid "oji"
 msgstr "Оджибве"
 
-#: ../languages/ripristino/prova_ripristino.php:312
+#: ../languages/ripristino/prova_ripristino.php:314
 msgid "ori"
 msgstr "Ория"
 
-#: ../languages/ripristino/prova_ripristino.php:313
+#: ../languages/ripristino/prova_ripristino.php:315
 msgid "orm"
 msgstr "Оромо"
 
-#: ../languages/ripristino/prova_ripristino.php:314
+#: ../languages/ripristino/prova_ripristino.php:316
 msgid "osa"
 msgstr "Оседжи"
 
-#: ../languages/ripristino/prova_ripristino.php:315
+#: ../languages/ripristino/prova_ripristino.php:317
 msgid "oss"
 msgstr "Осетинский"
 
-#: ../languages/ripristino/prova_ripristino.php:316
+#: ../languages/ripristino/prova_ripristino.php:318
 msgid "ota"
 msgstr "Старотурецкий (1500-1928 гг)"
 
-#: ../languages/ripristino/prova_ripristino.php:317
+#: ../languages/ripristino/prova_ripristino.php:319
 msgid "pag"
 msgstr "Пангасинан"
 
-#: ../languages/ripristino/prova_ripristino.php:318
+#: ../languages/ripristino/prova_ripristino.php:320
 msgid "pal"
 msgstr "Пехлевийский"
 
-#: ../languages/ripristino/prova_ripristino.php:319
+#: ../languages/ripristino/prova_ripristino.php:321
 msgid "pam"
 msgstr "Пампанга"
 
-#: ../languages/ripristino/prova_ripristino.php:320
+#: ../languages/ripristino/prova_ripristino.php:322
 msgid "pan"
 msgstr "Пенджабский"
 
-#: ../languages/ripristino/prova_ripristino.php:321
+#: ../languages/ripristino/prova_ripristino.php:323
 msgid "pap"
 msgstr "Папьяменто"
 
-#: ../languages/ripristino/prova_ripristino.php:322
+#: ../languages/ripristino/prova_ripristino.php:324
 msgid "pau"
 msgstr "Палау"
 
-#: ../languages/ripristino/prova_ripristino.php:323
+#: ../languages/ripristino/prova_ripristino.php:325
 msgid "peo"
 msgstr "Староперсидский (600-400 гг до н.э.)"
 
-#: ../languages/ripristino/prova_ripristino.php:324
+#: ../languages/ripristino/prova_ripristino.php:326
 msgid "phn"
 msgstr "Финикийский"
 
-#: ../languages/ripristino/prova_ripristino.php:325
+#: ../languages/ripristino/prova_ripristino.php:327
 msgid "pli"
 msgstr "Пали"
 
-#: ../languages/ripristino/prova_ripristino.php:326
+#: ../languages/ripristino/prova_ripristino.php:328
 msgid "pol"
 msgstr "Польский"
 
-#: ../languages/ripristino/prova_ripristino.php:327
+#: ../languages/ripristino/prova_ripristino.php:329
 msgid "pon"
 msgstr "Понапе"
 
-#: ../languages/ripristino/prova_ripristino.php:328
+#: ../languages/ripristino/prova_ripristino.php:330
 msgid "por"
 msgstr "Португальский"
 
-#: ../languages/ripristino/prova_ripristino.php:329
+#: ../languages/ripristino/prova_ripristino.php:331
 msgid "pro"
 msgstr "Старопровансальский (до 1500 г)"
 
-#: ../languages/ripristino/prova_ripristino.php:330
+#: ../languages/ripristino/prova_ripristino.php:332
 msgid "pus"
 msgstr "Пушту"
 
-#: ../languages/ripristino/prova_ripristino.php:331
+#: ../languages/ripristino/prova_ripristino.php:333
 msgid "que"
 msgstr "Кечуа"
 
-#: ../languages/ripristino/prova_ripristino.php:332
+#: ../languages/ripristino/prova_ripristino.php:334
 msgid "raj"
 msgstr "Раджастхани"
 
-#: ../languages/ripristino/prova_ripristino.php:333
+#: ../languages/ripristino/prova_ripristino.php:335
 msgid "rap"
 msgstr "Рапануйский"
 
-#: ../languages/ripristino/prova_ripristino.php:334
+#: ../languages/ripristino/prova_ripristino.php:336
 msgid "rar"
 msgstr "Раротонга"
 
-#: ../languages/ripristino/prova_ripristino.php:335
+#: ../languages/ripristino/prova_ripristino.php:337
 msgid "roh"
 msgstr "Ретороманский"
 
-#: ../languages/ripristino/prova_ripristino.php:336
+#: ../languages/ripristino/prova_ripristino.php:338
 msgid "rom"
 msgstr "Цыганский"
 
-#: ../languages/ripristino/prova_ripristino.php:337
+#: ../languages/ripristino/prova_ripristino.php:339
 msgid "ron"
 msgstr "Румынский"
 
-#: ../languages/ripristino/prova_ripristino.php:338
+#: ../languages/ripristino/prova_ripristino.php:340
 msgid "run"
 msgstr "Рунди"
 
-#: ../languages/ripristino/prova_ripristino.php:339
+#: ../languages/ripristino/prova_ripristino.php:341
 msgid "rup"
 msgstr "Арумынский"
 
-#: ../languages/ripristino/prova_ripristino.php:340
+#: ../languages/ripristino/prova_ripristino.php:342
 msgid "rus"
 msgstr "Русский"
 
-#: ../languages/ripristino/prova_ripristino.php:341
+#: ../languages/ripristino/prova_ripristino.php:343
 msgid "sad"
 msgstr "Сандаве"
 
-#: ../languages/ripristino/prova_ripristino.php:342
+#: ../languages/ripristino/prova_ripristino.php:344
 msgid "sag"
 msgstr "Санго"
 
-#: ../languages/ripristino/prova_ripristino.php:343
+#: ../languages/ripristino/prova_ripristino.php:345
 msgid "sah"
 msgstr "Якутский"
 
-#: ../languages/ripristino/prova_ripristino.php:344
+#: ../languages/ripristino/prova_ripristino.php:346
 msgid "sam"
 msgstr "Самаритянский арамейский"
 
-#: ../languages/ripristino/prova_ripristino.php:345
+#: ../languages/ripristino/prova_ripristino.php:347
 msgid "san"
 msgstr "Санскрит"
 
-#: ../languages/ripristino/prova_ripristino.php:346
+#: ../languages/ripristino/prova_ripristino.php:348
 msgid "sas"
 msgstr "Сасакский"
 
-#: ../languages/ripristino/prova_ripristino.php:347
+#: ../languages/ripristino/prova_ripristino.php:349
 msgid "sat"
 msgstr "Сантали"
 
-#: ../languages/ripristino/prova_ripristino.php:348
+#: ../languages/ripristino/prova_ripristino.php:350
 msgid "scn"
 msgstr "Сицилийский"
 
-#: ../languages/ripristino/prova_ripristino.php:349
+#: ../languages/ripristino/prova_ripristino.php:351
 msgid "sco"
 msgstr "Шотландский (англо-шотландский)"
 
-#: ../languages/ripristino/prova_ripristino.php:350
+#: ../languages/ripristino/prova_ripristino.php:352
 msgid "sel"
 msgstr "Селькупский"
 
-#: ../languages/ripristino/prova_ripristino.php:351
+#: ../languages/ripristino/prova_ripristino.php:353
 msgid "sga"
 msgstr "Староирландский (до 900 г.)"
 
-#: ../languages/ripristino/prova_ripristino.php:352
+#: ../languages/ripristino/prova_ripristino.php:354
 msgid "shn"
 msgstr "Шанский"
 
-#: ../languages/ripristino/prova_ripristino.php:353
+#: ../languages/ripristino/prova_ripristino.php:355
 msgid "sid"
 msgstr "Сидама"
 
-#: ../languages/ripristino/prova_ripristino.php:354
+#: ../languages/ripristino/prova_ripristino.php:356
 msgid "sin"
 msgstr "Сингальский"
 
-#: ../languages/ripristino/prova_ripristino.php:355
+#: ../languages/ripristino/prova_ripristino.php:357
 msgid "slk"
 msgstr "Словацкий"
 
-#: ../languages/ripristino/prova_ripristino.php:356
+#: ../languages/ripristino/prova_ripristino.php:358
 msgid "slv"
 msgstr "Словенский"
 
-#: ../languages/ripristino/prova_ripristino.php:357
+#: ../languages/ripristino/prova_ripristino.php:359
 msgid "sma"
 msgstr "Южносаамский"
 
-#: ../languages/ripristino/prova_ripristino.php:358
+#: ../languages/ripristino/prova_ripristino.php:360
 msgid "sme"
 msgstr "Северносаамский"
 
-#: ../languages/ripristino/prova_ripristino.php:359
+#: ../languages/ripristino/prova_ripristino.php:361
 msgid "smj"
 msgstr "Луле-саамский"
 
-#: ../languages/ripristino/prova_ripristino.php:360
+#: ../languages/ripristino/prova_ripristino.php:362
 msgid "smn"
 msgstr "Инари-саамский"
 
-#: ../languages/ripristino/prova_ripristino.php:361
+#: ../languages/ripristino/prova_ripristino.php:363
 msgid "smo"
 msgstr "Самоанский"
 
-#: ../languages/ripristino/prova_ripristino.php:362
+#: ../languages/ripristino/prova_ripristino.php:364
 msgid "sms"
 msgstr "Колтта-саамский"
 
-#: ../languages/ripristino/prova_ripristino.php:363
+#: ../languages/ripristino/prova_ripristino.php:365
 msgid "sna"
 msgstr "Шона"
 
-#: ../languages/ripristino/prova_ripristino.php:364
+#: ../languages/ripristino/prova_ripristino.php:366
 msgid "snd"
 msgstr "Синдхи"
 
-#: ../languages/ripristino/prova_ripristino.php:365
+#: ../languages/ripristino/prova_ripristino.php:367
 msgid "snk"
 msgstr "Сонинке"
 
-#: ../languages/ripristino/prova_ripristino.php:366
+#: ../languages/ripristino/prova_ripristino.php:368
 msgid "sog"
 msgstr "Согдийский"
 
-#: ../languages/ripristino/prova_ripristino.php:367
+#: ../languages/ripristino/prova_ripristino.php:369
 msgid "som"
 msgstr "Сомали"
 
-#: ../languages/ripristino/prova_ripristino.php:368
+#: ../languages/ripristino/prova_ripristino.php:370
 msgid "sot"
 msgstr "Сото южный"
 
-#: ../languages/ripristino/prova_ripristino.php:369
+#: ../languages/ripristino/prova_ripristino.php:371
 msgid "spa"
 msgstr "Испанский"
 
-#: ../languages/ripristino/prova_ripristino.php:370
+#: ../languages/ripristino/prova_ripristino.php:372
 msgid "sqi"
 msgstr "Албанский"
 
-#: ../languages/ripristino/prova_ripristino.php:371
+#: ../languages/ripristino/prova_ripristino.php:373
 msgid "srd"
 msgstr "Сардинский"
 
-#: ../languages/ripristino/prova_ripristino.php:372
+#: ../languages/ripristino/prova_ripristino.php:374
 msgid "srn"
 msgstr "Сранан-тонго"
 
-#: ../languages/ripristino/prova_ripristino.php:373
+#: ../languages/ripristino/prova_ripristino.php:375
 msgid "srp"
 msgstr "Сербский"
 
-#: ../languages/ripristino/prova_ripristino.php:374
+#: ../languages/ripristino/prova_ripristino.php:376
 msgid "srr"
 msgstr "Серер"
 
-#: ../languages/ripristino/prova_ripristino.php:375
+#: ../languages/ripristino/prova_ripristino.php:377
 msgid "ssw"
 msgstr "Свати"
 
-#: ../languages/ripristino/prova_ripristino.php:376
+#: ../languages/ripristino/prova_ripristino.php:378
 msgid "suk"
 msgstr "Сукума"
 
-#: ../languages/ripristino/prova_ripristino.php:377
+#: ../languages/ripristino/prova_ripristino.php:379
 msgid "sun"
 msgstr "Сунданский"
 
-#: ../languages/ripristino/prova_ripristino.php:378
+#: ../languages/ripristino/prova_ripristino.php:380
 msgid "sus"
 msgstr "Сусу"
 
-#: ../languages/ripristino/prova_ripristino.php:379
+#: ../languages/ripristino/prova_ripristino.php:381
 msgid "sux"
 msgstr "Шумерский"
 
-#: ../languages/ripristino/prova_ripristino.php:380
+#: ../languages/ripristino/prova_ripristino.php:382
 msgid "swa"
 msgstr "Суахили (макроязык)"
 
-#: ../languages/ripristino/prova_ripristino.php:381
+#: ../languages/ripristino/prova_ripristino.php:383
 msgid "swe"
 msgstr "Шведский"
 
-#: ../languages/ripristino/prova_ripristino.php:382
+#: ../languages/ripristino/prova_ripristino.php:384
 msgid "syc"
 msgstr "Классический сирийский"
 
-#: ../languages/ripristino/prova_ripristino.php:383
+#: ../languages/ripristino/prova_ripristino.php:385
 msgid "syr"
 msgstr "Сирийский"
 
-#: ../languages/ripristino/prova_ripristino.php:384
+#: ../languages/ripristino/prova_ripristino.php:386
 msgid "tah"
 msgstr "Таитянский"
 
-#: ../languages/ripristino/prova_ripristino.php:385
+#: ../languages/ripristino/prova_ripristino.php:387
 msgid "tam"
 msgstr "Тамильский"
 
-#: ../languages/ripristino/prova_ripristino.php:386
+#: ../languages/ripristino/prova_ripristino.php:388
 msgid "tat"
 msgstr "Татарский"
 
-#: ../languages/ripristino/prova_ripristino.php:387
+#: ../languages/ripristino/prova_ripristino.php:389
 msgid "tel"
 msgstr "Телугу"
 
-#: ../languages/ripristino/prova_ripristino.php:388
+#: ../languages/ripristino/prova_ripristino.php:390
 msgid "tem"
 msgstr "Темне"
 
-#: ../languages/ripristino/prova_ripristino.php:389
+#: ../languages/ripristino/prova_ripristino.php:391
 msgid "ter"
 msgstr "Терено"
 
-#: ../languages/ripristino/prova_ripristino.php:390
+#: ../languages/ripristino/prova_ripristino.php:392
 msgid "tet"
 msgstr "Тетум"
 
-#: ../languages/ripristino/prova_ripristino.php:391
+#: ../languages/ripristino/prova_ripristino.php:393
 msgid "tgk"
 msgstr "Таджикский"
 
-#: ../languages/ripristino/prova_ripristino.php:392
+#: ../languages/ripristino/prova_ripristino.php:394
 msgid "tgl"
 msgstr "Тагальский"
 
-#: ../languages/ripristino/prova_ripristino.php:393
+#: ../languages/ripristino/prova_ripristino.php:395
 msgid "tha"
 msgstr "Тайский"
 
-#: ../languages/ripristino/prova_ripristino.php:394
+#: ../languages/ripristino/prova_ripristino.php:396
 msgid "tig"
 msgstr "Тигре"
 
-#: ../languages/ripristino/prova_ripristino.php:395
+#: ../languages/ripristino/prova_ripristino.php:397
 msgid "tir"
 msgstr "Тигринья"
 
-#: ../languages/ripristino/prova_ripristino.php:396
+#: ../languages/ripristino/prova_ripristino.php:398
 msgid "tiv"
 msgstr "Тиви"
 
-#: ../languages/ripristino/prova_ripristino.php:397
+#: ../languages/ripristino/prova_ripristino.php:399
 msgid "tkl"
 msgstr "Токелаунский"
 
-#: ../languages/ripristino/prova_ripristino.php:398
+#: ../languages/ripristino/prova_ripristino.php:400
 msgid "tlh"
 msgstr "Клингонский"
 
-#: ../languages/ripristino/prova_ripristino.php:399
+#: ../languages/ripristino/prova_ripristino.php:401
 msgid "tli"
 msgstr "Тлингит"
 
-#: ../languages/ripristino/prova_ripristino.php:400
+#: ../languages/ripristino/prova_ripristino.php:402
 msgid "tmh"
 msgstr "Тамашек"
 
-#: ../languages/ripristino/prova_ripristino.php:401
+#: ../languages/ripristino/prova_ripristino.php:403
 msgid "tog"
 msgstr "Тонга (Ньяса)"
 
-#: ../languages/ripristino/prova_ripristino.php:402
+#: ../languages/ripristino/prova_ripristino.php:404
 msgid "ton"
 msgstr "Тонга (Тонга-исландский)"
 
-#: ../languages/ripristino/prova_ripristino.php:403
+#: ../languages/ripristino/prova_ripristino.php:405
 msgid "tpi"
 msgstr "Ток-писин"
 
-#: ../languages/ripristino/prova_ripristino.php:404
+#: ../languages/ripristino/prova_ripristino.php:406
 msgid "tsi"
 msgstr "Цимшиан"
 
-#: ../languages/ripristino/prova_ripristino.php:405
+#: ../languages/ripristino/prova_ripristino.php:407
 msgid "tsn"
 msgstr "Тсвана"
 
-#: ../languages/ripristino/prova_ripristino.php:406
+#: ../languages/ripristino/prova_ripristino.php:408
 msgid "tso"
 msgstr "Тсонга"
 
-#: ../languages/ripristino/prova_ripristino.php:407
+#: ../languages/ripristino/prova_ripristino.php:409
 msgid "tuk"
 msgstr "Туркменский"
 
-#: ../languages/ripristino/prova_ripristino.php:408
+#: ../languages/ripristino/prova_ripristino.php:410
 msgid "tum"
 msgstr "Тумбука"
 
-#: ../languages/ripristino/prova_ripristino.php:409
+#: ../languages/ripristino/prova_ripristino.php:411
 msgid "tur"
 msgstr "Турецкий"
 
-#: ../languages/ripristino/prova_ripristino.php:410
+#: ../languages/ripristino/prova_ripristino.php:412
 msgid "tvl"
 msgstr "Тувалу"
 
-#: ../languages/ripristino/prova_ripristino.php:411
+#: ../languages/ripristino/prova_ripristino.php:413
 msgid "twi"
 msgstr "Тви"
 
-#: ../languages/ripristino/prova_ripristino.php:412
+#: ../languages/ripristino/prova_ripristino.php:414
 msgid "tyv"
 msgstr "Тувинский"
 
-#: ../languages/ripristino/prova_ripristino.php:413
+#: ../languages/ripristino/prova_ripristino.php:415
 msgid "udm"
 msgstr "Удмуртский (вотяцкий)"
 
-#: ../languages/ripristino/prova_ripristino.php:414
+#: ../languages/ripristino/prova_ripristino.php:416
 msgid "uga"
 msgstr "Угаритский"
 
-#: ../languages/ripristino/prova_ripristino.php:415
+#: ../languages/ripristino/prova_ripristino.php:417
 msgid "uig"
 msgstr "Уйгурский"
 
-#: ../languages/ripristino/prova_ripristino.php:416
+#: ../languages/ripristino/prova_ripristino.php:418
 msgid "ukr"
 msgstr "Украинский"
 
-#: ../languages/ripristino/prova_ripristino.php:417
+#: ../languages/ripristino/prova_ripristino.php:419
 msgid "umb"
 msgstr "Умбунду"
 
-#: ../languages/ripristino/prova_ripristino.php:418
+#: ../languages/ripristino/prova_ripristino.php:420
 msgid "und"
 msgstr "Неидентифицированный"
 
-#: ../languages/ripristino/prova_ripristino.php:419
+#: ../languages/ripristino/prova_ripristino.php:421
 msgid "uzb"
 msgstr "Узбекский"
 
-#: ../languages/ripristino/prova_ripristino.php:420
+#: ../languages/ripristino/prova_ripristino.php:422
 msgid "vai"
 msgstr "Ваи"
 
-#: ../languages/ripristino/prova_ripristino.php:421
+#: ../languages/ripristino/prova_ripristino.php:423
 msgid "ven"
 msgstr "Венда"
 
-#: ../languages/ripristino/prova_ripristino.php:422
+#: ../languages/ripristino/prova_ripristino.php:424
 msgid "vie"
 msgstr "Вьетнамский"
 
-#: ../languages/ripristino/prova_ripristino.php:423
+#: ../languages/ripristino/prova_ripristino.php:425
 msgid "vol"
 msgstr "Волапюк"
 
-#: ../languages/ripristino/prova_ripristino.php:424
+#: ../languages/ripristino/prova_ripristino.php:426
 msgid "vot"
 msgstr "Водский"
 
-#: ../languages/ripristino/prova_ripristino.php:425
+#: ../languages/ripristino/prova_ripristino.php:427
 msgid "wal"
 msgstr "Воламо"
 
-#: ../languages/ripristino/prova_ripristino.php:426
+#: ../languages/ripristino/prova_ripristino.php:428
 msgid "war"
 msgstr "Варай (Филиппины)"
 
-#: ../languages/ripristino/prova_ripristino.php:427
+#: ../languages/ripristino/prova_ripristino.php:429
 msgid "was"
 msgstr "Вашо"
 
-#: ../languages/ripristino/prova_ripristino.php:428
+#: ../languages/ripristino/prova_ripristino.php:430
 msgid "wln"
 msgstr "Валлонский"
 
-#: ../languages/ripristino/prova_ripristino.php:429
+#: ../languages/ripristino/prova_ripristino.php:431
 msgid "wol"
 msgstr "Волоф"
 
-#: ../languages/ripristino/prova_ripristino.php:430
+#: ../languages/ripristino/prova_ripristino.php:432
 msgid "xal"
 msgstr "Калмыцкий"
 
-#: ../languages/ripristino/prova_ripristino.php:431
+#: ../languages/ripristino/prova_ripristino.php:433
 msgid "xho"
 msgstr "Коса"
 
-#: ../languages/ripristino/prova_ripristino.php:432
+#: ../languages/ripristino/prova_ripristino.php:434
 msgid "yao"
 msgstr "Яо"
 
-#: ../languages/ripristino/prova_ripristino.php:433
+#: ../languages/ripristino/prova_ripristino.php:435
 msgid "yap"
 msgstr "Яп"
 
-#: ../languages/ripristino/prova_ripristino.php:434
+#: ../languages/ripristino/prova_ripristino.php:436
 msgid "yid"
 msgstr "Идиш"
 
-#: ../languages/ripristino/prova_ripristino.php:435
+#: ../languages/ripristino/prova_ripristino.php:437
 msgid "yor"
 msgstr "Йоруба"
 
-#: ../languages/ripristino/prova_ripristino.php:436
+#: ../languages/ripristino/prova_ripristino.php:438
 msgid "zap"
 msgstr "Сапотекский"
 
-#: ../languages/ripristino/prova_ripristino.php:437
+#: ../languages/ripristino/prova_ripristino.php:439
 msgid "zbl"
 msgstr "Блисс-символы"
 
-#: ../languages/ripristino/prova_ripristino.php:438
+#: ../languages/ripristino/prova_ripristino.php:440
 msgid "zen"
 msgstr "Зенагский"
 
-#: ../languages/ripristino/prova_ripristino.php:439
+#: ../languages/ripristino/prova_ripristino.php:441
 msgid "zha"
 msgstr "Чжуанский"
 
-#: ../languages/ripristino/prova_ripristino.php:440
+#: ../languages/ripristino/prova_ripristino.php:442
 msgid "zho"
 msgstr "Китайский"
 
-#: ../languages/ripristino/prova_ripristino.php:441
+#: ../languages/ripristino/prova_ripristino.php:443
 msgid "zul"
 msgstr "Зулу"
 
-#: ../languages/ripristino/prova_ripristino.php:442
+#: ../languages/ripristino/prova_ripristino.php:444
 msgid "zun"
 msgstr "Зуньи"
 
-#: ../languages/ripristino/prova_ripristino.php:443
+#: ../languages/ripristino/prova_ripristino.php:445
 msgid "zxx"
 msgstr "Нет языкового содержания"
 
-#: ../languages/ripristino/prova_ripristino.php:444
+#: ../languages/ripristino/prova_ripristino.php:446
 msgid "zza"
 msgstr "Зазаки"
 
-#: ../languages/ripristino/prova_ripristino.php:445
+#: ../languages/ripristino/prova_ripristino.php:447
 msgid "urd"
 msgstr "Урду"
 
-#: ../languages/ripristino/prova_ripristino.php:446
+#: ../languages/ripristino/prova_ripristino.php:448
 msgid "vls"
 msgstr "Фламандский"
 
@@ -2195,7 +2230,6 @@ msgid "Copyrights"
 msgstr "Copyrights"
 
 #: views/scripts/work/manage.phtml:15
-#: views/scripts/work/read.phtml:45
 msgid "Manage text's privileges"
 msgstr "Изменить настройки конфиденциальности"
 
@@ -2236,54 +2270,80 @@ msgid "Translations"
 msgstr "Переводы"
 
 #: views/scripts/work/read.phtml:15
+#: views/scripts/work/index.phtml:30
+#: views/scripts/work/my.phtml:14
+#: views/scripts/work/history.phtml:2
+#: views/scripts/translation/read.phtml:112
+#: views/scripts/translation/read.phtml:133
+#: views/scripts/translation/edit.phtml:94
 msgid "No Title"
 msgstr "Без заголовка"
 
 #: views/scripts/work/read.phtml:23
+#: views/scripts/work/newread.phtml:10
+#: views/scripts/translation/read.phtml:6
 msgid "You're not allowed to do this. Ask permissions to the text's owner"
 msgstr "Вам не разрешено данное действие. Запросите разрешение у владельца текста."
 
 #: views/scripts/work/read.phtml:24
+#: views/scripts/work/newread.phtml:10
+#: views/scripts/translation/read.phtml:7
 msgid "You're not allowed to do this. Please login"
 msgstr "Вам не разрешено данное действие. Пожалуйста, зарегистрируйтесь"
 
 #: views/scripts/work/read.phtml:27
+#: views/scripts/work/newread.phtml:12
 msgid "You can't delete this text because it has some translations. Delete its translations first."
 msgstr "Вы не можете удалить этот текст из-за существовующих переводов к нему. Сначала удалите эти переводы."
 
 #: views/scripts/work/read.phtml:32
+#: views/scripts/translation/read.phtml:5
 msgid "Options"
 msgstr "Опции"
 
 #: views/scripts/work/read.phtml:35
+#: views/scripts/work/newread.phtml:23
+#: views/scripts/work/newread.phtml:119
 msgid "Create a translation"
 msgstr "Создать перевод"
 
 #: views/scripts/work/read.phtml:41
+#: views/scripts/work/newread.phtml:24
 msgid "Continue text insertion"
 msgstr "Продолжить добавление текста"
 
 #: views/scripts/work/read.phtml:42
+#: views/scripts/work/newread.phtml:25
 msgid "Edit the text"
 msgstr "Редактировать текст"
 
 #: views/scripts/work/read.phtml:50
+#: views/scripts/work/newread.phtml:13
+#: views/scripts/translation/read.phtml:23
 msgid "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
 msgstr "ПРЕДУПРЕЖДЕНИЕ! Удаление без возможности восстановления! Вы УВЕРЕНЫ, что хотите удалить этот текст?"
 
 #: views/scripts/work/read.phtml:53
+#: views/scripts/work/newread.phtml:35
 msgid "Delete this text"
 msgstr "Удалить этот текст"
 
 #: views/scripts/work/read.phtml:56
+#: views/scripts/work/newread.phtml:37
+#: views/scripts/work/history.phtml:12
+#: views/scripts/translation/read.phtml:29
 msgid "History of modifications"
 msgstr "История изменений"
 
 #: views/scripts/work/read.phtml:87
+#: views/scripts/work/newread.phtml:81
+#: views/scripts/translation/read.phtml:206
+#: views/scripts/translation/read.phtml:211
 msgid "Text inserted by"
 msgstr "Текст добавлен "
 
 #: views/scripts/work/read.phtml:96
+#: views/scripts/work/newread.phtml:141
 msgid "PAGETITLE_Read text"
 msgstr "Просмотр текста"
 
@@ -2387,19 +2447,19 @@ msgstr "Пожалуйста, зарегистрируйтесь"
 msgid "PAGETITLE_Login"
 msgstr "Вход в систему"
 
-#: views/scripts/error/denied.phtml:3
+#: views/scripts/error/denied.phtml:4
 msgid "Error"
 msgstr "Ошибка"
 
-#: views/scripts/error/denied.phtml:4
+#: views/scripts/error/denied.phtml:5
 msgid "Access denied"
 msgstr "В доступе отказано"
 
-#: views/scripts/error/denied.phtml:5
+#: views/scripts/error/denied.phtml:6
 msgid "You are trying to access an area which you have not allowed."
 msgstr "Вы пытаетесь получить доступ в запрещенную зону."
 
-#: views/scripts/error/denied.phtml:9
+#: views/scripts/error/denied.phtml:10
 msgid "PAGETITLE_Access denied"
 msgstr "В доступе отказано"
 
