@@ -114,16 +114,17 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         Tdxio_Log::info($work,'work read');
 
+		$this->view->canTag = $model->isAllowed('tag',$id);
         $taglist = new Zend_View();
         $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
         $taglist->assign('tags',$work['Tags']);
         $taglist->assign('genres',$work['Genres']);
         $taglist->assign('workid',$work['id']);
         $taglist->assign('userid',$this->view->userid);
+        $taglist->assign('canTag',$this->view->canTag);
         $this->view->tagbody=$taglist->render('taglist.phtml');
         
-        $this->view->hasTranslations=$model->hasTranslations($id);        
-        $this->view->canTag = $model->isAllowed('tag',$id);
+        $this->view->hasTranslations=$model->hasTranslations($id);     
         $this->view->canManage = $model->isAllowed('manage',$id);
         $this->view->work = $work;
         Tdxio_Log::info($work,'work/read work');
@@ -148,18 +149,20 @@ class WorkController extends Tdxio_Controller_Abstract
             Tdxio_Log::info('get in here');        
             throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
         }
+        $this->view->canTag = $model->isAllowed('tag',$id);
         $taglist = new Zend_View();
 		$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
 		$taglist->assign('tags',$work['Tags']);
 		$taglist->assign('genres',$work['Genres']);
 		$taglist->assign('workid',$work['id']);
 		$taglist->assign('userid',$this->view->userid);
+		$taglist->assign('canTag',$this->view->canTag);
 		if($model->isAllowed('tag',$id)){
 			$tagForm = new Form_Tag(); 
 			$taglist->assign('form',$tagForm);
 		}       
 		$this->view->tagbody=$taglist->render('taglist.phtml');
-        $this->view->canTag = $model->isAllowed('tag',$id);
+        
         $this->view->hasTranslations=$model->hasTranslations($id);   
         Tdxio_Log::info($this->view->hasTranslations,'hastrans');     
         $this->view->canManage = $model->isAllowed('manage',$id);
@@ -193,19 +196,20 @@ class WorkController extends Tdxio_Controller_Abstract
             }
             $work['Interpretations'] = $translations;
         }
+        $this->view->canTag = $model->isAllowed('tag',$id);
         $taglist = new Zend_View();
 		$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
 		$taglist->assign('tags',$trWork['Tags']);
 		$taglist->assign('genres',$trWork['Genres']);
 		$taglist->assign('workid',$trWork['id']);
 		$taglist->assign('userid',$this->view->userid);
+		$taglist->assign('canTag',$this->view->canTag);
 		   
 		$this->view->tagbody=$taglist->render('taglist.phtml');
         
         Tdxio_Log::info($work,'ajaxread00');
        
         $this->view->hasTranslations=$model->hasTranslations($id);        
-        $this->view->canTag = $model->isAllowed('tag',$id);
         $this->view->canManage = $model->isAllowed('manage',$id);
         $this->view->work = $work;
         $this->view->trWork = $trWork;

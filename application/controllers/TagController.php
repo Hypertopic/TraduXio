@@ -84,6 +84,7 @@ class TagController extends Tdxio_Controller_Abstract
         $request=$this->getRequest();
         $id=$request->getParam('id');
         $model= $this->_getModel();
+        $workModel= new Model_Work();
 		$tags = $model->getTags($id);
 		Tdxio_Log::info($tags,'abcdefg');
 		$genres=$tags['Genres'];
@@ -100,7 +101,7 @@ class TagController extends Tdxio_Controller_Abstract
 		$renderView->assign('tags',$tags);
 		$renderView->assign('genres',$genres);
 		$renderView->assign('userid',$username);
-		
+		$renderView->assign('canTag',$workModel->isAllowed('tag',$id));
 		$this->view->taglist=$renderView->render('taglist.phtml');
         		
 	}

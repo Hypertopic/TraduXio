@@ -60,6 +60,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         $translationId=$request->getParam('id');
         Tdxio_Log::info($request,'viaggio');
         $model= $this->_getModel();
+        $workModel = new Model_Work();
         if(!$work=$model->fetchTranslationWork($translationId,false)){
             throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
         }
@@ -84,6 +85,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         $taglist->assign('genres',$work['Genres']);
         $taglist->assign('workid',$translationId);
         $taglist->assign('userid',$this->view->userid);
+        $taglist->assign('canTag',$workModel->isAllowed('tag',$translationId));
         $this->view->tagbody=$taglist->render('taglist.phtml');
                    
         if ($request->isPost()) {
