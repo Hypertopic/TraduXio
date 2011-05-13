@@ -68,9 +68,9 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         </div>
         <div class="text-container center" id="work">
         <div class="work-title red"> <?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
-            <span class="author"><?php echo $author ?></span>
+            <span class="author" id="orig-author"><?php echo $author ?></span>
             ,
-            <span class="title"><?php echo $this->work['title']; ?></span>
+            <span class="title" id="orig-title"><?php echo $this->work['title']; ?></span>
         </div>
        <!-- <div class="language TBspaced red"><?php //echo __($this->work['language']); ?></div> !-->
         <div class="text show">
@@ -118,10 +118,14 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         <div class="Lborder middle"></div>
         <div class="text-container center" id="translation">
         <div class="work-title red"> 
-            <span class="author"></span>
+            <span class="author" id="tr-author"></span>
             ,
-            <span class="title"></span>
+            <span class="title" id="tr-title"></span>
         </div>
+        <div id="icons">
+		<div id="editbtn" title="<?php echo __("Edit mode"); ?>"></div>
+		<div id="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
+		</div>
         <div class="text show">
         <?php if(!$this->trId):?>
         <span id="create"><?php echo __('Create a translation'); ?></span>
@@ -140,11 +144,6 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     </div>
     
 </div>
-</div>
-<div id="icons">
-<div id="editbtn" title="<?php echo __("Edit mode"); ?>"></div>
-<div id="savebtn" title="<?php echo __("Save"); ?>"></div>
-<!--<div id="delbtn" title="<?php //echo __("Delete this translation"); ?>"></div>-->
 </div>
 </div>
 

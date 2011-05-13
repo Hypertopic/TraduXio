@@ -26,6 +26,8 @@ class TagController extends Tdxio_Controller_Abstract
 			$renderView->assign('content',$tagForm);
 			$this->view->tagform=$renderView->render('render.phtml');
         }
+        $this->view->response = true;
+        $this->view->message = __("OK");
 	}
     
     
@@ -92,8 +94,10 @@ class TagController extends Tdxio_Controller_Abstract
         
         if(!empty($tags)){
             $tags = $model->normalizeTags($tags[$id]);
+            $this->view->message = __("OK");
         }else{
             $tags = array();
+			$this->view->message = __("No tags inserted");
         }        
 		
 		$renderView = new Zend_View();
@@ -103,7 +107,7 @@ class TagController extends Tdxio_Controller_Abstract
 		$renderView->assign('userid',$username);
 		$renderView->assign('canTag',$workModel->isAllowed('tag',$id));
 		$this->view->taglist=$renderView->render('taglist.phtml');
-        		
+        $this->view->response =  true;
 	}
      
     public function deletetagAction(){      
@@ -135,19 +139,24 @@ class TagController extends Tdxio_Controller_Abstract
         Tdxio_Log::info('Entra in tag-getRule');
         $action = $request->action;
         $resource_id = $request->getParam('id');
-        
+        $visibility = null;
         if(!is_null($resource_id)){ 
             $taggableModel = new Model_Taggable();
             if(!($taggableModel->entryExists(array('id'=>$resource_id))))
-            {throw new Zend_Exception(sprintf('Taggable Id "%d" does not exist.',$resource_id), 404);}
+            {throw new Zend_Exception(sprintf('Taggable Id "%d" does not exist.',$resource_id), 404);} 
+            $wModel = new Model_Work();
+            $visibility=$wModel->getAttribute($resource_id,'visibility');
+            Tdxio_Log::info($visibility,'visibilita');
         }
         Tdxio_Log::info('supera controllo risorsa');
         
         $rule = 'noAction';
     
         switch($action){
+			case 'gettags': $rule = array('privilege'=>'read','work_id'=>$resource_id,'visibility'=>$visibility);break;
             case 'tag': $rule = array('privilege'=> 'tag','work_id' => $resource_id);      
                         break; 
+            case 'getform':
             case 'ajaxtag': $rule = array('privilege'=> 'tag','work_id' => $resource_id);      
                         break; 
             case 'deletetag':

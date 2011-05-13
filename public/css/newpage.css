@@ -277,8 +277,8 @@ display:block;}
 
 #icons{
 position:absolute;
-right:20px;
-top:50px;
+right:0px;
+top:5px;
 float:right;
 }
 
@@ -488,6 +488,9 @@ border:solid 1px #dbdbdb;
 display:block;
 padding:5px 10px;
 }
+
+#translation{
+position:relative;}
 
 #translation span.show,#translation textarea.show{
 margin-bottom:19px;/* this value must be equal to .merge height +3px*/

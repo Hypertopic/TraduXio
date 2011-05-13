@@ -1,4 +1,4 @@
 <?php 
 $this->layout()->setLayout('jsonlayout');
-$data = array('tagform'=> $this->tagform,'message'=>'OK'); 
+$data = array('tagform'=> $this->tagform,'response'=>$this->response,'message'=>$this->message); 
 echo Zend_Json::encode($data);

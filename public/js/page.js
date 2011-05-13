@@ -13,8 +13,9 @@ var minHeight = 400;
 var maxH;
 var docHeight;
 var blocked=false;
-var state = 'reset';//'reset' 'editable' 'editing'
+var state = 'reset';//'reset' 'editable'
 var trBlocks;
+var event;
 
 (function($) {
     
@@ -23,6 +24,21 @@ var trBlocks;
             $(this).append(pre + x +"'>" + sentences[x].content + post);
         }
     }
+    
+    $.fn.replaceTag = function(oldTagId,newTagName){
+		var w = $(this).width();
+		var h = $(this).height();
+		var cl = $(this).attr('class');
+		var id = $(this).attr('id');
+		var txt = (newTagName=='span')?nl2br($(this).val(),false):(trWork.blocks[id.match(/\d+/)].translation?trWork.blocks[id.match(/\d+/)].translation:'');
+		$(this).replaceWith( "<"+ newTagName +" class=\"" + cl + "\" name=\""+ id+ "\" id=\""+ id +"\" >" + txt + "</"+ newTagName +">");
+		$("#"+id).height(h);
+		$("#"+id).width(w);
+		$("#"+id).focus();
+	}
+    $.fn.resetToDefault = function(defaultValue){
+		$(this).text(defaultValue);
+	}
     
     $.getDocHeight = function(){
       //  alert('1 getdocheight');
@@ -84,7 +100,7 @@ var trBlocks;
          //   alert(begin +' '+(dir=='prev-page'));
             tdxio.page.displayWork(ajaxData,trId,(dir=='prev-page'),begin,end);
            // tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
-            tdxio.page.setState((window.state=='editing' || window.state=='editable')?'editable':'reset');
+            tdxio.page.setState(window.state);
             tdxio.page.adjust();
             tdxio.page.resize();
         },
@@ -161,15 +177,7 @@ var trBlocks;
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
                 $('#work span.block').after('<span class="merge" title="Merge here"></span>');
                 $('#work span.block.show span.cut:last-child').remove();			    
-            }else if(mode=='editing'){
-				tdxio.page.setBlocked(true);
-				if(window.state!=mode){
-				//$("div#translation").wrapInner('<form id="edit-form" />');
-					tdxio.page.replaceTag("span.block.show.editable","textarea");			
-					//$("span.block.show.editable").wrapInner("<textarea class='autogrow' />");
-					//$("span.block.show.editable textarea").each(function(){$(this).height($(this).parent().height());});
-				}
-			}        
+            }    
 			window.state = mode;
         },
         
@@ -257,7 +265,7 @@ var trBlocks;
                         beginSeg = trWork.blocks[beginBlock].from_segment;
                         
                         for(i=beginBlock;(i==beginBlock) || ( i<trlen && $('#test').height()<= maxH) ; i++){
-                            $('#translation div.text').append(preblock + i + "'>" +nl2br((trWork.blocks[i].translation)?trWork.blocks[i].translation:'',false) + "</span>");
+							$('#translation div.text').append(preblock + i + "'>" +nl2br((trWork.blocks[i].translation)?trWork.blocks[i].translation:'',false) + "</span>");
                             
                             for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
                                 text += pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>";
@@ -405,7 +413,7 @@ var trBlocks;
 					tdxio.page.resize();
 				},
 				error: function() {
-					alert("error reading the workk");
+					alert("error reading the work");
 				}
 			}); 
 		},
@@ -433,7 +441,7 @@ var trBlocks;
 				}
 			});  
            // tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
-			tdxio.page.setState((window.state=='editing' || window.state=='editable')?'editable':'reset');
+			tdxio.page.setState(window.state);
             tdxio.page.adjust();
             tdxio.page.resize();
 		}
@@ -501,40 +509,34 @@ var trBlocks;
         
         url=encodeURI(tdxio.baseUrl+"/translation/save");
    
-        
-		$('#translation div.text span.block.show.editable').live('click',function(){
-			if(window.state=='editable')
-				tdxio.page.setState('editing');
-		});
 		
-		$('.work-title span').live('dblclick',function(){
-			var content = $(this).html();
-			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\"value=\""+content+"\" />");
-		});
-		
-		$('.work-title input').live('focusout',function(){
+		$('.work-title input').live('focusout change',function(e){
+			event = e;
+			//alert(e.originalEvent.type);
 			var textId = ($(this).parent('div').parent('div.text-container').attr('id')=='work')?window.workId:window.trId;
 			var value = $(this).val();
 			var elName = $(this).attr('class');
-			var params=elName == 'author'?{'author':value}:{'title':value};
-			$(this).replaceWith("<span class=\""+$(this).attr('class')+"\">"+value+"</span>");	
-			$.ajax({
-                type: "post",
-                url: encodeURI(tdxio.baseUrl+"/work/metaedit/id/"+textId),
-                dataType: "json",
-                data: params,
-                success:function(rdata,status){
-                    if (rdata.response==false) {//error somewhere
-                        alert(rdata.message);
-                    }else {
-						alert('success');
-                    }
-                },
-                error:function() {
-                    alert("Error in the saving process");
-                },
-            });
-			//save modified filed
+			var params= elName == 'author'?{'author':value}:{'title':value};
+			if(e.originalEvent.type == "change"){
+				$.ajax({
+					type: "post",
+					url: encodeURI(tdxio.baseUrl+"/work/metaedit/id/"+textId),
+					dataType: "json",
+					data: params,
+					success:function(rdata,status){
+						if (rdata.response==false) {//error somewhere
+							$("#"+e.target.id).resetToDefault(e.target.defaultValue);
+							alert(rdata.message);
+						}else {
+							//alert('success');
+						}
+					},
+					error:function() {
+						alert("Error in the saving process");
+					},
+				});
+			}//save modified filed	
+			$(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
 		});
 		
 		$("ul li#extend a").live('click',function(event){
@@ -602,8 +604,6 @@ var trBlocks;
             switch(window.state){
 				case 'reset': tdxio.page.setState('editable');break;
 				case 'editable': tdxio.page.setState('reset');break;
-				case 'editing': //confirm("If you change visualisation you will loose unsaved modifications.Continue?");
-					tdxio.page.setState('reset');break;
 			}
             //tdxio.page.setState(active?'editable':'reset');
             tdxio.page.setBlocked(!active);
@@ -637,14 +637,60 @@ var trBlocks;
         });
         
         $('#work .segment').live('hover',function(){$(this).attr('title','Right click to add a comment for this segment of the text');});
-            
-        $('textarea.block.show.editable').live('change',function(){
+        /*
+		$('textarea.block.show.editable').live('change',function(){
 			$('#savebtn').toggleClass('on',true);
 		});
 		
 		$("#savebtn.on").live('click',function(){
 			//$(this).append("#translation textarea");
 			window.$.submitTranslation();});
+		*/
+		
+		$('#translation div.text span.block.show.editable').live('click',function(){
+			if(window.state=='editable')
+				$(this).replaceTag("span.block.show.editable","textarea");			
+		});
+		$('#translation div.text textarea.block.show.editable').live('change focusout',function(e){
+			if(window.state=='editable'){
+				if(e.originalEvent.type == "change"){window.$.submitTranslation($(this).attr('id'));}
+				$(this).replaceTag("textarea.block.show.editable","span");
+				e.preventDefault();
+			}
+		});
+		/*
+		$('#translation div.text textarea.block.show.editable').live('focusout',function(e){
+			if(window.state=='editable'){
+				$(this).replaceTag("textarea.block.show.editable","span");
+				e.preventDefault();
+			}			
+		});*/
+		
+		$('textarea').live('keypress',function(e){
+			if(e.keyCode ==34){
+				if($("#"+this.id).next().length)
+					$("#"+this.id).next().click();
+				else if($("#next-page .turn-page").length>0){
+					$("#next-page .turn-page").click();					
+					$("#translation .block.show.editable:first").click();
+				}
+				e.preventDefault();
+			}else if(e.keyCode == 33){
+				if($("#"+this.id).prev().length)
+					$("#"+this.id).prev().click();
+				else if($("#prev-page .turn-page").length>0){
+					$("#prev-page .turn-page").click();			
+					$("#translation .block.show.editable:last").click();
+				}
+				e.preventDefault();
+			}
+		});
+		
+		$('.work-title span').live('dblclick',function(){
+			var content = $(this).html();
+			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\" value=\""+content+"\" />");
+			$("#"+$(this).attr('id')).focus();
+		});
         
     });
     

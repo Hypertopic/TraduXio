@@ -54,9 +54,7 @@ var state;
             }
         }  
         tdxio.page.displayWork(window.ajaxData,window.trId,window.back,window.begin,window.end);
-     //   tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
-		//tdxio.page.setState(window.state);
-		tdxio.page.setState((window.state=='editing' || window.state=='editable')?'editable':'reset');
+		tdxio.page.setState(window.state);
 		tdxio.page.adjust();
         tdxio.page.resize();
     };
@@ -104,23 +102,20 @@ var state;
         
     };
     
-    $.submitTranslation = function(){
+    $.submitTranslation = function(blockId){
 		var url = tdxio.baseUrl+"/translation/ajaxedit/id/"+window.trId;
 		
 		$.ajax({
                 type: "post",
                 url: encodeURI(url),
                 dataType: "json",
-                data: $("#translation .block.show.editable").serializeArray(),
+                data: $("#translation .block.show.editable#"+blockId),
                 clearForm: false,
                 success:function(rdata,status){
                     if (rdata.response==false) {//error somewhere
                         alert(rdata.message);
                     }else {
-                        //window.$.update(action,rdata);
-                        $("#translation .block.show.editable").each(function(){$(this).text(this.value);});
-                        $("#savebtn").toggleClass('on',false);
-                        //tdxio.page.setState('editable');
+						$("#translation .block.show.editable#"+blockId).text(this.value);
                     }
                 },
                 error:function() {

@@ -264,6 +264,8 @@ class WorkController extends Tdxio_Controller_Abstract
         Tdxio_Log::info($form,'quaqua');
         $this->view->form = $form;
         Tdxio_Log::info(json_encode($form),'tent');
+        $this->view->response = true;
+        $this->view->message = __("OK");
     }
     
         
@@ -368,9 +370,11 @@ class WorkController extends Tdxio_Controller_Abstract
                         
                         $data=$form->getValues();
                         Tdxio_Log::info($data,'dati form work edit');
-                        $newId=$model->update($data,$id); 
-                        $histModel = new Model_History();        
-                        $histModel->addHistory($id,0);               
+                        $result=$model->update($data,$id); 
+                        if($result>0){
+							$histModel = new Model_History();        
+							$histModel->addHistory($id,0);               
+						}
                     }
                 }
                 return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
@@ -395,10 +399,18 @@ class WorkController extends Tdxio_Controller_Abstract
 		if(!is_null($title))
 			$data['title']=$title;
 		Tdxio_Log::info($data,'datata');
-		$newId=$model->update($data,$id); 
-		$histModel = new Model_History();        
-		$histModel->addHistory($id,0);  
-		$this->view->newText = is_null($author)?$title:$author;
+		$result=$model->update($data,$id); 
+		if($result>0){
+			$histModel = new Model_History();        
+			$histModel->addHistory($id,0);  
+			$this->view->response=true;
+			$this->view->newText = !is_null($author)?$data['author']:$data['title'];
+			$this->view->message = __("OK");
+		}else{
+			$this->view->response = false;
+			$this->view->newText = null;    
+			$this->view->message = __("DB not modified");
+		}
 	}
 
     public function manageAction(){
@@ -641,8 +653,7 @@ class WorkController extends Tdxio_Controller_Abstract
             
             case 'history':$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility);   
                 break;
-            case 'ajaxread': 
-                
+            case 'ajaxread':                 
                 if($trId=$request->getParam('trId')!=null)
                     $res_id = $trId;
                 else
@@ -656,7 +667,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 }else{
                         $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit','translate_privilege'=> 'translate');      
                 }break; 
-            case 'getform':
+            case 'getform': $rule = array('privilege'=> 'tag','work_id' => $resource_id);break;
+            case 'metaedit': $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);break; 
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        

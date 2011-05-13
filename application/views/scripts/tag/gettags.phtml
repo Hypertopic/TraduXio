@@ -1,4 +1,4 @@
 <?php 
 $this->layout()->setLayout('jsonlayout');
-$data = array('taglist'=> $this->taglist,'message'=>'OK','response'=>true); 
+$data = array('taglist'=> $this->taglist,'response'=>$this->response,'message'=>$this->message); 
 echo Zend_Json::encode($data);
