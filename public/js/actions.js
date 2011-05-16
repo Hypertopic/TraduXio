@@ -44,23 +44,37 @@ var state;
      
     };
     
-    $.updateTranslation = function(newBlocks){
-        window.translations[0].blocks = newBlocks;
+    $.updateTranslation = function(el,newEl){
+		var i=0;
+		for(i = 0; i<window.ajaxData.work.Interpretations.length;i++){
+			if(window.ajaxData.work.Interpretations[i].work.id==window.trId){break;}
+		}  
+        if(el=="blocks"){
+			window.translations[0].blocks = newEl;
+			window.ajaxData.work.Interpretations[i].blocks=newEl;
+			tdxio.page.displayWork(window.ajaxData,window.trId,window.back,window.begin,window.end);
+			tdxio.page.setState(window.state);
+			tdxio.page.adjust();
+			tdxio.page.resize();
+		}else if(el=="block"){
+			window.translations[0].blocks[newEl.blockId].translation = newEl.newText;
+			window.trWork.blocks[newEl.blockId].translation = newEl.newText;
+			window.ajaxData.work.Interpretations[i].blocks[newEl.blockId].translation = newEl.newText;			
+			tdxio.page.displayWork(window.ajaxData,window.trId,window.back,window.begin,window.end);
+			tdxio.page.setState(window.state);
+			tdxio.page.adjust();
+			tdxio.page.resize();
 
-        for(var i = 0; i<window.ajaxData.work.Interpretations.length;i++){
-            if(window.ajaxData.work.Interpretations[i].work.id==window.trId){
-                window.ajaxData.work.Interpretations[i].blocks=newBlocks;
-                break;
-            }
-        }  
-        tdxio.page.displayWork(window.ajaxData,window.trId,window.back,window.begin,window.end);
-		tdxio.page.setState(window.state);
-		tdxio.page.adjust();
-        tdxio.page.resize();
-    };
+		}
+		else if(el=="title" || el=="author"){
+			window.translations[0].work[el] = newEl;			
+			window.ajaxData.work.Interpretations[i].work[el]=newEl;
+			window.trWork.work[el]=newEl;  
+		}
+	};
     
     $.update = function(action,data){
-        //alert('update '+action);
+        alert('update '+action);
         switch(action)
         {
         case 'extend':
@@ -76,11 +90,17 @@ var state;
             break;
         case 'cut':
         case 'merge':    
-            $.updateTranslation(data.newblocks);                        
+            $.updateTranslation('blocks',data.newblocks);                        
             $.scrollTo($('#text'+workId+'-segment'+data.segToRed));
         break;        
         case 'translate':
+        $.updateTranslation('block',data);
           break;
+		case 'update-orig':
+			window.ajaxData.work[data.el]=data.val;
+		break;
+		case 'update-tr':alert(data.el);alert(data.val);$.updateTranslation(data.el,data.val);
+		break;
         default:
           
         }
@@ -117,6 +137,7 @@ var state;
                         else alert(rdata.message.code);
                     }else {
 						$("#translation .block.show.editable#"+blockId).text(this.value);
+						$.update('translate',{'blockId':blockId.match(/\d/),'newText':rdata.newText});
                     }
                 },
                 error:function() {

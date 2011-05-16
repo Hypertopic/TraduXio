@@ -166,6 +166,8 @@ var event;
                 tdxio.page.setBlocked(false);
                 $('.text').toggleClass('show',true);
                 $('.block').toggleClass('show',false);
+                $('.author').toggleClass('editable',false);
+                $('.title').toggleClass('editable',false); 
                 //$("span.block.show.editable textarea").each(function(){$(this).replaceWith($(this).text());});
                 //$("#translation span textarea").contents().unwrap();
                
@@ -179,6 +181,8 @@ var event;
                 tdxio.page.replaceTag("textarea.block.show.editable","span");
                 $('.text').toggleClass('show',false);
                 $('.block').toggleClass('show',true);
+                $('.author').toggleClass('editable',true);
+                $('.title').toggleClass('editable',true);                
                 $('#translation .block').toggleClass('editable',true);
                 $('#editbtn').toggleClass('on',true);
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
@@ -247,7 +251,7 @@ var event;
                         if(data.work.Interpretations[j].work.id==trId)
                             trWork = data.work.Interpretations[j];
                     }
-                    $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author:'');
+                    $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author:'[]');
                     $('#translation .work-title span.title').html(trWork.work.title);                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var trlen = trWork.blocks.length;
@@ -522,6 +526,7 @@ var event;
 		$('.work-title input').live('focusout change',function(e){
 			event = e;
 			//alert(e.originalEvent.type);
+			var id = $(this).attr('id');
 			var textId = ($(this).parent('div').parent('div.text-container').attr('id')=='work')?window.workId:window.trId;
 			var value = $(this).val();
 			var elName = $(this).attr('class');
@@ -547,6 +552,7 @@ var event;
 					},
 				});
 			}//save modified filed	
+			if(value=='' && $(this).attr('class')=="author editable") value = "[]";
 			$(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
 		});
 		
@@ -700,8 +706,15 @@ var event;
 			}
 		});
 		
-		$('.work-title span').live('dblclick',function(){
-			var content = $(this).html();
+		$('.work-title span.editable').live('click',function(){
+			var id = $(this).attr('id');
+			var content = '';
+			switch(id){
+				case 'tr-author':content = (trWork.work.author!=null)?trWork.work.author:'';break;
+				case 'tr-title':content = trWork.work.title;break;
+				case 'orig-author':content = ajaxData.work.author;break;
+				case 'orig-title':content = ajaxData.work.title;break;
+			}
 			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\" value=\""+content+"\" />");
 			$("#"+$(this).attr('id')).focus();
 		});
