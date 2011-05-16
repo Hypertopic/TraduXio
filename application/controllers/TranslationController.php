@@ -21,9 +21,8 @@ class TranslationController extends Tdxio_Controller_Abstract
         $translationId=$request->getParam('id'); 
         if(!$work=$model->fetchTranslationWork($translationId,false)){
             throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
-        }
+        }       
         
-         
         if ($request->isPost()) {
             $data=$request->getPost();
             
@@ -31,6 +30,7 @@ class TranslationController extends Tdxio_Controller_Abstract
             $data['TranslationBlocks']=array();                   
 			foreach ($work['TranslationBlocks']as $id=>$block) {
 				if (isset($data['block'.$id])) {
+					$translation = $data['block'.$id];
 					Tdxio_Log::info('block'.$id.' is set');
 					$data['TranslationBlocks'][]= array(
 						'translation' => $data['block'.$id],
@@ -48,9 +48,9 @@ class TranslationController extends Tdxio_Controller_Abstract
 		//$result = $model->merge($translationId,$segToMerge);
         if($result==0){
             Tdxio_Log::info($data,'form values in trajedit');
-            $this->view->data = array('response'=>true,'message'=>'Edit ok');
+            $this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'newText'=>$translation);
         }else{
-            $this->view->data = array('response'=>false,'message'=>__("ERROR, couldn't save the translation"));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("ERROR, couldn't save the translation")));
         } 
 		$this->_helper->viewRenderer('refresh');
 	}
@@ -168,14 +168,14 @@ class TranslationController extends Tdxio_Controller_Abstract
         $workModel = new Model_Work();
         
         if ((!$work=$workModel->fetchWork($translationId))||!($workModel->isTranslationWork($translationId))) {
-            $this->view->data = array('response'=>false,'Message'=>__("Translation %1\$d does not exist.", $translationId));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Translation %1\$d does not exist.", $translationId)));
             throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
              
         $blocks=$model->fetchInterpretations($translationId);
         $lastBlock = end($blocks);
         if ($segToCut<0 || $segToCut>=$lastBlock['to_segment']) {
-            $this->view->data = array('response'=>false,'Message'=>__("Can not merge here %1\$d", $segToCut));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Can not merge here %1\$d", $segToCut)));
             throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here %1\$d", $segToCut)), 404);
         }
         
@@ -186,9 +186,9 @@ class TranslationController extends Tdxio_Controller_Abstract
         
             $blocks = $model->fetchInterpretations($translationId);
             Tdxio_Log::info($blocks,'blocks after cut');
-            $this->view->data = array('response'=>true,'message'=>'Cut ok','newblocks'=>$blocks,'segToRed'=>$segToRedirect);
+            $this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'newblocks'=>$blocks,'segToRed'=>$segToRedirect);
         }else{
-            $this->view->data = array('response'=>false,'message'=>__("ERROR, couldn't cut on position %1\$d ",$segToCut));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("ERROR, couldn't cut on position %1\$d ",$segToCut)));
         }
         $this->_helper->viewRenderer('refresh');
     }
@@ -202,14 +202,14 @@ class TranslationController extends Tdxio_Controller_Abstract
         $model=$this->_getModel();
         
         if ((!$work=$workModel->fetchWork($translationId))||!($workModel->isTranslationWork($translationId))) {
-            $this->view->data = array('response'=>false,'Message'=>__("Translation %1\$s does not exist.", $translationId));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Translation %1\$s does not exist.", $translationId)));
             throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
                 
         $blocks=$model->fetchInterpretations($translationId);
         $lastBlock = end($blocks);
         if ($segToMerge<0 || $segToMerge>=$lastBlock['to_segment']) {
-            $this->view->data = array('response'=>false,'Message'=>__("Can not merge here %1\$d", $segToMerge));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Can not merge here %1\$d", $segToMerge)));
             throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here %1\$d", $segToMerge)), 404);
         }
         $result = $model->merge($translationId,$segToMerge);
@@ -217,9 +217,9 @@ class TranslationController extends Tdxio_Controller_Abstract
             $segToRedirect = $this->getFirstSegmentOf($segToMerge,$blocks);             
             $blocks = $model->fetchInterpretations($translationId);
             Tdxio_Log::info($blocks,'blocks after merge');
-            $this->view->data = array('response'=>true,'message'=>'Merge ok','newblocks'=>$blocks,'segToRed'=>$segToRedirect);
+            $this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'newblocks'=>$blocks,'segToRed'=>$segToRedirect);
         }else{
-            $this->view->data = array('response'=>false,'message'=>__("ERROR, couldn't merge on position %1\$d ",$segToMerge));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("ERROR, couldn't merge on position %1\$d ",$segToMerge)));
         } 
         $this->_helper->viewRenderer('refresh');
     }

@@ -134,6 +134,13 @@ var event;
             }
         },
         
+        redirect: function(address){
+			var referer = document.location.href.replace(tdxio.baseUrl,"");
+			alert(referer);
+			address = address+"?referer="+referer;
+			window.location.replace(address);
+		},
+        
         replaceTag: function(oldTagId,newTagName){
 			$(oldTagId).each(function(index,el){
 				var w = $(this).width();
@@ -393,6 +400,7 @@ var event;
 				dataType: "json",
 				data: params,
 				success: function(rdata){
+					//if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
 					if(rdata.work.Interpretations.length>0){
 						var exists=false;
 						for(var k=0;k<rdata.work.Interpretations.length;k++){
@@ -431,7 +439,8 @@ var event;
 				data:{'id':newId},
 				success: function(rdata,status){
 					if (rdata.response==false) {
-						alert(rdata.message);
+						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
+						else alert(rdata.message.code);
 					}else{
 						$("div#tr-tag").empty().append(rdata.taglist);
 					}
@@ -526,9 +535,11 @@ var event;
 					success:function(rdata,status){
 						if (rdata.response==false) {//error somewhere
 							$("#"+e.target.id).resetToDefault(e.target.defaultValue);
-							alert(rdata.message);
+							if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
+							else alert(rdata.message.code);
 						}else {
 							//alert('success');
+							$.update('update-'+id.split('-')[0],{'el':elName.split(' ')[0],'val':value});
 						}
 					},
 					error:function() {
@@ -554,7 +565,8 @@ var event;
 				data:{'type':action},
 				success: function(rdata,status){
 					if (rdata.response==false) {
-						alert(rdata.message);
+						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
+						else alert(rdata.message.code);
 					}else{
 						window.$.transform(action,rdata);
 					}
@@ -579,7 +591,8 @@ var event;
                 clearForm: true,
                 success:function(rdata,status){
                     if (rdata.response==false) {//error somewhere
-                        alert(rdata.message);
+                        if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+                        else alert(rdata.message.code);
                     }else {
                         window.$.update(action,rdata);
                     }
@@ -625,7 +638,8 @@ var event;
                 dataType: "json",
                 success: function(rdata,status){
                     if (rdata.response==false) {
-                        alert(rdata.message);
+                        if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+                        else alert(rdata.message.code);
                     }else{
                         window.$.update(op,rdata);
                     }

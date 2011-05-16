@@ -265,7 +265,7 @@ class WorkController extends Tdxio_Controller_Abstract
         $this->view->form = $form;
         Tdxio_Log::info(json_encode($form),'tent');
         $this->view->response = true;
-        $this->view->message = __("OK");
+        $this->view->message = array('code' => 0,'text'=>__("OK"));
     }
     
         
@@ -297,11 +297,12 @@ class WorkController extends Tdxio_Controller_Abstract
                     $histModel->addHistory($id,1);  
                     $this->view->response=true;
                     $this->view->addedText = $values['extendtext'];
-                    $this->view->message = __("OK");
+                    $this->view->message = array('code'=>0,'text'=> __("OK"));
+
                 }else{
                     $this->view->response = false;
                     $this->view->addedText = '';    
-                    $this->view->message = __("DB not modified");
+                    $this->view->message = array('code' => 1,'text'=>__("DB not modified"));
                 }
             }
         }
@@ -405,11 +406,12 @@ class WorkController extends Tdxio_Controller_Abstract
 			$histModel->addHistory($id,0);  
 			$this->view->response=true;
 			$this->view->newText = !is_null($author)?$data['author']:$data['title'];
-			$this->view->message = __("OK");
+			$this->view->message = array('code' => 0, 'text' => __("OK"));
+
 		}else{
 			$this->view->response = false;
 			$this->view->newText = null;    
-			$this->view->message = __("DB not modified");
+			$this->view->message = array('code' => 1,'text'=>__("DB not modified"));
 		}
 	}
 

@@ -113,7 +113,8 @@ var state;
                 clearForm: false,
                 success:function(rdata,status){
                     if (rdata.response==false) {//error somewhere
-                        alert(rdata.message);
+						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+                        else alert(rdata.message.code);
                     }else {
 						$("#translation .block.show.editable#"+blockId).text(this.value);
                     }

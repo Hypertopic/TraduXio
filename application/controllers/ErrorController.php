@@ -53,7 +53,10 @@ class ErrorController extends Tdxio_Controller_Abstract
         $request = $this->getRequest();
         $isXml = $request->isXmlHttpRequest();
         Tdxio_Log::info($isXml,'isXml');        
-        $this->view->message = ($this->view->isMember)?__("You don't have the right to perform this action."):__("The login is required");
+        if($this->view->isMember)
+			$this->view->message = array('code'=>3,'text'=>__("You don't have the right to perform this action."));
+		else
+			$this->view->message = array('code'=>2,'text'=>$this->view->makeUrl('/login/'));
     }
     
     

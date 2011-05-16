@@ -35,6 +35,8 @@ class LoginController extends Tdxio_Controller_Abstract
         Tdxio_Log::info('set URI','indexAction');
         $form = $this->getForm();
         $request = $this->getRequest();
+        $after = $request->getParam('referer');
+        Tdxio_Log::info($after,'after');
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $values=$form->getValues();
@@ -60,6 +62,7 @@ class LoginController extends Tdxio_Controller_Abstract
                         return;
                     }
 */
+					Tdxio_Log::info($values['redirect'],'ridirigi');
                     // We're authenticated! Redirect to the original page
                     $this->_redirect($values['redirect']);
 
@@ -75,9 +78,13 @@ class LoginController extends Tdxio_Controller_Abstract
             Tdxio_Log::info($request,'REQUESTURIb');
             Tdxio_Log::info($request->getParam('controller'),'controller');
             Tdxio_Log::info($request->getParam('action'),'action');
-            if(!(($request->getParam('controller')=='login')&&($request->getParam('action')=='index'))){
+            if($after!=null && $after!='')
+					$form->getElement('redirect')->setValue($after);
+            elseif(!(($request->getParam('controller')=='login')&&($request->getParam('action')=='index'))){
                 $form->getElement('redirect')->setValue($requestUri);
+				
             }   
+            Tdxio_Log::info($form->getElement('redirect'),'valzer');
         }
         Tdxio_Log::info($_SERVER,'server');
                 

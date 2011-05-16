@@ -37,7 +37,10 @@ if (typeof console == "undefined") console={log:function(){}};
                             tdxio.tag.print_tags(tag,genre,genreId,rdata.newID,parentId);
                             $("div#"+parentId+" #tagform").resetForm();
                         }
-                        else{alert(rdata.message);}
+                        else{
+							if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+							else alert(rdata.message.code);
+						}
                     },
                     error:function() {alert("error storing the tag");},
                     complete:function() {}
@@ -60,7 +63,9 @@ if (typeof console == "undefined") console={log:function(){}};
                 url:encodeURI(url),
                 dataType: "json",
                 success: function(rdata){
-                    if(rdata.last){
+                    if(rdata.response==false){
+						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+					}else if(rdata.last){
                         $("#"+id).parent('span').parent('span').parent('div').remove();
                     }
                     else{
@@ -85,7 +90,8 @@ if (typeof console == "undefined") console={log:function(){}};
 			data:{'id':textId},
 			success: function(rdata,status){
 				if (rdata.response==false) {
-					alert(rdata.message);
+					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+					else alert(rdata.message.code);
 				}else{
 					$("div#"+parentId+" .add-tag").replaceWith(rdata.tagform);
 				}

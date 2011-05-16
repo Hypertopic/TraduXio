@@ -27,7 +27,7 @@ class TagController extends Tdxio_Controller_Abstract
 			$this->view->tagform=$renderView->render('render.phtml');
         }
         $this->view->response = true;
-        $this->view->message = __("OK");
+        $this->view->message = array('code'=>0,'text'=> __("OK"));
 	}
     
     
@@ -94,10 +94,11 @@ class TagController extends Tdxio_Controller_Abstract
         
         if(!empty($tags)){
             $tags = $model->normalizeTags($tags[$id]);
-            $this->view->message = __("OK");
+            $this->view->message = array('code' => 0,'text'=>__("OK"));
+
         }else{
             $tags = array();
-			$this->view->message = __("No tags inserted");
+            $this->view->message=array('code'=> 1,'text'=>__("No tags inserted"));
         }        
 		
 		$renderView = new Zend_View();
@@ -129,9 +130,9 @@ class TagController extends Tdxio_Controller_Abstract
         if($rowsAffected>0){
             $histModel = new Model_History();
             $histModel->addHistory($taggableId,4,array('tag'=>$tag['comment'],'genre'=>$genre));  
-            $this->view->message = __("OK"); 
+			$this->view->message = array('code'=>0,'text'=>__("OK"));
         }else{
-            $this->view->message = __("No tag removed"); 
+			$this->view->message = array('code'=>1,'text'=>__("No tag removed")); 
         }
     }
     
