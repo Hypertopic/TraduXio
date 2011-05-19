@@ -1,0 +1,2775 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Traduxio\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-11 10:38+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Diana Zambon <dianazambon@hotmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_\n"
+"X-Poedit-Basepath: /var/www/new/traduxio/application/\n"
+"X-Poedit-SearchPath-0: controllers\n"
+"X-Poedit-SearchPath-1: forms\n"
+"X-Poedit-SearchPath-2: models\n"
+"X-Poedit-SearchPath-3: layouts\n"
+"X-Poedit-SearchPath-4: views/scripts/work\n"
+"X-Poedit-SearchPath-5: views/scripts/translation\n"
+"X-Poedit-SearchPath-6: views/scripts/login\n"
+"X-Poedit-SearchPath-7: views/scripts/error\n"
+"X-Poedit-SearchPath-8: views/scripts/index\n"
+
+#: controllers/WorkController.php:56
+msgid "Anonymous"
+msgstr "Anonym"
+
+#: controllers/WorkController.php:109
+#: controllers/WorkController.php:145
+#: controllers/WorkController.php:181
+#, php-format
+msgid "Work %1$d does not exist or you don't have the rights to see it."
+msgstr "Werk %1$d nicht vorhanden oder Sie haben keine Zugangsberechtigung."
+
+#: controllers/WorkController.php:218
+#: controllers/WorkController.php:258
+#: controllers/WorkController.php:545
+#: controllers/TranslationController.php:98
+#: controllers/TranslationController.php:123
+#, php-format
+msgid "Work %1$d does not exist."
+msgstr "Werk %1$d nicht vorhanden."
+
+#: controllers/WorkController.php:262
+msgid "Cannot extend a translation. Edit it instead."
+msgstr "Keine Übersetzung vorhanden. Eigenen Übersetzungsvorschlag unterbreiten."
+
+#: controllers/WorkController.php:293
+#, php-format
+msgid "Couldn't find work %1$d"
+msgstr "Werk %1$d nicht gefunden"
+
+#: controllers/WorkController.php:348
+#: forms/RemovePrivilege.php:78
+msgid "Remove Privilege"
+msgstr "Nutzeroption entfernen"
+
+#: controllers/WorkController.php:369
+#: forms/AddPrivilege.php:68
+msgid "Add Privilege"
+msgstr "Option hinzufügen"
+
+#: controllers/WorkController.php:376
+msgid "The privilege was not added because it already exists"
+msgstr "Option wurde nicht hinzugefügt, da sie bereits existiert"
+
+#: controllers/WorkController.php:380
+msgid "Switch to Standard Privileges"
+msgstr "Zu Standardoptionen wechseln"
+
+#: controllers/WorkController.php:391
+#: forms/TranslationEdit.php:85
+msgid "Save"
+msgstr "Speichern"
+
+#: controllers/WorkController.php:400
+msgid "Switch to Custom Privileges"
+msgstr "Zu persönlichen Nutzeroptionen wechseln"
+
+#: controllers/WorkController.php:456
+#, php-format
+msgid "%1$s, text modified by %2$s"
+msgstr "%1$s, Text geändert von %2$s"
+
+#: controllers/WorkController.php:457
+#, php-format
+msgid "%1$s, text extended by %2$s"
+msgstr "%1$s, Text hinzugefügt von %2$s"
+
+#: controllers/WorkController.php:458
+#, php-format
+msgid "%1$s, translation of %2$s, modified by %3$s"
+msgstr "%1$s, Übersetzung %2$s, geändert von %3$s"
+
+#: controllers/WorkController.php:459
+#, php-format
+msgid "New tag [%2$s:%1$s] for the text %3$s added by %4$s"
+msgstr "Neuer Tag [%2$s:%1$s] für den Text %3$s hinzugefügt von %4$s"
+
+#: controllers/WorkController.php:460
+#, php-format
+msgid "Removed tag [%2$s:%1$s] from the text %3$s by %4$s"
+msgstr "Tag [%2$s:%1$s] für den Text %3$s von %4$s gelöscht"
+
+#: controllers/WorkController.php:461
+#, php-format
+msgid "%1$s, new text added by %2$s"
+msgstr "%1$s, neuer Text hinzugefügt von %2$s"
+
+#: controllers/WorkController.php:462
+#, php-format
+msgid "%1$s, new translation of %2$s added by %3$s"
+msgstr "%1$s, neue Übersetzung von %2$s hinzugefügt von %3$s"
+
+#: controllers/TagController.php:96
+#, php-format
+msgid "Taggable object %1$d does not exist."
+msgstr "Zielobjekt %1$d nicht vorhanden."
+
+#: controllers/TranslationController.php:24
+#: controllers/TranslationController.php:92
+#: controllers/TranslationController.php:118
+#: controllers/TranslationController.php:319
+#, php-format
+msgid "Translation %1$d does not exist."
+msgstr "Übersetzung %1$d nicht vorhanden."
+
+#: controllers/TranslationController.php:102
+#, php-format
+msgid "Can not cut here (%1$d)"
+msgstr "Ausschneiden nicht möglich für (%1$d)"
+
+#: controllers/TranslationController.php:127
+#, php-format
+msgid "Can not merge here (%1$d)"
+msgstr "Zusammenfügen nicht möglich für (%1$d)"
+
+#: controllers/TranslationController.php:164
+msgid "Hide blocks"
+msgstr "Blocks ausblenden"
+
+#: controllers/TranslationController.php:164
+msgid "Show blocks"
+msgstr "Blocks einblenden"
+
+#: controllers/ErrorController.php:32
+msgid "Page not found"
+msgstr "Seite nicht gefunden"
+
+#: controllers/ErrorController.php:38
+msgid "Application error"
+msgstr "Anwendungsfehler"
+
+#: forms/Register.php:53
+msgid "Name"
+msgstr "Vorname"
+
+#: forms/Register.php:67
+msgid "Surname"
+msgstr "Nachname"
+
+#: forms/Register.php:81
+msgid "Email address"
+msgstr "E-Mail"
+
+#: forms/Register.php:93
+msgid "Your interest in TraduXio"
+msgstr "Ihr Interesse an TraduXio"
+
+#: forms/Register.php:103
+msgid "Anti-spam system"
+msgstr "Anti-spam Software"
+
+#: forms/Register.php:113
+msgid "Send"
+msgstr "Senden"
+
+#: forms/TextDeposit.php:44
+#: forms/TranslationEdit.php:61
+msgid "Title"
+msgstr "Titel"
+
+#: forms/TextDeposit.php:54
+#: forms/TranslationEdit.php:51
+msgid "Author"
+msgstr "Autor"
+
+#: forms/TextDeposit.php:68
+msgid "Text content"
+msgstr "Textinhalt"
+
+#: forms/TextDeposit.php:79
+msgid "Source language"
+msgstr "Ausgangssprache"
+
+#: forms/TextDeposit.php:86
+msgid "Deposit"
+msgstr "Ablegen"
+
+#: forms/RemovePrivilege.php:82
+msgid "There are no existing privileges for this text."
+msgstr "Für diesen Text wurden keine Optionen erstellt."
+
+#: forms/AddPrivilege.php:51
+msgid "User"
+msgstr "Nutzer"
+
+#: forms/AddPrivilege.php:59
+msgid "Privilege"
+msgstr "Option"
+
+#: forms/AddPrivilege.php:86
+msgid "All users"
+msgstr "Alle Nutzer"
+
+#: forms/AddPrivilege.php:87
+msgid "All members"
+msgstr "Alle Mitglieder"
+
+#: forms/AddPrivilege.php:104
+msgid "Privilege not added: you can't grant creation/edition privileges to unregistered users."
+msgstr "Option kann nicht hinzugefügt werden: Optionen zum Erstellen/Ändern für nicht registrierte Nutzer werden nicht autorisiert."
+
+#: forms/TranslationEdit.php:88
+msgid "Save and quit"
+msgstr "Speichern und beenden"
+
+#: forms/TranslationEdit.php:91
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: forms/Tag.php:49
+msgid "Category"
+msgstr "Kategorie"
+
+#: forms/Tag.php:60
+msgid "TAG"
+msgstr "TAG"
+
+#: forms/Login.php:24
+msgid "Your username"
+msgstr "Ihr Benutzername"
+
+#: forms/Login.php:40
+msgid "Password"
+msgstr "Passwort"
+
+#: forms/Login.php:61
+msgid "Login"
+msgstr "Login"
+
+#: forms/Right.php:20
+msgid "at the page"
+msgstr "auf der Seite"
+
+#: forms/Right.php:27
+msgid "Bad or missing reference (author, editor, license)"
+msgstr "Falsche oder fehlerhafte Angabe (Autor, Verleger, Lizenz)"
+
+#: forms/Right.php:39
+msgid "Publication of protected work non-comparable to a short quotation"
+msgstr "Veröffentlichung eines geschützten Werkes auch für kurze Zitate nicht erlaubt"
+
+#: forms/Right.php:60
+msgid "Details (optional)"
+msgstr "Detailangaben (Optional)"
+
+#: forms/Right.php:84
+msgid "Email address (optional)"
+msgstr "Email (Optional)"
+
+#: forms/Right.php:102
+msgid "Report"
+msgstr "Bericht"
+
+#: forms/TextExtend.php:41
+msgid "Text to add"
+msgstr "Hinzuzufügender Text"
+
+#: forms/WorkEdit.php:67
+msgid "Language"
+msgstr "Sprache"
+
+#: forms/StdPrivilege.php:49
+msgid "Text visibility"
+msgstr "Textsichtbarkeit"
+
+#: forms/StdPrivilege.php:51
+msgid "Private"
+msgstr "Privat"
+
+#: forms/StdPrivilege.php:52
+msgid "Public"
+msgstr "Freigegeben"
+
+#: forms/Feedback.php:44
+msgid "Subject"
+msgstr "Betreff"
+
+#: forms/Feedback.php:51
+msgid "Your email address"
+msgstr "Ihre E-Mail"
+
+#: forms/Feedback.php:69
+msgid "Your message"
+msgstr "Ihre Nachricht"
+
+#: forms/Feedback.php:78
+msgid "Please verify you're a human"
+msgstr "Bitte Code eingeben (real existierende Person)"
+
+#: models/Work.php:385
+msgid "All users are allowed to do everything for this text"
+msgstr "Alle Nutzer besitzen alle Zugriffsrechte für diesen Text"
+
+#: models/Work.php:387
+#, php-format
+msgid "All users are allowed to %1$s this text"
+msgstr "Berechtigung für alle Nutzer %1$s für diesen Text"
+
+#: models/Work.php:390
+msgid "All members are allowed to do everything for this text"
+msgstr "Alle Nutzer besitzen alle Zugriffsrechte für diesen Text"
+
+#: models/Work.php:392
+#, php-format
+msgid "All members are allowed to %1$s this text"
+msgstr "Berechtigung für alle Nutzer %1$s für diesen Text"
+
+#: models/Work.php:395
+#, php-format
+msgid "User %1$s is allowed to do everything for this text"
+msgstr "Nutzer %1$s besitzt alle Zugriffsrechte für diesen Text"
+
+#: models/Work.php:397
+#, php-format
+msgid "User %1$s is allowed to %2$s this text"
+msgstr "Nutzer %1$s berechtigt %2$s für diesen Text"
+
+#: models/Taggable.php:86
+msgid "Not enough parameters to delete a tag"
+msgstr "Nicht genug Parameter zum Löschen eines Tags"
+
+#: models/Taggable.php:95
+msgid "No taggable-id specified"
+msgstr "Keine Tag-ID angegeben"
+
+#: models/History.php:21
+msgid "work metadata modified"
+msgstr "Textangaben geändert"
+
+#: models/History.php:22
+msgid "text extended"
+msgstr "Neuer Text hinzugefügt"
+
+#: models/History.php:23
+msgid "translation modified"
+msgstr "Übersetzung geändert"
+
+#: models/History.php:24
+msgid "tag added"
+msgstr "Tag hinzugefügt"
+
+#: models/History.php:25
+msgid "tag removed"
+msgstr "Tag entfernt"
+
+#: models/History.php:26
+msgid "text created"
+msgstr "Text erstellt"
+
+#: models/Privilege.php:21
+msgid "Read text"
+msgstr "Text lesen"
+
+#: models/Privilege.php:21
+msgid "Edit text"
+msgstr "Text ändern"
+
+#: models/Privilege.php:21
+msgid "Create translation"
+msgstr "Übersetzung erstellen"
+
+#: models/Privilege.php:21
+msgid "Manage"
+msgstr "Verwalten"
+
+#: models/Privilege.php:21
+msgid "Tag text"
+msgstr "Tag für Text"
+
+#: views/helpers/ProfileLink.php:9
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: views/helpers/ProfileLink.php:9
+msgid "Logout"
+msgstr "Logout"
+
+#: ../languages/ripristino/prova_ripristino.php:2
+msgid "Compare, Interpret, Share"
+msgstr "Vergleichen, Deuten und Austauschen"
+
+#: ../languages/ripristino/prova_ripristino.php:3
+msgid "the environment for translators of cultural texts"
+msgstr "die Webseite für Übersetzer kultureller Texte"
+
+#: ../languages/ripristino/prova_ripristino.php:4
+msgid "create"
+msgstr "Erstellen"
+
+#: ../languages/ripristino/prova_ripristino.php:5
+#: ../languages/ripristino/prova_ripristino.php:16
+msgid "edit"
+msgstr "Ändern"
+
+#: ../languages/ripristino/prova_ripristino.php:6
+msgid "tag"
+msgstr "Tag angeben"
+
+#: ../languages/ripristino/prova_ripristino.php:7
+#: ../languages/ripristino/prova_ripristino.php:17
+msgid "translate"
+msgstr "Übersetzen"
+
+#: ../languages/ripristino/prova_ripristino.php:8
+msgid "delete"
+msgstr "Löschen"
+
+#: ../languages/ripristino/prova_ripristino.php:9
+msgid "release"
+msgstr "Veröffentlichen"
+
+#: ../languages/ripristino/prova_ripristino.php:10
+msgid "book"
+msgstr "Buch"
+
+#: ../languages/ripristino/prova_ripristino.php:11
+msgid "genre"
+msgstr "Genre"
+
+#: ../languages/ripristino/prova_ripristino.php:12
+msgid "period"
+msgstr "Epoche"
+
+#: ../languages/ripristino/prova_ripristino.php:13
+msgid "comment"
+msgstr "Kommentar"
+
+#: ../languages/ripristino/prova_ripristino.php:14
+msgid "copyright"
+msgstr "Copyright"
+
+#: ../languages/ripristino/prova_ripristino.php:15
+msgid "read"
+msgstr "Lesen"
+
+#: ../languages/ripristino/prova_ripristino.php:18
+msgid "manage"
+msgstr "Verwalten"
+
+#: ../languages/ripristino/prova_ripristino.php:19
+#, php-format
+msgid "%1$d seconds"
+msgstr "%1$d Sekunden"
+
+#: ../languages/ripristino/prova_ripristino.php:20
+#, php-format
+msgid "%1$d minutes"
+msgstr "%1$d Minuten"
+
+#: ../languages/ripristino/prova_ripristino.php:21
+#, php-format
+msgid "%1$d hours"
+msgstr "%1$d Stunden"
+
+#: ../languages/ripristino/prova_ripristino.php:22
+#, php-format
+msgid "%1$d days"
+msgstr "%1$d Tage"
+
+#: ../languages/ripristino/prova_ripristino.php:23
+msgid "second"
+msgstr "Sekunde"
+
+#: ../languages/ripristino/prova_ripristino.php:24
+msgid "minute"
+msgstr "Minute"
+
+#: ../languages/ripristino/prova_ripristino.php:25
+msgid "hour"
+msgstr "Stunde"
+
+#: ../languages/ripristino/prova_ripristino.php:26
+msgid "day"
+msgstr "Tag"
+
+#: ../languages/ripristino/prova_ripristino.php:27
+msgid "en"
+msgstr "Englisch"
+
+#: ../languages/ripristino/prova_ripristino.php:28
+msgid "fr"
+msgstr "Französisch"
+
+#: ../languages/ripristino/prova_ripristino.php:29
+msgid "it"
+msgstr "Italienisch"
+
+#: ../languages/ripristino/prova_ripristino.php:30
+msgid "fas"
+msgstr "Persisch"
+
+#: ../languages/ripristino/prova_ripristino.php:31
+msgid "heb"
+msgstr "Hebräisch"
+
+#: ../languages/ripristino/prova_ripristino.php:32
+msgid "ara"
+msgstr "Arabisch"
+
+#: ../languages/ripristino/prova_ripristino.php:33
+msgid "aar"
+msgstr "Afar"
+
+#: ../languages/ripristino/prova_ripristino.php:34
+msgid "abk"
+msgstr "Abchasisch"
+
+#: ../languages/ripristino/prova_ripristino.php:35
+msgid "ace"
+msgstr "Aceh"
+
+#: ../languages/ripristino/prova_ripristino.php:36
+msgid "ach"
+msgstr "Acholi"
+
+#: ../languages/ripristino/prova_ripristino.php:37
+msgid "ada"
+msgstr "Dangme"
+
+#: ../languages/ripristino/prova_ripristino.php:38
+msgid "ady"
+msgstr "Adygeisch"
+
+#: ../languages/ripristino/prova_ripristino.php:39
+msgid "afh"
+msgstr "Afrihili"
+
+#: ../languages/ripristino/prova_ripristino.php:40
+msgid "afr"
+msgstr "Afrikaans"
+
+#: ../languages/ripristino/prova_ripristino.php:41
+msgid "ain"
+msgstr "Ainu (Japan)"
+
+#: ../languages/ripristino/prova_ripristino.php:42
+msgid "aka"
+msgstr "Akan"
+
+#: ../languages/ripristino/prova_ripristino.php:43
+msgid "akk"
+msgstr "Akkadisch"
+
+#: ../languages/ripristino/prova_ripristino.php:44
+msgid "ale"
+msgstr "Aleutisch"
+
+#: ../languages/ripristino/prova_ripristino.php:45
+msgid "alt"
+msgstr "Altaisprachen"
+
+#: ../languages/ripristino/prova_ripristino.php:46
+msgid "amh"
+msgstr "Amharisch"
+
+#: ../languages/ripristino/prova_ripristino.php:47
+msgid "ang"
+msgstr "Angelsächsisch (ca. 450-1100)"
+
+#: ../languages/ripristino/prova_ripristino.php:48
+msgid "anp"
+msgstr "Anga"
+
+#: ../languages/ripristino/prova_ripristino.php:49
+msgid "arc"
+msgstr "Reichsaramäisch (700-300 BCE)"
+
+#: ../languages/ripristino/prova_ripristino.php:50
+msgid "arg"
+msgstr "Aragonesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:51
+msgid "arn"
+msgstr "Mapudungun"
+
+#: ../languages/ripristino/prova_ripristino.php:52
+msgid "arp"
+msgstr "Arapaho"
+
+#: ../languages/ripristino/prova_ripristino.php:53
+msgid "arw"
+msgstr "Arawak"
+
+#: ../languages/ripristino/prova_ripristino.php:54
+msgid "asm"
+msgstr "Assamesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:55
+msgid "ast"
+msgstr "Asturisch"
+
+#: ../languages/ripristino/prova_ripristino.php:56
+msgid "ava"
+msgstr "Awarisch"
+
+#: ../languages/ripristino/prova_ripristino.php:57
+msgid "ave"
+msgstr "Avestisch"
+
+#: ../languages/ripristino/prova_ripristino.php:58
+msgid "awa"
+msgstr "Awadhi"
+
+#: ../languages/ripristino/prova_ripristino.php:59
+msgid "aym"
+msgstr "Aymara"
+
+#: ../languages/ripristino/prova_ripristino.php:60
+msgid "aze"
+msgstr "Aserbaidschanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:61
+msgid "bak"
+msgstr "Baschkirisch"
+
+#: ../languages/ripristino/prova_ripristino.php:62
+msgid "bal"
+msgstr "Belutschisch"
+
+#: ../languages/ripristino/prova_ripristino.php:63
+msgid "bam"
+msgstr "Bambara"
+
+#: ../languages/ripristino/prova_ripristino.php:64
+msgid "ban"
+msgstr "Balinesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:65
+msgid "bas"
+msgstr "Bassa (Kamerun)"
+
+#: ../languages/ripristino/prova_ripristino.php:66
+msgid "bej"
+msgstr "Bedscha"
+
+#: ../languages/ripristino/prova_ripristino.php:67
+msgid "bel"
+msgstr "Weißrussisch"
+
+#: ../languages/ripristino/prova_ripristino.php:68
+msgid "bem"
+msgstr "Bemba (Sambia)"
+
+#: ../languages/ripristino/prova_ripristino.php:69
+msgid "ben"
+msgstr "Bengalisch"
+
+#: ../languages/ripristino/prova_ripristino.php:70
+msgid "bho"
+msgstr "Bhojpuri"
+
+#: ../languages/ripristino/prova_ripristino.php:71
+msgid "bik"
+msgstr "Bikolano"
+
+#: ../languages/ripristino/prova_ripristino.php:72
+msgid "bin"
+msgstr "Edo"
+
+#: ../languages/ripristino/prova_ripristino.php:73
+msgid "bis"
+msgstr "Bislama"
+
+#: ../languages/ripristino/prova_ripristino.php:74
+msgid "bla"
+msgstr "Siksika"
+
+#: ../languages/ripristino/prova_ripristino.php:75
+msgid "bod"
+msgstr "Tibetanische Sprachen"
+
+#: ../languages/ripristino/prova_ripristino.php:76
+msgid "bos"
+msgstr "Bosnisch"
+
+#: ../languages/ripristino/prova_ripristino.php:77
+msgid "bra"
+msgstr "Braj-Bhakha"
+
+#: ../languages/ripristino/prova_ripristino.php:78
+msgid "bre"
+msgstr "Bretonisch"
+
+#: ../languages/ripristino/prova_ripristino.php:79
+msgid "bua"
+msgstr "Burjatisch"
+
+#: ../languages/ripristino/prova_ripristino.php:80
+msgid "bug"
+msgstr "Buginesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:81
+msgid "bul"
+msgstr "Bulgarisch"
+
+#: ../languages/ripristino/prova_ripristino.php:82
+msgid "byn"
+msgstr "Blin"
+
+#: ../languages/ripristino/prova_ripristino.php:83
+msgid "cad"
+msgstr "Caddo-Sprachen"
+
+#: ../languages/ripristino/prova_ripristino.php:84
+msgid "car"
+msgstr "Carib-Sprachen"
+
+#: ../languages/ripristino/prova_ripristino.php:85
+msgid "cat"
+msgstr "Katalanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:86
+msgid "ceb"
+msgstr "Cebuano"
+
+#: ../languages/ripristino/prova_ripristino.php:87
+msgid "ces"
+msgstr "Tschechisch"
+
+#: ../languages/ripristino/prova_ripristino.php:88
+msgid "cha"
+msgstr "Chamorro"
+
+#: ../languages/ripristino/prova_ripristino.php:89
+msgid "chb"
+msgstr "Chibcha"
+
+#: ../languages/ripristino/prova_ripristino.php:90
+msgid "che"
+msgstr "Tschetschenisch"
+
+#: ../languages/ripristino/prova_ripristino.php:91
+msgid "chg"
+msgstr "Tschagataisch"
+
+#: ../languages/ripristino/prova_ripristino.php:92
+msgid "chk"
+msgstr "Chuukesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:93
+msgid "chm"
+msgstr "Mari (Russland)"
+
+#: ../languages/ripristino/prova_ripristino.php:94
+msgid "chn"
+msgstr "Chinook Wawa"
+
+#: ../languages/ripristino/prova_ripristino.php:95
+msgid "cho"
+msgstr "Choctaw"
+
+#: ../languages/ripristino/prova_ripristino.php:96
+msgid "chp"
+msgstr "Chipewyan"
+
+#: ../languages/ripristino/prova_ripristino.php:97
+msgid "chr"
+msgstr "Cherokee"
+
+#: ../languages/ripristino/prova_ripristino.php:98
+msgid "chu"
+msgstr "Kirchenslawisch"
+
+#: ../languages/ripristino/prova_ripristino.php:99
+msgid "chv"
+msgstr "Tschuwaschisch"
+
+#: ../languages/ripristino/prova_ripristino.php:100
+msgid "chy"
+msgstr "Cheyenne"
+
+#: ../languages/ripristino/prova_ripristino.php:101
+msgid "cop"
+msgstr "Koptisch"
+
+#: ../languages/ripristino/prova_ripristino.php:102
+msgid "cor"
+msgstr "Kornisch"
+
+#: ../languages/ripristino/prova_ripristino.php:103
+msgid "cos"
+msgstr "Korsisch"
+
+#: ../languages/ripristino/prova_ripristino.php:104
+msgid "cre"
+msgstr "Cree"
+
+#: ../languages/ripristino/prova_ripristino.php:105
+msgid "crh"
+msgstr "Krimtatarisch"
+
+#: ../languages/ripristino/prova_ripristino.php:106
+msgid "csb"
+msgstr "Kaschubisch"
+
+#: ../languages/ripristino/prova_ripristino.php:107
+msgid "cym"
+msgstr "Walisisch"
+
+#: ../languages/ripristino/prova_ripristino.php:108
+msgid "dak"
+msgstr "Dakota"
+
+#: ../languages/ripristino/prova_ripristino.php:109
+msgid "dan"
+msgstr "Dänisch"
+
+#: ../languages/ripristino/prova_ripristino.php:110
+msgid "dar"
+msgstr "Darginisch"
+
+#: ../languages/ripristino/prova_ripristino.php:111
+msgid "del"
+msgstr "Delaware"
+
+#: ../languages/ripristino/prova_ripristino.php:112
+msgid "den"
+msgstr "Slave (Athapascan)"
+
+#: ../languages/ripristino/prova_ripristino.php:113
+msgid "deu"
+msgstr "Deutsch"
+
+#: ../languages/ripristino/prova_ripristino.php:114
+msgid "dgr"
+msgstr "Dogrib"
+
+#: ../languages/ripristino/prova_ripristino.php:115
+msgid "din"
+msgstr "Dinka"
+
+#: ../languages/ripristino/prova_ripristino.php:116
+msgid "div"
+msgstr "Dhivehi"
+
+#: ../languages/ripristino/prova_ripristino.php:117
+msgid "doi"
+msgstr "Dogri (Makrosprache)"
+
+#: ../languages/ripristino/prova_ripristino.php:118
+msgid "dsb"
+msgstr "Niedersorbisch"
+
+#: ../languages/ripristino/prova_ripristino.php:119
+msgid "dua"
+msgstr "Douala"
+
+#: ../languages/ripristino/prova_ripristino.php:120
+msgid "dum"
+msgstr "Mittelniederländisch (ca. 1050-1350)"
+
+#: ../languages/ripristino/prova_ripristino.php:121
+msgid "dyu"
+msgstr "Dioula"
+
+#: ../languages/ripristino/prova_ripristino.php:122
+msgid "dzo"
+msgstr "Dzongkha"
+
+#: ../languages/ripristino/prova_ripristino.php:123
+msgid "efi"
+msgstr "Efik"
+
+#: ../languages/ripristino/prova_ripristino.php:124
+msgid "egy"
+msgstr "Altägyptisch"
+
+#: ../languages/ripristino/prova_ripristino.php:125
+msgid "eka"
+msgstr "Ekajuk"
+
+#: ../languages/ripristino/prova_ripristino.php:126
+msgid "ell"
+msgstr "Neugriechisch (1453-)"
+
+#: ../languages/ripristino/prova_ripristino.php:127
+msgid "elx"
+msgstr "Elamisch"
+
+#: ../languages/ripristino/prova_ripristino.php:128
+msgid "eng"
+msgstr "Englisch"
+
+#: ../languages/ripristino/prova_ripristino.php:129
+msgid "enm"
+msgstr "Mittelenglisch (1100-1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:130
+msgid "epo"
+msgstr "Esperanto"
+
+#: ../languages/ripristino/prova_ripristino.php:131
+msgid "est"
+msgstr "Estnisch"
+
+#: ../languages/ripristino/prova_ripristino.php:132
+msgid "eus"
+msgstr "Baskisch"
+
+#: ../languages/ripristino/prova_ripristino.php:133
+msgid "ewe"
+msgstr "Ewe"
+
+#: ../languages/ripristino/prova_ripristino.php:134
+msgid "ewo"
+msgstr "Ewondo"
+
+#: ../languages/ripristino/prova_ripristino.php:135
+msgid "fan"
+msgstr "Fang (Äquatorialguinea)"
+
+#: ../languages/ripristino/prova_ripristino.php:136
+msgid "fao"
+msgstr "Färöisch"
+
+#: ../languages/ripristino/prova_ripristino.php:137
+msgid "fat"
+msgstr "Fante"
+
+#: ../languages/ripristino/prova_ripristino.php:138
+msgid "fij"
+msgstr "Fidschi"
+
+#: ../languages/ripristino/prova_ripristino.php:139
+msgid "fil"
+msgstr "Filipino"
+
+#: ../languages/ripristino/prova_ripristino.php:140
+msgid "fin"
+msgstr "Finnisch"
+
+#: ../languages/ripristino/prova_ripristino.php:141
+msgid "fon"
+msgstr "Fon"
+
+#: ../languages/ripristino/prova_ripristino.php:142
+msgid "fra"
+msgstr "Französisch"
+
+#: ../languages/ripristino/prova_ripristino.php:143
+msgid "frm"
+msgstr "Mittelfranzösisch (ca. 1400-1600)"
+
+#: ../languages/ripristino/prova_ripristino.php:144
+msgid "fro"
+msgstr "Altfranzösisch (842-ca. 1400)"
+
+#: ../languages/ripristino/prova_ripristino.php:145
+msgid "frr"
+msgstr "Nordfriesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:146
+msgid "frs"
+msgstr "Ostfriesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:147
+msgid "fry"
+msgstr "Westfriesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:148
+msgid "ful"
+msgstr "Fulfulde"
+
+#: ../languages/ripristino/prova_ripristino.php:149
+msgid "fur"
+msgstr "Furlanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:150
+msgid "gaa"
+msgstr "Ga"
+
+#: ../languages/ripristino/prova_ripristino.php:151
+msgid "gay"
+msgstr "Gayo"
+
+#: ../languages/ripristino/prova_ripristino.php:152
+msgid "gba"
+msgstr "Gbaya (Zentralafrikanische Republik)"
+
+#: ../languages/ripristino/prova_ripristino.php:153
+msgid "gez"
+msgstr "Ge'ez"
+
+#: ../languages/ripristino/prova_ripristino.php:154
+msgid "gil"
+msgstr "Kiribatisch"
+
+#: ../languages/ripristino/prova_ripristino.php:155
+msgid "gla"
+msgstr "Schottisch-Gälisch"
+
+#: ../languages/ripristino/prova_ripristino.php:156
+msgid "gle"
+msgstr "Irisch"
+
+#: ../languages/ripristino/prova_ripristino.php:157
+msgid "glg"
+msgstr "Galicisch"
+
+#: ../languages/ripristino/prova_ripristino.php:158
+msgid "glv"
+msgstr "Manx"
+
+#: ../languages/ripristino/prova_ripristino.php:159
+msgid "gmh"
+msgstr "Mittelhochdeutsch (ca. 1050-1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:160
+msgid "goh"
+msgstr "Althochdeutsch (ca. 750-1050)"
+
+#: ../languages/ripristino/prova_ripristino.php:161
+msgid "gon"
+msgstr "Gondi"
+
+#: ../languages/ripristino/prova_ripristino.php:162
+msgid "gor"
+msgstr "Gorontalo"
+
+#: ../languages/ripristino/prova_ripristino.php:163
+msgid "got"
+msgstr "Gotisch"
+
+#: ../languages/ripristino/prova_ripristino.php:164
+msgid "grb"
+msgstr "Grebo"
+
+#: ../languages/ripristino/prova_ripristino.php:165
+msgid "grc"
+msgstr "Altgriechisch (to 1453)"
+
+#: ../languages/ripristino/prova_ripristino.php:166
+msgid "grn"
+msgstr "Guarani"
+
+#: ../languages/ripristino/prova_ripristino.php:167
+msgid "gsw"
+msgstr "Schweizerdeutsch"
+
+#: ../languages/ripristino/prova_ripristino.php:168
+msgid "guj"
+msgstr "Gujarati"
+
+#: ../languages/ripristino/prova_ripristino.php:169
+msgid "gwi"
+msgstr "Gwich'in"
+
+#: ../languages/ripristino/prova_ripristino.php:170
+msgid "hai"
+msgstr "Haida"
+
+#: ../languages/ripristino/prova_ripristino.php:171
+msgid "hat"
+msgstr "Haitianisch"
+
+#: ../languages/ripristino/prova_ripristino.php:172
+msgid "hau"
+msgstr "Hausa"
+
+#: ../languages/ripristino/prova_ripristino.php:173
+msgid "haw"
+msgstr "Hawaiisch"
+
+#: ../languages/ripristino/prova_ripristino.php:174
+msgid "her"
+msgstr "Herero"
+
+#: ../languages/ripristino/prova_ripristino.php:175
+msgid "hil"
+msgstr "Hiligaynon"
+
+#: ../languages/ripristino/prova_ripristino.php:176
+msgid "hin"
+msgstr "Hindi"
+
+#: ../languages/ripristino/prova_ripristino.php:177
+msgid "hit"
+msgstr "Hethitisch"
+
+#: ../languages/ripristino/prova_ripristino.php:178
+msgid "hmn"
+msgstr "Hmong"
+
+#: ../languages/ripristino/prova_ripristino.php:179
+msgid "hmo"
+msgstr "Hiri Motu"
+
+#: ../languages/ripristino/prova_ripristino.php:180
+msgid "hrv"
+msgstr "Kroatisch"
+
+#: ../languages/ripristino/prova_ripristino.php:181
+msgid "hsb"
+msgstr "Obersorbisch"
+
+#: ../languages/ripristino/prova_ripristino.php:182
+msgid "hun"
+msgstr "Ungarisch"
+
+#: ../languages/ripristino/prova_ripristino.php:183
+msgid "hup"
+msgstr "Hoopa"
+
+#: ../languages/ripristino/prova_ripristino.php:184
+msgid "hye"
+msgstr "Armenisch"
+
+#: ../languages/ripristino/prova_ripristino.php:185
+msgid "iba"
+msgstr "Iban"
+
+#: ../languages/ripristino/prova_ripristino.php:186
+msgid "ibo"
+msgstr "Igbo"
+
+#: ../languages/ripristino/prova_ripristino.php:187
+msgid "ido"
+msgstr "Ido"
+
+#: ../languages/ripristino/prova_ripristino.php:188
+msgid "iii"
+msgstr "Sichuan Yi"
+
+#: ../languages/ripristino/prova_ripristino.php:189
+msgid "iku"
+msgstr "Inuktitut"
+
+#: ../languages/ripristino/prova_ripristino.php:190
+msgid "ile"
+msgstr "Interlingue"
+
+#: ../languages/ripristino/prova_ripristino.php:191
+msgid "ilo"
+msgstr "Ilokano"
+
+#: ../languages/ripristino/prova_ripristino.php:192
+msgid "ina"
+msgstr "Interlingua (International Auxiliary Language Association)"
+
+#: ../languages/ripristino/prova_ripristino.php:193
+msgid "ind"
+msgstr "Indonesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:194
+msgid "inh"
+msgstr "Inguschisch"
+
+#: ../languages/ripristino/prova_ripristino.php:195
+msgid "ipk"
+msgstr "Inupiaq"
+
+#: ../languages/ripristino/prova_ripristino.php:196
+msgid "isl"
+msgstr "Isländisch"
+
+#: ../languages/ripristino/prova_ripristino.php:197
+msgid "ita"
+msgstr "Italienisch"
+
+#: ../languages/ripristino/prova_ripristino.php:198
+msgid "jav"
+msgstr "Javanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:199
+msgid "jbo"
+msgstr "Lojban"
+
+#: ../languages/ripristino/prova_ripristino.php:200
+msgid "jpn"
+msgstr "Japanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:201
+msgid "jpr"
+msgstr "Judäo-Persisch"
+
+#: ../languages/ripristino/prova_ripristino.php:202
+msgid "jrb"
+msgstr "Judäo-Arabisch"
+
+#: ../languages/ripristino/prova_ripristino.php:203
+msgid "kaa"
+msgstr "Karakalpakisch"
+
+#: ../languages/ripristino/prova_ripristino.php:204
+msgid "kab"
+msgstr "Kabylisch"
+
+#: ../languages/ripristino/prova_ripristino.php:205
+msgid "kac"
+msgstr "Kachinisch"
+
+#: ../languages/ripristino/prova_ripristino.php:206
+msgid "kal"
+msgstr "Kalaallisut"
+
+#: ../languages/ripristino/prova_ripristino.php:207
+msgid "kam"
+msgstr "Kikamba (Kenya)"
+
+#: ../languages/ripristino/prova_ripristino.php:208
+msgid "kan"
+msgstr "Kannada"
+
+#: ../languages/ripristino/prova_ripristino.php:209
+msgid "kas"
+msgstr "Kashmiri"
+
+#: ../languages/ripristino/prova_ripristino.php:210
+msgid "kat"
+msgstr "Georgisch"
+
+#: ../languages/ripristino/prova_ripristino.php:211
+msgid "kau"
+msgstr "Kanuri"
+
+#: ../languages/ripristino/prova_ripristino.php:212
+msgid "kaw"
+msgstr "Kawi"
+
+#: ../languages/ripristino/prova_ripristino.php:213
+msgid "kaz"
+msgstr "Kasachisch"
+
+#: ../languages/ripristino/prova_ripristino.php:214
+msgid "kbd"
+msgstr "Kabardinisch"
+
+#: ../languages/ripristino/prova_ripristino.php:215
+msgid "kha"
+msgstr "Khasi"
+
+#: ../languages/ripristino/prova_ripristino.php:216
+msgid "khm"
+msgstr "Khmer"
+
+#: ../languages/ripristino/prova_ripristino.php:217
+msgid "kho"
+msgstr "Khotanesakisch"
+
+#: ../languages/ripristino/prova_ripristino.php:218
+msgid "kik"
+msgstr "Kikuyu"
+
+#: ../languages/ripristino/prova_ripristino.php:219
+msgid "kin"
+msgstr "Kinyarwanda"
+
+#: ../languages/ripristino/prova_ripristino.php:220
+msgid "kir"
+msgstr "Kirgisisch"
+
+#: ../languages/ripristino/prova_ripristino.php:221
+msgid "kmb"
+msgstr "Kimbundu"
+
+#: ../languages/ripristino/prova_ripristino.php:222
+msgid "kok"
+msgstr "Konkani (Makrosprache)"
+
+#: ../languages/ripristino/prova_ripristino.php:223
+msgid "kom"
+msgstr "Komi"
+
+#: ../languages/ripristino/prova_ripristino.php:224
+msgid "kon"
+msgstr "Kikongo"
+
+#: ../languages/ripristino/prova_ripristino.php:225
+msgid "kor"
+msgstr "Koreanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:226
+msgid "kos"
+msgstr "Kosraeanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:227
+msgid "kpe"
+msgstr "Kpelle"
+
+#: ../languages/ripristino/prova_ripristino.php:228
+msgid "krc"
+msgstr "Karatschai-Balkarisch"
+
+#: ../languages/ripristino/prova_ripristino.php:229
+msgid "krl"
+msgstr "Karelisch"
+
+#: ../languages/ripristino/prova_ripristino.php:230
+msgid "kru"
+msgstr "Kurukh"
+
+#: ../languages/ripristino/prova_ripristino.php:231
+msgid "kua"
+msgstr "Kwanjama"
+
+#: ../languages/ripristino/prova_ripristino.php:232
+msgid "kum"
+msgstr "Kumykisch"
+
+#: ../languages/ripristino/prova_ripristino.php:233
+msgid "kur"
+msgstr "Kurdisch"
+
+#: ../languages/ripristino/prova_ripristino.php:234
+msgid "kut"
+msgstr "Kutenai"
+
+#: ../languages/ripristino/prova_ripristino.php:235
+msgid "lad"
+msgstr "Ladino"
+
+#: ../languages/ripristino/prova_ripristino.php:236
+msgid "lah"
+msgstr "Lahnda"
+
+#: ../languages/ripristino/prova_ripristino.php:237
+msgid "lam"
+msgstr "Lamba"
+
+#: ../languages/ripristino/prova_ripristino.php:238
+msgid "lao"
+msgstr "Laotisch"
+
+#: ../languages/ripristino/prova_ripristino.php:239
+msgid "lat"
+msgstr "Latein"
+
+#: ../languages/ripristino/prova_ripristino.php:240
+msgid "lav"
+msgstr "Lettisch"
+
+#: ../languages/ripristino/prova_ripristino.php:241
+msgid "lez"
+msgstr "Lesgisch"
+
+#: ../languages/ripristino/prova_ripristino.php:242
+msgid "lim"
+msgstr "Limburgisch"
+
+#: ../languages/ripristino/prova_ripristino.php:243
+msgid "lin"
+msgstr "Lingála"
+
+#: ../languages/ripristino/prova_ripristino.php:244
+msgid "lit"
+msgstr "Litauisch"
+
+#: ../languages/ripristino/prova_ripristino.php:245
+msgid "lol"
+msgstr "Lomongo"
+
+#: ../languages/ripristino/prova_ripristino.php:246
+msgid "loz"
+msgstr "Lozi"
+
+#: ../languages/ripristino/prova_ripristino.php:247
+msgid "ltz"
+msgstr "Luxemburgisch"
+
+#: ../languages/ripristino/prova_ripristino.php:248
+msgid "lua"
+msgstr "Tschiluba"
+
+#: ../languages/ripristino/prova_ripristino.php:249
+msgid "lub"
+msgstr "Kiluba"
+
+#: ../languages/ripristino/prova_ripristino.php:250
+msgid "lug"
+msgstr "Luganda"
+
+#: ../languages/ripristino/prova_ripristino.php:251
+msgid "lui"
+msgstr "Luiseno"
+
+#: ../languages/ripristino/prova_ripristino.php:252
+msgid "lun"
+msgstr "Chilunda"
+
+#: ../languages/ripristino/prova_ripristino.php:253
+msgid "luo"
+msgstr "Luo (Kenya und Tansania)"
+
+#: ../languages/ripristino/prova_ripristino.php:254
+msgid "lus"
+msgstr "Lushai"
+
+#: ../languages/ripristino/prova_ripristino.php:255
+msgid "mad"
+msgstr "Madura"
+
+#: ../languages/ripristino/prova_ripristino.php:256
+msgid "mag"
+msgstr "Magahi"
+
+#: ../languages/ripristino/prova_ripristino.php:257
+msgid "mah"
+msgstr "Marshallesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:258
+msgid "mai"
+msgstr "Maithili"
+
+#: ../languages/ripristino/prova_ripristino.php:259
+msgid "mak"
+msgstr "Makassar"
+
+#: ../languages/ripristino/prova_ripristino.php:260
+msgid "mal"
+msgstr "Malayalam"
+
+#: ../languages/ripristino/prova_ripristino.php:261
+msgid "man"
+msgstr "Mandingo"
+
+#: ../languages/ripristino/prova_ripristino.php:262
+msgid "mar"
+msgstr "Marathi"
+
+#: ../languages/ripristino/prova_ripristino.php:263
+msgid "mas"
+msgstr "Masai"
+
+#: ../languages/ripristino/prova_ripristino.php:264
+msgid "mdf"
+msgstr "Mokschanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:265
+msgid "mdr"
+msgstr "Mandar"
+
+#: ../languages/ripristino/prova_ripristino.php:266
+msgid "men"
+msgstr "Mende (Sierra Leone)"
+
+#: ../languages/ripristino/prova_ripristino.php:267
+msgid "mga"
+msgstr "Mittelirisch (900-1200)"
+
+#: ../languages/ripristino/prova_ripristino.php:268
+msgid "mic"
+msgstr "Mi'kmaq"
+
+#: ../languages/ripristino/prova_ripristino.php:269
+msgid "min"
+msgstr "Minangkabau"
+
+#: ../languages/ripristino/prova_ripristino.php:270
+msgid "mis"
+msgstr "Uncoded languages"
+
+#: ../languages/ripristino/prova_ripristino.php:271
+msgid "mkd"
+msgstr "Mazedonisch"
+
+#: ../languages/ripristino/prova_ripristino.php:272
+msgid "mlg"
+msgstr "Malagasy"
+
+#: ../languages/ripristino/prova_ripristino.php:273
+msgid "mlt"
+msgstr "Maltesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:274
+msgid "mnc"
+msgstr "Mandschurisch"
+
+#: ../languages/ripristino/prova_ripristino.php:275
+msgid "mni"
+msgstr "Manipuri"
+
+#: ../languages/ripristino/prova_ripristino.php:276
+msgid "moh"
+msgstr "Mohawk"
+
+#: ../languages/ripristino/prova_ripristino.php:277
+msgid "mon"
+msgstr "Mongolisch"
+
+#: ../languages/ripristino/prova_ripristino.php:278
+msgid "mos"
+msgstr "Mossi"
+
+#: ../languages/ripristino/prova_ripristino.php:279
+msgid "mri"
+msgstr "Maori"
+
+#: ../languages/ripristino/prova_ripristino.php:280
+msgid "msa"
+msgstr "Malay (Makrosprache)"
+
+#: ../languages/ripristino/prova_ripristino.php:281
+msgid "mul"
+msgstr "Multiple languages"
+
+#: ../languages/ripristino/prova_ripristino.php:282
+msgid "mus"
+msgstr "Creek"
+
+#: ../languages/ripristino/prova_ripristino.php:283
+msgid "mwl"
+msgstr "Mirandés"
+
+#: ../languages/ripristino/prova_ripristino.php:284
+msgid "mwr"
+msgstr "Marwari"
+
+#: ../languages/ripristino/prova_ripristino.php:285
+msgid "mya"
+msgstr "Birmanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:286
+msgid "myv"
+msgstr "Erzya"
+
+#: ../languages/ripristino/prova_ripristino.php:287
+msgid "nap"
+msgstr "Neapolitanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:288
+msgid "nau"
+msgstr "Nauru"
+
+#: ../languages/ripristino/prova_ripristino.php:289
+msgid "nav"
+msgstr "Navajo"
+
+#: ../languages/ripristino/prova_ripristino.php:290
+msgid "nbl"
+msgstr "Ndebele (Süd)"
+
+#: ../languages/ripristino/prova_ripristino.php:291
+msgid "nde"
+msgstr "Ndebele (Nord)"
+
+#: ../languages/ripristino/prova_ripristino.php:292
+msgid "ndo"
+msgstr "Ndongo"
+
+#: ../languages/ripristino/prova_ripristino.php:293
+msgid "nds"
+msgstr "Niederdeutsch"
+
+#: ../languages/ripristino/prova_ripristino.php:294
+msgid "nep"
+msgstr "Nepali"
+
+#: ../languages/ripristino/prova_ripristino.php:295
+msgid "new"
+msgstr "Newari"
+
+#: ../languages/ripristino/prova_ripristino.php:296
+msgid "nia"
+msgstr "Nias"
+
+#: ../languages/ripristino/prova_ripristino.php:297
+msgid "niu"
+msgstr "Niuean"
+
+#: ../languages/ripristino/prova_ripristino.php:298
+msgid "nld"
+msgstr "Holländisch"
+
+#: ../languages/ripristino/prova_ripristino.php:299
+msgid "nno"
+msgstr "Norwegian Nynorsk"
+
+#: ../languages/ripristino/prova_ripristino.php:300
+msgid "nob"
+msgstr "Norwegian Bokmål"
+
+#: ../languages/ripristino/prova_ripristino.php:301
+msgid "nog"
+msgstr "Nogai"
+
+#: ../languages/ripristino/prova_ripristino.php:302
+msgid "non"
+msgstr "Altnordisch"
+
+#: ../languages/ripristino/prova_ripristino.php:303
+msgid "nor"
+msgstr "Norwegisch"
+
+#: ../languages/ripristino/prova_ripristino.php:304
+msgid "nqo"
+msgstr "N'Ko"
+
+#: ../languages/ripristino/prova_ripristino.php:305
+msgid "nso"
+msgstr "Pedi"
+
+#: ../languages/ripristino/prova_ripristino.php:306
+msgid "nwc"
+msgstr "Classical Newari"
+
+#: ../languages/ripristino/prova_ripristino.php:307
+msgid "nya"
+msgstr "Nyanja"
+
+#: ../languages/ripristino/prova_ripristino.php:308
+msgid "nym"
+msgstr "Nyamwezi"
+
+#: ../languages/ripristino/prova_ripristino.php:309
+msgid "nyn"
+msgstr "Nyankole"
+
+#: ../languages/ripristino/prova_ripristino.php:310
+msgid "nyo"
+msgstr "Nyoro"
+
+#: ../languages/ripristino/prova_ripristino.php:311
+msgid "nzi"
+msgstr "Nzima"
+
+#: ../languages/ripristino/prova_ripristino.php:312
+msgid "oci"
+msgstr "Occitan (post 1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:313
+msgid "oji"
+msgstr "Ojibwa"
+
+#: ../languages/ripristino/prova_ripristino.php:314
+msgid "ori"
+msgstr "Oriya"
+
+#: ../languages/ripristino/prova_ripristino.php:315
+msgid "orm"
+msgstr "Oromo"
+
+#: ../languages/ripristino/prova_ripristino.php:316
+msgid "osa"
+msgstr "Osage"
+
+#: ../languages/ripristino/prova_ripristino.php:317
+msgid "oss"
+msgstr "Ossetisch"
+
+#: ../languages/ripristino/prova_ripristino.php:318
+msgid "ota"
+msgstr "Osmanisch (1500-1928)"
+
+#: ../languages/ripristino/prova_ripristino.php:319
+msgid "pag"
+msgstr "Pangasinan"
+
+#: ../languages/ripristino/prova_ripristino.php:320
+msgid "pal"
+msgstr "Pahlavi"
+
+#: ../languages/ripristino/prova_ripristino.php:321
+msgid "pam"
+msgstr "Pampanggan"
+
+#: ../languages/ripristino/prova_ripristino.php:322
+msgid "pan"
+msgstr "Panjabi"
+
+#: ../languages/ripristino/prova_ripristino.php:323
+msgid "pap"
+msgstr "Papiamento"
+
+#: ../languages/ripristino/prova_ripristino.php:324
+msgid "pau"
+msgstr "Palauan"
+
+#: ../languages/ripristino/prova_ripristino.php:325
+msgid "peo"
+msgstr "Altpersisch (ca. 600-400 B.C.)"
+
+#: ../languages/ripristino/prova_ripristino.php:326
+msgid "phn"
+msgstr "Phönikisch"
+
+#: ../languages/ripristino/prova_ripristino.php:327
+msgid "pli"
+msgstr "Pali"
+
+#: ../languages/ripristino/prova_ripristino.php:328
+msgid "pol"
+msgstr "Polnisch"
+
+#: ../languages/ripristino/prova_ripristino.php:329
+msgid "pon"
+msgstr "Pohnpeian"
+
+#: ../languages/ripristino/prova_ripristino.php:330
+msgid "por"
+msgstr "Portugiesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:331
+msgid "pro"
+msgstr "Altprovenzalisch (to 1500)"
+
+#: ../languages/ripristino/prova_ripristino.php:332
+msgid "pus"
+msgstr "Paschtu"
+
+#: ../languages/ripristino/prova_ripristino.php:333
+msgid "que"
+msgstr "Quechua"
+
+#: ../languages/ripristino/prova_ripristino.php:334
+msgid "raj"
+msgstr "Rajasthani"
+
+#: ../languages/ripristino/prova_ripristino.php:335
+msgid "rap"
+msgstr "Rapanui"
+
+#: ../languages/ripristino/prova_ripristino.php:336
+msgid "rar"
+msgstr "Rarotonganisch"
+
+#: ../languages/ripristino/prova_ripristino.php:337
+msgid "roh"
+msgstr "Romansh"
+
+#: ../languages/ripristino/prova_ripristino.php:338
+msgid "rom"
+msgstr "Romani"
+
+#: ../languages/ripristino/prova_ripristino.php:339
+msgid "ron"
+msgstr "Rumänisch"
+
+#: ../languages/ripristino/prova_ripristino.php:340
+msgid "run"
+msgstr "Rundi"
+
+#: ../languages/ripristino/prova_ripristino.php:341
+msgid "rup"
+msgstr "Aromunisch"
+
+#: ../languages/ripristino/prova_ripristino.php:342
+msgid "rus"
+msgstr "Russisch"
+
+#: ../languages/ripristino/prova_ripristino.php:343
+msgid "sad"
+msgstr "Sandawe"
+
+#: ../languages/ripristino/prova_ripristino.php:344
+msgid "sag"
+msgstr "Sango"
+
+#: ../languages/ripristino/prova_ripristino.php:345
+msgid "sah"
+msgstr "Yakut"
+
+#: ../languages/ripristino/prova_ripristino.php:346
+msgid "sam"
+msgstr "Samaritan Aramaic"
+
+#: ../languages/ripristino/prova_ripristino.php:347
+msgid "san"
+msgstr "Sanskrit"
+
+#: ../languages/ripristino/prova_ripristino.php:348
+msgid "sas"
+msgstr "Sasak"
+
+#: ../languages/ripristino/prova_ripristino.php:349
+msgid "sat"
+msgstr "Santali"
+
+#: ../languages/ripristino/prova_ripristino.php:350
+msgid "scn"
+msgstr "Sizilianisch"
+
+#: ../languages/ripristino/prova_ripristino.php:351
+msgid "sco"
+msgstr "Scots"
+
+#: ../languages/ripristino/prova_ripristino.php:352
+msgid "sel"
+msgstr "Selkupisch"
+
+#: ../languages/ripristino/prova_ripristino.php:353
+msgid "sga"
+msgstr "Altirisch (bis 900)"
+
+#: ../languages/ripristino/prova_ripristino.php:354
+msgid "shn"
+msgstr "Shan"
+
+#: ../languages/ripristino/prova_ripristino.php:355
+msgid "sid"
+msgstr "Sidamo"
+
+#: ../languages/ripristino/prova_ripristino.php:356
+msgid "sin"
+msgstr "Sinhala"
+
+#: ../languages/ripristino/prova_ripristino.php:357
+msgid "slk"
+msgstr "Slowakisch"
+
+#: ../languages/ripristino/prova_ripristino.php:358
+msgid "slv"
+msgstr "Slowenisch"
+
+#: ../languages/ripristino/prova_ripristino.php:359
+msgid "sma"
+msgstr "Sami (Süd)"
+
+#: ../languages/ripristino/prova_ripristino.php:360
+msgid "sme"
+msgstr "Sami (Nord)"
+
+#: ../languages/ripristino/prova_ripristino.php:361
+msgid "smj"
+msgstr "Lule Sami"
+
+#: ../languages/ripristino/prova_ripristino.php:362
+msgid "smn"
+msgstr "Inarisamisch"
+
+#: ../languages/ripristino/prova_ripristino.php:363
+msgid "smo"
+msgstr "Samoa"
+
+#: ../languages/ripristino/prova_ripristino.php:364
+msgid "sms"
+msgstr "Skoltsamisch"
+
+#: ../languages/ripristino/prova_ripristino.php:365
+msgid "sna"
+msgstr "Shona"
+
+#: ../languages/ripristino/prova_ripristino.php:366
+msgid "snd"
+msgstr "Sindhi"
+
+#: ../languages/ripristino/prova_ripristino.php:367
+msgid "snk"
+msgstr "Soninke"
+
+#: ../languages/ripristino/prova_ripristino.php:368
+msgid "sog"
+msgstr "Sogdisch"
+
+#: ../languages/ripristino/prova_ripristino.php:369
+msgid "som"
+msgstr "Somali"
+
+#: ../languages/ripristino/prova_ripristino.php:370
+msgid "sot"
+msgstr "Southern Sotho"
+
+#: ../languages/ripristino/prova_ripristino.php:371
+msgid "spa"
+msgstr "Spanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:372
+msgid "sqi"
+msgstr "Albanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:373
+msgid "srd"
+msgstr "Sardisch"
+
+#: ../languages/ripristino/prova_ripristino.php:374
+msgid "srn"
+msgstr "Sranan Tongo"
+
+#: ../languages/ripristino/prova_ripristino.php:375
+msgid "srp"
+msgstr "Serbisch"
+
+#: ../languages/ripristino/prova_ripristino.php:376
+msgid "srr"
+msgstr "Serer"
+
+#: ../languages/ripristino/prova_ripristino.php:377
+msgid "ssw"
+msgstr "Swati"
+
+#: ../languages/ripristino/prova_ripristino.php:378
+msgid "suk"
+msgstr "Sukuma"
+
+#: ../languages/ripristino/prova_ripristino.php:379
+msgid "sun"
+msgstr "Sundanesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:380
+msgid "sus"
+msgstr "Susu"
+
+#: ../languages/ripristino/prova_ripristino.php:381
+msgid "sux"
+msgstr "Sumerisch"
+
+#: ../languages/ripristino/prova_ripristino.php:382
+msgid "swa"
+msgstr "Swahili (Makrosprache)"
+
+#: ../languages/ripristino/prova_ripristino.php:383
+msgid "swe"
+msgstr "Swedisch"
+
+#: ../languages/ripristino/prova_ripristino.php:384
+msgid "syc"
+msgstr "Classical Syriac"
+
+#: ../languages/ripristino/prova_ripristino.php:385
+msgid "syr"
+msgstr "Syrisch"
+
+#: ../languages/ripristino/prova_ripristino.php:386
+msgid "tah"
+msgstr "Tahitisch"
+
+#: ../languages/ripristino/prova_ripristino.php:387
+msgid "tam"
+msgstr "Tamil"
+
+#: ../languages/ripristino/prova_ripristino.php:388
+msgid "tat"
+msgstr "Tatarisch"
+
+#: ../languages/ripristino/prova_ripristino.php:389
+msgid "tel"
+msgstr "Telugu"
+
+#: ../languages/ripristino/prova_ripristino.php:390
+msgid "tem"
+msgstr "Temne"
+
+#: ../languages/ripristino/prova_ripristino.php:391
+msgid "ter"
+msgstr "Tereno"
+
+#: ../languages/ripristino/prova_ripristino.php:392
+msgid "tet"
+msgstr "Tetum"
+
+#: ../languages/ripristino/prova_ripristino.php:393
+msgid "tgk"
+msgstr "Tadschikisch"
+
+#: ../languages/ripristino/prova_ripristino.php:394
+msgid "tgl"
+msgstr "Tagalog"
+
+#: ../languages/ripristino/prova_ripristino.php:395
+msgid "tha"
+msgstr "Thai"
+
+#: ../languages/ripristino/prova_ripristino.php:396
+msgid "tig"
+msgstr "Tigre"
+
+#: ../languages/ripristino/prova_ripristino.php:397
+msgid "tir"
+msgstr "Tigrinya"
+
+#: ../languages/ripristino/prova_ripristino.php:398
+msgid "tiv"
+msgstr "Tivi"
+
+#: ../languages/ripristino/prova_ripristino.php:399
+msgid "tkl"
+msgstr "Tokelauanisch"
+
+#: ../languages/ripristino/prova_ripristino.php:400
+msgid "tlh"
+msgstr "Klingon"
+
+#: ../languages/ripristino/prova_ripristino.php:401
+msgid "tli"
+msgstr "Tlingit"
+
+#: ../languages/ripristino/prova_ripristino.php:402
+msgid "tmh"
+msgstr "Tamascheq"
+
+#: ../languages/ripristino/prova_ripristino.php:403
+msgid "tog"
+msgstr "Tonga (Nyasa)"
+
+#: ../languages/ripristino/prova_ripristino.php:404
+msgid "ton"
+msgstr "Tonga (Tonga Islands)"
+
+#: ../languages/ripristino/prova_ripristino.php:405
+msgid "tpi"
+msgstr "Tok Pisin"
+
+#: ../languages/ripristino/prova_ripristino.php:406
+msgid "tsi"
+msgstr "Tsimshian"
+
+#: ../languages/ripristino/prova_ripristino.php:407
+msgid "tsn"
+msgstr "Tswana"
+
+#: ../languages/ripristino/prova_ripristino.php:408
+msgid "tso"
+msgstr "Tsonga"
+
+#: ../languages/ripristino/prova_ripristino.php:409
+msgid "tuk"
+msgstr "Turkmenisch"
+
+#: ../languages/ripristino/prova_ripristino.php:410
+msgid "tum"
+msgstr "Tumbuka"
+
+#: ../languages/ripristino/prova_ripristino.php:411
+msgid "tur"
+msgstr "Türkisch"
+
+#: ../languages/ripristino/prova_ripristino.php:412
+msgid "tvl"
+msgstr "Tuvalu"
+
+#: ../languages/ripristino/prova_ripristino.php:413
+msgid "twi"
+msgstr "Twi"
+
+#: ../languages/ripristino/prova_ripristino.php:414
+msgid "tyv"
+msgstr "Tuwinisch"
+
+#: ../languages/ripristino/prova_ripristino.php:415
+msgid "udm"
+msgstr "Udmurtisch"
+
+#: ../languages/ripristino/prova_ripristino.php:416
+msgid "uga"
+msgstr "Ugaritisch"
+
+#: ../languages/ripristino/prova_ripristino.php:417
+msgid "uig"
+msgstr "Uighur"
+
+#: ../languages/ripristino/prova_ripristino.php:418
+msgid "ukr"
+msgstr "Ukrainisch"
+
+#: ../languages/ripristino/prova_ripristino.php:419
+msgid "umb"
+msgstr "Umbundu"
+
+#: ../languages/ripristino/prova_ripristino.php:420
+msgid "und"
+msgstr "Undetermined (Unbestimmte Sprache)"
+
+#: ../languages/ripristino/prova_ripristino.php:421
+msgid "uzb"
+msgstr "Usbekisch"
+
+#: ../languages/ripristino/prova_ripristino.php:422
+msgid "vai"
+msgstr "Vai"
+
+#: ../languages/ripristino/prova_ripristino.php:423
+msgid "ven"
+msgstr "Venda"
+
+#: ../languages/ripristino/prova_ripristino.php:424
+msgid "vie"
+msgstr "Vietnamesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:425
+msgid "vol"
+msgstr "Volapük"
+
+#: ../languages/ripristino/prova_ripristino.php:426
+msgid "vot"
+msgstr "Votisch"
+
+#: ../languages/ripristino/prova_ripristino.php:427
+msgid "wal"
+msgstr "Wolayta"
+
+#: ../languages/ripristino/prova_ripristino.php:428
+msgid "war"
+msgstr "Waray (Philippinnen)"
+
+#: ../languages/ripristino/prova_ripristino.php:429
+msgid "was"
+msgstr "Washo"
+
+#: ../languages/ripristino/prova_ripristino.php:430
+msgid "wln"
+msgstr "Wallonisch"
+
+#: ../languages/ripristino/prova_ripristino.php:431
+msgid "wol"
+msgstr "Wolof"
+
+#: ../languages/ripristino/prova_ripristino.php:432
+msgid "xal"
+msgstr "Kalmyk"
+
+#: ../languages/ripristino/prova_ripristino.php:433
+msgid "xho"
+msgstr "Xhosa"
+
+#: ../languages/ripristino/prova_ripristino.php:434
+msgid "yao"
+msgstr "Yao"
+
+#: ../languages/ripristino/prova_ripristino.php:435
+msgid "yap"
+msgstr "Yap"
+
+#: ../languages/ripristino/prova_ripristino.php:436
+msgid "yid"
+msgstr "Yiddish"
+
+#: ../languages/ripristino/prova_ripristino.php:437
+msgid "yor"
+msgstr "Yoruba"
+
+#: ../languages/ripristino/prova_ripristino.php:438
+msgid "zap"
+msgstr "Zapotec"
+
+#: ../languages/ripristino/prova_ripristino.php:439
+msgid "zbl"
+msgstr "Bliss-Symbol"
+
+#: ../languages/ripristino/prova_ripristino.php:440
+msgid "zen"
+msgstr "Zenaga"
+
+#: ../languages/ripristino/prova_ripristino.php:441
+msgid "zha"
+msgstr "Zhuang"
+
+#: ../languages/ripristino/prova_ripristino.php:442
+msgid "zho"
+msgstr "Chinesisch"
+
+#: ../languages/ripristino/prova_ripristino.php:443
+msgid "zul"
+msgstr "Zulu"
+
+#: ../languages/ripristino/prova_ripristino.php:444
+msgid "zun"
+msgstr "Zuni"
+
+#: ../languages/ripristino/prova_ripristino.php:445
+msgid "zxx"
+msgstr "No linguistic content"
+
+#: ../languages/ripristino/prova_ripristino.php:446
+msgid "zza"
+msgstr "Zaza"
+
+#: ../languages/ripristino/prova_ripristino.php:447
+msgid "urd"
+msgstr "Urdu"
+
+#: ../languages/ripristino/prova_ripristino.php:448
+msgid "vls"
+msgstr "Flämisch"
+
+#: layouts/scripts/layout.phtml:5
+#: layouts/scripts/layout-black.phtml:5
+#: layouts/scripts/nolayout.phtml:8
+msgid "Traduxio Project"
+msgstr "Traduxio Projekt"
+
+#: layouts/scripts/layout.phtml:25
+#: layouts/scripts/layout-black.phtml:25
+msgid "Works"
+msgstr "Werke"
+
+#: layouts/scripts/layout.phtml:26
+#: layouts/scripts/layout-black.phtml:26
+msgid "My Translations"
+msgstr "Meine Übersetzungen"
+
+#: layouts/scripts/layout.phtml:27
+#: layouts/scripts/layout-black.phtml:27
+msgid "Concordance"
+msgstr "Übereinstimmung"
+
+#: layouts/scripts/layout.phtml:56
+#: layouts/scripts/layout-black.phtml:56
+#, php-format
+msgid "About %1$s"
+msgstr "Über %1$s"
+
+#: layouts/scripts/layout.phtml:57
+#: layouts/scripts/layout-black.phtml:57
+msgid "Copyrights"
+msgstr "Copyrights"
+
+#: views/scripts/work/manage.phtml:15
+msgid "Manage text's privileges"
+msgstr "Textoptionen verwalten"
+
+#: views/scripts/work/manage.phtml:18
+msgid "Back to the text"
+msgstr "Zurück zum Text"
+
+#: views/scripts/work/manage.phtml:22
+msgid "Standard Privileges"
+msgstr "Standardoptionen"
+
+#: views/scripts/work/manage.phtml:27
+msgid "Custom Privileges"
+msgstr "Nutzeroptionen"
+
+#: views/scripts/work/manage.phtml:30
+msgid "Select and click on Remove Privilege to delete a permission"
+msgstr "Zum Löschen einer Berechtigung auf Auswählen und Nutzeroption entfernen klicken"
+
+#: views/scripts/work/manage.phtml:31
+msgid "Remove an existing permission"
+msgstr "Eingestellte Berechtigung entfernen"
+
+#: views/scripts/work/manage.phtml:34
+msgid "NO EXISTING PRIVILEGES"
+msgstr "KEINE NUTZEROPTIONEN VORHANDEN"
+
+#: views/scripts/work/manage.phtml:37
+msgid "Add a new permission"
+msgstr "Neue Berechtigung hinzufügen"
+
+#: views/scripts/work/manage.phtml:43
+msgid "PAGETITLE_Continue text insertion"
+msgstr "Text weiter einfügen"
+
+#: views/scripts/work/read.phtml:11
+msgid "Translations"
+msgstr "Übersetzungen"
+
+#: views/scripts/work/read.phtml:15
+#: views/scripts/work/index.phtml:30
+#: views/scripts/work/my.phtml:14
+#: views/scripts/work/history.phtml:2
+#: views/scripts/translation/read.phtml:112
+#: views/scripts/translation/read.phtml:133
+#: views/scripts/translation/edit.phtml:94
+msgid "No Title"
+msgstr "Kein Titel"
+
+#: views/scripts/work/read.phtml:23
+#: views/scripts/work/newread.phtml:10
+#: views/scripts/translation/read.phtml:6
+msgid "You're not allowed to do this. Ask permissions to the text's owner"
+msgstr "Sie sind nicht zugriffsberechtigt. Bitten Sie den Eigentümer des Textes um Erlaubnis."
+
+#: views/scripts/work/read.phtml:24
+#: views/scripts/work/newread.phtml:10
+#: views/scripts/translation/read.phtml:7
+msgid "You're not allowed to do this. Please login"
+msgstr "Sie sind nicht zugriffsberechtigt. Login eingeben"
+
+#: views/scripts/work/read.phtml:27
+#: views/scripts/work/newread.phtml:12
+msgid "You can't delete this text because it has some translations. Delete its translations first."
+msgstr "Sie können den Text nicht löschen, da er Übersetzungen beinhaltet. Entfernen Sie die Übersetzungen."
+
+#: views/scripts/work/read.phtml:32
+#: views/scripts/translation/read.phtml:5
+msgid "Options"
+msgstr "Optionen"
+
+#: views/scripts/work/read.phtml:35
+#: views/scripts/work/newread.phtml:23
+#: views/scripts/work/newread.phtml:119
+msgid "Create a translation"
+msgstr "Übersetzung erstellen"
+
+#: views/scripts/work/read.phtml:41
+#: views/scripts/work/newread.phtml:24
+msgid "Continue text insertion"
+msgstr "Text weiter einfügen"
+
+#: views/scripts/work/read.phtml:42
+#: views/scripts/work/newread.phtml:25
+msgid "Edit the text"
+msgstr "Text bearbeiten"
+
+#: views/scripts/work/read.phtml:50
+#: views/scripts/work/newread.phtml:13
+#: views/scripts/translation/read.phtml:23
+msgid "WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?"
+msgstr "WARNHINWEIS! Das Löschen ist unwiderruflich! Sind Sie sicher, dass Sie diesen Text löschen wollen?"
+
+#: views/scripts/work/read.phtml:53
+#: views/scripts/work/newread.phtml:35
+msgid "Delete this text"
+msgstr "Text löschen"
+
+#: views/scripts/work/read.phtml:56
+#: views/scripts/work/newread.phtml:37
+#: views/scripts/work/history.phtml:12
+#: views/scripts/translation/read.phtml:29
+msgid "History of modifications"
+msgstr "Chronik der Änderungen"
+
+#: views/scripts/work/read.phtml:87
+#: views/scripts/work/newread.phtml:81
+#: views/scripts/translation/read.phtml:206
+#: views/scripts/translation/read.phtml:211
+msgid "Text inserted by"
+msgstr "Text hinzugefügt von"
+
+#: views/scripts/work/read.phtml:96
+#: views/scripts/work/newread.phtml:141
+msgid "PAGETITLE_Read text"
+msgstr "Text lesen"
+
+#: views/scripts/work/index.phtml:13
+msgid "HOMEPAGE PHRASE"
+msgstr "Du point de vue de la communauté, le langage n'est pas seulement un fait social , [...] il est par l'altérité [...] le fondement de toute association humaine."
+
+#: views/scripts/work/index.phtml:31
+#, php-format
+msgid "(%1$s Translations)"
+msgstr "(%1$s Übersetzungen)"
+
+#: views/scripts/work/index.phtml:31
+#, php-format
+msgid "(%1$s Translation)"
+msgstr "(%1$s Übersetzung)"
+
+#: views/scripts/work/index.phtml:40
+msgid "Deposit a new text"
+msgstr "Neuen Text ablegen"
+
+#: views/scripts/work/index.phtml:44
+#, php-format
+msgid "New translations in %1$s"
+msgstr "Neue Übersetzungen in %1$s"
+
+#: views/scripts/work/index.phtml:58
+msgid "PAGETITLE_Homepage"
+msgstr "Homepage"
+
+#: views/scripts/work/deposit.phtml:2
+#: views/scripts/work/translate.phtml:4
+msgid "Your text will automatically be private.&nbsp; Nobody will be able to see it unless you change the text's privileges.&nbsp;"
+msgstr "Ihr Text wird automatisch im privaten Modus erstellt.&nbsp; Niemand kann auf ihn zugreifen, es sei denn Sie ändern die Zulassungsoptionen.&nbsp;"
+
+#: views/scripts/work/deposit.phtml:8
+msgid "PAGETITLE_Deposit a new text"
+msgstr "Einen neuen Text ablegen"
+
+#: views/scripts/work/my.phtml:3
+msgid "My translations"
+msgstr "Meine Übersetzungen"
+
+#: views/scripts/work/my.phtml:6
+msgid "You have not inserted any text's translations"
+msgstr "Sie haben keine Übersetzungen eingefügt"
+
+#: views/scripts/work/my.phtml:24
+msgid "PAGETITLE_My translations"
+msgstr "Meine Übersetzungen"
+
+#: views/scripts/work/extend.phtml:21
+msgid "Last segment of the text"
+msgstr "Letztes Textsegment"
+
+#: views/scripts/work/translate.phtml:25
+msgid "PAGETITLE_Create Translation of"
+msgstr "Übersetzung erstellen von"
+
+#: views/scripts/work/history.phtml:32
+msgid "PAGETITLE_history of modifications"
+msgstr "Chronik der Änderungen"
+
+#: views/scripts/work/edit.phtml:6
+msgid "PAGETITLE_Edit text"
+msgstr "Text bearbeiten"
+
+#: views/scripts/translation/read.phtml:10
+msgid "You can't delete this translation because it has some translations. Delete its translations first."
+msgstr "Sie können diese Übersetzung nicht entfernen, da sie bereits Übersetzungen enthält. Entfernen Sie die Übersetzungen."
+
+#: views/scripts/translation/read.phtml:14
+msgid "Edit this translation"
+msgstr "Diese Übersetzung bearbeiten"
+
+#: views/scripts/translation/read.phtml:26
+msgid "Delete this translation"
+msgstr "Diese Übersetzung entfernen"
+
+#: views/scripts/translation/read.phtml:231
+msgid "PAGETITLE_Read translation"
+msgstr "Übersetzung lesen"
+
+#: views/scripts/translation/concord.phtml:13
+msgid "Search"
+msgstr "Suche"
+
+#: views/scripts/translation/concord.phtml:20
+msgid "PAGETITLE_Search"
+msgstr "Suche"
+
+#: views/scripts/translation/edit.phtml:205
+msgid "PAGETITLE_Edit translation"
+msgstr "Übersetzung bearbeiten"
+
+#: views/scripts/login/index.phtml:2
+msgid "Please Login"
+msgstr "Bitte Login eingeben"
+
+#: views/scripts/login/index.phtml:6
+msgid "PAGETITLE_Login"
+msgstr "Login"
+
+#: views/scripts/error/denied.phtml:4
+msgid "Error"
+msgstr "Fehlermeldung"
+
+#: views/scripts/error/denied.phtml:5
+msgid "Access denied"
+msgstr "Zugriff verweigert"
+
+#: views/scripts/error/denied.phtml:6
+msgid "You are trying to access an area which you have not allowed."
+msgstr "Sie sind nicht berechtigt auf diese Seite zuzugreifen."
+
+#: views/scripts/error/denied.phtml:10
+msgid "PAGETITLE_Access denied"
+msgstr "Zugriff verweigert"
+
+#: views/scripts/error/error.phtml:3
+msgid "An error occurred"
+msgstr "Ein Fehler ist aufgetreten"
+
+#: views/scripts/error/error.phtml:24
+msgid "PAGETITLE_Error"
+msgstr "Fehlermeldung"
+
+#: views/scripts/index/feedback.phtml:16
+msgid "PAGETITLE_Contact us"
+msgstr "Kontakt"
+
+#: views/scripts/index/index.phtml:3
+#: views/scripts/index/register.phtml:26
+msgid "Register"
+msgstr "Anmelden"
+
+#: views/scripts/index/index.phtml:4
+msgid "Invite"
+msgstr "Einladen"
+
+#: views/scripts/index/index.phtml:5
+msgid "FAQ"
+msgstr "FAQ"
+
+#: views/scripts/index/index.phtml:6
+msgid "About Traduxio"
+msgstr "Über Traduxio"
+
+#: views/scripts/index/index.phtml:7
+msgid "Help"
+msgstr "Hilfe"
+
+#: views/scripts/index/index.phtml:11
+msgid ""
+"the environment of translators\n"
+" of cultural texts"
+msgstr ""
+"die Webseite für Übersetzer\n"
+" kultureller Texte"
+
+#: views/scripts/index/index.phtml:14
+msgid ""
+"Compare\n"
+" Share\n"
+" Interpret"
+msgstr ""
+"Vergleichen\n"
+" Austauschen\n"
+" Deuten"
+
+#: views/scripts/index/copyright.phtml:5
+msgid "Report a copyright abuse"
+msgstr "Copyright-Betrugsversuch melden"
+
+#: views/scripts/index/copyright.phtml:9
+msgid "Your abuse report has been successfully sent; thank you for your help."
+msgstr "Ihre Benachrichtigung wurde erfolgreich versendet. Vielen Dank für Ihre Hilfe."
+
+#: views/scripts/index/copyright.phtml:10
+#: views/scripts/index/copyright.phtml:16
+#: views/scripts/index/register.phtml:9
+#: views/scripts/index/register.phtml:14
+#, php-format
+msgid "The %1$s team."
+msgstr "Das %1$s Team."
+
+#: views/scripts/index/copyright.phtml:12
+msgid "Continue"
+msgstr "Weiter"
+
+#: views/scripts/index/copyright.phtml:15
+#, php-format
+msgid ""
+"We encountered an error sending your message. Here is the error message : %1$s. \n"
+"Sorry for the inconvenience, we're trying hard to fix it."
+msgstr ""
+"Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Fehlermeldung: %1$s. \n"
+"Wir bemühen uns den Fehler schnellstmöglich zu beheben."
+
+#: views/scripts/index/copyright.phtml:21
+msgid "PAGETITLE_Copyright"
+msgstr "Copyright"
+
+#: views/scripts/index/about.phtml:116
+msgid "PAGETITLE_About Traduxio"
+msgstr "Über Traduxio"
+
+#: views/scripts/index/faq.phtml:7
+#: views/scripts/index/faq.phtml:120
+msgid "Frequently Asked Questions"
+msgstr "Frequently Asked Questions"
+
+#: views/scripts/index/faq.phtml:10
+msgid "FAQuestion1"
+msgstr "Wofür steht TraduXio?"
+
+#: views/scripts/index/faq.phtml:12
+msgid "FAQanswer1"
+msgstr "TraduXio ist eine Austauschplattform für Übersetzer kultureller Texte.<br> Für weitere Informationen besuchen Sie bitte die Seite %1$s auf SourceForge %2$s"
+
+#: views/scripts/index/faq.phtml:17
+msgid "FAQuestion2"
+msgstr "Wie funktioniert TraduXio?"
+
+#: views/scripts/index/faq.phtml:18
+msgid "FAQanswer2"
+msgstr "%1$s Hier %2$s finden Sie \"How To\" Erläuterungen über TraduXios Funktionalitäten."
+
+#: views/scripts/index/faq.phtml:24
+msgid "FAQuestion3"
+msgstr "Sind Sie eine weitere Translation Memory-Datenbank?"
+
+#: views/scripts/index/faq.phtml:25
+msgid "FAQanswer3"
+msgstr "Nein. TraduXio ist genau genommen keine Translation Memory-Datenbank. Traditionelle Datenbanken beschränken sich auf zwei Sprachen (Ausgangs- und Zielsprache). TraduXio ermöglicht es, mehrere verschiedene Versionen eines Textes miteinander zu vergleichen. TraduXio bietet die Möglichkeit die Originaltexte per Tag/Klassifikation genauestens anzuordnen, je nach literarischem Genre, Autor, Epoche, usw. Außerdem lassen sich die übersetzten Texte leichter verwalten."
+
+#: views/scripts/index/faq.phtml:30
+msgid "FAQuestion4"
+msgstr "Muss ich mich anmelden? Was genau muss ich tun?"
+
+#: views/scripts/index/faq.phtml:32
+msgid "FAQanswer4"
+msgstr "Ja, eine Anmeldung ist erforderlich, um ein Login zu erhalten. Um von einem Mitglied eingeladen zu werden, klicken Sie auf %1$s “Anmelden”%2$s, rechts auf der %3$s Titelseite %4$s im Menü, und senden Sie uns eine E-Mail."
+
+#: views/scripts/index/faq.phtml:38
+msgid "FAQuestion5"
+msgstr "Muss ich alle Werke freigeben? Wer hat Zugriff auf meine Übersetzungen?"
+
+#: views/scripts/index/faq.phtml:40
+msgid "FAQanswer5"
+msgstr "Alle Ihre Arbeiten werden im privaten Modus angelegt, Sie sind für die anderen Nutzer unzugänglich. Sie verwalten jederzeit die Nutzeroptionen (Zugriff, Bearbeiten, Übersetzen, usw.). Sie legen Ihre eigene Interessengruppen mit den von Ihnen erstellten Regeln an."
+
+#: views/scripts/index/faq.phtml:46
+msgid "FAQuestion6"
+msgstr "Wie werden die Autoren- und Übersetzerrechte gehandhabt?"
+
+#: views/scripts/index/faq.phtml:48
+msgid "FAQanswer6"
+msgstr "TraduXio achtet die Copyright-Bestimmungen und die Autorenrechte. Die Webseite beinhaltet nur frei zugängliche Texte. Übersetzungen von Texten, die noch unter das Urheberrecht fallen, sind eingeschränkt möglich, unterliegen aber der Einwilligung der Lizenzinhaber. TraduXio wertet und respektiert die Arbeit und Rechte der Übersetzer. Das Projekt ist dem Gemeinschaftsprinzip verschrieben, durch die Nutzung der freien Rechte und Lizenzen."
+
+#: views/scripts/index/faq.phtml:54
+msgid "FAQuestion7"
+msgstr "Welche rechtlichen Lizenzen nutzt TraduXio für die Texte?"
+
+#: views/scripts/index/faq.phtml:56
+msgid "FAQanswer7"
+msgstr "TraduXio ist ein frei zugängliches Tool, Sie  können für jeden Text die Ihnen entsprechenden Lizenzen wählen. Wir empfehlen den Gebrauch der \"freien\" oder der \"Creative Commons\"-Lizenzen."
+
+#: views/scripts/index/faq.phtml:62
+msgid "FAQuestion8"
+msgstr "Ist die Plattform kostenlos?"
+
+#: views/scripts/index/faq.phtml:64
+msgid "FAQanswer8"
+msgstr "Ja, TraduXio ist (und bleibt) kostenlos zugänglich."
+
+#: views/scripts/index/faq.phtml:70
+msgid "FAQuestion9"
+msgstr "Handelt es sich um eine kostenlose Software oder Open Source?"
+
+#: views/scripts/index/faq.phtml:72
+msgid "FAQanswer9"
+msgstr "Ja, die Software wurde dank einer GNU/GPL3 Lizenz entwickelt."
+
+#: views/scripts/index/faq.phtml:78
+msgid "FAQuestion10"
+msgstr "Kann ich “mein eigenes” TraduXio anlegen?"
+
+#: views/scripts/index/faq.phtml:80
+msgid "FAQanswer10"
+msgstr "Ja, da der Code frei zugänglich ist, können Sie Ihre eigene Übersetzungsplattform schaffen, unter Vorraussetzung der Einhaltung der Originallizenz (GNU/GPL3)."
+
+#: views/scripts/index/faq.phtml:86
+msgid "FAQuestion11"
+msgstr "Muss ich das Tool auf meinen Computer laden?"
+
+#: views/scripts/index/faq.phtml:88
+msgid "FAQanswer11"
+msgstr "Nein, TraduXio ist online zugänglich, es handelt sich um ein Internet-Tool."
+
+#: views/scripts/index/faq.phtml:93
+msgid "FAQuestion12"
+msgstr "Dient TraduXio der Werbung?"
+
+#: views/scripts/index/faq.phtml:95
+msgid "FAQanswer12"
+msgstr "Nein. Es handelt sich um eine Beitragsplattform und ein Netzwerk, das Nutzer/Übersetzer weltweit miteinander in Kontakt treten lässt. Sie entscheiden, ob Sie den Zugriff auf Ihre Übersetzungen ermöglichen, und wenn ja, in welcher Form und unter welchen legalen Bestimmungen. Es steht Ihnen frei, Ihre Übersetzungen zu löschen, und Sie behalten jederzeit die Kontrolle über Ihre Daten."
+
+#: views/scripts/index/faq.phtml:101
+msgid "FAQuestion13"
+msgstr "Wozu benötigt man ein spezielles, für die literarische Übersetzung konzipiertes Tool?"
+
+#: views/scripts/index/faq.phtml:103
+msgid "FAQanswer13"
+msgstr "Auch wenn maschinell erstellte Übersetzungen und Translation Memory-Datenbanken in der Geschäftswelt verwendet werden, eignen sie sich selten oder nur eingeschränkt für die Übersetzung kulturell hochwertiger Texte. In der Philosophie, der Literatur oder auch bei historischen Texten müssen Übersetzer darauf achten, dass die wichtigsten Faktoren de"
+
+#: views/scripts/index/faq.phtml:109
+msgid "FAQuestion14"
+msgstr "Wer steht hinter TraduXio?"
+
+#: views/scripts/index/faq.phtml:111
+msgid "FAQanswer14"
+msgstr "Das Projekt wurde von der französischen NRO “Zanchin” (“association loi 1901”) konzipiert und verwaltet. Sie hat ihren Sitz in Paris. Die wissenschaftliche Leitung obliegt dem Tech-Cico-Department der Technologischen Universität von Troyes (Frankreich). Weitere Partner (DGLFLF, UNESCO, usw.) nehmen an dem Projekt teil oder unterstützen es in finanzieller/institutioneller Hinsicht."
+
+#: views/scripts/index/register.phtml:5
+msgid "Registration"
+msgstr "Anmelden"
+
+#: views/scripts/index/register.phtml:8
+msgid "Your invitation request has been successfully sent; thank you for your interest, we will answer you as soon as possible."
+msgstr "Ihre Einladung wurde erfolgreich versendet. Vielen Dank für Ihr Interesse, wir bemühen uns, Ihnen schnellstmöglich zu antworten."
+
+#: views/scripts/index/register.phtml:12
+#, php-format
+msgid ""
+"We encountered an error sending your message. Here is the error message : %1$s.\n"
+"Sorry for the inconvenience, we're trying hard to fix it."
+msgstr ""
+"Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Fehlermeldung: %1$s.\n"
+"Wir bemühen uns den Fehler schnellstmöglich zu beheben."
+
+#: views/scripts/index/register.phtml:16
+msgid "REGISTRATION_PHRASE"
+msgstr "Um sich bei TraduXio anzumelden, müssen Sie von einem Mitglied dazu eingeladen werden.<br>Tragen Sie in die Felder Ihren Namen, Vornamen sowie Ihre E-MAil-Adresse ein und erklären Sie Ihr Interesse an TraduXio.<br>Wir senden Ihnen eine Einladung zu."
+
+#: views/scripts/index/tutorial.phtml:139
+msgid "PAGETITLE_Tutorial"
+msgstr "Nutzerhinweise"
+
+#~ msgid "indexlogoEN"
+#~ msgstr "indexlogoDE"
+
+#, fuzzy
+#~ msgid "fraseEN"
+#~ msgstr "frase_de"
+#~ msgid "logoEN"
+#~ msgstr "logoDE"
+#~ msgid "Back to work"
+#~ msgstr "Back to work"
+#~ msgid "A propos de %1$s"
+#~ msgstr "Über %1$s"
+#~ msgid "Your surname"
+#~ msgstr "Ihr Name"
+#~ msgid ""
+#~ "The application %1$s has been developed by the %2$s association and the %3"
+#~ "$s laboratory, supported by %4$s and by the %5$s."
+#~ msgstr ""
+#~ "Die Software %1$s wurde von der Gesellschaft %2$s und dem Labor %3 entwickelt"
+#~ "$s , mit Unterstützung von %4$s und %5$s."
+#~ msgid "Translating cultural texts"
+#~ msgstr "Übersetzungen literarischer, philosophischer und historischer Texte"
+#~ msgid "traduxio_en"
+#~ msgstr "traduxio_de"
+#~ msgid "TRADUXIO_DEFINITION"
+#~ msgstr "die Webseite für Übersetzer kultureller Texte"
+#~ msgid "New text"
+#~ msgstr "Neuer Text"
+#~ msgid "Feedback"
+#~ msgstr "Kontakt"
+#~ msgid "Latest News"
+#~ msgstr "Aktuelles"
+#~ msgid "%1$d %2$s ago"
+#~ msgstr "vor %1$d %2$s"
+
+#, fuzzy
+#~ msgid "Create Translation"
+#~ msgstr "Übersetzung erstellen"
+#~ msgid "Manage PRV"
+#~ msgstr "Optionen verwalten"
+#~ msgid "HIDE BLOCKS"
+#~ msgstr "BLOCKS AUSBLENDEN"
+#~ msgid "SHOW BLOCKS"
+#~ msgstr "BLOCKS EINBLENDEN"
+#~ msgid "\"%1$s\", the text has been modified"
+#~ msgstr "\"%1$s\", der Text wurde geändert"
+#~ msgid "\"%1$s\", translation of %2$s, has been modified"
+#~ msgstr "\"%1$s\", die Übersetzung von %2$s wurde geändert"
+#~ msgid "\"%1$s\" (%2$s) tag for %3$s has been modified by %4$s"
+#~ msgstr "\"%1$s\" (%2$s) Tag für %3$s geändert von %4$s"
+#~ msgid "%1$s: text created by <i>%2$s</i>."
+#~ msgstr "%1$s: Text erstellt von  <i>%2$s</i>."
+#~ msgid "LANGSEL_en"
+#~ msgstr "English"
+#~ msgid "LANGSEL_fr"
+#~ msgstr "Français"
+#~ msgid "LANGSEL_it"
+#~ msgstr "Italiano"
+#~ msgid "Original Text"
+#~ msgstr "Originaltext"
+#~ msgid "Send your feedback"
+#~ msgstr "Senden Sie Ihre Nachricht"
+#~ msgid "Edit Text PRV"
+#~ msgstr "Textoptionen ändern"
+#~ msgid "Translation"
+#~ msgstr "Übersetzung"
+#~ msgid "fr_FR"
+#~ msgstr "Französisch"
+#~ msgid "it_IT"
+#~ msgstr "Italienisch"
+#~ msgid "Genre"
+#~ msgstr "Genre"
+#~ msgid "Manage Text's Privileges"
+#~ msgstr "Textoptionen verwalten"
+#~ msgid "Original text"
+#~ msgstr "Originaltext"
+#~ msgid "This translation"
+#~ msgstr "Diese Übersetzung"
+#~ msgid "Manage Text's privileges"
+#~ msgstr "Textoptionen verwalten"
+#~ msgid "has been developed by the"
+#~ msgstr "wurde entwickelt von"
+#~ msgid "association and the"
+#~ msgstr "der Gesellschaft und dem"
+
+#, fuzzy
+#~ msgid "laboratory, supported by "
+#~ msgstr "Labor, unterstützt von"
+#~ msgid "and by the"
+#~ msgstr "und von"
+#~ msgid "Oeuvres"
+#~ msgstr "Werke"
+
