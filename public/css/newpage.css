@@ -220,6 +220,7 @@ div.show-tag-area{
 div.tag-line{
 width:96%;
 margin:auto;}
+div#show-tag,div#hide-tag{margin:auto;}
 
 #book{
     width:96%;
@@ -344,7 +345,7 @@ left:0;
 }*/
 #container-black #content{
 height:100%;
-padding:30px;
+padding:5px 30px 30px;
 }
 
 a img{
@@ -545,4 +546,38 @@ cursor:pointer;}
 width:100px;
 }
 
+div#show-tag{
+background:transparent url(../images/down.png) no-repeat;
+height:18px;
+width:18x;
+}
+
+div#hide-tag{
+background:transparent url(../images/up.png) no-repeat;
+height:18px;
+width:18x;
+}
+
+#header-navigation form{float:right;}
+#header-navigation ul{float:left;}
+input#search-bar{
+background:transparent url(../images/search.png) no-repeat;
+border:medium none;
+height:24px;
+padding:0px 25px 0px 25px;
+width:170px;
+}
+
+div#search-div{
+position:relative;}
+#close-search{
+position:absolute;
+right:1px;
+top:1px;
+cursor:pointer;}
+#lens-search{
+position:absolute;
+left:1px;
+top:1px;
+cursor:pointer;}
 /* END SLIDE MENU */

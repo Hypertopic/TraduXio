@@ -4,6 +4,7 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.scrollTo-min.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.jeditable.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/lib/selectedText.min.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/nl2br.js')); ?>
 <?php $this->layout()->setLayout('layout-black');?>
 
@@ -46,7 +47,8 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 
 
 <!-------------------------------!-->
-<div class="tag-line clear">
+<div id="tests"></div>
+<div class="tag-line clear"><div id="hide-tag"></div>
     <div class="show-tag-area" id="orig-tag">
 		 <?php echo $this->tagbody; ?>
     </div>

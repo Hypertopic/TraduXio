@@ -187,7 +187,8 @@ var event;
                 $('#editbtn').toggleClass('on',true);
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
                 $('#work span.block').after('<span class="merge" title="Merge here"></span>');
-                $('#work span.block.show span.cut:last-child').remove();			    
+                $('#work span.block.show span.cut:last-child').remove();	
+                $('#work div.text span.merge:last-child').remove();			    
             }    
 			window.state = mode;
         },
@@ -655,8 +656,7 @@ var event;
                 }
             });
         });
-        
-        $('#work .segment').live('hover',function(){$(this).attr('title','Right click to add a comment for this segment of the text');});
+                
         /*
 		$('textarea.block.show.editable').live('change',function(){
 			$('#savebtn').toggleClass('on',true);
@@ -718,7 +718,18 @@ var event;
 			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\" value=\""+content+"\" />");
 			$("#"+$(this).attr('id')).focus();
 		});
-        
+        $('#show-tag').live('click',function(){$('div.show-tag-area').show(50);$(this).attr('id','hide-tag');});
+        $('#hide-tag').live('click',function(){$('div.show-tag-area').hide(50);$(this).attr('id','show-tag');});
+
+		$("div#work div.text").selectedText({
+			min: 2,
+			max: 1000,
+			selecting: function(text) {$('input#search-bar').val(text);},
+			stop: function(text) {$('input#search-bar').val(text);}
+		});
+		
+		$("#lens-search").click();
+		$("img#close-search").live('click',function(){$("input#search-bar").val('');});
     });
     
     

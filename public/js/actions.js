@@ -74,7 +74,7 @@ var state;
 	};
     
     $.update = function(action,data){
-        alert('update '+action);
+       // alert('update '+action);
         switch(action)
         {
         case 'extend':
@@ -99,7 +99,7 @@ var state;
 		case 'update-orig':
 			window.ajaxData.work[data.el]=data.val;
 		break;
-		case 'update-tr':alert(data.el);alert(data.val);$.updateTranslation(data.el,data.val);
+		case 'update-tr':$.updateTranslation(data.el,data.val);
 		break;
         default:
           
