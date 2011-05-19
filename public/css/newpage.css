@@ -560,7 +560,7 @@ width:18x;
 
 #header-navigation form{float:right;}
 #header-navigation ul{float:left;}
-input#search-bar{
+input#query-value{
 background:transparent url(../images/search.png) no-repeat;
 border:medium none;
 height:24px;

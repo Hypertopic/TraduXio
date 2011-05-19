@@ -122,6 +122,8 @@ class Model_Work extends Model_Taggable
             ->where('work.id IN (?)',$ids));
             //end rtl
         }
+        Tdxio_Log::info($works,'testtest');
+        foreach($works as $key=>$w){$works[$key]['langname']=__($w['language']);}
         if(!is_array($id)){
             return $works[0];
         }else {

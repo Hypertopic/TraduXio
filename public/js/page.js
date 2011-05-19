@@ -73,9 +73,19 @@ var event;
             return newArray;
         }
     }
-        
+	
+	
+	tdxio.textSearch = {
+          getConcord : function() {
+            if (typeof tdxio.textSearch.concord!='undefined') {
+                tdxio.textSearch.concord.close();
+            }
+            tdxio.textSearch.concord = window.open("","concord") ;
+        }
+    }; 
+    
     tdxio.page = {
-		
+
 		getBlocked : function(){return blocked;},
 		setBlocked : function(val){blocked = val;},
     
@@ -136,7 +146,7 @@ var event;
         
         redirect: function(address){
 			var referer = document.location.href.replace(tdxio.baseUrl,"");
-			alert(referer);
+			//alert(referer);
 			address = address+"?referer="+referer;
 			window.location.replace(address);
 		},
@@ -252,6 +262,7 @@ var event;
                         if(data.work.Interpretations[j].work.id==trId)
                             trWork = data.work.Interpretations[j];
                     }
+                    $("input[name=destlang]").val(trWork.work.language);
                     $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author:'[]');
                     $('#translation .work-title span.title').html(trWork.work.title);                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
@@ -424,6 +435,9 @@ var event;
 					ajaxData = rdata;
 					tdxio.page.displayWork(rdata,trId,false,begin,end);
 					tdxio.page.resize();
+					$("input[name=srclang]").val(rdata.work.language);
+					
+					//alert($("input[name=destlang]").val());
 				},
 				error: function() {
 					alert("error reading the work");
@@ -720,7 +734,7 @@ var event;
 		});
         $('#show-tag').live('click',function(){$('div.show-tag-area').show(50);$(this).attr('id','hide-tag');});
         $('#hide-tag').live('click',function(){$('div.show-tag-area').hide(50);$(this).attr('id','show-tag');});
-
+/*
 		$("div#work div.text").selectedText({
 			min: 2,
 			max: 1000,
@@ -730,6 +744,19 @@ var event;
 		
 		$("#lens-search").click();
 		$("img#close-search").live('click',function(){$("input#search-bar").val('');});
+		* */
+		
+		$("div#work div.text").selectedText({
+			min: 2,
+			max: 1000,
+			selecting: function(text) {$('input#query-value').val(text);},
+			stop: function(text) {$('input#query-value').val(text);}
+		});
+		
+		$("#lens-search").click(function(){$("#concord-query").submit();});
+		$("img#close-search").live('click',function(){$("input#query-value").val('');});
+		
+        $("#concord-query").submit(tdxio.textSearch.getConcord);
     });
     
     

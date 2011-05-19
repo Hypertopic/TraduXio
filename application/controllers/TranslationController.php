@@ -324,6 +324,7 @@ class TranslationController extends Tdxio_Controller_Abstract
                 foreach ($values as $name=>$value) {
                     $$name=$value;
                     $this->view->$name=$value;
+                    Tdxio_Log::info($$name,$name);
                 }
                 //$src_filter="release:2008/book:10";
                 //extract($values);
@@ -351,6 +352,10 @@ class TranslationController extends Tdxio_Controller_Abstract
                 }
                 //Tdxio_Log::info($metadatas,"metadatas");
                 //$this->view->metadatas=$metadatas;
+                if(!isset($transId))$transId=null;
+                if(!isset($from))$from=null;
+				if(empty($filters))$filters=array();
+                
                 $blocks=$model->search($query,$transId,$from,$filters);
                 if ($blocks) {
                     $criterii_translation1=array();
@@ -382,12 +387,10 @@ class TranslationController extends Tdxio_Controller_Abstract
                         Tdxio_Log::info($this->view->metadata[$type],"criterii $type");
                     }
                 }
-                //$this->view->texts=$texts;
                 $search=array('query'=>$query,'from'=>$from);
                 if ($viewFilters) $search['filters']=$viewFilters;
                 $this->view->filters=$filters;
                 $this->view->currentSearch=$search;
-                Tdxio_Log::info(count($texts));
                 $tq=$model->getQuery($query);
                 $this->view->transQuery=$tq;
                 Tdxio_Log::info($query,'query, '.count($blocks).' results');

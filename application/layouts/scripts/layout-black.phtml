@@ -27,12 +27,17 @@
                     <li> <a href="<?php echo $this->makeUrl('/work/my'); ?>"><?php echo __('My Translations'); ?></a></li>
                     <li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concorder'); ?></a></li>                
                 </ul>
-                <form><div id="search-div"><img id="lens-search" src="<?php echo $this->makeUrl('/images/lens.png');?>"/><input id="search-bar"><img id="close-search" src="<?php echo $this->makeUrl('/images/closeS.png');?>"/></div></form>
-                <!-- To keep urls consistent with the applications router (right now we
-                     are using the default router), we will employ the use of the url
-                     view helper
-                     http://framework.zend.com/manual/en/zend.view.helpers.html
-                     -->
+     
+                <form id="concord-query" action="<?php echo $this->makeUrl('/translation/concord'); ?>" method="post" target="concord" onsubmit="getConcord()">
+                <input type="hidden" name="srclang" />
+				<input type="hidden" name="destlang" />
+				<input type="hidden" name="style" value="pop"/>
+				<div id="search-div"><img id="lens-search" src="<?php echo $this->makeUrl('/images/lens.png');?>"/>
+				<input name="query" id="query-value" />
+				<img id="close-search" src="<?php echo $this->makeUrl('/images/closeS.png');?>"/>
+				</div>
+				</form>
+
             </div>        
             <!--<div id="header-langsel">
                 <?php // echo $this->langform; ?>
