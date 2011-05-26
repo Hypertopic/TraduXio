@@ -220,7 +220,7 @@ msgstr "Alle Mitglieder"
 
 #: forms/AddPrivilege.php:104
 msgid "Privilege not added: you can't grant creation/edition privileges to unregistered users."
-msgstr "Option kann nicht hinzugefügt werden: Optionen zum Erstellen/Ändern für nicht registrierte Nutzer werden nicht autorisiert."
+msgstr "Option kann nicht hinzugefügt werden:Optionen zum Erstellen/Ändern für nicht registrierte Nutzer werden nicht autorisiert."
 
 #: forms/TranslationEdit.php:88
 msgid "Save and quit"
@@ -2355,7 +2355,7 @@ msgstr "Neuen Text ablegen"
 #: views/scripts/work/index.phtml:44
 #, php-format
 msgid "New translations in %1$s"
-msgstr "Neue Übersetzungen in %1$s"
+msgstr "Neue Übersetzungen Auf %1$s"
 
 #: views/scripts/work/index.phtml:58
 msgid "PAGETITLE_Homepage"
@@ -2499,7 +2499,7 @@ msgid ""
 msgstr ""
 "Vergleichen\n"
 " Austauschen\n"
-" Deuten"
+" Interpretieren"
 
 #: views/scripts/index/copyright.phtml:5
 msgid "Report a copyright abuse"
@@ -2527,7 +2527,7 @@ msgid ""
 "We encountered an error sending your message. Here is the error message : %1$s. \n"
 "Sorry for the inconvenience, we're trying hard to fix it."
 msgstr ""
-"Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Fehlermeldung: %1$s. \n"
+"Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Fehlermeldung:%1$s. \n"
 "Wir bemühen uns den Fehler schnellstmöglich zu beheben."
 
 #: views/scripts/index/copyright.phtml:21
@@ -2549,7 +2549,7 @@ msgstr "Wofür steht TraduXio?"
 
 #: views/scripts/index/faq.phtml:12
 msgid "FAQanswer1"
-msgstr "TraduXio ist eine Austauschplattform für Übersetzer kultureller Texte.<br> Für weitere Informationen besuchen Sie bitte die Seite %1$s auf SourceForge %2$s"
+msgstr "TraduXio ist eine Austauschplattform für Übersetzer kultureller Texte.<br> Für weitere Informationen besuchen Sie bitte unsere Seite %1$s auf SourceForge %2$s"
 
 #: views/scripts/index/faq.phtml:17
 msgid "FAQuestion2"
@@ -2557,7 +2557,7 @@ msgstr "Wie funktioniert TraduXio?"
 
 #: views/scripts/index/faq.phtml:18
 msgid "FAQanswer2"
-msgstr "%1$s Hier %2$s finden Sie \"How To\" Erläuterungen über TraduXios Funktionalitäten."
+msgstr "%1$s Hier %2$s finden Sie Erläuterungen über TraduXios Funktionalitäten."
 
 #: views/scripts/index/faq.phtml:24
 msgid "FAQuestion3"
@@ -2669,7 +2669,7 @@ msgid ""
 "We encountered an error sending your message. Here is the error message : %1$s.\n"
 "Sorry for the inconvenience, we're trying hard to fix it."
 msgstr ""
-"Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Fehlermeldung: %1$s.\n"
+"Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Fehlermeldung:%1$s.\n"
 "Wir bemühen uns den Fehler schnellstmöglich zu beheben."
 
 #: views/scripts/index/register.phtml:16
