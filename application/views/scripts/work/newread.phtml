@@ -18,16 +18,12 @@ $HTmessage = __("You can't delete this text because it has some translations. De
 $askConfirm = __("WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?");
 $dir = (($this->work['rtl']==1)?'dir="rtl"':''); 
 ?>
-<div id="test"></div>
-<div class="background">
-
-<div id="myslidemenu" class="jqueryslidemenu clear">
+<div id="test"></div><div id="myslidemenu" class="jqueryslidemenu clear">
     <ul>
         <li><a href="#"><div id='options'></div></a>
             <ul>
                 <li id="translate"><a <?php echo $href.' '.($this->showTranslate?'':$NRattrs); ?>><?php echo __('Create a translation'); ?></a></li>
                 <li id="extend"><a <?php echo $href_extend.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Continue text insertion'); ?></a></li>
-                <li id="edit"><a <?php echo $href_edit.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Edit the text'); ?></a>    </li>
                 <?php if($this->canManage): ?>
                 <li id="manage"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>
                 <?php endif; ?>
@@ -44,7 +40,8 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         </li>
     </ul>
 </div>
-
+<div class="background">
+<div id="new-translation"><div id="form-title"><?php echo __("Create a translation");?></div></div>
 
 <!-------------------------------!-->
 <div id="tests"></div>
@@ -69,11 +66,19 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
             <a href="#"><img class="turn-page" src="<?php echo $this->makeUrl('/images/previous.png'); ?>"/></a>
         </div>
         <div class="text-container center" id="work">
+        <div class="icons" id="orig-icons">
+		<div class="extbtn" title="<?php echo __("Extend the text"); ?>"></div>
+		<div class="print" title="<?php echo __("Print the original text"); ?>"></div>
+		<div class="manage" title="<?php echo __("Manage privileges"); ?>"></div>
+		<div class="history" title="<?php echo __("History of modifications"); ?>"></div>
+		<div class="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
+		</div>
         <div class="work-title red"> <?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
             <span class="author" id="orig-author"><?php echo $author ?></span>
             ,
             <span class="title" id="orig-title"><?php echo $this->work['title']; ?></span>
-        </div>
+        </div> 
+        
        <!-- <div class="language TBspaced red"><?php //echo __($this->work['language']); ?></div> !-->
         <div class="text show">
             <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
@@ -119,15 +124,21 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     <div class="clear">
         <div class="Lborder middle"></div>
         <div class="text-container center" id="translation">
+        	<div class="icons" id="tr-icons">
+		<div id="editbtn" title="<?php echo __("Edit mode"); ?>"></div>
+		<div class="print" title="<?php echo __("Print this translation"); ?>"></div>
+		<div class="manage" title="<?php echo __("Manage privileges"); ?>"></div>
+		<div class="history" title="<?php echo __("History of modifications"); ?>"></div>
+		<div class="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
+		</div>
+
+
         <div class="work-title red"> 
             <span class="author" id="tr-author"></span>
             ,
             <span class="title" id="tr-title"></span>
         </div>
-        <div id="icons">
-		<div id="editbtn" title="<?php echo __("Edit mode"); ?>"></div>
-		<div id="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
-		</div>
+        
         <div class="text show">
         <?php if(!$this->trId):?>
         <span id="create"><?php echo __('Create a translation'); ?></span>

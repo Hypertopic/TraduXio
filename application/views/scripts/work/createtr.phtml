@@ -1,0 +1,8 @@
+<?php
+$this->layout()->setLayout('jsonlayout');
+
+$data=array('response'=>$this->response,'newId'=>$this->newId,'values'=> $this->values,'message'=>$this->message);
+
+Tdxio_Log::info(Zend_Json::encode($data),'json createtr data');
+
+echo Zend_Json::encode($data); 

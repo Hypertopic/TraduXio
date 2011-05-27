@@ -15,6 +15,7 @@ var docHeight;
 var blocked=false;
 var state = 'reset';//'reset' 'editable'
 var trBlocks;
+var user;
 var event;
 
 (function($) {
@@ -183,7 +184,7 @@ var event;
                
 				//$("#edit-form").replaceWith($("#edit-form").html());
                 $('#translation .block').toggleClass('editable',false);
-                $('#icons div').toggleClass('on',false);
+                $('#tr-icons div').toggleClass('on',false);
                 $('.cut').remove();
                 $('.merge').remove();
             }else if(mode=='editable'){
@@ -360,7 +361,7 @@ var event;
         displayOnglets: function(trls){
             var N = trls.length;
             var lineWidth = $("#right-page").width()-30;
-            $('span#more').css('visibility','hidden');
+  //          $('span#more').css('visibility','hidden');
             $('.onglets li').css('z-index',-100);
             $('.onglets li').css('visibility','hidden'); 
             var totWidth = 0;
@@ -386,7 +387,7 @@ var event;
             }//alert(totWidth+' <-tot : line->'+lineWidth);
             if(i<N){
                 nextHiddenId = trls[i].work.id;
-                $('span#more').css('visibility','visible');
+           //     $('span#more').css('visibility','visible');
                // $('span#more').wrap('<a href="#tr'+trId+'" />');                
             }
         },
@@ -430,7 +431,8 @@ var event;
 						//trId = (trId=='')?rdata.work.Interpretations[0].work.id:trId;
 						translations = tdxio.array.trShift(rdata.work.Interpretations.slice(),trId,true);
 						tdxio.page.displayOnglets(translations);
-						$("#tr-tag").append(rdata.tagbody);
+						if($("#tr-tag .add-tag").length==0)
+							$("#tr-tag").append(rdata.tagbody);
 					}
 					ajaxData = rdata;
 					tdxio.page.displayWork(rdata,trId,false,begin,end);
@@ -446,6 +448,7 @@ var event;
 		},
 		
 		gotoTransl: function(newId){
+			document.location.hash="#tr"+newId;
             trId = newId;
             translations = tdxio.array.trShift(ajaxData.work.Interpretations.slice(),newId,true);
            /*tdxio.page.displayOnglets(translations);    */
@@ -515,8 +518,10 @@ var event;
        
         $('#text').empty();
         
-        $('span#create').live('click',function(){
-            alert('Create translation');
+        $('span#create').live('click',function(event){
+			event.preventDefault();
+			window.$.getForm('translate');
+            return false;
         });
         
         $('ul.onglets li').live('click',function(){
@@ -524,12 +529,20 @@ var event;
 			tdxio.page.gotoTransl(this.id.split("-")[1]);
         });
         
-        $('span#more').click(function(){
+      /*  $('span#more').click(function(){ // this was to make the "#more click" show other translations titles
 			if(nextHiddenId!=null)
                 translations = tdxio.array.trShift(translations,nextHiddenId,false);
             tdxio.page.displayOnglets(translations);
         });
-        
+*/        
+		$('span#more').click(function(event){
+			event.preventDefault();
+			if( $("div#new-translation").css('visibility')=='hidden'){
+				window.$.getForm('translate');
+			}
+			return false;
+		});
+		
 		var url;
         var action;
         var idstr = document.location.pathname.match(/\/id\/\d+/);
@@ -545,7 +558,7 @@ var event;
 			var textId = ($(this).parent('div').parent('div.text-container').attr('id')=='work')?window.workId:window.trId;
 			var value = $(this).val();
 			var elName = $(this).attr('class');
-			var params= elName == 'author'?{'author':value}:{'title':value};
+			var params= (elName.match('author'))?{'author':value}:{'title':value};
 			if(e.originalEvent.type == "change"){
 				$.ajax({
 					type: "post",
@@ -571,67 +584,26 @@ var event;
 			$(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
 		});
 		
-		$("ul li#extend a").live('click',function(event){
+		
+		$(".extbtn").live('click',function(event){
+		//$("ul li#extend a").live('click',function(event){
 			event.preventDefault();
-			/* if($(this).attr('class')=='idle'){
-			window.location.replace(tdxio.baseUrl+"/login/index");
-			}*/
-			url = $(this).attr("href");
-			action=url.split("/work/")[1].split("/")[0];
-			//alert(url);
-			$.ajax({
-				type:"get",
-				url:encodeURI(tdxio.baseUrl+"/work/getform"),
-				dataType: "json",
-				data:{'type':action},
-				success: function(rdata,status){
-					if (rdata.response==false) {
-						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
-						else alert(rdata.message.code);
-					}else{
-						window.$.transform(action,rdata);
-					}
-				},
-				error: function() {
-					alert("error getting the form");
-				}
-			});   
+			action="extend";
+			window.$.getForm(action);
 			return false;
 		});
-		$("form#extend-form").live("submit",function() {
+		
+		$("form#extend-form").live("submit",function(event) {
+           event.preventDefault();
+			window.$.submitForm($(this),"ajaxextend",{'id':workId});
            
-           url = tdxio.baseUrl+"/work/ajax"+(this.id.split('-')[0]);
-     //      alert('submit '+url);
-           
-        // submit the form 
-            $(this).ajaxSubmit({
-                type: "post",
-                url: encodeURI(url),
-                dataType: "json",
-                data: {'id':workId},
-                clearForm: true,
-                success:function(rdata,status){
-                    if (rdata.response==false) {//error somewhere
-                        if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
-                        else alert(rdata.message.code);
-                    }else {
-                        window.$.update(action,rdata);
-                    }
-                },
-                error:function() {
-                    alert("error posting the form");
-                },
-                complete:function() {
-                    //alert('complete');    
-                }
-            });
             //alert('after ajax'); 
-            //event.preventDefault();
+            //
             return false; 
         });
         
 	   $("#editbtn").click(function(){
-        //    $('#icons div').toggleClass('on');
+        //    $('#tr-icons div').toggleClass('on');
            var active = $(this).attr('class')=='on';
          //   $('.text').toggleClass('show');
          //   $('.block').toggleClass('show');
@@ -711,8 +683,9 @@ var event;
 				e.preventDefault();
 			}else if(e.keyCode == 33){
 				if($("#"+this.id).prev().length)
+				{alert('prev');
 					$("#"+this.id).prev().click();
-				else if($("#prev-page .turn-page").length>0){
+				}else if($("#prev-page .turn-page").length>0){
 					$("#prev-page .turn-page").click();			
 					$("#translation .block.show.editable:last").click();
 				}
@@ -757,6 +730,35 @@ var event;
 		$("img#close-search").live('click',function(){$("input#query-value").val('');});
 		
         $("#concord-query").submit(tdxio.textSearch.getConcord);
+        
+        $("form#translate-form").live("submit",function(event) {
+            event.preventDefault();
+           // alert('form submit');
+            window.event = event;
+			window.$.submitForm($(this),"createtr",{'id':workId});
+            //alert('after ajax'); 
+            //event.preventDefault();
+            return false; 
+        }); 
+       /* $("form#translate-form").live("reset",function(event) {
+            event.preventDefault();
+            $("form#translate-form").remove();
+            $("div#new-translation").css('visibility','hidden');
+            return false; 
+        });*/
+        
+     /*   $(".show-menu").live("click",function(){$(this).toggleClass('selected');});*/
+		$("#extend-form .closeimg").live('click',function(){
+			$("#extend-form").remove();
+		});
+		$("#new-translation .closeimg").live('click',function(){
+			$("#translate-form").remove();
+			$("div#new-translation").css('visibility','hidden');			
+		});
+		
+		$("#tr-icons .delbtn").live('click',function(){
+			window.$.deleteWork(window.trId);
+		});
     });
     
     

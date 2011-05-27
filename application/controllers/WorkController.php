@@ -218,6 +218,46 @@ class WorkController extends Tdxio_Controller_Abstract
         Tdxio_Log::info($trWork,'ajaxread2');
     }
     
+    public function createtrAction(){
+		$request = $this->getRequest();
+		$id = $request->getParam('id');
+        $model = $this->_getModel();     
+        if (!$id || !$origWork=$model->fetchOriginalWork($id)) {
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist.", $id)), 404);
+        }
+        $form = new Form_Translate();
+        if ($request->isPost()) {
+			if ($form->isValid($request->getPost())) {				
+				$test = $form->isValid($request->getPost());
+				Tdxio_Log::info($test,'testtesttest');
+				$data=$request->getPost();
+				Tdxio_Log::info($data,'ajax new translation data');
+				$userid = Tdxio_Auth::getUserName();                
+				$data['creator']=$userid;
+				unset($data['id']);
+				$newId=$model->createTranslation($data,$id);
+				if(!is_null($newId)){
+					$histModel = new Model_History();        
+					$histModel->addHistory($newId,5);   
+					$this->view->response = true;
+					$this->view->newId = $newId;
+					$this->view->values = $data; 
+					$this->view->message = array('code'=>0,'text'=> __("OK"));
+				}else{
+					$this->view->response = false;
+					$this->view->newId = null;   
+					$this->view->values = null;  
+					$this->view->message = array('code' => 1,'text'=>__("DB not modified"));
+				}
+			}else{
+				$this->view->response = false;
+				$this->view->newId = null;    
+				$this->view->values = null;  
+				$this->view->message = array('code' => 3,'text'=>__("Invalid form. Please fill all the required (*) fields."));
+			}
+		}
+	}
+    
     public function translateAction(){
         $request = $this->getRequest();
         $id = $request->getParam('id');
@@ -230,6 +270,7 @@ class WorkController extends Tdxio_Controller_Abstract
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $data=$form->getValues();
+                Tdxio_Log::info($data,'new translation data');
                 $userid = Tdxio_Auth::getUserName();                
                 $data['creator']=$userid;
                 $newId=$model->createTranslation($data,$id);
@@ -256,6 +297,7 @@ class WorkController extends Tdxio_Controller_Abstract
             Tdxio_Log::info($srcLangs,'my translations');       
         }
     }
+    
     public function getformAction(){
         $request = $this->getRequest();
         $type=$request->getParam('type');
@@ -288,22 +330,28 @@ class WorkController extends Tdxio_Controller_Abstract
             if ($this->getRequest()->isPost())
             {
                 $values=$request->getPost();
-                $data = array('insert_text'=>$values['extendtext']);
-                Tdxio_Log::info($data,'valori form');                
+                if($values['extendtext']!=null){
+					$data = array('insert_text'=>$values['extendtext']);
+					Tdxio_Log::info($data,'valori form');                
 
-                $result=$model->update($data,$id);
-                if($result>0){
-                    $histModel = new Model_History();
-                    $histModel->addHistory($id,1);  
-                    $this->view->response=true;
-                    $this->view->addedText = $values['extendtext'];
-                    $this->view->message = array('code'=>0,'text'=> __("OK"));
+					$result=$model->update($data,$id);
+					if($result>0){
+						$histModel = new Model_History();
+						$histModel->addHistory($id,1);  
+						$this->view->response=true;
+						$this->view->addedText = $values['extendtext'];
+						$this->view->message = array('code'=>0,'text'=> __("OK"));
 
-                }else{
-                    $this->view->response = false;
-                    $this->view->addedText = '';    
-                    $this->view->message = array('code' => 1,'text'=>__("DB not modified"));
-                }
+					}else{
+						$this->view->response = false;
+						$this->view->addedText = '';    
+						$this->view->message = array('code' => 1,'text'=>__("DB not modified"));
+					}
+				}else{
+					$this->view->response = false;
+					$this->view->addedText = '';    
+					$this->view->message = array('code' => 3,'text'=>__("Invalid form. Please fill all the required (*) fields."));
+				}
             }
         }
     }
@@ -526,6 +574,31 @@ class WorkController extends Tdxio_Controller_Abstract
         elseif( $orig_id<0 ){ return $this->_helper->redirector('index'); }
         else{ return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$orig_id)); }        
     }
+    
+    public function ajaxdeleteAction(){
+        $request = $this->getRequest();
+        $id= $request->getParam('id');
+        $model=$this->_getModel();
+        if(!($model->hasTranslations($id))){$orig_id=$model->delete($id);}
+        
+        if( is_null($orig_id) ){ 	
+			$this->view->response = false;
+			$this->view->newId = $id;   
+			$this->view->values = null;  
+			$this->view->message = array('code' => 1,'text'=>__("Invalid work id.No works deleted."));
+		}
+        elseif( $orig_id<0 ){ 
+			$this->view->response = true;
+			$this->view->newId = $id;   
+			$this->view->values = null;  
+			$this->view->message = array('code' => 0,'text'=>__("Original Work deleted")); }
+        else{ 
+			$this->view->response = true;
+			$this->view->newId = $id;   
+			$this->view->values = null;  
+			$this->view->message = array('code' => 0,'text'=>__("Translation deleted")); }    
+			$this->_helper->viewRenderer('createtr');    
+    }
 
     public function historyAction(){
         $request = $this->getRequest();
@@ -620,7 +693,13 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         return true;
     }*/
-    
+  public function getuserAction(){
+		$request=$this->getRequest(); 
+		$id=$request->getParam('id'); 
+		$user = Tdxio_Auth::getUserName();
+		Tdxio_Log::info($user,'userr');
+		$this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'user'=>$user);
+	}
     
     public function getRule($request){
         $action = $request->action;
@@ -645,7 +724,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 if($request->isPost()){
                     $rule = array('privilege'=> 'create','work_id' => -1 );       
                 }else{$rule = array('privilege'=> 'create','work_id' => -1, 'notAllowed'=>true);} 
-                break; 
+                break;
+			case 'getuser': $rule = array('privilege'=> 'translate','work_id' => $resource_id);break;
             case 'translate':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'translate','work_id' => $resource_id);

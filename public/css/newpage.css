@@ -194,7 +194,7 @@ padding-top:10px;
 background-color:#585858;
 color:#DBDBDB;  
 padding:10px 10px 30px 10px;
-}
+position:relative;}
 
 .page-container{
     color:#585858; 
@@ -254,6 +254,8 @@ width:90%;
 min-height: 100%;
 position: relative;
 background-color:#585858;
+width:100%;
+min-width:800px;
 }
 
 div#options{
@@ -276,18 +278,20 @@ color:#929292;
 cursor:pointer;
 display:block;}
 
-#icons{
+.icons{
 position:absolute;
-right:0px;
+right:0;
 top:5px;
-float:right;
 }
+/*#orig-icons{left:0px;}
+#tr-icons{right:0px;}
+*/
 
-#icons div{
+.icons div{
 cursor:pointer;
 margin:0 0 10px 0;
-width: 30px;
-height:30px;
+width: 24px;
+height:24px;
 float:left;
 }
 
@@ -359,6 +363,7 @@ border:0;
 font: bold 12px Verdana;
 background: #585858;
 width: 100%;
+z-index:600;
 }
 
 .jqueryslidemenu ul{
@@ -473,10 +478,10 @@ background: transparent url(../images/saveoff.png) no-repeat;
 #savebtn.on{
 background: transparent url(../images/saveon.png) no-repeat; 
 }*/
-#delbtn{
+.delbtn{
 background: transparent url(../images/deloffsmall.png) no-repeat; 
 }
-#delbtn.on{
+.delbtn.on{
 background: transparent url(../images/delonsmall.png) no-repeat; 
 }
 
@@ -491,7 +496,7 @@ display:block;
 padding:5px 10px;
 }
 
-#translation{
+#translation,#work{
 position:relative;}
 
 #translation span.show,#translation textarea.show{
@@ -580,4 +585,56 @@ position:absolute;
 left:1px;
 top:1px;
 cursor:pointer;}
+
+.print{background:transparent url(../images/print.png) no-repeat;}
+.extbtn{background:transparent url(../images/extend.png) no-repeat;}
+.manage{background:transparent url(../images/manage.png) no-repeat;}
+.history{background:transparent url(../images/history.png) no-repeat;}
+
+#new-translation{
+position:fixed;
+top:20px;
+left:auto;
+background-color:#585858;
+padding:40px;
+visibility:hidden;
+z-index:100;
+border:solid 8px #E5E5E5;
+text-align:right;}
+
+#new-translation input[type="submit"],#new-translation input[type="reset"]{
+margin:40px 0 0 20px;
+float:right;}
+
+#new-translation input[type="text"]{
+width:200px;}
+
+#new-translation #form-title{
+padding:0 20px 30px;
+font-size:1.8em;
+font-variant:small-caps;
+text-align:center;
+}
+
+.tr-inputline{
+margin:0 0 10px;
+}
+
+#extend-form{
+margin:40px 0 0;
+text-align:left;
+position:relative;
+}
+#extend-form textarea{
+width:100%;
+}
+.closeimg{
+position:absolute;
+top:2px;
+right:2px;
+background:transparent url(../images/close16.png) no-repeat;
+height:16px;
+width:16px;
+}
 /* END SLIDE MENU */
+

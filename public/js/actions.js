@@ -26,6 +26,7 @@ var state;
         
         //append the form
         $('#work div.text').append(data.form);
+       // $('#work #extend-form').append('<span class="closeimg" title="Close"></span>');
           /*  $('#myForm').ajaxForm(function() { 
                 alert("The text has been successfully extended!"); 
 		});*/
@@ -37,7 +38,11 @@ var state;
 
           break;
         case 'translate':
-          break;
+        tdxio.page.setState('reset');
+        $('div#new-translation').css('visibility','visible');
+        $('div#new-translation').css('left',document.width/2-200);
+        $('div#new-translation').append(data.form);
+        break;
         default:
           
         }
@@ -77,7 +82,7 @@ var state;
        // alert('update '+action);
         switch(action)
         {
-        case 'extend':
+        case 'ajaxextend':
             $('form#extend-form').remove();
             var lastId = $("#work div.text span:last")[0].id;
           //  alert(lastId);
@@ -92,7 +97,39 @@ var state;
         case 'merge':    
             $.updateTranslation('blocks',data.newblocks);                        
             $.scrollTo($('#text'+workId+'-segment'+data.segToRed));
-        break;        
+        break;     
+        case 'delete': 
+			if(data.newId==window.trId){
+				window.translations.splice(0,1);//remove item from translations
+				var k;//remove item from ajaxData
+				var L = ajaxData.work.Interpretations.length;
+				for(k=0;k<L;k++){
+					if(ajaxData.work.Interpretations[k].work.id==data.newId){
+						ajaxData.work.Interpretations.splice(k,1);
+						break;
+					}
+				}//update trId
+				window.trId = (k-1)>=0?ajaxData.work.Interpretations[k-1].work.id:(k<L?ajaxData.work.Interpretations[k].work.id:'');
+				//remove onglet
+				$(".onglet#onglet-"+data.newId).remove();				
+				tdxio.page.gotoTransl(window.trId);
+			};
+        break; 
+        case 'createtr':  $("form#translate-form").remove();
+            $("div#new-translation").css('visibility','hidden'); 
+           
+			//1 add an element to the list of translations (window.translations): empty translation template
+			var lastTo = ajaxData.work.Sentences.pop().number;
+			var trlTemplate = {'blocks':[{'work_id': data.newId , 'original_work_id' : workId , 'translation':'' , 'from_segment':0,'to_segment':lastTo}],'work': {'id': data.newId,'title':data.values.title,'author':data.values.author,'language':data.values.language}};
+			trlTemplate=[trlTemplate].concat(window.translations);
+			alert('a');
+			window.$.getCurrentUser();alert('b');
+			tdxio.page.getWork();alert('c');
+			$("ul.onglets").prepend("<li class=\"onglet\" id=\"onglet-"+data.newId+"\"><span title=\""+data.values.language+"\"><a href=\"#tr"+data.newId+"\">"+data.values.translator+"</a></span></li>");
+			alert('d');
+			tdxio.page.gotoTransl(data.newId);
+			alert('e');
+            break;
         case 'translate':
         $.updateTranslation('block',data);
           break;
@@ -121,6 +158,49 @@ var state;
         window.end*/
         
     };
+    $.setUser = function(username){window.user = username;};
+    
+    $.getCurrentUser = function(){
+		var url = tdxio.baseUrl+"/work/getuser/";
+		var curUser;
+		$.ajax({
+			type: "get",
+			url: encodeURI(url),
+			dataType: "json",
+			data: {'id':window.workId},
+			async:false,
+			success:function(rdata){
+				if (rdata.response==false) {//error somewhere
+					if(rdata.message.code ==2){tdxio.page.redirect(rdata.message.text);}
+					else alert(rdata.message.code);
+				}else {
+					$.setUser(rdata.user); 					
+				}
+			},
+			error:function() {alert('Could not retrieve the current user');}		
+		});
+	};
+    
+    $.getForm = function(formType){
+		$.ajax({
+			type:"get",
+			url:encodeURI(tdxio.baseUrl+"/work/getform"),
+			dataType: "json",
+			data:{'type':formType},
+			async:false,
+			success: function(rdata,status){
+				if (rdata.response==false) {
+					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
+					else alert(rdata.message.code);
+				}else{
+					window.$.transform(formType,rdata);
+				}
+			},
+			error: function() {
+				alert("error getting the form");
+			}
+		});   
+	};
     
     $.submitTranslation = function(blockId){
 		var url = tdxio.baseUrl+"/translation/ajaxedit/id/"+window.trId;
@@ -146,8 +226,57 @@ var state;
                 complete:function() {
                     //alert('complete');    
                 }
-            });
-		
+            });		
+	};
+	
+	$.submitForm = function(form,action,params){
+		url = tdxio.baseUrl+"/work/"+action;
+		form.ajaxSubmit({
+			type: "post",
+			url: encodeURI(url),
+			dataType: "json",
+			data: params,
+			clearForm: true,
+			success:function(rdata,status){
+				if (rdata.response==false) {//error somewhere
+					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+					else alert(rdata.message.text);
+				}else {
+					window.$.update(action,rdata);
+				}
+			},
+			error:function() {
+				alert("error posting the form");
+			},
+			complete:function() {
+				//alert('complete');    
+			}
+		});
+	};
+	
+    $.deleteWork = function(id){
+		url = tdxio.baseUrl+"/work/ajaxdelete";
+		$.ajax({
+			type: "post",
+			url: encodeURI(url),
+			dataType: "json",
+			data: {'id':id},
+			success:function(rdata,status){
+				if (rdata.response==false) {//error somewhere
+					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+					else alert(rdata.message.text);
+					alert(rdata.message.text);
+				}else{
+					$.update('delete',rdata);
+				}
+			},
+			error:function() {
+				alert("error deleting the work");
+			},
+			complete:function() {
+				//alert('complete');    
+			}
+		});
 	};
     
     $(document).ready(function() {
