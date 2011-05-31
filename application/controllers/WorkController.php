@@ -581,13 +581,13 @@ class WorkController extends Tdxio_Controller_Abstract
         $model=$this->_getModel();
         if(!($model->hasTranslations($id))){$orig_id=$model->delete($id);}
         
-        if( is_null($orig_id) ){ 	
+        if( is_null($id) ){ 	
 			$this->view->response = false;
 			$this->view->newId = $id;   
 			$this->view->values = null;  
 			$this->view->message = array('code' => 1,'text'=>__("Invalid work id.No works deleted."));
 		}
-        elseif( $orig_id<0 ){ 
+        elseif( $id<0 ){ 
 			$this->view->response = true;
 			$this->view->newId = $id;   
 			$this->view->values = null;  

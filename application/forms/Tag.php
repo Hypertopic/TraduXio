@@ -55,7 +55,21 @@ class Form_Tag extends Form_Abstract
             //'class' => 'manage-select'
         ));
         $this->addElement($genre);        
-        
+		
+		$view = new Zend_View;
+		$baseUrl = $view->baseUrl();    
+        Tdxio_Log::info($baseUrl,'base url in form');
+
+		$this->addElement('image','closeimg',array(
+			'class' => 'closeimg',
+			'alt' => __('Close'),
+			'title' => __('Close'),
+			'value' => ($baseUrl.'/images/close16.png'),			
+			'decorators'=>array(
+			'ViewHelper',
+			array(array('data'=>'HtmlTag'), array('tag'=>'span')),
+		)));
+		
         // add the submit button
         $this->addElement('submit', 'tag_button', array(
             'decorators' => array('ViewHelper'),

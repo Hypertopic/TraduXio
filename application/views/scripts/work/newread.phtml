@@ -45,7 +45,39 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 
 <!-------------------------------!-->
 <div id="tests"></div>
-<div class="tag-line clear"><div id="hide-tag"></div>
+<div id="show-icons">
+	<div class="icons" id="orig-icons">        
+		<?php if($this->canDelete): 
+			if($this->hasTranslations==false): 
+			$href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
+			else: $href = 'href="" class="idle" title="'.$HTmessage.'" onClick="alert(\''.addslashes($HTmessage).'\');"'; 
+			endif;?>
+		<a <?php echo $href; ?> ><div class="delbtn" title="<?php echo __("Delete this text"); ?>"></div></a>
+		<?endif; ?>
+		<div class="separate"></div>
+		<div class="printbtn" title="<?php echo __("Print the original text"); ?>"></div>
+		<div class="separate"></div>
+		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div class="history" title="<?php echo __("History of modifications"); ?>"></div></a>
+		<a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div class="manage" title="<?php echo __("Manage privileges"); ?>"></div></a>
+		<div class="separate"></div>	
+		<div id="show-tag" title="<?php echo __("Show TAGS"); ?>"></div>
+		<div class="extbtn" title="<?php echo __("Extend the text"); ?>"></div>
+		<div id="editmeta" title="<?php echo __("Edit the text"); ?>"></div>		
+	</div>
+	<div class="icons" id="tr-icons">
+		<div class="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>		
+		<div class="separate"></div>		
+		<div class="printbtn" title="<?php echo __("Print this translation"); ?>"></div>
+		<div class="separate"></div>
+		<div class="history" title="<?php echo __("History of modifications"); ?>"></div>
+		<div class="manage" title="<?php echo __("Manage privileges"); ?>"></div>
+		<div class="separate"></div>
+		<div id="show-tag" title="<?php echo __("Show TAGS"); ?>"></div>
+		<div id="editbtn" title="<?php echo __("Edit translation"); ?>"></div>
+	</div>
+</div>
+	
+<div class="tag-line clear">
     <div class="show-tag-area" id="orig-tag">
 		 <?php echo $this->tagbody; ?>
     </div>
@@ -66,13 +98,6 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
             <a href="#"><img class="turn-page" src="<?php echo $this->makeUrl('/images/previous.png'); ?>"/></a>
         </div>
         <div class="text-container center" id="work">
-        <div class="icons" id="orig-icons">
-		<div class="extbtn" title="<?php echo __("Extend the text"); ?>"></div>
-		<div class="print" title="<?php echo __("Print the original text"); ?>"></div>
-		<div class="manage" title="<?php echo __("Manage privileges"); ?>"></div>
-		<div class="history" title="<?php echo __("History of modifications"); ?>"></div>
-		<div class="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
-		</div>
         <div class="work-title red"> <?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>
             <span class="author" id="orig-author"><?php echo $author ?></span>
             ,
@@ -124,15 +149,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     <div class="clear">
         <div class="Lborder middle"></div>
         <div class="text-container center" id="translation">
-        	<div class="icons" id="tr-icons">
-		<div id="editbtn" title="<?php echo __("Edit mode"); ?>"></div>
-		<div class="print" title="<?php echo __("Print this translation"); ?>"></div>
-		<div class="manage" title="<?php echo __("Manage privileges"); ?>"></div>
-		<div class="history" title="<?php echo __("History of modifications"); ?>"></div>
-		<div class="delbtn" title="<?php echo __("Delete this translation"); ?>"></div>
-		</div>
-
-
+        	
         <div class="work-title red"> 
             <span class="author" id="tr-author"></span>
             ,
@@ -158,6 +175,11 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     
 </div>
 </div>
+<span class="comments">
+<span id="clicktoedit"><?php echo __("Click to edit");?></span>
+<span id=""><?php echo __("");?></span>
+<span id=""><?php echo __("");?></span>
+</span>
 </div>
 
 <?php $this->page_title = __("PAGETITLE_Read text").': '.$this->escape($this->work['title']); ?>

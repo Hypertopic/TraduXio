@@ -216,11 +216,14 @@ div.show-tag-area{
     margin-right:auto;
     vertical-align:top;
     width:50%;
+    display:none;
 }
+
 div.tag-line{
 width:96%;
 margin:auto;}
-div#show-tag,div#hide-tag{margin:auto;}
+
+/*div#show-tag,div#hide-tag{margin:auto;}*/
 
 #book{
     width:96%;
@@ -279,9 +282,8 @@ cursor:pointer;
 display:block;}
 
 .icons{
-position:absolute;
-right:0;
-top:5px;
+width:50%;
+float:left;
 }
 /*#orig-icons{left:0px;}
 #tr-icons{right:0px;}
@@ -290,9 +292,9 @@ top:5px;
 .icons div{
 cursor:pointer;
 margin:0 0 10px 0;
-width: 24px;
-height:24px;
-float:left;
+width: 32px;
+height:32px;
+float:right;
 }
 
 
@@ -465,11 +467,11 @@ padding:0;
 border:solid 1px #DBDBDB;
 }
 
-#editbtn{
-background: transparent url(../images/editonsmall.png) no-repeat; 
+#editbtn,#editmeta{
+background: transparent url(../images/editonsmall.png) scroll 50% no-repeat;
 }
-#editbtn.on{
-background: transparent url(../images/editon.png) no-repeat; 
+#editbtn.on,#editmeta.on{
+background: transparent url(../images/editon.png) scroll 50% no-repeat;
 }
 /*
 #savebtn{
@@ -479,10 +481,10 @@ background: transparent url(../images/saveoff.png) no-repeat;
 background: transparent url(../images/saveon.png) no-repeat; 
 }*/
 .delbtn{
-background: transparent url(../images/deloffsmall.png) no-repeat; 
+background: transparent url(../images/deloffsmall.png)  scroll 50% no-repeat; 
 }
 .delbtn.on{
-background: transparent url(../images/delonsmall.png) no-repeat; 
+background: transparent url(../images/delonsmall.png)  scroll 50% no-repeat; 
 }
 
 span.block,textarea.block{
@@ -496,8 +498,6 @@ display:block;
 padding:5px 10px;
 }
 
-#translation,#work{
-position:relative;}
 
 #translation span.show,#translation textarea.show{
 margin-bottom:19px;/* this value must be equal to .merge height +3px*/
@@ -521,6 +521,10 @@ cursor:pointer;
 .editable textarea{
 border:none;
 font:inherit;
+}
+.title.editable,.author.editable{
+
+background-color:#F5F5DC;
 }
 
 #translation textarea{
@@ -551,7 +555,7 @@ cursor:pointer;}
 width:100px;
 }
 
-div#show-tag{
+/*div#show-tag{
 background:transparent url(../images/down.png) no-repeat;
 height:18px;
 width:18x;
@@ -561,7 +565,7 @@ div#hide-tag{
 background:transparent url(../images/up.png) no-repeat;
 height:18px;
 width:18x;
-}
+}*/
 
 #header-navigation form{float:right;}
 #header-navigation ul{float:left;}
@@ -586,10 +590,12 @@ left:1px;
 top:1px;
 cursor:pointer;}
 
-.print{background:transparent url(../images/print.png) no-repeat;}
-.extbtn{background:transparent url(../images/extend.png) no-repeat;}
-.manage{background:transparent url(../images/manage.png) no-repeat;}
-.history{background:transparent url(../images/history.png) no-repeat;}
+.printbtn{background:transparent url(../images/print.png) scroll 50% no-repeat;}
+.extbtn{background:transparent url(../images/extend.png) scroll 50%  no-repeat;}
+.manage{background:transparent url(../images/manage.png)  scroll 50% no-repeat;}
+.history{background:transparent url(../images/history.png)  scroll 50% no-repeat;}
+#show-tag{background:transparent url(../images/tag24vio.png)  scroll 50% no-repeat;}
+#hide-tag{background:transparent url(../images/tag32vio.png)  scroll 50% no-repeat;}
 
 #new-translation{
 position:fixed;
@@ -625,6 +631,7 @@ margin:40px 0 0;
 text-align:left;
 position:relative;
 }
+
 #extend-form textarea{
 width:100%;
 }
@@ -635,6 +642,27 @@ right:2px;
 background:transparent url(../images/close16.png) no-repeat;
 height:16px;
 width:16px;
+}
+#tagform .closeimg{
+position:relative;
+top:0;
+right:0;
+}
+
+.comments{
+position:fixed;
+top:-2000px;
+left:-1000px;}
+
+.hint{
+font-size:0.5em;
+color:#4D4D4D;
+font-style:italic;}
+
+#show-icons{
+height:34px;
+width:96%;
+margin:auto;
 }
 /* END SLIDE MENU */
 

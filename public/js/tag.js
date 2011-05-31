@@ -93,7 +93,9 @@ if (typeof console == "undefined") console={log:function(){}};
 					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
 					else alert(rdata.message.code);
 				}else{
-					$("div#"+parentId+" .add-tag").replaceWith(rdata.tagform);
+					//$("div#"+parentId+" .add-tag").replaceWith(rdata.tagform);
+					$("div#"+parentId).prepend(rdata.tagform);
+					$("div#"+parentId+" .add-tag").css('display','none');
 				}
 			},
 			error: function() {
@@ -103,6 +105,7 @@ if (typeof console == "undefined") console={log:function(){}};
 	   });
 	   
         $("#tagform").live('submit',function(){
+			alert('form submit');
 			var parentId = $(this).parent('div').attr('id');
 			var textId = parentId=='orig-tag'?window.workId:window.trId;
             tdxio.tag.insert(textId,parentId);      

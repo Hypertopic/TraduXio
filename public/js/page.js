@@ -177,8 +177,10 @@ var event;
                 tdxio.page.setBlocked(false);
                 $('.text').toggleClass('show',true);
                 $('.block').toggleClass('show',false);
-                $('.author').toggleClass('editable',false);
-                $('.title').toggleClass('editable',false); 
+                //$('.author').toggleClass('editable',false);
+                //$('.title').toggleClass('editable',false); 
+                $('#tr-author').toggleClass('editable',false);
+                $('#tr-title').toggleClass('editable',false); 
                 //$("span.block.show.editable textarea").each(function(){$(this).replaceWith($(this).text());});
                 //$("#translation span textarea").contents().unwrap();
                
@@ -192,8 +194,8 @@ var event;
                 tdxio.page.replaceTag("textarea.block.show.editable","span");
                 $('.text').toggleClass('show',false);
                 $('.block').toggleClass('show',true);
-                $('.author').toggleClass('editable',true);
-                $('.title').toggleClass('editable',true);                
+                $('#tr-author').toggleClass('editable',true);
+                $('#tr-title').toggleClass('editable',true);                
                 $('#translation .block').toggleClass('editable',true);
                 $('#editbtn').toggleClass('on',true);
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
@@ -535,7 +537,7 @@ var event;
             tdxio.page.displayOnglets(translations);
         });
 */        
-		$('span#more').click(function(event){
+		$('span#more, li#translate').click(function(event){
 			event.preventDefault();
 			if( $("div#new-translation").css('visibility')=='hidden'){
 				window.$.getForm('translate');
@@ -585,7 +587,7 @@ var event;
 		});
 		
 		
-		$(".extbtn").live('click',function(event){
+		$(".extbtn , li#extend").live('click',function(event){
 		//$("ul li#extend a").live('click',function(event){
 			event.preventDefault();
 			action="extend";
@@ -602,6 +604,16 @@ var event;
             return false; 
         });
         
+		$("#editmeta").click(function(){	
+			if($(this).attr('class')=='on'){
+				$('#orig-author,#orig-title').trigger('focusout');				
+				$('#orig-author,#orig-title').toggleClass('editable',false);
+			}else{
+				$('#orig-author,#orig-title').toggleClass('editable',true);
+			}
+			$(this).toggleClass('on');
+		});
+		
 	   $("#editbtn").click(function(){
         //    $('#tr-icons div').toggleClass('on');
            var active = $(this).attr('class')=='on';
@@ -705,8 +717,8 @@ var event;
 			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\" value=\""+content+"\" />");
 			$("#"+$(this).attr('id')).focus();
 		});
-        $('#show-tag').live('click',function(){$('div.show-tag-area').show(50);$(this).attr('id','hide-tag');});
-        $('#hide-tag').live('click',function(){$('div.show-tag-area').hide(50);$(this).attr('id','show-tag');});
+        $('#show-tag').live('click',function(){$('div.show-tag-area').show(50);$(this).attr('id','hide-tag').attr('title','Hide TAGS');});
+        $('#hide-tag').live('click',function(){$('div.show-tag-area').hide(50);$(this).attr('id','show-tag').attr('title','Show TAGS');});
 /*
 		$("div#work div.text").selectedText({
 			min: 2,
@@ -748,17 +760,23 @@ var event;
         });*/
         
      /*   $(".show-menu").live("click",function(){$(this).toggleClass('selected');});*/
-		$("#extend-form .closeimg").live('click',function(){
-			$("#extend-form").remove();
+		$(".closeimg").live('click',function(e){
+			e.preventDefault();
+			var form = $(this).parents('form').attr('id');
+			switch(form){
+				case 'translate-form':
+					$("div#new-translation").css('visibility','hidden');	break;
+				case 'tagform':
+					$(this).parents('.show-tag-area').children(".add-tag").css('display','block');
+			}
+			$(this).parents('form').remove();
 		});
-		$("#new-translation .closeimg").live('click',function(){
-			$("#translate-form").remove();
-			$("div#new-translation").css('visibility','hidden');			
-		});
-		
+
 		$("#tr-icons .delbtn").live('click',function(){
 			window.$.deleteWork(window.trId);
 		});
+		
+		$('textarea').live('focus',function(){$(this).css('font-size','14px').css('color','#585858');});
     });
     
     
