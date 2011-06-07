@@ -171,53 +171,53 @@ class WorkController extends Tdxio_Controller_Abstract
         Tdxio_Log::info('till here');
     }
     
-    public function ajaxreadAction(){
-        $request = $this->getRequest();
-        $id = $request->getParam('id');
-        Tdxio_Log::info($request,'ababa');
-        $qtity = $request->getParam('qtity');//numero di segmenti/sentences da scaricare
-        $translations = array();
+	public function ajaxreadAction(){
+		$request = $this->getRequest();
+		$id = $request->getParam('id');
+		Tdxio_Log::info($request,'ababa');
+		$qtity = $request->getParam('qtity');//numero di segmenti/sentences da scaricare
+		$translations = array();
 
-        $trId=$request->getParam('trId');
-        $trWork = null;
-        Tdxio_Log::info($trId,'steptwo');
-        
-        $model = $this->_getModel();
-        if (!$id || !($work=$model->fetchOriginalWork($id))) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
-        }else{
-            if($trId!=null){
-                $trId = (array_key_exists($trId,$work['Interpretations']))?$trId:key($work['Interpretations']);
-                $trModel = new Model_Translation();
-                $trWork = $trModel->fetchTranslationWork($trId);                
-            }
-            foreach($work['Interpretations'] as $id=>$tr){
-                $translations[] = $tr;
+		$trId=$request->getParam('trId');
+		$trWork = null;
+		Tdxio_Log::info($trId,'steptwo');
+
+		$model = $this->_getModel();
+		if (!$id || !($work=$model->fetchOriginalWork($id))) {
+			$this->view->response = false;
+            $this->view->message = array('code'=>1,'text'=> __("Work %1\$d does not exist.",$id));
+		}else{
+			if(empty($work['Interpretations'])){$trId=null;}
+            else{
+				$trId = (array_key_exists($trId,$work['Interpretations']))?$trId:key($work['Interpretations']);
+				$trModel = new Model_Translation();
+				$trWork = $trModel->fetchTranslationWork($trId);                
+				foreach($work['Interpretations'] as $id=>$tr){$translations[] = $tr;}
+
+				$this->view->canTag = $model->isAllowed('tag',$trId);
+				$taglist = new Zend_View();
+				$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+				$taglist->assign('tags',$trWork['Tags']);
+				$taglist->assign('genres',$trWork['Genres']);
+				$taglist->assign('workid',$trWork['id']);
+				$taglist->assign('userid',$this->view->userid);
+				$taglist->assign('canTag',$this->view->canTag);
+				   
+				$this->view->tagbody=$taglist->render('taglist.phtml');
+				$this->view->canManage = $model->isAllowed('manage',$trId);
             }
             $work['Interpretations'] = $translations;
-        }
-        $this->view->canTag = $model->isAllowed('tag',$id);
-        $taglist = new Zend_View();
-		$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
-		$taglist->assign('tags',$trWork['Tags']);
-		$taglist->assign('genres',$trWork['Genres']);
-		$taglist->assign('workid',$trWork['id']);
-		$taglist->assign('userid',$this->view->userid);
-		$taglist->assign('canTag',$this->view->canTag);
-		   
-		$this->view->tagbody=$taglist->render('taglist.phtml');
-        
-        Tdxio_Log::info($work,'ajaxread00');
-       
-        $this->view->hasTranslations=$model->hasTranslations($id);        
-        $this->view->canManage = $model->isAllowed('manage',$id);
+		}
+        Tdxio_Log::info($work,'ajaxread0');
+		$this->view->response = true;
+		$this->view->message  = array('code'=>0,'text'=> __("OK"));   
         $this->view->work = $work;
         $this->view->trWork = $trWork;
+        $this->view->trId = $trId;
         
-        Tdxio_Log::info($work,'ajaxread1');
-        Tdxio_Log::info($trWork,'ajaxread2');
+        Tdxio_Log::info($trWork,'ajaxread1');
     }
-    
+        
     public function createtrAction(){
 		$request = $this->getRequest();
 		$id = $request->getParam('id');
@@ -735,11 +735,12 @@ class WorkController extends Tdxio_Controller_Abstract
             
             case 'history':$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility);   
                 break;
-            case 'ajaxread':                 
-                if($trId=$request->getParam('trId')!=null)
-                    $res_id = $trId;
-                else
-                    $res_id = $resource_id;
+            case 'ajaxread':  
+				$trId = $request->getParam('trId');
+				if($trId!=null && $trId!='' && $this->_getModel()->entryExists(array('id'=>$trId))){					
+                    $resource_id = $trId;
+                    $visibility=$this->_getModel()->getAttribute($trId,'visibility');
+				}
                 $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit','translate_privilege'=> 'translate');      
                 break;
             case 'newread':

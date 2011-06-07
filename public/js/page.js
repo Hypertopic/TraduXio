@@ -6,7 +6,7 @@ var begin = 0;// segment from which to begin the text's display - it can represe
 var end = 0;
 var back = false;
 var ajaxData;
-var translations;
+var translations=[];
 var nextHiddenId=null;    
 var id_str = document.location.pathname.match(/\/id\/\d+/);
 var minHeight = 400;
@@ -17,6 +17,7 @@ var state = 'reset';//'reset' 'editable'
 var trBlocks;
 var user;
 var event;
+var temp;
 
 (function($) {
     
@@ -89,7 +90,7 @@ var event;
 
 		getBlocked : function(){return blocked;},
 		setBlocked : function(val){blocked = val;},
-    
+		
         resize: function(){//alert('4');
             // 1. Make the height of the translation and of the work texts the same            
             var maxtemp = Math.max(maxH,$('#translation div.text').height(),$('#work div.text').height());
@@ -208,7 +209,7 @@ var event;
         
         displayWork: function(data,trId,backward,beginSeg,endSeg){
             if(data.work.Sentences.length > 0){
-                
+				
                 tdxio.page.resetHeight();
                 $('#work div.text').empty();
                 $('#test').empty();     
@@ -225,10 +226,14 @@ var event;
                 var pre = "<span class='segment' id='text"+data.work.id +"-segment";
                 var len = sentences.length;                
                 //if(data.work.Interpretations.length == 0){// there are no translations
-                if(trId == ''){// there are no translations
+                if(trId == '' || trId==null){// there are no translations
                     //display only the work
-                   
+                  
                     $('#translation .text').append("<span id='create'>Create a translation</span>"); 
+					$("#top-border").show(10);
+					$("#plus").hide(10);
+					$("#tr-author,#tr-title").empty();
+					$("#comma").remove();
                     if(backward===false){    
                         var i;
                         $('#test').append(pre + sentences[beginSeg].number + "'>" + nl2br(sentences[beginSeg].content,false) + "</span>");                    
@@ -267,7 +272,8 @@ var event;
                     }
                     $("input[name=destlang]").val(trWork.work.language);
                     $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author:'[]');
-                    $('#translation .work-title span.title').html(trWork.work.title);                    
+					if(!$("#comma").length) $('#translation .work-title span.title').before('<span id="comma">,&nbsp</span>');
+                    $('#translation .work-title span.title').html((trWork.work.title!=null)?trWork.work.title:'[]');                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var trlen = trWork.blocks.length;
                //     alert('trlen: '+trlen);
@@ -396,87 +402,91 @@ var event;
     
         translate: function(){
                 
-        },
+        },      
         
+          
         getWork: function(){
 			var url = tdxio.baseUrl+"/work/ajaxread"+id_str;
-			var hash = document.location.hash.substr(1);
-			var qtity=50;
-			var params;                
-			docHeight = $.getDocHeight();
-			if((hash==null)||(hash=='')||(hash==false)){
-				params={'qtity':qtity};
-			}else if(hash.match(/tr\d+/gi)!=null){
-				trId = hash.match(/tr\d+/gi)[0].substr(2);
-				beginHash = hash.match(/#beg\d+/gi);
-				if((beginHash!=null)&&(beginHash!='')){begin = beginHash[0].substr(4);}
-				params={'qtity':qtity,'trId':trId};
-			}
-						  
-			$.ajax({
-				type:"get",
-				url:encodeURI(url),
-				dataType: "json",
-				data: params,
-				success: function(rdata){
-					//if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
-					if(rdata.work.Interpretations.length>0){
-						var exists=false;
-						for(var k=0;k<rdata.work.Interpretations.length;k++){
-							if(trId == rdata.work.Interpretations[k].work.id){
-								exists = true;
-								break;
-							}
-						}
-						trId = (exists)?trId:rdata.work.Interpretations[0].work.id;
-						document.location.hash='tr'+trId;
-						//trId = (trId=='')?rdata.work.Interpretations[0].work.id:trId;
-						translations = tdxio.array.trShift(rdata.work.Interpretations.slice(),trId,true);
-						tdxio.page.displayOnglets(translations);
-						if($("#tr-tag .add-tag").length==0)
-							$("#tr-tag").append(rdata.tagbody);
-					}
-					ajaxData = rdata;
-					tdxio.page.displayWork(rdata,trId,false,begin,end);
-					tdxio.page.resize();
-					$("input[name=srclang]").val(rdata.work.language);
-					
-					//alert($("input[name=destlang]").val());
-				},
-				error: function() {
-					alert("error reading the work");
-				}
-			}); 
-		},
-		
-		gotoTransl: function(newId){
-			document.location.hash="#tr"+newId;
-            trId = newId;
-            translations = tdxio.array.trShift(ajaxData.work.Interpretations.slice(),newId,true);
-           /*tdxio.page.displayOnglets(translations);    */
-            tdxio.page.displayOnglets(translations);
-            tdxio.page.displayWork(ajaxData,newId,back,begin,end);
-            $.ajax({
-				type:"get",
-				url:encodeURI(tdxio.baseUrl+"/tag/gettags"),
-				dataType: "json",
-				data:{'id':newId},
-				success: function(rdata,status){
+ 			var hash = document.location.hash.substr(1);
+ 			var qtity=50;
+ 			var params;                
+ 			docHeight = $.getDocHeight();
+ 			if((hash==null)||(hash=='')||(hash==false)){
+ 				params={'qtity':qtity};
+ 			}else if(hash.match(/tr\d+/gi)!=null){
+ 				window.trId = hash.match(/tr\d+/gi)[0].substr(2);
+ 				beginHash = hash.match(/#beg\d+/gi);
+ 				if((beginHash!=null)&&(beginHash!='')){begin = beginHash[0].substr(4);}
+ 				params={'qtity':qtity,'trId':trId};
+ 			}
+ 						  
+ 			$.ajax({
+ 				type:"get",
+ 				url:encodeURI(url),
+ 				dataType: "json",
+ 				async: false,
+ 				data: params,
+ 				success: function(rdata){
 					if (rdata.response==false) {
 						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
 						else alert(rdata.message.code);
 					}else{
-						$("div#tr-tag").empty().append(rdata.taglist);
+						window.trId = rdata.trId;
+						document.location.hash = (rdata.trId!=null)?'tr'+rdata.trId : '';
+						if(rdata.work.Interpretations.length>0){	
+							translations = tdxio.array.trShift(rdata.work.Interpretations.slice(),rdata.trId,true);
+							tdxio.page.displayOnglets(translations);
+							if($("#tr-tag .add-tag").length==0)
+								$("#tr-tag").append(rdata.tagbody);							
+							$("input[name=srclang]").val(rdata.work.language);
+						}						
+						window.ajaxData = rdata;
+						tdxio.page.displayWork(rdata,rdata.trId,false,begin,end);
+						tdxio.page.resize();
 					}
-				},
-				error: function() {
-					alert("error getting the tags' list");
-				}
-			});  
-           // tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
-			tdxio.page.setState(window.state);
-            tdxio.page.adjust();
-            tdxio.page.resize();
+ 				},
+ 				error: function() {
+ 					alert("error reading the work");
+ 				}
+ 			}); 
+ 		},
+		
+		gotoTransl: function(newId){
+			if(newId!='' && newId!=null){
+				document.location.hash="#tr"+newId;
+				trId = newId;
+				translations = tdxio.array.trShift(ajaxData.work.Interpretations.slice(),newId,true);
+			   /*tdxio.page.displayOnglets(translations);    */
+				tdxio.page.displayOnglets(translations);
+				tdxio.page.displayWork(ajaxData,newId,back,begin,end);
+				$.ajax({
+					type:"get",
+					url:encodeURI(tdxio.baseUrl+"/tag/gettags"),
+					dataType: "json",
+					data:{'id':newId},
+					success: function(rdata,status){
+						if (rdata.response==false) {
+							if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
+							else alert(rdata.message.code);
+						}else{
+							$("div#tr-tag").empty().append(rdata.taglist);
+						}
+					},
+					error: function() {
+						alert("error getting the tags' list");
+					}
+				});  
+			   // tdxio.page.setState($('#editbtn').attr('class')=='on'?'editable':'reset');
+				tdxio.page.setState(window.state);
+				tdxio.page.adjust();
+				tdxio.page.resize();
+			}else{
+				document.location.hash="";		
+				tdxio.page.displayWork(ajaxData,'',back,begin,end);
+				tdxio.page.setState('reset');
+				tdxio.page.adjust();
+				tdxio.page.resize();
+			}
 		}
             
     }; 
@@ -493,7 +503,7 @@ var event;
             tout = false;
             tdxio.page.displayWork(ajaxData,trId,back,begin,end);//refresh arrows
             tdxio.page.resize();
-            tdxio.page.displayOnglets(translations);
+            if(translations.length)tdxio.page.displayOnglets(translations);
         }                
     };
     
@@ -582,7 +592,7 @@ var event;
 					},
 				});
 			}//save modified filed	
-			if(value=='' && $(this).attr('class')=="author editable") value = "[]";
+			if(value=='') value = "[]";
 			$(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
 		});
 		
@@ -614,7 +624,8 @@ var event;
 			$(this).toggleClass('on');
 		});
 		
-	   $("#editbtn").click(function(){
+	   $("#editbtn, #edit").click(function(e){
+		   e.preventDefault();
         //    $('#tr-icons div').toggleClass('on');
            var active = $(this).attr('class')=='on';
          //   $('.text').toggleClass('show');
@@ -710,7 +721,7 @@ var event;
 			var content = '';
 			switch(id){
 				case 'tr-author':content = (trWork.work.author!=null)?trWork.work.author:'';break;
-				case 'tr-title':content = trWork.work.title;break;
+				case 'tr-title':content = (trWork.work.title!=null)?trWork.work.title:'';break;
 				case 'orig-author':content = ajaxData.work.author;break;
 				case 'orig-title':content = ajaxData.work.title;break;
 			}
@@ -776,7 +787,20 @@ var event;
 			window.$.deleteWork(window.trId);
 		});
 		
+		$('.printbtn').live('click',function(){
+			var dad = $(this).parent().parent();
+			$(".print").toggleClass('print',false);
+			dad.children('.work-title, .text').toggleClass('print',true);
+			$(".print").jqprint();
+		});
+		
 		$('textarea').live('focus',function(){$(this).css('font-size','14px').css('color','#585858');});
+		$('input').live('focus',function(){$(this).css('font-size','1em');});
+		$("#tr-icons a").click(function(e){
+			e.preventDefault();
+			if(window.trId!=null && window.trId!='')
+				document.location.href = this.href.replace(/\/id\/\d+/,"/id/"+window.trId);
+		});
     });
     
     

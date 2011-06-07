@@ -109,26 +109,36 @@ var state;
 						break;
 					}
 				}//update trId
-				window.trId = (k-1)>=0?ajaxData.work.Interpretations[k-1].work.id:(k<L?ajaxData.work.Interpretations[k].work.id:'');
+				if(L>1)
+					window.trId = (k-1)>=0?ajaxData.work.Interpretations[k-1].work.id:(k<L?ajaxData.work.Interpretations[k].work.id:'');
+				else window.trId = '';
 				//remove onglet
-				$(".onglet#onglet-"+data.newId).remove();				
-				tdxio.page.gotoTransl(window.trId);
+				$(".onglet#onglet-"+data.newId).remove();	
+				//if(window.trId!='')
+					tdxio.page.gotoTransl(window.trId);
+			/*	else{
+					$("#top-border").show(10);
+					$("#plus").hide(10);
+				}*/
 			};
         break; 
-        case 'createtr':  $("form#translate-form").remove();
+        case 'createtr':  
+			$("form#translate-form").remove();
             $("div#new-translation").css('visibility','hidden'); 
-           
-			//1 add an element to the list of translations (window.translations): empty translation template
+            //1 add an element to the list of translations (window.translations): empty translation template
 			var lastTo = ajaxData.work.Sentences.pop().number;
 			var trlTemplate = {'blocks':[{'work_id': data.newId , 'original_work_id' : workId , 'translation':'' , 'from_segment':0,'to_segment':lastTo}],'work': {'id': data.newId,'title':data.values.title,'author':data.values.author,'language':data.values.language}};
 			trlTemplate=[trlTemplate].concat(window.translations);
-			alert('a');
-			window.$.getCurrentUser();alert('b');
-			tdxio.page.getWork();alert('c');
+			window.$.getCurrentUser();
+			if(data.newId!='' && data.newId!=null)
+				document.location.hash="tr"+data.newId;
+			tdxio.page.getWork();			
+            $("#top-border").hide(10);
+            $("#plus").show(10);
 			$("ul.onglets").prepend("<li class=\"onglet\" id=\"onglet-"+data.newId+"\"><span title=\""+data.values.language+"\"><a href=\"#tr"+data.newId+"\">"+data.values.translator+"</a></span></li>");
-			alert('d');
 			tdxio.page.gotoTransl(data.newId);
-			alert('e');
+			
+			
             break;
         case 'translate':
         $.updateTranslation('block',data);
@@ -142,7 +152,7 @@ var state;
           
         }
 
-    };
+    };     
     
     $.showBlocks = function(show){
         if(show){
@@ -151,12 +161,7 @@ var state;
         }else{
             $('.text').css('border','');
             
-        }
-      /*  window.ajaxData
-        window.trId
-        window.begin
-        window.end*/
-        
+        }        
     };
     $.setUser = function(username){window.user = username;};
     

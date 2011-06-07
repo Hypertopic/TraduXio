@@ -480,10 +480,10 @@ background: transparent url(../images/saveoff.png) no-repeat;
 #savebtn.on{
 background: transparent url(../images/saveon.png) no-repeat; 
 }*/
-.delbtn{
+.idle .delbtn{
 background: transparent url(../images/deloffsmall.png)  scroll 50% no-repeat; 
 }
-.delbtn.on{
+.delbtn{
 background: transparent url(../images/delonsmall.png)  scroll 50% no-repeat; 
 }
 
@@ -523,8 +523,7 @@ border:none;
 font:inherit;
 }
 .title.editable,.author.editable{
-
-background-color:#F5F5DC;
+border:thin inset #585858;
 }
 
 #translation textarea{
@@ -664,5 +663,8 @@ height:34px;
 width:96%;
 margin:auto;
 }
+
+.hidden{display:none;}
+.visible{display:block;}
 /* END SLIDE MENU */
 

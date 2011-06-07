@@ -5,6 +5,7 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.scrollTo-min.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.jeditable.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/selectedText.min.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.jqprint.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/nl2br.js')); ?>
 <?php $this->layout()->setLayout('layout-black');?>
 
@@ -23,19 +24,29 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         <li><a href="#"><div id='options'></div></a>
             <ul>
                 <li id="translate"><a <?php echo $href.' '.($this->showTranslate?'':$NRattrs); ?>><?php echo __('Create a translation'); ?></a></li>
-                <li id="extend"><a <?php echo $href_extend.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Continue text insertion'); ?></a></li>
+                <li id="edit"><a href="#"><?php echo __("Edit the translation"); ?></a></li>                                
+                <li id="extend"><a <?php echo $href_extend.' '.($this->showEdit?'':$NRattrs); ?>><?php echo __('Continue text insertion'); ?></a></li>                                
+                <li><a href="#"><?php echo __("Manage privileges"); ?></a>
+                <ul>
                 <?php if($this->canManage): ?>
                 <li id="manage"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>
-                <?php endif; ?>
+                <?php endif; ?>                
+                <li><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage translation's privileges"); ?></a></li>
+                </ul></li>
+                <li><a href="#"><?php echo __("Delete"); ?></a><ul>
                 <?php if($this->canDelete): 
-                    if($this->hasTranslations==false): 
-                        
+                    if($this->hasTranslations==false):                         
                         $href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
                     else: $href = 'href="" class="idle" title="'.$HTmessage.'" onClick="alert(\''.addslashes($HTmessage).'\');"'; 
-                    endif;?>
-                    <li id="delete"><a <?php echo $href; ?> ><?php echo __("Delete this text"); ?></a></li>
+				endif;?>
+				<li id="delete"><a <?php echo $href; ?> ><?php echo __("Delete this text"); ?></a></li>
                 <?endif; ?>
-                <li id="history"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("History of modifications"); ?></a></li>
+                <li><a <?php echo $href; ?> ><?php echo __("Delete this translation"); ?></a></li>                
+                </ul></li>
+                <li><a href="#"><?php echo __("History"); ?></a><ul>
+					<li id="history"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("Original work's history"); ?></a></li>
+					<li id="history"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("Translation's history"); ?></a></li>
+				</ul></li>
             </ul>
         </li>
     </ul>
@@ -69,8 +80,8 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 		<div class="separate"></div>		
 		<div class="printbtn" title="<?php echo __("Print this translation"); ?>"></div>
 		<div class="separate"></div>
-		<div class="history" title="<?php echo __("History of modifications"); ?>"></div>
-		<div class="manage" title="<?php echo __("Manage privileges"); ?>"></div>
+		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div class="history" title="<?php echo __("History of modifications"); ?>"></div></a>
+		<a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div class="manage" title="<?php echo __("Manage privileges"); ?>"></div></a>
 		<div class="separate"></div>
 		<div id="show-tag" title="<?php echo __("Show TAGS"); ?>"></div>
 		<div id="editbtn" title="<?php echo __("Edit translation"); ?>"></div>
@@ -125,13 +136,15 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 <div class="page-container" id="right-page">
 <?php //if(empty($this->work['Interpretations'])): ?>
 <?php if(!$this->hasTranslations): ?>
-    <div class="clear">
+<?php $ongletClass = "hidden"; $borderClass = "visible";?>    
+<?php else: $ongletClass = "visible"; $borderClass = "hidden";?>
+<?php endif; ?>
+<div class="clear <?php echo $borderClass; ?>" id="top-border">
         <div class="TLcorner"></div>
         <div class="Tborder center"></div>
         <div class="TRcorner"></div>
-    </div>
-<?php else: ?>
-<div class="clear" id="plus" >
+</div>
+<div class="clear <?php echo $ongletClass; ?>" id="plus" >
 <ul class="onglets">
 <?php foreach($this->work['Interpretations'] as $traId=>$trWork): ?>
 
@@ -144,7 +157,6 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 <span id='more'>+</span>
 </ul>    
 </div>
-<?php endif; ?>
     
     <div class="clear">
         <div class="Lborder middle"></div>
@@ -152,7 +164,6 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         	
         <div class="work-title red"> 
             <span class="author" id="tr-author"></span>
-            ,
             <span class="title" id="tr-title"></span>
         </div>
         
