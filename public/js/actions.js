@@ -177,7 +177,7 @@ var state;
 			success:function(rdata){
 				if (rdata.response==false) {//error somewhere
 					if(rdata.message.code ==2){tdxio.page.redirect(rdata.message.text);}
-					else alert(rdata.message.code);
+					else alert(rdata.message.text);
 				}else {
 					$.setUser(rdata.user); 					
 				}
@@ -196,7 +196,7 @@ var state;
 			success: function(rdata,status){
 				if (rdata.response==false) {
 					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
-					else alert(rdata.message.code);
+					else alert(rdata.message.text);
 				}else{
 					window.$.transform(formType,rdata);
 				}
@@ -219,7 +219,7 @@ var state;
                 success:function(rdata,status){
                     if (rdata.response==false) {//error somewhere
 						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
-                        else alert(rdata.message.code);
+                        else alert(rdata.message.text);
                     }else {
 						$("#translation .block.show.editable#"+blockId).text(this.value);
 						$.update('translate',{'blockId':blockId.match(/\d/),'newText':rdata.newText});
@@ -270,7 +270,6 @@ var state;
 				if (rdata.response==false) {//error somewhere
 					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
 					else alert(rdata.message.text);
-					alert(rdata.message.text);
 				}else{
 					$.update('delete',rdata);
 				}
@@ -282,6 +281,31 @@ var state;
 				//alert('complete');    
 			}
 		});
+	};
+	
+	$.checkRights = function(privilege,id){
+		url = tdxio.baseUrl+"/work/can";
+		var can=false;
+		$.ajax({	
+			type: "get",
+			url: encodeURI(url),
+			dataType: "json",
+			async:false,
+			data: {'privilege':privilege,'id':id},
+			success:function(rdata,status){
+				if (rdata.response==false) {//error somewhere
+					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+					else alert(rdata.message.text);
+				}else{
+					can=true;
+				}
+			},
+			error:function() {
+				alert("error retrieving the rights");
+			}
+		});	
+		return can;
+		
 	};
     
     $(document).ready(function() {

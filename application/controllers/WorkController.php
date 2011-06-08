@@ -181,6 +181,7 @@ class WorkController extends Tdxio_Controller_Abstract
 		$trId=$request->getParam('trId');
 		$trWork = null;
 		Tdxio_Log::info($trId,'steptwo');
+		$userid = Tdxio_Auth::getUserName();
 
 		$model = $this->_getModel();
 		if (!$id || !($work=$model->fetchOriginalWork($id))) {
@@ -193,7 +194,7 @@ class WorkController extends Tdxio_Controller_Abstract
 				$trModel = new Model_Translation();
 				$trWork = $trModel->fetchTranslationWork($trId);                
 				foreach($work['Interpretations'] as $id=>$tr){$translations[] = $tr;}
-
+				
 				$this->view->canTag = $model->isAllowed('tag',$trId);
 				$taglist = new Zend_View();
 				$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
@@ -204,7 +205,8 @@ class WorkController extends Tdxio_Controller_Abstract
 				$taglist->assign('canTag',$this->view->canTag);
 				   
 				$this->view->tagbody=$taglist->render('taglist.phtml');
-				$this->view->canManage = $model->isAllowed('manage',$trId);
+				$canDel = ($userid == $trWork['creator'])?true:$model->isAllowed('delete',$trId);
+				$this->view->trPrivileges = array('manage'=>$model->isAllowed('manage',$trId),'edit'=>$model->isAllowed('edit',$trId),'del'=>$canDel);
             }
             $work['Interpretations'] = $translations;
 		}
@@ -693,6 +695,19 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         return true;
     }*/
+    
+    public function canAction(){
+		$model = $this->_getModel();
+		$request = $this->getRequest();
+		$privilege = $request->getParam('privilege');
+		$id = $request->getParam('id');
+		$user = Tdxio_Auth::getUserName();
+		$can = $model->isAllowed($privilege,$id);
+		$this->view->data = array('response'=>$can, 'message'=>array('code'=>$can?0:3,'text'=>$can?__("OK"):__("Error")));
+		$this->_helper->viewRenderer('jsonresponse');		
+	}
+    
+    
   public function getuserAction(){
 		$request=$this->getRequest(); 
 		$id=$request->getParam('id'); 
@@ -735,6 +750,8 @@ class WorkController extends Tdxio_Controller_Abstract
             
             case 'history':$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility);   
                 break;
+            case 'can':$rule = array('privilege'=> $request->getParam('privilege'),'work_id' => $resource_id,'visibility'=>$visibility);   
+            break;  
             case 'ajaxread':  
 				$trId = $request->getParam('trId');
 				if($trId!=null && $trId!='' && $this->_getModel()->entryExists(array('id'=>$trId))){					
@@ -773,6 +790,7 @@ class WorkController extends Tdxio_Controller_Abstract
                     }else{
                         $rule = array('privilege'=> 'manage','work_id' => $resource_id, 'visibility'=>$visibility, 'notAllowed'=>true); 
                     } break;  
+            case 'ajaxdelete':
             case 'delete':
                 $rule = array('privilege'=> 'delete','work_id' => $resource_id,'visibility'=>$visibility);      
                 break;

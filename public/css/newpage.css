@@ -288,16 +288,27 @@ float:left;
 /*#orig-icons{left:0px;}
 #tr-icons{right:0px;}
 */
-
+.hidden{display:none;}
 .icons div{
 cursor:pointer;
+float:right;
+height:36px;
 margin:0 0 10px 0;
 width: 32px;
-height:32px;
-float:right;
 }
 
-
+.icons span{
+width: 32px;
+height:32px;
+display:block;
+}
+span.icon-label{
+width:32px;
+height:4px;
+display:block;
+font-size:0.6em;
+font-variant:small-caps;
+text-align:center;}
 
 li.onglet span a{
 color:inherit;
@@ -387,9 +398,13 @@ display: block;
 background: #585858; /*background of tabs (default state)*/
 color: white;
 padding: 8px 10px;
-/*border-right: 1px solid #778;*/
+/*border: 1px solid #778;*/
 color: #2d2b2b;
 text-decoration: none;
+}
+
+.jqueryslidemenu ul li ul li.idle a,.jqueryslidemenu ul li ul li ul li.idle a{
+color:#484848;
 }
 
 * html .jqueryslidemenu ul li a{ /*IE6 hack to get sub menu links to behave correctly*/
@@ -455,9 +470,9 @@ right: 5px;
 
 #myslidemenu{
 position:absolute;
-top:50px;
+top:60px;
 left:10px;
-height:23px;
+height:20px;
 width:20px;
 }
 
@@ -473,19 +488,17 @@ background: transparent url(../images/editonsmall.png) scroll 50% no-repeat;
 #editbtn.on,#editmeta.on{
 background: transparent url(../images/editon.png) scroll 50% no-repeat;
 }
-/*
-#savebtn{
-background: transparent url(../images/saveoff.png) no-repeat; 
-}
-#savebtn.on{
-background: transparent url(../images/saveon.png) no-repeat; 
-}*/
+
 .idle .delbtn{
 background: transparent url(../images/deloffsmall.png)  scroll 50% no-repeat; 
 }
 .delbtn{
 background: transparent url(../images/delonsmall.png)  scroll 50% no-repeat; 
 }
+.icons .idle{
+display:none;}
+
+.icons a:visited,.icons a:link{color:#FFFFFF;}
 
 span.block,textarea.block{
 display:inline;
@@ -551,7 +564,7 @@ display:none;}
 cursor:pointer;}
 
 .work-title input{
-width:100px;
+width:auto;
 }
 
 /*div#show-tag{
@@ -611,7 +624,7 @@ text-align:right;}
 margin:40px 0 0 20px;
 float:right;}
 
-#new-translation input[type="text"]{
+#new-translation input[type="text"],#new-translation select{
 width:200px;}
 
 #new-translation #form-title{
@@ -663,6 +676,17 @@ height:34px;
 width:96%;
 margin:auto;
 }
+#menu{
+background:transparent url(../images/menushow.png) scroll 50% no-repeat;
+position:absolute;
+top:45px;
+left:15px;
+width:20px;
+height:20px;
+z-index:700;
+cursor:pointer;
+}
+#menu.hide{background:transparent url(../images/menuhide.png) scroll 50% no-repeat;}
 
 .hidden{display:none;}
 .visible{display:block;}
