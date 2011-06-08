@@ -45,7 +45,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
                 </ul></li>
                 <li><a href="#"><?php echo __("History"); ?></a><ul>
 					<li id="history-orig"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("Original work's history"); ?></a></li>
-					<li id="history"><a href="#" ><?php echo __("Translation's history"); ?></a></li>
+					<li id="history" class="idle"><a href="#" ><?php echo __("Translation's history"); ?></a></li>
 				</ul></li>
             </ul>
         </li>
@@ -81,7 +81,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 		<div class="separate"></div>		
 		<div><span class="printbtn" title="<?php echo __("Print this translation"); ?>"></span><span class="icon-label"><?php echo __("Print");?></span></div>
 		<div class="separate"></div>
-		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div><span class="history" title="<?php echo __("History of modifications"); ?>"></span><span class="icon-label"><?php echo __("Log");?></span></div></a>
+		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div class="idle"><span class="history" title="<?php echo __("History of modifications"); ?>"></span><span class="icon-label"><?php echo __("Log");?></span></div></a>
 		<a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div class="idle"><span class="manage" title="<?php echo __("Manage privileges"); ?>"></span><span class="icon-label"><?php echo __("Manage");?></span></div></a>
 		<div class="separate"></div>
 		<div><span id="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>

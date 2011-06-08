@@ -213,6 +213,9 @@ var temp;
 			$("#delete").toggleClass('idle',!privileges.del);
 			$("#history a").attr("href",tdxio.baseUrl+"/work/history/id/"+twId);
 			$("#manage a").attr("href",tdxio.baseUrl+"/work/manage/id/"+twId);
+			if(twId!=null && twId!=''){
+				$("#history").toggleClass('idle',false);
+				$("#tr-icons .history").parent('div').toggleClass('idle',false);}
 			$("#tr-icons .delbtn").parent('div').toggleClass('idle',!privileges.del);
 			$("#tr-icons .manage").parent('div').toggleClass('idle',!privileges.manage);
 			$("#tr-icons #editbtn").parent('div').toggleClass('idle',!privileges.edit);			
