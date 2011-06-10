@@ -174,7 +174,7 @@ var temp;
         
         setState : function(mode){
             if(mode=='reset'){
-                tdxio.page.replaceTag("textarea.block.show.editable","span");
+				tdxio.page.replaceTag("textarea.block.show.editable","span");
                 tdxio.page.setBlocked(false);
                 $('.text').toggleClass('show',true);
                 $('.block').toggleClass('show',false);
@@ -186,6 +186,8 @@ var temp;
                 //$("#translation span textarea").contents().unwrap();
                
 				//$("#edit-form").replaceWith($("#edit-form").html());
+				$("#editbtn").toggleClass('on',false);
+                
                 $('#translation .block').toggleClass('editable',false);
                 $('#tr-icons div').toggleClass('on',false);
                 $('.cut').remove();
@@ -525,6 +527,10 @@ var temp;
     };
     
     $(document).ready(function() {
+        var url;
+        var action;
+        var idstr = document.location.pathname.match(/\/id\/\d+/);
+        workId = parseInt(idstr[0].match(/\d+/));
         
         tdxio.page.getWork();
        
@@ -547,11 +553,7 @@ var temp;
        
         $('#text').empty();
         
-        $('span#create').live('click',function(event){
-			event.preventDefault();
-			window.$.getForm('translate');
-            return false;
-        });
+       
         
         $('ul.onglets li').live('click',function(){
 			tdxio.page.setBlocked(false);
@@ -564,19 +566,15 @@ var temp;
             tdxio.page.displayOnglets(translations);
         });
 */        
-		$('span#more, li#translate').click(function(event){
+		$('span#more, li#translate,span#create').live('click',function(event){
 			event.preventDefault();
 			if( $("div#new-translation").css('visibility')=='hidden'){
-				window.$.getForm('translate');
+				window.$.getForm('translate',window.workId);
 			}
 			return false;
 		});
 		
-		var url;
-        var action;
-        var idstr = document.location.pathname.match(/\/id\/\d+/);
-        workId = parseInt(idstr[0].match(/\d+/));
-        
+		
         url=encodeURI(tdxio.baseUrl+"/translation/save");
    
 		
@@ -782,11 +780,8 @@ var temp;
         
         $("form#translate-form").live("submit",function(event) {
             event.preventDefault();
-           // alert('form submit');
             window.event = event;
 			window.$.submitForm($(this),"createtr",{'id':workId});
-            //alert('after ajax'); 
-            //event.preventDefault();
             return false; 
         }); 
        /* $("form#translate-form").live("reset",function(event) {
@@ -827,7 +822,7 @@ var temp;
 		});
 		
 		$('textarea').live('focus',function(){$(this).css('font-size','14px').css('color','#585858');});
-		$('input').live('focus',function(){$(this).css('font-size','1em');});
+		$('.work-title input').live('focus',function(){$(this).css('font-size','1em');});
 		$('#tr-icons a').click(function(e){
 			e.preventDefault();
 			if(window.trId!=null && window.trId!='')

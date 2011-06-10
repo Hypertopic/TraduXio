@@ -1,14 +1,23 @@
 <?php
 class Form_AjaxWorkTranslate extends Form_Abstract
 {
+	protected $__author;
+	
+	function __construct($author) {
+		$transliterator = new Zend_Filter_Transliteration();
+		$this->__author = $transliterator->filter($author);
+		Tdxio_Log::info($this->__author,'ravava');
+        parent::__construct();
+    }
+    
 	public function init()
     {	
 		$this->setMethod('post');
 		 
-
-		$this->addElement('text', 'author', array(
+		$author = $this->addElement('text','author', array(
             'label'      => __("Author"),
             'id' => 'translate-author',
+            'value' => $this->__author,
             'required' => true,
             'decorators' => array(
                 'ViewHelper',
@@ -19,7 +28,7 @@ class Form_AjaxWorkTranslate extends Form_Abstract
                 array(array('row'=>'HtmlTag'),array('tag'=>'div','class'=>'tr-inputline'))
             )
         ));
-        
+        		
 		$this->addElement('text', 'translator', array(
 			'label'      => __("Translator"),
 			'id' => 'translate-translator',

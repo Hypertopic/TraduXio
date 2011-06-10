@@ -137,8 +137,6 @@ var state;
             $("#plus").show(10);
 			$("ul.onglets").prepend("<li class=\"onglet\" id=\"onglet-"+data.newId+"\"><span title=\""+data.values.language+"\"><a href=\"#tr"+data.newId+"\">"+data.values.translator+"</a></span></li>");
 			tdxio.page.gotoTransl(data.newId);
-			
-			
             break;
         case 'translate':
         $.updateTranslation('block',data);
@@ -186,12 +184,12 @@ var state;
 		});
 	};
     
-    $.getForm = function(formType){
+    $.getForm = function(formType,id){
 		$.ajax({
 			type:"get",
 			url:encodeURI(tdxio.baseUrl+"/work/getform"),
 			dataType: "json",
-			data:{'type':formType},
+			data:{'type':formType,'id':id},
 			async:false,
 			success: function(rdata,status){
 				if (rdata.response==false) {

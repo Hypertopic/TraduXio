@@ -139,13 +139,19 @@ class WorkController extends Tdxio_Controller_Abstract
         $tagForm = new Form_Tag();
         $work = $model->fetchWork($id);
         
+        if($model->isTranslationWork($id)){
+			$trModel = new Model_Translation();
+			$origWork = $trModel->fetchTranslationOriginalWork($id);
+			$origId = $origWork['id'];
+			return $this->_helper->redirector->gotoUrl('/work/newread/id/'.$origId.'#tr'.$id); 
+		}
         $work=$model->fetchOriginalWork($id);
       /*  Tdxio_Log::info($work,'work read');
         if (!$id || !$work || (empty($work['Sentences']))) {    
             Tdxio_Log::info('get in here');        
             throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
         } */
-        if((!$id) || (!$model->isOriginalWork($id)) || (!$work)){
+        if((!$id) ||  (!$work)){
             Tdxio_Log::info('get in here');        
             throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
         }
@@ -304,7 +310,13 @@ class WorkController extends Tdxio_Controller_Abstract
         $request = $this->getRequest();
         $type=$request->getParam('type');
         $formname = 'Form_AjaxWork'.ucfirst($type);
-        $form = new $formname;
+        if($type=='translate'){
+			$model = $this->_getModel();
+			$author = $model->getAttribute($request->getParam('id'),'author');
+			Tdxio_Log::info($author,'funziona lautore?');
+			$form = new $formname($author);			
+		}else
+			$form = new $formname;
         Tdxio_Log::info($form,'quaqua');
         $this->view->form = $form;
         Tdxio_Log::info(json_encode($form),'tent');
@@ -532,7 +544,7 @@ class WorkController extends Tdxio_Controller_Abstract
                         Tdxio_Log::info($data,"manage data");                    
                         unset($data['submit']);
                         $model->update($data,$id);
-                        return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
+                        return $this->_helper->redirector->gotoSimple('newread',null,null, array('id'=>$id));
                     }               
                 }
             }
@@ -574,7 +586,7 @@ class WorkController extends Tdxio_Controller_Abstract
         
         if( is_null($orig_id) ){ $this->_redirect($_SERVER['HTTP_REFERER']); }
         elseif( $orig_id<0 ){ return $this->_helper->redirector('index'); }
-        else{ return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$orig_id)); }        
+        else{ return $this->_helper->redirector->gotoSimple('newread',null,null, array('id'=>$orig_id)); }        
     }
     
     public function ajaxdeleteAction(){
@@ -638,22 +650,22 @@ class WorkController extends Tdxio_Controller_Abstract
         $row['title']=($row['title']=='')?'<i>No Title</i>':$row['title'];
             
         if($row['message']==3 or $row['message']==4){
-            $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">'.$row['params']['tag'].'</a>';
-            $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">'.$row['params']['tag'].'</a>';
+            $taggedText = '<a href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $infoRow['phrase'] =  $this->codeList($row['message'],array('tag'=>$tag,'genre'=>$row['params']['genre'],'taggedText'=>$taggedText,'user'=>$row['user']));
         }elseif($row['message']==0 or $row['message']==1){
-            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $infoRow['phrase'] =$this->codeList($row['message'],array('title'=>$title,'user'=>$row['user']));
         }elseif($model->isTranslationWork($row['work_id'])){
-            $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $trModel = new Model_Translation();
             $origWork = $trModel->fetchTranslationOriginalWork($row['work_id']);
             $tempTitle=($origWork['title']=='')?'<i>No Title</i>':$origWork['title'];
-            $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$origWork['id']).'">"'.$tempTitle.'"</a>';
+            $origtitle = '<a href="'.$this->view->makeUrl('/work/newread/id/'.$origWork['id']).'">"'.$tempTitle.'"</a>';
             $newCode = ($row['message']==2)?2:6;
             $infoRow['phrase'] = $this->codeList($newCode,array('title'=>$title,'origtitle'=>$origtitle,'user'=>$row['user'])); 
         }elseif($row['message']==5){
-            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['id']).'">"'.$row['title'].'"</a>';
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['id']).'">"'.$row['title'].'"</a>';
             $infoRow['phrase'] = $this->codeList($row['message'],array('title'=>$title,'user'=>$row['creator']));
         }else{$infoRow['phrase'] = 'il controllo perde alcuni casi';}
         
