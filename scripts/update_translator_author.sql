@@ -1,5 +1,5 @@
 ﻿update work
-set translator=author where id in (select original_work_id from interpretation);
+set translator=author where id in (select work_id from interpretation);
 
 update work set author=original_work.author from
 interpretation 
