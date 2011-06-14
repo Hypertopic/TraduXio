@@ -43,10 +43,13 @@ var state;
         $('div#new-translation').css('left',document.width/2-200);
         $('div#new-translation').append(data.form);
         break;
-        default:
-          
-        }
-     
+        case 'sentencetag':
+        $('div#insert-sentence-tag').css('visibility','visible');
+        //$('div#insert-sentence-tag').css('left',document.width/2-200);
+        $('div#insert-sentence-tag').append(data.form);
+        break;
+        default:          
+        }     
     };
     
     $.updateTranslation = function(el,newEl){

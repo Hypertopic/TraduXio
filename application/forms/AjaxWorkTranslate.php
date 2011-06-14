@@ -1,12 +1,16 @@
 <?php
 class Form_AjaxWorkTranslate extends Form_Abstract
 {
-	protected $__author;
+	protected $__author='';
 	
-	function __construct($author) {
-		$transliterator = new Zend_Filter_Transliteration();
-		$this->__author = $transliterator->filter($author);
-		Tdxio_Log::info($this->__author,'ravava');
+	function __construct($id) {	
+		$model = new Model_Work();
+		try{
+			$author = $model->getAttribute($id,'author');
+			$transliterator = new Zend_Filter_Transliteration();
+			$this->__author = $transliterator->filter($author);
+			Tdxio_Log::info($this->__author,'ravava');
+		}catch(Zend_Exception $e){Tdxio_Log::info('Empty or unexisting attribute');}
         parent::__construct();
     }
     
@@ -14,7 +18,7 @@ class Form_AjaxWorkTranslate extends Form_Abstract
     {	
 		$this->setMethod('post');
 		 
-		$author = $this->addElement('text','author', array(
+		$this->addElement('text','author', array(
             'label'      => __("Author"),
             'id' => 'translate-author',
             'value' => $this->__author,

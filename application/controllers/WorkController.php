@@ -172,6 +172,8 @@ class WorkController extends Tdxio_Controller_Abstract
         $this->view->hasTranslations=$model->hasTranslations($id);   
         Tdxio_Log::info($this->view->hasTranslations,'hastrans');     
         $this->view->canManage = $model->isAllowed('manage',$id);
+        $this->view->canTranslate = $model->isAllowed('translate',$id);
+        $this->view->canEdit = $model->isAllowed('edit',$id);
         $this->view->work = $work;
         
         Tdxio_Log::info('till here');
@@ -310,12 +312,11 @@ class WorkController extends Tdxio_Controller_Abstract
         $request = $this->getRequest();
         $type=$request->getParam('type');
         $formname = 'Form_AjaxWork'.ucfirst($type);
-        if($type=='translate'){
-			$model = $this->_getModel();
-			$author = $model->getAttribute($request->getParam('id'),'author');
-			Tdxio_Log::info($author,'funziona lautore?');
-			$form = new $formname($author);			
-		}else
+        if($type=='translate')
+			$form = new $formname($request->getParam('id'));			
+	/*	elseif($type=='sentencetag')
+			$form = new $formname($request->getParam('id'),$request->getParam('number'));	*/
+		else
 			$form = new $formname;
         Tdxio_Log::info($form,'quaqua');
         $this->view->form = $form;
@@ -753,6 +754,9 @@ class WorkController extends Tdxio_Controller_Abstract
                 }else{$rule = array('privilege'=> 'create','work_id' => -1, 'notAllowed'=>true);} 
                 break;
 			case 'getuser': $rule = array('privilege'=> 'translate','work_id' => $resource_id);break;
+            case 'createtr':
+				$rule = array('privilege'=> 'translate','work_id' => $resource_id);
+            break;
             case 'translate':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'translate','work_id' => $resource_id);

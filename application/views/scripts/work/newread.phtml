@@ -24,9 +24,9 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         <li><a href="#"><div id='options'></div></a>
             <ul>
 				<li id="showtags"><a href="#"><?php echo __('Show Tags'); ?></a></li>
-                <li id="translate" <?php echo ($this->showTranslate?'':$NRattrs); ?>><a <?php echo $href; ?>><?php echo __('Create a translation'); ?></a></li>
-                <li id="extend" <?php echo ($this->showEdit?'':$NRattrs); ?>><a <?php echo $href_extend;?>><?php echo __('Continue text insertion'); ?></a></li>                                
-                <li id="edit-meta" <?php echo ($this->showEdit?'':$NRattrs); ?>><a href="#"><?php echo __("Edit work's info"); ?></a></li>                                
+                <li id="translate" <?php echo ($this->canTranslate?'':$NRattrs); ?>><a <?php echo $href; ?>><?php echo __('Create a translation'); ?></a></li>
+                <li id="extend" <?php echo ($this->canEdit?'':$NRattrs); ?>><a <?php echo $href_extend;?>><?php echo __('Continue text insertion'); ?></a></li>                                
+                <li id="edit-meta" <?php echo ($this->canEdit?'':$NRattrs); ?>><a href="#"><?php echo __("Edit work's info"); ?></a></li>                                
                 <li id="edit" <?php echo $NRattrs;?>><a href="#"><?php echo __("Edit the translation"); ?></a></li>                                
                 <li><a href="#"><?php echo __("Manage privileges"); ?></a>
 				<ul><li id="manage-orig" <?php echo ($this->canManage?'':$NRattrs); ?> ><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>
@@ -54,6 +54,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 <div id="menu" title="<?php echo __("Icons");?>"></div>
 <div class="background">
 <div id="new-translation"><div id="form-title"><?php echo __("Create a translation");?></div></div>
+<div id="insert-sentence-tag"></div>
 
 <!-------------------------------!-->
 <div id="tests"></div>
@@ -120,7 +121,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         <div class="text show">
             <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
                 <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
-                <span class="segment" id="<?php echo $segment_id; ?>"><?php //echo $this->nlBr($sentence['content']); ?></span>
+               <span class="segment" id="<?php echo $segment_id; ?>"><?php //echo $this->nlBr($sentence['content']); ?></span>
             <?php endforeach; ?>
         </div>            
         </div>

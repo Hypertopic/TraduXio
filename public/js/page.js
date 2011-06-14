@@ -18,6 +18,7 @@ var trBlocks;
 var user;
 var event;
 var temp;
+var lastPage;
 
 (function($) {
     
@@ -99,7 +100,7 @@ var temp;
             
             //2. Then (div#work and div#translation should have the same height)...
             if($('div#work').height()!=$('div#translation').height()){
-                alert('Change the code! #work and #translation have different heights');
+               // alert('Change the code! #work and #translation have different heights');
             }            
             // ... change the borders' height
             $('div.Rborder, div.Lborder').height($('div#work').height());
@@ -178,6 +179,8 @@ var temp;
                 tdxio.page.setBlocked(false);
                 $('.text').toggleClass('show',true);
                 $('.block').toggleClass('show',false);
+                $(".segment").toggleClass('highlighted',false);
+                $(".sentence-tag").remove();
                 //$('.author').toggleClass('editable',false);
                 //$('.title').toggleClass('editable',false); 
                 $('#tr-author').toggleClass('editable',false);
@@ -203,8 +206,9 @@ var temp;
                 $('#editbtn').toggleClass('on',true);
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
                 $('#work span.block').after('<span class="merge" title="Merge here"></span>');
-                $('#work span.block.show span.cut:last-child').remove();	
-                $('#work div.text span.merge:last-child').remove();			    
+                $('#work span.block.show span.cut:last-child').remove();
+                if(window.lastPage)	
+					$('#work div.text span.merge:last-child').remove();			    
             }    
 			window.state = mode;
         },
@@ -376,7 +380,8 @@ var temp;
                 $('#next-page img').attr('id','goto-'+((endSeg+1<len)?endSeg+1:0));
                 $('#next-page img').css('visibility',(endSeg+1<len)?'visible':'hidden');
                 $('#prev-page img').attr('id','goto-'+((beginSeg>0)?beginSeg-1:0));                           
-                $('#prev-page img').css('visibility',(beginSeg>0)?'visible':'hidden');    
+                $('#prev-page img').css('visibility',(beginSeg>0)?'visible':'hidden');  
+                lastPage=!(endSeg+1<len);
             }
             $('#test').empty();
             begin = beginSeg;
@@ -796,6 +801,8 @@ var temp;
 			e.preventDefault();
 			var form = $(this).parents('form').attr('id');
 			switch(form){
+				case 'stag-form':
+					$("div#insert-sentence-tag").css('visibility','hidden');	break;
 				case 'translate-form':
 					$("div#new-translation").css('visibility','hidden');	break;
 				case 'tagform':
@@ -821,7 +828,7 @@ var temp;
 			$(".print").jqprint();
 		});
 		
-		$('textarea').live('focus',function(){$(this).css('font-size','14px').css('color','#585858');});
+		$('textarea').live('focus',function(){$(this).css('font-size','1em').css('color','#585858');});
 		$('.work-title input').live('focus',function(){$(this).css('font-size','1em');});
 		$('#tr-icons a').click(function(e){
 			e.preventDefault();
@@ -833,6 +840,36 @@ var temp;
 			$(this).toggleClass('hide');
 			$("#show-icons").toggleClass('hidden');
 		});
+		
+		$(".segment").live('mousemove',function(event){
+			if(window.state=='editable'){
+				var id = $(this).attr('id');
+				$(".sentence-tag").remove();
+				$('body').prepend('<span class="sentence-tag" id="'+id+'-img"></span>');
+				$("#"+id+"-img").css('top',event.pageY-10).css('left',event.pageX+10);
+				//$("#"+id+"-img").css('top',$(this).offset().top);
+				//$("#"+id+"-img").css('left',$(this).offset().left - 10); 
+			}
+		});
+		$("div#work div.text").live('mouseleave',function(event){
+			$(".sentence-tag").remove();
+		});
+		
+		$(".segment").live('dblclick',function(event){
+			temp = event;
+			if(window.state=='editable'){
+				var id = $(this).attr('id').split('-img')[0];
+				$(".segment").toggleClass('highlighted',false);
+				$("#"+id).toggleClass('highlighted',true);
+				$("div#insert-sentence-tag").css('visibility','hidden');
+				$("div#insert-sentence-tag").empty();
+				$("div#insert-sentence-tag").css('top',event.pageY-100).css('left',event.pageX);
+				window.$.getForm('sentencetag'/*,window.workId,id.split('-')[0].match(/\d+/)*/);
+			}
+		});
+		
+		$("#stagTA").live('focus',function(event){$(this).empty(); $(this).unbind( event );});
+		
     });
     
     
