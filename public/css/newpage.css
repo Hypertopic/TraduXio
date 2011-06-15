@@ -560,6 +560,9 @@ form dl dt{
 display:none;}
 
 .add-tag{
+background:transparent url(../images/addtag.png) no-repeat;
+width:16px;
+height:16px;
 cursor:pointer;}
 
 .work-title input{
@@ -704,23 +707,30 @@ width:96%;
 margin:auto;
 }
 #menu{
-background:transparent url(../images/menushow.png) scroll 50% no-repeat;
+font-size:0.6em;
+color:#FFFFFF;
+font-weight:bold;
+/*background:transparent url(../images/menushow.png) scroll 50% no-repeat;*/
 position:absolute;
-top:45px;
+top:50px;
 left:15px;
 width:20px;
 height:20px;
 z-index:700;
 cursor:pointer;
 }
-#menu.hide{background:transparent url(../images/menuhide.png) scroll 50% no-repeat;}
+#menu.hide{/*background:transparent url(../images/menuhide.png) scroll 50% no-repeat;*/
+font-size:0.6em;
+font-style:italic;
+font-weight:normal;
+}
 
 .hidden{display:none;}
 .visible{display:block;}
 .highlighted{background-color:#FFFDDE;}
 .segment{cursor:default;}
 .sentence-tag{
-background:transparent url(../images/tag.png) scroll 50% no-repeat;
+background:transparent url(../images/chat16.png) scroll 50% no-repeat;
 width:16px;
 height:16px;
 position:absolute;
@@ -728,5 +738,20 @@ top:0;left:0;
 z-index:300;
 display:inline-block;
 }
+#notebtn{
+background:transparent url(../images/chat24.png) scroll 50% no-repeat;
+}
+#notebtn.on{
+background:transparent url(../images/chat32.png) scroll 50% no-repeat;
+}
+#hint{
+position:fixed;
+top:0px;
+left:500px;
+padding:20px;
+color:#7D7D7D;
+background-color:#F5F5F5;
+z-index:400;
+display:none;}
 /* END SLIDE MENU */
 

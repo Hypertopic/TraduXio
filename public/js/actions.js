@@ -308,6 +308,16 @@ var state;
 		return can;
 		
 	};
+	
+	$.hint = function(text){
+		$('#hint').fadeIn( function(){
+			$(this).append(text);
+			setTimeout( function(){
+				$("#hint").fadeOut("slow");
+			}, 10000);
+		});
+		$('#hint').empty();
+	}
     
     $(document).ready(function() {
 

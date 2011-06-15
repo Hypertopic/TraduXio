@@ -19,11 +19,13 @@ $HTmessage = __("You can't delete this text because it has some translations. De
 $askConfirm = __("WARNING! Deletion is a definitive choice! Are you SURE you want to delete this text?");
 $dir = (($this->work['rtl']==1)?'dir="rtl"':''); 
 ?>
+<div id="hint"></div>
 <div id="test"></div><div id="myslidemenu" class="jqueryslidemenu clear">
     <ul>
         <li><a href="#"><div id='options'></div></a>
             <ul>
 				<li id="showtags"><a href="#"><?php echo __('Show Tags'); ?></a></li>
+                <li id="note" <?php echo ($this->canTag?'':$NRattrs); ?>><a href="#"><?php echo __('Tag a sentence'); ?></a></li>
                 <li id="translate" <?php echo ($this->canTranslate?'':$NRattrs); ?>><a <?php echo $href; ?>><?php echo __('Create a translation'); ?></a></li>
                 <li id="extend" <?php echo ($this->canEdit?'':$NRattrs); ?>><a <?php echo $href_extend;?>><?php echo __('Continue text insertion'); ?></a></li>                                
                 <li id="edit-meta" <?php echo ($this->canEdit?'':$NRattrs); ?>><a href="#"><?php echo __("Edit work's info"); ?></a></li>                                
@@ -51,7 +53,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         </li>
     </ul>
 </div>
-<div id="menu" title="<?php echo __("Icons");?>"></div>
+<div id="menu" title="<?php echo __("Show/Hide icons");?>"><?php echo __("Icons"); ?></div>
 <div class="background">
 <div id="new-translation"><div id="form-title"><?php echo __("Create a translation");?></div></div>
 <div id="insert-sentence-tag"></div>
@@ -73,9 +75,11 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div><span class="history" title="<?php echo __("History of modifications"); ?>"></span><span class="icon-label"><?php echo __("Log");?></span></div></a>
 		<?php if($this->canManage):?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div><span class="manage" title="<?php echo __("Manage privileges"); ?>"></span><span class="icon-label"><?php echo __("Manage");?></span></div></a><?php endif; ?>
 		<div class="separate"></div>	
+		<div <?php if(!$this->canTag){echo 'class="idle"';}?>><span id="notebtn" title="<?php echo __("Tag a sentence"); ?>"></span><span class="icon-label"><?php echo __("Notes");?></span></div>
 		<div><span id="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
-		<div <?php if(!$this->showEdit){echo 'class="idle"';}?>><span class="extbtn" title="<?php echo __("Continue text insertion"); ?>"></span><span class="icon-label"><?php echo __("Add");?></span></div>
-		<div <?php if(!$this->showEdit){echo 'class="idle"';}?>><span id="editmeta" title="<?php echo __("Edit the text"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
+		<div class="separate"></div>
+		<div <?php if(!$this->canEdit){echo 'class="idle"';}?>><span class="extbtn" title="<?php echo __("Continue text insertion"); ?>"></span><span class="icon-label"><?php echo __("Add");?></span></div>
+		<div <?php if(!$this->canEdit){echo 'class="idle"';}?>><span id="editmeta" title="<?php echo __("Edit the text"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
 	</div>
 	<div class="icons" id="tr-icons">
 		<div class="idle"><span class="delbtn" title="<?php echo __("Delete this translation"); ?>"></span><span class="icon-label"><?php echo __("Delete");?></span></div>
@@ -86,6 +90,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 		<a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div class="idle"><span class="manage" title="<?php echo __("Manage privileges"); ?>"></span><span class="icon-label"><?php echo __("Manage");?></span></div></a>
 		<div class="separate"></div>
 		<div><span id="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
+		<div class="separate"></div>
 		<div class="idle"><span id="editbtn" title="<?php echo __("Edit translation"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
 	</div>
 </div>
@@ -194,6 +199,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 <span id="clicktoedit"><?php echo __("Click to edit");?></span>
 <span id="want2delete"><?php echo $askConfirm;?></span>
 <span id="missingpriv"><?php echo $explainNA;?></span>
+<span id="notehint"><?php echo __("Click on a sentence to insert a tag/note for it");?></span>
 </span>
 </div>
 

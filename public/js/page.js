@@ -842,9 +842,11 @@ var lastPage;
 		});
 		
 		$(".segment").live('mousemove',function(event){
-			if(window.state=='editable'){
+			if($("#notebtn").hasClass('on')){
 				var id = $(this).attr('id');
 				$(".sentence-tag").remove();
+				$(".segment").toggleClass('highlighted',false);
+				$("#"+id).toggleClass('highlighted',true);				
 				$('body').prepend('<span class="sentence-tag" id="'+id+'-img"></span>');
 				$("#"+id+"-img").css('top',event.pageY-10).css('left',event.pageX+10);
 				//$("#"+id+"-img").css('top',$(this).offset().top);
@@ -855,12 +857,10 @@ var lastPage;
 			$(".sentence-tag").remove();
 		});
 		
-		$(".segment").live('dblclick',function(event){
-			temp = event;
-			if(window.state=='editable'){
+		$(".segment").live('click',function(event){
+			if($("#notebtn").hasClass('on')){
 				var id = $(this).attr('id').split('-img')[0];
-				$(".segment").toggleClass('highlighted',false);
-				$("#"+id).toggleClass('highlighted',true);
+				
 				$("div#insert-sentence-tag").css('visibility','hidden');
 				$("div#insert-sentence-tag").empty();
 				$("div#insert-sentence-tag").css('top',event.pageY-100).css('left',event.pageX);
@@ -870,6 +870,17 @@ var lastPage;
 		
 		$("#stagTA").live('focus',function(event){$(this).empty(); $(this).unbind( event );});
 		
+		$("#note,#notebtn").click(function(e){
+			e.preventDefault();
+			$("#notebtn").toggleClass('on');
+			if(!$("#notebtn").hasClass('on')){
+				$(".segment").toggleClass('highlighted',false);
+				$("div#insert-sentence-tag").css('visibility','hidden');
+				$("div#insert-sentence-tag").empty();
+			}else{
+				window.$.hint($("#notehint").text());
+			}
+		});
     });
     
     
