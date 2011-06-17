@@ -14,7 +14,7 @@ class Form_AjaxWorkSentencetag extends Form_Abstract
     {	
 		$this->setMethod('post');
 		 
-		$this->addElement('textarea','description', array(
+		$this->addElement('textarea','tag_comment', array(
             'id' => 'stagTA',
             'value' => __("Tag the sentence"),
             'required' => true,

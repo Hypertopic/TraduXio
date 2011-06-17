@@ -153,7 +153,7 @@ class WorkController extends Tdxio_Controller_Abstract
         } */
         if((!$id) ||  (!$work)){
             Tdxio_Log::info('get in here');        
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);
         }
         $this->view->canTag = $model->isAllowed('tag',$id);
         $taglist = new Zend_View();

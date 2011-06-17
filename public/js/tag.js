@@ -5,6 +5,7 @@ if (typeof console == "undefined") console={log:function(){}};
 //var id_str = document.URL.substr(document.URL.search("/id/"));
         
     tdxio.tag = {
+		print_stags: function(tag,rdata,sentenceId){alert('print_stags'+rdata);},
 		
         print_tags: function(tag,genre,index,tagID,parentId){
             //var base = tdxio.baseUrl.split(document.domain)[1];                       
@@ -21,6 +22,30 @@ if (typeof console == "undefined") console={log:function(){}};
                 $("div#"+parentId+" #group-"+index).append("<span class=\"tag-item\" title=\""+genre+"\"><span class=\"tag-text\">"+tag+"</span>"+remove+"</span> ");
             }
         },
+        insertStag: function(textId,number){
+			var url = tdxio.baseUrl+"/tag/ajaxtag/id/"+textId;
+			if($("#stagTA").val()!="" || $("#stagTA").val()!=""==null){  
+				$("#stag-form").ajaxSubmit({
+                    type: "post",
+                    url: url,
+                    dataType: "json",
+                    data: {'number':number},
+                    success:function(rdata){
+                        if(rdata.response==true){
+                            tdxio.tag.print_stags(tag,rdata.newID,number);
+                            $("#stag-form").resetForm();
+                        }
+                        else{
+							if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
+							else alert(rdata.message.text);
+						}
+                    },
+                    error:function() {alert("error storing the tag");},
+                }); 
+			}else{
+                alert("No tag inserted!");
+            }
+		},
         
         insert: function(textId,parentId){
 			var url = tdxio.baseUrl+"/tag/ajaxtag/id/"+textId;
@@ -43,7 +68,6 @@ if (typeof console == "undefined") console={log:function(){}};
 						}
                     },
                     error:function() {alert("error storing the tag");},
-                    complete:function() {}
                 });
             }else{
                 alert("No tag inserted!");
@@ -105,14 +129,17 @@ if (typeof console == "undefined") console={log:function(){}};
 	   });
 	   
         $("#tagform").live('submit',function(){
-			alert('form submit');
 			var parentId = $(this).parent('div').attr('id');
 			var textId = parentId=='orig-tag'?window.workId:window.trId;
             tdxio.tag.insert(textId,parentId);      
             return false;
 		});            
 		
-		
+		 $("#stag-form").live('submit',function(){
+			var textId = window.workId;
+            tdxio.tag.insertStag(textId,window.sentenceToTag);      
+            return false;
+		});  
        
 		$("a.delete").live("click",function(){
 			//alert($(this).parent('span').parent('span').parent('div').parent('div').attr('id'));

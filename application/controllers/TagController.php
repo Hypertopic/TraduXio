@@ -29,13 +29,7 @@ class TagController extends Tdxio_Controller_Abstract
         $this->view->response = true;
         $this->view->message = array('code'=>0,'text'=> __("OK"));
 	}
-    
-    
-    protected function tagSentence()
-    {
-        
-    }
-
+   
     public function tagAction(){
         
         $model= $this->_getModel();
@@ -60,26 +54,38 @@ class TagController extends Tdxio_Controller_Abstract
         Tdxio_Log::info($request,'tagAction request');
         if ($request->isPost()) {
             $values=$request->getPost();
+            Tdxio_Log::info($values,'tagAction request values');
             $model= $this->_getModel();
             $user = Tdxio_Auth::getUserName();
             $user = !is_null($user)?$user:Tdxio_Auth::getUserRole();
             $params = $request->getParams();
+            $workId = $params['id'];
+            if($params['number']!=null){
+				$number = $params['number'];
+				$sentenceModel = new Model_Sentence();
+				$sentence = $sentenceModel->fetchSentence($workId,$number);
+				$sentence = $sentence[0];
+				$taggableId = $sentence['id'];
+				$genre = 'default';
+			}else{
+				$taggableId = $workId;
+				$genre = $params['tag_genre'];
+			}
             Tdxio_Log::info($params,'tagAction request params');
-            $data = array('username'=> $user, 'taggable_id'=> $params['id'],'genre'=> $params['tag_genre'], 'comment' => $params['tag_comment']);
-            $result = $model->tag($data);
-            $tags = $model->getTags($params['id']);
-            $this->view->rdata=$result;     
-            
-            if($result['response']==true){
-                $histModel = new Model_History();
+            $data = array('username'=> $user, 'taggable_id'=> $taggableId,'genre'=> $genre, 'comment' => $params['tag_comment']);
+			$newId = $model->tag($data);
+            if(is_null($newId)){
+				$rdata = array('response'=>false,'message'=>array('code'=>1,'text'=>__("The tag already exists.")));
+			}else{
+				$rdata = array('response'=>true,'message'=>array('code'=>0,'text'=>__("Tag successfully added")),'newID'=>$newId);
+			    $histModel = new Model_History();
                 Tdxio_Log::info('ADD HISTORY TAG');
-                $histModel->addHistory( $params['id'],3,array('tag'=>$params['tag_comment'],'genre'=>$params['tag_genre']));
-            }
-        } else {
-            Tdxio_Log('debug 1010');
-            throw new Zend_Controller_Action_Exception('Incorrect query.', 500);
-        }
-    }
+                $histModel->addHistory( $workId,3,array('tag'=>$params['tag_comment'],'genre'=>$genre));
+            }        
+            $this->view->rdata=$rdata;     
+            Tdxio_Log::info($rdata,'rdata from ajaxtag');
+		}
+	}
     
     public function gettagsAction(){
 		$username = Tdxio_Auth::getUserName();  

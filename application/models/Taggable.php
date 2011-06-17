@@ -13,6 +13,7 @@ class Model_Taggable extends Model_Abstract
 {
 
     protected $_tableClass = 'Taggable';
+    protected $_sentencesTagGenre = 'comment';
     
     public function getTags($taggable_id,$genre=null){
         $db = $this->_getTable()->getAdapter();
@@ -47,7 +48,11 @@ class Model_Taggable extends Model_Abstract
     
     
     public function tag($tag){
-        
+        if($tag['genre']=='default'){
+			$genreModel = new Model_Genre();
+			$genres=$genreModel->getGenres();
+			$tag['genre'] = array_search($this->_sentencesTagGenre,$genres);
+		}
         $tagTable = new Model_DbTable_Tag;
         $rdata = array();
         $data = array('taggable' => $tag['taggable_id'],
@@ -62,15 +67,14 @@ class Model_Taggable extends Model_Abstract
                             ->where('genre = ? ',$data['genre']);
         Tdxio_Log::info($select->__toString(),'selecttostring');
         $result = $tagTable->fetchRow($select);
-        Tdxio_Log::info($result,'bidibodo');
-        if(!empty($result)){
-            $rdata = array('response'=>false,'message'=>"The tag already exists.");
-        }else{
-            $newId = $tagTable->insert($data);
-            $rdata = array('response'=>true,'message'=>"Tag successfully added",'newID'=>$newId);
-        }        
-        return $rdata;
-    }   
+        Tdxio_Log::info($result,'bidibodo'); 
+        if(empty($result)){  
+			$newId = $tagTable->insert($data);     
+		}else{
+			$newId = null;
+		}
+        return $newId;
+    }  
     
     public function deleteTag($username,$tagId){
         $tagTable = new Model_DbTable_Tag();

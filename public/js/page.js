@@ -19,6 +19,7 @@ var user;
 var event;
 var temp;
 var lastPage;
+var sentenceToTag;
 
 (function($) {
     
@@ -859,11 +860,12 @@ var lastPage;
 		
 		$(".segment").live('click',function(event){
 			if($("#notebtn").hasClass('on')){
-				var id = $(this).attr('id').split('-img')[0];
+				//var id = $(this).attr('id').split('-img')[0];
 				
 				$("div#insert-sentence-tag").css('visibility','hidden');
 				$("div#insert-sentence-tag").empty();
 				$("div#insert-sentence-tag").css('top',event.pageY-100).css('left',event.pageX);
+				window.sentenceToTag = $(this).attr('id').split('segment')[1];
 				window.$.getForm('sentencetag'/*,window.workId,id.split('-')[0].match(/\d+/)*/);
 			}
 		});
@@ -871,14 +873,19 @@ var lastPage;
 		$("#stagTA").live('focus',function(event){$(this).empty(); $(this).unbind( event );});
 		
 		$("#note,#notebtn").click(function(e){
-			e.preventDefault();
-			$("#notebtn").toggleClass('on');
-			if(!$("#notebtn").hasClass('on')){
-				$(".segment").toggleClass('highlighted',false);
-				$("div#insert-sentence-tag").css('visibility','hidden');
-				$("div#insert-sentence-tag").empty();
-			}else{
-				window.$.hint($("#notehint").text());
+			var can = false;
+			if(window.workId!=null &&window.workId!='')
+				can = window.$.checkRights('tag',window.workId);
+			if(can){
+				e.preventDefault();
+				$("#notebtn").toggleClass('on');
+				if(!$("#notebtn").hasClass('on')){
+					$(".segment").toggleClass('highlighted',false);
+					$("div#insert-sentence-tag").css('visibility','hidden');
+					$("div#insert-sentence-tag").empty();
+				}else{
+					window.$.hint($("#notehint").text());
+				}
 			}
 		});
     });
