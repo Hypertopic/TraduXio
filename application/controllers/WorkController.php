@@ -146,11 +146,7 @@ class WorkController extends Tdxio_Controller_Abstract
 			return $this->_helper->redirector->gotoUrl('/work/newread/id/'.$origId.'#tr'.$id); 
 		}
         $work=$model->fetchOriginalWork($id);
-      /*  Tdxio_Log::info($work,'work read');
-        if (!$id || !$work || (empty($work['Sentences']))) {    
-            Tdxio_Log::info('get in here');        
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work Id %1\$s does not exist or you don't have the rights to see it ", $id)), 404);
-        } */
+        Tdxio_Log::info($work,'origwork');        
         if((!$id) ||  (!$work)){
             Tdxio_Log::info('get in here');        
             throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);

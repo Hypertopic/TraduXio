@@ -136,11 +136,19 @@ class Model_Work extends Model_Taggable
         
         $sentenceModel= new Model_Sentence();
         $work['Sentences'] = $sentenceModel->fetchSentences($work_id);
+        $sentencesIds = array();
         $content = '';
         foreach($work['Sentences'] as $key => $sentence){
             $content.=$sentence['content'];
+            $sentencesIdNumbers[$sentence['id']]=$sentence['number'];
+            $sentencesIds[]=$sentence['id'];
         }
+        Tdxio_Log::info($sentencesIds,'sids');
         $work['the_text']=$content;
+        $stags = $this->getTags($sentencesIds);
+        unset($stags['Genres']);
+        foreach($stags as $id => $tag)
+			$work['SentencesTags'][$sentencesIdNumbers[$id]] = $tag;
         $translationModel = new Model_Translation();
         $work['Interpretations'] = $translationModel->fetchSentencesInterpretations($work_id);  
         $tags = ($this->getTags($work_id));

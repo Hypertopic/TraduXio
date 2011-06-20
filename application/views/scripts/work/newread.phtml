@@ -96,7 +96,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 </div>
 	
 <div class="tag-line clear">
-    <div class="show-tag-area" id="orig-tag">
+    <div class="show-tag-area" id="orig-tag" dir=<?php echo $dir; ?>>
 		 <?php echo $this->tagbody; ?>
     </div>
     <div class="show-tag-area" id="tr-tag">		
@@ -127,6 +127,11 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
             <?php foreach ($this->work['Sentences'] as $segnum=>$sentence) : ?>
                 <?php $segment_id="text".$this->work['id']."-segment".$segnum; ?>
                <span class="segment" id="<?php echo $segment_id; ?>"><?php //echo $this->nlBr($sentence['content']); ?></span>
+                <?php //if(!empty($this->work['SentencesTags'][$segnum])): ?>
+                <?php //foreach($this->work['SentencesTags'][$segnum] as $key=>$stag): ?>
+                <!--<span class="note-symbol"><?php //echo $key; ?></span>!-->
+                <?php //endforeach; ?>
+                <?php //endif; ?>
             <?php endforeach; ?>
         </div>            
         </div>

@@ -753,5 +753,11 @@ color:#7D7D7D;
 background-color:#F5F5F5;
 z-index:400;
 display:none;}
+
+.note-symbol{
+color:#FF0000;
+vertical-align:super;
+font-size:0.8em;
+cursor:pointer;}
 /* END SLIDE MENU */
 

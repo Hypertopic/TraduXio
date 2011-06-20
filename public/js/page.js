@@ -229,6 +229,7 @@ var sentenceToTag;
 			$("#tr-icons .history").parent('a').attr("href",tdxio.baseUrl+"/work/history/id/"+twId);
 			$("#tr-icons .manage").parent('a').attr("href",tdxio.baseUrl+"/work/manage/id/"+twId);
 		},
+		
         
         displayWork: function(data,trId,backward,beginSeg,endSeg){
             if(data.work.Sentences.length > 0){
@@ -238,7 +239,7 @@ var sentenceToTag;
                 $('#test').empty();     
                 $('#translation div.text').empty();     
                 $('#test').width($('#work div.text').width());
-                           
+                
                 var sentences = data.work.Sentences;
                 //var maxH = Math.max(minHeight,$(window).height()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-$('#work div.text').outerHeight() +$('#work div.text').height()-60);
                 //var stdTextHeight = $.getDocHeight()-$('#header').outerHeight()-$('.footer').outerHeight()-$('#under-header').outerHeight()-($('.tag-line').outerHeight()+15)-$('.work-title').outerHeight()-$('.Tborder').height()-$('.Bborder').height()-60;
@@ -246,8 +247,8 @@ var sentenceToTag;
                 //alert(stdTextHeight);   
                 maxH = Math.max(minHeight,stdTextHeight);
 
-                var pre = "<span class='segment' id='text"+data.work.id +"-segment";
-                var len = sentences.length;                
+                var pre = "<span class='segment' id='text"+data.work.id +"-segment";  
+                var len = sentences.length;
                 //if(data.work.Interpretations.length == 0){// there are no translations
                 if(trId == '' || trId==null){// there are no translations
                     //display only the work
@@ -257,12 +258,12 @@ var sentenceToTag;
 					$("#plus").hide(10);
 					$("#tr-author,#tr-title").empty();
 					$("#comma").remove();
-                    if(backward===false){    
-                        var i;
+                    if(backward===false){ 
+                        var i;            
                         $('#test').append(pre + sentences[beginSeg].number + "'>" + nl2br(sentences[beginSeg].content,false) + "</span>");                    
                         for(i=beginSeg; (i==beginSeg) || (i<len && $('#test').height()<= maxH) ; i++){
-                            $('#work div.text').append(pre + sentences[i].number + "'>" +nl2br(sentences[i].content,false) + "</span>");
-                            if(i+1<len){
+							$('#work div.text').append(pre + sentences[i].number + "'>" +nl2br(sentences[i].content,false) + "</span>");
+							if(i+1<len){
                                 $('#test').append(pre + sentences[i+1].number + "'>" +nl2br(sentences[i+1].content,false) + "</span>");
                             }
                             endSeg=i;
@@ -271,7 +272,7 @@ var sentenceToTag;
                         var i;
                         $('#test').append(pre + sentences[endSeg].number + "'>" + nl2br(sentences[endSeg].content,false) + "</span>");
                         for(i=endSeg; (i==endSeg)|| (i>=0 && $('#test').height()<= maxH) ; i--){
-                            $('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
+							$('#work div.text').prepend(pre + sentences[i].number + "'>" +sentences[i].content + "</span>");
                             if(i-1>=0){
                                 $('#test').prepend(pre + sentences[i-1].number + "'>" +sentences[i-1].content + "</span>");
                             }                            
@@ -282,7 +283,7 @@ var sentenceToTag;
                             if($('#test').height()<= maxH){
                                 endSeg++;
                                 $('#work div.text').append(pre + sentences[endSeg].number + "'>" +nl2br(sentences[endSeg].content,false) + "</span>");                                
-                            }
+							}
                         }
                         back=true;
                     }      
@@ -298,6 +299,7 @@ var sentenceToTag;
 					if(!$("#comma").length) $('#translation .work-title span.title').before('<span id="comma">,&nbsp</span>');
                     $('#translation .work-title span.title').html((trWork.work.title!=null)?trWork.work.title:'[]');                    
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
+                    $('#tr-tag').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var trlen = trWork.blocks.length;
                //     alert('trlen: '+trlen);
                     var preblock = "<span class='block' id='block";
@@ -323,8 +325,8 @@ var sentenceToTag;
 							$('#translation div.text').append(preblock + i + "'>" +nl2br((trWork.blocks[i].translation)?trWork.blocks[i].translation:'',false) + "</span>");
                             
                             for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
-                                text += pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>";
-                            }
+                                text += pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>"; 
+							}
                             $('#work div.text').append(outblock + i + "'>"+text+"</span>");
                             $('#test').html($('#work div.text').html());
                             if(i+1<trlen){
@@ -343,7 +345,7 @@ var sentenceToTag;
                         for(i=endBlock; (i==endBlock) || (i>=0 && $('#test').height()<= maxH) ; i--){
                             $('#translation div.text').prepend(preblock + i + "'>" +nl2br((trWork.blocks[i].translation)?trWork.blocks[i].translation:'',false) + "</span>");
                              for(var x=trWork.blocks[i].from_segment,text=''; x<=trWork.blocks[i].to_segment; x++){
-                                text += pre + x +"'>" + sentences[x].content +"</span>";
+								text += pre + x +"'>" + sentences[x].content + "</span>";                          
                             }
                             $('#work div.text').prepend(outblock + i + "'>"+text+"</span>");
                             $('#test').html($('#work div.text').html());
@@ -364,8 +366,8 @@ var sentenceToTag;
                             if($('#test').height()<= maxH){
                                 $('#translation div.text').append(preblock + (endBlock+1) + "'>" +nl2br((trWork.blocks[endBlock+1].translation)?trWork.blocks[endBlock+1].translation:'',false) + "</span>");
                                 for(var x=from,text=''; x<=to; x++){
-                                    text += pre + x +"'>" + nl2br(sentences[x].content,false) +"</span>";
-                                }
+									text += pre + x +"'>" + nl2br(sentences[x].content,false) + "</span>";
+								}
                                 $('#work div.text').append(outblock + (endBlock+1) + "'>"+text+"</span>");
                                 //window.trBlocks.(endBlock+1)=outblock + (endBlock+1) + "'>"+text+"</span>");
                                 endSeg=to;
@@ -388,7 +390,31 @@ var sentenceToTag;
             begin = beginSeg;
             end = endSeg;
             
+            tdxio.page.addNotes(beginSeg,endSeg);
         },
+        
+        addNote: function(segNumber,noteNumber,noteText,note){
+			if(noteNumber>0)
+				$("span#segment"+segNumber+"-note"+noteNumber-1).after("<span class='note-symbol' id='segment"+segNumber+"-note"+noteNumber+"' title='"+noteText+"'>"+noteNumber+1+"</span>");
+			else
+				$("span#text"+window.workId+"-segment"+segNumber).prepend("<span class='note-symbol' id='segment"+segNumber+"-note"+noteNumber+"' title='"+noteText+"'>"+noteNumber+1+"</span>");
+			
+			ajaxData.work.SentencesTags[segNumber][noteNumber]=note;
+		},
+        
+        addNotes: function(from,to){
+			for(var segNumber in ajaxData.work.SentencesTags){
+				if(segNumber >= from && segNumber<=to){
+					var tags = ajaxData.work.SentencesTags[segNumber];
+					var tagstext = '';
+					for(var i in tags){
+						var j = parseInt(i)+1;
+						tagstext += "<span class='note-symbol' id='segment"+segNumber+"-note"+i+"' title='"+tags[i].comment+"'>"+ j +"</span>&nbsp;";
+					}
+					$("span#text"+window.workId+"-segment"+segNumber).prepend(tagstext);
+				}
+			}
+		},
         
         displayOnglets: function(trls){
             var N = trls.length;
