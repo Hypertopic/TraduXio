@@ -2483,7 +2483,10 @@ msgid ""
 "Compare\n"
 " Share\n"
 " Interpret"
-msgstr "ترجمة +إشراك+تأويل"
+msgstr ""
+"مقارنة \n"
+" إشراك \n"
+" تفسير"
 
 #: views/scripts/index/copyright.phtml:5
 msgid "Report a copyright abuse"
