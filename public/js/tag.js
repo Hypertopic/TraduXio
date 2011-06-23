@@ -5,8 +5,7 @@ if (typeof console == "undefined") console={log:function(){}};
 //var id_str = document.URL.substr(document.URL.search("/id/"));
         
     tdxio.tag = {
-		print_stags: function(tag,rdata,sentenceId){alert('print_stags'+rdata);},
-		
+	
         print_tags: function(tag,genre,index,tagID,parentId){
             //var base = tdxio.baseUrl.split(document.domain)[1];                       
             //var remove_url= base +"/tag/deletetag"+id_str+"/tag/"+tag+"/genre/"+index;
@@ -32,8 +31,18 @@ if (typeof console == "undefined") console={log:function(){}};
                     data: {'number':number},
                     success:function(rdata){
                         if(rdata.response==true){
-                            tdxio.tag.print_stags(tag,rdata.newID,number);
-                            $("#stag-form").resetForm();
+							var note,noteNumber;
+							for(var i in rdata.tags){
+								if(rdata.tags[i].id==rdata.newID){
+									note = rdata.tags[i];
+									noteNumber = i;
+								}
+							}				
+							$(".segment").toggleClass('highlighted',false);
+							$(".segment").toggleClass('selected',false);                    
+							$("#insert-sentence-tag").css('visibility','hidden');
+							$("#insert-sentence-tag").empty();
+							tdxio.page.addNote(number,noteNumber,note); 
                         }
                         else{
 							if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}

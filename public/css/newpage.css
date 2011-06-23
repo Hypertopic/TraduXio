@@ -678,6 +678,7 @@ position:relative;
 width:100%;
 }
 .closeimg{
+cursor:pointer;
 position:absolute;
 top:2px;
 right:2px;
@@ -728,6 +729,7 @@ font-weight:normal;
 .hidden{display:none;}
 .visible{display:block;}
 .highlighted{background-color:#FFFDDE;}
+.selected{background-color:#FAF327;}
 .segment{cursor:default;}
 .sentence-tag{
 background:transparent url(../images/chat16.png) scroll 50% no-repeat;
@@ -759,5 +761,16 @@ color:#FF0000;
 vertical-align:super;
 font-size:0.8em;
 cursor:pointer;}
+
+#show-note{
+position:fixed;
+bottom:5px;
+border:solid 1px #787878;
+background-color:#FFFFFF;
+color:#585858;
+z-index:800;
+visibility:hidden;
+padding:5px 20px;
+}
 /* END SLIDE MENU */
 

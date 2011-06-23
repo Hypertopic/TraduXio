@@ -60,13 +60,15 @@ class TagController extends Tdxio_Controller_Abstract
             $user = !is_null($user)?$user:Tdxio_Auth::getUserRole();
             $params = $request->getParams();
             $workId = $params['id'];
-            if($params['number']!=null){
-				$number = $params['number'];
-				$sentenceModel = new Model_Sentence();
-				$sentence = $sentenceModel->fetchSentence($workId,$number);
-				$sentence = $sentence[0];
-				$taggableId = $sentence['id'];
-				$genre = 'default';
+            if(array_key_exists('number',$params)){
+				if($params['number']!=null){
+					$number = $params['number'];
+					$sentenceModel = new Model_Sentence();
+					$sentence = $sentenceModel->fetchSentence($workId,$number);
+					$sentence = $sentence[0];
+					$taggableId = $sentence['id'];
+					$genre = 'default';
+				}
 			}else{
 				$taggableId = $workId;
 				$genre = $params['tag_genre'];
@@ -77,11 +79,12 @@ class TagController extends Tdxio_Controller_Abstract
             if(is_null($newId)){
 				$rdata = array('response'=>false,'message'=>array('code'=>1,'text'=>__("The tag already exists.")));
 			}else{
-				$rdata = array('response'=>true,'message'=>array('code'=>0,'text'=>__("Tag successfully added")),'newID'=>$newId);
+				$tags = $model->getTags($taggableId);
+				$rdata = array('response'=>true,'message'=>array('code'=>0,'text'=>__("Tag successfully added")),'newID'=>$newId,'tags'=>$tags[$taggableId]);
 			    $histModel = new Model_History();
                 Tdxio_Log::info('ADD HISTORY TAG');
                 $histModel->addHistory( $workId,3,array('tag'=>$params['tag_comment'],'genre'=>$genre));
-            }        
+		   }
             $this->view->rdata=$rdata;     
             Tdxio_Log::info($rdata,'rdata from ajaxtag');
 		}

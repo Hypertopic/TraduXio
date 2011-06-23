@@ -91,7 +91,7 @@ var state;
           //  alert(lastId);
             var newId = lastId;
             newId = newId.replace(/\d+$/,parseInt(lastId.match(/\d+$/))+1);
-            $('#'+lastId).after("<span id='"+newId+"'>"+data.addedtext+"</span>" );
+            $('#'+lastId).after("<span id='"+newId+"' class='segment'>"+data.addedtext+"</span>" );
             $("#work div.text").height("");
             tdxio.page.resize();
             tdxio.page.setBlocked(false);
@@ -317,7 +317,15 @@ var state;
 			}, 10000);
 		});
 		$('#hint').empty();
-	}
+	};
+	
+	$.showNote = function(segNum,noteNum){
+		$("#show-note").css('visibility','visible');
+		var note = window.ajaxData.work.SentencesTags[segNum][noteNum];
+		$("#show-note .text").text(note.comment);		
+	};
+	
+	
     
     $(document).ready(function() {
 
