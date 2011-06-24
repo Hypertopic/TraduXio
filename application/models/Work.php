@@ -147,6 +147,7 @@ class Model_Work extends Model_Taggable
         $work['the_text']=$content;
         $stags = $this->getTags($sentencesIds);
         unset($stags['Genres']);
+        $work['SentencesTags']=array();
         foreach($stags as $id => $tag)
 			$work['SentencesTags'][$sentencesIdNumbers[$id]] = $tag;
         $translationModel = new Model_Translation();

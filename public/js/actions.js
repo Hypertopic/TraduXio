@@ -181,10 +181,12 @@ var state;
 					else alert(rdata.message.text);
 				}else {
 					$.setUser(rdata.user); 					
+					curUser = rdata.user;
 				}
 			},
 			error:function() {alert('Could not retrieve the current user');}		
 		});
+		return curUser;
 	};
     
     $.getForm = function(formType,id){
@@ -320,9 +322,14 @@ var state;
 	};
 	
 	$.showNote = function(segNum,noteNum){
-		$("#show-note").css('visibility','visible');
 		var note = window.ajaxData.work.SentencesTags[segNum][noteNum];
-		$("#show-note .text").text(note.comment);		
+		$(".show-note").css('visibility','visible').attr('id','showseg'+segNum+'-note'+note.id);
+		$(".show-note .text").text(note.comment);
+		if(note.user==$.getCurrentUser()){
+			$(".show-note .delete").toggleClass('hidden',false);
+		}else{
+			$(".show-note .delete").toggleClass('hidden',true);
+		}
 	};
 	
 	

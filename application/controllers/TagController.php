@@ -124,7 +124,8 @@ class TagController extends Tdxio_Controller_Abstract
         Tdxio_Log::info('entra in deletetagAction');
         $username = Tdxio_Auth::getUserName();  
         $request=$this->getRequest();
-        $taggableId=$request->getParam('id');
+        $id=$request->getParam('id');
+        $taggableId=$request->getParam('taggableid');
         $tagId=$request->getParam('tagid');
         $genre=$request->getParam('genre');
         $model= $this->_getModel();
@@ -138,7 +139,7 @@ class TagController extends Tdxio_Controller_Abstract
 
         if($rowsAffected>0){
             $histModel = new Model_History();
-            $histModel->addHistory($taggableId,4,array('tag'=>$tag['comment'],'genre'=>$genre));  
+            $histModel->addHistory($id,4,array('tag'=>$tag['comment'],'genre'=>$genre));  
 			$this->view->message = array('code'=>0,'text'=>__("OK"));
         }else{
 			$this->view->message = array('code'=>1,'text'=>__("No tag removed")); 
@@ -154,7 +155,7 @@ class TagController extends Tdxio_Controller_Abstract
             $taggableModel = new Model_Taggable();
             if(!($taggableModel->entryExists(array('id'=>$resource_id))))
             {throw new Zend_Exception(sprintf('Taggable Id "%d" does not exist.',$resource_id), 404);} 
-            $wModel = new Model_Work();
+            $wModel = new Model_Work();            
             $visibility=$wModel->getAttribute($resource_id,'visibility');
             Tdxio_Log::info($visibility,'visibilita');
         }

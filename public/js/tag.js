@@ -83,26 +83,21 @@ if (typeof console == "undefined") console={log:function(){}};
             }
         },
         
-        remove: function(id,textId){  
+        remove: function(workId,taggableId,tagId,genre){  
 			
-			var temp = id.split('-');
-            var genre = temp[0];
-            var tagID = temp[1];
-            var elID = "#"+id;
-            var url = tdxio.baseUrl+"/tag/deletetag/id/"+textId+"/tagid/"+id.split('-')[1]+"/genre/"+id.split('-')[0];
+            var url = tdxio.baseUrl+"/tag/deletetag";
             
             $.ajax({
                 type:"post",
                 url:encodeURI(url),
                 dataType: "json",
+                data: {'id':workId,'taggableid':taggableId,'tagid':tagId,'genre':genre},
                 success: function(rdata){
                     if(rdata.response==false){
 						if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}
-					}else if(rdata.last){
-                        $("#"+id).parent('span').parent('span').parent('div').remove();
-                    }
-                    else{
-                        $("#"+id).parent('span').parent('span').remove();
+					}else if(workId==taggableId){ 
+						if(rdata.last)$("#"+genre+'-'+tagId).parent('span').parent('span').parent('div').remove();
+						else $("#"+genre+'-'+tagId).parent('span').parent('span').remove();
                     }
                 },
                 error: function() {alert("error erasing the tag");}
@@ -150,12 +145,33 @@ if (typeof console == "undefined") console={log:function(){}};
             return false;
 		});  
        
-		$("a.delete").live("click",function(){
-			//alert($(this).parent('span').parent('span').parent('div').parent('div').attr('id'));
-            var textId = $(this).parent('span').parent('span').parent('div').parent('div').attr('id')=='orig-tag'?window.workId:window.trId;
-            tdxio.tag.remove(this.id,textId);          
+		$("a.delete").live("click",function(e){
+			e.preventDefault();
+			var taggableId,tagId,genre,workId;
+			if($(this).parents(".show-note").length!=0){				
+				var segNum = $(this).parents(".show-note").attr('id').split('-')[0].match(/\d+/)[0];
+				tagId = $(this).parents(".show-note").attr('id').split('-')[1].match(/\d+/)[0];
+				taggableId = ajaxData.work.Sentences[segNum].id;
+				genre = ajaxData.work.SentencesTags[segNum][0].genre;
+				workId = window.workId;
+				tdxio.tag.remove(workId,taggableId,tagId,genre);    
+				$('.show-note .closeimg').click();
+				var noteNum;
+				for(var i in ajaxData.work.SentencesTags[segNum]){
+					if(ajaxData.work.SentencesTags[segNum][i].id==tagId)
+						noteNum=i;
+				}
+				tdxio.page.removeNote(segNum,noteNum);
+			}else{
+				taggableId = $(this).parent('span').parent('span').parent('div').parent('div').attr('id')=='orig-tag'?window.workId:window.trId;				
+				workId = taggableId;
+				genre = this.id.split('-')[0];
+				tagId = this.id.split('-')[1];
+				tdxio.tag.remove(workId,taggableId,tagId,genre);            
+			}                  
             return false;
         });        
+        
     });
     
 

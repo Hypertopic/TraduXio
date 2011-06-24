@@ -762,7 +762,9 @@ vertical-align:super;
 font-size:0.8em;
 cursor:pointer;}
 
-#show-note{
+.show-note{
+font-style:italic;
+font-size:0.9em;
 position:fixed;
 bottom:5px;
 border:solid 1px #787878;
@@ -770,7 +772,15 @@ background-color:#FFFFFF;
 color:#585858;
 z-index:800;
 visibility:hidden;
-padding:5px 20px;
+padding:10px 30px;
+}
+
+.show-note a.delete{
+font-style:normal;
+font-size:1.2em;
+margin:6px;
+background-color:#FFFFFF;
+border: 1px solid;
 }
 /* END SLIDE MENU */
 

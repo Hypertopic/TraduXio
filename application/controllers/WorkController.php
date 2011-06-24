@@ -749,8 +749,8 @@ class WorkController extends Tdxio_Controller_Abstract
                     $rule = array('privilege'=> 'create','work_id' => -1 );       
                 }else{$rule = array('privilege'=> 'create','work_id' => -1, 'notAllowed'=>true);} 
                 break;
-			case 'getuser': $rule = array('privilege'=> 'translate','work_id' => $resource_id);break;
-            case 'createtr':
+			//case 'getuser': $rule = array('privilege'=> 'translate','work_id' => $resource_id);break;
+			case 'createtr':
 				$rule = array('privilege'=> 'translate','work_id' => $resource_id);
             break;
             case 'translate':

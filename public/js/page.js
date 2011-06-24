@@ -399,12 +399,21 @@ var sentenceToTag;
 			var index = parseInt(noteNumber)+parseInt(1);
 			var prec = parseInt(noteNumber)-parseInt(1);
 			if(noteNumber>0){
-				$("span#segment"+segNumber+"-note"+(prec)).after("<span class='note-symbol' id='segment"+segNumber+"-note"+noteNumber+"' title='"+note.comment+"'>&nbsp;"+index+"</span>");
-			}
-			else
+				$("span#segment"+segNumber+"-note"+(prec)).after("<span class='note-symbol' id='segment"+segNumber+"-note"+noteNumber+"' title='"+note.comment+"'>"+index+"&nbsp;</span>");
+			}else{
 				$("span#text"+window.workId+"-segment"+segNumber).prepend("<span class='note-symbol' id='segment"+segNumber+"-note"+noteNumber+"' title='"+note.comment+"'>"+index+"&nbsp;</span>");
-			
+				ajaxData.work.SentencesTags[segNumber]=[];			
+			}
 			ajaxData.work.SentencesTags[segNumber][noteNumber]=note;
+		},
+		 
+		removeNote: function(segNumber,noteNumber){
+			var L = ajaxData.work.SentencesTags[segNumber];
+			ajaxData.work.SentencesTags[segNumber].splice(noteNumber,1);
+			//for(var i in ajaxData.work.SentencesTags[segNumber]
+			//delete ajaxData.work.SentencesTags[segNumber][noteNumber]=note;
+			$('#text'+window.workId+'-segment'+segNumber+' .note-symbol').remove();
+			tdxio.page.addNotes(segNumber,segNumber);
 		},
         
         addNotes: function(from,to){
@@ -414,7 +423,7 @@ var sentenceToTag;
 					var tagstext = '';
 					for(var i in tags){
 						var j = parseInt(i)+1;
-						tagstext += "<span class='note-symbol' id='segment"+segNumber+"-note"+i+"' title='"+tags[i].comment+"'>"+ j +"</span>&nbsp;";
+						tagstext += "<span class='note-symbol' id='segment"+segNumber+"-note"+i+"' title='"+tags[i].comment+"'>"+ j +"&nbsp</span>";
 					}
 					$("span#text"+window.workId+"-segment"+segNumber).prepend(tagstext);
 				}
@@ -765,7 +774,7 @@ var sentenceToTag;
 				e.preventDefault();
 			}else if(e.keyCode == 33){
 				if($("#"+this.id).prev().length)
-				{alert('prev');
+				{
 					$("#"+this.id).prev().click();
 				}else if($("#prev-page .turn-page").length>0){
 					$("#prev-page .turn-page").click();			
@@ -877,7 +886,7 @@ var sentenceToTag;
 		});
 		
 		$(".segment").live('mousemove',function(event){
-			if($("#notebtn").hasClass('on')){
+			if($("#notebtn").hasClass('on') ){
 				var id = $(this).attr('id');
 				$(".sentence-tag").remove();
 				$(".segment").toggleClass('highlighted',false);
@@ -893,7 +902,8 @@ var sentenceToTag;
 		});
 		
 		$(".segment").live('click',function(event){			
-			if($("#notebtn").hasClass('on')){
+			temp=event;
+			if($("#notebtn").hasClass('on') && event.target.className!="note-symbol"){
 				$(".segment").toggleClass('selected',false);				
 				$(this).toggleClass('selected',true);
 				$("div#insert-sentence-tag").css('visibility','hidden');
@@ -929,6 +939,7 @@ var sentenceToTag;
 			var noteNum = $(this).attr('id').split('-')[1].match(/\d+/);			
 			window.$.showNote(segNum,noteNum);
 		});
+		
     });
     
     
