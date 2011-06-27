@@ -451,20 +451,22 @@ class WorkController extends Tdxio_Controller_Abstract
 		$request = $this->getRequest();
         $id=$request->getParam('id');
         $model=$this->_getModel();
-		$author = $request->getParam('author');
+		$data = array($request->getParam('elName')=>$request->getParam('value'));
+/*		$author = $request->getParam('author');
 		$title = $request->getParam('title');
-		$data = array();
-		if(!is_null($author))
-			$data['author']=$author;
+		$translator = $request->getParam('translator');
+	
+		if(!is_null($author)){$data['author']=$author;$newText = $author;}
 		if(!is_null($title))
 			$data['title']=$title;
+		*/
 		Tdxio_Log::info($data,'datata');
 		$result=$model->update($data,$id); 
 		if($result>0){
 			$histModel = new Model_History();        
 			$histModel->addHistory($id,0);  
 			$this->view->response=true;
-			$this->view->newText = !is_null($author)?$data['author']:$data['title'];
+			$this->view->newText = $request->getParam('value');
 			$this->view->message = array('code' => 0, 'text' => __("OK"));
 
 		}else{

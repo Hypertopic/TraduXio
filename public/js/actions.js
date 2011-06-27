@@ -332,7 +332,29 @@ var state;
 		}
 	};
 	
-	
+	$.saveMeta = function(textId,elName,value){
+		var params= {'elName':elName,'value':value};
+		$.ajax({
+			type: "post",
+			url: encodeURI(tdxio.baseUrl+"/work/metaedit/id/"+textId),
+			dataType: "json",
+			data: params,
+			success:function(rdata,status){
+				if (rdata.response==false) {//error somewhere
+					$("#"+e.target.id).resetToDefault(e.target.defaultValue);
+					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
+					else alert(rdata.message.code);
+				}else {
+					//alert('success');
+					var updObj = (textId!=window.workId)?'tr':'orig';
+					$.update('update-'+updObj,{'el':elName,'val':value});
+				}
+			},
+			error:function() {
+				alert("Error in the saving process");
+			},
+		});
+	}
     
     $(document).ready(function() {
 

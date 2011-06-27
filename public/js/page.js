@@ -16,7 +16,6 @@ var blocked=false;
 var state = 'reset';//'reset' 'editable'
 var trBlocks;
 var user;
-var event;
 var temp;
 var lastPage;
 var sentenceToTag;
@@ -185,6 +184,7 @@ var sentenceToTag;
                 $(".sentence-tag").remove();
                 //$('.author').toggleClass('editable',false);
                 //$('.title').toggleClass('editable',false); 
+                $('.onglet.first .translator-name').toggleClass('editable',false);
                 $('#tr-author').toggleClass('editable',false);
                 $('#tr-title').toggleClass('editable',false); 
                 //$("span.block.show.editable textarea").each(function(){$(this).replaceWith($(this).text());});
@@ -204,6 +204,7 @@ var sentenceToTag;
                 $('.block').toggleClass('show',true);
                 $('#tr-author').toggleClass('editable',true);
                 $('#tr-title').toggleClass('editable',true);                
+                $('.onglet.first .translator-name').toggleClass('editable',true);                
                 $('#translation .block').toggleClass('editable',true);
                 $('#editbtn').toggleClass('on',true);
                 $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
@@ -436,23 +437,22 @@ var sentenceToTag;
   //          $('span#more').css('visibility','hidden');
             $('.onglets li').css('z-index',-100);
             $('.onglets li').css('visibility','hidden'); 
+            $("a.translator, .prec-onglet, .next-onglet").css('display','');
             var totWidth = 0;
             var overlap = 0;
             var ongClass='onglet first';
-            var i,id;
+            var i,id;            
+            $('li#onglet-'+trls[0].work.id).find('.translator,.prec-onglet,.next-onglet').css('display','inline');
             
             for(i = 0;i==0 || (i<N && (totWidth<lineWidth));i++){
             //   alert('tot: '+totWidth +', lineW: '+lineWidth);
                 id = trls[i].work.id;
-                $('li#onglet-'+id).css('z-index',N-i);
-                $('li#onglet-'+id).css('left',totWidth-overlap);
-                $('li#onglet-'+id).attr('class',ongClass);
-                $('li#onglet-'+id).css('visibility','visible');
+                $('li#onglet-'+id).css('z-index',N-i).css('left',totWidth-overlap).attr('class',ongClass).css('visibility','visible');				                
                 totWidth += $('li#onglet-'+id).outerWidth()-overlap;
                 overlap = 15;
                 ongClass='onglet';
-            }
-            
+            }         
+            //$(".onglet.first a.translator,.onglet.first .prec-onglet,.onglet.first .next-onglet").css('display','inline');
             if(totWidth>lineWidth){
                 $('li#onglet-'+id).css('visibility','hidden');
                 i--;
@@ -599,19 +599,22 @@ var sentenceToTag;
        
         $('#text').empty();
         
-       
-        
-        $('ul.onglets li').live('click',function(){
-			tdxio.page.setBlocked(false);
-			tdxio.page.gotoTransl(this.id.split("-")[1]);
+        $('ul.onglets li').live('click',function(e){
+			if(!$(this).hasClass('first') && e.target.className!='prec-onglet' && e.target.className!='next-onglet'){
+				tdxio.page.setBlocked(false);
+				tdxio.page.gotoTransl(this.id.split("-")[1]);
+			}
         });
         
-      /*  $('span#more').click(function(){ // this was to make the "#more click" show other translations titles
-			if(nextHiddenId!=null)
+        $('img.prec-onglet,img.next-onglet').click(function(event){
+			/*if(nextHiddenId!=null)
                 translations = tdxio.array.trShift(translations,nextHiddenId,false);
-            tdxio.page.displayOnglets(translations);
+            tdxio.page.displayOnglets(translations);*/
+            var index = (event.target.className.split('-')[0]=='prec')?translations.length-1:1;
+            var trid = translations[index].work.id;
+            tdxio.page.gotoTransl(trid);
         });
-*/        
+        
 		$('span#more, li#translate,span#create').live('click',function(event){
 			event.preventDefault();
 			if( $("div#new-translation").css('visibility')=='hidden'){
@@ -624,16 +627,16 @@ var sentenceToTag;
         url=encodeURI(tdxio.baseUrl+"/translation/save");
    
 		
-		$('.work-title input').live('focusout change',function(e){
-			event = e;
-			//alert(e.originalEvent.type);
+		$('.work-title input,input.translator-name').live('focusout change',function(e){
 			var id = $(this).attr('id');
 			var textId = ($(this).parent('div').parent('div.text-container').attr('id')=='work')?window.workId:window.trId;
 			var value = $(this).val();
 			var elName = $(this).attr('class');
-			var params= (elName.match('author'))?{'author':value}:{'title':value};
+			elName = (elName.match('author'))?'author':(elName.match('title')?'title':'translator');
+			
 			if(e.originalEvent.type == "change"){
-				$.ajax({
+				window.$.saveMeta(textId,elName,value);
+		/*		$.ajax({
 					type: "post",
 					url: encodeURI(tdxio.baseUrl+"/work/metaedit/id/"+textId),
 					dataType: "json",
@@ -652,9 +655,11 @@ var sentenceToTag;
 						alert("Error in the saving process");
 					},
 				});
+				* */
 			}//save modified filed	
 			if(value=='') value = "[]";
-			$(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
+			if(!$(this).hasClass('translator-name')) $(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
+			else $(this).replaceWith("<a href='#"+window.trId+" class=\""+$(this).attr('class')+"\" >"+value+"</span>");			
 		});
 		
 		
@@ -783,34 +788,35 @@ var sentenceToTag;
 				e.preventDefault();
 			}
 		});
-		
-		$('.work-title span.editable').live('click',function(){
-			var id = $(this).attr('id');
+	/*	$('.translator-name').live('click',function(e){
+			var content = trWork.work.translator;
+			$(this).empty().append("<input type=\"text\" value=\""+content+"\" />");			
+		});*/
+		$('.work-title span.editable,a.translator-name.editable').live('click',function(e){
+			var target = e.target;
+			var fontSize = $(this).css('font-size');
 			var content = '';
-			switch(id){
-				case 'tr-author':content = (trWork.work.author!=null)?trWork.work.author:'';break;
-				case 'tr-title':content = (trWork.work.title!=null)?trWork.work.title:'';break;
-				case 'orig-author':content = ajaxData.work.author;break;
-				case 'orig-title':content = ajaxData.work.title;break;
+			if($(this).hasClass('translator-name')) content = trWork.work.translator;
+			else{
+				var id = $(this).attr('id');
+				switch(id){
+					case 'tr-author':content = (trWork.work.author!=null)?trWork.work.author:'';break;
+					case 'tr-title':content = (trWork.work.title!=null)?trWork.work.title:'';break;
+					case 'orig-author':content = ajaxData.work.author;break;
+					case 'orig-title':content = ajaxData.work.title;break;
+				}
 			}
 			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\" value=\""+content+"\" />");
-			$("#"+$(this).attr('id')).focus();
+			//$("#"+$(this).attr('id')).focus();
+			if($(this).hasClass('translator-name')) $('.onglet.first .translator-name').focus();
+			else $("#"+$(this).attr('id')).focus();
 		});
+		
 		$('#showtags').live('click',function(){$('#show-tag').click();$(this).children('a').text($('#hidetagstext').text());$(this).attr('id','hidetags');});
 		$('#hidetags').live('click',function(){$('#hide-tag').click();$(this).children('a').text($('#showtagstext').text());$(this).attr('id','showtags');});
         $('#show-tag').live('click',function(){$('div.show-tag-area').show(50);$(this).attr('id','hide-tag').attr('title','Hide TAGS');});
         $('#hide-tag').live('click',function(){$('div.show-tag-area').hide(50);$(this).attr('id','show-tag').attr('title','Show TAGS');});
-/*
-		$("div#work div.text").selectedText({
-			min: 2,
-			max: 1000,
-			selecting: function(text) {$('input#search-bar').val(text);},
-			stop: function(text) {$('input#search-bar').val(text);}
-		});
-		
-		$("#lens-search").click();
-		$("img#close-search").live('click',function(){$("input#search-bar").val('');});
-		* */
+
 		
 		$("div#work div.text").selectedText({
 			min: 2,
@@ -873,7 +879,7 @@ var sentenceToTag;
 		});
 		
 		$('textarea').live('focus',function(){$(this).css('font-size','1em').css('color','#585858');});
-		$('.work-title input').live('focus',function(){$(this).css('font-size','1em');});
+		//$('.work-title input').live('focus',function(){$(this).css('font-size','inherit');});
 		$('#tr-icons a').click(function(e){
 			e.preventDefault();
 			if(window.trId!=null && window.trId!='')
@@ -901,8 +907,7 @@ var sentenceToTag;
 			$(".sentence-tag").remove();
 		});
 		
-		$(".segment").live('click',function(event){			
-			temp=event;
+		$(".segment").live('click',function(event){		
 			if($("#notebtn").hasClass('on') && event.target.className!="note-symbol"){
 				$(".segment").toggleClass('selected',false);				
 				$(this).toggleClass('selected',true);
@@ -910,8 +915,7 @@ var sentenceToTag;
 				$("div#insert-sentence-tag").empty();
 				$("div#insert-sentence-tag").css('top',event.pageY-100).css('left',event.pageX);
 				window.sentenceToTag = $(this).attr('id').split('segment')[1];
-				window.$.getForm('sentencetag'/*,window.workId,id.split('-')[0].match(/\d+/)*/);
-				
+				window.$.getForm('sentencetag'/*,window.workId,id.split('-')[0].match(/\d+/)*/);				
 			}
 		});
 		

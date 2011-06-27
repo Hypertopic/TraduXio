@@ -163,11 +163,16 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 
     <li class="onglet" id="onglet-<?php echo $traId;?>">
         <span title="<?php echo __($trWork['work']['language']) ?>">
-            <a href="#<?php echo 'tr'.$traId; ?>"><?php echo $trWork['work']['translator'];?></a>
+        <span class="container">	
+			<img class="prec-onglet" src="<?php echo $this->makeUrl('/images/prevong.png'); ?>"/>
+            <a href="#<?php echo 'tr'.$traId; ?>" class="translator"><?php echo __("Translator");?>:</a>
+            <a href="#<?php echo 'tr'.$traId; ?>" class="translator-name"><?php echo $trWork['work']['translator'];?></a>
+            <img class="next-onglet" src="<?php echo $this->makeUrl('/images/nextong.png');  ?>"/>
+		</span>
         </span>
     </li>    
 <?php endforeach; ?>
-<span id='more'>+</span>
+<span id='more' title="<?php echo __("Create a translation");?>">+</span>
 </ul>    
 </div>
     

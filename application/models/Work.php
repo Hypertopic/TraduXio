@@ -37,7 +37,7 @@ class Model_Work extends Model_Taggable
     }
     
     public function update(array $data, $id)
-    {
+    {Tdxio_Log::info($data,'parc');
         $table=$this->_getTable();
         if (isset($data['insert_text']))  { // text added in text extension
             $sentences = $this->_getCutter()->getSentences($data['insert_text']);
@@ -62,7 +62,7 @@ class Model_Work extends Model_Taggable
             //aggiungi un translation block ad ogni traduzione di $id
             $this->addInterpretations($id,$fromseg,$toseg);            
         }
-        if (isset($data['visibility'])||isset($data['author'])||isset($data['title'])){
+        if (isset($data['visibility'])||isset($data['author'])||isset($data['title'])||isset($data['translator'])){
             $result=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
         }        
         return $result; 

@@ -158,10 +158,6 @@ overflow:hidden;
 }
 
 li.onglet{
-float:left;
-letter-spacing:1px;
-padding-left:10px;
-float:left;
 }
 
 .onglets li{
@@ -184,8 +180,8 @@ overflow:hidden;
 }
 
 .onglets a{
-vertical-align:bottom;
-display:block;
+/*vertical-align:bottom;
+display:block;*/
 padding-top:10px;
 }
 
@@ -273,6 +269,9 @@ padding-top:30px;
 padding-bottom:15px;
 font-size:1.2em;
 }
+.work-title input{
+font-size:1em;
+}
 
 #create{
 text-align:center;
@@ -310,7 +309,7 @@ font-size:0.6em;
 font-variant:small-caps;
 text-align:center;}
 
-li.onglet span a{
+li.onglet span a,li.onglet span input{
 color:inherit;
 letter-spacing:-1px;
 font-size:0.9em;
@@ -319,7 +318,8 @@ font-size:0.9em;
 li.onglet{
 position:absolute;
 top:0px;
-left:0px;
+left:0px;float:left;
+letter-spacing:1px;
 }
 
 ul.onglets{
@@ -534,8 +534,9 @@ cursor:pointer;
 border:none;
 font:inherit;
 }
-.title.editable,.author.editable{
+.title.editable,.author.editable,.translator-name.editable{
 border:thin inset #585858;
+cursor:text;
 }
 
 #translation textarea{
@@ -782,5 +783,21 @@ margin:6px;
 background-color:#FFFFFF;
 border: 1px solid;
 }
+a.translator,.prec-onglet,.next-onglet{
+font-variant:small-caps;
+font-size:0.8em;
+color:#787878;
+display:none;}
+
+.onglets li.first span.container,.onglets li span.container{
+display:block;
+padding-top:10px;
+background:none;
+background-image:none;}
+span.container{
+z-index:800;
+width:auto;
+margin:0;
+padding:0;}
 /* END SLIDE MENU */
 
