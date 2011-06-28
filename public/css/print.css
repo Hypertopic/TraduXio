@@ -1,0 +1,32 @@
+body {visibility:hidden;}
+.print {visibility:visible;} 
+#printbtn{display:none;}
+
+div.title{
+    padding:3px;
+    padding-top:10px;
+    font-size:1.2em;
+    font-weight:bold;
+}
+a,a:visited,a:active{
+color:#585858;
+text-decoration:none;}
+
+.language{
+    font-size:0.8em;
+    font-weight:bold;
+    padding:3px;
+}
+
+.work-title{
+font-size:1.2em;
+}
+
+.language{
+    font-size:0.8em;
+    font-weight:bold;
+    padding:3px;
+}
+.text{
+text-align:justify;
+font-size:12px;}

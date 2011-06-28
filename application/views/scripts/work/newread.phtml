@@ -71,7 +71,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 		<a <?php echo $href; ?> ><div><span class="delbtn" title="<?php echo __("Delete this text"); ?>"></span><span class="icon-label"><?php echo __("Delete");?></span></div></a>
 		<?endif; ?>
 		<div class="separate"></div>
-		<div><span class="printbtn" title="<?php echo __("Print the original text"); ?>"></span><span class="icon-label"><?php echo __("Print");?></span></div>
+		<div><a href="<?php echo $this->makeUrl('/work/print/id/'.$this->work['id']); ?>" target="_blank"><span class="printbtn" title="<?php echo __("Print the original text"); ?>"></span><span class="icon-label"><?php echo __("Print");?></span></a></div>
 		<div class="separate"></div>
 		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div><span class="history" title="<?php echo __("History of modifications"); ?>"></span><span class="icon-label"><?php echo __("Log");?></span></div></a>
 		<?php if($this->canManage):?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div><span class="manage" title="<?php echo __("Manage privileges"); ?>"></span><span class="icon-label"><?php echo __("Manage");?></span></div></a><?php endif; ?>
@@ -85,7 +85,7 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 	<div class="icons" id="tr-icons">
 		<div class="idle"><span class="delbtn" title="<?php echo __("Delete this translation"); ?>"></span><span class="icon-label"><?php echo __("Delete");?></span></div>
 		<div class="separate"></div>		
-		<div><span class="printbtn" title="<?php echo __("Print this translation"); ?>"></span><span class="icon-label"><?php echo __("Print");?></span></div>
+		<div><a href="<?php echo $this->makeUrl('/translation/print/id/'); ?>" target="_blank"><span class="printbtn" title="<?php echo __("Print this translation"); ?>"></span><span class="icon-label"><?php echo __("Print");?></span></a></div>
 		<div class="separate"></div>
 		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div class="idle"><span class="history" title="<?php echo __("History of modifications"); ?>"></span><span class="icon-label"><?php echo __("Log");?></span></div></a>
 		<a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div class="idle"><span class="manage" title="<?php echo __("Manage privileges"); ?>"></span><span class="icon-label"><?php echo __("Manage");?></span></div></a>

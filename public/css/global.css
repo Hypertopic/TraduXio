@@ -942,5 +942,9 @@ clear:both;
 margin-bottom:20px;
 }
 
+#printbtn{
+cursor:pointer;}
 
-
+.reductor{
+width:800px;
+margin:auto;}

@@ -870,14 +870,19 @@ var sentenceToTag;
 				if(answer) {
 					window.$.deleteWork(window.trId);
 		}}});
-		
+	/*	
 		$('.printbtn').live('click',function(){
-			var dad = $(this).parent().parent();
-			$(".print").toggleClass('print',false);
-			dad.children('.work-title, .text').toggleClass('print',true);
+			$('.print').empty();
+			if($(this).parents('').length>0){
+				$('.print').append(ajaxData.work.title);
+				$('.print').append(ajaxData.work.the_text);
+			}else{
+				$('.print').append(ajaxData.work.title);
+				$('.print').append(ajaxData.work.the_text);
+			}
 			$(".print").jqprint();
 		});
-		
+		*/
 		$('textarea').live('focus',function(){$(this).css('font-size','1em').css('color','#585858');});
 		//$('.work-title input').live('focus',function(){$(this).css('font-size','inherit');});
 		$('#tr-icons a').click(function(e){

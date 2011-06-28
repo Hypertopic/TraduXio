@@ -131,6 +131,26 @@ class WorkController extends Tdxio_Controller_Abstract
         $this->view->tagForm = $tagForm;
     }
     
+     public function printAction(){
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        $model = $this->_getModel();
+        
+        if($model->isTranslationWork($id)){
+			$trModel = new Model_Translation();
+			$origWork = $trModel->fetchTranslationOriginalWork($id);
+			$origId = $origWork['id'];
+			return $this->_helper->redirector->gotoUrl('/translation/print/id/'.$id); 
+		}
+        $work = $model->fetchWork($id);
+        
+        if (!$id || !($work=$model->fetchOriginalWork($id))) {
+            
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);
+        }   
+        $this->view->work = $work;
+    }
+    
     public function newreadAction(){
     
         $request = $this->getRequest();
