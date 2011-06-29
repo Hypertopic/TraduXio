@@ -249,6 +249,16 @@ class TranslationController extends Tdxio_Controller_Abstract
 
     }
     
+	public function printAction(){
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        $model = $this->_getModel();
+		if (!$id || !($work=$model->fetchTranslationWork($id))) {            
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);
+        }  
+        $this->view->translation = $work;
+        Tdxio_Log::info($work['OriginalSentences'],'san giuseppe');
+    }
     
     public function readAction()
     {           

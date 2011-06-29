@@ -230,6 +230,7 @@ var sentenceToTag;
 			$("#tr-icons #editbtn").parent('div').toggleClass('idle',!privileges.edit);			
 			$("#tr-icons .history").parent('a').attr("href",tdxio.baseUrl+"/work/history/id/"+twId);
 			$("#tr-icons .manage").parent('a').attr("href",tdxio.baseUrl+"/work/manage/id/"+twId);
+			$("#tr-icons .printbtn").parent('a').attr("href",tdxio.baseUrl+"/translation/print/id/"+twId);
 		},
 		
         
