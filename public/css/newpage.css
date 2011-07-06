@@ -298,7 +298,9 @@ width: 32px;
 width: 32px;
 height:32px;
 display:block;
-}
+text-align:center;
+vertical-align:bottom;}
+
 span.icon-label{
 width:32px;
 height:4px;
@@ -487,12 +489,9 @@ background: transparent url(../images/editonsmall.png) scroll 50% no-repeat;
 background: transparent url(../images/editon.png) scroll 50% no-repeat;
 }
 
-.idle .delbtn{
-background: transparent url(../images/deloffsmall.png)  scroll 50% no-repeat; 
-}
-.delbtn{
+/*.delbtn{
 background: transparent url(../images/delonsmall.png)  scroll 50% no-repeat; 
-}
+}*/
 .icons .idle{
 display:none;}
 
@@ -603,12 +602,12 @@ left:1px;
 top:1px;
 cursor:pointer;}
 
-.printbtn{background:transparent url(../images/print.png) scroll 50% no-repeat;}
+/*.printbtn{background:transparent url(../images/print.png) scroll 50% no-repeat;}*/
 .extbtn{background:transparent url(../images/extend.png) scroll 50%  no-repeat;}
-.manage{background:transparent url(../images/manage.png)  scroll 50% no-repeat;}
-.history{background:transparent url(../images/history.png)  scroll 50% no-repeat;}
-#show-tag{background:transparent url(../images/tag24vio.png)  scroll 50% no-repeat;}
-#hide-tag{background:transparent url(../images/tag32vio.png)  scroll 50% no-repeat;}
+/*.manage{background:transparent url(../images/manage.png)  scroll 50% no-repeat;}
+.history{background:transparent url(../images/history.png)  scroll 50% no-repeat;}*/
+.show-tag{background:transparent url(../images/tag24vio.png)  scroll 50% no-repeat;}
+.hide-tag{background:transparent url(../images/tag32vio.png)  scroll 50% no-repeat;}
 
 #new-translation{
 position:fixed;

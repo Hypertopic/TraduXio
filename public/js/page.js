@@ -207,8 +207,8 @@ var sentenceToTag;
                 $('.onglet.first .translator-name').toggleClass('editable',true);                
                 $('#translation .block').toggleClass('editable',true);
                 $('#editbtn').toggleClass('on',true);
-                $('#work span.segment').after('<span class="cut" title="Cut here"></span>');
-                $('#work span.block').after('<span class="merge" title="Merge here"></span>');
+                $('#work span.segment').after('<span class="cut" title="'+tdxio.i18n.cuthere+'"></span>');
+                $('#work span.block').after('<span class="merge" title="'+tdxio.i18n.mergehere+'"></span>');
                 $('#work span.block.show span.cut:last-child').remove();
                 if(window.lastPage)	
 					$('#work div.text span.merge:last-child').remove();			    
@@ -217,20 +217,16 @@ var sentenceToTag;
         },
         
         updateLink: function(privileges,twId){
-			$("#edit").toggleClass('idle',!privileges.edit);			
-			$("#manage").toggleClass('idle',!privileges.manage);
-			$("#delete").toggleClass('idle',!privileges.del);
-			$("#history a").attr("href",tdxio.baseUrl+"/work/history/id/"+twId);
-			$("#manage a").attr("href",tdxio.baseUrl+"/work/manage/id/"+twId);
 			if(twId!=null && twId!=''){
-				$("#history").toggleClass('idle',false);
-				$("#tr-icons .history").parent('div').toggleClass('idle',false);}
-			$("#tr-icons .delbtn").parent('div').toggleClass('idle',!privileges.del);
-			$("#tr-icons .manage").parent('div').toggleClass('idle',!privileges.manage);
-			$("#tr-icons #editbtn").parent('div').toggleClass('idle',!privileges.edit);			
-			$("#tr-icons .history").parent('a').attr("href",tdxio.baseUrl+"/work/history/id/"+twId);
-			$("#tr-icons .manage").parent('a').attr("href",tdxio.baseUrl+"/work/manage/id/"+twId);
-			$("#tr-icons .printbtn").parent('a').attr("href",tdxio.baseUrl+"/translation/print/id/"+twId);
+				$("#edit,#editbtn").toggleClass('idle',!privileges.edit);			
+				$("#manage,#managebtn").toggleClass('idle',!privileges.manage);
+				$("#delete,#tr-icons .delbtn").toggleClass('idle',!privileges.del);
+				$("#history,#historybtn").toggleClass('idle',false);
+				$("#print,#printbtn").toggleClass('idle',false)
+				$("#history a,#historybtn a").attr("href",tdxio.baseUrl+"/work/history/id/"+twId);
+				$("#manage a,#managebtn a").attr("href",tdxio.baseUrl+"/work/manage/id/"+twId);
+				$("#print a,#printbtn a").attr("href",tdxio.baseUrl+"/translation/print/id/"+twId);
+			}			
 		},
 		
         
@@ -256,7 +252,7 @@ var sentenceToTag;
                 if(trId == '' || trId==null){// there are no translations
                     //display only the work
                   
-                    $('#translation .text').append("<span id='create'>Create a translation</span>"); 
+                    $('#translation .text').append("<span id='create'>"+tdxio.i18n.createtrsl+"</span>"); 
 					$("#top-border").show(10);
 					$("#plus").hide(10);
 					$("#tr-author,#tr-title").empty();
@@ -298,9 +294,9 @@ var sentenceToTag;
                             trWork = data.work.Interpretations[j];
                     }
                     $("input[name=destlang]").val(trWork.work.language);
-                    $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author:'[]');
+                    $('#translation .work-title span.author').html((trWork.work.author!=null)?trWork.work.author:tdxio.i18n.anonymous);
 					if(!$("#comma").length) $('#translation .work-title span.title').before('<span id="comma">,&nbsp</span>');
-                    $('#translation .work-title span.title').html((trWork.work.title!=null)?trWork.work.title:'[]');                    
+                    $('#translation .work-title span.title').html((trWork.work.title!=null)?trWork.work.title:tdxio.i18n.notitle);
                     $('div#translation').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     $('#tr-tag').attr('dir',(trWork.work.rtl==1)?'rtl':'');
                     var trlen = trWork.blocks.length;
@@ -634,7 +630,7 @@ var sentenceToTag;
 			var value = $(this).val();
 			var elName = $(this).attr('class');
 			elName = (elName.match('author'))?'author':(elName.match('title')?'title':'translator');
-			
+			value = (value!='')?value:((elName.match('title'))?tdxio.i18n.notitle:tdxio.i18n.anonymous);
 			if(e.originalEvent.type == "change"){
 				window.$.saveMeta(textId,elName,value);
 		/*		$.ajax({
@@ -658,7 +654,7 @@ var sentenceToTag;
 				});
 				* */
 			}//save modified filed	
-			if(value=='') value = "[]";
+			
 			if(!$(this).hasClass('translator-name')) $(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
 			else $(this).replaceWith("<a href='#"+window.trId+" class=\""+$(this).attr('class')+"\" >"+value+"</span>");			
 		});
@@ -801,8 +797,8 @@ var sentenceToTag;
 			else{
 				var id = $(this).attr('id');
 				switch(id){
-					case 'tr-author':content = (trWork.work.author!=null)?trWork.work.author:'';break;
-					case 'tr-title':content = (trWork.work.title!=null)?trWork.work.title:'';break;
+					case 'tr-author':content = (trWork.work.author!=null)?trWork.work.author:tdxio.i18n.anonymous;break;
+					case 'tr-title':content = (trWork.work.title!=null)?trWork.work.title:tdxio.i18n.notitle;break;
 					case 'orig-author':content = ajaxData.work.author;break;
 					case 'orig-title':content = ajaxData.work.title;break;
 				}
@@ -813,10 +809,10 @@ var sentenceToTag;
 			else $("#"+$(this).attr('id')).focus();
 		});
 		
-		$('#showtags').live('click',function(){$('#show-tag').click();$(this).children('a').text($('#hidetagstext').text());$(this).attr('id','hidetags');});
-		$('#hidetags').live('click',function(){$('#hide-tag').click();$(this).children('a').text($('#showtagstext').text());$(this).attr('id','showtags');});
-        $('#show-tag').live('click',function(){$('div.show-tag-area').show(50);$(this).attr('id','hide-tag').attr('title','Hide TAGS');});
-        $('#hide-tag').live('click',function(){$('div.show-tag-area').hide(50);$(this).attr('id','show-tag').attr('title','Show TAGS');});
+		$('#showtags').live('click',function(){$('.show-tag').click();$(this).attr('id','hidetags').children('a').text(tdxio.i18n.hidetags);});
+		$('#hidetags').live('click',function(){$('.hide-tag').click();$(this).attr('id','showtags').children('a').text(tdxio.i18n.showtags);});
+        $('.show-tag').live('click',function(){$('div.show-tag-area').show(50);$(this).attr('class','hide-tag').attr('title',tdxio.i18n.hidetags);});
+        $('.hide-tag').live('click',function(){$('div.show-tag-area').hide(50);$(this).attr('class','show-tag').attr('title',tdxio.i18n.showtags);});
 
 		
 		$("div#work div.text").selectedText({
@@ -867,7 +863,7 @@ var sentenceToTag;
 			if(window.trId!=null &&window.trId!='')
 				can = window.$.checkRights('delete',window.trId);
 			if(can){
-				var answer = confirm($("#want2delete").text());			
+				var answer = confirm(tdxio.i18n.want2delete);
 				if(answer) {
 					window.$.deleteWork(window.trId);
 		}}});
@@ -886,11 +882,12 @@ var sentenceToTag;
 		*/
 		$('textarea').live('focus',function(){$(this).css('font-size','1em').css('color','#585858');});
 		//$('.work-title input').live('focus',function(){$(this).css('font-size','inherit');});
-		$('#tr-icons a').click(function(e){
+					
+		/*$('#tr-icons a').click(function(e){
 			e.preventDefault();
 			if(window.trId!=null && window.trId!='')
 				document.location.href = this.href.replace(/\/id\/\d+/,"/id/"+window.trId);
-		});
+		});*/
 		
 		$("#menu").click(function(){
 			$(this).toggleClass('hide');
@@ -940,7 +937,7 @@ var sentenceToTag;
 					$("div#insert-sentence-tag").css('visibility','hidden');
 					$("div#insert-sentence-tag").empty();
 				}else{
-					window.$.hint($("#notehint").text());
+					window.$.hint(tdxio.i18n.notehint);
 				}
 			}
 		});
@@ -949,6 +946,7 @@ var sentenceToTag;
 			var noteNum = $(this).attr('id').split('-')[1].match(/\d+/);			
 			window.$.showNote(segNum,noteNum);
 		});
+		$(".idle a,a.idle").click(function(e){e.preventDefault();});
 		
     });
     

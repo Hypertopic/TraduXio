@@ -26,17 +26,21 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     <ul>
         <li><a href="#"><div id='options'></div></a>
             <ul>
-				<li id="showtags"><a href="#"><?php echo __('Show Tags'); ?></a></li>
-                <li id="note" <?php echo ($this->canTag?'':$NRattrs); ?>><a href="#"><?php echo __('Tag a sentence'); ?></a></li>
-                <li id="translate" <?php echo ($this->canTranslate?'':$NRattrs); ?>><a <?php echo $href; ?>><?php echo __('Create a translation'); ?></a></li>
-                <li id="extend" <?php echo ($this->canEdit?'':$NRattrs); ?>><a <?php echo $href_extend;?>><?php echo __('Continue text insertion'); ?></a></li>                                
+				<li id="showtags"><a href="#"><?php echo __("Show Tags"); ?></a></li>
+                <li id="note" <?php echo ($this->canTag?'':$NRattrs); ?>><a href="#"><?php echo __("Tag a sentence"); ?></a></li>
+                <li id="translate" <?php echo ($this->canTranslate?'':$NRattrs); ?>><a <?php echo $href; ?>><?php echo __("Create a translation"); ?></a></li>
+                <li id="extend" <?php echo ($this->canEdit?'':$NRattrs); ?>><a <?php echo $href_extend;?>><?php echo __("Continue text insertion"); ?></a></li>                                
                 <li id="edit-meta" <?php echo ($this->canEdit?'':$NRattrs); ?>><a href="#"><?php echo __("Edit work's info"); ?></a></li>                                
                 <li id="edit" <?php echo $NRattrs;?>><a href="#"><?php echo __("Edit the translation"); ?></a></li>                                
                 <li><a href="#"><?php echo __("Manage privileges"); ?></a>
 				<ul><li id="manage-orig" <?php echo ($this->canManage?'':$NRattrs); ?> ><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage text's privileges"); ?></a></li>
 					<li id="manage" class="idle"><a href="#"><?php echo __("Manage translation's privileges"); ?></a></li>
 				</ul></li>
-                <li><a href="#"><?php echo __("Delete"); ?></a><ul>
+				<li><a href="#"><?php echo __("Print"); ?></a><ul>		
+					<li><a href="<?php echo $this->makeUrl('/work/print/id/'.$this->work['id']); ?>" target="_blank"><?php echo __("Print the original text"); ?></a></li>
+					<li id="print" class="idle"><a href="#" target="_blank"><?php echo __("Print the translation");?></a></li>
+                </ul></li>
+				<li><a href="#"><?php echo __("Delete"); ?></a><ul>
                 <?php if($this->canDelete): 
                     if($this->hasTranslations==false):                         
                         $href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;$msg=__("Warning!This is a definitive choice!");
@@ -69,16 +73,16 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 			$href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
 			else: $href = 'href="" class="idle" title="'.$HTmessage.'" onClick="alert(\''.addslashes($HTmessage).'\');"'; 
 			endif;?>
-		<a <?php echo $href; ?> ><div><span class="delbtn" title="<?php echo __("Delete this text"); ?>"></span><span class="icon-label"><?php echo __("Delete");?></span></div></a>
+		<div><span class="delbtn" title="<?php echo __("Delete this text"); ?>"><a <?php echo $href; ?> ><img src="<?php echo $this->makeUrl('/images/delonsmall.png'); ?>"/></a></span><span class="icon-label"><a <?php echo $href; ?> ><?php echo __("Delete");?></a></span></div>
 		<?endif; ?>
 		<div class="separate"></div>
-		<div><a href="<?php echo $this->makeUrl('/work/print/id/'.$this->work['id']); ?>" target="_blank"><span class="printbtn" title="<?php echo __("Print the original text"); ?>"></span><span class="icon-label"><?php echo __("Print");?></span></a></div>
+		<div><span title="<?php echo __("Print the original text"); ?>"><a href="<?php echo $this->makeUrl('/work/print/id/'.$this->work['id']); ?>" target="_blank"><img src="<?php echo $this->makeUrl('/images/print.png'); ?>"/></a></span><span class="icon-label"><a href="<?php echo $this->makeUrl('/work/print/id/'.$this->work['id']); ?>" target="_blank"><?php echo __("Print");?></a></span></div>
 		<div class="separate"></div>
-		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div><span class="history" title="<?php echo __("History of modifications"); ?>"></span><span class="icon-label"><?php echo __("Log");?></span></div></a>
-		<?php if($this->canManage):?><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div><span class="manage" title="<?php echo __("Manage privileges"); ?>"></span><span class="icon-label"><?php echo __("Manage");?></span></div></a><?php endif; ?>
+		<div><span title="<?php echo __("History of modifications"); ?>"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><img src="<?php echo $this->makeUrl('/images/history.png'); ?>"/></a></span><span class="icon-label"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("Log");?></a></span></div>
+		<?php if($this->canManage):?><div><span title="<?php echo __("Manage privileges"); ?>"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><img src="<?php echo $this->makeUrl('/images/manage.png'); ?>"/></a></span><span class="icon-label"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage");?></a></span></div><?php endif; ?>
 		<div class="separate"></div>	
 		<div <?php if(!$this->canTag){echo 'class="idle"';}?>><span id="notebtn" title="<?php echo __("Tag a sentence"); ?>"></span><span class="icon-label"><?php echo __("Notes");?></span></div>
-		<div><span id="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
+		<div><span class="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
 		<div class="separate"></div>
 		<div <?php if(!$this->canEdit){echo 'class="idle"';}?>><span class="extbtn" title="<?php echo __("Continue text insertion"); ?>"></span><span class="icon-label"><?php echo __("Add");?></span></div>
 		<div <?php if(!$this->canEdit){echo 'class="idle"';}?>><span id="editmeta" title="<?php echo __("Edit the text"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
@@ -86,12 +90,12 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 	<div class="icons" id="tr-icons">
 		<div class="idle"><span class="delbtn" title="<?php echo __("Delete this translation"); ?>"></span><span class="icon-label"><?php echo __("Delete");?></span></div>
 		<div class="separate"></div>		
-		<div><a href="<?php echo $this->makeUrl('/translation/print/id/'); ?>" target="_blank"><span class="printbtn" title="<?php echo __("Print this translation"); ?>"></span><span class="icon-label"><?php echo __("Print");?></span></a></div>
+		<div id="printbtn"><span title="<?php echo __("Print this translation"); ?>"><a href="#" target="_blank"><img src="<?php echo $this->makeUrl('/images/print.png'); ?>"/></a></span><span class="icon-label"><a href="#" target="_blank"><?php echo __("Print");?></a></span></div>
 		<div class="separate"></div>
-		<a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><div class="idle"><span class="history" title="<?php echo __("History of modifications"); ?>"></span><span class="icon-label"><?php echo __("Log");?></span></div></a>
-		<a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><div class="idle"><span class="manage" title="<?php echo __("Manage privileges"); ?>"></span><span class="icon-label"><?php echo __("Manage");?></span></div></a>
+		<div id="historybtn" class="idle"><span title="<?php echo __("History of modifications"); ?>"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>"><img src="<?php echo $this->makeUrl('/images/history.png'); ?>"/></a></span><span class="icon-label"><a href="#" ><?php echo __("Log");?></a></span></div>
+		<div id="managebtn" class="idle"><span title="<?php echo __("Manage privileges"); ?>"><a href="#"><img src="<?php echo $this->makeUrl('/images/manage.png'); ?>"/></a></span><span class="icon-label"><a href="#"><?php echo __("Manage");?></a></span></div>
 		<div class="separate"></div>
-		<div><span id="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
+		<div><span class="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
 		<div class="separate"></div>
 		<div class="idle"><span id="editbtn" title="<?php echo __("Edit translation"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
 	</div>
