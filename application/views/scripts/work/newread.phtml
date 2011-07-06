@@ -7,6 +7,7 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/selectedText.min.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/lib/jquery.jqprint.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/nl2br.js')); ?>
+<?php $this->headScript()->appendFile($this->makeUrl('/index/jsi18n')); ?>
 <?php $this->layout()->setLayout('layout-black');?>
 
 <?php 
@@ -204,14 +205,6 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
     
 </div>
 </div>
-<span class="comments">
-<span id="showtagstext"><?php echo __("Show tags");?></span>
-<span id="hidetagstext"><?php echo __("Hide tags");?></span>
-<span id="clicktoedit"><?php echo __("Click to edit");?></span>
-<span id="want2delete"><?php echo $askConfirm;?></span>
-<span id="missingpriv"><?php echo $explainNA;?></span>
-<span id="notehint"><?php echo __("Click on a sentence to insert a tag/note for it");?></span>
-</span>
 </div>
 
 <?php $this->page_title = __("PAGETITLE_Read text").': '.$this->escape($this->work['title']); ?>

@@ -28,6 +28,9 @@ class IndexController extends Tdxio_Controller_Abstract
         //return $this->_helper->redirector('index','work');
     }
     
+    public function jsi18nAction(){	
+	}
+    
     public function tutorialAction()
     {}
    
