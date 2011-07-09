@@ -439,8 +439,10 @@ var sentenceToTag;
             var overlap = 0;
             var ongClass='onglet first';
             var i,id;            
-            $('li#onglet-'+trls[0].work.id).find('.translator,.prec-onglet,.next-onglet').css('display','inline');
-            
+            $('li#onglet-'+trls[0].work.id).find('.translator').css('display','inline');            
+            if(N>1)
+				$('li#onglet-'+trls[0].work.id).find('.prec-onglet,.next-onglet').css('display','inline');
+				
             for(i = 0;i==0 || (i<N && (totWidth<lineWidth));i++){
             //   alert('tot: '+totWidth +', lineW: '+lineWidth);
                 id = trls[i].work.id;
@@ -448,7 +450,8 @@ var sentenceToTag;
                 totWidth += $('li#onglet-'+id).outerWidth()-overlap;
                 overlap = 15;
                 ongClass='onglet';
-            }         
+            }
+				
             //$(".onglet.first a.translator,.onglet.first .prec-onglet,.onglet.first .next-onglet").css('display','inline');
             if(totWidth>lineWidth){
                 $('li#onglet-'+id).css('visibility','hidden');
@@ -603,7 +606,7 @@ var sentenceToTag;
 			}
         });
         
-        $('img.prec-onglet,img.next-onglet').click(function(event){
+        $('img.prec-onglet,img.next-onglet').live('click',function(event){
 			/*if(nextHiddenId!=null)
                 translations = tdxio.array.trShift(translations,nextHiddenId,false);
             tdxio.page.displayOnglets(translations);*/

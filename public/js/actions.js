@@ -138,7 +138,7 @@ var state;
 			tdxio.page.getWork();			
             $("#top-border").hide(10);
             $("#plus").show(10);
-			$("ul.onglets").prepend("<li class=\"onglet\" id=\"onglet-"+data.newId+"\"><span title=\""+data.values.language+"\"><a href=\"#tr"+data.newId+"\">"+data.values.translator+"</a></span></li>");
+			$("ul.onglets").prepend("<li class='onglet' id='onglet-"+data.newId+"'><span title='"+data.values.language+"'><span class='container'><img class='prec-onglet' src='"+tdxio.baseUrl+"/images/prevong.png"+"'/> <a class='translator' href='#tr"+data.newId+"'>"+ tdxio.i18n.translator+":</a> <a class='translator-name' href='#tr"+data.newId+"'>"+data.values.translator+"</a> <img class='next-onglet' src='"+tdxio.baseUrl+"/images/nextong.png"+"'/></span></span></li>");
 			tdxio.page.gotoTransl(data.newId);
             break;
         case 'translate':

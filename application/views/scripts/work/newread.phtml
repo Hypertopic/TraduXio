@@ -70,10 +70,14 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 	<div class="icons" id="orig-icons">        
 		<?php if($this->canDelete): 
 			if($this->hasTranslations==false): 
-			$href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
-			else: $href = 'href="" class="idle" title="'.$HTmessage.'" onClick="alert(\''.addslashes($HTmessage).'\');"'; 
+			$delclass=''; $href= 'href="'.$this->url(array('controller'=>'work','action'=>'delete','id'=>$this->work['id'])).'" onClick="'."return confirm('".$askConfirm."')".'"' ;
+			else: $delclass='idle'; $href = 'href="" title="'.$HTmessage.'" onClick="alert(\''.addslashes($HTmessage).'\');"'; 
 			endif;?>
-		<div><span class="delbtn" title="<?php echo __("Delete this text"); ?>"><a <?php echo $href; ?> ><img src="<?php echo $this->makeUrl('/images/delonsmall.png'); ?>"/></a></span><span class="icon-label"><a <?php echo $href; ?> ><?php echo __("Delete");?></a></span></div>
+		<div class="delbtn <?php echo $delclass;?>">
+			<span class="icon-img" title="<?php echo __("Delete this text"); ?>"><a <?php echo $href; ?>><img src="<?php echo $this->makeUrl('/images/delonsmall.png'); ?>"/></a>
+			</span>
+			<span class="icon-label"><a <?php echo $href; ?> ><?php echo __("Delete");?></a></span>
+		</div>
 		<?endif; ?>
 		<div class="separate"></div>
 		<div><span title="<?php echo __("Print the original text"); ?>"><a href="<?php echo $this->makeUrl('/work/print/id/'.$this->work['id']); ?>" target="_blank"><img src="<?php echo $this->makeUrl('/images/print.png'); ?>"/></a></span><span class="icon-label"><a href="<?php echo $this->makeUrl('/work/print/id/'.$this->work['id']); ?>" target="_blank"><?php echo __("Print");?></a></span></div>
@@ -81,23 +85,23 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
 		<div><span title="<?php echo __("History of modifications"); ?>"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><img src="<?php echo $this->makeUrl('/images/history.png'); ?>"/></a></span><span class="icon-label"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>" ><?php echo __("Log");?></a></span></div>
 		<?php if($this->canManage):?><div><span title="<?php echo __("Manage privileges"); ?>"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><img src="<?php echo $this->makeUrl('/images/manage.png'); ?>"/></a></span><span class="icon-label"><a href="<?php echo $this->url(array('controller'=>'work','action'=>'manage','id'=>$this->work['id'])) ?>"><?php echo __("Manage");?></a></span></div><?php endif; ?>
 		<div class="separate"></div>	
-		<div <?php if(!$this->canTag){echo 'class="idle"';}?>><span id="notebtn" title="<?php echo __("Tag a sentence"); ?>"></span><span class="icon-label"><?php echo __("Notes");?></span></div>
-		<div><span class="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
+		<div id="notebtn" <?php if(!$this->canTag){echo 'class="idle"';}?>><span class="icon-img" title="<?php echo __("Tag a sentence"); ?>"></span><span class="icon-label"><?php echo __("Notes");?></span></div>
+		<div class="show-tag"><span class="icon-img" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
 		<div class="separate"></div>
-		<div <?php if(!$this->canEdit){echo 'class="idle"';}?>><span class="extbtn" title="<?php echo __("Continue text insertion"); ?>"></span><span class="icon-label"><?php echo __("Add");?></span></div>
-		<div <?php if(!$this->canEdit){echo 'class="idle"';}?>><span id="editmeta" title="<?php echo __("Edit the text"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
+		<div class="extbtn<?php if(!$this->canEdit){echo ' idle';}?>"><span class="icon-img" title="<?php echo __("Continue text insertion"); ?>"></span><span class="icon-label"><?php echo __("Add");?></span></div>
+		<div  id="editmeta" <?php if(!$this->canEdit){echo 'class="idle"';}?>><span class="icon-img" title="<?php echo __("Edit the text"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
 	</div>
 	<div class="icons" id="tr-icons">
-		<div class="idle"><span class="delbtn" title="<?php echo __("Delete this translation"); ?>"></span><span class="icon-label"><?php echo __("Delete");?></span></div>
+		<div class="delbtn idle"><span class="icon-img" title="<?php echo __("Delete this translation"); ?>"><img src="<?php echo $this->makeUrl('/images/delonsmall.png'); ?>"/></span><span class="icon-label"><?php echo __("Delete");?></span></div>
 		<div class="separate"></div>		
 		<div id="printbtn"><span title="<?php echo __("Print this translation"); ?>"><a href="#" target="_blank"><img src="<?php echo $this->makeUrl('/images/print.png'); ?>"/></a></span><span class="icon-label"><a href="#" target="_blank"><?php echo __("Print");?></a></span></div>
 		<div class="separate"></div>
 		<div id="historybtn" class="idle"><span title="<?php echo __("History of modifications"); ?>"><a href="<?php echo $this->makeUrl('/work/history/id/'.$this->work['id']); ?>"><img src="<?php echo $this->makeUrl('/images/history.png'); ?>"/></a></span><span class="icon-label"><a href="#" ><?php echo __("Log");?></a></span></div>
 		<div id="managebtn" class="idle"><span title="<?php echo __("Manage privileges"); ?>"><a href="#"><img src="<?php echo $this->makeUrl('/images/manage.png'); ?>"/></a></span><span class="icon-label"><a href="#"><?php echo __("Manage");?></a></span></div>
 		<div class="separate"></div>
-		<div><span class="show-tag" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
+		<div class="show-tag"><span class="icon-img" title="<?php echo __("Show Tags"); ?>"></span><span class="icon-label"><?php echo __("Tags");?></span></div>
 		<div class="separate"></div>
-		<div class="idle"><span id="editbtn" title="<?php echo __("Edit translation"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
+		<div id="editbtn" class="idle"><span class="icon-img" title="<?php echo __("Edit translation"); ?>"></span><span class="icon-label"><?php echo __("Edit");?></span></div>
 	</div>
 </div>
 	

@@ -189,6 +189,7 @@ class WorkController extends Tdxio_Controller_Abstract
         Tdxio_Log::info($this->view->hasTranslations,'hastrans');     
         $this->view->canManage = $model->isAllowed('manage',$id);
         $this->view->canTranslate = $model->isAllowed('translate',$id);
+        $this->view->canDelete = $model->isAllowed('delete',$id);
         $this->view->canEdit = $model->isAllowed('edit',$id);
         $this->view->work = $work;
         
