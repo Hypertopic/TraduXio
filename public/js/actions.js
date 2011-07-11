@@ -312,11 +312,11 @@ var state;
 	};
 	
 	$.hint = function(text){
-		$('#hint').fadeIn( function(){
+		$('#hint').fadeIn('fast', function(){
 			$(this).append(text);
 			setTimeout( function(){
 				$("#hint").fadeOut("slow");
-			}, 10000);
+			}, 3000);
 		});
 		$('#hint').empty();
 	};

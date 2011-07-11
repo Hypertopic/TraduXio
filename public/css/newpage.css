@@ -558,18 +558,6 @@ cursor:pointer;}
 width:auto;
 }
 
-/*div#show-tag{
-background:transparent url(../images/down.png) no-repeat;
-height:18px;
-width:18x;
-}
-
-div#hide-tag{
-background:transparent url(../images/up.png) no-repeat;
-height:18px;
-width:18x;
-}*/
-
 #header-navigation form{float:right;}
 #header-navigation ul{float:left;}
 input#query-value{
@@ -599,7 +587,7 @@ cursor:pointer;}
 {background: transparent url(../images/editon.png) scroll 50% no-repeat;}
 .extbtn span.icon-img{background:transparent url(../images/extend.png) scroll 50%  no-repeat;}
 .show-tag span.icon-img{background:transparent url(../images/tag24vio.png)  scroll 50% no-repeat;}
-.hide-tag span.icon-img{background:transparent url(../images/tag32vio.png)  scroll 50% no-repeat;}
+.show-tag.on span.icon-img{background:transparent url(../images/tag32vio.png)  scroll 50% no-repeat;}
 
 #new-translation{
 position:fixed;
@@ -687,11 +675,11 @@ position:fixed;
 top:-2000px;
 left:-1000px;}
 
-.hint{
+/*.hint{
 font-size:0.5em;
 color:#4D4D4D;
 font-style:italic;}
-
+*/
 #show-icons{
 height:34px;
 width:96%;
@@ -738,7 +726,7 @@ background:transparent url(../images/chat32.png) scroll 50% no-repeat;
 }
 #hint{
 position:fixed;
-top:0px;
+top:20px;
 left:500px;
 padding:20px;
 color:#7D7D7D;

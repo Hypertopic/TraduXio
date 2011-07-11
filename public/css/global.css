@@ -475,7 +475,7 @@ vertical-align:top;
     margin:2px;
 }
 
-textarea.autogrow, #autogrow_shadow {
+textarea.autogrow, #autogrow_shadow,textarea#insert-text{
 font-family:Verdana,Arial,Helvetica,sans-serif;
 font-size:14px;
 }
