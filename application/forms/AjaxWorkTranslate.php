@@ -7,7 +7,7 @@ class Form_AjaxWorkTranslate extends Form_Abstract
 		$model = new Model_Work();
 		try{
 			$author = $model->getAttribute($id,'author');
-			$transliterator = new Zend_Filter_Transliteration();
+			$transliterator = new Tdxio_Filter_Transliteration();
 			$this->__author = $transliterator->filter($author);
 			Tdxio_Log::info($this->__author,'ravava');
 		}catch(Zend_Exception $e){Tdxio_Log::info('Empty or unexisting attribute');}
