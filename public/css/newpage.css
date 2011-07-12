@@ -718,10 +718,10 @@ top:0;left:0;
 z-index:300;
 display:inline-block;
 }
-#notebtn span.icon-img{
+#addnotebtn span.icon-img{
 background:transparent url(../images/chat24.png) scroll 50% no-repeat;
 }
-#notebtn.on span.icon-img{
+#addnotebtn.on span.icon-img{
 background:transparent url(../images/chat32.png) scroll 50% no-repeat;
 }
 #hint{

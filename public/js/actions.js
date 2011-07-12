@@ -324,7 +324,7 @@ var state;
 	$.showNote = function(segNum,noteNum){
 		var note = window.ajaxData.work.SentencesTags[segNum][noteNum];
 		$(".show-note").css('visibility','visible').attr('id','showseg'+segNum+'-note'+note.id);
-		$(".show-note .text").text(note.comment);
+		$(".show-note .note").text(note.comment);
 		if(note.user==$.getCurrentUser()){
 			$(".show-note .delete").toggleClass('hidden',false);
 		}else{
