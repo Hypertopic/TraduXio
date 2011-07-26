@@ -2527,119 +2527,119 @@ msgstr "A propos de Traduxio"
 #: views/scripts/index/faq.phtml:7
 #: views/scripts/index/faq.phtml:120
 msgid "Frequently Asked Questions"
-msgstr "Frequently Asked Questions"
+msgstr "Foire Aux Questions"
 
 #: views/scripts/index/faq.phtml:10
 msgid "FAQuestion1"
-msgstr "What is TraduXio?"
+msgstr "Qu'est-ce que TraduXio?"
 
 #: views/scripts/index/faq.phtml:12
 msgid "FAQanswer1"
-msgstr "TraduXio is a participative platform for cultural texts translators.<br> For a detailed description, visit the %1$s official page on SourceForge %2$s"
+msgstr "TraduXio est un environnement collaboratif pour les traducteurs de textes culturels.Pour une description plus détaillée, consultez la page officielle sur SourceForge."
 
 #: views/scripts/index/faq.phtml:17
 msgid "FAQuestion2"
-msgstr "How does it work?"
+msgstr "Comment ça marche?"
 
 #: views/scripts/index/faq.phtml:18
 msgid "FAQanswer2"
-msgstr "%1$s Here %2$s you can find a \"How To\", explaining TraduXio's basic functionalities."
+msgstr "Vous trouverez %1$s ici %2$s un guide qui explique les fonctionnalités de base de Traduxio."
 
 #: views/scripts/index/faq.phtml:24
 msgid "FAQuestion3"
-msgstr "So you are just another Translation Memory?"
+msgstr "En fait, il s'agit juste d'un logiciel de mémoire de traduction (encore un), non ? "
 
 #: views/scripts/index/faq.phtml:25
 msgid "FAQanswer3"
-msgstr "No. Strictly speaking, TraduXio is not a Translation Memory. Whereas traditional Translation Memory devices are limited to two languages (source/target), TraduXio allows the comparison between many different versions of the same text. Moreover, for TraduXio offers a (social) tagging/classification system of the source-text (according to its literary genre, author, historical period, etc.), it enables a better management of translated texts."
+msgstr "Non. Au sens strict, TraduXio n'est pas une mémoire de traduction. Ces logiciels sont traditionnellement limités à deux langues (source / cible), tandis que TraduXio offre la comparaison de différentes versions du même texte. En outre, TraduXio possède d'un système de classification du texte source (en fonction de son genre littéraire, de l'auteur, de la période historique, etc.), et il propose ainsi une meilleure gestion des textes traduits. "
 
 #: views/scripts/index/faq.phtml:30
 msgid "FAQuestion4"
-msgstr "Should I register? How can I do it?"
+msgstr "Dois-je m'enregistrer ? Comment puis-je l'essayer ? "
 
 #: views/scripts/index/faq.phtml:32
 msgid "FAQanswer4"
-msgstr "Yes, you need to register to get a log in. In order to be invited by a member of the community, click on %1$s “Register”%2$s, on the right side of the %3$s Front Page %4$s menu, and send us an e-mail."
+msgstr "Oui, vous devez vous inscrire pour obtenir un identifiant. Pour être invité par un membre de la communauté, cliquez sur le bouton %1$s \"S'inscrire\" %2$s qui se trouve au côté droit du menu de la page d'accueil, et envoyez nous un e-mail."
 
 #: views/scripts/index/faq.phtml:38
 msgid "FAQuestion5"
-msgstr "Am I forced to share all my work? Who can have access to my translations?"
+msgstr "Dois-je partager tous mes textes ? Qui peut avoir accès à mes traductions?"
 
 #: views/scripts/index/faq.phtml:40
 msgid "FAQanswer5"
-msgstr "By default, all your work will remain private and invisible to the others. You manage the text’s privileges (access, edit, translate, etc.) the way you want, at all time. You can build your own community with your own sharing rules."
+msgstr "Par défaut, tout votre travail restera en accès privé et invisible aux autres. Vous pouvez gérer les privilèges du texte (les droits d'accès, d'édition, de traduction, etc.) à tout moment quand vous le souhaitez. Vous pouvez aussi créer votre propre communauté et y appliquer vos propres normes. "
 
 #: views/scripts/index/faq.phtml:46
 msgid "FAQuestion6"
-msgstr "What about authors/translators’ rights?"
+msgstr "Qu'en est-il des droits d'auteur/ de traducteur?"
 
 #: views/scripts/index/faq.phtml:48
 msgid "FAQanswer6"
-msgstr "TraduXio respects copyright (and “droit d’auteur”) regulations. The site contains only works taken from the public domain. Translations of protected texts are possible but require previous authorization from copyright holders.TraduXio would like to value the work of translators and their rights, while promoting a spirit of mutualisation, through the use of open licenses. "
+msgstr "TraduXio respecte les règlements sur le droit d'auteur. Le site contient uniquement les textes du domaine public. Traduire un texte protégé est également possible à condition d'avoir une autorisation préalable du titulaire du droit d'auteur. TraduXio aspire à mettre en valeur le travail de traducteurs et leurs droits, tout en favorisant l'esprit de travail en commun, grâce à l'utilisation des licences ouvertes. "
 
 #: views/scripts/index/faq.phtml:54
 msgid "FAQuestion7"
-msgstr "What kind of legal license does TraduXio use for the texts?"
+msgstr "Quel type de licence légale TraduXio applique-t-il aux textes? "
 
 #: views/scripts/index/faq.phtml:56
 msgid "FAQanswer7"
-msgstr "TraduXio is very liberal, so you remain free to choose which kind of license suits you best, for each text, and for the sets of texts. We recommend the use of “open” licenses, of the Creative Commons type."
+msgstr "TraduXio est d'inspiration très libérale ; vous restez donc libre de choisir le type de licence qui vous convient le mieux pour chaque texte et pour les ensembles de textes. Nous recommandons toutefois les licences \"ouvertes\" du type Creative Commons."
 
 #: views/scripts/index/faq.phtml:62
 msgid "FAQuestion8"
-msgstr "Is it free of use?"
+msgstr "TraduXio est-il gratuit?"
 
 #: views/scripts/index/faq.phtml:64
 msgid "FAQanswer8"
-msgstr "Yes. TraduXio is and will remain durably free of use."
+msgstr "Oui. L'utilisation de TraduXio est gratuite et le restera toujours."
 
 #: views/scripts/index/faq.phtml:70
 msgid "FAQuestion9"
-msgstr "Is it free software or open source?"
+msgstr "Est-ce un logiciel libre ou Open Source?"
 
 #: views/scripts/index/faq.phtml:72
 msgid "FAQanswer9"
-msgstr "Yes. The software is developed with a GNU/GPL3 license."
+msgstr "Oui. Le logiciel est développé sous la licence GNU/GPL3."
 
 #: views/scripts/index/faq.phtml:78
 msgid "FAQuestion10"
-msgstr "Can I have then “my own” TraduXio?"
+msgstr "Je peux avoir \"mon\" TraduXio?"
 
 #: views/scripts/index/faq.phtml:80
 msgid "FAQanswer10"
-msgstr "Yes, since the code is open, you are free to build your own translation platform, provided you respect the original license (GNU/GPL3)."
+msgstr "Oui. Le code est ouvert et vous êtes libre de construire votre propre espace de traduction, à condition de respecter la licence originale (GNU/GPL3)."
 
 #: views/scripts/index/faq.phtml:86
 msgid "FAQuestion11"
-msgstr "Do I need to download it on my PC?"
+msgstr "Faut-il télécharger TraduXio sur mon ordinateur?"
 
 #: views/scripts/index/faq.phtml:88
 msgid "FAQanswer11"
-msgstr "No, TraduXio is Web based. It is an online workbench."
+msgstr "Non. Espace de travail en ligne, TraduXio est basé sur Internet."
 
 #: views/scripts/index/faq.phtml:93
 msgid "FAQuestion12"
-msgstr "Is TraduXio a publishing device?"
+msgstr "TraduXio est-il un dispositif d'édition?"
 
 #: views/scripts/index/faq.phtml:95
 msgid "FAQanswer12"
-msgstr "No. It is meant to be a collaborative Platform and network connecting users/translators worldwide. You decide whether you want to make your translations public, how, and under what legal conditions. You remain free to remove your translations and keep control over your datas, at all time."
+msgstr "Non, c'est un espace collaboratif et un réseau reliant des utilisateurs /traducteurs dans le monde entier. C'est à vous de décider si vous voulez rendre vos traductions publiques, la manière dont vous le faites et à quelles conditions légales. A tout moment, vous restez libre de reprendre vos traductions et de conserver vos données."
 
 #: views/scripts/index/faq.phtml:101
 msgid "FAQuestion13"
-msgstr "Why do we need a specific device for Literary Translation anyway?"
+msgstr "Pourquoi d'un dispositif spécifique pour la traduction littéraire?"
 
 #: views/scripts/index/faq.phtml:103
 msgid "FAQanswer13"
-msgstr "Although machine translation and translation memories are frequently used in business, they are inadequate to translate a text from a culture to another one. When faced with philosophy, literature or ancient texts, professional translators have to cope with the fact that the most important things to \"translate\" are often in the style, in details, or even unwritten. "
+msgstr "Bien que la traduction automatique et les logiciels de mémoire de traduction soient largement utilisés dans le domaine commercial, ils sont peu adaptés pour traduire un texte d'une culture vers une autre. Face à la philosophie, littérature ou textes anciens, des traducteurs professionnels admettent que les choses les plus importantes à «traduire» sont souvent dans le style, dans les détails, ou même sous-entendues."
 
 #: views/scripts/index/faq.phtml:109
 msgid "FAQuestion14"
-msgstr "Who makes TraduXio?"
+msgstr "Qui est impliqué dans le projet TraduXio?"
 
 #: views/scripts/index/faq.phtml:111
 msgid "FAQanswer14"
-msgstr "The project was launched and is currently led by the French NGO “Zanchin” (“association loi 1901”), based in Paris. The scientific direction is ensured by the Tech-Cico department of the University of Technology of Troyes (France). Other partners (DGLFLF, UNESCO …) are involved in the project, providing either financial or institutional support. "
+msgstr "Le projet a été lancé et est actuellement dirigé par l'ONG française \"Zanchin\" (\"association loi 1901\"), dont le siège est à Paris. La direction scientifique est assurée par le département Tech-CICO de l'Université de Technologie de Troyes (France). Le projet a également d'autres partenaires (DGLFLF, UNESCO ...) qui fournissent un soutien financier ou institutionnel."
 
 #: views/scripts/index/register.phtml:5
 msgid "Registration"
