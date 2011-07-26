@@ -36,10 +36,11 @@ foreach ($this->entries as $lang=>$authors) { ?>
         </ul></li>
 <?php } ?>
 </ul>
+</td>
+<td class="lang-list">
 <br>
 <a id="insert-text" href="<?php echo $this->url(array('controller'=>'work','action'=>'deposit')) ?>"><?php echo __("Deposit a new text");?></a>
-</td>
-
+</td class="lang-list">
 <td class="news hundred">
     <div class="news-paragraph"><div class="news-title"><?php echo __("New translations in %1\$s",__($this->newsLang));?></div>
     <?php if(!empty($this->news)):?><ul class = "new-translation"><?php 

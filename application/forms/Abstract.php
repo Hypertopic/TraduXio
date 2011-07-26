@@ -29,6 +29,8 @@ class Form_Abstract extends Zend_Form
         if (null === $languageOptions) {
             $langModel = new Model_Language();
             $languageOptions=$langModel->fetchOptions();
+            asort($languageOptions,SORT_LOCALE_STRING);
+            Tdxio_Log::info($languageOptions,'lanlist');
         }
      //   Tdxio_Log::info($languageOptions,'lang codes');
         return $languageOptions;

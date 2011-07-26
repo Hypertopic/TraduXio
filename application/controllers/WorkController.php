@@ -68,7 +68,7 @@ class WorkController extends Tdxio_Controller_Abstract
         $news = $this->getNews($browserLang['id']);
         Tdxio_Log::info($browserLang['id'],'bbbbrows');
         Tdxio_Log::info($news,'newentries');
-        if(!empty($sort)){ksort($sort,SORT_STRING);}     
+        if(!empty($sort)){ksort($sort,SORT_LOCALE_STRING);}     
         $this->view->entries=$sort;        
         //$this->view->home = true; //non serve più da quando è stato eliminato dal file layout.phtml
         $this->view->news = $news;
@@ -91,7 +91,7 @@ class WorkController extends Tdxio_Controller_Abstract
                 $histModel = new Model_History();  
                 $histModel->addHistory($new_id,5);   
                 Tdxio_Log::info($data);
-                return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$new_id));
+                return $this->_helper->redirector->gotoSimple('newread','work',null,array('id'=>$new_id));
             }
         }
         $this->view->form = $form;
