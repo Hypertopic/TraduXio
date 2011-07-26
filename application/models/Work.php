@@ -169,7 +169,7 @@ class Model_Work extends Model_Taggable
                         /*RTL*/->joinLeft(array('l'=>'languages'),'work.language = l.id','l.rtl')
                         ->joinLeft(array('i'=>$selectIntAlwd),'i.original_work_id = work.id','count(distinct i.work_id)')
                         ->group(array('work.id','work.title','work.author','work.language','work.created','work.modified','work.creator','l.rtl'))
-                        ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd);
+                        ->where('work.id IN (?)',$selectOrig)->where('work.id IN (?)',$selectAlwd)->order('language')->order('author')->order('title');
         
         if(!is_null($idList)){           
             $select->where('work.id IN (?)',$idList);

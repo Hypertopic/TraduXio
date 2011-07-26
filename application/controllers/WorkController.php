@@ -62,6 +62,9 @@ class WorkController extends Tdxio_Controller_Abstract
                     $sort[$lang][$author][]=$entry;
                 }
             }
+            foreach ($sort as $l=>$entry) {
+				ksort($sort[$l],SORT_STRING);
+			}
         }
         $langModel = new Model_Language();        
         $browserLang = $langModel->getBrowserLang(3);
