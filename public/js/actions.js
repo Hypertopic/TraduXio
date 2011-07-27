@@ -138,8 +138,9 @@ var state;
 			tdxio.page.getWork();			
             $("#top-border").hide(10);
             $("#plus").show(10);
-			$("ul.onglets").prepend("<li class='onglet' id='onglet-"+data.newId+"'><span title='"+data.values.language+"'><span class='container'><img class='prec-onglet' src='"+tdxio.baseUrl+"/images/prevong.png"+"'/> <a class='translator' href='#tr"+data.newId+"'>"+ tdxio.i18n.translator+":</a> <a class='translator-name' href='#tr"+data.newId+"'>"+data.values.translator+"</a> <img class='next-onglet' src='"+tdxio.baseUrl+"/images/nextong.png"+"'/></span></span></li>");
-			tdxio.page.gotoTransl(data.newId);
+            var translatorName = (data.values.translator!='' && data.values.translator!=null)?data.values.translator:tdxio.i18n.anonymous;
+			$("ul.onglets").prepend("<li class='onglet' id='onglet-"+data.newId+"'><span title='"+data.values.language+"'><span class='container'><img class='prec-onglet' src='"+tdxio.baseUrl+"/images/prevong.png"+"'/> <a class='translator' href='#tr"+data.newId+"'>"+ tdxio.i18n.translator+":</a> <a class='translator-name' href='#tr"+data.newId+"'>"+translatorName+"</a> <img class='next-onglet' src='"+tdxio.baseUrl+"/images/nextong.png"+"'/></span></span></li>");
+			tdxio.page.gotoTransl(data.newId,'edit');
             break;
         case 'translate':
         $.updateTranslation('block',data);
@@ -188,7 +189,30 @@ var state;
 		});
 		return curUser;
 	};
-    
+	
+    $.getValue = function(name,id){
+		var value;
+		$.ajax({
+			type:"get",
+			url:encodeURI(tdxio.baseUrl+"/work/getvalue"),
+			dataType: "json",
+			data:{'value':name,'id':id},
+			async:false,
+			success: function(rdata,status){
+				if (rdata.response==false) {
+					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
+					else alert(rdata.message.text);
+				}else{
+					value = rdata.value;
+				}
+			},
+			error: function() {
+				alert("error getting the form");
+			}
+		}); 
+		return value;  
+	};
+	
     $.getForm = function(formType,id){
 		$.ajax({
 			type:"get",

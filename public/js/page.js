@@ -520,7 +520,7 @@ var sentenceToTag;
  			}); 
  		},
 		
-		gotoTransl: function(newId){
+		gotoTransl: function(newId,mode){
 			if(newId!='' && newId!=null){
 				document.location.hash="#tr"+newId;
 				trId = newId;
@@ -555,6 +555,10 @@ var sentenceToTag;
 				tdxio.page.setState('reset');
 				tdxio.page.adjust();
 				tdxio.page.resize();
+			}
+			if(mode=='edit'){
+				$("#editbtn").click();
+				$("#translation .block.show.editable").click();
 			}
 		}
             
@@ -636,32 +640,11 @@ var sentenceToTag;
 			var textId = ($(this).parent('div').parent('div.text-container').attr('id')=='work')?window.workId:window.trId;
 			var value = $(this).val();
 			var elName = $(this).attr('class');
-			elName = (elName.match('author'))?'author':(elName.match('title')?'title':'translator');
-			value = (value!='')?value:((elName.match('title'))?tdxio.i18n.notitle:tdxio.i18n.anonymous);
+			elName = (elName.match('author'))?'author':(elName.match('title')?'title':'translator');			
 			if(e.originalEvent.type == "change"){
 				window.$.saveMeta(textId,elName,value);
-		/*		$.ajax({
-					type: "post",
-					url: encodeURI(tdxio.baseUrl+"/work/metaedit/id/"+textId),
-					dataType: "json",
-					data: params,
-					success:function(rdata,status){
-						if (rdata.response==false) {//error somewhere
-							$("#"+e.target.id).resetToDefault(e.target.defaultValue);
-							if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
-							else alert(rdata.message.code);
-						}else {
-							//alert('success');
-							$.update('update-'+id.split('-')[0],{'el':elName.split(' ')[0],'val':value});
-						}
-					},
-					error:function() {
-						alert("Error in the saving process");
-					},
-				});
-				* */
 			}//save modified filed	
-			
+			value = (value!='')?value:((elName.match('title'))?tdxio.i18n.notitle:tdxio.i18n.anonymous);
 			if(!$(this).hasClass('translator-name')) $(this).replaceWith("<span class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">"+value+"</span>");			
 			else $(this).replaceWith("<a href='#"+window.trId+" class=\""+$(this).attr('class')+"\" >"+value+"</span>");			
 		});
@@ -805,17 +788,10 @@ var sentenceToTag;
 		$('.work-title span.editable,a.translator-name.editable').live('click',function(e){
 			var target = e.target;
 			var fontSize = $(this).css('font-size');
-			var content = '';
-			if($(this).hasClass('translator-name')) content = trWork.work.translator;
-			else{
-				var id = $(this).attr('id');
-				switch(id){
-					case 'tr-author':content = (trWork.work.author!=null)?trWork.work.author:tdxio.i18n.anonymous;break;
-					case 'tr-title':content = (trWork.work.title!=null)?trWork.work.title:tdxio.i18n.notitle;break;
-					case 'orig-author':content = ajaxData.work.author;break;
-					case 'orig-title':content = ajaxData.work.title;break;
-				}
-			}
+			var name = ($(this).hasClass('translator-name')?'translator':$(this).attr('id').split('-')[1]);
+			var textId = (($(this).attr('id')).search('orig')==-1)?trId:workId;
+			var content = $.getValue(name,textId);
+			content = (content==null)?'':content;
 			$(this).replaceWith("<input type=\"text\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\" value=\""+content+"\" />");
 			//$("#"+$(this).attr('id')).focus();
 			if($(this).hasClass('translator-name')) $('.onglet.first .translator-name').focus();
@@ -861,7 +837,7 @@ var sentenceToTag;
         });*/
         
      /*   $(".show-menu").live("click",function(){$(this).toggleClass('selected');});*/
-		$(".closeimg").live('click',function(e){
+		$(".closeimg,:input[name='resetbtn']").live('click',function(e){
 			e.preventDefault();
 			var form = $(this).parents('form').attr('id');
 			switch(form){

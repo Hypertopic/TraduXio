@@ -3,15 +3,17 @@ class Form_AjaxWorkTranslate extends Form_Abstract
 {
 	protected $__author='';
 	
-	function __construct($id) {	
+	function __construct($id=null) {	
 		$model = new Model_Work();
-		try{
-			$author = $model->getAttribute($id,'author');
-			$transliterator = new Tdxio_Filter_Transliteration();
-			$this->__author = $transliterator->filter($author);
-			Tdxio_Log::info($this->__author,'ravava');
-		}catch(Zend_Exception $e){Tdxio_Log::info('Empty or unexisting attribute');}
-        parent::__construct();
+		if($id!=null){
+			try{
+				$author = $model->getAttribute($id,'author');
+				$transliterator = new Tdxio_Filter_Transliteration();
+				$this->__author = $transliterator->filter($author);
+				Tdxio_Log::info($this->__author,'ravava');
+			}catch(Zend_Exception $e){Tdxio_Log::info('Empty or unexisting attribute');}
+		}
+		parent::__construct();
     }
     
 	public function init()
@@ -98,8 +100,8 @@ class Form_AjaxWorkTranslate extends Form_Abstract
                 array(array('row'=>'HtmlTag'),array('tag'=>'span'))
             )
         ));
-        $this->addElement('reset', 'reset', array(
-            'label'    => __('Reset'),
+        $this->addElement('reset', 'resetbtn', array(
+            'label'    => __('Cancel'),
             'id'=> 'translate-reset',
             'decorators' => array(
                 'ViewHelper',

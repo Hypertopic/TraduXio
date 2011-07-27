@@ -174,8 +174,9 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         <span title="<?php echo __($trWork['work']['language']) ?>">
         <span class="container">	
 			<img class="prec-onglet" src="<?php echo $this->makeUrl('/images/prevong.png'); ?>"/>
+			<?php $translator = ($trWork['work']['translator']=='')?__('Anonymous'):$trWork['work']['translator'];?>
             <a href="#<?php echo 'tr'.$traId; ?>" class="translator"><?php echo __("Translator");?>:</a>
-            <a href="#<?php echo 'tr'.$traId; ?>" class="translator-name"><?php echo $trWork['work']['translator'];?></a>
+            <a href="#<?php echo 'tr'.$traId; ?>" class="translator-name"><?php echo $translator;?></a>
             <img class="next-onglet" src="<?php echo $this->makeUrl('/images/nextong.png');  ?>"/>
 		</span>
         </span>

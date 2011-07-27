@@ -152,7 +152,7 @@ class WorkController extends Tdxio_Controller_Abstract
     }
     
     public function newreadAction(){
-    
+		
         $request = $this->getRequest();
         $id = $request->getParam('id');
         $model = $this->_getModel();
@@ -197,7 +197,10 @@ class WorkController extends Tdxio_Controller_Abstract
         Tdxio_Log::info('till here');
     }
     
+
+    
 	public function ajaxreadAction(){
+		
 		$request = $this->getRequest();
 		$id = $request->getParam('id');
 		Tdxio_Log::info($request,'ababa');
@@ -253,7 +256,7 @@ class WorkController extends Tdxio_Controller_Abstract
         if (!$id || !$origWork=$model->fetchOriginalWork($id)) {
             throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist.", $id)), 404);
         }
-        $form = new Form_Translate();
+        $form = new Form_AjaxWorkTranslate();
         if ($request->isPost()) {
 			if ($form->isValid($request->getPost())) {				
 				$test = $form->isValid($request->getPost());
@@ -324,6 +327,18 @@ class WorkController extends Tdxio_Controller_Abstract
             
             Tdxio_Log::info($srcLangs,'my translations');       
         }
+    }
+    
+    public function getvalueAction(){
+		$model=$this->_getModel();         
+        $request = $this->getRequest();
+        $value=$request->getParam('value');
+        $id=$request->getParam('id');
+        if (!$id || !($work=$model->fetchWork($id))) {
+			$this->view->data = array('response' => false, 'value' => null,'message' => array('code' => 1,'text'=>__("Invalid work id")));
+		}
+        $this->view->data = array('response' => true,'message' => array('code' => 0,'text'=>__("OK")),'value'=>$work[$value]);
+        $this->_helper->viewRenderer('jsonresponse');
     }
     
     public function getformAction(){
@@ -803,7 +818,8 @@ class WorkController extends Tdxio_Controller_Abstract
                 }else{
                         $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit','translate_privilege'=> 'translate');      
                 }break; 
-            case 'getform': $rule = array('privilege'=> 'tag','work_id' => $resource_id);break;
+            case 'getform': $rule = array('privilege'=> 'tag','work_id' => $resource_id);break;            
+            case 'getvalue':
             case 'metaedit': $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);break; 
             case 'edit':
                 if($request->isPost()){

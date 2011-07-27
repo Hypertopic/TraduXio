@@ -44,8 +44,8 @@ public function init()
 			array(array('data'=>'HtmlTag'), array('tag'=>'span')),
         )));
         
-        $this->addElement('reset', 'extendcancel', array(
-            'label'    => __('Reset'),
+        $this->addElement('reset', 'resetbtn', array(
+            'label'    => __('Cancel'),
             'id'=> 'extend-cancel',
             'decorators' => array(
                 'ViewHelper',
