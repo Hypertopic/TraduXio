@@ -198,7 +198,7 @@ class Tdxio_Filter_Transliteration implements Zend_Filter_Interface
      * @param string $s
      * @return string
      */
-    private function _transliterateFr ($s,$to)
+    private function _transliterateFr ()
     {        
         $table = array (
             'â' => 'a',
