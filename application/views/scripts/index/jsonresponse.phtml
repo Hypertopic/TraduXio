@@ -1,0 +1,8 @@
+<?php
+$this->layout()->setLayout('jsonlayout');
+
+$data=$this->data;
+
+Tdxio_Log::info(Zend_Json::encode($data),'jsondata');
+
+echo Zend_Json::encode($data); 

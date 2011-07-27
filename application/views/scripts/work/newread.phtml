@@ -59,14 +59,14 @@ $dir = (($this->work['rtl']==1)?'dir="rtl"':'');
         </li>
     </ul>
 </div>
-<div id="menu" title="<?php echo __("Show/Hide icons");?>"><?php echo __("Icons"); ?></div>
+<div id="menu" title="<?php echo __("Show/Hide icons");?>" <?php if($this->iconsState=='visible') echo 'class="hide"'; ?>><?php echo __("Icons"); ?></div>
 <div class="background">
 <div id="new-translation"><div id="form-title"><?php echo __("Create a translation");?></div></div>
 <div id="insert-sentence-tag"></div>
 
 <!-------------------------------!-->
 <div id="tests"></div>
-<div id="show-icons" class="hidden">
+<div id="show-icons" <?php if($this->iconsState!='visible') echo 'class="hidden"';?>>
 	<div class="icons" id="orig-icons">        
 		<?php if($this->canDelete): 
 			if($this->hasTranslations==false): 

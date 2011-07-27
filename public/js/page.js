@@ -915,6 +915,8 @@ var sentenceToTag;
 		$("#menu").click(function(){
 			$(this).toggleClass('hide');
 			$("#show-icons").toggleClass('hidden');
+			var state = $("#show-icons").hasClass('hidden')?'hidden':'visible';
+			window.$.setIconsState(state);
 		});
 		
 		$(".segment").live('mousemove',function(event){

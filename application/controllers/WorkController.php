@@ -192,7 +192,8 @@ class WorkController extends Tdxio_Controller_Abstract
         $this->view->canDelete = $model->isAllowed('delete',$id);
         $this->view->canEdit = $model->isAllowed('edit',$id);
         $this->view->work = $work;
-        
+        $session = new Zend_Session_Namespace('MenuIcons');
+        if(isset($session->state)){$this->view->iconsState=$session->state;}
         Tdxio_Log::info('till here');
     }
     

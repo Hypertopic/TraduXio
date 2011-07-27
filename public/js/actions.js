@@ -354,7 +354,23 @@ var state;
 				alert("Error in the saving process");
 			},
 		});
-	}
+		
+	};
+	
+	
+	$.setIconsState = function(state){
+		$.ajax({
+			type: "post",
+			url: encodeURI(tdxio.baseUrl+"/index/iconstate/state/"+state),
+			dataType: "json",
+			success:function(rdata,status){
+				alert('success');
+			},
+			error:function() {
+				alert("Error in the icons' state setting process");
+			},
+		});
+	};
     
     $(document).ready(function() {
 
