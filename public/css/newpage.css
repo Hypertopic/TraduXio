@@ -25,7 +25,7 @@ text-align:right;}
 /*    background-image:url(../images/TRcorner.png);*/
     background-image:url(../images/TRcorner_extended.png);
     background-position:right top;
-    float:right;
+  /*  float:right;*/
 }
 .TLcorner-ong{
     background-image:url(../images/onglet-left.png); 
@@ -58,7 +58,7 @@ text-align:right;}
     /*background-image:url(../images/BRcorner.png);*/
     background-image:url(../images/BRcorner_extended.png);
     background-position:right bottom;
-    float:right;
+  /*  float:right;*/
 }
 .Tborder{
     background-image:url(../images/top-border.png);
