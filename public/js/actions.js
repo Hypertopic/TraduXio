@@ -72,9 +72,8 @@ var state;
 			tdxio.page.setState(window.state);
 			tdxio.page.adjust();
 			tdxio.page.resize();
-
 		}
-		else if(el=="title" || el=="author"){
+		else if(el=="title" || el=="author" || el=="translator"){
 			window.translations[0].work[el] = newEl;			
 			window.ajaxData.work.Interpretations[i].work[el]=newEl;
 			window.trWork.work[el]=newEl;  
@@ -369,8 +368,9 @@ var state;
 					if(rdata.message.code == 2){tdxio.page.redirect(rdata.message.text);}                        
 					else alert(rdata.message.code);
 				}else {
-					//alert('success');
+					
 					var updObj = (textId!=window.workId)?'tr':'orig';
+					//alert('$.update '+updObj+' '+elName+' '+value);
 					$.update('update-'+updObj,{'el':elName,'val':value});
 				}
 			},
