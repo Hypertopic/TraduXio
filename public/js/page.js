@@ -664,12 +664,10 @@ var sentenceToTag;
 		});
 		
 		$("form#extend-form").live("submit",function(event) {
-           event.preventDefault();
+			event.preventDefault();
+			$("form#extend-form input").attr('disabled', true);            
 			window.$.submitForm($(this),"ajaxextend",{'id':workId});
-           
-            //alert('after ajax'); 
-            //
-            return false; 
+			return false; 
         });
 		
 		$("#editmeta,#edit-meta").click(function(){	
@@ -830,7 +828,7 @@ var sentenceToTag;
         
         $("form#translate-form").live("submit",function(event) {
             event.preventDefault();
-            window.event = event;
+            $("form#translate-form input[type=reset],form#translate-form input[type=submit]").attr('disabled', true);            
 			window.$.submitForm($(this),"createtr",{'id':workId});
             return false; 
         }); 

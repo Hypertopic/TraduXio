@@ -280,7 +280,7 @@ var state;
 				alert("error posting the form");
 			},
 			complete:function() {
-				//alert('complete');    
+				$("#"+form.attr('id')+" input").attr('disabled', false);
 			}
 		});
 	};
