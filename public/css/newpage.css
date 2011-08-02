@@ -93,7 +93,9 @@ text-align:right;}
 img.turn-page{
     height:20px;
     width:21px;
-    position:relative;
+    position:fixed;
+    margin:40px 0;
+   /* position:relative;*/
     top:50%;
     cursor:pointer;
     visibility:hidden;
