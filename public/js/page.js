@@ -635,6 +635,13 @@ var sentenceToTag;
 			return false;
 		});
 		
+		$('#translate-form select#language').live('change',function(e){
+			var srcLang, destLang;
+			srcLang = window.ajaxData.work.language;
+			destLang = $(this).attr('value');
+			if(window.ajaxData.work.author!='')
+				$('#translate-author').attr('value',window.$.transliterate(window.ajaxData.work.author,srcLang,destLang));
+		});
 		
         url=encodeURI(tdxio.baseUrl+"/translation/save");
    

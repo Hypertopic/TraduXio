@@ -4,14 +4,12 @@ class Form_AjaxWorkTranslate extends Form_Abstract
 	protected $__author='';
 	
 	function __construct($id=null) {	
-		$model = new Model_Work();
 		if($id!=null){
 			try{
-				$author = $model->getAttribute($id,'author');
-				$transliterator = new Tdxio_Filter_Transliteration();
-				$this->__author = $transliterator->filter($author);
-				Tdxio_Log::info($this->__author,'ravava');
-			}catch(Zend_Exception $e){Tdxio_Log::info('Empty or unexisting attribute');}
+				$model = new Model_Work();
+				
+				$this->__author = $model->getAttribute($id,'author');
+			}catch(Zend_Exception $e){Tdxio_Log::info('Exception in form creation');}
 		}
 		parent::__construct();
     }

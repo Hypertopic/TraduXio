@@ -764,6 +764,23 @@ class WorkController extends Tdxio_Controller_Abstract
 		$this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'user'=>$user);
 	}
     
+    
+    public function transliterateAction(){
+		$request = $this->getRequest();
+		$text = $request->getParam('text');
+		$srcLang = $request->getParam('srcLang');
+		$destLang = $request->getParam('destLang');
+		Tdxio_Log::info($request,'tuttok');
+		try{$transliterator = new Tdxio_Filter_Transliteration();}catch(Zend_Exception $e){Tdxio_Log::info('non crea il filtro');}
+		Tdxio_Log::info('dopo creazione filter');
+		if($srcLang!=$destLang)
+			$tlText = $transliterator->filter(array('text'=>$text,'srcLang'=>$srcLang,'destLang'=>$destLang));
+		else
+			$tlText = $text;
+		$this->view->data = array('response'=>true, 'message'=>array('code'=>0,'text'=>__("OK")),'transliteratedText'=>$tlText);
+		$this->_helper->viewRenderer('jsonresponse');		
+	}
+    
     public function getRule($request){
         $action = $request->action;
         $resource_id = $request->getParam('id');

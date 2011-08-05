@@ -9,33 +9,42 @@ class Tdxio_Filter_Transliteration implements Zend_Filter_Interface
      * Defined by Zend_Filter_Interface
      *
      * @param  string $value
+     * @param  string $srcLang
+     * @param  string $destLang
      * @return string
      */
     public function filter ($value)
     {
-		$langModel = new Model_Language();        
+		/*$langModel = new Model_Language();        
         $browserLang = $langModel->getBrowserLang();			
         Tdxio_Log::info($browserLang,'blang');
-
-		switch($browserLang['part1']){
-			case 'cs': $table = $this->_transliterateCs(); break;
-			case 'da': $table = $this->_transliterateDa(); break;
-			case 'de': $table = $this->_transliterateDe(); break;
-			case 'fr': $table = $this->_transliterateFr(); break;
-			case 'hr': $table = $this->_transliterateHr(); break;
-			case 'hu': $table = $this->_transliterateHu(); break;
-			case 'pl': $table = $this->_transliteratePl(); break;
-			case 'ru': $table = $this->_transliterateRu(); break;
+		*/		
+		$text = $value['text'];
+		$srcLang = $value['srcLang'];
+		$destLang = $value['destLang'];
+		$supportedLangs = array('ces','dan','deu','fra','hrv','hun','pol','rus');
+		if(!in_array($srcLang,$supportedLangs)){return $text;}
+		switch($srcLang){
+			case 'ces': $table = $this->_transliterateCs(); break;
+			case 'dan': $table = $this->_transliterateDa(); break;
+			case 'deu': $table = $this->_transliterateDe(); break;
+			case 'fra': $table = $this->_transliterateFr(); break;
+			case 'hrv': $table = $this->_transliterateHr(); break;
+			case 'hun': $table = $this->_transliterateHu(); break;
+			case 'pol': $table = $this->_transliteratePl(); break;
+			case 'rus': $table = $this->_transliterateRu(); break;
 			default: $table=null;break;						
 		}
 		if(!is_null($table)){
-			foreach($table as $key=>$val)
+			Tdxio_Log::info($table,'tabella traslitterazione');
+			/*foreach($table as $key=>$val)
 				if($val == '')
 					unset($table[$key]);
-			$value = strtr($value,array_flip($table));
-			return $value;
+			$text = strtr($text,array_flip($table));*/
+			$text = strtr($text,$table);
+			return $text;
 		}else{
-			return $value;
+			return $text;
 		} 
     }
 
@@ -148,7 +157,7 @@ class Tdxio_Filter_Transliteration implements Zend_Filter_Interface
             'ů' => 'u',
             'ý' => 'y',
             'ž' => 'z',
-                'Á' => 'A',
+            'Á' => 'A',
             'Č' => 'C',
             'Ď' => 'D',
             'É' => 'E',
@@ -188,8 +197,7 @@ class Tdxio_Filter_Transliteration implements Zend_Filter_Interface
             'Ü' => 'Ue',
             'ß' => 'ss',
         );
-        if($to) return strtr($s, array_flip($table));
-        else return strtr($s, $table);
+        return $table;
     }
     
         /**

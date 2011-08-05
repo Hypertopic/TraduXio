@@ -52,6 +52,27 @@ var state;
         }     
     };
     
+    $.transliterate = function(text,srcLang,destLang){
+		var tlText;
+		$.ajax({
+			type: "get",
+			url: encodeURI(tdxio.baseUrl+"/work/transliterate"),
+			dataType: "json",
+			data: {'text':text,'srcLang':srcLang,'destLang':destLang},
+			async:false,
+			success:function(rdata){
+				if (rdata.response==false) {
+					if(rdata.message.code ==2){tdxio.page.redirect(rdata.message.text);}
+					else alert(rdata.message.text);
+				}else {
+					tlText = rdata.transliteratedText;
+				}
+			},
+			error:function() {alert('Error in the transliteration process');}		
+		});
+		return tlText;
+	}
+    
     $.updateTranslation = function(el,newEl){
 		var i=0;
 		for(i = 0; i<window.ajaxData.work.Interpretations.length;i++){
