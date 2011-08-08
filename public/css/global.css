@@ -932,3 +932,12 @@ div#page-title {
     font-variant: small-caps;
     font-weight: normal;
 }
+
+/* files added after the merge of the test and the master branches */
+div#homepage{
+height:557px;padding:30px;
+}
+
+html{height:99.9%;width:99.9%;}
+#printbtn{cursor:pointer;}
+.reductor{width:800px;margin:auto;}
