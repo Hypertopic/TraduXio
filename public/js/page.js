@@ -223,9 +223,11 @@ var sentenceToTag;
         
         updateLink: function(privileges,twId){
 			if(twId!=null && twId!=''){
-				$("#edit,#editbtn").toggleClass('idle',!privileges.edit);			
-				$("#manage,#managebtn").toggleClass('idle',!privileges.manage);
-				$("#delete,#tr-icons .delbtn").toggleClass('idle',!privileges.del);
+				if(privileges!=null){
+					$("#edit,#editbtn").toggleClass('idle',!privileges.edit);			
+					$("#manage,#managebtn").toggleClass('idle',!privileges.manage);
+					$("#delete,#tr-icons .delbtn").toggleClass('idle',!privileges.del);
+				}
 				$("#history,#historybtn").toggleClass('idle',false);
 				$("#print,#printbtn").toggleClass('idle',false)
 				$("#history a,#historybtn a").attr("href",tdxio.baseUrl+"/work/history/id/"+twId);
@@ -529,6 +531,7 @@ var sentenceToTag;
 			   /*tdxio.page.displayOnglets(translations);    */
 				tdxio.page.displayOnglets(translations);
 				tdxio.page.displayWork(ajaxData,newId,back,begin,end);
+				tdxio.page.updateLink(null,newId);
 				$.ajax({
 					type:"get",
 					url:encodeURI(tdxio.baseUrl+"/tag/gettags"),
@@ -690,7 +693,7 @@ var sentenceToTag;
 					$("#editmeta").attr('title',tdxio.i18n.exiteditmeta);
 					$("#edit-meta a").text(tdxio.i18n.exiteditmeta);
 				}
-				$(this).toggleClass('on');
+				$("#editmeta,#edit-meta").toggleClass('on');
 			}
 		});
 	    $("#editbtn, #edit").click(function(e){

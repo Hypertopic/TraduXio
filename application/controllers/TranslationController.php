@@ -344,8 +344,8 @@ class TranslationController extends Tdxio_Controller_Abstract
                 foreach (array('src','dest') as $type) {
                     //$metadatas[$type]=array_merge($genreModel->getGenres(),array('author'=>'author','language'=>'language'));
                     $var=$type."_filter";
-                    Tdxio_Log::info($$var,$var);
-                    if ($$var) {
+                    if (isset($$var)) {
+						Tdxio_Log::info($$var,$var);
                         $temp_filter=explode('/',$$var);
                         $filters[$type]=array();
                         foreach ($temp_filter as $v) {
@@ -356,7 +356,6 @@ class TranslationController extends Tdxio_Controller_Abstract
                             }
                         }
                     }
-                    Tdxio_Log::info($$var,$var);
                     //$this->view->$var=$$var;
                 }
                 //Tdxio_Log::info($metadatas,"metadatas");
