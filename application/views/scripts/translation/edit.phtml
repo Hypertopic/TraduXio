@@ -12,6 +12,7 @@
  **/
 
 ?>
+<?php $this->headLink()->appendStylesheet($this->makeUrl('/css/oldpage.css')) ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/traduxio.js')); ?>
 <?php $this->headScript()->appendFile($this->makeUrl('/js/autogrow.js')); ?>
@@ -22,6 +23,8 @@ tdxio.translation.srcLang = '<?php echo $this->translation['OriginalWork']['lang
 tdxio.translation.destLang = '<?php echo $this->translation['language']; ?>';
 //tdxio.textSearch.current = {filters:{},query:''};
 <?php $this->headScript()->captureEnd(); ?>
+<?php $this->layout()->setLayout('layout');?>
+
 <?php //if ($this->translation['srcText']['Language']['rtl']) $origDir=' rtl'; else $origDir=""; ?>
 <?php //if ($this->translation['Language']['rtl']) $transDir=' rtl'; else $transDir=""; ?>
 

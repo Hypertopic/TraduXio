@@ -46,6 +46,20 @@ class ErrorController extends Tdxio_Controller_Abstract
 	public function deniedAction()
     {		
     }
+        
+	
+	public function ajaxdeniedAction()
+    {
+        $request = $this->getRequest();
+        $isXml = $request->isXmlHttpRequest();
+        Tdxio_Log::info($isXml,'isXml');        
+        if($this->view->isMember)
+			$this->view->message = array('code'=>3,'text'=>__("You don't have the right to perform this action."));
+		else
+			$this->view->message = array('code'=>2,'text'=>$this->view->makeUrl('/login/'));
+    }
+    
+    
 	
 
 }

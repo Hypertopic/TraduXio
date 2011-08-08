@@ -9,9 +9,12 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 
     private $_noauth = array('controller' => 'login',
                              'action' => 'index');
-
+    
     private $_noacl = array('controller' => 'error',
                             'action' => 'denied');
+   
+    private $_norightsXml = array('controller' => 'error',
+                             'action' => 'ajaxdenied');
    
     public function __construct()
     {
@@ -21,9 +24,15 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
 
     public function preDispatch($request)
     {
+        $isXml = $request->isXmlHttpRequest();
+        
         $controllername = $request->getControllerName();
         $controllername[0]=strtoupper($controllername[0]);
         $actionName = $request->getActionName();
+        
+        if($isXml){
+            Tdxio_Log::info($actionName,'yes it is');}
+        else{Tdxio_Log::info('no it is not');}
         
         //If the request is not for a controller we can just exit here without doing anything
         if(empty($controllername))
@@ -37,7 +46,7 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         $controller = new $classname($request,$response); 
         
         $rule = $controller->getRule($request);
-        Tdxio_Log::info($rule," rule dopo text-controller");
+        Tdxio_Log::info($rule," rule dopo controller");
         
         $layout = Zend_Controller_Action_HelperBroker::getStaticHelper('Layout');
         $view = $layout->getView();
@@ -65,10 +74,11 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         
         if (!($privilegeModel->exist($privilege))){
             Tdxio_Log::info('the privilege does not exist');
- 
-            if ($this->_role=='guest'){                
-
-               // $this->setLastRequestedUri($request);                        
+            if($isXml){
+                $controllername = $this->_norightsXml['controller'];
+                $actionName = $this->_norightsXml['action'];
+            }else if($this->_role=='guest'){
+               // $this->setLastRequestedUri($request);                   
                 $controllername = $this->_noauth['controller'];
                 $actionName = $this->_noauth['action'];
             } else {
@@ -97,7 +107,6 @@ class Tdxio_Plugin_AclPlugin extends Zend_Controller_Plugin_Abstract
         $deletePrivilege['privilege']='delete';
         unset($deletePrivilege['visibility']);
         $view->canDelete=$privilegeModel->exist($deletePrivilege);
-       
         $request->setControllerName($controllername);
         $request->setActionName($actionName);
     }

@@ -15,11 +15,52 @@ class TranslationController extends Tdxio_Controller_Abstract
     
     public function init(){}
     
+    public function ajaxeditAction() {
+		$request=$this->getRequest(); 
+		$model= $this->_getModel();
+        $translationId=$request->getParam('id'); 
+        if(!$work=$model->fetchTranslationWork($translationId,false)){
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
+        }       
+        
+        if ($request->isPost()) {
+            $data=$request->getPost();
+            
+            Tdxio_Log::info($data,'trajaxedit');  
+            $data['TranslationBlocks']=array();                   
+			foreach ($work['TranslationBlocks']as $id=>$block) {
+				if (isset($data['block'.$id])) {
+					$translation = $data['block'.$id];
+					Tdxio_Log::info('block'.$id.' is set');
+					$data['TranslationBlocks'][]= array(
+						'translation' => $data['block'.$id],
+						'from_segment' => $block['from_segment']
+						);
+						Tdxio_Log::info($data);
+					unset($data['block'.$id]);
+				}
+			}
+			$model->update($data,$translationId);   
+			$histModel = new Model_History();
+			$histModel->addHistory($translationId,2);  
+		}
+		$result = 0;
+		//$result = $model->merge($translationId,$segToMerge);
+        if($result==0){
+            Tdxio_Log::info($data,'form values in trajedit');
+            $this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'newText'=>$translation);
+        }else{
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("ERROR, couldn't save the translation")));
+        } 
+		$this->_helper->viewRenderer('refresh');
+	}
+
     public function editAction() {
         $request=$this->getRequest();
         $translationId=$request->getParam('id');
         Tdxio_Log::info($request,'viaggio');
         $model= $this->_getModel();
+        $workModel = new Model_Work();
         if(!$work=$model->fetchTranslationWork($translationId,false)){
             throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
@@ -44,6 +85,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         $taglist->assign('genres',$work['Genres']);
         $taglist->assign('workid',$translationId);
         $taglist->assign('userid',$this->view->userid);
+        $taglist->assign('canTag',$workModel->isAllowed('tag',$translationId));
         $this->view->tagbody=$taglist->render('taglist.phtml');
                    
         if ($request->isPost()) {
@@ -81,6 +123,17 @@ class TranslationController extends Tdxio_Controller_Abstract
         $this->view->translation=$work;
     }
     
+    public function saveAction()
+    {
+        $request=$this->getRequest();
+        $post = $request->getPost();
+        Tdxio_Log::info($post,'posted');      
+        
+        $value = $this->_getParam('value', '');
+       
+        $this->view->newText = $value;
+    }
+    
     
     public function cutAction() 
     {
@@ -102,9 +155,73 @@ class TranslationController extends Tdxio_Controller_Abstract
             throw new Zend_Controller_Action_Exception(sprintf(__("Can not cut here (%1\$d)", $segToCut)), 404);
         }
         $model->cut($translationId,$segToCut);
-        $segToRedirect = $this->getFirstSegmentOf($segToCut,$translation);
+        $segToRedirect = $this->getFirstSegmentOf($segToCut,$translation['TranslationBlocks']);
         $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
 
+    }
+    
+    public function ajaxcutAction(){
+        $request=$this->getRequest();
+        $translationId=$request->getParam('id');
+        $segToCut=$request->getParam('after');
+        $model=$this->_getModel();
+        $workModel = new Model_Work();
+        
+        if ((!$work=$workModel->fetchWork($translationId))||!($workModel->isTranslationWork($translationId))) {
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Translation %1\$d does not exist.", $translationId)));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
+        }
+             
+        $blocks=$model->fetchInterpretations($translationId);
+        $lastBlock = end($blocks);
+        if ($segToCut<0 || $segToCut>=$lastBlock['to_segment']) {
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Can not merge here %1\$d", $segToCut)));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here %1\$d", $segToCut)), 404);
+        }
+        
+        $result = $model->cut($translationId,$segToCut);
+        if($result==0){
+            $segToRedirect = $this->getFirstSegmentOf($segToCut,$blocks);
+//        $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
+        
+            $blocks = $model->fetchInterpretations($translationId);
+            Tdxio_Log::info($blocks,'blocks after cut');
+            $this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'newblocks'=>$blocks,'segToRed'=>$segToRedirect);
+        }else{
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("ERROR, couldn't cut on position %1\$d ",$segToCut)));
+        }
+        $this->_helper->viewRenderer('refresh');
+    }
+    
+    public function ajaxmergeAction(){
+        $request=$this->getRequest();
+        $translationId=$request->getParam('id');      
+        $segToMerge=$request->getParam('after');
+        $model=$this->_getModel();
+        $workModel = new Model_Work();
+        $model=$this->_getModel();
+        
+        if ((!$work=$workModel->fetchWork($translationId))||!($workModel->isTranslationWork($translationId))) {
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Translation %1\$s does not exist.", $translationId)));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
+        }
+                
+        $blocks=$model->fetchInterpretations($translationId);
+        $lastBlock = end($blocks);
+        if ($segToMerge<0 || $segToMerge>=$lastBlock['to_segment']) {
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Can not merge here %1\$d", $segToMerge)));
+            throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here %1\$d", $segToMerge)), 404);
+        }
+        $result = $model->merge($translationId,$segToMerge);
+        if($result==0){
+            $segToRedirect = $this->getFirstSegmentOf($segToMerge,$blocks);             
+            $blocks = $model->fetchInterpretations($translationId);
+            Tdxio_Log::info($blocks,'blocks after merge');
+            $this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'newblocks'=>$blocks,'segToRed'=>$segToRedirect);
+        }else{
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("ERROR, couldn't merge on position %1\$d ",$segToMerge)));
+        } 
+        $this->_helper->viewRenderer('refresh');
     }
     
     public function mergeAction() 
@@ -127,11 +244,21 @@ class TranslationController extends Tdxio_Controller_Abstract
             throw new Zend_Controller_Action_Exception(sprintf(__("Can not merge here (%1\$d)", $segToCut)), 404);
         }
         $model->merge($translationId,$segToMerge);
-        $segToRedirect = $this->getFirstSegmentOf($segToMerge,$translation);
+        $segToRedirect = $this->getFirstSegmentOf($segToMerge,$translation['TranslationBlocks']);
         $this->_helper->redirector->gotoUrl('translation/edit/id/'.$translationId."/#segment-".$segToRedirect);
 
     }
     
+	public function printAction(){
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        $model = $this->_getModel();
+		if (!$id || !($work=$model->fetchTranslationWork($id))) {            
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);
+        }  
+        $this->view->translation = $work;
+        Tdxio_Log::info($work['OriginalSentences'],'san giuseppe');
+    }
     
     public function readAction()
     {           
@@ -234,6 +361,10 @@ class TranslationController extends Tdxio_Controller_Abstract
                 }
                 //Tdxio_Log::info($metadatas,"metadatas");
                 //$this->view->metadatas=$metadatas;
+                if(!isset($transId))$transId=null;
+                if(!isset($from))$from=null;
+				if(empty($filters))$filters=array();
+                
                 $blocks=$model->search($query,$transId,$from,$filters);
                 if ($blocks) {
                     $criterii_translation1=array();
@@ -265,12 +396,10 @@ class TranslationController extends Tdxio_Controller_Abstract
                         Tdxio_Log::info($this->view->metadata[$type],"criterii $type");
                     }
                 }
-                //$this->view->texts=$texts;
                 $search=array('query'=>$query,'from'=>$from);
                 if ($viewFilters) $search['filters']=$viewFilters;
                 $this->view->filters=$filters;
                 $this->view->currentSearch=$search;
-                Tdxio_Log::info(count($texts));
                 $tq=$model->getQuery($query);
                 $this->view->transQuery=$tq;
                 Tdxio_Log::info($query,'query, '.count($blocks).' results');
@@ -322,23 +451,27 @@ class TranslationController extends Tdxio_Controller_Abstract
         }
         
         switch($action){
+            case 'save':
+            case 'ajaxedit':
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 }else{
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility, 'notAllowed'=>true);        
                 } break; 
+            case 'ajaxcut':
             case 'cut':
                 $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);    
                 break;
+            case 'ajaxmerge':
             case 'merge': 
                 $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 break;              
             case 'read': 
                 $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit');  
                 break;  
-            case 'concord': 
-            case 'search':  
+             case 'concord': 
+			 case 'search':             
             default:$rule = 'noAction';
         }               
         return $rule;
@@ -360,8 +493,8 @@ class TranslationController extends Tdxio_Controller_Abstract
         }
     }
     
-    public function getFirstSegmentOf($seg,$translation){
-        foreach($translation['TranslationBlocks'] as $key=>$block){
+    public function getFirstSegmentOf($seg,$blocks){
+        foreach($blocks as $key=>$block){
             if($block['from_segment']<=$seg and $seg<=$block['to_segment'])
                 return $block['from_segment'];
         }

@@ -32,7 +32,7 @@ class Model_Translation extends Model_Taggable
         $table  = $this->_getTable();
             
         // control part
-        $oldBlocks = $this->fetchInterpretations($translationId);// non indexées
+        $oldBlocks = $this->fetchInterpretations($translationId);// non indexees
         Tdxio_Log::info('old blocks');
         Tdxio_Log::info($oldBlocks);
         $newBlocks=$data['TranslationBlocks'];
@@ -64,11 +64,12 @@ class Model_Translation extends Model_Taggable
             if ($table->fetchRow($table->select()->where($where))) {
                 Tdxio_Log::info('block exists, update');
                 $result = $table->update($block,$where);
+                Tdxio_Log::info($result,'number of rows?');
             } else {
                 Tdxio_Log::info('block doesn\'t exist, create');
                 $table->insert($block);
             }
-        }   
+        }     
         $updateData = array();
         if(isset($data['title']))
             $updateData['title']=$data['title'];
@@ -144,6 +145,7 @@ class Model_Translation extends Model_Taggable
         for( $i=$from; $i<=$to; $i++){              
             $sourceText=$sourceText.$numberedSentences[$i]['content'];
         }   
+        Tdxio_Log::info($sourceText,'source text');
         return $sourceText;
     }
     
@@ -220,8 +222,9 @@ class Model_Translation extends Model_Taggable
             $table->insert($block2);
         } else {
             Tdxio_Log::error("ERROR, couldn't find block containing segment $segnum",__FUNCTION__);
+            return 1;
         }
-
+        return 0;
     }
     
     public function merge($transId,$segnum) {
@@ -248,7 +251,9 @@ class Model_Translation extends Model_Taggable
             $table->update($newBlock,$updateCond);
         } else {
             Tdxio_Log::error("ERROR, couldn't merge on position $segnum",__FUNCTION__);
+            return 1;
         }
+        return 0;
     }
 
     protected function _getCutter() {

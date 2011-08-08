@@ -70,7 +70,7 @@ class Model_DbTable_Abstract extends Zend_Db_Table_Abstract {
         foreach ($data as $field => $value) {
             if (!array_key_exists($field, $fields)
             || ($includeKeys && in_array($field,$keys))) {
-                Tdxio_Log::info($data[$field],"column $field was found in data, but isn't part of $this->name table");
+                Tdxio_Log::info($data[$field],"column $field was found in data, but isn't part of $this->_name table");
                 unset($data[$field]);
             } else {
                 Tdxio_Log::info($fields[$field]['NULLABLE'],"$field nullable");

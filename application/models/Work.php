@@ -37,7 +37,7 @@ class Model_Work extends Model_Taggable
     }
     
     public function update(array $data, $id)
-    {
+    {Tdxio_Log::info($data,'parc');
         $table=$this->_getTable();
         if (isset($data['insert_text']))  { // text added in text extension
             $sentences = $this->_getCutter()->getSentences($data['insert_text']);
@@ -57,15 +57,15 @@ class Model_Work extends Model_Taggable
             Tdxio_Log::info('fromseg is '.$fromseg.', toseg is '.$toseg);
             
             Tdxio_Log::info($data);
-            $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
+            $result=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
             
             //aggiungi un translation block ad ogni traduzione di $id
             $this->addInterpretations($id,$fromseg,$toseg);            
         }
-        if (isset($data['visibility'])||isset($data['author'])||isset($data['title'])){
-            $new_id=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
+        if (isset($data['visibility'])||isset($data['author'])||isset($data['title'])||isset($data['translator'])){
+            $result=$table->update($data,$table->getAdapter()->quoteInto('id = ?',$id));
         }        
-        return $new_id; 
+        return $result; 
     }
         
     public function createTranslation(array $data,$original_work_id)
@@ -122,6 +122,8 @@ class Model_Work extends Model_Taggable
             ->where('work.id IN (?)',$ids));
             //end rtl
         }
+        Tdxio_Log::info($works,'testtest');
+        foreach($works as $key=>$w){$works[$key]['langname']=__($w['language']);}
         if(!is_array($id)){
             return $works[0];
         }else {
@@ -134,11 +136,20 @@ class Model_Work extends Model_Taggable
         
         $sentenceModel= new Model_Sentence();
         $work['Sentences'] = $sentenceModel->fetchSentences($work_id);
+        $sentencesIds = array();
         $content = '';
         foreach($work['Sentences'] as $key => $sentence){
             $content.=$sentence['content'];
+            $sentencesIdNumbers[$sentence['id']]=$sentence['number'];
+            $sentencesIds[]=$sentence['id'];
         }
+        Tdxio_Log::info($sentencesIds,'sids');
         $work['the_text']=$content;
+        $stags = $this->getTags($sentencesIds);
+        unset($stags['Genres']);
+        $work['SentencesTags']=array();
+        foreach($stags as $id => $tag)
+			$work['SentencesTags'][$sentencesIdNumbers[$id]] = $tag;
         $translationModel = new Model_Translation();
         $work['Interpretations'] = $translationModel->fetchSentencesInterpretations($work_id);  
         $tags = ($this->getTags($work_id));

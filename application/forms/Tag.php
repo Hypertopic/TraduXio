@@ -20,7 +20,9 @@
  */
 
 class Form_Tag extends Form_Abstract
-{
+{  
+	protected $_workId = null;
+
     /**
      * init() is the initialization routine called when Zend_Form objects are
      * created. In most cases, it make alot of sense to put definitions in this
@@ -38,7 +40,7 @@ class Form_Tag extends Form_Abstract
         //$this->setMethod('post');//comment for ajax
 
         $tag=$this->createElement('text','tag_comment',array(
-            'decorators' => array('ViewHelper','Errors','Description','Label'),
+            'decorators' => array('ViewHelper','Errors','Description'),
             'filters' => array('StringTrim','StringToLower'),
             'required'=>true,
             'id'      => 'tag_input'));
@@ -53,15 +55,32 @@ class Form_Tag extends Form_Abstract
             //'class' => 'manage-select'
         ));
         $this->addElement($genre);        
-        
+		
+		$view = new Zend_View;
+		$baseUrl = $view->baseUrl();    
+        Tdxio_Log::info($baseUrl,'base url in form');
+
+		$this->addElement('image','closeimg',array(
+			'class' => 'closeimg',
+			'alt' => __('Close'),
+			'title' => __('Close'),
+			'value' => ($baseUrl.'/images/close16.png'),			
+			'decorators'=>array(
+			'ViewHelper',
+			array(array('data'=>'HtmlTag'), array('tag'=>'span')),
+		)));
+		
         // add the submit button
         $this->addElement('submit', 'tag_button', array(
             'decorators' => array('ViewHelper'),
             'label'    => __('TAG'),
         ));
 
-        $this->addDisplayGroup(array('tag_comment','tag_genre','tag_button'), 'tag_group');
+        $this->addDisplayGroup(array('tag_comment','tag_genre','tag_button'), 'tag_group-', array(
+			'decorators' => array(),        
+        ));
         $this->setAttrib('id','tagform');
+
     }
     
     public function _getGenres(){

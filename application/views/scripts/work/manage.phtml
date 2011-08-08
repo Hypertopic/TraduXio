@@ -15,7 +15,7 @@
 <?php $this->page_title= __("Manage text's privileges").$this->escape($this->work['title']); ?>
 
 <div class="central-home">
-<span class="manage-link"><a href="<?php echo $this->makeUrl('/work/read/id/'.$this->work_id); ?>"><?php echo __('Back to the text'); ?></a></span>
+<span class="manage-link"><a href="<?php echo $this->makeUrl('/work/newread/id/'.$this->work_id); ?>"><?php echo __('Back to the text'); ?></a></span>
 <span class="manage-link"><a href="<?php echo $this->makeUrl('/work/switch/id/'.$this->work_id); ?>"><?php echo __($this->link); ?></a></span>
 
 <?php if($this->visibility=='public' or $this->visibility=='private'): ?>

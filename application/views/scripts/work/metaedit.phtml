@@ -1,0 +1,7 @@
+<?php
+$this->headScript()->appendFile($this->baseUrl().'/js/jquery-1.2.1.pack.js');
+$this->headScript()->appendFile($this->baseUrl().'/js/jquery.jeditable.js');
+$this->layout()->setLayout('jsonlayout');
+
+echo json_encode(array('result'=>$this->escape($this->newText),'response'=>$this->response,'message'=>$this->message));
+?>

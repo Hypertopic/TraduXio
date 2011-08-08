@@ -1,13 +1,13 @@
-
 <?php
-$this->layout()->setLayout('empty');
-$this->work['language']=__($this->work['language']);
+$this->layout()->setLayout('jsonlayout');
+//$this->work['language']=__($this->work['language']);
 $translations = array();
-if(!empty($this->work['Sentences'])){
+/*if(!empty($this->work['Sentences'])){
     foreach($this->work['Sentences'] as $key=>$sentence){
         $this->work['Sentences'][$key]['content'] = $this->nlBr($sentence['content']);
     }
-}
+}*/
+/*
 if(!empty($this->work['Interpretations'])){
     foreach($this->work['Interpretations'] as $key=>$trl){
         foreach($trl['blocks'] as $ind=>$block){
@@ -15,9 +15,9 @@ if(!empty($this->work['Interpretations'])){
         }
         $this->work['Interpretations'][$key]['work']['language']=__($trl['work']['language']);
     }
-}
+}*/
 
-$data=array('work'=>$this->work,'tags'=>$this->tagbody,'tagform'=>$this->tagform,'translation'=>$this->trWork);
+$data=array('response'=>$this->response,'message'=>$this->message,'work'=>$this->work,'translation'=>$this->trWork,'tagbody'=>$this->tagbody,'trId' => $this->trId,'trPriv' => $this->trPrivileges);
 
 Tdxio_Log::info(Zend_Json::encode($data),'jsondata');
 

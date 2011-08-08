@@ -14,7 +14,7 @@ class Model_Privilege extends Model_Abstract
     protected $_tableClass = 'Privilege';    
     
     public $_dbPrivilegeList=array();
-    public $_includeReadList = array('read','edit','translate','manage','tag');
+    public $_includeReadList = array('read','edit','translate','manage','tag','delete');
     
     public function __construct($class_name=null,$idField=null,$contentField=null)
     {

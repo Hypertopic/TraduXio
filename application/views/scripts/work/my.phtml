@@ -1,5 +1,5 @@
-<div class="gray-square">
-<div id="gray-page-title">
+<div id="margin">
+<div id="page-title">
 <?php echo __('My translations'); ?>
 </div>
 <ul>
@@ -10,7 +10,7 @@
     <ul class='trl'>
 <?php foreach ($texts as $text): ?>
     <li class='text my'>
-    <a href="<?php echo $this->url(array('controller'=>'translation','action'=>'read','id'=>$text['id'])) ?>">
+    <a href="<?php echo $this->url(array('controller'=>'work','action'=>'newread','id'=>$text['id'])) ?>">
         <?php if($text['title']==''){echo '<i>'.__('No Title').'</i>';}else{echo $text['title'];} ?>
     </a></li>
 <?php endforeach; ?>

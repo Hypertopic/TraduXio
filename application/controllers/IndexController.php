@@ -31,6 +31,9 @@ class IndexController extends Tdxio_Controller_Abstract
         //return $this->_helper->redirector('index','work');
     }
     
+    public function jsi18nAction(){	
+	}
+    
     public function tutorialAction()
     {}
    
@@ -114,7 +117,16 @@ class IndexController extends Tdxio_Controller_Abstract
         }
         $this->view->form=$form;
     }
+       
     
+	public function iconstateAction(){
+		$request = $this->getRequest();
+		$state = $request->getParam('state');
+		$session = new Zend_Session_Namespace('MenuIcons');
+        $session->state=$state;//'visible' or 'hidden'
+        $this->view->data=null;
+        $this->_helper->viewRenderer('jsonresponse');
+	}
      
     public function getRule($request){  
         $action = $request->action;

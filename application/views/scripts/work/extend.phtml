@@ -11,17 +11,19 @@
  * GNU General Public License for more details.
  **/
 
-?><?php echo $this->headScript()->appendFile($this->makeUrl('/js/autogrow.js')); ?>
+?>
+<?php $this->headLink()->appendStylesheet($this->makeUrl('/css/oldpage.css')) ?>
+<?php echo $this->headScript()->appendFile($this->makeUrl('/js/autogrow.js')); ?>
 <?php $dir = (($this->text['rtl']==1)?'dir="rtl"':''); ?>
 
 <div class="central-home">
 <div class = "work-container hundred" <?php echo $dir ?>>
 <div class="title"><?php echo $this->escape($this->text['title']); ?></div>
-<div class="language"><?php echo __($this->escape($this->text['Language']['ref_name'])); ?></div>
+<div class="language"><?php echo __($this->text['language']); ?></div>
 <br/><span class="label"><?php echo __('Last segment of the text') ?></span>
 
-<div class="text view<?php echo $textDir; ?>" lang="<?php echo __($this->text['Language']['part1']) ?>">
-<span class="segment" id="<?php echo$this->text['id']?>"></span><?php echo $this->lasttext; ?>
+<div class="text" lang="<?php echo $this->text['language'] ?>">
+<span class="segment"></span><?php echo $this->lasttext; ?>
 </div>
 <div class="form">
 <?php echo $this->form ?>

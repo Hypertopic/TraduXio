@@ -1,0 +1,199 @@
+.creator{
+    text-align:left;
+    color:#BBB;
+    margin:0 10px;
+}
+
+.TLcorner,.TRcorner,.BLcorner,.BRcorner{
+    background-repeat:no-repeat;
+    width:21px;
+    height:21px;
+}
+.TLcorner{
+    float:left;
+    background-image:url(../images/TLcorner.png); 
+}
+.TRcorner{
+    background-image:url(../images/TRcorner.png);
+    float:right;
+}
+.TLcorner-ong{
+    background-image:url(../images/onglet-left.png); 
+    height:32px;
+    width:23px;
+    float:left;
+    background-repeat:no-repeat;
+}
+.TRcorner-ong{
+    background-image: url(../images/onglet-right-short.png); 
+    height:32px;
+    float:right;
+    width:23px;
+    background-repeat:no-repeat;
+}
+.Tborder-ong{
+    background-image:url(../images/onglet-top.png);
+    background-repeat:repeat-x;
+    height:32px;
+}
+.BLcorner{
+    float:left;
+    background-image:url(../images/BLcorner.png); 
+}
+.BRcorner{
+    background-image:url(../images/BRcorner.png);
+    float:right;
+}
+.Tborder{
+    background-image:url(../images/top-border.png);
+}
+.Bborder{
+    background-image:url(../images/bottom-border.png);
+    background-position:bottom;
+}
+.Tborder, .Bborder{
+    background-repeat:repeat-x;  
+    height:21px;
+}
+.Lborder{
+    background-image:url(../images/left-border.png);
+    background-repeat:repeat-y;
+    background-position:left;
+  /*  width:21px;*/
+}
+.Rborder{
+    background-image:url(../images/right-border.png);
+    background-repeat:repeat-y;
+    background-position:right;
+  /*      width:21px;*/
+
+ }  
+#page-container{
+    /*text-align: center;*/
+    vertical-align: middle;
+    padding: 20px 20px 50px 20px;
+    background-color: #585858;
+    color:#585858;
+}
+div.work-container{
+    background-color: #FFFFFF;
+    color:#585858;
+    background-repeat:no-repeat;
+    margin:0 20px;
+    padding: 0 20px;
+}
+div.text {
+background-color:#FFFFFF;
+border: solid 1px #DBDBDB;
+margin-top:15px;
+padding:5px 10px;
+vertical-align:top;
+}
+div.left-menu{
+    float:left;
+    margin:0px;
+    width:16%;
+    font-size:80%;
+/*    padding:1%;
+ *     border-top: solid 1px #DBDBDB;*/
+    text-align:right;
+    vertical-align:top;
+
+}
+table.right-container{
+    margin:0px;
+    background-color:#585858;
+    color:#DBDBDB;    
+    border-collapse:collapse;
+    border-spacing:0px;
+
+}
+div.right-container{
+    margin-left:16%;
+    background-color:#585858;
+    color:#DBDBDB;    
+}
+#container{
+min-height: 100%;
+position: relative;
+}
+#LRcontainer{
+    width:100%;    
+    min-width:1014px;/* sum of the elements into div#LRcontainer minus margin of #content */
+}
+tr.button-line{
+    padding:5px;
+    text-align:right;
+}
+tr.tag-line, tr.onglets-line{
+background-color:#585858;
+}
+.onglet{
+color:#5A5A5A;
+font-weight:bold;
+letter-spacing:1px;
+}
+ul.onglets{
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+margin:0;
+/*float:left;*/
+padding:0px;
+height:32px;
+}
+li.onglet{
+float:left;
+letter-spacing:1px;
+padding-left:10px;
+float:left;
+}
+.onglets li{
+background: transparent url(../images/onglet-left.png) no-repeat; 
+height:32px;
+display:block;
+padding-left:21px;
+}
+.onglets span{
+background: transparent url(../images/onglet-right.png) no-repeat scroll 100% 100%;
+display:block;
+height:32px;
+padding-right:21px;
+vertical-align:bottom;
+}
+.onglets a{
+vertical-align:bottom;
+display:block;
+padding-top:10px;
+}
+.onglets li.inactive{
+/*border-bottom:2px solid #585858;
+margin-top:-2px;*/
+}
+#other-onglet{
+display:inline;/*
+float:left;*/
+}
+.space{height:10px;}
+.w21{width:21px;}
+.h21{height:21px;}
+.newblock,.trablock{background-color:#FFF;border:1px solid #DBDBDB;color:#585858;width:50%;vertical-align:top;}
+.new-container,.new-container td,.new-container tr{padding:0;border-collapse:collapse;vertical-align:top;}
+.pad10{padding:10px;}
+.whiteback{background-color:#FFF;}
+div.minus1{margin-left:-1px;margin-right:-1px;}
+tr.dark{background-color:#585858;}
+tr.tag-line{vertical-align:top;}
+td div.show-tag-area{padding-left:0px;}
+.rminus1{margin-right:-1px;}
+
+div.show-tag-area{
+    padding-top:10px;
+    margin-bottom:5px;
+    color:#DBDBDB;
+    vertical-align:top;
+    padding-left:20px;
+}
+.left,.center,.right{
+float:left;
+}

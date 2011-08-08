@@ -934,7 +934,7 @@ msgstr "Fijian"
 
 #: ../languages/ripristino/prova_ripristino.php:139
 msgid "fil"
-msgstr "Filipino"
+msgstr "Filippino"
 
 #: ../languages/ripristino/prova_ripristino.php:140
 msgid "fin"

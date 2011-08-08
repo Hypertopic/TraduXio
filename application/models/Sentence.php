@@ -65,7 +65,7 @@ class Model_Sentence extends Model_Taggable
         foreach($result as $key => $row){
             $max = max($max,$row['number']);
         }
-        Tdxio_Log::alert('Last index for work_id %d is '.$max,$work_id);
+        Tdxio_Log::info('Last index for work_id %d is '.$max,$work_id);
         return $max;
         
     }

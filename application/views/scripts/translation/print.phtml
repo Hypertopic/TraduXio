@@ -1,0 +1,156 @@
+<?php $this->headScript()->appendFile($this->makeUrl('/js/myprint.js')); ?>
+<?php $this->headLink()->appendStylesheet($this->makeUrl('/css/oldpage.css')) ?>
+<?php $this->layout()->setLayout('nolayout');?>
+<link rel="stylesheet" type="text/css" media="print" href="<?php echo $this->makeUrl('/css/print.css'); ?>" />
+
+<div id="page-container">
+
+<div class="print">
+<table class="new-container full-width">
+<!------------------------------------------------------------------------------------------------------------------------>
+<tr class="full-width hundred">
+<td class="w21 Lborder hundred whiteback"><div class="TLcorner-ong w21"></div></td>
+<td class="whiteback hundred"><div class="Tborder-ong whiteback minus1"></div></td>
+<td class="w21 Rborder hundred"><div class="TRcorner-ong w21"></div></td>
+<td class="w21 Lborder hundred whiteback"><div class="TLcorner-ong w21"></div></td>
+<td class="whiteback hundred"><div class="Tborder-ong whiteback minus1"></div></td>
+<td class="w21 Rborder hundred"><div class="TRcorner-ong w21"></div></td>
+</tr>
+
+<tr class="full-width hundred">
+<td class="Lborder w21 hundred whiteback"></td>
+<td class="whiteback hundred"><div class="whiteback hundred minus1"></div></td>
+<td class="w21 hundred Rborder"></td>
+<td class="Lborder w21 hundred whiteback"></td>
+<td class="whiteback hundred"><div class="whiteback hundred minus1"></div></td>
+<td class="w21 hundred Rborder"></td>
+
+</tr>
+
+<tr class="hundred">
+<td class="w21 hundred Lborder"></td>
+<td <?php echo $origDir;?>>
+<div class = "whiteback hundred minus1">
+    <div class="title">
+        <?php $author = $this->translation['OriginalWork']['author'];
+        $title = $this->escape($this->translation['OriginalWork']['title']);
+        if($author==''){$author=__('Anonymous');} 
+        if($title==''){$title=__('No Title');} 
+        ?>
+        <span class="author red"><?php echo $author.', ' ?></span>
+        <span class="title red">
+        <?php echo $title; ?>
+        </span>
+    </div>
+    <div class="language TBspaced red">
+        <?php echo __($this->translation['OriginalWork']['language']); ?>
+    </div>
+</div>
+</td>
+<td class="w21 hundred Rborder"></td>
+<td class="w21 hundred Lborder"></td>
+<td <?php echo $tradDir; ?>>
+<div class = "whiteback hundred minus1">
+                <div class="title">          
+                    <?php 
+                        $title = ($this->translation['title']=='')?__('No Title'):$this->translation['title'];
+                        $author = ($this->translation['author']=='')?__('Anonymous'):$this->translation['author'];
+                    ?>
+                    <span class="author red"><?php echo $author.', ' ?></span>
+                    <a href="<?php echo $this->makeUrl('/work/newread/id/'.$this->translation['id']);?>"><span class="title red"><?php echo $title ?></span></a>
+					<img id="printbtn" src="<?php echo $this->makeUrl('/images/print.png');?>" title="<?php echo __('Print'); ?>">
+               </div>
+                <div class="language TBspaced red">
+                    <?php echo __($this->translation['language']); ?>
+                </div>
+            </div>
+</td>
+<td class="w21 hundred Rborder"></td>
+</tr>
+
+<?php if($this->showBlocks==1): ?>
+
+<?php foreach ($this->translation['TranslationBlocks'] as $blocknum=>$block) : ?>
+
+<tr>
+<td class="w21 hundred Lborder"><div class="w21 hundred"></div></td>
+<td class="newblock hundred" <?php echo $origDir; ?>><div class="pad10">
+<?php foreach ($block['OriginalSentences'] as $segnum=>$segment) : ?>
+                        <?php $segment = $segment['content']; ?>
+                        <?php $segment_id="text".$this->translation['OriginalWork']['id']."-segment".$segnum; ?>
+                        <span class="segment" id="<?php echo $segment_id; ?>"><?php echo $this->nlBr($segment); ?></span>
+
+                    <?php endforeach; ?>
+</div>
+</td>
+<td class="w21 Rborder hundred"><div class="w21 hundred"></div></td>
+<td class="w21 Lborder hundred"><div class="w21 hundred"></div></td>
+<td class="newblock hundred" <?php echo $tradDir; ?>>
+<div class="pad10"><span><?php echo $this->nlBr($block['translation']); ?></span></div>
+</td>
+<td class="w21 Rborder hundred"><div class="w21 hundred"></div></td>
+</tr>
+
+<tr class="hundred">
+<td class="w21 Lborder hundred"></td>
+<td class="whiteback space"><div class="whiteback space minus1" ></div>
+</td>
+<td class="w21 Rborder hundred"></td>
+<td class="w21 Lborder hundred"></td>
+<td class="whiteback space"><div class="whiteback space minus1" ></div>
+</td>
+<td class="w21 Rborder hundred"></td>
+</tr>
+<?php endforeach;?>
+<?php else: ?>
+
+<tr>
+<td class="w21 Lborder hundred"></td>
+<td class="newblock hundred" <?php echo $origDir; ?>><div class="pad10">
+<?php foreach($this->translation['OriginalSentences'] as $key=>$sentence):
+                    echo $this->nlBr($sentence['content']); 
+                endforeach; ?>
+</td>
+<td class="w21 Rborder hundred"></td>
+<td class="w21 Lborder hundred"></td>
+<td class="newblock hundred" <?php echo $tradDir; ?>><div class="pad10">
+<?php foreach($this->translation['TranslationBlocks'] as $key=>$block):
+                   echo $this->nlBr($block['translation']).' '; 
+                endforeach; ?>  
+                </div>
+</td>
+<td class="w21 Rborder hundred"></td>
+</tr>
+<?php endif;?>
+
+
+<tr class="h21 whiteback">
+<td class="w21 Lborder hundred"></td>
+<td class="whiteback hundred">
+    
+</td>
+<td class="Rborder hundred"><div class="w21 hundred minus1"></div></td>
+<td class="w21 Lborder hundred"></td>
+<td class="whiteback hundred">
+    
+    
+</td>
+<td class="w21 Rborder hundred"><div class="w21 hundred"></div></td>
+</tr>
+
+<tr class="full-width">
+<td class="BLcorner w21"></td>
+<td class="Bborder whiteback"><div class="Bborder whiteback minus1"></div></td>
+<td class="BRcorner w21"></td>
+<td class="w21"><div class="BLcorner w21"></div></td>
+<td><div class="Bborder minus1"></div></td>
+<td class="BRcorner w21"></td>
+</tr>
+
+
+</table>
+</div>
+</div>
+</div>
+
+<?php $this->page_title=__("PAGETITLE_Print the translation").': '.$this->escape($this->translation['title']); ?>

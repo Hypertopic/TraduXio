@@ -1,4 +1,6 @@
 <?php $this->headScript()->appendFile($this->makeUrl('/js/tag.js')); ?>
+<?php $this->headLink()->appendStylesheet($this->makeUrl('/css/oldpage.css')) ?>
+<?php $this->layout()->setLayout('layout');?>
 
 <div id="LRcontainer">
 <div class="left-menu">
@@ -60,7 +62,6 @@ $HTmessage = __("You can't delete this text because it has some translations. De
 <?php if($this->canTag){echo $this->tagForm; } ?>
 </div>
 
-<!--<td id = "right-column">-->
 <div class="right-container">
     <div class="show-tag-area" id="show-tag-ajax">
         <?php echo $this->tagbody ?>
@@ -68,7 +69,6 @@ $HTmessage = __("You can't delete this text because it has some translations. De
 
 <div id = "page-container">
 <div class = "Tborder"><div class = "TLcorner"></div><div class = "TRcorner"></div></div>
-<!--<div id = "Lborder"><img class = "turn-page" src="<?php //echo $this->makeUrl('/images/previous.png'); ?>"></div>-->
         <div class="Lborder hundred"><div class="Rborder hundred">
             <div class = "work-container hundred" <?php echo $dir ?>>
                 <div class = "title" id="work-title"><?php $author = ($this->work['author']=='')?__('Anonymous'):$this->work['author'];?>

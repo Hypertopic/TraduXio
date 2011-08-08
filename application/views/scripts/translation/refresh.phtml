@@ -1,0 +1,6 @@
+<?php
+$this->layout()->setLayout('jsonlayout');
+
+echo json_encode($this->data);
+Tdxio_Log::info($this->data,'datajsonn');
+?>

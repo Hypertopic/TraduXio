@@ -71,7 +71,7 @@ class WorkController extends Tdxio_Controller_Abstract
         $news = $this->getNews($browserLang['id']);
         Tdxio_Log::info($browserLang['id'],'bbbbrows');
         Tdxio_Log::info($news,'newentries');
-        if(!empty($sort)){ksort($sort,SORT_STRING);}     
+        if(!empty($sort)){ksort($sort,SORT_LOCALE_STRING);}     
         $this->view->entries=$sort;        
         //$this->view->home = true; //non serve più da quando è stato eliminato dal file layout.phtml
         $this->view->news = $news;
@@ -94,7 +94,7 @@ class WorkController extends Tdxio_Controller_Abstract
                 $histModel = new Model_History();  
                 $histModel->addHistory($new_id,5);   
                 Tdxio_Log::info($data);
-                return $this->_helper->redirector->gotoSimple('read','work',null,array('id'=>$new_id));
+                return $this->_helper->redirector->gotoSimple('newread','work',null,array('id'=>$new_id));
             }
         }
         $this->view->form = $form;
@@ -117,101 +117,180 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         Tdxio_Log::info($work,'work read');
 
+		$this->view->canTag = $model->isAllowed('tag',$id);
         $taglist = new Zend_View();
         $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
         $taglist->assign('tags',$work['Tags']);
         $taglist->assign('genres',$work['Genres']);
         $taglist->assign('workid',$work['id']);
         $taglist->assign('userid',$this->view->userid);
+        $taglist->assign('canTag',$this->view->canTag);
         $this->view->tagbody=$taglist->render('taglist.phtml');
         
-        $this->view->hasTranslations=$model->hasTranslations($id);        
-        $this->view->canTag = $model->isAllowed('tag',$id);
+        $this->view->hasTranslations=$model->hasTranslations($id);     
         $this->view->canManage = $model->isAllowed('manage',$id);
         $this->view->work = $work;
         Tdxio_Log::info($work,'work/read work');
         $this->view->tagForm = $tagForm;
     }
     
-       public function newreadAction(){
-    
+     public function printAction(){
         $request = $this->getRequest();
         $id = $request->getParam('id');
-        $trId = $request->getParam('tr');
+        $model = $this->_getModel();
+        
+        if($model->isTranslationWork($id)){
+			$trModel = new Model_Translation();
+			$origWork = $trModel->fetchTranslationOriginalWork($id);
+			$origId = $origWork['id'];
+			return $this->_helper->redirector->gotoUrl('/translation/print/id/'.$id); 
+		}
+        $work = $model->fetchWork($id);
+        
+        if (!$id || !($work=$model->fetchOriginalWork($id))) {
+            
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);
+        }   
+        $this->view->work = $work;
+    }
+    
+    public function newreadAction(){
+		
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
         $model = $this->_getModel();
         $tagForm = new Form_Tag();
-        Tdxio_Log::info('step1');
+        $work = $model->fetchWork($id);
         
+        if($model->isTranslationWork($id)){
+			$trModel = new Model_Translation();
+			$origWork = $trModel->fetchTranslationOriginalWork($id);
+			$origId = $origWork['id'];
+			return $this->_helper->redirector->gotoUrl('/work/newread/id/'.$origId.'#tr'.$id); 
+		}
         $work=$model->fetchOriginalWork($id);
-        if (!$id || !$work || (empty($work['Sentences']))) {    
+        Tdxio_Log::info($work,'origwork');        
+        if((!$id) ||  (!$work)){
             Tdxio_Log::info('get in here');        
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
-        }   
-        Tdxio_Log::info($work,'work read');
-        if($trId && !(array_key_exists($trId,$work['Interpretations']))){
-            Tdxio_Log::info($trId,'newread doesn\'t exist trID');
-            $trId=NULL;
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);
         }
-        
-        $this->view->hasTranslations=$model->hasTranslations($id);        
         $this->view->canTag = $model->isAllowed('tag',$id);
+        $taglist = new Zend_View();
+		$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+		$taglist->assign('tags',$work['Tags']);
+		$taglist->assign('genres',$work['Genres']);
+		$taglist->assign('workid',$work['id']);
+		$taglist->assign('userid',$this->view->userid);
+		$taglist->assign('canTag',$this->view->canTag);
+		if($model->isAllowed('tag',$id)){
+			$tagForm = new Form_Tag(); 
+			$taglist->assign('form',$tagForm);
+		}       
+		$this->view->tagbody=$taglist->render('taglist.phtml');
+        
+        $this->view->hasTranslations=$model->hasTranslations($id);   
+        Tdxio_Log::info($this->view->hasTranslations,'hastrans');     
         $this->view->canManage = $model->isAllowed('manage',$id);
+        $this->view->canTranslate = $model->isAllowed('translate',$id);
+        $this->view->canDelete = $model->isAllowed('delete',$id);
+        $this->view->canEdit = $model->isAllowed('edit',$id);
         $this->view->work = $work;
-        $this->view->trId = $trId;
-        if($trId){$this->view->translation = $work['Interpretations'][$trId];}
-
+        $session = new Zend_Session_Namespace('MenuIcons');
+        if(isset($session->state)){$this->view->iconsState=$session->state;}
+        Tdxio_Log::info('till here');
     }
-   public function ajaxreadAction(){
-        $request = $this->getRequest();
-        $id = $request->getParam('id');
-        Tdxio_Log::info($request,'ababa');
-        $qtity = $request->getParam('qtity');//numero di segmenti/sentences da scaricare
-        $translations = array();
+    
 
-        $trWork = null;
-        $trId=$request->getParam('trId');
-        if($trId!=null){
-            Tdxio_Log::info($trId,'trid');
-            $trModel = new Model_Translation();
-            Tdxio_Log::info($trWork,'ajaxread0');  
-            //if (!$trId || !($tempWork=$model->fetchWork($trId))) {
-             //   throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
-            //}  
-            $trWork = $trModel->fetchTranslationWork($trId);
-        }
-        $model = $this->_getModel();
-        if (!$id || !($work=$model->fetchOriginalWork($id))) {
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
-        }else{
-            foreach($work['Interpretations'] as $id=>$trWork){
-                $translations[] = $trWork;
+    
+	public function ajaxreadAction(){
+		
+		$request = $this->getRequest();
+		$id = $request->getParam('id');
+		Tdxio_Log::info($request,'ababa');
+		$qtity = $request->getParam('qtity');//numero di segmenti/sentences da scaricare
+		$translations = array();
+
+		$trId=$request->getParam('trId');
+		$trWork = null;
+		Tdxio_Log::info($trId,'steptwo');
+		$userid = Tdxio_Auth::getUserName();
+
+		$model = $this->_getModel();
+		if (!$id || !($work=$model->fetchOriginalWork($id))) {
+			$this->view->response = false;
+            $this->view->message = array('code'=>1,'text'=> __("Work %1\$d does not exist.",$id));
+		}else{
+			if(empty($work['Interpretations'])){$trId=null;}
+            else{
+				$trId = (array_key_exists($trId,$work['Interpretations']))?$trId:key($work['Interpretations']);
+				$trModel = new Model_Translation();
+				$trWork = $trModel->fetchTranslationWork($trId);                
+				foreach($work['Interpretations'] as $id=>$tr){$translations[] = $tr;}
+				
+				$this->view->canTag = $model->isAllowed('tag',$trId);
+				$taglist = new Zend_View();
+				$taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
+				$taglist->assign('tags',$trWork['Tags']);
+				$taglist->assign('genres',$trWork['Genres']);
+				$taglist->assign('workid',$trWork['id']);
+				$taglist->assign('userid',$this->view->userid);
+				$taglist->assign('canTag',$this->view->canTag);
+				   
+				$this->view->tagbody=$taglist->render('taglist.phtml');
+				$canDel = ($userid == $trWork['creator'])?true:$model->isAllowed('delete',$trId);
+				$this->view->trPrivileges = array('manage'=>$model->isAllowed('manage',$trId),'edit'=>$model->isAllowed('edit',$trId),'del'=>$canDel);
             }
             $work['Interpretations'] = $translations;
-        }
-        Tdxio_Log::info($work,'ajaxread00');
-       
-        
-     /*  $tagForm = new Form_Tag(); 
-        $model = $this->_getModel();
-        $tagForm = new Form_Tag();
-         $taglist = new Zend_View();
-        $taglist->setScriptPath(APPLICATION_PATH.'/views/scripts/tag/');        
-        $taglist->assign('tags',$work['Tags']);
-        $taglist->assign('genres',$work['Genres']);
-        $taglist->assign('workid',$work['id']);
-        $taglist->assign('userid',$this->view->userid);
-        $this->view->tagbody=$taglist->render('taglist.phtml');
-       */ 
-        $this->view->hasTranslations=$model->hasTranslations($id);        
-        $this->view->canTag = $model->isAllowed('tag',$id);
-        $this->view->canManage = $model->isAllowed('manage',$id);
+		}
+        Tdxio_Log::info($work,'ajaxread0');
+		$this->view->response = true;
+		$this->view->message  = array('code'=>0,'text'=> __("OK"));   
         $this->view->work = $work;
         $this->view->trWork = $trWork;
-        //$this->view->tagForm = $tagForm;
+        $this->view->trId = $trId;
         
-        Tdxio_Log::info($work,'ajaxread1');
-        Tdxio_Log::info($trWork,'ajaxread2');
+        Tdxio_Log::info($trWork,'ajaxread1');
     }
+        
+    public function createtrAction(){
+		$request = $this->getRequest();
+		$id = $request->getParam('id');
+        $model = $this->_getModel();     
+        if (!$id || !$origWork=$model->fetchOriginalWork($id)) {
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist.", $id)), 404);
+        }
+        $form = new Form_AjaxWorkTranslate();
+        if ($request->isPost()) {
+			if ($form->isValid($request->getPost())) {				
+				$test = $form->isValid($request->getPost());
+				Tdxio_Log::info($test,'testtesttest');
+				$data=$request->getPost();
+				Tdxio_Log::info($data,'ajax new translation data');
+				$userid = Tdxio_Auth::getUserName();                
+				$data['creator']=$userid;
+				unset($data['id']);
+				$newId=$model->createTranslation($data,$id);
+				if(!is_null($newId)){
+					$histModel = new Model_History();        
+					$histModel->addHistory($newId,5);   
+					$this->view->response = true;
+					$this->view->newId = $newId;
+					$this->view->values = $data; 
+					$this->view->message = array('code'=>0,'text'=> __("OK"));
+				}else{
+					$this->view->response = false;
+					$this->view->newId = null;   
+					$this->view->values = null;  
+					$this->view->message = array('code' => 1,'text'=>__("DB not modified"));
+				}
+			}else{
+				$this->view->response = false;
+				$this->view->newId = null;    
+				$this->view->values = null;  
+				$this->view->message = array('code' => 3,'text'=>__("Invalid form. Please fill all the required (*) fields."));
+			}
+		}
+	}
     
     public function translateAction(){
         $request = $this->getRequest();
@@ -225,6 +304,7 @@ class WorkController extends Tdxio_Controller_Abstract
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $data=$form->getValues();
+                Tdxio_Log::info($data,'new translation data');
                 $userid = Tdxio_Auth::getUserName();                
                 $data['creator']=$userid;
                 $newId=$model->createTranslation($data,$id);
@@ -249,6 +329,81 @@ class WorkController extends Tdxio_Controller_Abstract
             $this->view->myEntries = $srcLangs;
             
             Tdxio_Log::info($srcLangs,'my translations');       
+        }
+    }
+    
+    public function getvalueAction(){
+		$model=$this->_getModel();         
+        $request = $this->getRequest();
+        $value=$request->getParam('value');
+        $id=$request->getParam('id');
+        if (!$id || !($work=$model->fetchWork($id))) {
+			$this->view->data = array('response' => false, 'value' => null,'message' => array('code' => 1,'text'=>__("Invalid work id")));
+		}
+        $this->view->data = array('response' => true,'message' => array('code' => 0,'text'=>__("OK")),'value'=>$work[$value]);
+        $this->_helper->viewRenderer('jsonresponse');
+    }
+    
+    public function getformAction(){
+        $request = $this->getRequest();
+        $type=$request->getParam('type');
+        $formname = 'Form_AjaxWork'.ucfirst($type);
+        if($type=='translate')
+			$form = new $formname($request->getParam('id'));			
+	/*	elseif($type=='sentencetag')
+			$form = new $formname($request->getParam('id'),$request->getParam('number'));	*/
+		else
+			$form = new $formname;
+        Tdxio_Log::info($form,'quaqua');
+        $this->view->form = $form;
+        Tdxio_Log::info(json_encode($form),'tent');
+        $this->view->response = true;
+        $this->view->message = array('code' => 0,'text'=>__("OK"));
+    }
+    
+        
+    public function ajaxextendAction(){
+        Tdxio_Log::info('got here');
+        $request = $this->getRequest();
+        $id=$request->getParam('id');
+        $model=$this->_getModel(); 
+        
+        if (!$id || !($work=$model->fetchWork($id))) {
+            throw new Zend_Controller_Action_Exception(sprintf('Work Id "%d" does not exist.', $id), 404);
+        }   
+        
+        if(!$model->isOriginalWork($id)) {
+            throw new Zend_Controller_Action_Exception(sprintf('Cannot extend a translation. Edit it instead.'), 404);
+        }
+        
+        if($id && $work=$model->fetchOriginalWork($id))
+        {  
+            if ($this->getRequest()->isPost())
+            {
+                $values=$request->getPost();
+                if($values['extendtext']!=null){
+					$data = array('insert_text'=>$values['extendtext']);
+					Tdxio_Log::info($data,'valori form');                
+
+					$result=$model->update($data,$id);
+					if($result>0){
+						$histModel = new Model_History();
+						$histModel->addHistory($id,1);  
+						$this->view->response=true;
+						$this->view->addedText = $values['extendtext'];
+						$this->view->message = array('code'=>0,'text'=> __("OK"));
+
+					}else{
+						$this->view->response = false;
+						$this->view->addedText = '';    
+						$this->view->message = array('code' => 1,'text'=>__("DB not modified"));
+					}
+				}else{
+					$this->view->response = false;
+					$this->view->addedText = '';    
+					$this->view->message = array('code' => 3,'text'=>__("Invalid form. Please fill all the required (*) fields."));
+				}
+            }
         }
     }
     
@@ -279,13 +434,15 @@ class WorkController extends Tdxio_Controller_Abstract
                 if ($form->isValid($request->getPost())){
                     $model = $this->_getModel();
                     $data=$form->getValues();
-                                    
+                    Tdxio_Log::info($data,'old extend form values');
                     unset($data['submit']);
                     
-                    $newId=$model->update($data,$id);
-                    $histModel = new Model_History();
-                    $histModel->addHistory($id,1);  
-                    return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
+                    $result=$model->update($data,$id);
+                    if($result>0){
+                        $histModel = new Model_History();
+                        $histModel->addHistory($id,1);  
+                    }
+                    return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));                        
                 }
             }
             $this->view->form=$form;
@@ -313,9 +470,11 @@ class WorkController extends Tdxio_Controller_Abstract
                         
                         $data=$form->getValues();
                         Tdxio_Log::info($data,'dati form work edit');
-                        $newId=$model->update($data,$id); 
-                        $histModel = new Model_History();        
-                        $histModel->addHistory($id,0);               
+                        $result=$model->update($data,$id); 
+                        if($result>0){
+							$histModel = new Model_History();        
+							$histModel->addHistory($id,0);               
+						}
                     }
                 }
                 return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
@@ -327,6 +486,35 @@ class WorkController extends Tdxio_Controller_Abstract
         }
         
     }
+    
+    public function metaeditAction(){
+		$request = $this->getRequest();
+        $id=$request->getParam('id');
+        $model=$this->_getModel();
+		$data = array($request->getParam('elName')=>$request->getParam('value'));
+/*		$author = $request->getParam('author');
+		$title = $request->getParam('title');
+		$translator = $request->getParam('translator');
+	
+		if(!is_null($author)){$data['author']=$author;$newText = $author;}
+		if(!is_null($title))
+			$data['title']=$title;
+		*/
+		Tdxio_Log::info($data,'datata');
+		$result=$model->update($data,$id); 
+		if($result>0){
+			$histModel = new Model_History();        
+			$histModel->addHistory($id,0);  
+			$this->view->response=true;
+			$this->view->newText = $request->getParam('value');
+			$this->view->message = array('code' => 0, 'text' => __("OK"));
+
+		}else{
+			$this->view->response = false;
+			$this->view->newText = null;    
+			$this->view->message = array('code' => 1,'text'=>__("DB not modified"));
+		}
+	}
 
     public function manageAction(){
                 
@@ -395,7 +583,7 @@ class WorkController extends Tdxio_Controller_Abstract
                         Tdxio_Log::info($data,"manage data");                    
                         unset($data['submit']);
                         $model->update($data,$id);
-                        return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$id));
+                        return $this->_helper->redirector->gotoSimple('newread',null,null, array('id'=>$id));
                     }               
                 }
             }
@@ -437,7 +625,32 @@ class WorkController extends Tdxio_Controller_Abstract
         
         if( is_null($orig_id) ){ $this->_redirect($_SERVER['HTTP_REFERER']); }
         elseif( $orig_id<0 ){ return $this->_helper->redirector('index'); }
-        else{ return $this->_helper->redirector->gotoSimple('read',null,null, array('id'=>$orig_id)); }        
+        else{ return $this->_helper->redirector->gotoSimple('newread',null,null, array('id'=>$orig_id)); }        
+    }
+    
+    public function ajaxdeleteAction(){
+        $request = $this->getRequest();
+        $id= $request->getParam('id');
+        $model=$this->_getModel();
+        if(!($model->hasTranslations($id))){$orig_id=$model->delete($id);}
+        
+        if( is_null($id) ){ 	
+			$this->view->response = false;
+			$this->view->newId = $id;   
+			$this->view->values = null;  
+			$this->view->message = array('code' => 1,'text'=>__("Invalid work id.No works deleted."));
+		}
+        elseif( $id<0 ){ 
+			$this->view->response = true;
+			$this->view->newId = $id;   
+			$this->view->values = null;  
+			$this->view->message = array('code' => 0,'text'=>__("Original Work deleted")); }
+        else{ 
+			$this->view->response = true;
+			$this->view->newId = $id;   
+			$this->view->values = null;  
+			$this->view->message = array('code' => 0,'text'=>__("Translation deleted")); }    
+			$this->_helper->viewRenderer('createtr');    
     }
 
     public function historyAction(){
@@ -476,22 +689,22 @@ class WorkController extends Tdxio_Controller_Abstract
         $row['title']=($row['title']=='')?'<i>No Title</i>':$row['title'];
             
         if($row['message']==3 or $row['message']==4){
-            $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">'.$row['params']['tag'].'</a>';
-            $taggedText = '<a href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $tag = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">'.$row['params']['tag'].'</a>';
+            $taggedText = '<a href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $infoRow['phrase'] =  $this->codeList($row['message'],array('tag'=>$tag,'genre'=>$row['params']['genre'],'taggedText'=>$taggedText,'user'=>$row['user']));
         }elseif($row['message']==0 or $row['message']==1){
-            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $infoRow['phrase'] =$this->codeList($row['message'],array('title'=>$title,'user'=>$row['user']));
         }elseif($model->isTranslationWork($row['work_id'])){
-            $title = '<a class="news_link" href="'.$this->view->makeUrl('/translation/read/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['work_id']).'">"'.$row['title'].'"</a>';
             $trModel = new Model_Translation();
             $origWork = $trModel->fetchTranslationOriginalWork($row['work_id']);
             $tempTitle=($origWork['title']=='')?'<i>No Title</i>':$origWork['title'];
-            $origtitle = '<a href="'.$this->view->makeUrl('/work/read/id/'.$origWork['id']).'">"'.$tempTitle.'"</a>';
+            $origtitle = '<a href="'.$this->view->makeUrl('/work/newread/id/'.$origWork['id']).'">"'.$tempTitle.'"</a>';
             $newCode = ($row['message']==2)?2:6;
             $infoRow['phrase'] = $this->codeList($newCode,array('title'=>$title,'origtitle'=>$origtitle,'user'=>$row['user'])); 
         }elseif($row['message']==5){
-            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/read/id/'.$row['id']).'">"'.$row['title'].'"</a>';
+            $title = '<a class="news_link" href="'.$this->view->makeUrl('/work/newread/id/'.$row['id']).'">"'.$row['title'].'"</a>';
             $infoRow['phrase'] = $this->codeList($row['message'],array('title'=>$title,'user'=>$row['creator']));
         }else{$infoRow['phrase'] = 'il controllo perde alcuni casi';}
         
@@ -534,11 +747,47 @@ class WorkController extends Tdxio_Controller_Abstract
         return true;
     }*/
     
+    public function canAction(){
+		$model = $this->_getModel();
+		$request = $this->getRequest();
+		$privilege = $request->getParam('privilege');
+		$id = $request->getParam('id');
+		$user = Tdxio_Auth::getUserName();
+		$can = $model->isAllowed($privilege,$id);
+		$this->view->data = array('response'=>$can, 'message'=>array('code'=>$can?0:3,'text'=>$can?__("OK"):__("Error")));
+		$this->_helper->viewRenderer('jsonresponse');		
+	}
+    
+    
+  public function getuserAction(){
+		$request=$this->getRequest(); 
+		$id=$request->getParam('id'); 
+		$user = Tdxio_Auth::getUserName();
+		Tdxio_Log::info($user,'userr');
+		$this->view->data = array('response'=>true,'message'=>array('code'=>0,'text'=>__("OK")),'user'=>$user);
+	}
+    
+    
+    public function transliterateAction(){
+		$request = $this->getRequest();
+		$text = $request->getParam('text');
+		$srcLang = $request->getParam('srcLang');
+		$destLang = $request->getParam('destLang');
+		Tdxio_Log::info($request,'tuttok');
+		try{$transliterator = new Tdxio_Filter_Transliteration();}catch(Zend_Exception $e){Tdxio_Log::info('non crea il filtro');}
+		Tdxio_Log::info('dopo creazione filter');
+		if($srcLang!=$destLang)
+			$tlText = $transliterator->filter(array('text'=>$text,'srcLang'=>$srcLang,'destLang'=>$destLang));
+		else
+			$tlText = $text;
+		$this->view->data = array('response'=>true, 'message'=>array('code'=>0,'text'=>__("OK")),'transliteratedText'=>$tlText);
+		$this->_helper->viewRenderer('jsonresponse');		
+	}
     
     public function getRule($request){
         $action = $request->action;
         $resource_id = $request->getParam('id');
-        
+        $visibility = null;
         $rule = 'noAction';
         Tdxio_Log::info($request,'request');
         Tdxio_Log::info($resource_id,'resource_id');
@@ -558,7 +807,11 @@ class WorkController extends Tdxio_Controller_Abstract
                 if($request->isPost()){
                     $rule = array('privilege'=> 'create','work_id' => -1 );       
                 }else{$rule = array('privilege'=> 'create','work_id' => -1, 'notAllowed'=>true);} 
-                break; 
+                break;
+			//case 'getuser': $rule = array('privilege'=> 'translate','work_id' => $resource_id);break;
+			case 'createtr':
+				$rule = array('privilege'=> 'translate','work_id' => $resource_id);
+            break;
             case 'translate':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'translate','work_id' => $resource_id);
@@ -568,7 +821,16 @@ class WorkController extends Tdxio_Controller_Abstract
             
             case 'history':$rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility);   
                 break;
-            case 'ajaxread':
+            case 'can':$rule = array('privilege'=> $request->getParam('privilege'),'work_id' => $resource_id,'visibility'=>$visibility);   
+            break;  
+            case 'ajaxread':  
+				$trId = $request->getParam('trId');
+				if($trId!=null && $trId!='' && $this->_getModel()->entryExists(array('id'=>$trId))){					
+                    $resource_id = $trId;
+                    $visibility=$this->_getModel()->getAttribute($trId,'visibility');
+				}
+                $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit','translate_privilege'=> 'translate');      
+                break;
             case 'newread':
             case 'read':
                 if($request->isPost()){
@@ -576,14 +838,18 @@ class WorkController extends Tdxio_Controller_Abstract
                 }else{
                         $rule = array('privilege'=> 'read','work_id' => $resource_id,'visibility'=>$visibility,'edit_privilege'=> 'edit','translate_privilege'=> 'translate');      
                 }break; 
+            case 'getform': $rule = array('privilege'=> 'tag','work_id' => $resource_id);break;            
+            case 'getvalue':
+            case 'metaedit': $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);break; 
             case 'edit':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 }else{$rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility,'notAllowed'=>true);} 
                 break;
             case 'my': $rule = array('privilege'=> 'translate','work_id'=>-1); //work_id = -1 is to ensure it does not count privileges with work_id !=null
-                break;                   
-            case 'extend':
+                break;
+            case 'extend': 
+            case 'ajaxextend':
                 if($request->isPost()){
                     $rule = array('privilege'=> 'edit','work_id' => $resource_id,'visibility'=>$visibility);        
                 }else{
@@ -596,6 +862,7 @@ class WorkController extends Tdxio_Controller_Abstract
                     }else{
                         $rule = array('privilege'=> 'manage','work_id' => $resource_id, 'visibility'=>$visibility, 'notAllowed'=>true); 
                     } break;  
+            case 'ajaxdelete':
             case 'delete':
                 $rule = array('privilege'=> 'delete','work_id' => $resource_id,'visibility'=>$visibility);      
                 break;
