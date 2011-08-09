@@ -49,7 +49,7 @@ if (typeof console == "undefined") console={log:function(){}};
 							else alert(rdata.message.text);
 						}
                     },
-                    error:function() {alert("error storing the tag");},
+                    error:function() {alert("error storing the tag");}
                 }); 
 			}else{
                 alert("No tag inserted!");
@@ -76,7 +76,7 @@ if (typeof console == "undefined") console={log:function(){}};
 							else alert(rdata.message.code);
 						}
                     },
-                    error:function() {alert("error storing the tag");},
+                    error:function() {alert("error storing the tag");}
                 });
             }else{
                 alert("No tag inserted!");

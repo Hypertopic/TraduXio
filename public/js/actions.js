@@ -397,7 +397,7 @@ var state;
 			},
 			error:function() {
 				alert("Error in the saving process");
-			},
+			}
 		});
 		
 	};
@@ -411,7 +411,7 @@ var state;
 			success:function(rdata,status){
 			},
 			error:function() {
-			},
+			}
 		});
 	};
     
