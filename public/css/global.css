@@ -237,7 +237,11 @@ div#results table {
     border-collapse:collapse;
 }
 
-div.tutorial-text {
+ol.tutorial-text{
+list-style:decimal inside;
+}
+
+li.question {
 background-color:#FFFFFF;
 border-color:#DEDEDE;
 border:3px solid #DEDEDE;
@@ -817,6 +821,7 @@ font-style:bold;
 
 .answer{
 padding:10px 20px;
+font-size:0.8em;
 }
 
 div#traduxio_logo{
