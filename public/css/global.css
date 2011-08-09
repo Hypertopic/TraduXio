@@ -138,8 +138,8 @@ display:inline;
 
 div.left-section {
 background-color:#585858;
+border-width:2px 0px 2px 2px;
 border-color: #ffffff;
-border:2px 0px 2px 2px;
 border-style:solid;
 color:#FFFFFF;
 font-size:120%;
@@ -247,6 +247,7 @@ border-color:#DEDEDE;
 border:3px solid #DEDEDE;
 padding-left:20px;
 margin:15px 0px;
+font-size:1.3em;
 }
 div.tutorial {
 margin:30px auto;
@@ -812,11 +813,6 @@ font-weight:bold;
 .tutorial-text{
 list-style:decimal;
 list-style-position:inside;
-}
-
-.question{
-font-size:1.3em;
-font-style:bold;
 }
 
 .answer{
