@@ -28,7 +28,7 @@
                     <li><a href="<?php echo $this->makeUrl('/translation/concord'); ?>"><?php echo __('Concordance'); ?></a></li>                
                 </ul>
      
-                <form id="concord-query" action="<?php echo $this->makeUrl('/translation/concord'); ?>" method="post" target="concord" onsubmit="getConcord()">
+                <form id="concord-query" action="<?php echo $this->makeUrl('/translation/concord'); ?>" method="post" target="concord" onsubmit="tdxio.textSearch.getConcord()">
                 <input type="hidden" name="srclang" />
 				<input type="hidden" name="destlang" />
 				<input type="hidden" name="style" value="pop"/>

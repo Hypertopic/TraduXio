@@ -653,6 +653,10 @@ margin:40px 0 0;
 text-align:left;
 position:relative;
 }
+#extend-form input[type="submit"],#extend-form input[type="reset"]{
+margin:10px 0 0 20px;
+float:right;
+}
 
 #extend-form textarea{
 width:100%;
