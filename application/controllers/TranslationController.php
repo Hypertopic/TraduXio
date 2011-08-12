@@ -20,7 +20,7 @@ class TranslationController extends Tdxio_Controller_Abstract
 		$model= $this->_getModel();
         $translationId=$request->getParam('id'); 
         if(!$work=$model->fetchTranslationWork($translationId,false)){
-            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$s does not exist.", $translationId)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }       
         
         if ($request->isPost()) {
@@ -202,7 +202,7 @@ class TranslationController extends Tdxio_Controller_Abstract
         $model=$this->_getModel();
         
         if ((!$work=$workModel->fetchWork($translationId))||!($workModel->isTranslationWork($translationId))) {
-            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Translation %1\$s does not exist.", $translationId)));
+            $this->view->data = array('response'=>false,'message'=>array('code'=>1,'text'=>__("Translation %1\$d does not exist.", $translationId)));
             throw new Zend_Controller_Action_Exception(sprintf(__("Translation %1\$d does not exist.", $translationId)), 404);
         }
                 

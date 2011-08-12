@@ -109,7 +109,7 @@ class WorkController extends Tdxio_Controller_Abstract
         
         if (!$id || !($work=$model->fetchOriginalWork($id))) {
             
-            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it.", $id)), 404);
+            throw new Zend_Controller_Action_Exception(sprintf(__("Work %1\$d does not exist or you don't have the rights to see it ", $id)), 404);
         }   
         
         if(empty($work['Sentences'])){

@@ -142,7 +142,7 @@ msgstr "Erreur de l'application"
 
 #: forms/Register.php:53
 msgid "Name"
-msgstr "Name"
+msgstr "Prénom"
 
 #: forms/Register.php:67
 msgid "Surname"
@@ -154,7 +154,7 @@ msgstr "Adresse de courriel"
 
 #: forms/Register.php:93
 msgid "Your interest in TraduXio"
-msgstr "Your interest in TraduXio"
+msgstr "Votre intérêt pour TraduXio"
 
 #: forms/Register.php:103
 msgid "Anti-spam system"
@@ -288,7 +288,7 @@ msgstr "Sujet"
 
 #: forms/Feedback.php:51
 msgid "Your email address"
-msgstr "Votre adresse email"
+msgstr "Votre adresse de courrier électronique (optionnel)"
 
 #: forms/Feedback.php:69
 msgid "Your message"
@@ -2380,7 +2380,7 @@ msgstr "Créer une traduction de"
 
 #: views/scripts/work/history.phtml:32
 msgid "PAGETITLE_history of modifications"
-msgstr "historique des modifications"
+msgstr "Historique des modifications"
 
 #: views/scripts/work/edit.phtml:6
 msgid "PAGETITLE_Edit text"
@@ -2408,7 +2408,7 @@ msgstr "Recherche"
 
 #: views/scripts/translation/concord.phtml:20
 msgid "PAGETITLE_Search"
-msgstr "Concordancier"
+msgstr "Concordance"
 
 #: views/scripts/translation/edit.phtml:205
 msgid "PAGETITLE_Edit translation"
@@ -2522,7 +2522,7 @@ msgstr "Droits d'auteur"
 
 #: views/scripts/index/about.phtml:116
 msgid "PAGETITLE_About Traduxio"
-msgstr "A propos de Traduxio"
+msgstr "A propos de TraduXio"
 
 #: views/scripts/index/faq.phtml:7
 #: views/scripts/index/faq.phtml:120
@@ -2664,7 +2664,7 @@ msgstr "Pour s'inscrire à TraduXio il faut être invités par un membre de la c
 
 #: views/scripts/index/tutorial.phtml:139
 msgid "PAGETITLE_Tutorial"
-msgstr "Comment utiliser Traduxio"
+msgstr "Comment utiliser TraduXio"
 
 #~ msgid "indexlogoEN"
 #~ msgstr "indexlogoFR"
