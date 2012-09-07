@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title>{{title}} – {{creator}} – Trad. {{current}}</title>
+</head>
+<body>
+  <table>
+    {{#units}}
+    <tr>
+      <td>
+        {{#sources}}{{{.}}}<br/>{{/sources}}
+      </td>
+      <td>{{{target}}}</td>
+    </tr>
+    {{/units}}
+  </table>
+  <p>
+    Autres traductions :
+    {{#others}}<a href="?translation={{{.}}}">{{.}}</a> {{/others}}
+  </p>
+</body>
+</html>
