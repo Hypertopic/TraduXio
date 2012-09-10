@@ -1,0 +1,19 @@
+<html>
+<body>
+<ul>
+  {{#languages}}
+    <li>{{code}}</li>
+    <ul>
+      {{#authors}}
+        <li>{{name}}</li>
+        <ul>
+          {{#works}}
+            <li><a href="{{id}}">{{name}}</a></li>
+          {{/works}}
+        </ul>
+      {{/authors}}
+    </ul>
+  {{/languages}}
+</ul>
+</body>
+</html>

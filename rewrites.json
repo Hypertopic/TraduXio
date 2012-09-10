@@ -1,0 +1,8 @@
+[{
+  "from": ":id",
+  "to": "_show/work/:id",
+  "method": "GET"
+},{
+  "from": "",
+  "to": "_list/works/works"
+}]
