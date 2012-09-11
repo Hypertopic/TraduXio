@@ -13,6 +13,7 @@ function(o, req) {
   var data = {
     title: o.title,
     creator: o.creator,
+    language: o.language,
     current: CURRENT,
     others: [],
     units: []

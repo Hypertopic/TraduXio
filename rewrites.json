@@ -1,4 +1,13 @@
 [{
+  "from": "concordance",
+  "to": "_list/concordance/concordance",
+  "query": {
+    "include_docs": "true"
+  }
+},{
+  "from": "script/:file", 
+  "to": "../../../_utils/script/:file"
+},{
   "from": ":id",
   "to": "_show/work/:id",
   "method": "GET"

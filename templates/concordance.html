@@ -1,0 +1,25 @@
+<html>
+<body>
+<table>
+  {{#occurrences}}
+    <tr>
+      <td>{{{context}}}</td>
+      <td>{{{mapping}}}</td>
+      <td>
+        {{#original}} 
+          {{creator}} <br/>
+          {{title}} <br/>
+          {{#publisher}}{{publisher}}<br/>{{/publisher}}
+          {{#date}}{{date}}<br/>{{/date}}
+        {{/original}}
+        {{#translation}}
+          Trad. {{creator}} <br/>
+          {{#publisher}}{{publisher}}<br/>{{/publisher}}
+          {{#date}}{{date}}<br/>{{/date}}
+        {{/translation}}
+      </td>
+    </tr>
+  {{/occurrences}}
+</table>
+</body>
+</html>

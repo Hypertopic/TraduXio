@@ -1,6 +1,17 @@
 <html>
 <head>
   <title>{{title}} – {{creator}} – Trad. {{current}}</title>
+  <script src="script/jquery.js"></script>  
+  <script type="text/javascript">
+
+  function search() {
+    var q = $('#query').val().toLowerCase();
+    window.location.href = 'concordance?startkey=["{{language}}","' + q 
+      + '"]&endkey=["{{language}}","' + q 
+      + '\\u9999"]&query=' + q ;
+  }
+
+  </script>
 </head>
 <body>
   <table>
@@ -17,5 +28,9 @@
     Autres traductions :
     {{#others}}<a href="?translation={{{.}}}">{{.}}</a> {{/others}}
   </p>
+  <form>
+    <input id="query" type="text" />
+    <button type="button" onclick="search()">Rechercher</button>  
+  </form>
 </body>
 </html>
