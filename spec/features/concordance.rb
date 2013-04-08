@@ -1,4 +1,4 @@
-require 'spec_helper'
+ï»¿require 'spec_helper'
 
 feature 'Do a concordance' do
 
@@ -6,17 +6,17 @@ feature 'Do a concordance' do
 
   background do
     visit '/work/index'
-    click_on 'Déposer un nouveau texte' 
+    click_on 'DÃ©poser un nouveau texte' 
     fill_in 'Titre', :with => $a_title
     fill_in 'Auteur', :with => 'TestAuteur'
     fill_in 'Contenu du Texte', :with => 'Bla bla bla bla test'
-    select 'Langue Original', :from => 'Français'    
-    click_on 'Déposer'
-	click_on 'Créer une traduction'
+    select 'Langue Original', :from => 'FranÃ§ais'    
+    click_on 'DÃ©poser'
+	click_on 'CrÃ©er une traduction'
 	fill_in '*Translator', :with => 'TestTraducteur'
 	fill_in '*Titre', :with => $a_title + ' (traduction)'
 	select '*Translate to', :from => 'Anglais'
-	click_on 'Déposer'
+	click_on 'DÃ©poser'
 	fill_in 'Bloc 1', :with => 'Bla bla bla bla apple'
 	visit '/login/logout'
   end
