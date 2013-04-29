@@ -17,3 +17,7 @@ end
 def prefer_language(language)
   page.driver.header 'Accept-Language', language
 end
+
+def in_bold()
+  page.all('b', :visible => "true")
+end
