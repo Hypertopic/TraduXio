@@ -2,32 +2,32 @@ require 'spec_helper'
 
 feature 'Search for a concordance' do
 
-  #$regular_expression = '"la petite maison" OR "barricade ou démolition" '
-  #$title = 'Le bac'
-  #$title2 = 'Amandine ou les deux jardins'
-  $expression = 'petit'
-
-  background do
-  visit '/'
-    click_on 'Concordance' 
-  end
-
-  #scenario 'based on a regular expression' do
-    #fill_in 'expression', :with => $regular_expression   
-    #click_on 'Recherche'
-	#page.should have_content $title
-	#page.should_not have_content $title2
-  #end
-  
-  scenario 'based on an expression' do
-	fill_in 'expression', :with => $word
-	click_on 'Recherche'
-	each in_bold().should equals $word
+	scenario 'Research a valid sequence of words' do
+		visit 'http://traduxio.test.hypertopic.org'
+		click_on 'The lamp (Fungi from Yuggoth, 6)'
+		fill_in 'Rechercher', :with => 'the ancient oil'
+		click_on 'Rechercher'
+		in_bold() should_equals 'the ancient oil'
+		page.should have_content 'Trad. François Truchaud'
+		page.should have_content 'Trad. Aurélien Bénel'
+	end
 	
-	#page.should have_content 'pauvre petit bébé'
-	#page.should have_content 'la petite maison'
-	#page.should have_content 'quatre petits y étaient'
-	#page.should have_content 'mes petites amies'
-  end
+	scenario 'Research an invalid sequence of words' do
+		visit 'http://traduxio.test.hypertopic.org'
+		click_on 'The lamp (Fungi from Yuggoth, 6)'
+		fill_in 'Rechercher', :with => 'zdfghjkl'
+		click_on 'Rechercher'
+		page.should_not have_content 'Trad. François Truchaud'
+		page.should_not have_content 'Trad. Aurélien Bénel'
+	end
+	
+	scenario 'Research a sequence of words in the wrong order' do
+		visit 'http://traduxio.test.hypertopic.org'
+		click_on 'The lamp (Fungi from Yuggoth, 6)'
+		fill_in 'Rechercher', :with => 'ancient the'
+		click_on 'Rechercher'
+		page.should_not have_content 'Trad. François Truchaud'
+		page.should_not have_content 'Trad. Aurélien Bénel'
+	end
 
 end
