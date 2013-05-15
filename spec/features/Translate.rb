@@ -11,7 +11,7 @@ feature 'Translation' do
           page.should have_traductor'Martin Dupont'
           fill_in 'blocs'
           click_on 'link'
-          page.should have_blocs 'une fois, sur le minuit lugubre ...  Sur maint précieux et curieux volume ...'
+          page.should have_bloc 'une fois, sur le minuit lugubre ...  Sur maint précieux et curieux volume ...'
           page.should have_button 'cut'
           click_on 'blocs'
           edit 'blocs'
