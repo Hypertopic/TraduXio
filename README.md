@@ -8,7 +8,7 @@ $ sudo apt-get install curl
 $ sudo apt-get install zlib1g-dev libreadline-dev libssl-dev libxml2-dev
 ```
 
-### Ruby installation vith RVM (Ruby version manager)
+### Ruby installation with RVM (Ruby version manager)
 
 ```bash
 $ bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
@@ -38,6 +38,16 @@ RubyGems is a package manager for the Ruby programming language that provides a 
 ```bash
 $ sudo apt-get install rubygems
 ```
+
+## Ruby environment installation on Windows :
+
+Download 'RubyInstaller' from 
+http://rubyforge.org/frs/download.php/76955/rubyinstaller-2.0.0-p195.exe
+and istall it.
+
+Start Command Prompt with Ruby from
+C:\Windows\System32\cmd.exe /E:ON /K <install path>\bin\setrbvars.bat
+
 
 ### Rspec installation
 
