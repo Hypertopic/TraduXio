@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 feature 'Translation' do
-    $title = 'The Raven'
-    $author = 'Edgar Allan Poe'
-
 
     background do
         visit '/'
