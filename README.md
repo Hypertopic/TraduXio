@@ -46,10 +46,10 @@ http://rubyforge.org/frs/download.php/76955/rubyinstaller-2.0.0-p195.exe
 and istall it.
 
 Start Command Prompt with Ruby from
-C:\Windows\System32\cmd.exe /E:ON /K <install path>\bin\setrbvars.bat
+C:\Windows\System32\cmd.exe /E:ON /K 'install path'\bin\setrbvars.bat
 
 
-### Rspec installation
+## Rspec installation
 
 ```bash
 gem install rspec
