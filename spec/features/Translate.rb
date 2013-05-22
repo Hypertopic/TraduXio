@@ -42,6 +42,6 @@ feature 'Translation' do
           page.should have_field 'content2' , :with => 'Sur maint précieux et curieux volume d une doctrine oubliée'
           
           page.should have_button 'link_fields'
-    end
+    end 
 
 end
