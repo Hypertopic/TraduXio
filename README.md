@@ -44,7 +44,7 @@ $ sudo apt-get install rubygems
 Download 'RubyInstaller' from 
 http://rubyforge.org/frs/download.php/76955/rubyinstaller-2.0.0-p195.exe.
 
-And istall it.
+And install it.
 
 Start Command Prompt with Ruby from
 C:\Windows\System32\cmd.exe /E:ON /K C:\Ruby200\bin\setrbvars.bat
