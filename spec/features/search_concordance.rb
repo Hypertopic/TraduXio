@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 feature 'Search for a concordance' do
 
@@ -7,7 +7,7 @@ feature 'Search for a concordance' do
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'Rechercher', :with => 'the ancient oil'
 		click_on 'Rechercher'
-		in_bold() should_equals 'the ancient oil'
+		in_bold().should equal 'the ancient oil'
 		page.should have_content 'Trad. François Truchaud'
 		page.should have_content 'Trad. Aurélien Bénel'
 	end
@@ -26,7 +26,7 @@ feature 'Search for a concordance' do
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'Rechercher', :with => 'anc'
 		click_on 'Rechercher'
-		in_bold() should_equals 'anc'
+		in_bold().should equal 'anc'
 		page.should have_content 'Trad. François Truchaud'
 		page.should have_content 'Trad. Aurélien Bénel'
 	end

@@ -39,16 +39,14 @@ RubyGems is a package manager for the Ruby programming language that provides a 
 $ sudo apt-get install rubygems
 ```
 
-## Ruby environment installation on Windows :
+## Ruby environment installation on Windows
 
-Download 'RubyInstaller' from 
-http://rubyforge.org/frs/download.php/76955/rubyinstaller-2.0.0-p195.exe.
+Download 'RubyInstaller' from http://rubyinstaller.org/downloads/.
+('Ruby 2.0.0-p195' or 'Ruby 2.0.0-p195 (x64)' depending on your Windows version)
 
-And install it.
+Install 'RubyInstaller'.
 
-Start Command Prompt with Ruby from
-C:\Windows\System32\cmd.exe /E:ON /K C:\Ruby200\bin\setrbvars.bat
-
+Run the file 'setrbvars.bat' in 'bin' repertory of Ruby. (C:\Ruby200\bin\setrvars.bat)
 
 ## Rspec installation
 
@@ -99,3 +97,18 @@ You should see :
 Finished in 0.00059 seconds
 1 example, 0 failures
 ```
+
+## Capybara webkit installation
+
+```bash
+gem install capybara-webkit
+```
+
+If you have an error...You have to install Ruby Development Kit, Qt, nokogiri, libxml2, ...
+
+## Ruby Development Kit
+
+Download 'Ruby Development Kit' from http://rubyinstaller.org/downloads/.
+('DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe' or 'DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe' depending on your Windows version)
+
+Extract the 'Development Kit' and place it into a permanent directory (for example in Ruby directory).
