@@ -1,4 +1,4 @@
-require 'spec_helper'
+﻿require_relative '../spec_helper'
 
 feature 'Translation' do
 
@@ -7,7 +7,7 @@ feature 'Translation' do
         click_on '+'
         fill_in 'title', :with => 'The Raven'
         fill_in 'author', :with => 'Edgar Allan Poe'
-        fill_in 'content1' :with => 'Once upon a midnight dreary, while I pondered, weak and weary,'
+        fill_in 'content1', :with => 'Once upon a midnight dreary, while I pondered, weak and weary,'
         fill_in 'content2', :with => 'Over many a quaint and curious volume of forgotten lore'
         click_on 'Enregistrer'
     end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+﻿require_relative '../spec_helper'
 
 feature 'Droit d''auteurs' do
 
@@ -10,7 +10,7 @@ feature 'Droit d''auteurs' do
 		  page.should have_link 'The lamp (Fungi from Yuggoth, 6)'
 		  click_on 'The lamp (Fungi from Yuggoth, 6)'
 		  
-		  /** LOADING: REDIRECTING TO THE TEXT PAGE **/
+		  #/** LOADING: REDIRECTING TO THE TEXT PAGE **/
 		  
 		  page should have_content 'We found the lamp inside those hollow cliffs
 									Whose chiseled sign no priest in Thebes could read

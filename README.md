@@ -104,15 +104,5 @@ Finished in 0.00059 seconds
 gem install capybara-webkit
 ```
 
-If you have an error...You have to install Ruby Development Kit.
-Then, you need native libraries : Qt, nokogiri (libxml2...), ...
-
-If you have Windows 64 bits, it seems that it's actually impossible to install nokogiri (dependencies problem).
-See https://github.com/sparklemotion/nokogiri/issues/864 for more information.
-
-## Ruby Development Kit
-
-Download 'Ruby Development Kit' from http://rubyinstaller.org/downloads/.
-('DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe' or 'DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe' depending on your Windows version)
-
-Extract the 'Development Kit' and place it into a permanent directory (for example in Ruby directory).
+If you have an error...You have to install Ruby Development Kit. Then, you need native libraries : Qt, nokogiri (libxml2...), ...
+The process is complex with Windows 64 bits : see https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit for more information.

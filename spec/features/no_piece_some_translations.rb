@@ -1,9 +1,9 @@
-###
+﻿###
 # This acceptance test is based on the V2.0 prototype of Traduxio
 # (http://traduxio.test.hypertopic.org/)
 ###
 
-require 'spec_helper'
+require_relative '../spec_helper'
 
 feature 'No original piece but translations' do
   scenario 'navigate and compare translation' do
