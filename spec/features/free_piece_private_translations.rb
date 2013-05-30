@@ -3,7 +3,7 @@
 # (http://traduxio.test.hypertopic.org/)
 ###
 
-require_relative '../spec_helper'
+require '../spec_helper'
 
 feature 'Free piece, private transaltions' do
   scenario 'navigate and compare translation' do

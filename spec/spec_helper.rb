@@ -2,7 +2,8 @@
 require 'capybara/webkit'
 
 Capybara.run_server = false
-Capybara.default_driver = :webkit #:selenium
+Capybara.default_driver = :webkit
+Capybara.javascript_driver = :webkit
 Capybara.app_host = 'http://traduxio.test.hypertopic.org/'
 
 def a_string()

@@ -6,7 +6,7 @@
 # - Mettre une licence
 # - Accéder à la traduction depuis un autre compte
 
-require_relative '../spec_helper'
+require '../spec_helper'
 
 feature 'Recherche une oeuvre' do
 	$title = 'Germinal'
