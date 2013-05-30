@@ -1,11 +1,11 @@
-###
+﻿###
 # This acceptance test is based on the V2.0 prototype of Traduxio 
 # (http://traduxio.test.hypertopic.org/)
 # It will be possible to display more than two translation at the same time in the V2.1 prototype. 
 # This test should be updated in order to validate this new feature.   
 ###
 
-require 'spec_helper'
+require_relative '../spec_helper'
 feature 'Navigate and compare translation' do
 	scenario 'navigate and compare translation' do
 		visit '/'

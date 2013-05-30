@@ -1,4 +1,4 @@
-# - Rechercher une oeuvre (en francais)
+﻿# - Rechercher une oeuvre (en francais)
 # - Rechercher une traduction (en anglais) => il n'y en a pas , seulement italien
 # - Proposer une traduction (en anglais)
 # - Rechercher une concordance " l'embrun aveuglant des ténèbres " => aucun résultat
@@ -6,7 +6,7 @@
 # - Mettre une licence
 # - Accéder à la traduction depuis un autre compte
 
-require 'spec_helper'
+require_relative '../spec_helper'
 
 feature 'Recherche une oeuvre' do
 	$title = 'Germinal'
