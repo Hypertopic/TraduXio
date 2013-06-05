@@ -3,11 +3,11 @@
 # (http://traduxio.test.hypertopic.org/)
 ###
 
-require '../spec_helper'
+require 'spec_helper'
 
 feature 'Free piece, private transaltions' do
   scenario 'navigate and compare translation' do
-		visit '/'
+		visit '/works'
 		click_on 'en'
 		click_on 'Howard Phillips Lovecraft'
 		page.should have_content 'Pas de traduction'
