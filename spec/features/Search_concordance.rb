@@ -2,7 +2,7 @@
 
 feature 'Search for a concordance' do
 
-	scenario 'Research a valid sequence of words' do
+	scenario 'search a valid sequence of words' do
 		visit '/concordance'
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'query', :with => 'the ancient oil'
@@ -12,7 +12,7 @@ feature 'Search for a concordance' do
 		page.should have_content 'Trad. Aurélien Bénel'
 	end
 	
-	scenario 'Research a sequence of words in the wrong order' do
+	scenario 'search a sequence of words in the wrong order' do
 		visit '/concordance'
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'query', :with => 'ancient the'
@@ -21,7 +21,7 @@ feature 'Search for a concordance' do
 		page.should_not have_content 'Trad. Aurélien Bénel'
 	end
 	
-	scenario 'Research a beginning of a word' do
+	scenario 'search the beginning of a word' do
 		visit '/concordance'
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'query', :with => 'anc'
