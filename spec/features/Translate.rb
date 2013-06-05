@@ -13,7 +13,7 @@ feature 'Translation' do
     end
   
 
-    scenario 'Translation' do
+    scenario 'translation' do
 
           
           click_on '+'
