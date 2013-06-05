@@ -9,7 +9,7 @@ require 'spec_helper'
 
 feature 'Navigate and compare translation' do
 	scenario 'navigate and compare translation' do
-		visit '/'
+		visit '/works'
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		page.should have_content 'We found the lamp inside those hollow cliffs'
 		page.should have_content 'Nous trouvâmes la lampe à l\'intérieur de ces cavités rocheuses'
