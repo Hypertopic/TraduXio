@@ -1,9 +1,9 @@
-﻿require '../spec_helper'
+﻿require 'spec_helper'
 
-feature 'Droit d''auteurs' do
+feature 'copyright' do
 
-    scenario 'Oeuvre libre et traduction libre' do
-          visit '/'
+    scenario 'Free work et free translation' do
+          visit '/works'
           click_on 'en'
   	  page.should have_author 'Howard Phillips Lovecraft'
 		  click_on 'Howard Phillips Lovecraft'
