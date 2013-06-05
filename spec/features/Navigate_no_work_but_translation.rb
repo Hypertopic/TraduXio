@@ -3,11 +3,11 @@
 # (http://traduxio.test.hypertopic.org/)
 ###
 
-require '../spec_helper'
+require 'spec_helper'
 
-feature 'No original piece but translations' do
+feature 'No original work but translations' do
   scenario 'navigate and compare translation' do
-		visit '/'
+		visit '/works'
 		click_on 'gr'
 		click_on 'Jesus'
 		page.should have_content 'Pas d\'original'
