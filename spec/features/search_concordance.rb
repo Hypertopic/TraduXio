@@ -1,9 +1,9 @@
-﻿require '../spec_helper'
+﻿require 'spec_helper'
 
 feature 'Search for a concordance' do
 
 	scenario 'Research a valid sequence of words' do
-		visit '/'
+		visit '/concordance'
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'query', :with => 'the ancient oil'
 		click_on 'Rechercher'
@@ -13,7 +13,7 @@ feature 'Search for a concordance' do
 	end
 	
 	scenario 'Research a sequence of words in the wrong order' do
-		visit '/'
+		visit '/concordance'
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'query', :with => 'ancient the'
 		click_on 'Rechercher'
@@ -22,7 +22,7 @@ feature 'Search for a concordance' do
 	end
 	
 	scenario 'Research a beginning of a word' do
-		visit '/'
+		visit '/concordance'
 		click_on 'The lamp (Fungi from Yuggoth, 6)'
 		fill_in 'query', :with => 'anc'
 		click_on 'Rechercher'
