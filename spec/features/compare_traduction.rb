@@ -5,7 +5,7 @@
 # This test should be updated in order to validate this new feature.   
 ###
 
-require '../spec_helper'
+require 'spec_helper'
 
 feature 'Navigate and compare translation' do
 	scenario 'navigate and compare translation' do
