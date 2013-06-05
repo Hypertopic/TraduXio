@@ -1,9 +1,9 @@
-﻿require_relative '../spec_helper'
+require 'spec_helper'
 
 feature 'Translation' do
 
     background do
-        visit '/'
+        visit '/works'
         click_on '+'
         fill_in 'title', :with => 'The Raven'
         fill_in 'author', :with => 'Edgar Allan Poe'
