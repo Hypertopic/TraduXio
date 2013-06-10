@@ -1,6 +1,5 @@
 ﻿require 'capybara/rspec'
 require 'capybara/webkit'
-require 'capybara/rails'
 
 Capybara.run_server = false
 Capybara.default_driver = :webkit
@@ -15,6 +14,10 @@ def prefer_language(language)
 	page.driver.header 'Accept-Language', language
 end
 
-def in_bold()
-	page.all(:css, "b")
+def should_have_in_bold(text)
+	page.should have_css('b', :text => text)
+end
+
+def block(number)
+	page.all(:css, '.block').find(number)
 end
