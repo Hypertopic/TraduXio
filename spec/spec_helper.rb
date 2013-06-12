@@ -18,9 +18,29 @@ def should_have_in_bold(text)
 	page.should have_css('b', :text => text)
 end
 
-# find a element in the page having an ID of #blockX (X being a integer)
-# can be useful to find a block of text to translate or to get content from
-def block(number)
-	myId = "#block" + number.to_s
-	page.find(:css, myId)
+# finds the row'th element having the .row class within
+# the col'th element having the .col class
+#
+# <section id=translator>
+#   <div class=col>
+#     <p>not here !</p>
+#   </div>
+#   <div class=col>
+#     <div class=row>
+#       <p>not here either</p>
+#     </div>
+#     <div class=row>
+#       <a href=/win>im here !</a>
+#     </div>
+#   </div>
+# </section>
+#
+# => block(2, 2)
+#
+def block(col, row)
+  within('#translator') do
+    within(page.find(:xpath, ".//[@class='col']")[col]) do
+      return page.find(:xpath, ".//[@class='row']")[row]
+    end
+  end
 end
