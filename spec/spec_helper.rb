@@ -21,20 +21,22 @@ end
 # finds the row'th element having the .row class within
 # the col'th element having the .col class
 #
-# <div class=col>
-#   <p>not here !</p>
-# </div>
-# <div class=col>
-#   <div class=row>
-#     <p>not here either</p>
+# <div id=translator>
+#   <div class=col>
+#     <p>not here !</p>
 #   </div>
-#   <div class=row>
-#     <input name=foo />
+#   <div class=col>
+#     <div class=row>
+#       <p>not here either</p>
+#     </div>
+#     <div class=row>
+#       <input name=foo />
+#     </div>
 #   </div>
 # </div>
 #
 # => block(2, 2)
 #
 def block(col, row)
-  page.find(:xpath, "//*[@id='translations']/div[@class='col']["+col.to_s+"]/div[@class='row']["+row.to_s+"]/*")['name']
+  page.find(:xpath, "//*[@id='translator']/div[@class='col']["+col.to_s+"]/div[@class='row']["+row.to_s+"]/*")['name']
 end
