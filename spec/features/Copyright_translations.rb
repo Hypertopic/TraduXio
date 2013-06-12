@@ -35,9 +35,11 @@ feature 'Copyright translations' do
 	scenario 'Non-free work and free translation' do
 		visit '/works'
 		click_on 'fr'
+		page.should_not have_content 'NTM'
+		click_on 'Mes traductions'
 		click_on 'NTM'
 		click_on 'La fièvre'
-		page.should_not have_content 'Tout a débuté un matin quand à dix heures dix'
+		page.should have_content 'Tout a débuté un matin quand à dix heures dix'
 		page.should have_content 'Tudo começou uma manhã quando às dez e dez'
 	end
 
