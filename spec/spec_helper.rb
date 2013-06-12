@@ -18,6 +18,9 @@ def should_have_in_bold(text)
 	page.should have_css('b', :text => text)
 end
 
+# find a element in the page having an ID of #blockX (X being a integer)
+# can be useful to find a block of text to translate or to get content from
 def block(number)
-	page.all(:css, '.block').find(number)
+	myId = "#block" + number.to_s
+	page.find(:css, myId)
 end
