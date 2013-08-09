@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>{{title}} – {{creator}} – Trad. {{current}}</title>
+  <title>{{title}} – {{creator}}</title>
   <script src="script/jquery.js"></script>  
   <script type="text/javascript">
 
@@ -17,17 +17,12 @@
   <table>
     {{#units}}
     <tr>
-      <td>
-        {{#sources}}{{{.}}}<br/>{{/sources}}
-      </td>
-      <td>{{{target}}}</td>
+      {{#versions}}
+        <td>{{{.}}}</td>
+      {{/versions}}
     </tr>
     {{/units}}
   </table>
-  <p>
-    Autres traductions :
-    {{#others}}<a href="?translation={{{.}}}">{{.}}</a> {{/others}}
-  </p>
   <form>
     <input id="query" type="text" />
     <button type="button" onclick="search()">Rechercher</button>  
