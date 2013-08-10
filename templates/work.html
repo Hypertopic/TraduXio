@@ -6,7 +6,7 @@
 
   function search() {
     var q = $('#query').val().toLowerCase();
-    window.location.href = 'concordance?startkey=["{{language}}","' + q 
+    window.location.href = 'concordance?startkey=["{{work_language}}","' + q 
       + '"]&endkey=["{{language}}","' + q 
       + '\\u9999"]&query=' + q ;
   }

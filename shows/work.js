@@ -46,6 +46,7 @@ function(o, req) {
   var data = {
     work_title: o.title,
     work_creator: o.creator,
+    work_language: o.language,
     headers: [],
     units: []
   };
