@@ -4,16 +4,22 @@
   <script src="script/jquery.js"></script>  
   <script type="text/javascript">
 
-  function search() {
-    var q = $('#query').val().toLowerCase();
-    window.location.href = 'concordance?startkey=["{{work_language}}","' + q 
-      + '"]&endkey=["{{work_language}}","' + q 
-      + '\\u9999"]&query=' + q ;
-  }
+  $(document).ready(function() {
+    $("form").submit(function(event) { //TODO jQuery 2
+      event.preventDefault();
+      var q = $(this).find('#query').val().toLowerCase();
+      window.location.href = 'concordance?startkey=["{{work_language}}","' + q 
+        + '"]&endkey=["{{work_language}}","' + q 
+        + '\\u9999"]&query=' + q ;
+    });
+  });
 
   </script>
 </head>
 <body>
+  <form>
+    <input id="query" type="search" placeholder="Rechercher" />
+  </form>
   <h1>{{work_title}} – {{work_creator}}</h1>
   <table>
     <tr>
@@ -41,9 +47,5 @@
     </tr>
     {{/units}}
   </table>
-  <form>
-    <input id="query" type="text" />
-    <button type="button" onclick="search()">Rechercher</button>  
-  </form>
 </body>
 </html>
