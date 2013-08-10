@@ -68,7 +68,7 @@ function(o, req) {
       creator: "Trad. "+ t, //TODO i18n
       language: translation.language,
       date: translation.date,
-      creativeCommons: translation.creativeCommons 
+      creativeCommons: translation.creativeCommons
     });
   }
   var block = {next: 0};

@@ -22,7 +22,14 @@
           {{title}}<br/>
           {{work_creator}}<br/>
           {{language}} — {{creator}} {{date}}<br/>
-          {{creativeCommons}}
+          {{#creativeCommons}}
+            <a href="http://creativecommons.org/licenses/{{creativeCommons}}/3.0/fr">
+              <img src="http://i.creativecommons.org/l/{{creativeCommons}}/3.0/88x31.png"/>
+            </a>
+          {{/creativeCommons}}
+          {{^creativeCommons}}
+            Tous droits réservés.
+          {{/creativeCommons}}
         </th>
       {{/headers}}
     </tr>
