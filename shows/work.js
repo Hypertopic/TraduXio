@@ -44,17 +44,31 @@ function(o, req) {
   }
 
   var data = {
-    title: o.title,
-    creator: o.creator,
-    language: o.language,
+    work_title: o.title,
+    work_creator: o.creator,
+    headers: [],
     units: []
   };
   var texts = [];
   if (o.text) {
     texts.push(o.text);
+    data.headers.push({
+      title: o.title,
+      language: o.language,
+      date: o.date,
+      creativeCommons: o.creativeCommons
+    });
   }
-  for each (var t in o.translations) {
-    texts.push(t.text);
+  for (var t in o.translations) {
+    var translation = o.translations[t];
+    texts.push(translation.text);
+    data.headers.push({
+      title: translation.title,
+      creator: "Trad. "+ t, //TODO i18n
+      language: translation.language,
+      date: translation.date,
+      creativeCommons: translation.creativeCommons 
+    });
   }
   var block = {next: 0};
   do {

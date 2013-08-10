@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>{{title}} – {{creator}}</title>
+  <title>{{work_creator}} : {{work_title}} — TraduXio</title>
   <script src="script/jquery.js"></script>  
   <script type="text/javascript">
 
@@ -14,7 +14,18 @@
   </script>
 </head>
 <body>
+  <h1>{{work_title}} – {{work_creator}}</h1>
   <table>
+    <tr>
+      {{#headers}}
+        <th>
+          {{title}}<br/>
+          {{work_creator}}<br/>
+          {{language}} — {{creator}} {{date}}<br/>
+          {{creativeCommons}}
+        </th>
+      {{/headers}}
+    </tr>
     {{#units}}
     <tr>
       {{#versions}}
