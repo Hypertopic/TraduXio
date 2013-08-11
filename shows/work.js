@@ -14,8 +14,10 @@ function(o, req) {
   const NEW_LINE = /\n/g;
 
   function toHtml(string) {
-    return (string)
-      ? "<div>" + string.replace(NEW_LINE, "</div><div>") + "</div>" 
+    return (string!=null)
+      ? '<div class="unit"><div>'
+        + string.replace(NEW_LINE, "</div><div>")
+        + "</div></div>"
       : null;
   }
 

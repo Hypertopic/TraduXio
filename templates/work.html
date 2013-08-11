@@ -4,12 +4,28 @@
   <script src="script/jquery.js"></script>  
   <script type="text/javascript">
 
-  function toggle(index) {
-    $("tr").find("td:nth-child(" + index + ")").find("div").toggle();
-    var button = $("tr").find("th:nth-child(" + index + ")").find("button")
-    button.text(
-      (button.text()=="Cacher")? "Afficher" : "Cacher"
+  function toggleName(element, name1, name2) {
+    element.text(
+      (element.text()==name1)? name2 : name1
     );
+  }
+
+  function find(parentType, translationNumber, type) {
+    return $("tr").find(parentType + ":nth-child(" + translationNumber + ")")
+      .find(type);
+  }
+
+  function findUnits(translationNumber) {
+    return find("td", translationNumber, ".unit");
+  }
+
+  function toggleShow(translationNumber) {
+    findUnits(translationNumber).toggle();
+    toggleName(find("th", translationNumber, ".toggle"), "Afficher", "Cacher");
+  }
+
+  function isEdited(unit) {
+    return unit.find("textarea").length>0;
   }
 
   $(document).ready(function() {
@@ -23,12 +39,29 @@
     });
 
     $(".toggle").click(function() { //TODO jQuery 2
-      toggle($(this).closest("th").index() + 1);
+      toggleShow($(this).closest("th").index() + 1);
+    });
+
+    $(".edit").click(function() { //TODO jQuery 2
+      toggleName($(this), "Lire", "Éditer");
+      findUnits($(this).closest("th").index() + 1).each(function() {
+        if (isEdited($(this))) {
+          var content = $(this).find("textarea").text()
+            .replace(/\n/g, "</div><div>");
+          $(this).html('<div>' + content + '</div>');
+        } else {
+          var content = $(this).html()
+            .replace(/<\/div><div>/g, "\n")
+            .replace("<div>", "")
+            .replace("</div>", ""); // TODO optimize?
+          $(this).html('<textarea>' + content + '</textarea>');
+        }
+      });
     });
 
     const N = $("th").length;
     for (var i = 3; i<=N; i++) {
-      toggle(i);
+      toggleShow(i);
     }
 
   });
@@ -57,6 +90,7 @@
           {{/creativeCommons}}
           <br/>
           <button class="toggle">Cacher</button>
+          <button class="edit">Éditer</button>
         </th>
       {{/headers}}
     </tr>
