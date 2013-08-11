@@ -14,7 +14,9 @@ function(o, req) {
   const NEW_LINE = /\n/g;
 
   function toHtml(string) {
-    return (string)? string.replace(NEW_LINE, "<br/>") : null;
+    return (string)
+      ? "<div>" + string.replace(NEW_LINE, "</div><div>") + "</div>" 
+      : null;
   }
 
   function getRawUnit(texts, n) {
@@ -32,8 +34,7 @@ function(o, req) {
       var raw =  getRawUnit(texts, n);
       for (var version in raw) {
         if (raw[version]) {
-          block[version] += "<br/>" + raw[version];
-          log(raw[version]);
+          block[version] += raw[version];
         }
       }
     }

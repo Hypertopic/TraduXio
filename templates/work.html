@@ -4,7 +4,16 @@
   <script src="script/jquery.js"></script>  
   <script type="text/javascript">
 
+  function toggle(index) {
+    $("tr").find("td:nth-child(" + index + ")").find("div").toggle();
+    var button = $("tr").find("th:nth-child(" + index + ")").find("button")
+    button.text(
+      (button.text()=="Cacher")? "Afficher" : "Cacher"
+    );
+  }
+
   $(document).ready(function() {
+
     $("form").submit(function(event) { //TODO jQuery 2
       event.preventDefault();
       var q = $(this).find('#query').val().toLowerCase();
@@ -12,6 +21,16 @@
         + '"]&endkey=["{{work_language}}","' + q 
         + '\\u9999"]&query=' + q ;
     });
+
+    $(".toggle").click(function() { //TODO jQuery 2
+      toggle($(this).closest("th").index() + 1);
+    });
+
+    const N = $("th").length;
+    for (var i = 3; i<=N; i++) {
+      toggle(i);
+    }
+
   });
 
   </script>
@@ -36,6 +55,8 @@
           {{^creativeCommons}}
             Tous droits réservés.
           {{/creativeCommons}}
+          <br/>
+          <button class="toggle">Cacher</button>
         </th>
       {{/headers}}
     </tr>
