@@ -30,6 +30,7 @@ function(head, req) {
         context: highlight(context, req.query.query),
         mapping: mapping,
         original: {
+          work_id: work._id,
           creator: work.creator, 
           title: work.title,
           publisher: work.publisher,
