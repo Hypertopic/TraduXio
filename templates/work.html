@@ -73,6 +73,18 @@
       });
     });
 
+    $(".unit").focusout(function() { //TODO jQuery 2
+      $.ajax({
+        type: "PUT",
+        url: "version/{{id}}?"+ $.param({
+          version: $(this).data("version"),
+          line: $(this).data("line")
+        }),
+        contentType: "text/plain",
+        data: $(this).find("textarea").val()
+      });
+    });
+
     const N = $("th").length;
     for (var i = 3; i<=N; i++) {
       toggleShow(i);

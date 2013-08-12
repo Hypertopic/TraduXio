@@ -13,27 +13,29 @@ function(o, req) {
 
   const NEW_LINE = /\n/g;
 
-  function toHtml(string) {
+  function toHtml(string, line, version) {
     return (string!=null)
-      ? '<div class="unit"><div>'
+      ? '<div class="unit" data-line="'
+        + line + '" data-version="'
+        + version + '"><div>'
         + string.replace(NEW_LINE, "</div><div>")
         + "</div></div>"
       : null;
   }
 
-  function getRawUnit(texts, n) {
+  function getRawUnit(texts, n, headers) {
     var result = [];
-    for each (var version in texts) {
-      result.push(toHtml(version[n]));
+    for (var version in texts) {
+      result.push(toHtml(texts[version][n], n, headers[version].id));
     }
     return result;
   }
 
-  function getVersions(texts, n) {
+  function getVersions(texts, n, headers) {
     const LENGTH = texts[0].length;
-    var block = getRawUnit(texts, n);
+    var block = getRawUnit(texts, n, headers);
     while (++n<LENGTH && isJoined(texts, n)) {
-      var raw =  getRawUnit(texts, n);
+      var raw =  getRawUnit(texts, n, headers);
       for (var version in raw) {
         if (raw[version]) {
           block[version] += raw[version];
@@ -47,6 +49,7 @@ function(o, req) {
   }
 
   var data = {
+    id: o._id,
     work_title: o.title,
     work_creator: o.creator,
     work_language: o.language,
@@ -57,6 +60,7 @@ function(o, req) {
   if (o.text) {
     texts.push(o.text);
     data.headers.push({
+      id: "original",
       title: o.title,
       language: o.language,
       date: o.date,
@@ -67,6 +71,7 @@ function(o, req) {
     var translation = o.translations[t];
     texts.push(translation.text);
     data.headers.push({
+      id: t,
       title: translation.title,
       creator: "Trad. "+ t, //TODO i18n
       language: translation.language,
@@ -76,7 +81,7 @@ function(o, req) {
   }
   var block = {next: 0};
   do {
-    block = getVersions(texts, block.next);
+    block = getVersions(texts, block.next, data.headers);
     data.units.push({versions: block.versions});
   } while (block.next);
   return Mustache.to_html(templates.work, data);
