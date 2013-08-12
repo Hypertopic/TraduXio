@@ -1,108 +1,46 @@
-# Mise en place de l'environnement de test
-## Ruby environment installation on Debian/Ubuntu
-### Dependencies installation
+TraduXio – A participative platform for cultural texts translators
+==================================================================
 
-```bash
-$ sudo apt-get install build-essential
-$ sudo apt-get install curl
-$ sudo apt-get install zlib1g-dev libreadline-dev libssl-dev libxml2-dev
-```
+License: [GNU Affero General Public License](http://www.gnu.org/licenses/agpl.html)
+Contact: aurelien.benel@utt.fr
 
-### Ruby installation with RVM (Ruby version manager)
+Installation requirements
+-------------------------
 
-```bash
-$ bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-```
+* Git client
+* [CouchDB](http://couchdb.apache.org/)
+* [Couchapp](https://github.com/jchris/couchapp)
 
-Append the following line to your ~/.bashrc file.
+Installation procedure
+----------------------
 
-```bash
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
-```
+* Create a database named `traduxio` at <http://127.0.0.1:5984/_utils>.
+* In any folder:
 
-And then reload your bash environment (or close the terminal window and open a new one).
+        git clone git://github.com/benel/TraduXio.git
+        couchapp push http://127.0.0.1:5984/traduxio
 
-```bash
-$ rvm install 1.9.3
-$ rvm use 1.9.3
-```
-Test if everything is okay with Ruby
+* The application should be now accessible at <http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/>.
 
-```bash
-$ irb --version
-```
+Tests requirements
+------------------
 
-### Rubygems installation
-RubyGems is a package manager for the Ruby programming language that provides a standard format for distributing Ruby programs and libraries
+* Ruby
+* [Install QT](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
 
-```bash
-$ sudo apt-get install rubygems
-```
+Note: If you're on MacOS X, [change your `PATH`](http://stackoverflow.com/a/14138490/1121345) so that `gem` refers to brew's gem rather than to system's brew.
 
-## Ruby environment installation on Windows
+Tests installation procedure
+---------------------------
 
-Download 'RubyInstaller' from http://rubyinstaller.org/downloads/.
-('Ruby 2.0.0-p195' or 'Ruby 2.0.0-p195 (x64)' depending on your Windows version)
+* In any folder:
 
-Install 'RubyInstaller'.
+        sudo gem install capybara capybara-webkit rspec
 
-Run the file 'setrbvars.bat' in 'bin' repertory of Ruby. (C:\Ruby200\bin\setrvars.bat)
+Tests running
+-------------
 
-## Rspec installation
+* In the application folder:
 
-```bash
-gem install rspec
-```
+        rspec spec/features/*
 
-In order to test the installation :
-
-Create one file bowling_spec.rb with the following content :
-
-```bash
-# bowling_spec.rb
-require_relative 'bowling'
-
-describe Bowling, "#score" do
-  it "returns 0 for all gutter game" do
-    bowling = Bowling.new
-    20.times { bowling.hit(0) }
-    bowling.score.should eq(0)
-  end
-end
-```
-
-And another file bowling.rb as well :
-
-```bash
-# bowling.rb
-class Bowling
-  def hit(pins)
-  end
-
-  def score
-    0
-  end
-end
-```
-
-You can now try the command :
-
-```bash
-$ rspec bowling_spec.rb --format nested
-```
-
-You should see :
-
-```bash
-Finished in 0.00059 seconds
-1 example, 0 failures
-```
-
-## Capybara webkit installation
-
-```bash
-gem install capybara-webkit
-```
-
-If you have an error...You have to install Ruby Development Kit. Then, you need native libraries : Qt, nokogiri (libxml2...), ...
-The process is complex with Windows 64 bits : see https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit for more information.
