@@ -28,34 +28,47 @@
     return unit.find("textarea").length>0;
   }
 
+  function htmlToString(unit) {
+    return unit.html()
+      .replace(/<\/div><div>/g, "\n")
+      .replace("<div>", "")
+      .replace("</div>", "");
+  }
+
+  function stringToHtml(formattedString) {
+     return "<div>" 
+      + formattedString.replace(/\n/g, "</div><div>")
+      + "</div>";
+  }
+
+  function getTranslationNumber(element, ancestor) {
+    return element.closest(ancestor).index() + 1;
+  }
+
   $(document).ready(function() {
 
     $("form").submit(function(event) { //TODO jQuery 2
       event.preventDefault();
       var q = $(this).find('#query').val().toLowerCase();
-      window.location.href = 'concordance?startkey=["{{work_language}}","' + q 
-        + '"]&endkey=["{{work_language}}","' + q 
-        + '\\u9999"]&query=' + q
-        + '&language={{work_language}}';
+      window.location.href = 'concordance?' + $.param({
+        startkey: '["{{work_language}}","' + q + '"]',
+        endkey: '["{{work_language}}","' + q + '\\u9999"]',
+        query: q,
+        language: '{{work_language}}'
+      });
     });
 
     $(".toggle").click(function() { //TODO jQuery 2
-      toggleShow($(this).closest("th").index() + 1);
+      toggleShow(getTranslationNumber($(this), "th"));
     });
 
     $(".edit").click(function() { //TODO jQuery 2
       toggleName($(this), "Lire", "Éditer");
-      findUnits($(this).closest("th").index() + 1).each(function() {
+      findUnits(getTranslationNumber($(this), "th")).each(function() {
         if (isEdited($(this))) {
-          var content = $(this).find("textarea").text()
-            .replace(/\n/g, "</div><div>");
-          $(this).html('<div>' + content + '</div>');
+          $(this).html(stringToHtml($(this).find("textarea").val()));
         } else {
-          var content = $(this).html()
-            .replace(/<\/div><div>/g, "\n")
-            .replace("<div>", "")
-            .replace("</div>", ""); // TODO optimize?
-          $(this).html('<textarea>' + content + '</textarea>');
+          $(this).html("<textarea>" + htmlToString($(this)) + "</textarea>");
         }
       });
     });

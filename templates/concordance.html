@@ -42,10 +42,12 @@
       event.preventDefault();
       var q = $(this).find('#query').val().toLowerCase();
       var l = $("#language").val();
-      window.location.href = 'concordance?startkey=["' + l + '","' + q
-        + '"]&endkey=["' + l + '","' + q
-        + '\\u9999"]&query=' + q
-        + '&language=' + l;
+      window.location.href = 'concordance?' + $.param({
+        startkey: '["' + l + '","' + q + '"]',
+        endkey: '["' + l + '","' + q + '\\u9999"]',
+        query: q,
+        language: l
+      });
     });
 
     $.ajax({
