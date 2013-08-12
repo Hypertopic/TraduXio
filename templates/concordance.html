@@ -1,5 +1,12 @@
 <html>
+<head>
+  <script src="script/jquery.js"></script>
+</head>
 <body>
+<form>
+  <input id="query" type="search" placeholder="Rechercher" value="{{query}}" />
+  {{language}}
+</form>
 <table>
   {{#occurrences}}
     <tr>
@@ -21,5 +28,21 @@
     </tr>
   {{/occurrences}}
 </table>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $("form").submit(function(event) { //TODO jQuery 2
+      event.preventDefault();
+      var q = $(this).find('#query').val().toLowerCase();
+      window.location.href = 'concordance?startkey=["{{language}}","' + q
+        + '"]&endkey=["{{language}}","' + q
+        + '\\u9999"]&query=' + q
+        + '&language={{language}}';
+    });
+
+  });
+
+</script>
 </body>
 </html>

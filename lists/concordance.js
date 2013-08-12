@@ -46,7 +46,11 @@ function(head, req) {
   }
 
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
-  var data = {occurrences:[]};
+  var data = {
+    language: req.query.language,
+    query: req.query.query,
+    occurrences:[]
+  };
   while (row = getRow()) {
     if (row.value.translation) {
       // translation >> original
