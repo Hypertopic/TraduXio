@@ -5,7 +5,8 @@
 <body>
 <form>
   <input id="query" type="search" placeholder="Rechercher" value="{{query}}" />
-  {{language}}
+  <select id="language" />
+  </select>
 </form>
 <table>
   {{#occurrences}}
@@ -35,12 +36,24 @@
     $("form").submit(function(event) { //TODO jQuery 2
       event.preventDefault();
       var q = $(this).find('#query').val().toLowerCase();
-      window.location.href = 'concordance?startkey=["{{language}}","' + q
-        + '"]&endkey=["{{language}}","' + q
+      var l = $("#language").val();
+      window.location.href = 'concordance?startkey=["' + l + '","' + q
+        + '"]&endkey=["' + l + '","' + q
         + '\\u9999"]&query=' + q
-        + '&language={{language}}';
+        + '&language=' + l;
     });
 
+    $.ajax({
+      url: "languages",
+      type: "GET",
+      dataType: "json",
+      success: function(result) {
+        $.each(result.rows, function(i, o) {
+          $("#language").append("<option>" + o.key + "</option>");
+        });
+        $("#language").val("{{language}}");
+      }
+    });
   });
 
 </script>

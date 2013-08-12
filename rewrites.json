@@ -5,6 +5,12 @@
     "include_docs": "true"
   }
 },{
+  "from": "languages",
+  "to": "_view/languages",
+  "query": {
+    "group": "true"
+  }
+},{
   "from": "script/:file", 
   "to": "../../../_utils/script/:file"
 },{
