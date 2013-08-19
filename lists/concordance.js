@@ -1,48 +1,43 @@
 function(head, req) {
   // !json templates.concordance
   // !code lib/mustache.js
-
-  function getBlock(original, unit, translation) {
-    var i = unit;
-    while (translation[i]==null) {
-      i--;
-    }
-    var result = {
-      original: original[i],
-      translation: translation[i].replace(/\n/g, "<br/>")
-    }
-    while (++i<translation.length && translation[i]==null) {
-      result.original += "<br/>" + original[i];
-    }
-    return result;
-  }
+  // !code lib/hexapla.js
 
   function highlight(context, pattern) {
-    //TODO more efficient and safer?
+    //TODO safer so that HTML is not matched
     const regexp = new RegExp(pattern, "gi");
     return context.replace(regexp, "<b>" + pattern + "</b>");
   }
 
-  function push(occurrences, context, mapping, work, translationID) {
-    if (mapping) {
-      var translation = work.translations[translationID];
+  function getHeaders(work, translation_id) {
+    var translation = work.translations[translation_id];
+    return {
+      creator: translation_id,
+      publisher: translation.publisher,
+      date: translation.date
+    };
+  }
+
+  function push(occurrences, context, mapping, line_number, original_header, translation_header) {
+    var hexapla = new Hexapla();
+    hexapla.addVersion(context);
+    hexapla.addVersion(mapping);
+    var unit = hexapla.getUnitVersions(line_number).versions;
+    if (unit[1]) {
       occurrences.push({
-        context: highlight(context, req.query.query),
-        mapping: mapping,
-        original: {
-          work_id: work._id,
-          creator: work.creator, 
-          title: work.title,
-          publisher: work.publisher,
-          date: work.date
-        },
-        translation: {
-          creator: translationID,
-          publisher: translation.publisher,
-          date: translation.date
-        }
+        context: highlight(unit[0], req.query.query),
+        mapping: unit[1],
+        original: original_header,
+        translation: translation_header
       });
     }
+  }
+
+  function getTranslation(work, translation_id) {
+    return {
+      id: translation_id,
+      text: work.translations[translation_id].text
+    };
   }
 
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
@@ -52,29 +47,33 @@ function(head, req) {
     occurrences:[]
   };
   while (row = getRow()) {
-    if (row.value.translation) {
+    var translation_id = row.value.translation;
+    var line_number = row.value.unit; 
+    var work = row.doc;
+    var original = (work.text)? {
+      id: "original",
+      text: work.text
+    } : null;
+    var original_header = {
+      work_id: work._id,
+      creator: work.creator, 
+      title: work.title,
+      publisher: work.publisher,
+      date: work.date
+    };
+    if (translation_id) {
       // translation >> original
-      if (row.doc.text) {
-        var block = getBlock(
-          row.doc.text,
-          row.value.unit,
-          row.doc.translations[row.value.translation].text
-        );
-        push(data.occurrences, block.translation, block.original, row.doc, row.value.translation);
+      if (original) {
+        var translation_header = getHeaders(work, translation_id);
+        push(data.occurrences, getTranslation(work, translation_id), original, line_number, original_header, translation_header);
       }
       // translation >> translations
       //TODO
     } else {
       // original >> translations
-      if (row.doc.text) {
-        for (var t in row.doc.translations) {
-          var block = getBlock(
-            row.doc.text,
-            row.value.unit,
-            row.doc.translations[t].text
-          );
-          push(data.occurrences, block.original, block.translation, row.doc, t);
-        }
+      for (var t in work.translations) {
+        var translation_header = getHeaders(work, t);
+        push(data.occurrences, original, getTranslation(work, t), line_number, original_header, translation_header);
       }
     }
   }
