@@ -17,6 +17,9 @@
   "from": "script/:file", 
   "to": "../../../_utils/script/:file"
 },{
+  "from": "shared/*",
+  "to": "*"
+}, {
   "from": ":id",
   "to": "_show/work/:id",
   "method": "GET"

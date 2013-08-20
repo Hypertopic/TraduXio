@@ -2,11 +2,12 @@
 <head>
   <title>{{work_creator}} : {{work_title}} — TraduXio</title>
   <script src="script/jquery.js"></script>  
+  <script src="shared/traduxio.js"></script>  
   <script type="text/javascript">
 
-  function toggleName(element, name1, name2) {
-    element.text(
-      (element.text()==name1)? name2 : name1
+  $.fn.toggleName = function(name1, name2) {
+    this.text(
+      (this.text()==name1)? name2 : name1
     );
   }
 
@@ -21,11 +22,11 @@
 
   function toggleShow(translationNumber) {
     findUnits(translationNumber).toggle();
-    toggleName(find("th", translationNumber, ".toggle"), "Afficher", "Cacher");
+    find("th", translationNumber, ".toggle").toggleName("Afficher", "Cacher");
   }
 
-  function isEdited(unit) {
-    return unit.find("textarea").length>0;
+  $.fn.isEdited = function() {
+    return this.find("textarea").length>0;
   }
 
   function htmlToString(unit) {
@@ -41,31 +42,22 @@
       + "</div>";
   }
 
-  function getTranslationNumber(element, ancestor) {
-    return element.closest(ancestor).index() + 1;
+  $.fn.getTranslationNumber = function(ancestor) {
+    return this.closest(ancestor).index() + 1;
   }
 
   $(document).ready(function() {
 
-    $("form").submit(function(event) { //TODO jQuery 2
-      event.preventDefault();
-      var q = $(this).find('#query').val().toLowerCase();
-      window.location.href = 'concordance?' + $.param({
-        startkey: '["{{work_language}}","' + q + '"]',
-        endkey: '["{{work_language}}","' + q + '\\u9999"]',
-        query: q,
-        language: '{{work_language}}'
-      });
-    });
-
+    $("form").concordancify("{{work_language}}", "");
+   
     $(".toggle").click(function() { //TODO jQuery 2
-      toggleShow(getTranslationNumber($(this), "th"));
+      toggleShow($(this).getTranslationNumber("th"));
     });
 
     $(".edit").click(function() { //TODO jQuery 2
-      toggleName($(this), "Lire", "Éditer");
-      findUnits(getTranslationNumber($(this), "th")).each(function() {
-        if (isEdited($(this))) {
+      $(this).toggleName("Lire", "Éditer");
+      findUnits($(this).getTranslationNumber("th")).each(function() {
+        if ($(this).isEdited()) {
           $(this).html(stringToHtml($(this).find("textarea").val()));
         } else {
           $(this).html("<textarea>" + htmlToString($(this)) + "</textarea>");
@@ -100,9 +92,7 @@
       <li><a href=".">Œuvres</a></li>
     </ul>
   </nav>
-  <form>
-    <input id="query" type="search" placeholder="Rechercher" />
-  </form>
+  <form></form>
   <h1>{{work_title}} – {{work_creator}}</h1>
   <table>
     <tr>
