@@ -62,18 +62,22 @@ function(head, req) {
       date: work.date
     };
     if (translation_id) {
+      var translation = getTranslation(work, translation_id);
+      var translation_header = getHeaders(work, translation_id);
       // translation >> original
       if (original) {
-        var translation_header = getHeaders(work, translation_id);
-        push(data.occurrences, getTranslation(work, translation_id), original, line_number, original_header, translation_header);
+        push(data.occurrences, translation, original, line_number, original_header, translation_header);
       }
       // translation >> translations
-      //TODO
+      for (var t in work.translations) {
+        if (t!=translation_id) {
+          push(data.occurrences, translation, getTranslation(work, t), line_number, original_header, [translation_header, getHeaders(work, t)]);
+        }
+      }
     } else {
       // original >> translations
       for (var t in work.translations) {
-        var translation_header = getHeaders(work, t);
-        push(data.occurrences, original, getTranslation(work, t), line_number, original_header, translation_header);
+        push(data.occurrences, original, getTranslation(work, t), line_number, original_header, getHeaders(work, t));
       }
     }
   }
