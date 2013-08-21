@@ -26,6 +26,15 @@ function(old, req) {
   var work = new Work();
   var old_content = work.getContent(VERSION_ID, LINE);
   if (new_content!=old_content) {
+    if (new_content=="null") {
+      var previous_line = LINE;
+      var previous_line_content;
+      do {
+        previous_line_content = work.getContent(VERSION_ID, --previous_line);
+      } while (previous_line_content==null);
+      var joined_content = previous_line_content + "\n" + old_content;
+      work.setContent(VERSION_ID, previous_line, joined_content);
+      new_content = null;
     }
     work.setContent(VERSION_ID, LINE, new_content);
     return [work.data, VERSION_ID + " updated at line " + LINE];

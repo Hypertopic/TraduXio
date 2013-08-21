@@ -63,11 +63,14 @@
 
     $(".edit").on("click", function() {
       $(this).toggleName("Lire", "Éditer");
-      findUnits($(this).getTranslationNumber("th")).each(function() {
+      findUnits($(this).getTranslationNumber("th")).each(function(index) {
         if ($(this).isEdited()) {
           $(this).html(stringToHtml($(this).find("textarea").val()));
         } else {
           $(this).html("<textarea>" + htmlToString($(this)) + "</textarea>");
+          if (index!=0) {
+            $(this).append('<button class="join">X</button>');
+          }
         }
       });
     });
@@ -80,6 +83,13 @@
         data: content
       });
     }
+
+    $(".unit").on("click", ".join", function() {
+      editOnServer("null", $(this).closest(".unit").getReference())
+        .done(function() {
+          location.reload();
+        });
+    });
 
     $(".unit").on("focusout", function() {
       editOnServer($(this).find("textarea").val(), $(this).getReference());
