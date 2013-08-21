@@ -1,19 +1,34 @@
 function(old, req) {
+
+  function Work() {
+    this.data = old;
+    this.isOriginal = function(version) {
+      return version=="original";
+    };
+    this.getContent = function(version, line) {
+      return (this.isOriginal(version)
+        ? this.data
+        : this.data.translations[version]
+      ).text[line];
+    };
+    this.setContent = function(version, line, content) {
+      if (this.isOriginal(version)) {
+        this.data.text[line] = content;
+      } else {
+        this.data.translations[version].text[line] = content;
+      }
+    };
+  }
+
   const VERSION_ID = req.query.version;
   const LINE = +req.query.line;
-  const NEW_CONTENT = req.body;
-  const IS_ORIGINAL = (VERSION_ID=="original");
-  var old_content = (IS_ORIGINAL)
-    ? old.text[LINE]
-    : old.translations[VERSION_ID].text[LINE];
-  if (old_content!=NEW_CONTENT) {
-    var o = old;
-    if (IS_ORIGINAL) {
-      o.text[LINE] = NEW_CONTENT;
-    } else {
-      o.translations[VERSION_ID].text[LINE] = NEW_CONTENT;
+  var new_content = req.body;
+  var work = new Work();
+  var old_content = work.getContent(VERSION_ID, LINE);
+  if (new_content!=old_content) {
     }
-    return [o, VERSION_ID + " updated at line " + LINE];
+    work.setContent(VERSION_ID, LINE, new_content);
+    return [work.data, VERSION_ID + " updated at line " + LINE];
   }
-  return [null, VERSION_ID + " unchanched at line " + LINE];
+  return [null, VERSION_ID + " unchanged at line " + LINE];
 }
