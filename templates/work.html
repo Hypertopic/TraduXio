@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>{{work_creator}} : {{work_title}} — TraduXio</title>
-  <script src="script/jquery.js"></script>  
+  <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>  
   <script src="shared/traduxio.js"></script>  
   <script type="text/javascript">
 
@@ -50,11 +50,11 @@
 
     $("form").concordancify("{{work_language}}", "");
    
-    $(".toggle").click(function() { //TODO jQuery 2
+    $(".toggle").on("click", function() {
       toggleShow($(this).getTranslationNumber("th"));
     });
 
-    $(".edit").click(function() { //TODO jQuery 2
+    $(".edit").on("click", function() {
       $(this).toggleName("Lire", "Éditer");
       findUnits($(this).getTranslationNumber("th")).each(function() {
         if ($(this).isEdited()) {
@@ -65,7 +65,7 @@
       });
     });
 
-    $(".unit").focusout(function() { //TODO jQuery 2
+    $(".unit").on("focusout", function() {
       $.ajax({
         type: "PUT",
         url: "version/{{id}}?"+ $.param({

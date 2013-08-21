@@ -14,9 +14,6 @@
   "from": "version/:id",
   "to": "_update/version/:id"
 },{
-  "from": "script/:file", 
-  "to": "../../../_utils/script/:file"
-},{
   "from": "shared/*",
   "to": "*"
 }, {
