@@ -63,13 +63,25 @@
 
     $(".edit").on("click", function() {
       $(this).toggleName("Lire", "Éditer");
-      findUnits($(this).getTranslationNumber("th")).each(function(index) {
+      var units = findUnits($(this).getTranslationNumber("th"))
+      units.each(function(index) {
         if ($(this).isEdited()) {
           $(this).html(stringToHtml($(this).find("textarea").val()));
         } else {
           $(this).html("<textarea>" + htmlToString($(this)) + "</textarea>");
           if (index!=0) {
             $(this).append('<button class="join">X</button>');
+          }
+          var current_line = $(this).data("line")+1;
+          var lines = $("body").data("lines");
+          if (current_line<lines) {
+            var next_unit = units.eq(index+1);
+            var max_lines_to_split = (next_unit.length==0)? lines : next_unit.data("line");
+            for (var i = current_line; i<max_lines_to_split; i++) {
+              $(this).append(
+                '<button class="split" data-line="' + i + '">+</button>'
+              );
+            }
           }
         }
       });
@@ -91,6 +103,15 @@
         });
     });
 
+    $(".unit").on("click", ".split", function() {
+      editOnServer("", {
+        version:$(this).closest(".unit").data("version"),
+        line: $(this).data("line")
+      }).done(function() {
+        location.reload();
+      });
+    });
+
     $(".unit").on("focusout", function() {
       editOnServer($(this).find("textarea").val(), $(this).getReference());
     });
@@ -104,7 +125,7 @@
 
   </script>
 </head>
-<body>
+<body data-lines="{{lines}}">
   <nav>
     <ul>
       <li><a href=".">Œuvres</a></li>

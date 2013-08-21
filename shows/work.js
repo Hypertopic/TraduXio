@@ -3,11 +3,19 @@ function(o, req) {
   // !code lib/mustache.js
   // !code lib/hexapla.js
 
+  function getTextLength() {
+    if (o.text)
+      return o.text.length;
+    for each (version in o.translations)
+      return version.text.length;
+  }
+
   var data = {
     id: o._id,
     work_title: o.title,
     work_creator: o.creator,
     work_language: o.language,
+    lines: getTextLength(),
     headers: [],
     units: []
   };
