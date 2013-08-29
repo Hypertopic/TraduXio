@@ -18,12 +18,13 @@ function(head, req) {
     };
   }
 
+  const HTML_CONTENT = /<div>[^<]+<\/div>/g;
   function push(occurrences, context, mapping, line_number, original_header, translation_header) {
     var hexapla = new Hexapla();
     hexapla.addVersion(context);
     hexapla.addVersion(mapping);
     var unit = hexapla.getUnitVersions(line_number).versions;
-    if (unit[1]) {
+    if (unit[1] && HTML_CONTENT.test(unit[1])) {
       occurrences.push({
         context: highlight(unit[0], req.query.query),
         mapping: unit[1],
