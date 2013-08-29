@@ -18,8 +18,8 @@ function(head, req) {
     };
   }
 
-  const HTML_CONTENT = /<div>[^<]+<\/div>/g;
   function push(occurrences, context, mapping, line_number, original_header, translation_header) {
+    const HTML_CONTENT = /<div>[^<]+<\/div>/g;
     var hexapla = new Hexapla();
     hexapla.addVersion(context);
     hexapla.addVersion(mapping);
