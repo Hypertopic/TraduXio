@@ -1,23 +1,37 @@
 table{
   border-collapse:separate;
   border-spacing:0px;
+  empty-cells:show;
+}
+
+th {
+  border: 1px solid;
 }
 
 .header th {
-  border-radius:15px 15px 0px 0px;
-  border:1px solid;
-  border-bottom:none;
+  border-radius:2em 2em 0px 0px;
+  border-bottom:0px;
+}
+
+.pleat.close {
+  border-style:dashed;
 }
 
 .footer th {
-  border-radius:0px 0px 15px 15px;
-  border:1px solid;
-  border-top:none;
+  border-radius:0px 0px 2em 2em;
+  border-top:0px;
 }
 
-table td {
-  border-left:1px solid;
-  border-right:1px solid;
+td {
+  border-left:1px;
+  border-right:1px;
+  border-top:0px;
+  border-bottom:0px;
+  border-style:solid;
+}
+
+td,
+td.pleat.close {
 }
 
 .pleat.open,
@@ -96,6 +110,7 @@ table td {
 textarea {
   width:100%;
   box-sizing:border-box;
+  border:none;
 }
 
 .unit:hover {
@@ -104,6 +119,11 @@ textarea {
 
 .unit:after {
   content:" ";
+  background-color:white;
+}
+
+.unit.highlight:after {
+  /*content:" X ";*/
 }
 
 .unit.highlight {
