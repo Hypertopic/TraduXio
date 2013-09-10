@@ -25,8 +25,8 @@ th {
 td {
   border-left:1px;
   border-right:1px;
-  border-top:0px;
-  border-bottom:0px;
+  border-top:1px;
+  border-bottom:1px;
   border-style:solid;
 }
 
@@ -113,17 +113,56 @@ textarea {
   border:none;
 }
 
+.unit {
+  padding-right:0.5em;
+  margin-left:0.5em;
+  position:relative;
+}
+
+.unit:before {
+  content:".";
+  padding:0.5em;
+  margin-left:-0.5em;
+}
+
 .unit:hover {
   background-color:yellow;
 }
 
-.unit:after {
+/*.unit:after {
   content:" ";
   background-color:white;
+}*/
+
+.unit .join,
+.unit .split {
+  padding 2px;
+  cursor:pointer;
+  margin-left:0.5em;
+  position:absolute;
 }
 
-.unit.highlight:after {
-  /*content:" X ";*/
+.unit .join {
+  left:-0.5em;
+  top:0;
+}
+
+.unit .split {
+  right:0;
+  bottom:0;
+}
+
+.unit .join:before {
+  content:"X";
+}
+
+.unit .split:before {
+  content:"+";
+  right:0.5em;
+}
+
+.unit.tomerge, .unit.tosplit,.unit.highlight.included.tosplit {
+  background-color:gray;
 }
 
 .unit.highlight {
@@ -137,3 +176,4 @@ textarea {
 .unit.highlight.included {
   background-color:blue;
 }
+
