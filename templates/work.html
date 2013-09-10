@@ -86,15 +86,12 @@
 
   function htmlToString(unit) {
     return unit.html()
-      .replace(/<\/div><div>/g, "\n")
-      .replace("<div>", "")
-      .replace("</div>", "");
+      .replace(/<br\/?>/g, "\n").replace("&lt;","<").replace("&gt;",">").replace(/<empty>/,"");
   }
 
   function stringToHtml(formattedString) {
-     return "<div>" 
-      + formattedString.replace(/\n/g, "</div><div>")
-      + "</div>";
+     if (formattedString=="") formattedString="<empty>";
+     return formattedString.replace("<","&lt").replace(">","&gt;").replace(/\n/g, "<br>");
   }
 
   $.fn.getTranslationNumber = function(ancestor) {
@@ -119,6 +116,41 @@
     $("table").on("click", ".pleat.close",function() {
       toggleShow($(this).index()+1-translationsNumber());
     });
+
+    var highlightLines = function() {
+      var transNum=$(this).getTranslationNumber("td");
+	var units=findUnits($(this).getTranslationNumber("td"));
+        var unit=$(this).closest(".unit");
+	var currLine=unit.data("line");
+	var currIndex=units.index(unit);
+	if (currIndex<units.length) {
+	  var nextUnit=units.eq(currIndex+1);
+	  var lastLine=nextUnit.data("line") - 1;
+	} else {
+	  lastLine=currLine;
+	}
+      for (var i=1;i<translationsNumber();i++) {
+        if (i!=transNum) {
+	  var origUnits=findUnits(i);
+	  origUnits.each(function() {
+	    var lineNum=$(this).data("line");
+	    if (lineNum>=currLine && lineNum <= lastLine) {
+	      $(this).addClass("highlight");
+	    }
+	  });
+        }
+      }
+    }
+    
+    var downlightLines = function () {
+      $(".unit").removeClass("highlight");
+    }
+
+    $(".unit").hover(highlightLines,downlightLines);
+    $(".unit").on("dblclick",function() {
+        $(".unit").has("textarea").each(unedit);
+	$(this).html("<textarea>" + htmlToString($(this)) + "</textarea>");
+     });
 
     $(".edit").on("click", function() {
       $(this).toggleName("Lire", "Éditer");
@@ -171,9 +203,15 @@
       });
     });
 
-    $(".unit").on("focusout", function() {
-      editOnServer($(this).find("textarea").val(), $(this).getReference());
-    });
+    var unedit=function() {
+      var unit=this;
+      var content=$(unit).find("textarea").val();
+      editOnServer(content, $(unit).getReference()).done(function() {
+         $(unit).html(stringToHtml(content));
+      });
+    }
+
+    $(".unit").on("focusout", unedit);
 
     const N = $("thead.header th.pleat.open").length;
     for (var i = 1; i<=N; i++) {
@@ -204,7 +242,7 @@
           <div class="creator">{{creator}}</div>
           <div class="date">{{date}}</div>
           <div class="language">{{language}}</div>
-          <button class="edit">Éditer</button>
+          <!--button class="edit">Éditer</button-->
           <button class="hide">Cacher</button>
         </th>
       {{/headers}}

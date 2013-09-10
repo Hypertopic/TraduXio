@@ -48,7 +48,7 @@ table td {
   display:none;
   cursor:pointer;
   width:2em;
-  padding-left:0.5em;
+  padding:0.5em;
 }
 
 .pleat.close * {
@@ -67,14 +67,14 @@ table td {
 .pleat.close .creator {
   display:block;
   white-space:nowrap;
-  bottom:3em;
+  bottom:8em;
   padding-top:0.5em;
   padding-left:0.5em;
 }
 
 .pleat.close .language {
   display:block;
-  bottom:-2em;
+  bottom:2em;
   border:3px solid black;
   padding:0.3em;
   width:1em;
@@ -97,3 +97,12 @@ textarea {
   width:100%;
   box-sizing:border-box;
 }
+
+.unit:hover {
+  background-color:yellow;
+}
+
+.unit.highlight {
+  background-color:green;
+}
+
