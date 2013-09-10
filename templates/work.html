@@ -117,33 +117,46 @@
       toggleShow($(this).index()+1-translationsNumber());
     });
 
+    var getEndLine=function (units,index) {
+      var nextIndex=index+1;
+      var lastLine=0;
+      if (nextIndex<units.length) {
+	var nextUnit=units.eq(nextIndex);
+	lastLine=nextUnit.data("line") - 1;
+      } else {
+	lastLine=$(document.body).data("lines");
+      }
+      return lastLine;
+      
+    }
+
     var highlightLines = function() {
       var transNum=$(this).getTranslationNumber("td");
 	var units=findUnits($(this).getTranslationNumber("td"));
         var unit=$(this).closest(".unit");
 	var currLine=unit.data("line");
 	var currIndex=units.index(unit);
-	if (currIndex<units.length) {
-	  var nextUnit=units.eq(currIndex+1);
-	  var lastLine=nextUnit.data("line") - 1;
-	} else {
-	  lastLine=currLine;
-	}
-      for (var i=1;i<translationsNumber();i++) {
+        var lastLine=getEndLine(units,currIndex);
+      for (var i=1;i<=translationsNumber();i++) {
         if (i!=transNum) {
 	  var origUnits=findUnits(i);
-	  origUnits.each(function() {
-	    var lineNum=$(this).data("line");
-	    if (lineNum>=currLine && lineNum <= lastLine) {
+	  origUnits.each(function(index) {
+	    var startLine=$(this).data("line");
+            var endLine=getEndLine(origUnits,index);
+            if (startLine==lastLine && endLine==currLine) {
 	      $(this).addClass("highlight");
-	    }
+            } else if (startLine >=currLine && endLine <= lastLine) { //included
+	      $(this).addClass("highlight").addClass("included");
+            } else if (endLine>=currLine && startLine <= lastLine) { //overlaped
+	      $(this).addClass("highlight").addClass("partial");
+            }
 	  });
         }
       }
     }
     
     var downlightLines = function () {
-      $(".unit").removeClass("highlight");
+      $(".unit").removeClass("highlight").removeClass("partial").removeClass("included");
     }
 
     $(".unit").hover(highlightLines,downlightLines);
