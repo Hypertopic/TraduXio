@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>{{work_creator}} : {{work_title}} — TraduXio</title>
+  <link rel="stylesheet" href="shared/traduxio.css" type="text/css" />
   <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>  
   <script src="shared/traduxio.js"></script>  
   <script type="text/javascript">
@@ -11,18 +12,72 @@
     );
   }
 
-  function find(parentType, translationNumber, type) {
-    return $("tr").find(parentType + ":nth-child(" + translationNumber + ")")
-      .find(type);
+  function find(parentType, translationNumber) {
+    return $("tr").find(parentType + ":nth-child(" + translationNumber + ")");
+  }
+
+  function findPleat(parentType, translationNumber) {
+    var offset=translationNumber + translationsNumber();
+    return $("tr").find(parentType + ":nth-child(" + offset + ")");
+  }
+
+  function addPleat(translationNumber) {
+    var pleat=$("<td/>").addClass("pleat").addClass("close").attr("rowspan",$("tbody tr").length).html(find("th.pleat.open" ,translationNumber).html());
+    $("table tbody tr:first-child").append(pleat);
+    var pleatRound=$("<th/>").addClass("pleat").addClass("close");
+    $("thead tr").append(pleatRound);
   }
 
   function findUnits(translationNumber) {
-    return find("td", translationNumber, ".unit");
+    return find("td", translationNumber).find(".unit");
   }
 
+  function translationsNumber() {
+    return $(".pleat.open").length;
+  }
+
+  function positionPleats() {
+    var closedPleats=$(".pleat.close:visible");
+    //pleats positioning is done automatically with FF23 and Chromium 28
+    //chromium has a bug, which requires to redraw the fixed elements
+    closedPleats.children(":visible").redraw();
+    return;
+    //in case other browsers needs to be said the position of pleats, the following code does it.
+    closedPleats.each(function() {
+      //var offset=$(this).nextAll(":visible").length;
+      var offset=(closedPleats.length-closedPleats.index(this)-1);
+      $(this).children(":visible").css("right",offset * 3+"em");
+    });
+  }
+
+  //https://coderwall.com/p/ahazha
+  //does not work
+  $.fn.redraw = function(){
+    $(this).each(function(){
+      var redraw = this.offsetHeight;
+    });
+  };
+
+  //https://gist.github.com/hdragomir/740199
+  $.fn.redraw = function(){
+      return $(this).each(function(){
+	  var n = document.createTextNode(' ');
+	  $(this).append(n);
+	  setTimeout(function(){n.parentNode.removeChild(n)}, 0);
+      });
+  };
+
+  //http://forrst.com/posts/jQuery_redraw-BGv
+  $.fn.redraw = function() {
+    return this.hide(0, function(){$(this).show()});
+  };
+
   function toggleShow(translationNumber) {
-    findUnits(translationNumber).toggle();
-    find("th", translationNumber, ".toggle").toggleName("Afficher", "Cacher");
+    find("td",translationNumber).toggle();
+    findPleat("td",translationNumber).toggle();
+    find("th",translationNumber).toggle();
+    findPleat("th",translationNumber).toggle();
+    positionPleats();
   }
 
   $.fn.isEdited = function() {
@@ -57,8 +112,12 @@
 
     $("form").concordancify("{{work_language}}", "");
    
-    $(".toggle").on("click", function() {
+    $(".pleat.open button.hide").on("click", function() {
       toggleShow($(this).getTranslationNumber("th"));
+    });
+
+    $("table").on("click", ".pleat.close",function() {
+      toggleShow($(this).index()+1-translationsNumber());
     });
 
     $(".edit").on("click", function() {
@@ -116,7 +175,10 @@
       editOnServer($(this).find("textarea").val(), $(this).getReference());
     });
 
-    const N = $("th").length;
+    const N = $("thead.header th.pleat.open").length;
+    for (var i = 1; i<=N; i++) {
+      addPleat(i);
+    }
     for (var i = 3; i<=N; i++) {
       toggleShow(i);
     }
@@ -134,12 +196,32 @@
   <form></form>
   <h1>{{work_title}} – {{work_creator}}</h1>
   <table>
-    <tr>
+    <thead class="header"><tr>
       {{#headers}}
-        <th>
-          {{title}}<br/>
-          {{work_creator}}<br/>
-          {{language}} — {{creator}} {{date}}<br/>
+        <th class="pleat open">
+          <div class="title"> {{title}}</div>
+          <div class="work-creator">{{work_creator}}</div>
+          <div class="creator">{{creator}}</div>
+          <div class="date">{{date}}</div>
+          <div class="language">{{language}}</div>
+          <button class="edit">Éditer</button>
+          <button class="hide">Cacher</button>
+        </th>
+      {{/headers}}
+    </tr></thead>
+    <tbody>
+    {{#units}}
+    <tr>
+      {{#versions}}
+        <td>{{{.}}}</td>
+      {{/versions}}
+    </tr>
+    {{/units}}
+    </tbody>
+    <thead class="footer"><tr>
+    {{#headers}}
+      <th class="footer">
+          <div class="license">
           {{#creativeCommons}}
             <a href="http://creativecommons.org/licenses/{{creativeCommons}}/3.0/fr">
               <img src="http://i.creativecommons.org/l/{{creativeCommons}}/3.0/88x31.png"/>
@@ -148,19 +230,10 @@
           {{^creativeCommons}}
             Tous droits réservés.
           {{/creativeCommons}}
-          <br/>
-          <button class="toggle">Cacher</button>
-          <button class="edit">Éditer</button>
-        </th>
-      {{/headers}}
-    </tr>
-    {{#units}}
-    <tr>
-      {{#versions}}
-        <td>{{{.}}}</td>
-      {{/versions}}
-    </tr>
-    {{/units}}
+          </div>
+      </th>
+    {{/headers}}
+    </tr></thead>
   </table>
 </body>
 </html>
