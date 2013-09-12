@@ -1,5 +1,4 @@
 function(o, req) {
-  // !json templates.work
   // !code lib/mustache.js
   // !code lib/hexapla.js
 
@@ -51,5 +50,9 @@ function(o, req) {
     unit = hexapla.getUnitVersions(unit.next);
     data.units.push({versions: unit.versions});
   } while (unit.next);
-  return Mustache.to_html(templates.work, data);
+  data.name="work";
+  data.css=true;
+  data.script=true;
+  data.language=data.work_language;
+  return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }

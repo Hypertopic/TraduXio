@@ -39,6 +39,7 @@ function(head, req) {
   }
   languageData.authors.push(authorData);
   data.languages.push(languageData);
-  return Mustache.to_html(templates.works, data);
+  data.name="works";
+  return Mustache.to_html(this.templates.works, data,this.templates.partials);
 }
 

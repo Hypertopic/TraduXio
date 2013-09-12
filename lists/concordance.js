@@ -1,12 +1,11 @@
 function(head, req) {
-  // !json templates.concordance
   // !code lib/mustache.js
   // !code lib/hexapla.js
 
   function highlight(context, pattern) {
     //TODO safer so that HTML is not matched
-    const regexp = new RegExp(pattern, "gi");
-    return context.replace(regexp, "<b>" + pattern + "</b>");
+    const regexp = new RegExp("("+pattern+")", "gi");
+    return context.replace(regexp, "<b>$1</b>");
   }
 
   function getHeaders(work, translation_id) {
@@ -24,14 +23,14 @@ function(head, req) {
     hexapla.addVersion(context);
     hexapla.addVersion(mapping);
     var unit = hexapla.getUnitVersions(line_number).versions;
-    if (unit[1] && HTML_CONTENT.test(unit[1])) {
+    if (unit[1] && unit[1].trim()!="") {// && HTML_CONTENT.test(unit[1])) {
       occurrences.push({
         context: highlight(unit[0], req.query.query),
         mapping: unit[1],
         original: original_header,
         translation: translation_header
       });
-    }
+    } else {log("don't push "+unit[1]);}
   }
 
   function getTranslation(work, translation_id) {
@@ -82,5 +81,7 @@ function(head, req) {
       }
     }
   }
-  return Mustache.to_html(templates.concordance, data);
+  data.name="concordance";
+  data.css=true;
+  return Mustache.to_html(this.templates.concordance, data, this.templates.partials);
 }

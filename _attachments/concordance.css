@@ -1,0 +1,12 @@
+table.concordance {
+  border-collapse:collapse;
+}
+
+table.concordance tr:nth-child(2n) td {
+  background-color: #ddd;
+}
+
+table.concordance td {
+  border-bottom: 1px solid black;
+  padding:5px;
+}
