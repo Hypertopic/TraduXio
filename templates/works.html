@@ -1,17 +1,33 @@
 {{>header}}
+<div id="lead">
+  <div class="logo">TraduXio</div>
+  <img src="shared/traduxio_home_logo.jpg" alt="TraduXio Home Logo" />
+  <div id="citation">Du point de vue de la communauté, le langage n'est pas seulement un fait social , [...] il est par l'altérité [...] le fondement de toute association humaine.<span class="author">Eugenio Coseriu</span></div>
+</div>
+<div id="works-list">
+<div class="list">
+<span class="title">Langues</span>
+<div class="content">
 <ul>
   {{#languages}}
-    <li>{{code}}</li>
+    <li class="foldable">{{code}}
     <ul>
       {{#authors}}
-        <li>{{name}}</li>
+        <li class="foldable closed">{{name}}
         <ul>
           {{#works}}
             <li><a href="{{id}}">{{name}}</a></li>
           {{/works}}
         </ul>
+        </li>
       {{/authors}}
     </ul>
+    </li>
   {{/languages}}
 </ul>
+</div>
+</div>
+</div>
+<div id="latests">
+</div>
 {{>footer}}

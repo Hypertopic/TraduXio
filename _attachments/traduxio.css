@@ -83,6 +83,7 @@ body,html {
   list-style:none;
   margin-left:1em;
   padding:0.5em;
+  font-weight:bold;
 }
 
 #nav li a {
@@ -98,6 +99,8 @@ body,html {
 #header #logo {
   float:right;
   margin-right:2em;
+  font-size:1.2em;
+  font-weight:bold;
 }
 
 #works li.works,
@@ -116,5 +119,27 @@ form.concordance input {
   border-radius:0.7em;
   border-style:solid;
   height:1.5em;
-  margin:0px auto;
+  margin:0.5em;
+}
+
+ul {
+  padding-left:1em;
+  margin-left:0.5em;
+}
+
+li {
+  list-style-image: url("list-square-small.png");
+}
+
+li.foldable {
+  list-style-image: url("open_list_item.gif");
+  cursor: pointer;
+}
+
+li.foldable.closed {
+  list-style-image: url("closed_list_item.gif");
+}
+
+li.closed > * {
+  display:none;
 }

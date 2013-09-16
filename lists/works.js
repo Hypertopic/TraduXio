@@ -40,6 +40,8 @@ function(head, req) {
   languageData.authors.push(authorData);
   data.languages.push(languageData);
   data.name="works";
+  data.scripts=["ul-close"];
+  data.css=true;
   return Mustache.to_html(this.templates.works, data,this.templates.partials);
 }
 
