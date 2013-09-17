@@ -3,29 +3,44 @@
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}">
     <thead class="header"><tr>
       {{#headers}}
-        <th class="pleat open">
+        <th class="pleat open"><div class="relative-wrapper">
           <div class="title"> {{title}}</div>
           <div class="work-creator">{{work_creator}}</div>
           <div class="creator">{{creator}}</div>
-          <div class="date">{{date}}</div>
-          <div class="language">{{language}}</div>
-          <!--button class="edit">Éditer</button-->
-          <button class="hide">Cacher</button>
-        </th>
+          <div class="meta group">
+	    <div class="date">{{date}}</div>
+	    <div class="language">{{language}}</div>
+          </div>
+          <span class="button hide">Cacher</span>
+        </div></th>
+      {{/headers}}
+      {{#headers}}
+        <th class="pleat close"><div class="relative-wrapper">
+          <span class="button show">Montrer</span>
+        </div></th>
       {{/headers}}
     </tr></thead>
     <tbody>
     {{#units}}
     <tr>
       {{#versions}}
-        <td>{{{.}}}</td>
+        <td class="pleat open">{{{.}}}</td>
       {{/versions}}
+      {{#first}}
+      {{#headers}}
+        <td class="pleat close" rowspan="{{units.length}}">
+          <div class="creator">{{creator}}</div>
+          <div class="language">{{language}}</div>
+        </td>
+      {{/headers}}
+      {{/first}}
     </tr>
     {{/units}}
     </tbody>
     <thead class="footer"><tr>
     {{#headers}}
-      <th class="footer">
+      <th class="pleat open">
+        <div class="relative-wrapper">
           <div class="license">
           {{#creativeCommons}}
             <a href="http://creativecommons.org/licenses/{{creativeCommons}}/3.0/fr">
@@ -36,8 +51,17 @@
             Tous droits réservés.
           {{/creativeCommons}}
           </div>
+          <!--div class="button">Cacher</div-->
+        </div>
       </th>
     {{/headers}}
+      {{#headers}}
+        <th class="pleat close">
+	  <div class="relative-wrapper">
+	    <!--div class="button">Montrer</div-->
+          </div>
+        </th>
+      {{/headers}}
     </tr></thead>
   </table>
 

@@ -1,7 +1,9 @@
 table#hexapla {
   border-collapse:separate;
-  border-spacing:0.5em;
+  border-spacing:0;
   empty-cells:show;
+  height:80%;
+  margin:0 1em;
 }
 
 #hexapla th {
@@ -9,17 +11,20 @@ table#hexapla {
 }
 
 #hexapla .header th {
-  border-radius:2em 2em 0px 0px;
+  border-radius:30px 30px 0px 0px;
   border-bottom:0px;
+  position:relative;
 }
 
 #hexapla .pleat.close {
   border-style:dashed;
+  text-align:center;
 }
 
 #hexapla .footer th {
-  border-radius:0px 0px 2em 2em;
+  border-radius:0px 0px 30px 30px;
   border-top:0px;
+  padding:5px;
 }
 
 #hexapla td {
@@ -34,9 +39,20 @@ table#hexapla {
 #hexapla td.pleat.close {
 }
 
-#hexapla .pleat.open,
-#hexapla .pleat.open * {
-  padding:0 2em;
+#hexapla th.pleat.open .relative-wrapper,
+#hexapla td.pleat.open {
+  padding:0 12px;
+}
+
+.title,.work-creator,.creator, .date, .language {
+  font-size:1.2em;
+  padding:0.5em 2em;
+  white-space:nowrap;
+}
+
+.meta {
+  max-width:400px;
+  margin:0 auto;
 }
 
 #hexapla .pleat.open .title,
@@ -46,10 +62,8 @@ table#hexapla {
 
 #hexapla .pleat.open .language {
   float:left;
-  margin-left:4em;
 }
 
-#hexapla .pleat.open .creator,
 #hexapla .pleat.open .date {
   float:right;
 }
@@ -60,13 +74,15 @@ table#hexapla {
 
 #hexapla .pleat.close {
   display:none;
-  cursor:pointer;
-  width:2em;
-  padding:0.5em;
+  width:50px;
+  height:50px;
 }
 
-#hexapla .pleat.close * {
-  display:none;
+#hexapla td.pleat.close {
+  padding:0px;
+}
+
+#hexapla td.pleat.close * {
   transform:rotate(270deg);
   -o-transform:rotate(270deg);
   -moz-transform:rotate(270deg);
@@ -80,22 +96,25 @@ table#hexapla {
   -moz-box-sizing:initial;
   -webkit-box-sizing:initial;
   position:fixed;
+  font-size:16px;
+  font-weight:bold;
+  margin:0px 9px;
 }
 
 #hexapla .pleat.close .creator {
   display:block;
   white-space:nowrap;
   bottom:8em;
-  padding-top:0.5em;
-  padding-left:0.5em;
+  padding-top:8px;
+  padding-left:8px;
 }
 
 #hexapla .pleat.close .language {
   display:block;
   bottom:2em;
   border:3px solid black;
-  padding:0.3em;
-  width:1em;
+  padding:5px;
+  width:30px;
 
 }
 
@@ -132,6 +151,8 @@ textarea {
   padding:0.5em;
   margin:0.5em;
   position:relative;
+  margin-right:32px;
+  background-color:#f8f8f8;
 }
 
 #hexapla .unit:not(.edit):before {
@@ -140,43 +161,39 @@ textarea {
   margin-left:-0.5em;
 }
 
-/*.unit:after {
-  content:" ";
-  background-color:white;
-}*/
-
 #hexapla .unit .join,
+#hexapla .unit .split {
+  position:absolute;
+  width:32px;
+  height:32px;
+  cursor:pointer;
+  padding:2px;
+  border:1px solid black;
+}
+
+#hexapla .unit .join {
+  background-image:url(merge-32.png);
+  right:-32px;
+  top:-16px;
+}
+
 #hexapla .unit .split {
   padding:2px;
   cursor:pointer;
   margin-left:0.5em;
   position:absolute;
-}
-
-#hexapla .unit .join {
-  left:-0.5em;
-  top:0;
+  bottom:-2em;
 }
 
 #hexapla .unit .split {
-  right:0;
-  bottom:0;
-}
-
-#hexapla .unit .join:before {
-  content:"X";
-}
-
-#hexapla .unit .split:before {
-  content:"+";
-  right:0.5em;
+  position:relative;
 }
 
 #hexapla .unit.tomerge, #hexapla .unit.tosplit,#hexapla .unit.highlight.included.tosplit {
   background-color:#aaa;
 }
 
-#hexapla .unit:not(.edit):hover {
+#hexapla .unit:not(.edit).active {
   background-color:#eee;
 }
 
@@ -192,3 +209,29 @@ textarea {
   background-color:#efefef;
 }
 
+.pleat.close .button {
+  background-image: url(pleat-closed.png);
+  width:20px;
+  right:15px;
+}
+
+.pleat.open .button {
+  background-image: url(pleat-open.png);
+  width:32px;
+  right: 10px;
+}
+
+.pleat .button {
+  background-repeat:no-repeat;
+  height:32px;
+  position: absolute;
+  top: 10px;
+  cursor:pointer;
+  text-indent: 100%;
+  overflow:hidden;
+}
+
+.footer .pleat .button {
+  top:auto;
+  bottom:10px;
+}

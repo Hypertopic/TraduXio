@@ -26,6 +26,7 @@ function(o, req) {
     })
     data.headers.push({
       title: o.title,
+      creator: "Original",
       language: o.language,
       date: o.date,
       creativeCommons: o.creativeCommons
@@ -46,9 +47,11 @@ function(o, req) {
     });
   }
   var unit = {next: 0};
+  var first=true;
   do {
     unit = hexapla.getUnitVersions(unit.next);
-    data.units.push({versions: unit.versions});
+    data.units.push({versions: unit.versions, first:first});
+    first=false;
   } while (unit.next);
   data.name="work";
   data.css=true;

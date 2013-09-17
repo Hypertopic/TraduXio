@@ -26,7 +26,7 @@
   }
 
   function translationsNumber() {
-    return $(".pleat.open").length;
+    return $("#hexapla .header tr:first-child .pleat.open").length;
   }
 
   function positionPleats() {
@@ -99,12 +99,12 @@
 
   $(document).ready(function() {
 
-    $(".pleat.open button.hide").on("click", function() {
+    $("#hexapla").on("click", ".pleat.open .button", function() {
       toggleShow($(this).getTranslationNumber("th"));
     });
 
-    $("table").on("click", ".pleat.close",function() {
-      toggleShow($(this).index()+1-translationsNumber());
+    $("#hexapla").on("click", ".pleat.close .button", function() {
+      toggleShow($(this).getTranslationNumber("th")-translationsNumber());
     });
 
     var getEndLine=function (units,index) {
@@ -120,23 +120,37 @@
       
     }
 
+    var createJoin=function(unit1,unit2) {
+        var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
+        var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
+        unit2.prepend(join);
+        join.on("mouseleave",function(){$(".unit").removeClass("tomerge");});
+    }
+
     var highlightLines = function() {
+      downlightLines(); 
       var transNum=$(this).getTranslationNumber("td");
 	var units=findUnits($(this).getTranslationNumber("td"));
         var unit=$(this).closest(".unit");
+        unit.addClass("active");
 	var currLine=unit.data("line");
 	var currIndex=units.index(unit);
         var lastLine=getEndLine(units,currIndex);
       if (currIndex>0) {
-        var join=$("<span/>").addClass("join").attr("title","merge with previous");
-        unit.prepend(join);
+        var prevUnit=units.eq(currIndex-1);
+        createJoin(prevUnit,unit);
       }
+      if (currIndex<units.length-1) {
+        var nextUnit=units.eq(currIndex+1);
+        createJoin(unit,nextUnit);
+      }
+      unit.find(".split").remove();
       var maxLines=$("#hexapla").data("lines");
       if (currLine<lastLine && currLine<maxLines) {
         for (var i=currLine+1; i<=lastLine; ++i) {
 	  var split=$("<span/>").addClass("split").attr("title","split").data("line",i);
-          var offset=0.5*(i-currLine);
-          split.css("right","-"+offset+"em").css("z-index",99);
+          //var offset=0.5*(i-currLine);
+          //split.css("right","-"+offset+"em").css("z-index",99);
 	  unit.append(split);
         }
       }
@@ -159,11 +173,11 @@
     }
     
     var downlightLines = function () {
-      $(".unit").removeClass("highlight").removeClass("partial").removeClass("included").find(".join").remove();
+      $(".unit").removeClass("highlight partial included active").find(".join").remove().end().find(".split").remove();
     }
 
-    $("tr").on({ mouseenter:highlightLines,mouseleave:downlightLines},".unit:not(.edit)");
-    $("tr").on("dblclick",".unit",function() {
+    $("#hexapla").on({ mouseenter:highlightLines,"mouseleave":function(){$(".unit.tomerge").removeClass("tomerge");}},".unit:not(.edit)");
+    $("#hexapla").on("dblclick",".unit",function() {
         $(".unit").has("textarea").each(unedit);
         $(this).addClass("edit").find("span").remove();
         var textarea=$("<textarea/>");
@@ -227,15 +241,26 @@
       return $(units.eq(units.index(unit)-1));
     }
 
-    $("tr").on({mouseenter:function() {
-	getPreviousUnit($(this).closest(".unit")).addClass("tomerge");
+    $("#hexapla").on({
+      "mouseleave":function(e) {
+        e.stopPropagation();
+        downlightLines();
+        var unit=$(this).closest(".unit");
+        unit.removeClass("tomerge");
+	getPreviousUnit(unit).removeClass("tomerge");
+        $("#hexapla").find(".join").remove();
       },
-      mouseleave:function() {
-	getPreviousUnit($(this).closest(".unit")).removeClass("tomerge");
+      mouseenter:function(e) {
+        e.stopPropagation();
+        var unit=$(this).closest(".unit");
+        unit.addClass("tomerge");
+	getPreviousUnit(unit).addClass("tomerge");
       }
     },".join");
     
-    $("tr").on({mouseenter:function() {
+    $("#hexapla").on({mouseenter:function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         var unit=$(this).closest(".unit");
         $(".unit").not(unit).find(".split").remove();
         var line=$(this).data("line");
@@ -244,14 +269,15 @@
         }
         $(".unit[data-line="+line+"]").addClass("tosplit");
       },
-      mouseleave:function() {
+      "mouseleave":function() {
         var line=$(this).data("line");
         $(".unit[data-line="+line+"]").removeClass("tosplit");
       }
     },".split");
 
 
-    $("tr").on("click", ".join", function() {
+    $("tr").on("click", ".join", function(e) {
+      e.stopPropagation();
       var unit=$(this).closest(".unit");
       var translationNumber=unit.getTranslationNumber("td");
       editOnServer("null", $(this).closest(".unit").getReference())
@@ -262,6 +288,7 @@
             var thisRow=unit.closest("tr");
             var previousRow=previousUnit.closest("tr");
             previousUnit.append(" "+unit.html()).removeClass("tomerge");
+            $(".join").remove();
 	    unit.remove();
             if (!previousRow.is(thisRow)) {
               mergeRows(previousRow,thisRow);
@@ -270,7 +297,8 @@
         });
     });
 
-    $("tr").on("click", ".split", function() {
+    $("tr").on("click", ".split", function(e) {
+      e.stopPropagation();
       var unit=$(this).closest(".unit");
       var line=$(this).data("line");
       var version=unit.data("version");
@@ -298,7 +326,7 @@
 
     const N = $("thead.header th.pleat.open").length;
     for (var i = 1; i<=N; i++) {
-      addPleat(i);
+      //addPleat(i);
     }
     for (var i = 3; i<=N; i++) {
       toggleShow(i);

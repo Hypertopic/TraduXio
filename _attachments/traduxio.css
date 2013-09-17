@@ -1,6 +1,14 @@
 * {margin:0px; padding:0px; 
    -moz-box-sizing:border-box; 
    box-sizing:border-box; }
+table, td, tr, th {
+  /* firefox doesn't box-sizes table elements,
+  so we switch back to default on all browsers
+  for consistency */
+  box-sizing:initial;
+  -o-box-sizing:initial;
+  -webkit-box-sizing:initial;
+}
 a {color:inherit; text-decoration:none; }
 .align-left { float:left; }
 .align-right { float:right; }
@@ -20,6 +28,7 @@ a {color:inherit; text-decoration:none; }
 /*pagination*/
 body,html {
   height:100%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 #body {
@@ -142,4 +151,10 @@ li.foldable.closed {
 
 li.closed > * {
   display:none;
+}
+
+.relative-wrapper {
+  position:relative;
+  height:100%;
+  width:100%;
 }
