@@ -1,5 +1,4 @@
 function(head, req) {
-  // !json templates.works
   // !code lib/mustache.js
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
   var data = {languages:[]};

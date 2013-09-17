@@ -46,6 +46,7 @@ function(head, req) {
     query: req.query.query,
     occurrences:[]
   };
+  if (req.query.query) {
   while (row = getRow()) {
     var translation_id = row.value.translation;
     var line_number = row.value.unit; 
@@ -80,6 +81,7 @@ function(head, req) {
         push(data.occurrences, original, getTranslation(work, t), line_number, original_header, getHeaders(work, t));
       }
     }
+  }
   }
   data.name="concordance";
   data.css=true;

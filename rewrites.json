@@ -2,7 +2,8 @@
   "from": "concordance",
   "to": "_list/concordance/concordance",
   "query": {
-    "include_docs": "true"
+    "include_docs": "true",
+    "limit":"100"
   }
 },{
   "from": "languages",
