@@ -24,3 +24,51 @@ $.fn.concordancify = function(default_language, default_query) {
   });
 }
 
+var languagesNames;
+var currentLanguage='fr';
+
+function getLanguageName(id,target) {
+  var result=id;
+  target=target || currentLanguage;
+  if (languagesNames[id]) {
+    var list=languagesNames[id];
+    if(list[target]) {
+      return list[target];
+    } else if (list['en']) {
+      return list['en'];
+    } else if (list[id]) {
+      return list[id];
+    } else {
+      result=list[Object.keys(list)[0]];
+    }
+  }
+  return result;
+}
+
+function getLanguageNames(callback) {
+  if (! languagesNames) {
+    $.getJSON("shared/languages.json",function(result) {
+      languagesNames=result;
+      callback(true);
+    });
+  } else {
+     callback(true);
+  }
+}
+
+$(document).ready(function() {
+  getLanguageNames(function() {
+    $(".language").each(function() {
+      var lang=this;
+      var langID=$(lang).data("id");
+      var langName=getLanguageName(langID);
+      if ($(lang).is(".expand")) {
+	$(lang).text(langName);
+	$(lang).attr('title',langID);
+      } else {
+	$(lang).attr('title',langName);
+      }
+    });
+  });
+});
+

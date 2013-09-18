@@ -9,7 +9,7 @@
           <div class="creator">{{creator}}</div>
           <div class="meta group">
 	    <div class="date">{{date}}</div>
-	    <div class="language">{{language}}</div>
+	    <div class="language expand" data-id="{{language}}">{{language}}</div>
           </div>
           <span class="button hide">Cacher</span>
         </div></th>
@@ -29,8 +29,8 @@
       {{#first}}
       {{#headers}}
         <td class="pleat close" rowspan="{{units.length}}">
-          <div class="creator">{{creator}}</div>
-          <div class="language">{{language}}</div>
+          <div class="creator">{{#creator}}{{creator}}{{/creator}}{{^creator}}{{work_creator}}{{/creator}}</div>
+          <div class="language" data-id="{{language}}">{{language}}</div>
         </td>
       {{/headers}}
       {{/first}}
