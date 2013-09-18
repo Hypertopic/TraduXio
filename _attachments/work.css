@@ -76,6 +76,9 @@ table#hexapla {
   display:none;
   width:50px;
   height:50px;
+  min-width:50px;
+  min-height:50px;
+  max-width:50px;
 }
 
 #hexapla td.pleat.close {
@@ -167,26 +170,18 @@ textarea {
   width:32px;
   height:32px;
   cursor:pointer;
-  padding:2px;
   border:1px solid black;
+  z-index:99;
 }
 
 #hexapla .unit .join {
-  background-image:url(merge-32.png);
   right:-32px;
-  top:-16px;
+  background-image:url(merge.png);
 }
 
 #hexapla .unit .split {
-  padding:2px;
-  cursor:pointer;
-  margin-left:0.5em;
-  position:absolute;
-  bottom:-2em;
-}
-
-#hexapla .unit .split {
-  position:relative;
+  background-image:url(split.png);
+  bottom:-32px;
 }
 
 #hexapla .unit.tomerge, #hexapla .unit.tosplit,#hexapla .unit.highlight.included.tosplit {
@@ -229,6 +224,7 @@ textarea {
   cursor:pointer;
   text-indent: 100%;
   overflow:hidden;
+  z-index:99;
 }
 
 .footer .pleat .button {

@@ -149,8 +149,8 @@
       if (currLine<lastLine && currLine<maxLines) {
         for (var i=currLine+1; i<=lastLine; ++i) {
 	  var split=$("<span/>").addClass("split").attr("title","split").data("line",i);
-          //var offset=0.5*(i-currLine);
-          //split.css("right","-"+offset+"em").css("z-index",99);
+          var offset=48*(i-currLine);
+          split.css("left",offset+"px");
 	  unit.append(split);
         }
       }
@@ -177,7 +177,7 @@
     }
 
     $("#hexapla").on({ mouseenter:highlightLines,"mouseleave":function(){$(".unit.tomerge").removeClass("tomerge");}},".unit:not(.edit)");
-    $("#hexapla").on("dblclick",".unit",function() {
+    $("#hexapla").on("dblclick",".unit:not(.edit)",function() {
         $(".unit").has("textarea").each(unedit);
         $(this).addClass("edit").find("span").remove();
         var textarea=$("<textarea/>");
