@@ -12,7 +12,7 @@ function(o, req) {
   var data = {
     id: o._id,
     work_title: o.title,
-    work_creator: o.creator,
+    work_creator: o.creator?o.creator:"Anonymus",
     work_language: o.language,
     lines: getTextLength(),
     headers: [],
@@ -26,7 +26,6 @@ function(o, req) {
     })
     data.headers.push({
       title: o.title,
-      creator: "Original",
       language: o.language,
       date: o.date,
       creativeCommons: o.creativeCommons
