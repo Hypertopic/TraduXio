@@ -1,0 +1,169 @@
+* {margin:0px; padding:0px; 
+   -moz-box-sizing:border-box; 
+   box-sizing:border-box; }
+table, td, tr, th {
+  /* firefox doesn't box-sizes table elements,
+  so we switch back to default on all browsers
+  for consistency */
+  box-sizing:initial;
+  -o-box-sizing:initial;
+  -webkit-box-sizing:initial;
+}
+a {color:inherit; text-decoration:none; }
+.align-left { float:left; }
+.align-right { float:right; }
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  zoom: 1; /* IE6&7 */
+}
+
+/*pagination*/
+body,html {
+  height:100%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+#body {
+  min-height:100%;
+  position:relative;
+}
+
+#main {
+  padding-bottom:3em;
+  position:relative;
+}
+
+#header {
+  font-size:1em;
+  color:#fff;
+  background-color:#333;
+}
+
+#footer {
+  color:#fff;
+  background-color:#333;
+  font-size:1em;
+  font-weight:bold;
+  width:100%;
+  position:absolute;
+  z-index:99;
+  bottom:0px;
+  height:2em;
+}
+
+#footer > div {
+  padding:0.4em;
+}
+
+#header ul#nav {
+  float:left;
+  padding:0px;
+  margin-top:0.4em;
+}
+
+#work h1 {
+  background-color:#888;
+  color:#fff;
+  padding:0.5em;
+  margin-bottom:1em;
+}
+
+/*textarea {
+  width:100%;
+  box-sizing:border-box;
+  border:none;
+}*/
+
+#header li,
+#header div {
+  padding:0.5em;
+}
+
+#nav li {
+  display:inline-block;
+  list-style:none;
+  margin-left:1em;
+  padding:0.5em;
+  font-weight:bold;
+}
+
+#nav li a {
+  color:#fff;
+  text-decoration:none;
+}
+
+#nav li:hover {
+  background-color:#666;
+}
+
+#header form.concordance,
+#header #logo {
+  float:right;
+  margin-right:2em;
+  font-size:1.2em;
+  font-weight:bold;
+}
+
+#works li.works,
+#work li.work,
+#concordance li.concordance,
+#myworks li.myworks,
+#home li.home {
+  background-color:#888;
+}
+
+form.concordance input#query {
+  border-radius:0.7em;
+  border-style:solid;
+  height:1.5em;
+  margin:0.5em;
+}
+
+form.concordance button.submit {
+  background-image: url(magnifier.png);
+  background-color:#fff;
+  background-repeat:no-repeat;
+  border-radius:12px;
+  border-width:0px;
+  background-position: left center;
+  width:24px;
+  height:24px;
+  text-indent:100%;
+  overflow:hidden;
+}
+
+ul {
+  padding-left:1em;
+  margin-left:0.5em;
+}
+
+li {
+  list-style-image: url("list-square-small.png");
+}
+
+li.foldable {
+  list-style-image: url("open_list_item.gif");
+  cursor: pointer;
+}
+
+li.foldable.closed {
+  list-style-image: url("closed_list_item.gif");
+}
+
+li.closed > ul {
+  display:none;
+}
+
+.relative-wrapper {
+  position:relative;
+  height:100%;
+  width:100%;
+}

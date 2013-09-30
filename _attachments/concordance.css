@@ -1,0 +1,36 @@
+table.concordance {
+  border-collapse:collapse;
+  width:100%;
+}
+
+table.concordance tr:nth-child(2n) td {
+  background-color: #ddd;
+}
+
+table.concordance td {
+  border-bottom: 1px solid black;
+  padding:0.5em 1em;
+}
+
+table.concordance td.metadata {
+  padding:0.5em;
+  color:#888;
+  white-space:nowrap
+}
+
+td.metadata > div {
+  margin-top:0.5em;
+}
+
+td.metadata .creator {
+  color:#000;
+}
+
+td.metadata a {
+  color:#000;
+}
+
+td.metadata a:hover {
+  color:#333;
+  text-decoration:underline;
+}

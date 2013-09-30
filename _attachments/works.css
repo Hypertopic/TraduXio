@@ -1,0 +1,95 @@
+/* fixed height layout : http://www.hacksrus.net/files/demo.html */
+
+body#works #header {
+  position:absolute;
+  width:100%;
+}
+
+body#works #main {
+  position:absolute;
+  top:4em;
+  bottom:3em;
+  width:100%;
+}
+
+body#works #main > *{
+  position:relative;
+  float:left;
+}
+
+body#works #footer {
+  position:absolute;
+  bottom:0px;
+}
+
+div#works-list {
+  width:55%;
+}
+
+div#latests {
+  width:0%;
+}
+
+div#citation {
+  padding: 2% 18px;
+  text-align: justify;
+  font-size: 0.8em;
+  background-image: url("citation-mark.gif");
+  background-repeat: no-repeat;
+}
+
+div#citation span.author {
+  display: block;
+  text-align: right;
+}
+
+div#lead {
+  border-right: 4px dotted;
+  padding-left: 1%;
+  padding-right: 1%;
+  text-align: center;
+  width:40%;
+  min-height:80%;
+  top:10%;
+  max-width:500px;
+}
+
+div #lead > * {
+  max-width:400px;
+  display:inline-block;
+  margin:5px 0;
+}
+
+#lead img {
+  width:100%;
+  max-width:269px;
+}
+
+
+div.list {
+  margin-top:1%;
+  margin-left:2%;
+}
+
+div.list div.content {
+  border:2px solid black;
+  height:85%;
+  width:95%;
+  overflow:auto;
+  clear:both;
+  padding-left:0.5em;
+}
+
+div.content li {
+  margin-top:0.5em;
+}
+
+div.list span.title {
+  padding:0.5em;
+  float:left;
+  border:2px solid black;
+}
+
+#lead .logo {
+  font-size:4em;
+}
