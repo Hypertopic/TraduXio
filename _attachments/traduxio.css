@@ -158,7 +158,7 @@ li.foldable.closed {
   list-style-image: url("closed_list_item.gif");
 }
 
-li.closed > * {
+li.closed > ul {
   display:none;
 }
 
