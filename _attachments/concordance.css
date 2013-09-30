@@ -14,4 +14,23 @@ table.concordance td {
 
 table.concordance td.metadata {
   padding:0.5em;
+  color:#888;
+  white-space:nowrap
+}
+
+td.metadata > div {
+  margin-top:0.5em;
+}
+
+td.metadata .creator {
+  color:#000;
+}
+
+td.metadata a {
+  color:#000;
+}
+
+td.metadata a:hover {
+  color:#333;
+  text-decoration:underline;
 }

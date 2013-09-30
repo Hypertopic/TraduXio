@@ -120,15 +120,24 @@ body,html {
   background-color:#888;
 }
 
-form.concordance input {
-  padding-left:25px;
-  background-image: url(magnifier.png);
-  background-repeat:no-repeat;
-  background-position: left center;
+form.concordance input#query {
   border-radius:0.7em;
   border-style:solid;
   height:1.5em;
   margin:0.5em;
+}
+
+form.concordance button.submit {
+  background-image: url(magnifier.png);
+  background-color:#fff;
+  background-repeat:no-repeat;
+  border-radius:12px;
+  border-width:0px;
+  background-position: left center;
+  width:24px;
+  height:24px;
+  text-indent:100%;
+  overflow:hidden;
 }
 
 ul {

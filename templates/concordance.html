@@ -6,15 +6,19 @@
       <td>{{{mapping}}}</td>
       <td class="metadata">
         {{#original}} 
-          {{creator}} <br/>
-          <a href="{{work_id}}">{{title}}</a><br/>
-          {{#publisher}}{{publisher}}<br/>{{/publisher}}
-          {{#date}}{{date}}<br/>{{/date}}
+        <div class="original">
+          <div class="creator">{{creator}}</div>
+          <div class="title"><a href="{{work_id}}">{{title}}</a></div>
+          <div>{{#publisher}}<span class="publisher">{{publisher}}</span>{{/publisher}}
+          {{#date}}{{#publisher}}, {{/publisher}}<span class="data">{{date}}</span>{{/date}}</div>
+        </div>
         {{/original}}
         {{#translation}}
-          Trad. {{creator}} <br/>
-          {{#publisher}}{{publisher}}<br/>{{/publisher}}
-          {{#date}}{{date}}<br/>{{/date}}
+        <div class="translation">
+          <div class="creator">Trad. {{creator}}</div>
+          <div>{{#publisher}}<span class="publisher">{{publisher}}</span>{{/publisher}}
+          {{#date}}{{#publisher}}, {{/publisher}}<span class="data">{{date}}</span>{{/date}}</div>
+         </div>
         {{/translation}}
       </td>
     </tr>

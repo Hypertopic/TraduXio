@@ -1,19 +1,27 @@
-$.fn.concordancify = function(default_language, default_query) {
+$.fn.concordancify = function() {
+  
+  default_language=$("body").data("language") || currentLanguage;
+  default_query=$("body").data("query") || "";
 
-  this.append('<input id="query" type="search" placeholder="Rechercher" value="'
+  this.append('<input id="query" type="search" results="5" name="query" placeholder="Rechercher" value="'
     +  default_query + '" />');
-  this.append('<select id="language" />');
+  this.append('<button class="submit icon-search">Rechercher</div>');
+  this.append('<select id="language" name="language"/>');
+  
+  var form=this; 
 
-  $.getJSON("languages", function(result) {
-    $.each(result.rows, function(i, o) {
-      $("#language").append("<option>" + o.key + "</option>");
-    });
-    $("#language").val(default_language);
-  }); 
-
-  this.submit(function(event) { //TODO jQuery 2
+  getLanguageNames(function() {
+    $.getJSON("languages", function(result) {
+      $.each(result.rows, function(i, o) {
+	$("#language",form).append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
+      });
+      $("#language",form).val(default_language);
+    }); 
+  });
+  
+  var submitForm=function(event) { //TODO jQuery 2
     event.preventDefault();
-    var query = $(this).find('#query').val().toLowerCase();
+    var query = form.find('#query').val().toLowerCase();
     var language = $("#language").val();
     window.location.href = 'concordance?' + $.param({
       startkey: '["' + language + '","' + query + '"]',
@@ -21,6 +29,14 @@ $.fn.concordancify = function(default_language, default_query) {
       query: query,
       language: language
     });
+  }
+
+  this.on("submit",submitForm);
+  $(".submit",form).on("click",submitForm);
+  $("#language",form).on("keypress",function(e) {
+      if(e.which == 13) {
+	  submitForm(e);
+      }
   });
 }
 
@@ -70,5 +86,6 @@ $(document).ready(function() {
       }
     });
   });
+  $("form.concordance").concordancify();
 });
 
