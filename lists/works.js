@@ -1,5 +1,4 @@
 function(head, req) {
-  // !json templates.works
   // !code lib/mustache.js
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
   var data = {languages:[]};
@@ -39,6 +38,9 @@ function(head, req) {
   }
   languageData.authors.push(authorData);
   data.languages.push(languageData);
-  return Mustache.to_html(templates.works, data);
+  data.name="works";
+  data.scripts=["ul-close"];
+  data.css=true;
+  return Mustache.to_html(this.templates.works, data,this.templates.partials);
 }
 

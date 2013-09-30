@@ -1,145 +1,47 @@
-<html>
-<head>
-  <title>{{work_creator}} : {{work_title}} — TraduXio</title>
-  <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>  
-  <script src="shared/traduxio.js"></script>  
-  <script type="text/javascript">
-
-  $.fn.toggleName = function(name1, name2) {
-    this.text(
-      (this.text()==name1)? name2 : name1
-    );
-  }
-
-  function find(parentType, translationNumber, type) {
-    return $("tr").find(parentType + ":nth-child(" + translationNumber + ")")
-      .find(type);
-  }
-
-  function findUnits(translationNumber) {
-    return find("td", translationNumber, ".unit");
-  }
-
-  function toggleShow(translationNumber) {
-    findUnits(translationNumber).toggle();
-    find("th", translationNumber, ".toggle").toggleName("Afficher", "Cacher");
-  }
-
-  $.fn.isEdited = function() {
-    return this.find("textarea").length>0;
-  }
-
-  function htmlToString(unit) {
-    return unit.html()
-      .replace(/<\/div><div>/g, "\n")
-      .replace("<div>", "")
-      .replace("</div>", "");
-  }
-
-  function stringToHtml(formattedString) {
-     return "<div>" 
-      + formattedString.replace(/\n/g, "</div><div>")
-      + "</div>";
-  }
-
-  $.fn.getTranslationNumber = function(ancestor) {
-    return this.closest(ancestor).index() + 1;
-  }
-
-  $.fn.getReference = function() {
-    return {
-      version: this.data("version"),
-      line: this.data("line")
-    }
-  }
-
-  $(document).ready(function() {
-
-    $("form").concordancify("{{work_language}}", "");
-   
-    $(".toggle").on("click", function() {
-      toggleShow($(this).getTranslationNumber("th"));
-    });
-
-    $(".edit").on("click", function() {
-      $(this).toggleName("Lire", "Éditer");
-      var units = findUnits($(this).getTranslationNumber("th"))
-      units.each(function(index) {
-        if ($(this).isEdited()) {
-          $(this).html(stringToHtml($(this).find("textarea").val()));
-        } else {
-          $(this).html("<textarea>" + htmlToString($(this)) + "</textarea>");
-          if (index!=0) {
-            $(this).append('<button class="join">X</button>');
-          }
-          var current_line = $(this).data("line")+1;
-          var lines = $("body").data("lines");
-          if (current_line<lines) {
-            var next_unit = units.eq(index+1);
-            var max_lines_to_split = (next_unit.length==0)? lines : next_unit.data("line");
-            for (var i = current_line; i<max_lines_to_split; i++) {
-              $(this).append(
-                '<button class="split" data-line="' + i + '">+</button>'
-              );
-            }
-          }
-        }
-      });
-    });
-
-    var editOnServer = function(content, reference) {
-      return $.ajax({
-        type: "PUT",
-        url: "version/{{id}}?"+ $.param(reference),
-        contentType: "text/plain",
-        data: content
-      });
-    }
-
-    $(".unit").on("click", ".join", function() {
-      editOnServer("null", $(this).closest(".unit").getReference())
-        .done(function() {
-          location.reload();
-        });
-    });
-
-    $(".unit").on("click", ".split", function() {
-      editOnServer("", {
-        version:$(this).closest(".unit").data("version"),
-        line: $(this).data("line")
-      }).done(function() {
-        location.reload();
-      });
-    });
-
-    $(".unit").on("focusout", function() {
-      editOnServer($(this).find("textarea").val(), $(this).getReference());
-    });
-
-    const N = $("th").length;
-    for (var i = 3; i<=N; i++) {
-      toggleShow(i);
-    }
-
-  });
-
-  </script>
-</head>
-<body data-lines="{{lines}}">
-  <nav>
-    <ul>
-      <li><a href=".">Œuvres</a></li>
-    </ul>
-  </nav>
-  <form></form>
+{{> header}}
   <h1>{{work_title}} – {{work_creator}}</h1>
-  <table>
-    <tr>
+  <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}">
+    <thead class="header"><tr>
       {{#headers}}
-        <th>
-          {{title}}<br/>
-          {{work_creator}}<br/>
-          {{language}} — {{creator}} {{date}}<br/>
+        <th class="pleat open"><div class="relative-wrapper">
+          <div class="title"> {{title}}</div>
+          <div class="work-creator">{{work_creator}}</div>
+          <div class="creator">{{creator}}</div>
+          <div class="meta group">
+	    <div class="date">{{date}}</div>
+	    <div class="language expand" data-id="{{language}}">{{language}}</div>
+          </div>
+          <span class="button hide">Cacher</span>
+        </div></th>
+      {{/headers}}
+      {{#headers}}
+        <th class="pleat close"><div class="relative-wrapper">
+          <span class="button show">Montrer</span>
+        </div></th>
+      {{/headers}}
+    </tr></thead>
+    <tbody>
+    {{#units}}
+    <tr>
+      {{#versions}}
+        <td class="pleat open">{{{.}}}</td>
+      {{/versions}}
+      {{#first}}
+      {{#headers}}
+        <td class="pleat close" rowspan="{{units.length}}">
+          <div class="creator">{{#creator}}{{creator}}{{/creator}}{{^creator}}{{work_creator}}{{/creator}}</div>
+          <div class="language" data-id="{{language}}">{{language}}</div>
+        </td>
+      {{/headers}}
+      {{/first}}
+    </tr>
+    {{/units}}
+    </tbody>
+    <thead class="footer"><tr>
+    {{#headers}}
+      <th class="pleat open">
+        <div class="relative-wrapper">
+          <div class="license">
           {{#creativeCommons}}
             <a href="http://creativecommons.org/licenses/{{creativeCommons}}/3.0/fr">
               <img src="http://i.creativecommons.org/l/{{creativeCommons}}/3.0/88x31.png"/>
@@ -148,19 +50,19 @@
           {{^creativeCommons}}
             Tous droits réservés.
           {{/creativeCommons}}
-          <br/>
-          <button class="toggle">Cacher</button>
-          <button class="edit">Éditer</button>
+          </div>
+          <!--div class="button">Cacher</div-->
+        </div>
+      </th>
+    {{/headers}}
+      {{#headers}}
+        <th class="pleat close">
+	  <div class="relative-wrapper">
+	    <!--div class="button">Montrer</div-->
+          </div>
         </th>
       {{/headers}}
-    </tr>
-    {{#units}}
-    <tr>
-      {{#versions}}
-        <td>{{{.}}}</td>
-      {{/versions}}
-    </tr>
-    {{/units}}
+    </tr></thead>
   </table>
-</body>
-</html>
+
+{{> footer}}

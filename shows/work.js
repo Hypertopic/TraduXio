@@ -1,5 +1,4 @@
 function(o, req) {
-  // !json templates.work
   // !code lib/mustache.js
   // !code lib/hexapla.js
 
@@ -13,7 +12,7 @@ function(o, req) {
   var data = {
     id: o._id,
     work_title: o.title,
-    work_creator: o.creator,
+    work_creator: o.creator?o.creator:"Anonymus",
     work_language: o.language,
     lines: getTextLength(),
     headers: [],
@@ -47,9 +46,15 @@ function(o, req) {
     });
   }
   var unit = {next: 0};
+  var first=true;
   do {
     unit = hexapla.getUnitVersions(unit.next);
-    data.units.push({versions: unit.versions});
+    data.units.push({versions: unit.versions, first:first});
+    first=false;
   } while (unit.next);
-  return Mustache.to_html(templates.work, data);
+  data.name="work";
+  data.css=true;
+  data.script=true;
+  data.language=data.work_language;
+  return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }

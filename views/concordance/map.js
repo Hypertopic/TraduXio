@@ -7,10 +7,12 @@ function(o) {
   const WORD_MATCHER = /\S+/g;
   for (var i in o.text) {
     var text = o.text[i];
-    var match;
-    while ((match = WORD_MATCHER.exec(text))) {
-      var begin = match.index;
-      emit([o.language, format(text, begin)], {unit: i, char: begin});
+    if (text) {
+      var match;
+      while ((match = WORD_MATCHER.exec(text))) {
+	var begin = match.index;
+	emit([o.language, format(text, begin)], {unit: i, char: begin});
+      }
     }
   }
   for (var t in o.translations) {

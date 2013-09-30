@@ -1,0 +1,33 @@
+<html>
+<head>
+  <title>{{work_creator}} : {{work_title}} — TraduXio</title>
+  <link rel="stylesheet" href="shared/traduxio.css" type="text/css" />
+  {{#css}} 
+  <link rel="stylesheet" href="shared/{{name}}.css" type="text/css" />
+  {{/css}} 
+  <script src="shared/jquery.js"></script>  
+  <script src="shared/traduxio.js"></script> 
+  {{#script}} 
+  <script type="text/javascript" src="shared/{{name}}.js"></script>
+  {{/script}} 
+  {{#scripts}} 
+  <script type="text/javascript" src="shared/{{.}}.js"></script>
+  {{/scripts}} 
+	<!--[if lt IE 7]>
+	<style media="screen" type="text/css">
+	body {
+		height:100%;
+	}
+	</style>
+	<![endif]-->
+</head>
+<body id="{{name}}" data-language="{{language}}" data-query="{{query}}">
+  <div id="body">
+    <div id="header" class="group">
+	<ul id="nav">
+	  <li class="work works"><a href=".">Œuvres</a></li><li class="myworks"><a href="#">Mes traductions</a></li><li class="concordance"><a href="concordance">Concordance</a></li>
+	</ul>
+      <form class="concordance"></form>
+      <div id="logo">TraduXio</div>
+    </div>
+    <div id="main" class="group">
