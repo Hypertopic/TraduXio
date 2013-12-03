@@ -72,6 +72,10 @@ function getLanguageNames(callback) {
   }
 }
 
+$.fn.outerHtml = function() {
+  return this.clone().wrap("<div>").parent().html();
+}
+
 $(document).ready(function() {
   getLanguageNames(function() {
     $(".language").each(function() {

@@ -14,11 +14,6 @@
           <span class="button hide">Cacher</span>
         </div></th>
       {{/headers}}
-      {{#headers}}
-        <th class="pleat close"><div class="relative-wrapper">
-          <span class="button show">Montrer</span>
-        </div></th>
-      {{/headers}}
     </tr></thead>
     <tbody>
     {{#units}}
@@ -26,14 +21,6 @@
       {{#versions}}
         <td class="pleat open">{{{.}}}</td>
       {{/versions}}
-      {{#first}}
-      {{#headers}}
-        <td class="pleat close" rowspan="{{units.length}}">
-          <div class="creator">{{#creator}}{{creator}}{{/creator}}{{^creator}}{{work_creator}}{{/creator}}</div>
-          <div class="language" data-id="{{language}}">{{language}}</div>
-        </td>
-      {{/headers}}
-      {{/first}}
     </tr>
     {{/units}}
     </tbody>
@@ -55,13 +42,6 @@
         </div>
       </th>
     {{/headers}}
-      {{#headers}}
-        <th class="pleat close">
-	  <div class="relative-wrapper">
-	    <!--div class="button">Montrer</div-->
-          </div>
-        </th>
-      {{/headers}}
     </tr></thead>
   </table>
 

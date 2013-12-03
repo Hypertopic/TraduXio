@@ -15,10 +15,20 @@
   }
 
   function addPleat(translationNumber) {
-    var pleat=$("<td/>").addClass("pleat").addClass("close").attr("rowspan",$("tbody tr").length).html(find("th.pleat.open" ,translationNumber).html());
-    $("table tbody tr:first-child").append(pleat);
-    var pleatRound=$("<th/>").addClass("pleat").addClass("close");
-    $("thead tr").append(pleatRound);
+    var pleat=$("<td/>").addClass("pleat").addClass("close").attr("rowspan",$("tbody tr").length);
+    pleat.append($("thead tr th.pleat.open:nth-child("+translationNumber+") .creator").clone(true,true));
+    var language=$("thead tr th.pleat.open:nth-child("+translationNumber+") .language").clone(true,true);
+    language.attr("title",language.html()).html(language.data("id")).removeClass("expand");
+    pleat.append(language);
+    $("table tbody tr:first-child td:nth-child("+translationNumber+")").after(pleat);
+    var pleatHead=$("<th/>").addClass("pleat").addClass("close").append(
+       $("<div>").addClass("relative-wrapper").append(
+            $("<span>").addClass("button show").html("Montrer")
+       )
+    );
+    $("thead.header tr th:nth-child("+translationNumber+")").after(pleatHead);
+    var pleatFoot=$("<th/>").addClass("pleat").addClass("close");
+    $("thead.footer tr th:nth-child("+translationNumber+")").after(pleatFoot);
   }
 
   function findUnits(translationNumber) {
@@ -66,10 +76,12 @@
   };
 
   function toggleShow(translationNumber) {
-    find("td",translationNumber).toggle();
-    findPleat("td",translationNumber).toggle();
-    find("th",translationNumber).toggle();
-    findPleat("th",translationNumber).toggle();
+    $("td:nth-child("+translationNumber+")",$("tbody tr").not("tbody tr:first-child"))
+	.add("td:nth-child("+(translationNumber*2-1)+")",$("tbody tr:first-child"))
+	.toggle();
+    $("tbody tr:first-child td:nth-child("+(translationNumber*2)+")").toggle();
+    $("thead tr th:nth-child("+(translationNumber*2-1)+")").toggle();
+    $("thead tr th:nth-child("+(translationNumber*2)+")").toggle();
     positionPleats();
   }
 
@@ -87,7 +99,8 @@
   }
 
   $.fn.getTranslationNumber = function(ancestor) {
-    return this.closest(ancestor).index() + 1;
+    return $(ancestor,$(this).closest("tr")).index($(this).closest(ancestor)) +1 ;
+    return this.closest(ancestor).index(ancestor) + 1;
   }
 
   $.fn.getReference = function() {
@@ -100,11 +113,13 @@
   $(document).ready(function() {
 
     $("#hexapla").on("click", ".pleat.open .button", function() {
-      toggleShow($(this).getTranslationNumber("th"));
+      if ($("thead.header th.pleat.open:visible").length > 1) {
+        toggleShow($(this).getTranslationNumber("th.open"));
+      }
     });
 
     $("#hexapla").on("click", ".pleat.close .button", function() {
-      toggleShow($(this).getTranslationNumber("th")-translationsNumber());
+      toggleShow($(this).getTranslationNumber("th.close"));
     });
 
     var getEndLine=function (units,index) {
@@ -129,8 +144,8 @@
 
     var highlightLines = function() {
       downlightLines(); 
-      var transNum=$(this).getTranslationNumber("td");
-	var units=findUnits($(this).getTranslationNumber("td"));
+      var transNum=$(this).getTranslationNumber("td.open");
+	var units=findUnits(transNum);
         var unit=$(this).closest(".unit");
         unit.addClass("active");
 	var currLine=unit.data("line");
@@ -192,7 +207,7 @@
 
     $(".edit").on("click", function() {
       $(this).toggleName("Lire", "Éditer");
-      var units = findUnits($(this).getTranslationNumber("th"))
+      var units = findUnits($(this).getTranslationNumber("th.open"))
       units.each(function(index) {
         if ($(this).isEdited()) {
           $(this).html(stringToHtml($(this).find("textarea").val()));
@@ -236,7 +251,7 @@
     }
 
     var getPreviousUnit=function(unit) {
-      var translationNumber=unit.getTranslationNumber("td");
+      var translationNumber=unit.getTranslationNumber("td.open");
       var units=findUnits(translationNumber);
       return $(units.eq(units.index(unit)-1));
     }
@@ -279,7 +294,7 @@
     $("tr").on("click", ".join", function(e) {
       e.stopPropagation();
       var unit=$(this).closest(".unit");
-      var translationNumber=unit.getTranslationNumber("td");
+      var translationNumber=unit.getTranslationNumber("td.open");
       editOnServer("null", $(this).closest(".unit").getReference())
         .done(function() {
           var units=findUnits(translationNumber);
@@ -325,8 +340,8 @@
     $("tr").on("focusout", ".unit", unedit);
 
     const N = $("thead.header th.pleat.open").length;
-    for (var i = 1; i<=N; i++) {
-      //addPleat(i);
+    for (var i = N; i>=1; i--) {
+      addPleat(i);
     }
     for (var i = 3; i<=N; i++) {
       toggleShow(i);
