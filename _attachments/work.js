@@ -1,42 +1,46 @@
 
   $.fn.toggleName = function(name1, name2) {
-    this.text(
-      (this.text()==name1)? name2 : name1
+    this.val(
+      (this.val()==name1)? name2 : name1
     );
   }
 
-  function find(parentType, translationNumber) {
-    return $("tr").find(parentType + ":nth-child(" + translationNumber + ")");
+  function find(version) {
+    return $(".pleat.open[data-version='"+version+"']");
   }
 
-  function findPleat(parentType, translationNumber) {
-    var offset=translationNumber + translationsNumber();
-    return $("tr").find(parentType + ":nth-child(" + offset + ")");
+  function findPleat(version) {
+    return $(".pleat.close[data-version='"+version+"']");
   }
 
-  function addPleat(translationNumber) {
-    var pleat=$("<td/>").addClass("pleat").addClass("close").attr("rowspan",$("tbody tr").length);
-    pleat.append($("thead tr th.pleat.open:nth-child("+translationNumber+") .creator").clone(true,true));
-    var language=$("thead tr th.pleat.open:nth-child("+translationNumber+") .language").clone(true,true);
+  function addPleat(version) {
+    var header=find(version).filter("th").first();
+    var pleat=$("<td/>").addClass("pleat").addClass("close").attr("rowspan",$("tbody tr").length).attr("data-version",version);
+    pleat.append(header.find(".creator").clone(true,true));
+    var language=header.find(".language").clone(true,true);
     language.attr("title",language.html()).html(language.data("id")).removeClass("expand");
     pleat.append(language);
-    $("table tbody tr:first-child td:nth-child("+translationNumber+")").after(pleat);
+    find(version).filter("td").first().after(pleat);
     var pleatHead=$("<th/>").addClass("pleat").addClass("close").append(
        $("<div>").addClass("relative-wrapper").append(
             $("<span>").addClass("button show").html("Montrer")
        )
-    );
-    $("thead.header tr th:nth-child("+translationNumber+")").after(pleatHead);
-    var pleatFoot=$("<th/>").addClass("pleat").addClass("close");
-    $("thead.footer tr th:nth-child("+translationNumber+")").after(pleatFoot);
+    ).attr("data-version",version);
+    header.after(pleatHead);
+    var pleatFoot=$("<th/>").addClass("pleat").addClass("close").attr("data-version",version);
+    find(version).last().after(pleatFoot);
   }
 
-  function findUnits(translationNumber) {
-    return find("td", translationNumber).find(".unit");
+  function findUnits(version) {
+    return find(version).find(".unit");
   }
 
-  function translationsNumber() {
-    return $("#hexapla .header tr:first-child .pleat.open").length;
+  function getVersions() {
+    var versions=[];
+    $("#hexapla .header tr:first-child .pleat.open").each(function() {
+      versions.push($(this).data("version"));
+    });
+    return versions;
   }
 
   function positionPleats() {
@@ -45,43 +49,16 @@
     //chromium has a bug, which requires to redraw the fixed elements
     closedPleats.children(":visible").redraw();
     return;
-    //in case other browsers needs to be said the position of pleats, the following code does it.
-    closedPleats.each(function() {
-      //var offset=$(this).nextAll(":visible").length;
-      var offset=(closedPleats.length-closedPleats.index(this)-1);
-      $(this).children(":visible").css("right",offset * 3+"em");
-    });
   }
-
-  //https://coderwall.com/p/ahazha
-  //does not work
-  $.fn.redraw = function(){
-    $(this).each(function(){
-      var redraw = this.offsetHeight;
-    });
-  };
-
-  //https://gist.github.com/hdragomir/740199
-  $.fn.redraw = function(){
-      return $(this).each(function(){
-	  var n = document.createTextNode(' ');
-	  $(this).append(n);
-	  setTimeout(function(){n.parentNode.removeChild(n)}, 0);
-      });
-  };
 
   //http://forrst.com/posts/jQuery_redraw-BGv
   $.fn.redraw = function() {
     return this.hide(0, function(){$(this).show()});
   };
 
-  function toggleShow(translationNumber) {
-    $("td:nth-child("+translationNumber+")",$("tbody tr").not("tbody tr:first-child"))
-	.add("td:nth-child("+(translationNumber*2-1)+")",$("tbody tr:first-child"))
-	.toggle();
-    $("tbody tr:first-child td:nth-child("+(translationNumber*2)+")").toggle();
-    $("thead tr th:nth-child("+(translationNumber*2-1)+")").toggle();
-    $("thead tr th:nth-child("+(translationNumber*2)+")").toggle();
+  function toggleShow(version) {
+    find(version).toggle();
+    findPleat(version).toggle();
     positionPleats();
   }
 
@@ -98,15 +75,15 @@
      return formattedString.replace("<","&lt").replace(">","&gt;").replace(/\n/g, "<br>");
   }
 
-  $.fn.getTranslationNumber = function(ancestor) {
+  $.fn.getVersion = function(ancestor) {
+    return this.closest(ancestor).data("version");
     return $(ancestor,$(this).closest("tr")).index($(this).closest(ancestor)) +1 ;
-    return this.closest(ancestor).index(ancestor) + 1;
   }
 
   $.fn.getReference = function() {
     return {
-      version: this.data("version"),
-      line: this.data("line")
+      version: this.closest(".unit").data("version"),
+      line: this.closest(".unit").data("line")
     }
   }
 
@@ -114,12 +91,12 @@
 
     $("#hexapla").on("click", ".pleat.open .button", function() {
       if ($("thead.header th.pleat.open:visible").length > 1) {
-        toggleShow($(this).getTranslationNumber("th.open"));
+        toggleShow($(this).getVersion("th.open"));
       }
     });
 
     $("#hexapla").on("click", ".pleat.close .button", function() {
-      toggleShow($(this).getTranslationNumber("th.close"));
+      toggleShow($(this).getVersion("th.close"));
     });
 
     var getEndLine=function (units,index) {
@@ -139,97 +116,68 @@
         var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
         var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
         unit2.prepend(join);
-        join.on("mouseleave",function(){$(".unit").removeClass("tomerge");});
     }
 
-    var highlightLines = function() {
-      downlightLines(); 
-      var transNum=$(this).getTranslationNumber("td.open");
-	var units=findUnits(transNum);
-        var unit=$(this).closest(".unit");
-        unit.addClass("active");
-	var currLine=unit.data("line");
-	var currIndex=units.index(unit);
-        var lastLine=getEndLine(units,currIndex);
+
+    var createJoins=function(unit) {
+      unit.find(".join").remove();
+      var version=unit.getVersion("td.open");
+      var units=findUnits(version);
+      var currIndex=units.index(unit);
       if (currIndex>0) {
-        var prevUnit=units.eq(currIndex-1);
-        createJoin(prevUnit,unit);
+	var prevUnit=units.eq(currIndex-1);
+	createJoin(prevUnit,unit);
       }
-      if (currIndex<units.length-1) {
-        var nextUnit=units.eq(currIndex+1);
-        createJoin(unit,nextUnit);
-      }
+    }
+    var createSplits=function(unit) {
       unit.find(".split").remove();
+      var version=unit.getVersion("td.open");
+      var units=findUnits(version);
+      var currIndex=units.index(unit);
+      var currLine=unit.data("line");
+      var lastLine=getEndLine(units,currIndex);
       var maxLines=$("#hexapla").data("lines");
+      var currPos=unit.position();
       if (currLine<lastLine && currLine<maxLines) {
-        for (var i=currLine+1; i<=lastLine; ++i) {
+	for (var i=currLine+1; i<=lastLine; ++i) {
 	  var split=$("<span/>").addClass("split").attr("title","split").data("line",i);
-          var offset=48*(i-currLine);
-          split.css("left",offset+"px");
+	  var position=$(".unit[data-line="+i+"]").position();
+	  split.css("top",(position.top-currPos.top)+"px");
 	  unit.append(split);
-        }
-      }
-      for (var i=1;i<=translationsNumber();i++) {
-        if (i!=transNum) {
-	  var origUnits=findUnits(i);
-	  origUnits.each(function(index) {
-	    var startLine=$(this).data("line");
-            var endLine=getEndLine(origUnits,index);
-            if (startLine==lastLine && endLine==currLine) {
-	      $(this).addClass("highlight");
-            } else if (startLine >=currLine && endLine <= lastLine) { //included
-	      $(this).addClass("highlight").addClass("included");
-            } else if (endLine>=currLine && startLine <= lastLine) { //overlaped
-	      $(this).addClass("highlight").addClass("partial");
-            }
-	  });
-        }
+	}
       }
     }
-    
-    var downlightLines = function () {
-      $(".unit").removeClass("highlight partial included active").find(".join").remove().end().find(".split").remove();
-    }
-
-    $("#hexapla").on({ mouseenter:highlightLines,"mouseleave":function(){$(".unit.tomerge").removeClass("tomerge");}},".unit:not(.edit)");
-    $("#hexapla").on("dblclick",".unit:not(.edit)",function() {
-        $(".unit").has("textarea").each(unedit);
-        $(this).addClass("edit").find("span").remove();
-        var textarea=$("<textarea/>");
-        textarea.html(htmlToString($(this))).
-          css({
-            "height":($(this).outerHeight())+"px"
-           ,"width":$(this).width()+"px"
-          });
-	$(this).empty().append(textarea);
-        textarea.focus();
-     });
-
-    $(".edit").on("click", function() {
-      $(this).toggleName("Lire", "Éditer");
-      var units = findUnits($(this).getTranslationNumber("th.open"))
-      units.each(function(index) {
+    var toggleEdit=function () {
+      $(this).toggleName("Lire", "Editer");
+      var version=$(this).getVersion("th.open");
+      var units = findUnits(version);
+      if (units.isEdited()) {
+        find(version).first().css("width","auto");
+      } else {
+        find(version).first().css("width",find(version).first().outerWidth()+"px");
+      }
+      units.each(function(currIndex) {
+        var unit=$(this);
         if ($(this).isEdited()) {
           $(this).html(stringToHtml($(this).find("textarea").val()));
+          unit.find(".split").remove();
+          unit.find(".join").remove();
+          unit.removeClass("edit");
         } else {
-          $(this).html("<textarea>" + htmlToString($(this)) + "</textarea>");
-          if (index!=0) {
-            $(this).prepend('<button class="join">X</button>');
-          }
-          var current_line = $(this).data("line")+1;
-          var lines = $("#hexapla").data("lines");
-          if (current_line<lines) {
-            var next_unit = units.eq(index+1);
-            var max_lines_to_split = (next_unit.length==0)? lines : next_unit.data("line");
-            for (var i = current_line; i<max_lines_to_split; i++) {
-              $(this).append(
-                '<button class="split" data-line="' + i + '">+</button>'
-              );
-            }
-          }
+	  $(this).addClass("edit").find("span").remove();
+	  var textarea=$("<textarea/>");
+	  textarea.html(htmlToString($(this)));
+/*	    .css({
+	      "height":($(this).outerHeight())+"px"
+	    });*/
+	  $(this).empty().append(textarea);
+          createJoins(unit);
+          createSplits(unit);
         }
       });
-    });
+    }
+
+    $(".edit").on("click",toggleEdit);
 
     var editOnServer = function(content, reference) {
       var id=$("#hexapla").data("id");
@@ -241,75 +189,34 @@
       });
     }
    
-    var mergeRows=function(tr1,tr2) {
-      var tds1=$(tr1).find("td");
-      var tds2=$(tr2).find("td");
-      for (var i=0;i<translationsNumber();i++) {
-        tds1.eq(i).append(tds2.eq(i).html());
-      }
-      tr2.remove();
-    }
-
     var getPreviousUnit=function(unit) {
-      var translationNumber=unit.getTranslationNumber("td.open");
-      var units=findUnits(translationNumber);
+      var version=unit.getVersion("td.open");
+      var units=findUnits(version);
       return $(units.eq(units.index(unit)-1));
     }
-
-    $("#hexapla").on({
-      "mouseleave":function(e) {
-        e.stopPropagation();
-        downlightLines();
-        var unit=$(this).closest(".unit");
-        unit.removeClass("tomerge");
-	getPreviousUnit(unit).removeClass("tomerge");
-        $("#hexapla").find(".join").remove();
-      },
-      mouseenter:function(e) {
-        e.stopPropagation();
-        var unit=$(this).closest(".unit");
-        unit.addClass("tomerge");
-	getPreviousUnit(unit).addClass("tomerge");
-      }
-    },".join");
-    
-    $("#hexapla").on({mouseenter:function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var unit=$(this).closest(".unit");
-        $(".unit").not(unit).find(".split").remove();
-        var line=$(this).data("line");
-        for (var i=1;i<translationsNumber();i++) {
-          
-        }
-        $(".unit[data-line="+line+"]").addClass("tosplit");
-      },
-      "mouseleave":function() {
-        var line=$(this).data("line");
-        $(".unit[data-line="+line+"]").removeClass("tosplit");
-      }
-    },".split");
-
 
     $("tr").on("click", ".join", function(e) {
       e.stopPropagation();
       var unit=$(this).closest(".unit");
-      var translationNumber=unit.getTranslationNumber("td.open");
-      editOnServer("null", $(this).closest(".unit").getReference())
-        .done(function() {
-          var units=findUnits(translationNumber);
-          var previousUnit=units.eq(units.index(unit)-1);
-          if (previousUnit) {
-            var thisRow=unit.closest("tr");
-            var previousRow=previousUnit.closest("tr");
-            previousUnit.append(" "+unit.html()).removeClass("tomerge");
-            $(".join").remove();
-	    unit.remove();
-            if (!previousRow.is(thisRow)) {
-              mergeRows(previousRow,thisRow);
-            }
-          }
+      var version=unit.getVersion("td.open");
+      var units=findUnits(version);
+      var previousUnit=units.eq(units.index(unit)-1);
+      if (previousUnit) {
+	editOnServer("null", $(this).closest(".unit").getReference())
+	  .done(function() {
+            var previousContent=previousUnit.find("textarea").val();
+            var thisContent=unit.find("textarea").val();
+            previousUnit.find("textarea").val(previousContent+"\n"+thisContent);
+            var thisLine=unit.data("line");
+            var prevLine=previousUnit.data("line");
+            var size=parseInt(unit.closest("td").attr("rowspan"));
+            var newSpan=thisLine-prevLine+size;
+            previousUnit.closest("td").attr("rowspan",newSpan);
+            unit.closest("td").remove();
+            createJoins(previousUnit);
+            createSplits(previousUnit);
         });
+      }
     });
 
     $("tr").on("click", ".split", function(e) {
@@ -321,30 +228,69 @@
         version:version,
         line: line
       }).done(function() {
-        var newUnit=$("<div/>");
-        unit.after(newUnit);
-        newUnit.addClass("unit").data("line",line).data("version",version);
-        unit.find(".split").remove();
+        var size=parseInt(unit.closest("td").attr("rowspan"));
+        var initialLine=unit.data("line");
+        var newUnit=$("<div/>").append("<textarea>");
+        newUnit.addClass("unit edit").data("line",line).attr("data-version",version);
+        $(this).remove();
+        var newTd=$("<td>").addClass("pleat open").attr("data-version",version).attr("rowspan",size-(line-initialLine)).append(newUnit);
+        unit.closest("td").attr("rowspan",line-initialLine);
+        var versions=getVersions();
+        var versionIndex=versions.indexOf(version);
+        if (versionIndex==0) {
+	  $(".unit[data-line="+line+"]").closest("tr").prepend(newTd);
+        } else if (versionIndex+1==versions.length) {
+	  $(".unit[data-line="+line+"]").closest("tr").append(newTd);
+        } else {
+	  var ok=false;
+	  $(".unit[data-line="+line+"]").each(function() {
+            var currVersion=$(this).data("version");
+	    if (versions.indexOf(currVersion) > versions.indexOf(version)) {
+	      $(this).closest("td").before(newTd);
+	      ok=true;
+	      return false;
+	    }
+	    if (versions.indexOf($(this).data("version")) +1 == versions.length) {
+	      $(this).closest("td").before(newTd);
+	    }
+	  });
+          if (!ok) {
+            alert("!ok");
+          }
+        }
+        createJoins(unit);
+        createSplits(unit);
+        createJoins(newUnit);
+        createSplits(newUnit);
         $(".tosplit").removeClass("tosplit");
       });
     });
 
     var unedit=function() {
-      var unit=this;
-      var content=$(unit).find("textarea").val();
-      editOnServer(content, $(unit).getReference()).done(function() {
+      var unit=$(this).closest(".unit");
+      saveUnit.apply(unit,function() {
          $(unit).html(stringToHtml(content)).removeClass("edit");
       });
     }
 
-    $("tr").on("focusout", ".unit", unedit);
-
-    const N = $("thead.header th.pleat.open").length;
-    for (var i = N; i>=1; i--) {
-      addPleat(i);
+    var saveUnit=function(callback) {
+      var content=$(this).find("textarea").val();
+      editOnServer(content, $(this).getReference()).done(function() {
+        if (callback) {
+           callback();
+        }
+      });
     }
-    for (var i = 3; i<=N; i++) {
-      toggleShow(i);
+
+    $("tr").on("focusout", ".unit.edit textarea", unedit);
+    
+    var versions=getVersions();
+    const N = versions.length;
+    for (var i = N-1; i>=0; i--) {
+      addPleat(versions[i]);
+    }
+    for (var i = 2; i<N; i++) {
+      toggleShow(versions[i]);
     }
 
   });

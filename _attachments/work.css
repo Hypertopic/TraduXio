@@ -33,6 +33,7 @@ table#hexapla {
   border-top:0px;
   border-bottom:0px;
   border-style:solid;
+  vertical-align:top;
 }
 
 #hexapla td,
@@ -133,35 +134,36 @@ table#hexapla {
   zoom: 1; /* IE6&7 */
 }
 
-textarea {
-  box-sizing:initial;
-  -o-box-sizing:initial;
-  -moz-box-sizing:initial;
-  -webkit-box-sizing:initial;
+#hexapla div.unit {
+  padding:0.5em;
+  position:relative;
+  background-color:#f8f8f8;
+  height:100%;
+  border:1px black solid;
+  -webkit-margin:0.5em;
+}
+
+/*to have the margin behaviour but allowing 
+.unit to have 100% height */
+#hexapla td.pleat.open .box-wrapper {
+  padding:0.5em 0px;
+  height:100%;
+  -webkit-margin:0.5em;
+}
+
+#hexapla div.unit.edit {
+  padding:0px;
+  padding-right:40px;
+  border:none;
+  background:none;
+}
+
+.unit.edit textarea {
   border:1px solid gray;
   border-radius:0.5em;
   padding:0.5em;
-  margin:0.5em;
-}
-
-#hexapla span.unit {
-  padding-right:0.5em;
-  margin-left:0.5em;
-  position:relative;
-}
-
-#hexapla div.unit {
-  padding:0.5em;
-  margin:0.5em;
-  position:relative;
-  margin-right:32px;
-  background-color:#f8f8f8;
-}
-
-#hexapla .unit:not(.edit):before {
-  content:".";
-  padding:0.5em;
-  margin-left:-0.5em;
+  width:100%;
+  height:100%;
 }
 
 #hexapla .unit .join,
@@ -172,11 +174,12 @@ textarea {
   cursor:pointer;
   border:1px solid black;
   z-index:99;
+  right:0px;
 }
 
 #hexapla .unit .join {
-  right:-32px;
   background-image:url(merge.png);
+  top:-23px;
 }
 
 #hexapla .unit .split {
