@@ -97,8 +97,12 @@
   $.fn.getReference = function() {
     return {
       version: this.closest(".unit").data("version"),
-      line: this.closest(".unit").data("line")
+      line: this.closest("tr").data("line")
     }
+  }
+  
+  $.fn.getLine = function() {
+    return this.closest("tr").data("line");
   }
 
   $(document).ready(function() {
@@ -118,12 +122,18 @@
       var lastLine=0;
       if (nextIndex<units.length) {
 	var nextUnit=units.eq(nextIndex);
-	lastLine=nextUnit.data("line") - 1 ;
+	lastLine=nextUnit.getReference().line - 1 ;
       } else {
 	lastLine=$("#hexapla").data("lines") - 1;
       }
       return lastLine;
       
+    }
+   
+    var getSize=function(unit) {
+      var rowspan=unit.closest("td").attr("rowspan");
+      if (rowspan) return parseInt(rowspan); 
+      else return 1;
     }
 
     var createJoin=function(unit1,unit2) {
@@ -145,17 +155,19 @@
     }
     var createSplits=function(unit) {
       unit.find(".split").remove();
-      var version=unit.getVersion("td.open");
+      var reference=unit.getReference();
+      var version=reference.version;
+      var currLine=reference.line;
       var units=findUnits(version);
       var currIndex=units.index(unit);
-      var currLine=unit.data("line");
-      var lastLine=getEndLine(units,currIndex);
+      var size=getSize(unit);
+      var lastLine=currLine+size-1;
       var maxLines=$("#hexapla").data("lines");
       var currPos=unit.position();
       if (currLine<lastLine && currLine<maxLines) {
 	for (var i=currLine+1; i<=lastLine; ++i) {
 	  var split=$("<span/>").addClass("split").attr("title","split").data("line",i);
-	  var position=$(".unit[data-line="+i+"]").position();
+	  var position=$("tr[data-line="+i+"]").position();
 	  split.css("top",(position.top-currPos.top)+"px");
 	  unit.append(split);
 	}
@@ -170,7 +182,7 @@
       } else {
         find(version).first().css("width",find(version).first().outerWidth()+"px");
       }
-      units.each(function(currIndex) {
+      units.each(function() {
         var unit=$(this);
         if ($(this).isEdited()) {
           $(this).html(stringToHtml($(this).find("textarea").val()));
@@ -221,9 +233,9 @@
             var previousContent=previousUnit.find("textarea").val();
             var thisContent=unit.find("textarea").val();
             previousUnit.find("textarea").val(previousContent+"\n"+thisContent);
-            var thisLine=unit.data("line");
-            var prevLine=previousUnit.data("line");
-            var size=parseInt(unit.closest("td").attr("rowspan"));
+            var thisLine=unit.getLine();
+            var prevLine=previousUnit.getLine();
+            var size=getSize(unit);
             var newSpan=thisLine-prevLine+size;
             previousUnit.closest("td").attr("rowspan",newSpan);
             unit.closest("td").remove();
@@ -242,22 +254,20 @@
         version:version,
         line: line
       }).done(function() {
-        var size=parseInt(unit.closest("td").attr("rowspan"));
-        var initialLine=unit.data("line");
+        var size=getSize(unit);
+        var initialLine=unit.getLine();
         var newUnit=$("<div/>").append("<textarea>");
-        newUnit.addClass("unit edit").data("line",line).attr("data-version",version);
+        newUnit.addClass("unit edit").attr("data-version",version);
         $(this).remove();
         var newTd=$("<td>").addClass("pleat open").attr("data-version",version).attr("rowspan",size-(line-initialLine)).append(newUnit);
         unit.closest("td").attr("rowspan",line-initialLine);
         var versions=getVersions();
         var versionIndex=versions.indexOf(version);
         if (versionIndex==0) {
-	  $(".unit[data-line="+line+"]").closest("tr").prepend(newTd);
-        } else if (versionIndex+1==versions.length) {
-	  $(".unit[data-line="+line+"]").closest("tr").append(newTd);
+	  $("tr[data-line="+line+"]").prepend(newTd);
         } else {
 	  var ok=false;
-	  $(".unit[data-line="+line+"]").each(function() {
+	  $("tr[data-line="+line+"] .unit").each(function() {
             var currVersion=$(this).data("version");
 	    if (versions.indexOf(currVersion) > versions.indexOf(version)) {
 	      $(this).closest("td").before(newTd);
@@ -269,7 +279,7 @@
 	    }
 	  });
           if (!ok) {
-            alert("!ok");
+	    $("tr[data-line="+line+"]").append(newTd);
           }
         }
         createJoins(unit);
