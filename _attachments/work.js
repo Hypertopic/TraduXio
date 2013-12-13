@@ -197,8 +197,10 @@
 	      "height":($(this).outerHeight())+"px"
 	    });*/
 	  $(this).empty().append(textarea);
-          createJoins(unit);
-          createSplits(unit);
+          if (getVersions().indexOf(version)>0) {
+            createJoins(unit);
+            createSplits(unit);
+          }
         }
       });
     }
