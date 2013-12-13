@@ -82,44 +82,29 @@ table#hexapla {
   max-width:50px;
 }
 
+#hexapla .pleat.close .rotated-text__wrapper {
+  width:50px;
+            
+}
+
 #hexapla td.pleat.close {
   padding:0px;
 }
 
-#hexapla td.pleat.close * {
-  transform:rotate(270deg);
-  -o-transform:rotate(270deg);
-  -moz-transform:rotate(270deg);
-  -webkit-transform:rotate(270deg);
-  transform-origin:left top;
-  -o-transform-origin:left top;
-  -moz-transform-origin:left top;
-  -webkit-transform-origin:left top;
-  box-sizing:initial;
-  -o-box-sizing:initial;
-  -moz-box-sizing:initial;
-  -webkit-box-sizing:initial;
-  position:fixed;
-  font-size:16px;
+#hexapla .pleat.close .creator,
+#hexapla .pleat.close .language {
+  font-size:20px;
   font-weight:bold;
-  margin:0px 9px;
+  white-space:nowrap;
 }
 
 #hexapla .pleat.close .creator {
-  display:block;
-  white-space:nowrap;
-  bottom:8em;
-  padding-top:8px;
-  padding-left:8px;
+  padding:8px;
 }
 
 #hexapla .pleat.close .language {
-  display:block;
-  bottom:2em;
   border:3px solid black;
   padding:5px;
-  width:30px;
-
 }
 
 .group:before,

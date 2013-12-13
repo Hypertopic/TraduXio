@@ -170,3 +170,33 @@ li.closed > ul {
   height:100%;
   width:100%;
 }
+
+/* ====
+I hate when you have to hack CSS to render natural stuff...
+http://kizu.ru/en/fun/rotated-text/
+*/
+.rotated-text__wrapper {
+   display: inline-block;
+   overflow: hidden;
+ }
+
+.rotated-text {
+   display: inline-block;
+   white-space: nowrap;
+
+        transform: translate(0,100%) rotate(-90deg);
+        transform-origin: 0 0;
+     -o-transform: translate(0,100%) rotate(-90deg);
+     -o-transform-origin: 0 0;
+   -moz-transform: translate(0,100%) rotate(-90deg);
+   -moz-transform-origin: 0 0;
+-webkit-transform: translate(0,100%) rotate(-90deg);
+-webkit-transform-origin: 0 0;
+ }
+
+.rotated-text:after {
+   content: "";
+   float: left;
+   margin-top: 100%;
+ }
+/* ==== */

@@ -13,13 +13,27 @@
     return $(".pleat.close[data-version='"+version+"']");
   }
 
+  $.fn.getHeight = function() {
+    var fake=$("<div>").css({"position":"fixed","left":"-1000px"}).append(this.clone());
+    $(document.body).append(fake);
+    var height=fake.outerHeight();
+    fake.remove();
+    return height;
+  }
+
+  $.fn.rotate = function () {
+    return $("<div>").addClass("rotated-text__wrapper").append(
+      $("<div>").addClass("rotated-text").append(this)
+    );
+  }
+
   function addPleat(version) {
     var header=find(version).filter("th").first();
     var pleat=$("<td/>").addClass("pleat").addClass("close").attr("rowspan",$("tbody tr").length).attr("data-version",version);
-    pleat.append(header.find(".creator").clone(true,true));
     var language=header.find(".language").clone(true,true);
     language.attr("title",language.html()).html(language.data("id")).removeClass("expand");
-    pleat.append(language);
+    pleat.append(language.rotate());
+    pleat.append(header.find(".creator").clone(true,true).rotate());
     find(version).filter("td").first().after(pleat);
     var pleatHead=$("<th/>").addClass("pleat").addClass("close").append(
        $("<div>").addClass("relative-wrapper").append(
