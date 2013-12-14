@@ -86,7 +86,7 @@
   }
 
   function stringToHtml(formattedString) {
-     return formattedString.replace("<","&lt").replace(">","&gt;").replace(/\n/g, "<br>");
+     return formattedString.replace("<","&lt").replace(">","&gt;").replace(/\n$/,"\n ").replace(/\n/g, "<br>");
   }
 
   $.fn.getVersion = function(ancestor) {
@@ -192,11 +192,9 @@
         } else {
 	  $(this).addClass("edit").find("span").remove();
 	  var textarea=$("<textarea/>");
-	  textarea.html(htmlToString($(this)));
-/*	    .css({
-	      "height":($(this).outerHeight())+"px"
-	    });*/
-	  $(this).empty().append(textarea);
+	  textarea.val(htmlToString($(this)));
+	  $(this).empty().append(textarea).append("<div class='textcopy'/>");
+          autoSize.apply(textarea);
           if (getVersions().indexOf(version)>0) {
             createJoins(unit);
             createSplits(unit);
@@ -258,7 +256,8 @@
       }).done(function() {
         var size=getSize(unit);
         var initialLine=unit.getLine();
-        var newUnit=$("<div/>").append("<textarea>");
+        var newUnit=$("<div/>").append("<textarea>").append("<div class='textcopy'/>");
+        autoSize.apply($("textarea",newUnit));
         newUnit.addClass("unit edit").attr("data-version",version);
         $(this).remove();
         var newTd=$("<td>").addClass("pleat open").attr("data-version",version).attr("rowspan",size-(line-initialLine)).append(newUnit);
@@ -291,6 +290,22 @@
         $(".tosplit").removeClass("tosplit");
       });
     });
+
+    var autoSize=function() {
+      // Copy textarea contents; browser will calculate correct height of copy,
+      // which will make overall container taller, which will make textarea taller.
+      var text = stringToHtml($(this).val());
+      $(this).parent().find("div.textcopy").html(text);
+      $(this).css({'width':'100%','height':'100%'});
+      console.log("autosize");
+    }
+    
+    var modified=function() {
+      $(this).addClass("dirty");
+      autoSize.apply(this);
+    }
+
+    $("#hexapla").on('change keyup keydown input cut paste','textarea',modified);
 
     var unedit=function() {
       var unit=$(this).closest(".unit");
