@@ -185,10 +185,13 @@
       units.each(function() {
         var unit=$(this);
         if ($(this).isEdited()) {
-          $(this).html(stringToHtml($(this).find("textarea").val()));
-          unit.find(".split").remove();
-          unit.find(".join").remove();
-          unit.removeClass("edit");
+          var self=this;
+          saveUnit.apply($(this).find('textarea'),[function () {
+	    $(self).html(stringToHtml($(self).find("textarea").val()));
+	    unit.find(".split").remove();
+	    unit.find(".join").remove();
+	    unit.removeClass("edit");
+          }]);
         } else {
 	  $(this).addClass("edit").find("span").remove();
 	  var textarea=$("<textarea/>");
@@ -308,22 +311,37 @@
     $("#hexapla").on('change keyup keydown input cut paste','textarea',modified);
 
     var unedit=function() {
-      var unit=$(this).closest(".unit");
-      saveUnit.apply(unit,function() {
-         $(unit).html(stringToHtml(content)).removeClass("edit");
-      });
+      var self=this;
+      saveUnit.apply(this,[function() {
+         var unit=$(self).closest(".unit");
+         unit.html(stringToHtml($(self).val())).removeClass("edit");
+      }]);
     }
 
     var saveUnit=function(callback) {
-      var content=$(this).find("textarea").val();
-      editOnServer(content, $(this).getReference()).done(function() {
-        if (callback) {
-           callback();
-        }
-      });
+      var self=this;
+      if ($(this).hasClass("dirty")) {
+        $(this).prop("disabled",true);
+	var content=$(this).closest(".unit").find("textarea").val();
+	editOnServer(content, $(this).getReference()).done(function(message,result) {
+          if (result == "success") {
+            $(self).removeClass("dirty"); 
+            $(self).prop("disabled",false);
+	    if (callback && typeof(callback) == "function") {
+	       callback();
+	    }
+          } else {
+            alert(result+":"+message);
+          }
+	});
+      } else {
+	if (callback && typeof(callback) == "function") {
+	   callback();
+	}
+      } 
     }
 
-    $("tr").on("focusout", ".unit.edit textarea", unedit);
+    $("tr").on("focusout", ".unit.edit textarea", saveUnit);
     
     var versions=getVersions();
     const N = versions.length;

@@ -172,6 +172,10 @@ table#hexapla {
   right:0px;
 }
 
+textarea.dirty {
+  background-color:#fdd;
+}
+
 #hexapla .unit .join {
   background-image:url(merge.png);
   top:-23px;
