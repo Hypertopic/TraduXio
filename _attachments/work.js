@@ -108,9 +108,9 @@
   $(document).ready(function() {
 
     $("#hexapla").on("click", ".pleat.open .button", function() {
-      if ($("thead.header th.pleat.open:visible").length > 1) {
+      //if ($("thead.header th.pleat.open:visible").length > 1) {
         toggleShow($(this).getVersion("th.open"));
-      }
+      //}
     });
 
     $("#hexapla").on("click", ".pleat.close .button", function() {
