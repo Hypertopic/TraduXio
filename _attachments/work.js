@@ -40,9 +40,9 @@
             $("<span>").addClass("button show").html("Montrer")
        )
     ).attr("data-version",version);
-    header.after(pleatHead);
+    header.after(pleatHead.clone());
     var pleatFoot=$("<th/>").addClass("pleat").addClass("close").attr("data-version",version);
-    find(version).last().after(pleatFoot);
+    find(version).last().after(pleatHead);
   }
 
   function findUnits(version) {
@@ -174,8 +174,8 @@
       }
     }
     var toggleEdit=function () {
-      $(this).toggleName("Lire", "Editer");
       var version=$(this).getVersion("th.open");
+      find(version).find("input.edit").toggleName("Lire", "Editer");
       var units = findUnits(version);
       if (units.isEdited()) {
         find(version).first().css("width","auto");
@@ -206,7 +206,7 @@
       });
     }
 
-    $(".edit").on("click",toggleEdit);
+    $("input.edit").on("click",toggleEdit);
 
     var editOnServer = function(content, reference) {
       var id=$("#hexapla").data("id");
