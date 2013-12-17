@@ -57,6 +57,58 @@
     return versions;
   }
 
+  var getSize=function(unit) {
+    var rowspan=unit.closest("td").attr("rowspan");
+    if (rowspan) return parseInt(rowspan); 
+    else return 1;
+  }
+
+  function positionSplits() {
+    $("span.split").each(function() {
+      var currTd=$(this).closest("td");
+      var line=$(this).data("line");
+      var position={};
+      var tableLine=$("tr[data-line="+line+"]");
+      if (tableLine.find("td:visible").length>0) {
+	position=tableLine.find("td:visible").position();
+        $(this).removeClass("dynamic");
+      } else {
+        $(this).addClass("dynamic");
+      }
+      var currPos=$(this).closest("td").position();
+      $(this).css("top",(position.top-currPos.top-24)+"px");
+    });
+    positionDynamicSplits(document);
+  }
+  
+  function positionDynamicSplits(context) {
+    $("span.split.dynamic",context).each(function() {
+      var unit=$(this).closest(".unit");
+      var currTop=unit.position().top;
+      var currLine=$(this).data("line");
+      var startTop,endTop,startLine,endLine;
+      var prev=$(this).prev(".split:not(.dynamic)");
+      if (prev.length==1) {
+        startTop=prev.position().top-currTop;
+        startLine=prev.data("line");
+      } else {
+        startTop=0;
+        startLine=unit.getLine();
+      }
+      var next=$(this).next(".split:not(.dynamic)");
+      if (next.length==1) {
+        endTop=next.position().top-currTop;
+        endLine=next.data("line");
+      } else {
+        endTop=unit.height();
+        endLine=unit.getLine()+getSize(unit);
+      }
+      var lineDiff=(currLine-startLine)/(endLine-startLine);
+      var top=lineDiff*(endTop-startTop);
+      $(this).css("top",(top-24)+"px");
+    });
+  }
+
   function positionPleats() {
     var closedPleats=$(".pleat.close:visible");
     //pleats positioning is done automatically with FF23 and Chromium 28
@@ -73,7 +125,7 @@
   function toggleShow(version) {
     find(version).toggle();
     findPleat(version).toggle();
-    positionPleats();
+    positionSplits();
   }
 
   $.fn.isEdited = function() {
@@ -130,12 +182,6 @@
       
     }
    
-    var getSize=function(unit) {
-      var rowspan=unit.closest("td").attr("rowspan");
-      if (rowspan) return parseInt(rowspan); 
-      else return 1;
-    }
-
     var createJoin=function(unit1,unit2) {
         var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
         var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
@@ -166,11 +212,10 @@
       var currPos=unit.position();
       if (currLine<lastLine && currLine<maxLines) {
 	for (var i=currLine+1; i<=lastLine; ++i) {
-	  var split=$("<span/>").addClass("split").attr("title","split").data("line",i);
-	  var position=$("tr[data-line="+i+"]").position();
-	  split.css("top",(position.top-currPos.top)+"px");
+	  var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
 	  unit.append(split);
 	}
+        positionSplits();
       }
     }
     var toggleEdit=function () {
@@ -197,6 +242,7 @@
 	  var textarea=$("<textarea/>");
 	  textarea.val(htmlToString($(this)));
 	  $(this).empty().append(textarea).append("<div class='textcopy'/>");
+          $(".textcopy",this).css("min-height",(getSize(unit)*32)+"px");
           autoSize.apply(textarea);
           if (getVersions().indexOf(version)>0) {
             createJoins(unit);
@@ -241,6 +287,7 @@
             var size=getSize(unit);
             var newSpan=thisLine-prevLine+size;
             previousUnit.closest("td").attr("rowspan",newSpan);
+            $(".textcopy",previousUnit).css("min-height",(newSpan*32)+"px");
             unit.closest("td").remove();
             createJoins(previousUnit);
             createSplits(previousUnit);
@@ -260,6 +307,7 @@
         var size=getSize(unit);
         var initialLine=unit.getLine();
         var newUnit=$("<div/>").append("<textarea>").append("<div class='textcopy'/>");
+	$(".textcopy",newUnit).css("min-height",(getSize(unit)*32)+"px");
         autoSize.apply($("textarea",newUnit));
         newUnit.addClass("unit edit").attr("data-version",version);
         $(this).remove();
@@ -306,6 +354,7 @@
     var modified=function() {
       $(this).addClass("dirty");
       autoSize.apply(this);
+      positionDynamicSplits($(this).closest(".unit"));
     }
 
     $("#hexapla").on('change keyup keydown input cut paste','textarea',modified);
