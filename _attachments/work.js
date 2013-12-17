@@ -357,7 +357,7 @@
       positionDynamicSplits($(this).closest(".unit"));
     }
 
-    $("#hexapla").on('change keyup keydown input cut paste','textarea',modified);
+    $("#hexapla").on('change input cut paste','textarea',modified);
 
     var unedit=function() {
       var self=this;
