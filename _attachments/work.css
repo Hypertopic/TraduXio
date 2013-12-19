@@ -120,12 +120,17 @@ table#hexapla {
 }
 
 #hexapla div.unit {
-  padding:0.5em;
   position:relative;
+  height: 100%;
+}
+
+#hexapla div.unit .text {
+  padding: 0.5em;   /* Same border+padding as text area. */
+  padding-bottom: 1.5em; /* A bit more than one additional line of text. */ 
   background-color:#f8f8f8;
-  height:100%;
+  width: 100%;
+  height: 100%;
   border:1px black solid;
-  -webkit-margin:0.5em;
 }
 
 /*to have the margin behaviour but allowing 
@@ -133,13 +138,13 @@ table#hexapla {
 #hexapla td.pleat.open .box-wrapper {
   padding:0.5em 0px;
   height:100%;
-  -webkit-margin:0.5em;
 }
 
 #hexapla div.unit.edit {
   padding:0px;
   border:none;
   background:none;
+  position:relative;
 }
 
 .unit.edit textarea {
@@ -152,13 +157,11 @@ table#hexapla {
   overflow: hidden;
   position: absolute;
   width: 100%;
+  font-size:1em;
 }
 
-.unit.edit div.textcopy {
-  padding: 0.5em;   /* Same border+padding as text area. */
-  padding-bottom: 1.5em; /* A bit more than one additional line of text. */ 
+.unit.edit div.text {
   visibility: hidden;
-  width: 100%;
 }
 
 #hexapla .unit .join,

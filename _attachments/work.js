@@ -232,17 +232,18 @@
         if ($(this).isEdited()) {
           var self=this;
           saveUnit.apply($(this).find('textarea'),[function () {
-	    $(self).html(stringToHtml($(self).find("textarea").val()));
+	    $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
 	    unit.find(".split").remove();
 	    unit.find(".join").remove();
+	    unit.find("textarea").remove();
 	    unit.removeClass("edit");
           }]);
         } else {
 	  $(this).addClass("edit").find("span").remove();
 	  var textarea=$("<textarea/>");
-	  textarea.val(htmlToString($(this)));
-	  $(this).empty().append(textarea).append("<div class='textcopy'/>");
-          $(".textcopy",this).css("min-height",(getSize(unit)*32)+"px");
+	  textarea.val(htmlToString($(".text",this)));
+	  $(this).prepend(textarea);
+          $(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
           autoSize.apply(textarea);
           if (getVersions().indexOf(version)>0) {
             createJoins(unit);
@@ -287,7 +288,7 @@
             var size=getSize(unit);
             var newSpan=thisLine-prevLine+size;
             previousUnit.closest("td").attr("rowspan",newSpan);
-            $(".textcopy",previousUnit).css("min-height",(newSpan*32)+"px");
+            previousUnit.find(".text").css("min-height",(newSpan*32)+"px");
             unit.closest("td").remove();
             createJoins(previousUnit);
             createSplits(previousUnit);
@@ -306,13 +307,14 @@
       }).done(function() {
         var size=getSize(unit);
         var initialLine=unit.getLine();
-        var newUnit=$("<div/>").append("<textarea>").append("<div class='textcopy'/>");
-	$(".textcopy",newUnit).css("min-height",(getSize(unit)*32)+"px");
+        var newUnit=$("<div/>").append("<textarea>");
+        var text=$("<div>").addClass("text").css("min-height",((line-initialLine)*32)+"px");
+        newUnit.append(text);
         autoSize.apply($("textarea",newUnit));
         newUnit.addClass("unit edit").attr("data-version",version);
         $(this).remove();
         var newTd=$("<td>").addClass("pleat open").attr("data-version",version).attr("rowspan",size-(line-initialLine)).append(newUnit);
-        unit.closest("td").attr("rowspan",line-initialLine);
+        unit.closest("td").attr("rowspan",line-initialLine).find(".text").css("min-height",(getSize(unit)*32)+"px");
         var versions=getVersions();
         var versionIndex=versions.indexOf(version);
         if (versionIndex==0) {
@@ -346,9 +348,8 @@
       // Copy textarea contents; browser will calculate correct height of copy,
       // which will make overall container taller, which will make textarea taller.
       var text = stringToHtml($(this).val());
-      $(this).parent().find("div.textcopy").html(text);
+      $(this).parent().find("div.text").html(text);
       $(this).css({'width':'100%','height':'100%'});
-      console.log("autosize");
     }
     
     var modified=function() {
