@@ -57,14 +57,14 @@
     return versions;
   }
 
-  var getSize=function(unit) {
+  function getSize(unit) {
     var rowspan=unit.closest("td").attr("rowspan");
     if (rowspan) return parseInt(rowspan); 
     else return 1;
   }
 
-  function positionSplits() {
-    $("span.split").each(function() {
+  function positionSplits(context) {
+    $("span.split",context).each(function() {
       var currTd=$(this).closest("td");
       var line=$(this).data("line");
       var position={};
@@ -78,7 +78,7 @@
       var currPos=$(this).closest("td").position();
       $(this).css("top",(position.top-currPos.top-24)+"px");
     });
-    positionDynamicSplits(document);
+    positionDynamicSplits(context);
   }
   
   function positionDynamicSplits(context) {
@@ -125,6 +125,10 @@
   function toggleShow(version) {
     find(version).toggle();
     findPleat(version).toggle();
+    //when one version is edited, and we show a non edited one, pagination is ugly
+    //so we toggle edited versions twice to get back to correct pagination
+    //applying to both top and bottom buttons, so we do it twice
+    find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit); 
     positionSplits();
   }
 
@@ -161,6 +165,152 @@
     return this.closest("tr").data("line");
   }
 
+  function autoSize() {
+    // Copy textarea contents; browser will calculate correct height of copy,
+    // which will make overall container taller, which will make textarea taller.
+    var text = stringToHtml($(this).val());
+    $(this).parent().find("div.text").html(text);
+    $(this).css({'width':'100%','height':'100%'});
+  }
+  
+  function modified() {
+    $(this).addClass("dirty");
+    autoSize.apply(this);
+    positionSplits($(this).closest(".unit"));
+  }
+
+  function toggleEdit () {
+    var version=$(this).getVersion("th.open");
+    find(version).find("input.edit").toggleName("Lire", "Editer");
+    var units = findUnits(version);
+    if (units.isEdited()) {
+      find(version).first().css("width","auto");
+    } else {
+      find(version).first().css("width",find(version).first().outerWidth()+"px");
+    }
+    units.each(function() {
+      var unit=$(this);
+      if ($(this).isEdited()) {
+	var self=this;
+	saveUnit.apply($(this).find('textarea'),[function () {
+	  $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
+	  unit.find(".split").remove();
+	  unit.find(".join").remove();
+	  unit.find("textarea").remove();
+	  unit.removeClass("edit");
+	}]);
+      } else {
+	$(this).addClass("edit").find("span").remove();
+	var textarea=$("<textarea/>");
+	textarea.val(htmlToString($(".text",this)));
+	$(this).prepend(textarea);
+	$(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
+	autoSize.apply(textarea);
+	if (getVersions().indexOf(version)>0) {
+	  createJoins(unit);
+	  createSplits(unit);
+	}
+      }
+    });
+  }
+
+  function getEndLine (units,index) {
+    var nextIndex=index+1;
+    var lastLine=0;
+    if (nextIndex<units.length) {
+      var nextUnit=units.eq(nextIndex);
+      lastLine=nextUnit.getReference().line - 1 ;
+    } else {
+      lastLine=$("#hexapla").data("lines") - 1;
+    }
+    return lastLine;
+    
+  }
+ 
+  function createJoin(unit1,unit2) {
+      var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
+      var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
+      unit2.prepend(join);
+  }
+
+
+  function createJoins(unit) {
+    unit.find(".join").remove();
+    var version=unit.getVersion("td.open");
+    var units=findUnits(version);
+    var currIndex=units.index(unit);
+    if (currIndex>0) {
+      var prevUnit=units.eq(currIndex-1);
+      createJoin(prevUnit,unit);
+    }
+  }
+  function createSplits(unit) {
+    unit.find(".split").remove();
+    var reference=unit.getReference();
+    var version=reference.version;
+    var currLine=reference.line;
+    var units=findUnits(version);
+    var currIndex=units.index(unit);
+    var size=getSize(unit);
+    var lastLine=currLine+size-1;
+    var maxLines=$("#hexapla").data("lines");
+    var currPos=unit.position();
+    if (currLine<lastLine && currLine<maxLines) {
+      for (var i=currLine+1; i<=lastLine; ++i) {
+	var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
+	unit.append(split);
+      }
+      positionSplits();
+    }
+  }
+
+  function unedit() {
+    var self=this;
+    saveUnit.apply(this,[function() {
+       var unit=$(self).closest(".unit");
+       unit.html(stringToHtml($(self).val())).removeClass("edit");
+    }]);
+  }
+
+  function saveUnit(callback) {
+    var self=this;
+    if ($(this).hasClass("dirty")) {
+      $(this).prop("disabled",true);
+      var content=$(this).closest(".unit").find("textarea").val();
+      editOnServer(content, $(this).getReference()).done(function(message,result) {
+	if (result == "success") {
+	  $(self).removeClass("dirty"); 
+	  $(self).prop("disabled",false);
+	  if (callback && typeof(callback) == "function") {
+	     callback();
+	  }
+	} else {
+	  alert(result+":"+message);
+	}
+      });
+    } else {
+      if (callback && typeof(callback) == "function") {
+	 callback();
+      }
+    } 
+  }
+
+  function getPreviousUnit(unit) {
+    var version=unit.getVersion("td.open");
+    var units=findUnits(version);
+    return $(units.eq(units.index(unit)-1));
+  }
+
+  var editOnServer = function(content, reference) {
+    var id=$("#hexapla").data("id");
+    return $.ajax({
+      type: "PUT",
+      url: "version/"+id+"?"+ $.param(reference),
+      contentType: "text/plain",
+      data: content
+    });
+  }
+
   $(document).ready(function() {
 
     $("#hexapla").on("click", ".pleat.open .button", function() {
@@ -173,107 +323,7 @@
       toggleShow($(this).getVersion("th.close"));
     });
 
-    var getEndLine=function (units,index) {
-      var nextIndex=index+1;
-      var lastLine=0;
-      if (nextIndex<units.length) {
-	var nextUnit=units.eq(nextIndex);
-	lastLine=nextUnit.getReference().line - 1 ;
-      } else {
-	lastLine=$("#hexapla").data("lines") - 1;
-      }
-      return lastLine;
-      
-    }
-   
-    var createJoin=function(unit1,unit2) {
-        var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
-        var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
-        unit2.prepend(join);
-    }
-
-
-    var createJoins=function(unit) {
-      unit.find(".join").remove();
-      var version=unit.getVersion("td.open");
-      var units=findUnits(version);
-      var currIndex=units.index(unit);
-      if (currIndex>0) {
-	var prevUnit=units.eq(currIndex-1);
-	createJoin(prevUnit,unit);
-      }
-    }
-    var createSplits=function(unit) {
-      unit.find(".split").remove();
-      var reference=unit.getReference();
-      var version=reference.version;
-      var currLine=reference.line;
-      var units=findUnits(version);
-      var currIndex=units.index(unit);
-      var size=getSize(unit);
-      var lastLine=currLine+size-1;
-      var maxLines=$("#hexapla").data("lines");
-      var currPos=unit.position();
-      if (currLine<lastLine && currLine<maxLines) {
-	for (var i=currLine+1; i<=lastLine; ++i) {
-	  var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
-	  unit.append(split);
-	}
-        positionSplits();
-      }
-    }
-    var toggleEdit=function () {
-      var version=$(this).getVersion("th.open");
-      find(version).find("input.edit").toggleName("Lire", "Editer");
-      var units = findUnits(version);
-      if (units.isEdited()) {
-        find(version).first().css("width","auto");
-      } else {
-        find(version).first().css("width",find(version).first().outerWidth()+"px");
-      }
-      units.each(function() {
-        var unit=$(this);
-        if ($(this).isEdited()) {
-          var self=this;
-          saveUnit.apply($(this).find('textarea'),[function () {
-	    $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
-	    unit.find(".split").remove();
-	    unit.find(".join").remove();
-	    unit.find("textarea").remove();
-	    unit.removeClass("edit");
-          }]);
-        } else {
-	  $(this).addClass("edit").find("span").remove();
-	  var textarea=$("<textarea/>");
-	  textarea.val(htmlToString($(".text",this)));
-	  $(this).prepend(textarea);
-          $(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
-          autoSize.apply(textarea);
-          if (getVersions().indexOf(version)>0) {
-            createJoins(unit);
-            createSplits(unit);
-          }
-        }
-      });
-    }
-
     $("input.edit").on("click",toggleEdit);
-
-    var editOnServer = function(content, reference) {
-      var id=$("#hexapla").data("id");
-      return $.ajax({
-        type: "PUT",
-        url: "version/"+id+"?"+ $.param(reference),
-        contentType: "text/plain",
-        data: content
-      });
-    }
-   
-    var getPreviousUnit=function(unit) {
-      var version=unit.getVersion("td.open");
-      var units=findUnits(version);
-      return $(units.eq(units.index(unit)-1));
-    }
 
     $("tr").on("select mouseup keyup",".unit", function (e) {
       //requires jquery.selection plugin
@@ -310,6 +360,10 @@
       }
     });
 
+    $.fn.setSize = function (size) {
+      this.closest("td").attr("rowspan",size).find(".text").css("min-height",size*32+"px");
+    }
+
     $("tr").on("click", ".split", function(e) {
       e.stopPropagation();
       var unit=$(this).closest(".unit");
@@ -322,13 +376,14 @@
         var size=getSize(unit);
         var initialLine=unit.getLine();
         var newUnit=$("<div/>").append("<textarea>");
-        var text=$("<div>").addClass("text").css("min-height",((line-initialLine)*32)+"px");
+        var text=$("<div>").addClass("text");
         newUnit.append(text);
         autoSize.apply($("textarea",newUnit));
         newUnit.addClass("unit edit").attr("data-version",version);
         $(this).remove();
-        var newTd=$("<td>").addClass("pleat open").attr("data-version",version).attr("rowspan",size-(line-initialLine)).append(newUnit);
-        unit.closest("td").attr("rowspan",line-initialLine).find(".text").css("min-height",(getSize(unit)*32)+"px");
+        var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append(newUnit);
+        newUnit.setSize(size-(line-initialLine));
+        unit.setSize(line-initialLine);
         var versions=getVersions();
         var versionIndex=versions.indexOf(version);
         if (versionIndex==0) {
@@ -358,52 +413,7 @@
       });
     });
 
-    var autoSize=function() {
-      // Copy textarea contents; browser will calculate correct height of copy,
-      // which will make overall container taller, which will make textarea taller.
-      var text = stringToHtml($(this).val());
-      $(this).parent().find("div.text").html(text);
-      $(this).css({'width':'100%','height':'100%'});
-    }
-    
-    var modified=function() {
-      $(this).addClass("dirty");
-      autoSize.apply(this);
-      positionDynamicSplits($(this).closest(".unit"));
-    }
-
     $("#hexapla").on('change input cut paste','textarea',modified);
-
-    var unedit=function() {
-      var self=this;
-      saveUnit.apply(this,[function() {
-         var unit=$(self).closest(".unit");
-         unit.html(stringToHtml($(self).val())).removeClass("edit");
-      }]);
-    }
-
-    var saveUnit=function(callback) {
-      var self=this;
-      if ($(this).hasClass("dirty")) {
-        $(this).prop("disabled",true);
-	var content=$(this).closest(".unit").find("textarea").val();
-	editOnServer(content, $(this).getReference()).done(function(message,result) {
-          if (result == "success") {
-            $(self).removeClass("dirty"); 
-            $(self).prop("disabled",false);
-	    if (callback && typeof(callback) == "function") {
-	       callback();
-	    }
-          } else {
-            alert(result+":"+message);
-          }
-	});
-      } else {
-	if (callback && typeof(callback) == "function") {
-	   callback();
-	}
-      } 
-    }
 
     $("tr").on("focusout", ".unit.edit textarea", saveUnit);
     
