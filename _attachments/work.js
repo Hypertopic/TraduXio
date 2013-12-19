@@ -153,6 +153,10 @@
     }
   }
   
+  $.fn.getLanguage = function() {
+    return find(this.getVersion("td.open")).find(".language").data("id");
+  }
+  
   $.fn.getLine = function() {
     return this.closest("tr").data("line");
   }
@@ -270,6 +274,16 @@
       var units=findUnits(version);
       return $(units.eq(units.index(unit)-1));
     }
+
+    $("tr").on("select mouseup keyup",".unit", function (e) {
+      //requires jquery.selection plugin
+      var txt=$.selection();
+      if (txt) {
+	$("form.concordance #query").val(txt);
+	var language=$(this).getLanguage();
+	$("form.concordance #language").val(language);
+      }
+    });
 
     $("tr").on("click", ".join", function(e) {
       e.stopPropagation();

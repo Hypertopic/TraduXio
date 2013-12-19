@@ -77,6 +77,7 @@ function(o, req) {
   data.name="work";
   data.css=true;
   data.script=true;
+  data.scripts=["jquery.selection"];
   data.language=data.work_language;
   
   return Mustache.to_html(this.templates.work, data, this.templates.partials);
