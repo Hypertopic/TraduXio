@@ -1,5 +1,6 @@
 function(head, req) {
   // !code lib/mustache.js
+  // !code lib/path.js
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
   var data = {languages:[]};
   var languageData = null; 
@@ -41,6 +42,7 @@ function(head, req) {
   data.name="works";
   data.scripts=["ul-close"];
   data.css=true;
+  data.prefix=getPrefix(req.requested_path,0);
   return Mustache.to_html(this.templates.works, data,this.templates.partials);
 }
 

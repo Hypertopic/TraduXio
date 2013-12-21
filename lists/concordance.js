@@ -1,6 +1,7 @@
 function(head, req) {
   // !code lib/mustache.js
   // !code lib/hexapla.js
+  // !code lib/path.js
 
   function highlight(context, pattern) {
     //TODO safer so that HTML is not matched
@@ -85,5 +86,7 @@ function(head, req) {
   }
   data.name="concordance";
   data.css=true;
+  data.prefix=getPrefix(req.requested_path,1);
+
   return Mustache.to_html(this.templates.concordance, data, this.templates.partials);
 }

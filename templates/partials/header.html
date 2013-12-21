@@ -1,17 +1,17 @@
 <html>
 <head>
   <title>{{work_creator}} : {{work_title}} — TraduXio</title>
-  <link rel="stylesheet" href="shared/traduxio.css" type="text/css" />
+  <link rel="stylesheet" href="{{prefix}}/shared/traduxio.css" type="text/css" />
   {{#css}} 
-  <link rel="stylesheet" href="shared/{{name}}.css" type="text/css" />
+  <link rel="stylesheet" href="{{prefix}}/shared/{{name}}.css" type="text/css" />
   {{/css}} 
-  <script src="shared/jquery.js"></script>  
-  <script src="shared/traduxio.js"></script> 
+  <script src="{{prefix}}/shared/jquery.js"></script>  
+  <script src="{{prefix}}/shared/traduxio.js"></script> 
   {{#script}} 
-  <script type="text/javascript" src="shared/{{name}}.js"></script>
+  <script type="text/javascript" src="{{prefix}}/shared/{{name}}.js"></script>
   {{/script}} 
   {{#scripts}} 
-  <script type="text/javascript" src="shared/{{.}}.js"></script>
+  <script type="text/javascript" src="{{prefix}}/shared/{{.}}.js"></script>
   {{/scripts}} 
 	<!--[if lt IE 7]>
 	<style media="screen" type="text/css">
@@ -21,7 +21,7 @@
 	</style>
 	<![endif]-->
 </head>
-<body id="{{name}}" data-language="{{language}}" data-query="{{query}}">
+<body id="{{name}}" data-language="{{language}}" data-prefix="{{prefix}}" data-query="{{query}}">
   <div id="body">
     <div id="header" class="group">
 	<ul id="nav">

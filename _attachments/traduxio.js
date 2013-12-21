@@ -11,7 +11,7 @@ $.fn.concordancify = function() {
   var form=this; 
 
   getLanguageNames(function() {
-    $.getJSON("languages", function(result) {
+    $.getJSON(getPrefix()+"/languages", function(result) {
       $.each(result.rows, function(i, o) {
 	$("#language",form).append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
@@ -23,7 +23,7 @@ $.fn.concordancify = function() {
     event.preventDefault();
     var query = form.find('#query').val().toLowerCase();
     var language = $("#language").val();
-    window.location.href = 'concordance?' + $.param({
+    window.location.href = getPrefix()+'/concordance?' + $.param({
       startkey: '["' + language + '","' + query + '"]',
       endkey: '["' + language + '","' + query + '\\u9999"]',
       query: query,
@@ -63,7 +63,7 @@ function getLanguageName(id,target) {
 
 function getLanguageNames(callback) {
   if (! languagesNames) {
-    $.getJSON("shared/languages.json",function(result) {
+    $.getJSON(getPrefix()+"/shared/languages.json",function(result) {
       languagesNames=result;
       callback(true);
     });
@@ -74,6 +74,10 @@ function getLanguageNames(callback) {
 
 $.fn.outerHtml = function() {
   return this.clone().wrap("<div>").parent().html();
+}
+
+function getPrefix() {
+  return $("body").data("prefix");
 }
 
 $(document).ready(function() {
