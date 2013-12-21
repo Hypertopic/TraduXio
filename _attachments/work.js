@@ -185,7 +185,9 @@
     var units = findUnits(version);
     if (units.isEdited()) {
       find(version).first().css("width","auto");
+      find(version).removeClass("edit");
     } else {
+      find(version).addClass("edit");
       find(version).first().css("width",find(version).first().outerWidth()+"px");
     }
     units.each(function() {
@@ -313,14 +315,18 @@
 
   $(document).ready(function() {
 
-    $("#hexapla").on("click", ".pleat.open .button", function() {
+    $("#hexapla").on("click", ".button.hide", function() {
       //if ($("thead.header th.pleat.open:visible").length > 1) {
         toggleShow($(this).getVersion("th.open"));
       //}
     });
 
-    $("#hexapla").on("click", ".pleat.close .button", function() {
+    $("#hexapla").on("click", ".button.show", function() {
       toggleShow($(this).getVersion("th.close"));
+    });
+
+    $("#hexapla").on("click", ".button.edit-license", function() {
+      window.location=getPrefix()+"/license/"+$("#hexapla").data("id")+'/'+$(this).getVersion("th");
     });
 
     $("input.edit").on("click",toggleEdit);

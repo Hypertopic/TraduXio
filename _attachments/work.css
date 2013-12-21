@@ -69,10 +69,6 @@ table#hexapla {
   float:right;
 }
 
-#hexapla .pleat.open .license {
-  clear:both;
-}
-
 #hexapla .pleat.close {
   display:none;
   width:50px;
@@ -209,16 +205,35 @@ textarea.dirty {
   background-color:#efefef;
 }
 
-.pleat.close .button {
+.button.show {
   background-image: url(pleat-closed.png);
   width:20px;
   right:15px;
 }
 
-.pleat.open .button {
+.license {
+  left:10px;
+}
+
+.edit .license {
+  display:none;
+}
+
+.button.hide {
   background-image: url(pleat-open.png);
   width:32px;
   right: 10px;
+}
+
+.edit .button.edit-license {
+  display:inline-block;
+}
+
+.button.edit-license {
+  background-image: url(lock.png);
+  width:32px;
+  left: 10px;
+  display:none;
 }
 
 .pleat .button {

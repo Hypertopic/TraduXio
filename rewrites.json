@@ -24,6 +24,14 @@
   "from": ":id",
   "to": "_show/work/:id",
   "method": "GET"
+}, {
+  "from": "license/:id/:version",
+  "to": "_show/license/:id",
+  "method": "GET"
+}, {
+  "from": "license/:id/:version",
+  "to": "_update/license/:id",
+  "method": "PUT"
 },{
   "from": "",
   "to": "_list/works/works"

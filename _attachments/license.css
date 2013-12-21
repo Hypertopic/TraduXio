@@ -1,0 +1,74 @@
+h1 {
+  text-align:center;
+  padding:1em;
+}
+
+.chapeau {
+  text-align:center;
+  font-weight:bold;
+}
+
+div.full {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+div.full > div {
+  float:left;
+  padding:3em;
+}
+
+div.dialog {
+  height:50%;
+  border:2px black solid;
+}
+
+div.label {
+  font-weight:bold;
+  line-height:1.5em;
+}
+
+div.option-group {
+  border-bottom:1px black solid;
+  padding:0.5em 3em;
+}
+
+div.bottom {
+  border:none;
+  text-align:center;
+}
+
+div.license-name {
+  font-size:2em;
+  font-weight:bold;
+  text-align:center;
+}
+
+div.graphical > div {
+  display:inline-block;
+  margin:2em;
+  padding:2em;
+  background-repeat:no-repeat;
+  background-position:center center;
+-webkit-background-size: cover;
+   -moz-background-size: cover;
+     -o-background-size: cover;
+        background-size: cover;
+}
+
+div.by {
+  background-image:url(cc-by.gif);
+}
+
+div.nc {
+  background-image:url(cc-nc.gif);
+}
+
+div.nd {
+  background-image:url(cc-nd.gif);
+}
+
+div.sa {
+  background-image:url(cc-sa.gif);
+}
+

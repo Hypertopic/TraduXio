@@ -1,0 +1,52 @@
+{{> header}}
+<script type="text/javascript">
+  var license="{{text.license}}";
+</script>
+  <h1>{{work_title}} – {{work_creator}} - {{text.date}} <br/>
+      {{text.creator}}</h1>
+
+<div class="full" data-id="{{id}}">
+  <div class="license-attributes">
+    <p class="chapeau">Caractéristiques de la licence</p>
+    <div class="dialog">
+      <form id="license">
+        <div class="option-group">
+	  <div class="label">Autorisez-vous les modifications de votre création ?</div>
+	  <div class="choice"><input type="radio" name="derivatives" value="EMPTY" checked/>Oui</div>
+	  <div class="choice"><input type="radio" name="derivatives" value="nd"/>Non</div>
+	  <div class="choice"><input type="radio" name="derivatives" value="sa"/>Oui, sous condition de partage dans les même conditions</div>
+        </div>
+        <div class="option-group">
+	  <div class="label">Autorisez-vous les utilisations commerciales de votre oeuvre ?</div>
+	  <div class="choice"><input type="radio" name="commercial" value="EMPTY" checked/>Oui</div>
+	  <div class="choice"><input type="radio" name="commercial" value="nc"/>Non</div>
+        </div>
+        <div class="option-group bottom">
+	  <div class="label">Juridiction de la licence</div>
+	  <select name="country">
+            <option value="fr">France</option>
+            <option value="uk">Royaume Uni</option>
+            <option value="us">Etats-Unis</option>
+            <option value="it">Italie</option>
+          </select>
+        </div>
+        <div class="option-group bottom">
+	  <input type="submit" name="save" value="Enregistrer"/>
+	  <input type="button" name="cancel" value="Annuler"/>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+  <div class="license-selected">
+    <p class="chapeau">Licence sélectionnée</p>
+    <div class="dialog">
+      <div class="license-name"></div>
+      <div class="graphical">
+        <div class="by"></div>
+        <div class="commercial"></div>
+        <div class="derivatives"></div>
+    </div>
+  </div>
+</div>
+{{> footer}}
