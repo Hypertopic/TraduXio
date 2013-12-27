@@ -5,7 +5,7 @@
   <h1>{{work_title}} – {{work_creator}} - {{text.date}} <br/>
       {{text.creator}}</h1>
 
-<div class="full" data-id="{{id}}">
+<div class="full group" data-id="{{id}}">
   <div class="license-attributes">
     <p class="chapeau">Caractéristiques de la licence</p>
     <div class="dialog">
@@ -41,11 +41,16 @@
   <div class="license-selected">
     <p class="chapeau">Licence sélectionnée</p>
     <div class="dialog">
-      <div class="license-name"></div>
+      <div class="license-name">{{text.license}}</div>
       <div class="graphical">
-        <div class="by"></div>
-        <div class="commercial"></div>
-        <div class="derivatives"></div>
+        <div class="cc by"></div>
+        <div class="cc commercial"></div>
+        <div class="cc derivatives"></div>
+      </div>
+      <div class="fc-dubious">
+	<div class="freework"></div>
+	<div class="freework-text">Ce n'est pas une licence culturelle gratuite</div>
+      </div>
     </div>
   </div>
 </div>

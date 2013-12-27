@@ -8,18 +8,25 @@ h1 {
   font-weight:bold;
 }
 
-div.full {
+.full {
+  width:80%;
   margin-left:auto;
   margin-right:auto;
+  position:relative;
 }
 
-div.full > div {
-  float:left;
+.full > div {
+  width:50%;
   padding:3em;
+  vertical-align:top;
+  position:absolute;
+}
+
+div.license-selected {
+  margin-left:50%;
 }
 
 div.dialog {
-  height:50%;
   border:2px black solid;
 }
 
@@ -42,9 +49,27 @@ div.license-name {
   font-size:2em;
   font-weight:bold;
   text-align:center;
+  padding:0.5em;
 }
 
-div.graphical > div {
+div.freework-text {
+  font-size:2em;
+  padding:0.5em;
+  margin-right:4em;
+  text-align:left;
+}
+
+div.graphical {
+  text-align:center;
+  white-space:nowrap;
+}
+
+div.fc-dubious {
+  text-align:center;
+  padding:2em 0.5em;
+}
+
+div.cc, div.freework {
   display:inline-block;
   margin:2em;
   padding:2em;
@@ -56,19 +81,24 @@ div.graphical > div {
         background-size: cover;
 }
 
-div.by {
-  background-image:url(cc-by.gif);
+div.freework {
+  background-image:url(fc_dubious.png);
+  float:right;
 }
 
-div.nc {
-  background-image:url(cc-nc.gif);
+div.cc.by {
+  background-image:url(chooser_by.png);
 }
 
-div.nd {
-  background-image:url(cc-nd.gif);
+div.cc.nc {
+  background-image:url(chooser_nc.png);
 }
 
-div.sa {
-  background-image:url(cc-sa.gif);
+div.cc.nd {
+  background-image:url(chooser_nd.png);
+}
+
+div.cc.sa {
+  background-image:url(chooser_sa.png);
 }
 
