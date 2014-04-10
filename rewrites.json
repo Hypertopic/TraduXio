@@ -12,6 +12,9 @@
     "group": "true"
   }
 },{
+  "from": "welcome",
+  "to": "_show/welcome"
+},{
   "from": "version/:id",
   "to": "_update/version/:id"
 },{
