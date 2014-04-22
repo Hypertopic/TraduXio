@@ -8,12 +8,14 @@ function(work, req) {
 	var name = args.value;
 	if(name == undefined) {
 	  name = "Unnamed document";
-	} 
+	}
+	if (name != version) {
 	while(work.translations[name] || name == "original" || name.length == 0) {
 	  name += "(2)";
 	}
 	work.translations[name] = doc;
 	delete work.translations[version];
+	}
   } else {
 	doc[args.key] = args.value;
   }
