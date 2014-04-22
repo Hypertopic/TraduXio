@@ -4,6 +4,12 @@
       (this.val()==name1)? name2 : name1
     );
   }
+  
+  $.fn.toggleText = function(text1, text2) {
+    this.text(
+      (this.text()==text1)? text2 : text1
+    );
+  }
 
   function find(version) {
     return $(".pleat.open[data-version='"+version+"']");
@@ -181,39 +187,107 @@
 
   function toggleEdit () {
     var version=$(this).getVersion("th.open");
-    find(version).find("input.edit").toggleName("Lire", "Editer");
+	var doc = find(version);
     var units = findUnits(version);
-    if (units.isEdited()) {
-      find(version).first().css("width","auto");
-      find(version).removeClass("edit");
+	var top = doc.first();
+	var edited = units.isEdited();
+    doc.find("input.edit").toggleName("Lire", "Editer");
+    if (edited) {
+      top.css("width","auto");
+      doc.removeClass("edit");
+	  top.find("textArea").remove();
     } else {
-      find(version).addClass("edit");
-      find(version).first().css("width",find(version).first().outerWidth()+"px");
+      doc.addClass("edit");
+      top.css("width",doc.first().outerWidth()+"px");
     }
+	setEditState(edited, top, "title");
+	setEditState(edited, top, "work-creator");
+	if(version != "original")
+	  setEditState(edited, top, "creator");
+	setLangEditState(edited, top);
+	setEditState(edited, top, "date");
     units.each(function() {
       var unit=$(this);
       if ($(this).isEdited()) {
-	var self=this;
-	saveUnit.apply($(this).find('textarea'),[function () {
-	  $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
-	  unit.find(".split").remove();
-	  unit.find(".join").remove();
-	  unit.find("textarea").remove();
-	  unit.removeClass("edit");
-	}]);
+		var self=this;
+		saveUnit.apply($(this).find('textarea'),[function () {
+		  $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
+		  unit.find(".split").remove();
+		  unit.find(".join").remove();
+		  unit.find("textarea").remove();
+		  unit.removeClass("edit");
+		}]);
       } else {
-	$(this).addClass("edit").find("span").remove();
-	var textarea=$("<textarea/>");
-	textarea.val(htmlToString($(".text",this)));
-	$(this).prepend(textarea);
-	$(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
-	autoSize.apply(textarea);
-	if (getVersions().indexOf(version)>0) {
-	  createJoins(unit);
-	  createSplits(unit);
-	}
+		$(this).addClass("edit").find("span").remove();
+		var textarea=$("<textarea/>");
+		textarea.val(htmlToString($(".text",this)));
+		$(this).prepend(textarea);
+		$(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
+		autoSize.apply(textarea);
+		if (getVersions().indexOf(version)>0) {
+		  createJoins(unit);
+		  createSplits(unit);
+		}
       }
     });
+  }
+  
+  function setLangEditState(isEdited, container) {
+	var target = container.find(".language");
+	if(isEdited) {
+	  container.find("select").remove();
+	  target.removeClass("edit").show();
+	} else {
+	  var language = $("#header").find("#language").clone();
+	  language.val(target.data("id"));
+	  language.addClass("editedMeta").css("width", "50%");
+	  language.on("change", function() {
+		var id = $("#hexapla").data("id");
+		var ref = $(this).closest("th").data("version");
+		$.ajax({
+		  type: "PUT",
+		  url: "work/"+id+"/"+ref,
+		  contentType: 'text/plain',
+		  data: JSON.stringify({"key":"language", "value": language.val()})
+		}).done(function() {
+		  var lang = language.find("option:selected").text();
+		  target.data("id", lang.substring(0, 2));
+		  target.text(lang.substring(5));
+		}).fail(function() { alert("fail!"); });
+	  });
+	  target.addClass("edit");
+	  target.before(language).hide();
+	}
+  }
+  
+  function setEditState(isEdited, container, name, auto) {
+	setEditStateForComponent(isEdited, container, name, "focusout", '<textarea class="editedMeta ' + name + '" />', auto);
+  }
+  
+  function setEditStateForComponent(isEdited, container, name, event, textComponent, auto) {
+	var target = container.find("." + name);
+	if(isEdited) {
+	  target.removeClass("edit").show();
+	} else {
+	  target.addClass("edit");
+	  var component=$(textComponent);
+	  component.on(event, function() {
+		var id = $("#hexapla").data("id");
+		var ref = $(this).closest("th").data("version");
+		$.ajax({
+		  type: "PUT",
+		  url: "work/"+id+"/"+ref,
+		  contentType: 'text/plain',
+		  data: JSON.stringify({"key": name, "value": component.val()})
+		}).done(function() { 
+		  component.removeClass("dirty");
+		  target.text(component.val())
+		}).fail(function() { alert("fail!"); });
+	  });
+	  component.val($(target).text());
+	  target.before(component);
+	  target.hide();
+	}
   }
 
   function getEndLine (units,index) {
@@ -280,19 +354,19 @@
       $(this).prop("disabled",true);
       var content=$(this).closest(".unit").find("textarea").val();
       editOnServer(content, $(this).getReference()).done(function(message,result) {
-	if (result == "success") {
-	  $(self).removeClass("dirty"); 
-	  $(self).prop("disabled",false);
-	  if (callback && typeof(callback) == "function") {
-	     callback();
-	  }
-	} else {
-	  alert(result+":"+message);
-	}
+		if (result == "success") {
+		  $(self).removeClass("dirty"); 
+		  $(self).prop("disabled",false);
+			if (callback && typeof(callback) == "function") {
+			  callback();
+			}
+		} else {
+		  alert(result+":"+message);
+		}
       });
     } else {
       if (callback && typeof(callback) == "function") {
-	 callback();
+		callback();
       }
     } 
   }

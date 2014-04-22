@@ -73,11 +73,13 @@ body,html,input,textarea {
   margin-top:0.4em;
 }
 
-#work h1 {
+#work .top {
   background-color:#888;
   color:#fff;
   padding:0.5em;
   margin-bottom:1em;
+  display: inline-block;
+  width: 100%;
 }
 
 /*textarea {

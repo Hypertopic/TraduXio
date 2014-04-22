@@ -1,12 +1,14 @@
 {{> header}}
-  <h1>{{work_title}} – {{work_creator}}</h1>
+  <div class="top">
+	<h1>{{work_title}} – {{work_creator}}</h1>
+  </div>
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}">
     <thead class="header"><tr>
       {{#headers}}
         <th class="pleat open" data-version="{{id}}"><div class="relative-wrapper">
-          <div class="title"> {{title}}</div>
+          <div class="title">{{title}}</div>
           <div class="work-creator">{{work_creator}}</div>
-          <div class="creator">{{creator}}</div>
+          <span>{{trad}}</span><div class="creator">{{creator}}</div>
           <div class="meta group">
 	    <div class="date">{{date}}</div>
 	    <div class="language expand" data-id="{{language}}">{{language}}</div>

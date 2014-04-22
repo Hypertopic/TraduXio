@@ -68,10 +68,12 @@ function(o, req) {
     data.headers.push({
       id:t,
       title: translation.title,
-      creator: "Trad. "+ t, //TODO i18n
+	  work_creator: translation.creator ? translation.creator : o.creator,
+      creator: t,
       language: translation.language,
       date: translation.date,
-      creativeCommons: translation.creativeCommons
+      creativeCommons: translation.creativeCommons,
+	  trad:"Trad."
     });
   }
   data.rows=hexapla.getRows();
