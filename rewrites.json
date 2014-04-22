@@ -23,17 +23,21 @@
 },{
   "from": "robots.txt",
   "to": "robots.txt"
-}, {
+},{
   "from": ":id",
   "to": "_show/work/:id",
   "method": "GET"
-}, {
+},{
   "from": "license/:id/:version",
   "to": "_show/license/:id",
   "method": "GET"
-}, {
+},{
   "from": "license/:id/:version",
   "to": "_update/license/:id",
+  "method": "PUT"
+},{
+  "from": "work/:id/:version",
+  "to": "_update/work/:id",
   "method": "PUT"
 },{
   "from": "",
