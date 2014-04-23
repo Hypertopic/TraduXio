@@ -8,14 +8,19 @@ function(work, req) {
 	var name = args.value;
 	if(name == undefined) {
 	  name = "Unnamed document";
-	} 
-	while(work.translations[name] || name == "original" || name.length == 0) {
-	  name += "(2)";
 	}
-	work.translations[name] = doc;
-	delete work.translations[version];
+	if(name != version) {
+	  while(work.translations[name] || name == "original" || name.length == 0) {
+		name += "(2)";
+	  }
+	  work.translations[name] = doc;
+	  delete work.translations[version];
+	  return [work, name];
+	} else {
+	  return [work, version];
+	}
   } else {
 	doc[args.key] = args.value;
   }
-  return [work, args.key + " updated with " + args.value + " on " + version + " version."];
+  return [work, args.value];
 }
