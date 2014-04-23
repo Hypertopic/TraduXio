@@ -251,8 +251,12 @@
 		  data: JSON.stringify({"key":"language", "value": language.val()})
 		}).done(function() {
 		  var lang = language.find("option:selected").text();
-		  target.data("id", lang.substring(0, 2));
-		  target.text(lang.substring(5));
+		  var lang_id = lang.substring(0, 2);
+		  var lang_text = lang.substring(5);
+		  target.data("id", lang_id).attr("data-id", lang_id);
+		  target.text(lang_text);
+		  $("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
+		    .attr("data-id", lang_id).data("id", lang_id).attr("title", lang_text).html(lang_id);
 		}).fail(function() { alert("fail!"); });
 	  });
 	  target.addClass("edit");
@@ -272,22 +276,32 @@
 	  target.addClass("edit");
 	  var component=$(textComponent);
 	  component.on(event, function() {
-		var id = $("#hexapla").data("id");
-		var ref = $(this).closest("th").data("version");
-		$.ajax({
-		  type: "PUT",
-		  url: "work/"+id+"/"+ref,
-		  contentType: 'text/plain',
-		  data: JSON.stringify({"key": name, "value": component.val()})
-		}).done(function() { 
-		  component.removeClass("dirty");
-		  target.text(component.val())
-		}).fail(function() { alert("fail!"); });
+		if(component.hasClass("dirty")) {
+		  var id = $("#hexapla").data("id");
+		  var ref = $(this).closest("th").data("version");
+		  $.ajax({
+		    type: "PUT",
+		    url: "work/"+id+"/"+ref,
+		    contentType: 'text/plain',
+		    data: JSON.stringify({"key": name, "value": component.val()})
+		  }).done(function(data) {
+			if(name == "creator") {
+			  changeVersion(ref, data);
+			}
+			component.val(data);
+			target.text(data)
+			component.removeClass("dirty");
+		  }).fail(function() { alert("fail!"); });
+		}
 	  });
 	  component.val($(target).text());
 	  target.before(component);
 	  target.hide();
 	}
+  }
+  
+  function changeVersion(oldVersion, newVersion) {
+	$("#hexapla").find("*[data-version='" + oldVersion + "']").attr("data-version", newVersion).data("version", newVersion).find(".creator").html(newVersion);
   }
 
   function getEndLine (units,index) {
@@ -496,6 +510,8 @@
     $("#hexapla").on('change input cut paste','textarea',modified);
 
     $("tr").on("focusout", ".unit.edit textarea", saveUnit);
+	
+	//$(".top").on("click", ".addVersion", addVersion);
     
     var versions=getVersions();
     const N = versions.length;
