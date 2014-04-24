@@ -1,11 +1,13 @@
 {{> header}}
   <div class="top">
 	<h1>{{work_title}} – {{work_creator}}</h1>
+	<img src="shared/add.png" alt="add version" class="addVersion" />
+	<form id="addPanel"><h3>{{addtrad}}</h3><input type="text"/><input type="submit" /></form>
   </div>
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}">
     <thead class="header"><tr>
       {{#headers}}
-        <th class="pleat open" data-version="{{id}}"><div class="relative-wrapper">
+        <th class="pleat open{{#edited}} edited{{/edited}}" data-version="{{id}}"><div class="relative-wrapper">
           <div class="title">{{title}}</div>
           <div class="work-creator">{{work_creator}}</div>
           <span>{{trad}}</span><div class="creator">{{creator}}</div>

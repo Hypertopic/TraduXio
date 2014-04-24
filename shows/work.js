@@ -73,9 +73,11 @@ function(o, req) {
       language: translation.language,
       date: translation.date,
       creativeCommons: translation.creativeCommons,
-	  trad:"Trad."
+	  trad:"Trad.",
+	  edited: req.query.edit == t
     });
   }
+  data.addtrad="Traducteur :";
   data.rows=hexapla.getRows();
   data.name="work";
   data.css=true;

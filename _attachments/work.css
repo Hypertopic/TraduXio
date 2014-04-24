@@ -77,6 +77,31 @@ table#hexapla {
   margin:0 auto;
 }
 
+#work .addVersion {
+  float: right;
+  display: inline;
+  cursor: pointer;
+}
+
+#work  .top #addPanel * {
+  display: inline-block;
+  margin: 5px;
+}
+
+#work  .top #addPanel textarea {
+  width: 250px;
+}
+
+#work  .top #addPanel button {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#work  .top #addPanel {
+  text-align: right;
+  display: none;
+}
+
 #hexapla .pleat.open .title,
 #hexapla .pleat.open .work-creator {
   clear:both;
@@ -226,24 +251,6 @@ textarea.dirty {
   background-color:#efefef;
 }
 
-#work #add {
-  padding-top: 25px;
-}
-
-#work #add label {
-  padding: 10px;
-  width: 125px;
-  display: inline-block;
-}
-
-#work #add input {
-  width: 300px;
-}
-
-#work #add button {
-  margin: 10px 10px 10px 380px;
-}
-
 .button.show {
   background-image: url(pleat-closed.png);
   width:20px;
@@ -262,6 +269,12 @@ textarea.dirty {
   background-image: url(pleat-open.png);
   width:32px;
   right: 10px;
+}
+
+.button.delete {
+  background-image: url(delete.png);
+  width:32px;
+  left: 10px;
 }
 
 .edit .button.edit-license {

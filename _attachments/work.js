@@ -196,9 +196,14 @@
       top.css("width","auto");
       doc.removeClass("edit");
 	  top.find("textArea").remove();
+	  top.find(".delete").remove();
     } else {
       doc.addClass("edit");
       top.css("width",doc.first().outerWidth()+"px");
+	  if(version != "original") {
+		top.prepend('<span class="button delete"></span>');
+		top.find(".delete").on("click", clickDeleteVersion);
+	  }
     }
 	setEditState(edited, top, "title");
 	setEditState(edited, top, "work-creator");
@@ -302,6 +307,56 @@
   
   function changeVersion(oldVersion, newVersion) {
 	$("#hexapla").find("*[data-version='" + oldVersion + "']").attr("data-version", newVersion).data("version", newVersion).find(".creator").html(newVersion);
+  }
+  
+  function toggleAddVersion() {
+	$("#addPanel").slideToggle(200);
+  }
+  
+  function addVersion() {
+	var id = $("#hexapla").data("id");
+	var ref = $("#addPanel").find("input[type='text']").val();
+	if(ref != "") {
+	  $.ajax({
+		type: "PUT",
+		url: "work/"+id+"/"+ref,
+		contentType: 'text/plain',
+		data: JSON.stringify({"key": "creator", "value": ref})
+	  }).done(function() {
+		window.location.href = id + "?edit=" + ref;
+	  }).fail(function() { alert("fail!"); });
+	}
+	return false;
+  }
+  
+  function clickDeleteVersion() {
+	var ref = $(this).closest("th").data("version");
+	if(confirm("Supprimer la traduction de " + ref + " ?")) {
+	  deleteVersion(ref);
+	}
+  }
+  
+  function deleteVersion(version) {
+	var id = $("#hexapla").data("id");
+	$.ajax({
+	  type: "PUT",
+	  url: "work/"+id+"/"+version,
+	  contentType: 'text/plain',
+	  data: JSON.stringify({"key": "delete"})
+	}).done(function() {
+	  window.location.reload(true);
+	}).fail(function() { alert("fail!"); });
+  }
+  
+  function openEditedVersions() {
+	var version = $("#hexapla").find(".edited").last();
+	var ref = version.closest("th").data("version");
+	find(ref).show();
+    findPleat(ref).hide();
+    find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit);
+    positionSplits();
+	version.find(".edit").click();
+	version.removeClass("edited");
   }
 
   function getEndLine (units,index) {
@@ -511,7 +566,9 @@
 
     $("tr").on("focusout", ".unit.edit textarea", saveUnit);
 	
-	//$(".top").on("click", ".addVersion", addVersion);
+	$(".top").on("click", ".addVersion", toggleAddVersion);
+	
+	$("#addPanel").on("submit", addVersion);
     
     var versions=getVersions();
     const N = versions.length;
@@ -521,6 +578,8 @@
     for (var i = 2; i<N; i++) {
       toggleShow(versions[i]);
     }
+	
+	openEditedVersions();
 
   });
 
