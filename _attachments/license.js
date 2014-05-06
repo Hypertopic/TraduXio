@@ -24,7 +24,15 @@ function goBack() {
 
 function submitLicense(e) {
   e.preventDefault();
-  $.ajax({type:"PUT",url:window.location,contentType:"text/plain",data:getLicense()}).done(goBack).fail(function() {
+  var id = $(".full").first().data("id");
+  var tmp = document.location.pathname.split("/");
+  var ref = tmp[tmp.length - 1];
+  $.ajax({
+	type:"PUT",
+	url: $("#license").data("prefix") + "/work/"+id+"/"+ref,
+	contentType:"text/plain",
+	data:JSON.stringify({key: "creativeCommons", value: getLicense()})
+  }).done(goBack).fail(function() {
     alert("failed!");
   });
 }
