@@ -205,12 +205,12 @@
 		top.find(".delete").on("click", clickDeleteVersion);
 	  }
     }
-	setEditState(edited, top, "title");
-	setEditState(edited, top, "work-creator");
+	setEditState(edited, top, "title", "Titre");
+	setEditState(edited, top, "work-creator", "Traduction");
 	if(version != "original")
-	  setEditState(edited, top, "creator");
+	  setEditState(edited, top, "creator", "Auteur");
 	setLangEditState(edited, top);
-	setEditState(edited, top, "date");
+	setEditState(edited, top, "date", "Année");
     units.each(function() {
       var unit=$(this);
       if ($(this).isEdited()) {
@@ -269,17 +269,18 @@
 	}
   }
   
-  function setEditState(isEdited, container, name, auto) {
-	setEditStateForComponent(isEdited, container, name, "focusout", '<textarea class="editedMeta ' + name + '" />', auto);
+  function setEditState(isEdited, container, name, placeholder) {
+	setEditStateForComponent(isEdited, container, name, "focusout", '<textarea class="editedMeta ' + name + '" />', placeholder);
   }
   
-  function setEditStateForComponent(isEdited, container, name, event, textComponent, auto) {
+  function setEditStateForComponent(isEdited, container, name, event, textComponent, placeholder) {
 	var target = container.find("." + name);
 	if(isEdited) {
 	  target.removeClass("edit").show();
 	} else {
 	  target.addClass("edit");
 	  var component=$(textComponent);
+	  component.attr("placeholder", placeholder);
 	  component.on(event, function() {
 		if(component.hasClass("dirty")) {
 		  var id = $("#hexapla").data("id");
