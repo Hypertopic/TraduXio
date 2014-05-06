@@ -77,7 +77,8 @@ function(o, req) {
 	  edited: req.query.edit == t
     });
   }
-  data.addtrad="Traducteur :";
+  data.addtrad="Traduction :";
+  data.send="Cr&eacute;er";
   data.rows=hexapla.getRows();
   data.name="work";
   data.css=true;

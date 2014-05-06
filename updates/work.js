@@ -14,7 +14,7 @@ function(work, req) {
 	  for(var i=0 ; i<text.length ; i++) {
 		text[i] = "";
 	  }
-	  work.translations[version] = { title: work.title, language: work.language, date: new Date().getFullYear(), text: text };
+	  work.translations[version] = { title: work.title, language: work.language, text: text };
 	}
 	doc = work.translations[version];
   }
