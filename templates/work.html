@@ -1,8 +1,10 @@
 {{> header}}
   <div class="top">
 	<h1>{{work_title}} – {{work_creator}}</h1>
+	<img src="shared/remove.png" alt="remove doc" class="removeDoc" />
 	<img src="shared/add.png" alt="add version" class="addVersion" />
 	<form id="addPanel"><h3>{{addtrad}}</h3><input type="text"/><input type="submit" value="{{send}}" /></form>
+	<div id="removePanel"><button>{{deleteMsg}}</button></div>
   </div>
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}">
     <thead class="header"><tr>

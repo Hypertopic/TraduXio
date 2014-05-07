@@ -318,6 +318,12 @@
   
   function toggleAddVersion() {
 	$("#addPanel").slideToggle(200);
+	$("#removePanel").slideUp(200);
+  }
+  
+  function toggleRemoveDoc() {
+	$("#removePanel").slideToggle(200);
+	$("#addPanel").slideUp(200);
   }
   
   function addVersion() {
@@ -334,6 +340,19 @@
 	  }).fail(function() { alert("fail!"); });
 	}
 	return false;
+  }
+  
+  function removeDoc() {
+	if(confirm("La suppression est irréversible. Continuer ?")) {
+	  $.ajax({
+		type: "PUT",
+		url: "work/"+$("#hexapla").data("id"),
+		contentType: 'text/plain',
+		data: JSON.stringify({"key": "remove"})
+	  }).done(function() {
+		window.location.href = "./";
+	  }).fail(function(error) { alert("failed: " + error.statusText); });
+	}
   }
   
   function clickDeleteVersion() {
@@ -574,8 +593,10 @@
     $("tr").on("focusout", ".unit.edit textarea", saveUnit);
 	
 	$(".top").on("click", ".addVersion", toggleAddVersion);
+	$(".top").on("click", ".removeDoc", toggleRemoveDoc);
 	
 	$("#addPanel").on("submit", addVersion);
+	$("#removePanel").on("click", removeDoc);
     
     var versions=getVersions();
     const N = versions.length;

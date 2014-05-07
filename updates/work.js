@@ -1,6 +1,10 @@
 function(work, req) {
-  var version = req.query.version;
   var args = JSON.parse(req.body);
+  if(args.key == "remove") {
+	work._deleted = true;
+	return [work, "document removed"];
+  }
+  var version = req.query.version;
   if(args.key == "delete") {
 	delete work.translations[version];
 	return [work, version + " deleted"];

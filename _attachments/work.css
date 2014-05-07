@@ -77,29 +77,34 @@ table#hexapla {
   margin:0 auto;
 }
 
-#work .addVersion {
+#work .addVersion, #work .removeDoc {
   float: right;
   display: inline;
   cursor: pointer;
 }
 
-#work  .top #addPanel * {
+#work  .top form * {
   display: inline-block;
   margin: 5px;
 }
 
-#work  .top #addPanel textarea {
+#work  .top form textarea {
   width: 250px;
 }
 
-#work  .top #addPanel button {
+#work  .top button {
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#work  .top #addPanel {
+#work  .top form, #removePanel {
   text-align: right;
   display: none;
+}
+
+#removePanel  button {
+  padding: 5px;
+  font-size: 1em;
 }
 
 #hexapla .pleat.open .title,
