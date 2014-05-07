@@ -206,9 +206,9 @@
 	  }
     }
 	setEditState(edited, top, "title", "Titre");
-	setEditState(edited, top, "work-creator", "Traduction");
+	setEditState(edited, top, "work-creator", "Auteur");
 	if(version != "original")
-	  setEditState(edited, top, "creator", "Auteur");
+	  setEditState(edited, top, "creator", "Traduction");
 	setLangEditState(edited, top);
 	setEditState(edited, top, "date", "Année");
     units.each(function() {
@@ -243,29 +243,35 @@
 	  container.find("select").remove();
 	  target.removeClass("edit").show();
 	} else {
-	  var language = $("#header").find("#language").clone();
-	  language.val(target.data("id"));
-	  language.addClass("editedMeta").css("width", "50%");
-	  language.on("change", function() {
-		var id = $("#hexapla").data("id");
-		var ref = $(this).closest("th").data("version");
-		$.ajax({
-		  type: "PUT",
-		  url: "work/"+id+"/"+ref,
-		  contentType: 'text/plain',
-		  data: JSON.stringify({"key":"language", "value": language.val()})
-		}).done(function() {
-		  var lang = language.find("option:selected").text();
-		  var lang_id = lang.substring(0, 2);
-		  var lang_text = lang.substring(5);
-		  target.data("id", lang_id).attr("data-id", lang_id);
-		  target.text(lang_text);
-		  $("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
-		    .attr("data-id", lang_id).data("id", lang_id).attr("title", lang_text).html(lang_id);
-		}).fail(function() { alert("fail!"); });
-	  });
-	  target.addClass("edit");
-	  target.before(language).hide();
+	  target.hide();
+	  var language = $("<select></select>");
+	  $.getJSON(getPrefix() + "/shared/languages.json", function(result) {
+		$.each(result, function(key, o) {
+		  language.append("<option value=\""+key+"\">" + key + " (" + o.fr + " - " + o.en + " - " + o[key] + ")</option>");
+		});
+		language.val(target.data("id"));
+		language.addClass("editedMeta").css("width", "50%");
+		language.on("change", function() {
+		  var id = $("#hexapla").data("id");
+		  var ref = $(this).closest("th").data("version");
+		  $.ajax({
+		    type: "PUT",
+		    url: "work/"+id+"/"+ref,
+		    contentType: 'text/plain',
+		    data: JSON.stringify({"key":"language", "value": language.val()})
+		  }).done(function() {
+			var lang = language.find("option:selected").text();
+			var lang_id = lang.substring(0, 2);
+			var lang_text = lang.substring(4).split("-")[0];
+			target.data("id", lang_id).attr("data-id", lang_id);
+			target.text(lang_text);
+			$("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
+			  .attr("data-id", lang_id).data("id", lang_id).attr("title", lang_text).html(lang_id);
+			}).fail(function() { alert("fail!"); });
+		});
+		target.addClass("edit");
+		target.before(language);
+	  }).fail(function() { alert("Cannot edit language field"); });
 	}
   }
   
@@ -332,7 +338,7 @@
   
   function clickDeleteVersion() {
 	var ref = $(this).closest("th").data("version");
-	if(confirm("Supprimer la traduction de " + ref + " ?")) {
+	if(confirm("Supprimer la traduction '" + ref + "' ?")) {
 	  deleteVersion(ref);
 	}
   }
