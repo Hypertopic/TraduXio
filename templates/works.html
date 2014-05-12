@@ -1,33 +1,27 @@
 {{>header}}
 <div id="lead">
-  <div class="logo">TraduXio</div>
-  <div class="welcome">Bienvenue sur TraduXio, le site de traduction participative</div>
   <img src="shared/traduxio_home_logo.jpg" alt="TraduXio Home Logo" />
-  <div id="citation">{{quote}}<span class="author">{{author}}</span></div>
+  <div id="citation"><span class="quote"></span><span class="author"></span></div>
+  <div class="welcome">Un environnement participatif pour les traducteurs de textes culturels</div>
 </div>
 <div id="works-list">
-<div class="list">
-<span class="title">Langues</span>
-<div class="content">
-<ul>
-  {{#languages}}
-    <li class="foldable"><span class="language expand" data-id="{{code}}">{{code}}</span>
-    <ul>
-      {{#authors}}
-        <li class="foldable closed">{{name}}
-        <ul>
-          {{#works}}
-            <li><a href="{{id}}">{{name}}</a></li>
-          {{/works}}
-        </ul>
-        </li>
-      {{/authors}}
-    </ul>
-    </li>
-  {{/languages}}
-</ul>
-</div>
-</div>
+	<ul>
+	  {{#languages}}
+		<li class="language foldable"><span class="language expand" data-id="{{code}}">{{code}}</span>
+		<ul>
+		  {{#authors}}
+			<li class="author foldable closed">{{name}}
+			<ul>
+			  {{#works}}
+				<li><a href="{{id}}">{{name}}</a></li>
+			  {{/works}}
+			</ul>
+			</li>
+		  {{/authors}}
+		</ul>
+		</li>
+	  {{/languages}}
+	</ul>
 </div>
 <div id="latests">
 </div>
