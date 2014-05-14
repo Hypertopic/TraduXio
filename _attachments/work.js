@@ -201,7 +201,7 @@
       doc.addClass("edit");
       top.css("width",doc.first().outerWidth()+"px");
 	  if(version != "original") {
-		top.prepend('<span class="button delete"></span>');
+		top.find(".relative-wrapper").prepend('<span class="button delete"></span>');
 		top.find(".delete").on("click", clickDeleteVersion);
 	  }
     }
