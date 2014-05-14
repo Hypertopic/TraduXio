@@ -5,7 +5,6 @@ $.fn.concordancify = function() {
 
   this.append('<input id="query" type="search" results="5" name="query" placeholder="Rechercher" value="'
     +  default_query + '" />');
-  this.append('<button class="submit icon-search">Rechercher</div>');
   this.append('<select id="language" name="language"/>');
   
   var form=this; 
@@ -13,9 +12,9 @@ $.fn.concordancify = function() {
   getLanguageNames(function() {
     $.getJSON(getPrefix()+"/languages", function(result) {
       $.each(result.rows, function(i, o) {
-	$("#language",form).append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
+	$("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
-      $("#language",form).val(default_language);
+      $("#language").val(default_language);
     }); 
   });
   

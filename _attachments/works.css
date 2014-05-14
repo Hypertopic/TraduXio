@@ -1,37 +1,14 @@
-/* fixed height layout : http://www.hacksrus.net/files/demo.html */
-
-body#works #header {
-  position:absolute;
-  width:100%;
-}
-
 body#works #main {
-  position:absolute;
-  top:4em;
-  bottom:3em;
   width:100%;
 }
 
 body#works #main > *{
-  position:relative;
+  margin-top: 25px;
   float:left;
 }
 
-body#works #footer {
-  position:absolute;
-  bottom:0px;
-}
-
-div#works-list {
-  width:55%;
-}
-
-div#latests {
-  width:0%;
-}
-
 div#citation {
-  padding: 2% 18px;
+  padding: 0 25px;
   text-align: justify;
   font-size: 0.8em;
   background-image: url("citation-mark.gif");
@@ -44,14 +21,19 @@ div#citation span.author {
 }
 
 div#lead {
-  border-right: 4px dotted;
+  border-right: 2px dotted;
   padding-left: 1%;
   padding-right: 1%;
+  margin: 1%;
   text-align: center;
-  width:40%;
-  min-height:80%;
+  width:25%;
+  min-height:60%;
   top:10%;
-  max-width:500px;
+}
+
+#lead .welcome {
+  margin-top: 25px;
+  font-size: 1.2em;
 }
 
 div #lead > * {
@@ -65,31 +47,45 @@ div #lead > * {
   max-width:269px;
 }
 
-
-div.list {
-  margin-top:1%;
-  margin-left:2%;
+#works-list {
+  width: 70%;
+  margin: 0;
+  margin-left: 1%;
 }
 
-div.list div.content {
-  border:2px solid black;
-  height:85%;
-  width:95%;
-  overflow:auto;
-  clear:both;
-  padding-left:0.5em;
+#works-list li{
+  margin-top: 5px;
 }
 
-div.content li {
-  margin-top:0.5em;
+#works-list li a:hover {
+  color: grey;
 }
 
-div.list span.title {
-  padding:0.5em;
-  float:left;
-  border:2px solid black;
+#works-list .language, #latests .title {
+  font-variant: small-caps;
+  margin-top: 15px;
+  list-style: none;
+  font-size: 22px;
+  color: grey;
 }
 
-#lead .logo {
-  font-size:4em;
+#works-list .author {
+  font-variant: normal;
+  margin-left: 20px;
+  font-size: 16px;
+  color: black;
+}
+
+#works-list a, #latests li {
+  font-size: 14px;
+}
+
+#nav li.work {
+  color: black;
+  background-color: white;
+  border-bottom: 3px white solid;
+}
+
+.concordance {
+  display: none;
 }
