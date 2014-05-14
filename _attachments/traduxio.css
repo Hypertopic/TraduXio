@@ -77,9 +77,12 @@ body,html,input,textarea {
   background-color:#888;
   color:#fff;
   padding:0.5em;
-  margin-bottom:1em;
-  display: inline-block;
-  width: 100%;
+  margin-bottom:0.5em;
+}
+
+#work .top  h1{
+  display: inline;
+  margin-right: 30px;
 }
 
 /*textarea {
