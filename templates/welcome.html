@@ -1,54 +1,67 @@
-{{> header}}
-<div id="top">
-    <h1 class="title">TraduXio</h1>
-    <strong class="subtitle">TraduXio est un environnement
-        collaboratif pour les traducteurs de textes culturels.
-    </strong>
-</div>
-<!--Panels d'informations-->
-<div id="middle">
-    <div>
-        <div class="panel">
-            <img src="shared/analysis.png" 
-                 alt="Analyse et comparaison"/>
-            <h2>Analysez et comparez</h2>
-            <p>TraduXio met à votre disposition la possibilité
-                d'analyser et de comparer les traductions d'une 
-                même œuvre, mais également de conserver toutes 
-                vos contributions.</p>
+<html>
+    <head>
+        <title>TraduXio</title>
+        <link rel="stylesheet" href="shared/welcome.css" type="text/css" />
+        <!--[if lt IE 7]>
+        <style media="screen" type="text/css">
+        body {
+                height:100%;
+        }
+        </style>
+        <![endif]-->
+    </head>
+    <body id="main" data-language="{{language}}" data-query="{{query}}">
+        <div id="body">
+            <div id="top">
+                <h1 class="title">TraduXio</h1>
+                <strong class="subtitle">TraduXio est un environnement
+                    collaboratif pour les traducteurs de textes culturels.
+                </strong>
+            </div>
+            <!--Panels d'informations-->
+            <div id="middle">
+                <div>
+                    <div class="panel">
+                        <img src="shared/analysis.png" 
+                             alt="Analyse et comparaison"/>
+                        <h2>Analysez et comparez</h2>
+                        <p>TraduXio met à votre disposition la possibilité
+                            d'analyser et de comparer les traductions d'une 
+                            même œuvre, mais également de conserver toutes 
+                            vos contributions.</p>
+                    </div>
+                    <div class="panel">
+                        <img src="shared/cc.png" alt="Choisir la licence"/>
+                        <h2>Choisissez votre licence</h2>
+                        <p>TraduXio vous permet de définir une licence pour
+                            garantir les droits de vos contributions. La 
+                            définition des licences est basée sur le modèle 
+                            du Creative Commons.</p>
+                    </div>
+                </div><div>
+                    <div class="panel">
+                        <img src="shared/research.png" alt="Rechercher des 
+                             traductions"/>
+                        <h2>Recherchez des traductions</h2>
+                        <p>TraduXio vous offre la possibilité de rechercher 
+                            la traduction d'un ou plusieurs termes au 
+                            travers d'une bibliothèque d'œuvres de manière 
+                            simple et efficace.
+                        </p>
+                    </div>
+                    <div class="panel">
+                        <img src="shared/group.png" alt="Travail à 
+                             plusieurs"/>
+                        <h2>Travaillez à plusieurs</h2>
+                        <p>TraduXio propose un environnement collaboratif. 
+                            Il comprend un outil de traduction permettant à
+                            plusieurs collaborateurs de traduire une même
+                            œuvre en simultané.
+                        </p>
+                    </div>
+                </div>
+                <a href="./" class="start">&nbsp;Commencer&nbsp;</a>
+            </div>
         </div>
-        <div class="panel">
-            <img src="shared/cc.png" alt="Choisir la licence"/>
-            <h2>Choisissez votre licence</h2>
-            <p>TraduXio vous permet de définir une licence pour
-                garantir les droits de vos contributions. La 
-                définition des licences est basée sur le modèle 
-                du Creative Commons.</p>
-        </div>
-    </div><div>
-        <div class="panel">
-            <img src="shared/research.png" alt="Rechercher des 
-                 traductions"/>
-            <h2>Recherchez des traductions</h2>
-            <p>TraduXio vous offre la possibilité de rechercher 
-                la traduction d'un ou plusieurs termes au 
-                travers d'une bibliothèque d'œuvres de manière 
-                simple et efficace.
-            </p>
-        </div>
-        <div class="panel">
-            <img src="shared/group.png" alt="Travail à 
-                 plusieurs"/>
-            <h2>Travaillez à plusieurs</h2>
-            <p>TraduXio propose un environnement collaboratif. 
-                Il comprend un outil de traduction permettant à
-                plusieurs collaborateurs de traduire une même
-                œuvre en simultané.
-            </p>
-        </div>
-    </div>
-    <!--Lien vers le guide-->
-    <a href="about.html" class="help">&nbsp;Suivez le guide !&nbsp;
-    </a>
-</div>
-{{> footer}}
+    </body>
+</html>

@@ -1,6 +1,7 @@
 #main {
     font-family: "Trebuchet MS";
     font-size: 90%;
+    background: linear-gradient(to bottom, rgba(235,235,235,1) 0%, white 5%);
 }
 
 #main #top {
@@ -27,11 +28,9 @@
 
 #middle {
     text-align: center;
-    position: relative;
-    top: 25px;
 }
 
-.panel {
+#middle .panel {
     vertical-align: text-top;
     text-align: left;
     width: 45%;
@@ -41,25 +40,27 @@
     max-width: 600px;
 }
 
-.panel p {
+#middle .panel p {
     text-align: justify;
 }
 
-.panel img {
+#middle .panel img {
     width: 128px;
     height: 128px;
     float: left;
 }
 
-.help {
+#middle .start {
     font-size: 120%;
     border: 3px black solid;
     position: relative;
     box-shadow: 3px 3px 0 black;
     bottom: -30px;
+    text-decoration: none;
+    color: black;
 }
 
-.help:hover {
+#middle .start:hover {
     box-shadow: 5px 5px 10px black;
     font-size: 130%;
 }

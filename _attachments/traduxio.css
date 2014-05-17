@@ -46,43 +46,34 @@ body,html,input,textarea {
 }
 
 #header {
-  font-size:1em;
+  font-size:0.9em;
   color:#fff;
-  background-color:#333;
+  background: linear-gradient(to bottom, grey 0%, darkslategrey 100%);
 }
 
 #footer {
   color:#fff;
-  background-color:#333;
-  font-size:1em;
-  font-weight:bold;
+  background-color: darkslategrey;
   width:100%;
   position:absolute;
   z-index:99;
   bottom:0px;
-  height:2em;
+  font-size: 0.85em;
+  height:2.1em;
 }
 
 #footer > div {
   padding:0.4em;
 }
 
+#footer span {
+  font-weight:bold;
+}
+
 #header ul#nav {
   float:left;
   padding:0px;
-  margin-top:0.4em;
-}
-
-#work .top {
-  background-color:#888;
-  color:#fff;
-  padding:0.5em;
-  margin-bottom:0.5em;
-}
-
-#work .top  h1{
-  display: inline;
-  margin-right: 30px;
+  padding-top: 3px;
 }
 
 /*textarea {
@@ -105,28 +96,19 @@ body,html,input,textarea {
 }
 
 #nav li a {
-  color:#fff;
   text-decoration:none;
+  font-weight: normal;
 }
 
 #nav li:hover {
-  background-color:#666;
+  box-shadow: 0 0 8px white;
 }
 
-#header form.concordance,
-#header #logo {
+#header form.concordance {
   float:right;
   margin-right:2em;
   font-size:1.2em;
   font-weight:bold;
-}
-
-#works li.works,
-#work li.work,
-#concordance li.concordance,
-#myworks li.myworks,
-#home li.home {
-  background-color:#888;
 }
 
 form.concordance input#query {
@@ -136,17 +118,8 @@ form.concordance input#query {
   margin:0.5em;
 }
 
-form.concordance button.submit {
-  background-image: url(magnifier.png);
-  background-color:#fff;
-  background-repeat:no-repeat;
-  border-radius:12px;
-  border-width:0px;
-  background-position: left center;
-  width:24px;
-  height:24px;
-  text-indent:100%;
-  overflow:hidden;
+#header #language  {
+  border-radius: 0.5em;
 }
 
 ul {
