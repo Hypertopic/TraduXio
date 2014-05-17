@@ -4,7 +4,7 @@ function(o) {
     return text.substr(begin, SIZE).toLowerCase();
   }
 
-  const WORD_MATCHER = /\S+/g;
+  const WORD_MATCHER = /[^\s'`\-]+/g;
   for (var i in o.text) {
     var text = o.text[i];
     if (text) {
