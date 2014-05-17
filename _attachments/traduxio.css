@@ -48,6 +48,7 @@ body,html,input,textarea {
 #header {
   z-index:100;
   position: fixed;
+  top: 0;
   width: 100%;
   font-size:0.85em;
   color:#fff;
