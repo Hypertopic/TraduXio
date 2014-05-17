@@ -324,7 +324,7 @@ textarea.dirty {
     background-color:#888;
     color:#fff;
     padding:0.5em;
-    margin: 5px 0.5em 0.5em;
+    margin: 0 0.5em 0.5em;
     font-size: 0.75em;
     border-radius: 0.5em;
 }
@@ -335,4 +335,10 @@ textarea.dirty {
     display: inline;
     margin-right: 50px;
     margin-left: 15px;
+}
+
+#nav li.works {
+    border-top: 1px darkgrey solid;
+    background-color: #888;
+    border-bottom: 6px #888 solid;
 }

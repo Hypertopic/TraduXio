@@ -10,7 +10,8 @@ body#works #main > *{
 div#citation {
   padding: 0 25px;
   text-align: justify;
-  font-size: 0.8em;
+  font-size: 0.7em;
+  height: 15%;
   background-image: url("citation-mark.gif");
   background-repeat: no-repeat;
 }
@@ -32,8 +33,9 @@ div#lead {
 }
 
 #lead .welcome {
-  margin-top: 25px;
-  font-size: 1.2em;
+  padding-right: 20px;
+  font-size: 1.5em;
+  text-align: right;
 }
 
 div #lead > * {

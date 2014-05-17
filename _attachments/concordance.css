@@ -1,5 +1,6 @@
 table.concordance {
   border-collapse:collapse;
+  font-size: 0.85em;
   width:100%;
 }
 
@@ -68,5 +69,5 @@ td.metadata a:hover {
 }
 
 #filters span {
-    margin: 5px;
+  margin: 5px;
 }
