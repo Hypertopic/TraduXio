@@ -36,8 +36,8 @@ body,html,input,textarea {
 }
 
 #body {
-  min-height:100%;
   position:relative;
+  top: 2.5em;
 }
 
 #main {
@@ -46,19 +46,23 @@ body,html,input,textarea {
 }
 
 #header {
-  font-size:0.9em;
+  z-index:100;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size:0.85em;
   color:#fff;
-  background: linear-gradient(to bottom, grey 0%, darkslategrey 100%);
+  background: linear-gradient(to bottom, grey 0%, #333 100%);
 }
 
 #footer {
   color:#fff;
-  background-color: darkslategrey;
+  background-color: #333;
   width:100%;
-  position:absolute;
+  position:fixed;
   z-index:99;
   bottom:0px;
-  font-size: 0.85em;
+  font-size: 0.8em;
   height:2.1em;
 }
 
