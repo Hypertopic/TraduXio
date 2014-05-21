@@ -43,7 +43,7 @@
   data.scripts=["ul-close"];
   data.script=true;
   data.css=true;
-  data.prefix=getPrefix(req.requested_path,0);
+  data.prefix="..";
   return Mustache.to_html(this.templates.works, data,this.templates.partials);
 }
 

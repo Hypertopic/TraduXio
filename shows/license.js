@@ -28,7 +28,7 @@ function(work, req) {
   data.name="license";
   data.css=true;
   data.script=true;
-  data.prefix=getPrefix(req.requested_path,3);
+  data.prefix="../../..";
 
   return Mustache.to_html(this.templates.license, data, this.templates.partials);
 }

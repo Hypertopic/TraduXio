@@ -1,5 +1,5 @@
 [{
-  "from": "concordance",
+  "from": "works/concordance",
   "to": "_list/concordance/concordance",
   "query": {
     "include_docs": "true",
@@ -12,11 +12,11 @@
     "group": "true"
   }
 },{
-  "from": "welcome",
-  "to": "_show/welcome"
-},{
-  "from": "version/:id",
+  "from": "works/version/:id",
   "to": "_update/version/:id"
+},{
+  "from": "works",
+  "to": "_list/works/works"
 },{
   "from": "shared/*",
   "to": "*"
@@ -24,22 +24,22 @@
   "from": "robots.txt",
   "to": "robots.txt"
 },{
-  "from": ":id",
+  "from": "works/:id",
   "to": "_show/work/:id",
   "method": "GET"
 },{
-  "from": "work/:id",
+  "from": "works/work/:id",
   "to": "_update/work/:id",
   "method": "PUT"
 },{
-  "from": "license/:id/:version",
+  "from": "works/license/:id/:version",
   "to": "_show/license/:id",
   "method": "GET"
 },{
-  "from": "work/:id/:version",
+  "from": "works/work/:id/:version",
   "to": "_update/work/:id",
   "method": "PUT"
 },{
   "from": "",
-  "to": "_list/works/works"
+  "to": "_show/welcome"
 }]

@@ -22,7 +22,7 @@ $.fn.concordancify = function() {
     event.preventDefault();
     var query = form.find('#query').val().toLowerCase();
     var language = $("#language").val();
-    window.location.href = getPrefix()+'/concordance?' + $.param({
+    window.location.href = getPrefix()+'/works/concordance?' + $.param({
       startkey: '["' + language + '","' + query + '"]',
       endkey: '["' + language + '","' + query + '\\u9999"]',
       query: query,

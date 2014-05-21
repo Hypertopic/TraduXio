@@ -495,7 +495,7 @@
     });
 
     $("#hexapla").on("click", ".button.edit-license", function() {
-      window.location=getPrefix()+"/license/"+$("#hexapla").data("id")+'/'+$(this).getVersion("th");
+      window.location=getPrefix()+"/works/license/"+$("#hexapla").data("id")+'/'+$(this).getVersion("th");
     });
 
     $("input.edit").on("click",toggleEdit);
