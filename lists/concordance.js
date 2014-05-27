@@ -87,7 +87,7 @@ function(head, req) {
   data.name="concordance";
   data.css=true;
   data.script=true;
-  data.prefix=getPrefix(req.requested_path,1);
+  data.prefix="..";
 
   return Mustache.to_html(this.templates.concordance, data, this.templates.partials);
 }

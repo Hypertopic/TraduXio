@@ -19,7 +19,7 @@ function getLicense() {
 }
 
 function goBack() {
-  window.location=getPrefix()+"/"+$(".full").data("id");
+  window.location=getPrefix()+"/works/"+$(".full").data("id");
 }
 
 function submitLicense(e) {
@@ -29,7 +29,7 @@ function submitLicense(e) {
   var ref = tmp[tmp.length - 1];
   $.ajax({
 	type:"PUT",
-	url: $("#license").data("prefix") + "/work/"+id+"/"+ref,
+	url: $("#license").data("prefix") + "/works/work/"+id+"/"+ref,
 	contentType:"text/plain",
 	data:JSON.stringify({key: "creativeCommons", value: getLicense()})
   }).done(goBack).fail(function() {

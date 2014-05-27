@@ -86,7 +86,7 @@ function(o, req) {
   data.script=true;
   data.scripts=["jquery.selection"];
   data.language=data.work_language;
-  data.prefix=getPrefix(req.requested_path,1);
+  data.prefix="..";
  
   return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }
