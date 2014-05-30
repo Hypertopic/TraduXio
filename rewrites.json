@@ -15,6 +15,9 @@
   "from": "works/version/:id",
   "to": "_update/version/:id"
 },{
+  "from": "works/copyright",
+  "to": "_show/copyright"
+},{
   "from": "works",
   "to": "_list/works/works"
 },{
