@@ -22,7 +22,7 @@
       authorData = null;
     }
     var a = row.key[1];
-    if (a!=lastAuthor) {
+    if (a!=lastAuthor || !authorData) {
       if (authorData) {
         languageData.authors.push(authorData);
       }
