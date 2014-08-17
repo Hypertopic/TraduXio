@@ -4,6 +4,20 @@ function(work, req) {
 	work._deleted = true;
 	return [work, "document removed"];
   }
+  if (work===null) {
+    work=args;
+    work._id=work.id || req.id || req.uuid;
+    work.creator=work["work-creator"];
+    delete work["work-creator"];
+    if (work.original) {
+        work.text=work.text || [];
+        work.translations={};
+    } else {
+        delete work.text;
+        work.translations={"first":{text:[]}};
+    }
+    return [work, JSON.stringify({ok:"created",id:work._id})];
+  }
   var version = req.query.version;
   if(args.key == "delete") {
 	delete work.translations[version];
@@ -42,5 +56,5 @@ function(work, req) {
   } else {
 	doc[args.key] = args.value;
   }
-  return [work, args.value];
+  return [work, typeof args.value=="string"?args.value:JSON.stringify(args.value)];
 }

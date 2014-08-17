@@ -92,7 +92,7 @@ body {
     cursor: pointer;
 }
 
-#work .top form * {
+#work .top form input {
     display: inline-block;
     margin: 5px;
 }
@@ -336,6 +336,10 @@ body {
     display: inline;
     margin-right: 50px;
     margin-left: 15px;
+}
+
+#work .top #work-info {
+    display:none
 }
 
 #nav li.works {

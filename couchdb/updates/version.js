@@ -13,6 +13,11 @@ function(old, req) {
     };
     this.setContent = function(version, line, content) {
       if (this.isOriginal(version)) {
+        if (line>=this.data.text.length) {
+            for(i=this.data.text.length;i<line;i++) {
+                this.data.text.push("");
+            }
+        } 
         this.data.text[line] = content;
       } else {
         this.data.translations[version].text[line] = content;

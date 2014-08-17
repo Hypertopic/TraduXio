@@ -31,6 +31,10 @@
   "to": "_show/work/:id",
   "method": "GET"
 },{
+  "from": "works/work",
+  "to": "_update/work",
+  "method": "POST"
+},{
   "from": "works/work/:id",
   "to": "_update/work/:id",
   "method": "PUT"

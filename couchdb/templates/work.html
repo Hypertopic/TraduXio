@@ -5,6 +5,14 @@
 	<img src="{{prefix}}/shared/add.png" alt="add version" class="addVersion" />
 	<form id="addPanel"><h3>{{addtrad}}</h3><input type="text"/><input type="submit" value="{{send}}" /></form>
 	<div id="removePanel"><button>{{deleteMsg}}</button></div>
+    <form id="work-info">
+        <input class="title" name="title" placeholder="Titre">
+        <input class="work-creator" name="work-creator" placeholder="Auteur">
+        <select class="language" name="language"></select>
+        <input class="date" name="date" placeholder="Date">
+        <label for="original-work">Oeuvre originale</label><input type="checkbox" checked="" name="original-work">
+        <input type="submit" name="{{sned}}">
+    </form>
   </div>
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}">
     <thead class="header"><tr>

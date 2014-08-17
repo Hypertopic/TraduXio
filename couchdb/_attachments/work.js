@@ -139,7 +139,7 @@
   }
 
   $.fn.isEdited = function() {
-    return this.find("textarea").length>0;
+    return this.hasClass("edit");
   };
 
   function htmlToString(unit) {
@@ -192,13 +192,42 @@
 	var doc = find(version);
     var units = findUnits(version);
 	var top = doc.first();
-	var edited = units.isEdited();
+	var edited = doc.isEdited();
     doc.find("input.edit").toggleName("Lire", "Editer");
     if (edited) {
       top.css("width","auto");
       doc.removeClass("edit");
 	  top.find("input.editedMeta").remove();
 	  top.find(".delete").remove();
+      if (getVersions().length==1) {
+          var fulltext=$("textarea.fulltext").val();
+          var lines=fulltext.split("\n\n");
+            var id=$("#hexapla").data("id");
+            var update=function(){
+                $("#hexapla tbody tr").remove();
+              lines.forEach(function(line,i) {
+                var newUnit=$("<div/>");
+                var text=$("<div>").addClass("text dirty");
+                text.html(stringToHtml(line)).removeClass("dirty");
+                newUnit.append(text);
+                newUnit.addClass("unit").attr("data-version",version);
+                var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append($("<div>").addClass("box-wrapper").append(newUnit));
+                newUnit.setSize(1);
+                var tr=$("<tr/>").data("line",i).prepend(newTd);
+                $("#hexapla tbody").append(tr);
+              });
+            };
+            if ($("textarea.fulltext").is(".dirty")) {
+                $.ajax({
+                    type:"PUT",
+                    data:JSON.stringify({key:"text",value:lines}),
+                    contentType: "text/plain",
+                    url:"work/"+id+"?version="+version
+                }).done(update);
+            } else {
+                update();
+            }
+      }
     } else {
       doc.addClass("edit");
       top.css("width",doc.first().outerWidth()+"px");
@@ -206,6 +235,20 @@
 		top.find(".relative-wrapper").prepend('<span class="button delete"></span>');
 		top.find(".delete").on("click", clickDeleteVersion);
 	  }
+      if (getVersions().length==1) {
+          var fulltext="";
+          var first=true;
+          units.each(function() {
+              if (first) first=false;
+              else fulltext+="\n\n";
+              fulltext+=htmlToString($(".text",this));
+          });
+          $("#hexapla tbody tr").remove();
+          var textarea=$("<textarea/>").addClass("fulltext").val(fulltext);
+          var tr=$("<tr/>").append($("<td/>").append($("<div>").addClass("unit edit").append(textarea).append($("<div>").addClass("text"))));
+          $("#hexapla tbody").append(tr);
+          autoSize.apply(textarea);
+      }
     }
 	setEditState(edited, top, "title", "Titre");
 	setEditState(edited, top, "work-creator", "Auteur");
@@ -629,6 +672,33 @@
     }
 	
 	openEditedVersions();
+    if(N==0) {
+      $("#work-info").show().on("submit",function(e) {
+        e.preventDefault();
+        var data={};
+        ["work-creator","language","title","date"].forEach(function(field) {
+          data[field]=$("[name='"+field+"']","#work-info").val();
+        });
+        data.original=$("[name=original-work]").prop("checked");
+        $.ajax({
+          type:"POST",
+          url:"work",
+          data:JSON.stringify(data),
+          contentType:"application/json",
+          dataType:"json"
+        }).done(function(result) {
+          if (result.ok && result.id) {
+            window.location.href=result.id;
+          } else {
+            alert("fail");
+          }
+        }).fail(function(){alert("fail");});
+        return false;
+      });
+
+      fillLanguages($("#work-info [name=language]"));
+      $(".top h1,img.removeDoc,img.addVersion").hide();
+    }
 
   });
 

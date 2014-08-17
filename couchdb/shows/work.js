@@ -2,6 +2,9 @@ function(o, req) {
   // !code lib/mustache.js
   // !code lib/hexapla.js
   // !code lib/path.js
+  if (o===null) {
+      o={translations:{}};
+  }
 
   function getTextLength() {
     if (o.text)
@@ -12,7 +15,7 @@ function(o, req) {
   function getLines(text,version) {
     var lines=[];
     var line={};
-    for each(var lineNum in text) {
+    for (var lineNum in text) {
        if (text[lineNum]) {
          if (line) {
            line.space=lineNum-line.lineNum;
@@ -22,7 +25,7 @@ function(o, req) {
            text:text[lineNum],
            line:lineNum,
            version:version
-         }
+         };
        }
     }
     if (line) {
@@ -63,7 +66,7 @@ function(o, req) {
     hexapla.addVersion({
       id: t,
       text: translation.text
-    })
+    });
     data.raw[t]=translation.text;
     data.headers.push({
       id:t,
