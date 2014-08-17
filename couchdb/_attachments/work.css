@@ -6,6 +6,15 @@ table#hexapla {
     margin: 0 0.5em;
 }
 
+table#hexapla.full {
+    margin: 0 auto;
+    width:99%;
+}
+
+#hexapla thead:first-child tr {
+  height:30%;
+}
+
 body {
     background-color: black;
 }

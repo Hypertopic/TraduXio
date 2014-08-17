@@ -131,6 +131,11 @@
   function toggleShow(version) {
     find(version).toggle();
     findPleat(version).toggle();
+    if ($(".pleat.open:visible").length==0) {
+      $("#hexapla").removeClass("full");
+    } else {
+      $("#hexapla").addClass("full");
+    }
     //when one version is edited, and we show a non edited one, pagination is ugly
     //so we toggle edited versions twice to get back to correct pagination
     //applying to both top and bottom buttons, so we do it twice
@@ -698,6 +703,9 @@
 
       fillLanguages($("#work-info [name=language]"));
       $(".top h1,img.removeDoc,img.addVersion").hide();
+    }
+    if (N==1) {
+      $(".button.hide").remove();
     }
 
   });
