@@ -28,9 +28,18 @@ function(work, req) {
 	doc = work;
   } else {
 	if(!work.translations[version]) {
-	  var text = work.text ? new Array(work.text.length) : new Array(1);
-	  for(var i=0 ; i<text.length ; i++) {
-		text[i] = "";
+	  var l = 1;
+	  if (work.text) l=work.text.length;
+	  else if (work.translations) {
+	    for (var t in work.translations) {
+	      if (work.translations[t].text) {
+	        l=Math.max(l,work.translations[t].text.length);
+	      }
+	    }
+	  }
+	  var text=[];
+	  for(var i=0 ; i<l ; i++) {
+		  text.push("");
 	  }
 	  work.translations[version] = { title: work.title, language: work.language, text: text };
 	}
