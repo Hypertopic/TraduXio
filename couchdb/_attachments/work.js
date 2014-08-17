@@ -127,15 +127,22 @@
   $.fn.redraw = function() {
     return this.hide(0, function(){$(this).show()});
   };
+  
+  function fixWidths() {
+   var nbOpen=$("thead:first-child tr:first-child th.pleat.open:visible").length;
+    if (nbOpen==0) {
+      $("#hexapla").removeClass("full");
+    } else {
+      $("#hexapla").addClass("full");
+      $("tbody tr:first-child td.pleat.open:visible").css("width",100/nbOpen+"%");
+    }
+
+  }
 
   function toggleShow(version) {
     find(version).toggle();
     findPleat(version).toggle();
-    if ($(".pleat.open:visible").length==0) {
-      $("#hexapla").removeClass("full");
-    } else {
-      $("#hexapla").addClass("full");
-    }
+    fixWidths();
     //when one version is edited, and we show a non edited one, pagination is ugly
     //so we toggle edited versions twice to get back to correct pagination
     //applying to both top and bottom buttons, so we do it twice
@@ -676,8 +683,9 @@
     for (var i = 2; i<N; i++) {
       toggleShow(versions[i]);
     }
+    openEditedVersions();
+    fixWidths();
 	
-	openEditedVersions();
     if(N==0) {
       $("#work-info").show().on("submit",function(e) {
         e.preventDefault();
