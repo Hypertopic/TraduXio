@@ -3,13 +3,13 @@
     this.val(
       (this.val()==name1)? name2 : name1
     );
-  }
+  };
   
   $.fn.toggleText = function(text1, text2) {
     this.text(
       (this.text()==text1)? text2 : text1
     );
-  }
+  };
 
   function find(version) {
     return $(".pleat.open[data-version='"+version+"']");
@@ -25,13 +25,13 @@
     var height=fake.outerHeight();
     fake.remove();
     return height;
-  }
+  };
 
   $.fn.rotate = function () {
     return $("<div>").addClass("rotated-text__wrapper").append(
       $("<div>").addClass("rotated-text").append(this)
     );
-  }
+  };
 
   function addPleat(version) {
     var header=find(version).filter("th").first();
@@ -154,29 +154,31 @@
   $.fn.getVersion = function(ancestor) {
     return this.closest(ancestor).data("version");
     return $(ancestor,$(this).closest("tr")).index($(this).closest(ancestor)) +1 ;
-  }
+  };
 
   $.fn.getReference = function() {
     return {
       version: this.closest(".unit").data("version"),
       line: this.closest("tr").data("line")
-    }
-  }
+    };
+  };
   
   $.fn.getLanguage = function() {
     return find(this.getVersion("td.open")).find(".language").data("id");
-  }
+  };
   
   $.fn.getLine = function() {
     return this.closest("tr").data("line");
-  }
+  };
 
   function autoSize() {
     // Copy textarea contents; browser will calculate correct height of copy,
     // which will make overall container taller, which will make textarea taller.
     var text = stringToHtml($(this).val());
     $(this).parent().find("div.text").html(text);
-    $(this).css({'width':'100%','height':'100%'});
+    if ($(this).parents().is("box-wrapper")) {
+        $(this).css({'width':'100%','height':'100%'});
+    }
   }
   
   function modified() {
@@ -480,7 +482,7 @@
       contentType: "text/plain",
       data: content
     });
-  }
+  };
 
   $(document).ready(function() {
 
@@ -536,8 +538,8 @@
     });
 
     $.fn.setSize = function (size) {
-      this.closest("td").attr("rowspan",size).find(".text").css("min-height",size*32+"px");
-    }
+      this.closest("td").attr("rowspan",size).find(".text").css("min-height",size*40+"px");
+    };
 
     $("tr").on("click", ".split", function(e) {
       e.stopPropagation();
@@ -556,7 +558,7 @@
         autoSize.apply($("textarea",newUnit));
         newUnit.addClass("unit edit").attr("data-version",version);
         $(this).remove();
-        var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append(newUnit);
+        var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append($("<div>").addClass("box-wrapper").append(newUnit));
         newUnit.setSize(size-(line-initialLine));
         unit.setSize(line-initialLine);
         var versions=getVersions();
