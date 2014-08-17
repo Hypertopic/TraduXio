@@ -188,8 +188,10 @@
   
   function modified() {
     $(this).addClass("dirty");
-    autoSize.apply(this);
-    positionSplits($(this).closest(".unit"));
+    if ($(this).is(".autosize")) {
+      autoSize.apply(this);
+      positionSplits($(this).closest(".unit"));
+    }
   }
 
   function toggleEdit () {
@@ -250,9 +252,8 @@
           });
           $("#hexapla tbody tr").remove();
           var textarea=$("<textarea/>").addClass("fulltext").val(fulltext);
-          var tr=$("<tr/>").append($("<td/>").append($("<div>").addClass("unit edit").append(textarea).append($("<div>").addClass("text"))));
+          var tr=$("<tr/>").append($("<td/>").append($("<div>").addClass("unit edit").append(textarea)));
           $("#hexapla tbody").append(tr);
-          autoSize.apply(textarea);
       }
     }
 	setEditState(edited, top, "title", "Titre");
@@ -274,7 +275,7 @@
 		}]);
       } else {
 		$(this).addClass("edit").find("span").remove();
-		var textarea=$("<textarea/>");
+		var textarea=$("<textarea/>").addClass("autosize");
 		textarea.val(htmlToString($(".text",this)));
 		$(this).prepend(textarea);
 		$(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
@@ -619,7 +620,7 @@
       }).done(function() {
         var size=getSize(unit);
         var initialLine=unit.getLine();
-        var newUnit=$("<div/>").append("<textarea>");
+        var newUnit=$("<div/>").append($("<textarea>").addClass("autosize"));
         var text=$("<div>").addClass("text");
         newUnit.append(text);
         autoSize.apply($("textarea",newUnit));
