@@ -140,7 +140,7 @@
 
   $.fn.isEdited = function() {
     return this.find("textarea").length>0;
-  }
+  };
 
   function htmlToString(unit) {
     return unit.html()
@@ -197,7 +197,7 @@
     if (edited) {
       top.css("width","auto");
       doc.removeClass("edit");
-	  top.find("textArea").remove();
+	  top.find("input.editedMeta").remove();
 	  top.find(".delete").remove();
     } else {
       doc.addClass("edit");
@@ -237,6 +237,27 @@
 		}
       }
     });
+
+  }
+
+  var languages=null;
+
+  function fillLanguages(control,callback) {
+    function updateSelect() {
+      $.each(languages, function(key, o) {
+        control.append("<option value=\""+key+"\">" + key + " (" + o.fr + " - " + o.en + " - " + o[key] + ")</option>");
+      });
+      if (typeof callback=="function")
+          callback();
+    };
+    if (!languages) {
+      $.getJSON(getPrefix() + "/shared/languages.json", function(result) {
+        languages=result;
+        updateSelect();
+      }).fail(function() { alert("Cannot edit language field"); });;
+    } else {
+      updateSelect();
+    }
   }
   
   function setLangEditState(isEdited, container) {
@@ -247,10 +268,7 @@
 	} else {
 	  target.hide();
 	  var language = $("<select></select>");
-	  $.getJSON(getPrefix() + "/shared/languages.json", function(result) {
-		$.each(result, function(key, o) {
-		  language.append("<option value=\""+key+"\">" + key + " (" + o.fr + " - " + o.en + " - " + o[key] + ")</option>");
-		});
+	  fillLanguages(language, function() {
 		language.val(target.data("id"));
 		language.addClass("editedMeta").css("width", "50%");
 		language.on("change", function() {
@@ -273,12 +291,12 @@
 		});
 		target.addClass("edit");
 		target.before(language);
-	  }).fail(function() { alert("Cannot edit language field"); });
+	  });
 	}
   }
   
   function setEditState(isEdited, container, name, placeholder) {
-	setEditStateForComponent(isEdited, container, name, "focusout", '<textarea class="editedMeta ' + name + '" />', placeholder);
+	setEditStateForComponent(isEdited, container, name, "focusout", '<input type="text" class="editedMeta ' + name + '" />', placeholder);
   }
   
   function setEditStateForComponent(isEdited, container, name, event, textComponent, placeholder) {
@@ -289,6 +307,7 @@
 	  target.addClass("edit");
 	  var component=$(textComponent);
 	  component.attr("placeholder", placeholder);
+    component.attr("title", placeholder);
 	  component.on(event, function() {
 		if(component.hasClass("dirty")) {
 		  var id = $("#hexapla").data("id");
@@ -303,7 +322,7 @@
 			  changeVersion(ref, data);
 			}
 			component.val(data);
-			target.text(data)
+			target.text(data);
 			component.removeClass("dirty");
 		  }).fail(function() { alert("fail!"); });
 		}
@@ -590,7 +609,7 @@
       });
     });
 
-    $("#hexapla").on('change input cut paste','textarea',modified);
+    $("#hexapla").on('change input cut paste','textarea,input.editedMeta',modified);
 
     $("tr").on("focusout", ".unit.edit textarea", saveUnit);
 	

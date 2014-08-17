@@ -234,7 +234,7 @@ body {
     right:0px;
 }
 
-textarea.dirty {
+.dirty {
     background-color:#fdd;
 }
 
