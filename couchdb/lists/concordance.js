@@ -19,19 +19,19 @@ function(head, req) {
   }
 
   function push(occurrences, context, mapping, line_number, original_header, translation_header) {
-    const HTML_CONTENT = /<div>[^<]+<\/div>/g;
     var hexapla = new Hexapla();
     hexapla.addVersion(context);
     hexapla.addVersion(mapping);
-    var unit = hexapla.getUnitVersions(line_number).versions;
-    if (unit[1] && unit[1].trim()!="") {// && HTML_CONTENT.test(unit[1])) {
+    var unit = hexapla.getUnitVersions(line_number,true).versions;
+    if (unit[1] && unit[1].trim()!=="") {
+      var html = hexapla.getUnitVersions(line_number,false).versions;
       occurrences.push({
-        context: highlight(unit[0], req.query.query),
-        mapping: unit[1],
+        context: highlight(html[0], req.query.query),
+        mapping: html[1],
         original: original_header,
         translation: translation_header
       });
-    } else {log("don't push "+unit[1]);}
+    }
   }
 
   function getTranslation(work, translation_id) {

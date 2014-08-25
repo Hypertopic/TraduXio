@@ -13,59 +13,74 @@ function Hexapla() {
    */
   this.addVersion = function(version) {
     this.versions.push(version);
-  }
+  };
 
   this.isJoined = function(line_number) {
-    for each (var version in this.versions) {
-      if (version.text[line_number]==null) {
+    for (var version_number in this.versions) {
+      var version=this.versions[version_number];
+      if (version.text && version.text[line_number]==null) {
         return true;
       }
     }
     return false;
-  }
+  };
 
   this.getNotJoined = function(line_number) {
     while (this.isJoined(line_number)) {
       line_number--;
     }
     return line_number;
-  }
+  };
 
   this.getLineVersion = function(version_number, line_number) {
     var version = this.versions[version_number];
-    var string = version.text[line_number];
-    return (string!=null)
-      ? '<div class="unit" data-line="'
-        + line_number + '" data-version="'
-        + version.id + '">'
-        + string.replace("<","&lt").replace(">","&gt;").replace(NEW_LINE, "<br/>")
-        + "</div>"
-      : null;
-  }
+    if (version)
+      var string = version.text[line_number];
+    else
+      string=null;
+    return string;
+  };
 
-  this.getLineVersions = function(line_number) {
+  this.getHtmlLine = function(version_number, line_number) {
+    var string = this.getLineVersion(version_number, line_number);
+    if (string!=null)
+      return '<div class="unit" data-line="'
+        + line_number + '" data-version="'
+        + this.versions[version_number].id + '">'
+        + string.replace("<","&lt").replace(">","&gt;").replace(NEW_LINE, "<br/>")
+        + "</div>";
+    return null;
+  };
+
+  this.getLineVersions = function(line_number,plain) {
+    plain=plain || false;
     var result = [];
     for (var version_number in this.versions) {
-      result.push(this.getLineVersion(version_number, line_number));
+      result.push(
+        plain?
+          this.getLineVersion(version_number, line_number)
+        : this.getHtmlLine(version_number, line_number)
+      );
     }
     return result;
-  }
+  };
 
   this.getLength = function() {
     return this.versions[0].text.length;
-  }
+  };
 
   /**
    * PUBLIC
    * @return the versions of the corresponding unit 
    * and the line number of the next unit (or null).
    */
-  this.getUnitVersions = function(line_number) {
+  this.getUnitVersions = function(line_number,plain) {
+    plain=plain || false;
     const LENGTH = this.getLength();
     var line_number = this.getNotJoined(line_number);
-    var unit = this.getLineVersions(line_number);
+    var unit = this.getLineVersions(line_number,plain);
     while (++line_number<LENGTH && this.isJoined(line_number)) {
-      var raw =  this.getLineVersions(line_number);
+      var raw =  this.getLineVersions(line_number,plain);
       for (var version_number in raw) {
         if (raw[version_number]) {
           unit[version_number] += raw[version_number];
@@ -76,7 +91,7 @@ function Hexapla() {
       versions: unit, 
       next: (line_number<LENGTH)? line_number : null
     };
-  }
+  };
   
   /**
    * PUBLIC
@@ -119,7 +134,7 @@ function Hexapla() {
     }
     printLines(lastLines);
     return rows;
-  }
+  };
   
   function printLines(lastLines) {
     for (var version in lastLines) {
