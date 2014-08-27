@@ -123,7 +123,6 @@ function Hexapla() {
 	  }
         }
       }
-      printLines(lastLines);
       rows[i]=row;
     }
     if (finished) {
@@ -132,14 +131,7 @@ function Hexapla() {
         lastLine.space=i-1-lastLines[version].num;
       }
     }
-    printLines(lastLines);
     return rows;
   };
   
-  function printLines(lastLines) {
-    for (var version in lastLines) {
-      var line=lastLines[version].line;
-      log(line.version+":"+lastLines[version].num+" "+line.space+" rows");
-    }
-  }
 }
