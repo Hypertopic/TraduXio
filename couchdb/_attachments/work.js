@@ -201,7 +201,7 @@
     }
   }
 
-  function toggleEdit () {
+  function toggleEdit (e) {
     var version=$(this).getVersion("th.open");
 	var doc = find(version);
     var units = findUnits(version);
@@ -293,7 +293,8 @@
 		}
       }
     });
-
+    if (e.hasOwnProperty("cancelable")) //means it is an event, and as such toggle occured on user action
+      updateUrl();
   }
 
   var languages=null;
@@ -349,6 +350,22 @@
 		target.before(language);
 	  });
 	}
+  }
+  
+  function updateUrl() {
+    var opened=$("thead:first-child th.open:visible").not(".edit").map(function() {return $(this).getVersion("th");}).toArray().join("|");
+    var edited=$("thead:first-child th.edit:visible").map(function() {return $(this).getVersion("th");}).toArray().join("|");
+    var suffix="";
+    if (opened) {
+      suffix+="open="+encodeURIComponent(opened);
+    }
+    if (edited) {
+      suffix = suffix ? suffix + "&" :"";
+      suffix+="edit="+encodeURIComponent(edited);
+    }
+    suffix = suffix ? "?"+suffix:"";
+    
+    window.history.pushState("object or string","",$("#hexapla").data("id")+suffix);
   }
   
   function setEditState(isEdited, container, name, placeholder) {
@@ -451,17 +468,6 @@
 	}).fail(function() { alert("fail!"); });
   }
   
-  function openEditedVersions() {
-	var version = $("#hexapla").find(".edited").last();
-	var ref = version.closest("th").data("version");
-	find(ref).show();
-    findPleat(ref).hide();
-    find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit);
-    positionSplits();
-	version.find(".edit").click();
-	version.removeClass("edited");
-  }
-
   function getEndLine (units,index) {
     var nextIndex=index+1;
     var lastLine=0;
@@ -562,13 +568,13 @@
   $(document).ready(function() {
 
     $("#hexapla").on("click", ".button.hide", function() {
-      //if ($("thead.header th.pleat.open:visible").length > 1) {
         toggleShow($(this).getVersion("th.open"));
-      //}
+        updateUrl();
     });
 
     $("#hexapla").on("click", ".button.show", function() {
       toggleShow($(this).getVersion("th.close"));
+      updateUrl();
     });
 
     $("#hexapla").on("click", ".button.edit-license", function() {
@@ -680,10 +686,16 @@
     for (var i = N-1; i>=0; i--) {
       addPleat(versions[i]);
     }
-    for (var i = 2; i<N; i++) {
-      toggleShow(versions[i]);
+    if ($("th.pleat.opened,th.pleat.edited").length==0) {
+      for (var i = 2; i<N; i++) {
+        toggleShow(versions[i]);
+      }
+    } else {
+      $("thead:first-child tr:first-child th.open.pleat").not(".opened").not(".edited").each(function() {
+        toggleShow($(this).getVersion("th"));
+      });
     }
-    openEditedVersions();
+    $("#hexapla th.edited").each(toggleEdit).removeClass("edited");
     fixWidths();
 	
     if(N==0) {

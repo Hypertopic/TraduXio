@@ -47,6 +47,8 @@ function(o, req) {
     rows:[]
   };
   var hexapla = new Hexapla();
+  var edited_versions=req.query.edit ? req.query.edit.split("|") : [];
+  var opened_versions=req.query.open ? req.query.open.split("|") : [];
   if (o.text) {
     hexapla.addVersion({
       id: "original",
@@ -58,7 +60,9 @@ function(o, req) {
       title: o.title,
       language: o.language,
       date: o.date,
-      creativeCommons: o.creativeCommons
+      creativeCommons: o.creativeCommons,
+    edited: (edited_versions.indexOf("original")!=-1),
+    opened: (opened_versions.indexOf("original")!=-1)
     });
   }
   for (var t in o.translations) {
@@ -77,7 +81,8 @@ function(o, req) {
       date: translation.date,
       creativeCommons: translation.creativeCommons,
 	  trad:"Trad.",
-	  edited: req.query.edit == t
+	  edited: (edited_versions.indexOf(t)!== -1),
+	  opened: (opened_versions.indexOf(t)!== -1)
     });
   }
   data.addtrad="Traduction :";

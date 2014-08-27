@@ -17,7 +17,7 @@
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full">
     <thead class="header"><tr>
       {{#headers}}
-        <th class="pleat open{{#edited}} edited{{/edited}}" data-version="{{id}}"><div class="relative-wrapper">
+        <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
           <div class="metadata title">{{title}}</div>
           <div class="metadata work-creator">{{work_creator}}</div>
           <span>{{trad}}</span><div class="metadata creator">{{creator}}</div>
