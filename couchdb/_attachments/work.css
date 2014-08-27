@@ -191,6 +191,12 @@ div.metadata {
 #hexapla div.unit {
     position:relative;
     height: 100%;
+    -webkit-transition: background-color 1s ease-in-out; /* For Safari 3.1 to 6.0 */
+    transition: background-color 1s ease-in-out;
+}
+
+#hexapla div.unit.highlight {
+    background-color:#C11C1C;
 }
 
 #hexapla div.unit .text {

@@ -364,14 +364,14 @@
       suffix+="edit="+encodeURIComponent(edited);
     }
     suffix = suffix ? "?"+suffix:"";
-    
+
     window.history.pushState("object or string","",$("#hexapla").data("id")+suffix);
   }
-  
+
   function setEditState(isEdited, container, name, placeholder) {
 	setEditStateForComponent(isEdited, container, name, "focusout", '<input type="text" class="editedMeta ' + name + '" />', placeholder);
   }
-  
+
   function setEditStateForComponent(isEdited, container, name, event, textComponent, placeholder) {
 	var target = container.find("." + name);
 	if(isEdited) {
@@ -731,4 +731,10 @@
 
   });
 
+  $(window).load(function() {
+    if (window.location.hash) {
+      $("tr"+window.location.hash+" .unit").addClass("highlight");
+      setTimeout(function() {$("tr"+window.location.hash+" .unit").removeClass("highlight");},500);
+    }
+  });
 
