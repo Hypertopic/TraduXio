@@ -26,7 +26,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
         return val ===null;
     }
     function isString(val) {
-        return typeof val ==="string";
+        return typeof val ==="string" || typeof val === "number";
     }
     function isArray(val) {
         return (typeof val.forEach ==="function");
@@ -79,7 +79,7 @@ function (newDoc, oldDoc, userCtx, secObj) {
         if (newDoc.text && !testArray(newDoc.text,isString)) {
             throw({forbidden:"text lines must be strings "+JSON.stringify(newDoc.text)});
         }
-        mandatoryFields(["creator","translations"]);
+        mandatoryFields(["translations"]);
         ensureStrings(["creator","date","language","title"]);
         ensureObjects(["translations"]);
         for (var t in newDoc.translations) {
