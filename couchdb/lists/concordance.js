@@ -28,6 +28,7 @@ function(head, req) {
       occurrences.push({
         context: highlight(html[0], req.query.query),
         mapping: html[1],
+        open_list:encodeURIComponent(context.id+"|"+mapping.id),
         original: original_header,
         translation: translation_header
       });
