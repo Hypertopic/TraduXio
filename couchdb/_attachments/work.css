@@ -63,7 +63,7 @@ body {
     padding:0 35px;
 }
 
-.title,.work-creator,.creator, .date, .language {
+div.metadata {
     padding:0.5em 2em;
     white-space:nowrap;
 }

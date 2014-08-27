@@ -18,12 +18,12 @@
     <thead class="header"><tr>
       {{#headers}}
         <th class="pleat open{{#edited}} edited{{/edited}}" data-version="{{id}}"><div class="relative-wrapper">
-          <div class="title">{{title}}</div>
-          <div class="work-creator">{{work_creator}}</div>
-          <span>{{trad}}</span><div class="creator">{{creator}}</div>
+          <div class="metadata title">{{title}}</div>
+          <div class="metadata work-creator">{{work_creator}}</div>
+          <span>{{trad}}</span><div class="metadata creator">{{creator}}</div>
           <div class="meta group">
-	    <div class="date">{{date}}</div>
-	    <div class="language expand" data-id="{{language}}">{{language}}</div>
+	    <div class="metadata date">{{date}}</div>
+	    <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
           </div>
           <input type="button" class="edit" value="Editer" />
           <span class="button hide">Cacher</span>

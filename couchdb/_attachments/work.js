@@ -134,7 +134,7 @@
       $("#hexapla").removeClass("full");
     } else {
       $("#hexapla").addClass("full");
-      $("tbody tr:first-child td.pleat.open:visible").css("width",100/nbOpen+"%");
+      $("thead:first-child tr:first-child th.pleat.open:visible").css("width",100/nbOpen+"%");
     }
 
   }
