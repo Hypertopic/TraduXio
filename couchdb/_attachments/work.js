@@ -583,14 +583,35 @@
 
     $("input.edit").on("click",toggleEdit);
 
-    $("tr").on("select mouseup keyup",".unit", function (e) {
+    $("tr").on("mouseup select",".unit", function (e) {
       //requires jquery.selection plugin
       var txt=$.selection();
       if (txt) {
-	$("form.concordance #query").val(txt);
-	var language=$(this).getLanguage();
-	$("form.concordance #language").val(language);
+        e.stopPropagation();
+        var unit=this;
+        var menu=$("<div/>").addClass("context-menu");
+        menu.append($("<div/>").addClass("item concordance").append("search the concordance for <em>"+txt+"</em>"));
+
+        menu.css({top:e.pageY,left:e.pageX});
+        $("body .context-menu").remove();
+        $("body").append(menu);
+        $(".context-menu .concordance").on("click",function() {
+          $("form.concordance #query").val(txt);
+          $("form.concordance #language").val($(unit).getLanguage());
+          $("form.concordance").submit();
+        });
+        $(".context-menu .item").on("click",function() {
+          $("body .context-menu").remove();
+        });
       }
+    });
+
+    $("body").on("mouseup",".context-menu",function(e) {
+      e.stopPropagation();
+    });
+
+    $("body").on("mouseup",function(e) {
+      $("body .context-menu").remove();
     });
 
     $("tr").on("click", ".join", function(e) {

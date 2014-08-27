@@ -365,3 +365,20 @@ textarea.autosize {
     background-color: #888;
     border-bottom: 6px #888 solid;
 }
+
+div.context-menu {
+  position:absolute;
+  background: #AAAAAA;
+  padding:2px;
+  border:#000000;
+}
+
+div.context-menu div.item {
+  padding:2px;
+  cursor:default;
+}
+
+div.context-menu div:hover {
+  background:#333333;
+  color:#AAAAAA;
+}
