@@ -1,10 +1,16 @@
 function(o) {
   const SIZE = 24;
+
+  var ideograms=["\\u3400-\\u9FFF","\\u3040-\\u30FF"].join("");
+  var punctuation_signs=["'","`","\\-","\\uff0c","\\u3002"].join("");
+
+  var regex="["+ideograms+"]|[^\\s"+punctuation_signs+ideograms+"]+";
+
   function format(text, begin) {
     return text.substr(begin, SIZE).toLowerCase();
   }
 
-  const WORD_MATCHER = /[^\s'`\-]+/g;
+  const WORD_MATCHER = new RegExp(regex,"g");
   for (var i in o.text) {
     var text = o.text[i];
     if (text) {
