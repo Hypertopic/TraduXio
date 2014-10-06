@@ -11,29 +11,36 @@ function(o) {
   }
 
   const WORD_MATCHER = new RegExp(regex,"g");
-  for (var i in o.text) {
-    var text = o.text[i];
-    if (text) {
-      var match;
-      while ((match = WORD_MATCHER.exec(text))) {
-	var begin = match.index;
-	emit([o.language, format(text, begin)], {unit: i, char: begin});
+
+  if (o.translations) {
+    var nb_translations=Object.keys(o.translations).length;
+
+    if (nb_translations) {
+      for (var i in o.text) {
+	var text = o.text[i];
+	if (text && text.length<1024) {
+	  var match;
+	  while ((match = WORD_MATCHER.exec(text))) {
+	    var begin = match.index;
+	    emit([o.language, format(text, begin)], {unit: i, char: begin});
+	  }
+	}
       }
-    }
-  }
-  for (var t in o.translations) {
-    var translation = o.translations[t];
-    for (var i in translation.text) {
-      var text = translation.text[i];
-      if (text) {
-        var match;
-        while ((match = WORD_MATCHER.exec(text))) {
-          var begin = match.index;
-          emit(
-            [translation.language, format(text, begin)], 
-            {unit: i, char: begin, translation: t}
-          );
-        }
+      for (var t in o.translations) {
+	var translation = o.translations[t];
+	for (var i in translation.text) {
+	  var text = translation.text[i];
+	  if (text && text.length<1024) {
+	    var match;
+	    while ((match = WORD_MATCHER.exec(text))) {
+	      var begin = match.index;
+	      emit(
+		[translation.language, format(text, begin)], 
+		{unit: i, char: begin, translation: t}
+	      );
+	    }
+	  }
+	}
       }
     }
   }
