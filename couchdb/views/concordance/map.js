@@ -16,7 +16,7 @@ function(o) {
     var nb_translations=Object.keys(o.translations).length;
 
     if (nb_translations) {
-      for (var i in o.text) {
+      if (o.language) for (var i in o.text) {
 	var text = o.text[i];
 	if (text && text.length<1024) {
 	  var match;
@@ -28,7 +28,7 @@ function(o) {
       }
       for (var t in o.translations) {
 	var translation = o.translations[t];
-	for (var i in translation.text) {
+	if (translation.language) for (var i in translation.text) {
 	  var text = translation.text[i];
 	  if (text && text.length<1024) {
 	    var match;

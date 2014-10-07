@@ -28,7 +28,7 @@ $.fn.concordancify = function() {
       query: query,
       language: language
     });
-  }
+  };
 
   this.on("submit",submitForm);
   $(".submit",form).on("click",submitForm);
@@ -37,7 +37,7 @@ $.fn.concordancify = function() {
 	  submitForm(e);
       }
   });
-}
+};
 
 var languagesNames;
 var currentLanguage='fr';
@@ -61,7 +61,7 @@ function getLanguageName(id,target) {
 }
 
 function getLanguageNames(callback) {
-  if (! languagesNames) {
+  if (!languagesNames) {
     $.getJSON(getPrefix()+"/shared/languages.json",function(result) {
       languagesNames=result;
       callback(true);
@@ -73,26 +73,35 @@ function getLanguageNames(callback) {
 
 $.fn.outerHtml = function() {
   return this.clone().wrap("<div>").parent().html();
-}
+};
 
 function getPrefix() {
   return $("body").data("prefix");
 }
 
-$(document).ready(function() {
+function fixLanguages(container) {
   getLanguageNames(function() {
-    $(".language").each(function() {
+    if (container) {
+      var language=$(container).find(".language").andSelf().filter(".language");
+    } else {
+      language=$(".language");
+    }
+    language.each(function() {
       var lang=this;
       var langID=$(lang).data("id");
       var langName=getLanguageName(langID);
       if ($(lang).is(".expand")) {
-	$(lang).text(langName);
-	$(lang).attr('title',langID);
+        $(lang).text(langName);
+        $(lang).attr('title',langID);
       } else {
-	$(lang).attr('title',langName);
+        $(lang).attr('title',langName);
       }
     });
   });
+}
+
+$(document).ready(function() {
+  fixLanguages();
   $("form.concordance").concordancify();
 });
 

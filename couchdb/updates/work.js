@@ -41,7 +41,7 @@ function(work, req) {
 	  for(var i=0 ; i<l ; i++) {
 		  text.push("");
 	  }
-	  work.translations[version] = { title: work.title, language: work.language, text: text };
+	  work.translations[version] = { title: "", language: "", creator:"", text: text };
 	}
 	doc = work.translations[version];
   }

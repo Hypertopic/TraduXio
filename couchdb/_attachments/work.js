@@ -263,12 +263,18 @@
           $("#hexapla tbody").append(tr);
       }
     }
-	setEditState(edited, top, "title", "Titre");
-	setEditState(edited, top, "work-creator", "Auteur");
-	if(version != "original")
-	  setEditState(edited, top, "creator", "Traduction");
-	setLangEditState(edited, top);
-	setEditState(edited, top, "date", "Année");
+    if(version == "original") {
+      setEditState(edited, top, "title", "Titre");
+      setEditState(edited, top, "work-creator", "Auteur");
+      setEditState(edited, top, "date", "Date, année, ou siècle de l'oeuvre");
+      setLangEditState(edited, top, "Langue originale");
+    } else {
+      setEditState(edited, top, "title", "Titre traduit");
+      setEditState(edited, top, "work-creator", "Auteur (translittéré si nécessaire)");
+      setEditState(edited, top, "creator", "Traduction");
+      setEditState(edited, top, "date", "Date, année, ou siècle de la traduction");
+      setLangEditState(edited, top, "Langue de traduction");
+    }
     units.each(function() {
       var unit=$(this);
       if ($(this).isEdited()) {
@@ -317,7 +323,7 @@
     }
   }
   
-  function setLangEditState(isEdited, container) {
+  function setLangEditState(isEdited, container, placeholder) {
 	var target = container.find(".language");
 	if(isEdited) {
 	  container.find("select").remove();
@@ -326,6 +332,10 @@
 	  target.hide();
 	  var language = $("<select></select>");
 	  fillLanguages(language, function() {
+	    if (placeholder) {
+        language.prepend("<option value=\"\">" + placeholder+"</option>");
+        language.attr("title",placeholder);
+	    }
 		language.val(target.data("id"));
 		language.addClass("editedMeta").css("width", "50%");
 		language.on("change", function() {
@@ -337,13 +347,10 @@
 		    contentType: 'text/plain',
 		    data: JSON.stringify({"key":"language", "value": language.val()})
 		  }).done(function() {
-			var lang = language.find("option:selected").text();
-			var lang_id = lang.substring(0, 2);
-			var lang_text = lang.substring(4).split("-")[0];
-			target.data("id", lang_id).attr("data-id", lang_id);
-			target.text(lang_text);
-			$("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
-			  .attr("data-id", lang_id).data("id", lang_id).attr("title", lang_text).html(lang_id);
+			var lang_id = language.val();
+			fixLanguages(target.data("id",lang_id));
+			fixLanguages($("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
+			  .data("id", lang_id));
 			}).fail(function() { alert("fail!"); });
 		});
 		target.addClass("edit");
@@ -586,9 +593,9 @@
     $("tr").on("mouseup select",".unit", function (e) {
       //requires jquery.selection plugin
       var txt=$.selection();
-      if (txt) {
+      var unit=$(this);
+      if (txt && unit.getLanguage()) {
         e.stopPropagation();
-        var unit=this;
         var menu=$("<div/>").addClass("context-menu");
         menu.append($("<div/>").addClass("item concordance").append("search the concordance for <em>"+txt+"</em>"));
 
@@ -597,7 +604,7 @@
         $("body").append(menu);
         $(".context-menu .concordance").on("click",function() {
           $("form.concordance #query").val(txt);
-          $("form.concordance #language").val($(unit).getLanguage());
+          $("form.concordance #language").val(unit.getLanguage());
           $("form.concordance").submit();
         });
         $(".context-menu .item").on("click",function() {
@@ -743,7 +750,7 @@
         return false;
       });
 
-      fillLanguages($("#work-info [name=language]"));
+      fillLanguages($("#work-info [name=language]"),"langue originale");
       $(".top h1,img.removeDoc,img.addVersion").hide();
     }
     if (N==1) {

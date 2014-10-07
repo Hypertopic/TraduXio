@@ -75,7 +75,7 @@ function(o, req) {
     data.headers.push({
       id:t,
       title: translation.title,
-	  work_creator: translation.creator ? translation.creator : o.creator,
+	  work_creator: translation.creator ? translation.creator : "",
       creator: t,
       language: translation.language,
       date: translation.date,
@@ -86,7 +86,7 @@ function(o, req) {
     });
   }
   data.addtrad="Traduction :";
-  data.send="Cr&eacute;er";
+  data.send="Créer";
   data.deleteMsg="Supprimer le texte et toutes ses traductions";
   data.rows=hexapla.getRows();
   data.name="work";
