@@ -10,6 +10,7 @@ Installation requirements
 * Git client
 * [CouchDB](http://couchdb.apache.org/)
 * [Couchapp](https://github.com/jchris/couchapp)
+* [Node.js](http://nodejs.org)
 
 Installation procedure
 ----------------------
@@ -17,10 +18,9 @@ Installation procedure
 * Create a database named `traduxio` at <http://127.0.0.1:5984/_utils>.
 * In any folder:
 
-        git clone git://github.com/benel/TraduXio.git
-        couchapp push http://127.0.0.1:5984/traduxio
-
-* The application should be now accessible at <http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/>.
+        git clone https://github.com/benel/TraduXio.git
+        cd TraduXio
+        couchapp push --browse couchdb http://127.0.0.1:5984/traduxio
 
 Tests requirements
 ------------------
