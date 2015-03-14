@@ -2,8 +2,10 @@ $.fn.concordancify = function() {
   
   default_language=$("body").data("language") || currentLanguage;
   default_query=$("body").data("query") || "";
+  
+  var research = $("#nav").data("i_research");
 
-  this.append('<input id="query" type="search" results="5" name="query" placeholder="Rechercher" value="'
+  this.append('<input id="query" type="search" results="5" name="query" placeholder="' + research + '" value="'
     +  default_query + '" />');
   this.append('<select id="language" name="language"/>');
   
@@ -28,7 +30,7 @@ $.fn.concordancify = function() {
       query: query,
       language: language
     });
-  };
+  }
 
   this.on("submit",submitForm);
   $(".submit",form).on("click",submitForm);
@@ -37,14 +39,14 @@ $.fn.concordancify = function() {
 	  submitForm(e);
       }
   });
-};
+}
 
 var languagesNames;
 var currentLanguage='fr';
 
 function getLanguageName(id,target) {
   var result=id;
-  target=target || currentLanguage;
+  target=target || default_language;
   if (languagesNames[id]) {
     var list=languagesNames[id];
     if(list[target]) {
@@ -61,7 +63,7 @@ function getLanguageName(id,target) {
 }
 
 function getLanguageNames(callback) {
-  if (!languagesNames) {
+  if (! languagesNames) {
     $.getJSON(getPrefix()+"/shared/languages.json",function(result) {
       languagesNames=result;
       callback(true);
@@ -73,35 +75,26 @@ function getLanguageNames(callback) {
 
 $.fn.outerHtml = function() {
   return this.clone().wrap("<div>").parent().html();
-};
+}
 
 function getPrefix() {
   return $("body").data("prefix");
 }
 
-function fixLanguages(container) {
+$(document).ready(function() {
   getLanguageNames(function() {
-    if (container) {
-      var language=$(container).find(".language").andSelf().filter(".language");
-    } else {
-      language=$(".language");
-    }
-    language.each(function() {
+    $(".language").each(function() {
       var lang=this;
       var langID=$(lang).data("id");
       var langName=getLanguageName(langID);
       if ($(lang).is(".expand")) {
-        $(lang).text(langName);
-        $(lang).attr('title',langID);
+	$(lang).text(langName);
+	$(lang).attr('title',langID);
       } else {
-        $(lang).attr('title',langName);
+	$(lang).attr('title',langName);
       }
     });
   });
-}
-
-$(document).ready(function() {
-  fixLanguages();
   $("form.concordance").concordancify();
 });
 

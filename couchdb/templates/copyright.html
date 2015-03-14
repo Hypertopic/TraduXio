@@ -1,18 +1,18 @@
 ﻿{{>header}}
 <div id="middle">
-  <h3>Signaler une mise en ligne abusive</h3>
+  {{#i18n}}
+  <h3>{{i_report_description}}</h3>
   <form data-url="{{server_url}}">
-	<div id="link"><label>à la page :</label><input type="text" name="link"/></div><br/>
-	<input type="checkbox" name="wrongref"/>Référence erronée ou manquante (auteur, éditeur, licence...)<br/>
-	<input type="checkbox" name="protected"/>Diffusion d'une &oelig;uvre protégée non-assimilable à une citation courte<br/>
-	<div id="details"><label>Détails (optionnel) :</label><br/>
+	<div id="link"><label>{{i_at_page}} :</label><input type="text" name="link"/></div><br/>
+	<input type="checkbox" name="wrongref"/>{{i_wrong_ref}}<br/>
+	<input type="checkbox" name="protected"/>{{i_protected_work}}<br/>
+	<div id="details"><label>{{i_details}} ({{i_optional}}) :</label><br/>
 	<textarea></textarea><br/></div>
-	<label>Adresse de courrier électronique (optionnel) :</label><br/><input type="email" name="link"/><br/>
-	<label>Système anti-spam :</label>
+	<label>{{i_email}} ({{i_optional}}) :</label><br/><input type="email" name="link"/><br/>
+	<label>{{i_anti_spam_system}} :</label>
 	<script type="text/javascript">
 	  var RecaptchaOptions = {
-		theme : 'clean',
-		lang: 'fr'
+		theme : 'clean'
 	  };
 	</script>
 	<script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k={{public_key}}"></script>
@@ -23,7 +23,8 @@
      </textarea>
      <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
 	</noscript>
-	<button>Signaler</button>
+	<button>{{i_report}}</button>
   </form><br/>
+  {{/i18n}}
 </div>
 {{>footer}}

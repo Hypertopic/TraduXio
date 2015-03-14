@@ -1,6 +1,7 @@
 ﻿function(head, req) {
   // !code lib/mustache.js
   // !code lib/path.js
+  // !code localization.js
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
   var data = {languages:[]};
   var languageData = null; 
@@ -22,7 +23,7 @@
       authorData = null;
     }
     var a = row.key[1];
-    if (a!=lastAuthor || !authorData) {
+    if (a!=lastAuthor) {
       if (authorData) {
         languageData.authors.push(authorData);
       }
@@ -37,15 +38,15 @@
       name: row.value
     });
   }
-  if (authorData) {
-    languageData.authors.push(authorData);
-    data.languages.push(languageData);
-  }
+  languageData.authors.push(authorData);
+  data.languages.push(languageData);
   data.name="works";
   data.scripts=["ul-close"];
   data.script=true;
   data.css=true;
   data.prefix="..";
+  data.language=getPreferredLanguage();
+  data.i18n=localized(data.language);
   return Mustache.to_html(this.templates.works, data,this.templates.partials);
 }
 
