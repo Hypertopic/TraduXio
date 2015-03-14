@@ -18,6 +18,10 @@
   function findPleat(version) {
     return $(".pleat.close[data-version='"+version+"']");
   }
+  
+  function getTranslated(name) {
+	return $("#hexapla").data(name);
+  }
 
   $.fn.getHeight = function() {
     var fake=$("<div>").css({"position":"fixed","left":"-1000px"}).append(this.clone());
@@ -191,7 +195,7 @@
     var units = findUnits(version);
 	var top = doc.first();
 	var edited = units.isEdited();
-    doc.find("input.edit").toggleName("Lire", "Editer");
+    doc.find("input.edit").toggleName(getTranslated("i_read"), getTranslated("i_edit"));
     if (edited) {
       top.css("width","auto");
       doc.removeClass("edit");
@@ -205,12 +209,12 @@
 		top.find(".delete").on("click", clickDeleteVersion);
 	  }
     }
-	setEditState(edited, top, "title", "Titre");
-	setEditState(edited, top, "work-creator", "Auteur");
+	setEditState(edited, top, "title", getTranslated("i_title"));
+	setEditState(edited, top, "work-creator", getTranslated("i_author"));
 	if(version != "original")
-	  setEditState(edited, top, "creator", "Traduction");
+	  setEditState(edited, top, "creator", getTranslated("i_translation"));
 	setLangEditState(edited, top);
-	setEditState(edited, top, "date", "Année");
+	setEditState(edited, top, "date", getTranslated("i_year"));
     units.each(function() {
       var unit=$(this);
       if ($(this).isEdited()) {
@@ -343,7 +347,7 @@
   }
   
   function removeDoc() {
-	if(confirm("La suppression est irréversible. Continuer ?")) {
+	if(confirm(getTranslated("i_confirm_delete"))) {
 	  $.ajax({
 		type: "PUT",
 		url: "work/"+$("#hexapla").data("id"),

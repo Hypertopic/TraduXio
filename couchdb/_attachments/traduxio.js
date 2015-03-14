@@ -2,8 +2,10 @@ $.fn.concordancify = function() {
   
   default_language=$("body").data("language") || currentLanguage;
   default_query=$("body").data("query") || "";
+  
+  var research = $("#nav").data("i_research");
 
-  this.append('<input id="query" type="search" results="5" name="query" placeholder="Rechercher" value="'
+  this.append('<input id="query" type="search" results="5" name="query" placeholder="' + research + '" value="'
     +  default_query + '" />');
   this.append('<select id="language" name="language"/>');
   
@@ -44,7 +46,8 @@ var currentLanguage='fr';
 
 function getLanguageName(id,target) {
   var result=id;
-  target=target || currentLanguage;
+  target=target || default_language;
+  console.log(target);
   if (languagesNames[id]) {
     var list=languagesNames[id];
     if(list[target]) {

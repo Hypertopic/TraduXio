@@ -2,6 +2,7 @@ function(head, req) {
   // !code lib/mustache.js
   // !code lib/hexapla.js
   // !code lib/path.js
+  // !code localization.js
 
   function highlight(context, pattern) {
     //TODO safer so that HTML is not matched
@@ -88,6 +89,8 @@ function(head, req) {
   data.css=true;
   data.script=true;
   data.prefix="..";
+  data.i18n=localized();
+  data.i_trad = data.i18n.i_trad;
 
   return Mustache.to_html(this.templates.concordance, data, this.templates.partials);
 }
