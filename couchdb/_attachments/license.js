@@ -28,10 +28,10 @@ function submitLicense(e) {
   var tmp = document.location.pathname.split("/");
   var ref = tmp[tmp.length - 1];
   $.ajax({
-	type:"PUT",
-	url: $("#license").data("prefix") + "/works/work/"+id+"/"+ref,
-	contentType:"text/plain",
-	data:JSON.stringify({key: "creativeCommons", value: getLicense()})
+    type:"PUT",
+    url: $("#license").data("prefix") + "/works/work/"+id+"/"+ref,
+    contentType:"text/plain",
+    data:JSON.stringify({key: "creativeCommons", value: getLicense()})
   }).done(goBack).fail(function() {
     alert("failed!");
   });

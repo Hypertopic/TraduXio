@@ -1,53 +1,51 @@
 <html>
-    <head>
-        <title>TraduXio</title>
-        <link rel="stylesheet" href="shared/welcome.css" type="text/css" />
-        <!--[if lt IE 7]>
-        <style media="screen" type="text/css">
-        body {
-                height:100%;
-        }
-        </style>
-        <![endif]-->
-    </head>
-    <body id="main">
-        <div id="body">
-          {{#i18n}}
-            <div id="top">
-                <h1 class="title">TraduXio</h1>
-                <strong class="subtitle">{{i_traduxio_description}}</strong>
-            </div>
-            <!--Panels d'informations-->
-            <div id="middle">
-                <div>
-                    <div class="panel">
-                        <img src="shared/analysis.png" 
-                             alt="Analyse et comparaison"/>
-                        <h2>{{i_analyze_compare}}</h2>
-                        <p>{{i_analyze_compare_description}}</p>
-                    </div>
-                    <div class="panel">
-                        <img src="shared/cc.png" alt="Choisir la licence"/>
-                        <h2>{{i_choose_license}}</h2>
-                        <p>{{i_choose_license_description}}</p>
-                    </div>
-                </div><div>
-                    <div class="panel">
-                        <img src="shared/research.png" alt="Rechercher des 
-                             traductions"/>
-                        <h2>{{i_research_translations}}</h2>
-                        <p>{{i_research_translations_description}}</p>
-                    </div>
-                    <div class="panel">
-                        <img src="shared/group.png" alt="Travail à 
-                             plusieurs"/>
-                        <h2>{{i_work_together}}</h2>
-                        <p>{{i_work_together_description}}</p>
-                    </div>
-                </div>
-                <a href="works/" class="start">&nbsp;{{i_start}}&nbsp;</a>
-            </div>
-          {{/i18n}}
+  <head>
+    <title>TraduXio</title>
+      <link rel="stylesheet" href="shared/welcome.css" type="text/css" />
+      <!--[if lt IE 7]>
+      <style media="screen" type="text/css">
+      body {
+        height:100%;
+      }
+      </style>
+      <![endif]-->
+  </head>
+  <body id="main">
+    <div id="body">
+      {{#i18n}}
+      <div id="top">
+        <h1 class="title">TraduXio</h1>
+        <strong class="subtitle">{{i_traduxio_description}}</strong>
+      </div>
+      <!--Panels d'informations-->
+      <div id="middle">
+        <div>
+          <div class="panel">
+            <img src="shared/analysis.png" alt="{{i_analyze_compare}}"/>
+            <h2>{{i_analyze_compare}}</h2>
+            <p>{{i_analyze_compare_description}}</p>
+          </div>
+          <div class="panel">
+            <img src="shared/cc.png" alt="{{i_choose_license}}"/>
+            <h2>{{i_choose_license}}</h2>
+            <p>{{i_choose_license_description}}</p>
+          </div>
         </div>
-    </body>
+        <div>
+          <div class="panel">
+            <img src="shared/research.png" alt="{{i_research_translations}}"/>
+            <h2>{{i_research_translations}}</h2>
+            <p>{{i_research_translations_description}}</p>
+          </div>
+          <div class="panel">
+            <img src="shared/group.png" alt="{{i_work_together}}"/>
+            <h2>{{i_work_together}}</h2>
+            <p>{{i_work_together_description}}</p>
+          </div>
+        </div>
+        <a href="works/" class="start">&nbsp;{{i_start}}&nbsp;</a>
+      </div>
+      {{/i18n}}
+    </div>
+  </body>
 </html>

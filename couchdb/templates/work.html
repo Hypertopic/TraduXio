@@ -7,8 +7,10 @@
   <form id="addPanel"><h3>{{i_translation}} :</h3><input type="text"/><input type="submit" value="{{i_create}}" /></form>
   <div id="removePanel"><button>{{i_delete_text_and_translations}}</button></div>
   </div>
-  <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" data-i_confirm_delete="{{i_confirm_delete}}" data-i_read="{{i_read}}"
-  data-i_year="{{i_year}}" data-i_author="{{i_author}}" data-i_title="{{i_title}}" data-i_edit="{{i_edit}}" data-i_translation="{{i_translation}}">
+  <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" 
+    data-i_confirm_delete="{{i_confirm_delete}}" data-i_read="{{i_read}}"
+    data-i_year="{{i_year}}" data-i_author="{{i_author}}" data-i_title="{{i_title}}" 
+    data-i_edit="{{i_edit}}" data-i_translation="{{i_translation}}">
     <thead class="header"><tr>
       {{#headers}}
         <th class="pleat open{{#edited}} edited{{/edited}}" data-version="{{id}}"><div class="relative-wrapper">
