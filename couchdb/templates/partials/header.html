@@ -13,24 +13,24 @@
   {{#scripts}} 
   <script type="text/javascript" src="{{prefix}}/shared/{{.}}.js"></script>
   {{/scripts}} 
-	<!--[if lt IE 7]>
-	<style media="screen" type="text/css">
-	body {
-		height:100%;
-	}
-	</style>
-	<![endif]-->
+  <!--[if lt IE 7]>
+  <style media="screen" type="text/css">
+  body {
+    height:100%;
+  }
+  </style>
+  <![endif]-->
 </head>
 <body id="{{name}}" data-language="{{language}}" data-prefix="{{prefix}}" data-query="{{query}}">
   <div id="body">
     <div id="header" class="group">
-	{{#i18n}}
-	<ul id="nav" data-i_research="{{i_research}}">
-	  <li class="work works"><a href="{{prefix}}/works/">{{i_works}}</a></li>
-	  <li class="myworks"><a href="#">{{i_my_translations}}</a></li>
-	  <li class="concordance"><a href="{{prefix}}/works/concordance">{{i_concordance}}</a></li>
-	</ul>
-	{{/i18n}}
+  {{#i18n}}
+  <ul id="nav" data-i_search="{{i_search}}">
+    <li class="work works"><a href="{{prefix}}/works/">{{i_works}}</a></li>
+    <li class="myworks"><a href="#">{{i_my_translations}}</a></li>
+    <li class="concordance"><a href="{{prefix}}/works/concordance">{{i_concordance}}</a></li>
+  </ul>
+  {{/i18n}}
       <form class="concordance"></form>
     </div>
     <div id="main" class="group">

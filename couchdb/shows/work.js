@@ -43,7 +43,7 @@ function(o, req) {
     units: [],
     raw:[],
     rows:[],
-	i18n: localized()
+    i18n: localized()
   };
   var hexapla = new Hexapla();
   if (o.text) {
@@ -70,13 +70,13 @@ function(o, req) {
     data.headers.push({
       id:t,
       title: translation.title,
-	  work_creator: translation.creator ? translation.creator : o.creator,
+      work_creator: translation.creator ? translation.creator : o.creator,
       creator: t,
       language: translation.language,
       date: translation.date,
       creativeCommons: translation.creativeCommons,
-	  trad:data.i18n.i_trad,
-	  edited: req.query.edit == t
+      trad:data.i18n.i_trad,
+      edited: req.query.edit == t
     });
   }
   data.rows=hexapla.getRows();

@@ -20,7 +20,7 @@
   }
   
   function getTranslated(name) {
-	return $("#hexapla").data(name);
+    return $("#hexapla").data(name);
   }
 
   $.fn.getHeight = function() {

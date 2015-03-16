@@ -5,6 +5,6 @@ function(o, req) {
   // !code localization.js
  
   return Mustache.to_html(this.templates.welcome, {
-	i18n: localized()
+    i18n: localized()
   });
 }

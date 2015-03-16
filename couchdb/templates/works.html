@@ -7,22 +7,22 @@
   {{/i18n}}
 </div>
 <div id="works-list">
-	<ul>
-	  {{#languages}}
-		<li class="language"><span class="language expand" data-id="{{code}}">{{code}}</span>
-		<ul>
-		  {{#authors}}
-			<li class="author foldable closed">{{name}}
-			<ul>
-			  {{#works}}
-				<li><a href="{{id}}">{{name}}</a></li>
-			  {{/works}}
-			</ul>
-			</li>
-		  {{/authors}}
-		</ul>
-		</li>
-	  {{/languages}}
-	</ul>
+  <ul>
+    {{#languages}}
+    <li class="language"><span class="language expand" data-id="{{code}}">{{code}}</span>
+    <ul>
+      {{#authors}}
+      <li class="author foldable closed">{{name}}
+      <ul>
+        {{#works}}
+        <li><a href="{{id}}">{{name}}</a></li>
+        {{/works}}
+      </ul>
+      </li>
+      {{/authors}}
+    </ul>
+    </li>
+    {{/languages}}
+  </ul>
 </div>
 {{>footer}}

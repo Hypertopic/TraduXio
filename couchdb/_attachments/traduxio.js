@@ -3,9 +3,9 @@ $.fn.concordancify = function() {
   default_language=$("body").data("language") || currentLanguage;
   default_query=$("body").data("query") || "";
   
-  var research = $("#nav").data("i_research");
+  var search = $("#nav").data("i_search");
 
-  this.append('<input id="query" type="search" results="5" name="query" placeholder="' + research + '" value="'
+  this.append('<input id="query" type="search" results="5" name="query" placeholder="' + search + '" value="'
     +  default_query + '" />');
   this.append('<select id="language" name="language"/>');
   
@@ -14,7 +14,7 @@ $.fn.concordancify = function() {
   getLanguageNames(function() {
     $.getJSON(getPrefix()+"/languages", function(result) {
       $.each(result.rows, function(i, o) {
-	$("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
+  $("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
       $("#language").val(default_language);
     }); 
@@ -36,7 +36,7 @@ $.fn.concordancify = function() {
   $(".submit",form).on("click",submitForm);
   $("#language",form).on("keypress",function(e) {
       if(e.which == 13) {
-	  submitForm(e);
+        submitForm(e);
       }
   });
 }
@@ -88,10 +88,10 @@ $(document).ready(function() {
       var langID=$(lang).data("id");
       var langName=getLanguageName(langID);
       if ($(lang).is(".expand")) {
-	$(lang).text(langName);
-	$(lang).attr('title',langID);
+  $(lang).text(langName);
+  $(lang).attr('title',langID);
       } else {
-	$(lang).attr('title',langName);
+  $(lang).attr('title',langName);
       }
     });
   });
