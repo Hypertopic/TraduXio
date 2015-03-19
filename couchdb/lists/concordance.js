@@ -44,7 +44,7 @@ function(head, req) {
 
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
   var data = {
-    language: req.query.language,
+    lang: req.query.language,
     query: req.query.query,
     occurrences:[]
   };
@@ -89,7 +89,8 @@ function(head, req) {
   data.css=true;
   data.script=true;
   data.prefix="..";
-  data.i18n=localized();
+  data.language=getPreferredLanguage();
+  data.i18n=localized(data.language);
   data.i_trad = data.i18n.i_trad;
 
   return Mustache.to_html(this.templates.concordance, data, this.templates.partials);

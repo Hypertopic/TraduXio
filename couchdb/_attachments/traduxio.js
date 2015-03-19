@@ -16,7 +16,7 @@ $.fn.concordancify = function() {
       $.each(result.rows, function(i, o) {
   $("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
-      $("#language").val(default_language);
+      $("#language").val($("body").data("lang"));
     }); 
   });
   
