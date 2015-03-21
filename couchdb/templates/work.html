@@ -1,38 +1,34 @@
 {{> header}}
+{{#i18n}}
   <div class="top">
-	<h1>{{work_title}} – {{work_creator}}</h1>
-	<img src="{{prefix}}/shared/remove.png" alt="remove doc" class="removeDoc" />
-	<img src="{{prefix}}/shared/add.png" alt="add version" class="addVersion" />
-	<form id="addPanel"><h3>{{addtrad}}</h3><input type="text"/><input type="submit" value="{{send}}" /></form>
-	<div id="removePanel"><button>{{deleteMsg}}</button></div>
-    <form id="work-info">
-        <input class="title" name="title" placeholder="Titre">
-        <input class="work-creator" name="work-creator" placeholder="Auteur">
-        <select class="language" name="language"></select>
-        <input class="date" name="date" placeholder="Date">
-        <label for="original-work">Oeuvre originale</label><input type="checkbox" checked="" name="original-work">
-        <input type="submit" name="{{sned}}">
-    </form>
+  <h1>{{work_title}} – {{work_creator}}</h1>
+  <img src="{{prefix}}/shared/remove.png" alt="remove doc" class="removeDoc" />
+  <img src="{{prefix}}/shared/add.png" alt="add version" class="addVersion" />
+  <form id="addPanel"><h3>{{i_translation_}} </h3><input type="text"/><input type="submit" value="{{i_create}}" /></form>
+  <div id="removePanel"><button>{{i_delete_text_and_translations}}</button></div>
   </div>
-  <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full">
+  <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" 
+    data-i_confirm_delete="{{i_confirm_delete}}" data-i_read="{{i_read}}"
+    data-i_year="{{i_year}}" data-i_author="{{i_author}}" data-i_title="{{i_title}}" 
+    data-i_edit="{{i_edit}}" data-i_translation="{{i_translation_}}">
     <thead class="header"><tr>
       {{#headers}}
-        <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
-          <div class="metadata title">{{title}}</div>
-          <div class="metadata work-creator">{{work_creator}}</div>
-          <span>{{trad}}</span><div class="metadata creator">{{creator}}</div>
+        <th class="pleat open{{#edited}} edited{{/edited}}" data-version="{{id}}"><div class="relative-wrapper">
+          <div class="title">{{title}}</div>
+          <div class="work-creator">{{work_creator}}</div>
+          <span>{{trad}}</span><div class="creator">{{creator}}</div>
           <div class="meta group">
-	    <div class="metadata date">{{date}}</div>
-	    <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
+      <div class="date">{{date}}</div>
+      <div class="language expand" data-id="{{language}}">{{language}}</div>
           </div>
-          <input type="button" class="edit" value="Editer" />
-          <span class="button hide">Cacher</span>
+          <input type="button" class="edit" value="{{i_edit}}" />
+          <span class="button hide">{{i_hide}}</span>
         </div></th>
       {{/headers}}
     </tr></thead>
     <tbody>
     {{#rows}}
-    <tr id="{{line}}" data-line="{{line}}">
+    <tr data-line="{{line}}">
       {{#units}}
         <td class="pleat open" data-version="{{version}}" rowspan="{{space}}">
           <div class="box-wrapper"><div class="unit" data-version="{{version}}"><div class="text">{{{text}}}</div></div></div>
@@ -45,8 +41,8 @@
     {{#headers}}
       <th class="pleat open" data-version="{{id}}">
         <div class="relative-wrapper">
-          <input type="button" class="edit" value="Editer" />
-          <div class="button edit-license" title="Editer la licence"></div>
+          <input type="button" class="edit" value="{{i_edit}}" />
+          <div class="button edit-license" title="{{i_edit_license}}"></div>
           <div class="license">
           {{#creativeCommons}}
             <a href="http://creativecommons.org/licenses/{{creativeCommons}}/3.0/fr">
@@ -54,14 +50,15 @@
             </a>
           {{/creativeCommons}}
           {{^creativeCommons}}
-            Tous droits réservés.
+            {{i_all_rights_reserved}}.
           {{/creativeCommons}}
           </div>
-          <div class="button hide">Cacher</div>
+          <div class="button hide">{{i_hide}}</div>
         </div>
       </th>
     {{/headers}}
     </tr></thead>
   </table>
 
+{{/i18n}}
 {{> footer}}

@@ -4,20 +4,6 @@ function(work, req) {
 	work._deleted = true;
 	return [work, "document removed"];
   }
-  if (work===null) {
-    work=args;
-    work._id=work.id || req.id || req.uuid;
-    work.creator=work["work-creator"];
-    delete work["work-creator"];
-    if (work.original) {
-        work.text=work.text || [];
-        work.translations={};
-    } else {
-        delete work.text;
-        work.translations={"first":{text:[]}};
-    }
-    return [work, JSON.stringify({ok:"created",id:work._id})];
-  }
   var version = req.query.version;
   if(args.key == "delete") {
 	delete work.translations[version];
@@ -28,20 +14,11 @@ function(work, req) {
 	doc = work;
   } else {
 	if(!work.translations[version]) {
-	  var l = 1;
-	  if (work.text) l=work.text.length;
-	  else if (work.translations) {
-	    for (var t in work.translations) {
-	      if (work.translations[t].text) {
-	        l=Math.max(l,work.translations[t].text.length);
-	      }
-	    }
+	  var text = work.text ? new Array(work.text.length) : new Array(1);
+	  for(var i=0 ; i<text.length ; i++) {
+		text[i] = "";
 	  }
-	  var text=[];
-	  for(var i=0 ; i<l ; i++) {
-		  text.push("");
-	  }
-	  work.translations[version] = { title: "", language: "", creator:"", text: text };
+	  work.translations[version] = { title: work.title, language: work.language, text: text };
 	}
 	doc = work.translations[version];
   }
@@ -65,5 +42,5 @@ function(work, req) {
   } else {
 	doc[args.key] = args.value;
   }
-  return [work, typeof args.value=="string"?args.value:JSON.stringify(args.value)];
+  return [work, args.value];
 }

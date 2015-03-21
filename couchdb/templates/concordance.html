@@ -1,5 +1,7 @@
 {{>header}}
+{{#i18n}}
 <div id="filters">
+  {{i_language_}}
 </div>
 <table class="concordance">
   {{#occurrences}}
@@ -10,14 +12,14 @@
         {{#original}} 
         <div class="original">
           <div class="creator">{{creator}}</div>
-          <div class="title"><a href="{{work_id}}?open={{/original}}{{open_list}}{{#original}}">{{title}}</a></div>
+          <div class="title"><a href="{{work_id}}">{{title}}</a></div>
           <div>{{#publisher}}<span class="publisher">{{publisher}}</span>{{/publisher}}
           {{#date}}{{#publisher}}, {{/publisher}}<span class="data">{{date}}</span>{{/date}}</div>
         </div>
         {{/original}}
         {{#translation}}
         <div class="translation">
-          <div class="creator">Trad. {{creator}}</div>
+          <div class="creator">{{i_trad}} {{creator}}</div>
           <div>{{#publisher}}<span class="publisher">{{publisher}}</span>{{/publisher}}
           {{#date}}{{#publisher}}, {{/publisher}}<span class="data">{{date}}</span>{{/date}}</div>
          </div>
@@ -26,4 +28,5 @@
     </tr>
   {{/occurrences}}
 </table>
+{{/i18n}}
 {{>footer}}

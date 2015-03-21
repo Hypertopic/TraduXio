@@ -2,9 +2,7 @@ function(o, req) {
   // !code lib/mustache.js
   // !code lib/hexapla.js
   // !code lib/path.js
-  if (o===null) {
-      o={translations:{}};
-  }
+  // !code localization.js
 
   function getTextLength() {
     if (o.text)
@@ -15,7 +13,7 @@ function(o, req) {
   function getLines(text,version) {
     var lines=[];
     var line={};
-    for (var lineNum in text) {
+    for each(var lineNum in text) {
        if (text[lineNum]) {
          if (line) {
            line.space=lineNum-line.lineNum;
@@ -25,7 +23,7 @@ function(o, req) {
            text:text[lineNum],
            line:lineNum,
            version:version
-         };
+         }
        }
     }
     if (line) {
@@ -44,11 +42,10 @@ function(o, req) {
     headers: [],
     units: [],
     raw:[],
-    rows:[]
+    rows:[],
+    i18n: localized()
   };
   var hexapla = new Hexapla();
-  var edited_versions=req.query.edit ? req.query.edit.split("|") : [];
-  var opened_versions=req.query.open ? req.query.open.split("|") : [];
   if (o.text) {
     hexapla.addVersion({
       id: "original",
@@ -60,9 +57,7 @@ function(o, req) {
       title: o.title,
       language: o.language,
       date: o.date,
-      creativeCommons: o.creativeCommons,
-    edited: (edited_versions.indexOf("original")!=-1),
-    opened: (opened_versions.indexOf("original")!=-1)
+      creativeCommons: o.creativeCommons
     });
   }
   for (var t in o.translations) {
@@ -70,24 +65,20 @@ function(o, req) {
     hexapla.addVersion({
       id: t,
       text: translation.text
-    });
+    })
     data.raw[t]=translation.text;
     data.headers.push({
       id:t,
       title: translation.title,
-	  work_creator: translation.creator ? translation.creator : "",
+      work_creator: translation.creator ? translation.creator : o.creator,
       creator: t,
       language: translation.language,
       date: translation.date,
       creativeCommons: translation.creativeCommons,
-	  trad:"Trad.",
-	  edited: (edited_versions.indexOf(t)!== -1),
-	  opened: (opened_versions.indexOf(t)!== -1)
+      trad:data.i18n.i_trad,
+      edited: req.query.edit == t
     });
   }
-  data.addtrad="Traduction :";
-  data.send="Créer";
-  data.deleteMsg="Supprimer le texte et toutes ses traductions";
   data.rows=hexapla.getRows();
   data.name="work";
   data.css=true;
@@ -95,6 +86,10 @@ function(o, req) {
   data.scripts=["jquery.selection"];
   data.language=data.work_language;
   data.prefix="..";
+  data.i_edit=data.i18n.i_edit;
+  data.i_hide=data.i18n.i_hide;
+  data.i_edit_license=data.i18n.i_edit_license;
+  data.i_all_rights_reserved=data.i18n.i_all_rights_reserved;
  
   return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }

@@ -2,17 +2,7 @@ table#hexapla {
     border-collapse:separate;
     border-spacing:0;
     empty-cells:show;
-    height:80%;
     margin: 0 0.5em;
-}
-
-table#hexapla.full {
-    margin: 0 auto;
-    width:99%;
-}
-
-#hexapla thead:first-child tr {
-  height:30%;
 }
 
 body {
@@ -63,7 +53,7 @@ body {
     padding:0 35px;
 }
 
-div.metadata {
+.title,.work-creator,.creator, .date, .language {
     padding:0.5em 2em;
     white-space:nowrap;
 }
@@ -101,7 +91,7 @@ div.metadata {
     cursor: pointer;
 }
 
-#work .top form input {
+#work .top form * {
     display: inline-block;
     margin: 5px;
 }
@@ -191,12 +181,6 @@ div.metadata {
 #hexapla div.unit {
     position:relative;
     height: 100%;
-    -webkit-transition: background-color 1s ease-in-out; /* For Safari 3.1 to 6.0 */
-    transition: background-color 1s ease-in-out;
-}
-
-#hexapla div.unit.highlight {
-    background-color:#C11C1C;
 }
 
 #hexapla div.unit .text {
@@ -226,15 +210,12 @@ div.metadata {
     border-radius:0.5em;
     padding:0.5em;
     width:100%;
+    height:100%;
+    overflow: hidden;
+    position: absolute;
     width: 100%;
     font-size:1em;
     font-size:1em;
-    height:100%;
-}
-
-textarea.autosize {
-    overflow: hidden;
-    position: absolute;
 }
 
 .unit.edit div.text {
@@ -252,7 +233,7 @@ textarea.autosize {
     right:0px;
 }
 
-.dirty {
+textarea.dirty {
     background-color:#fdd;
 }
 
@@ -356,29 +337,8 @@ textarea.autosize {
     margin-left: 15px;
 }
 
-#work .top #work-info {
-    display:none
-}
-
 #nav li.works {
     border-top: 1px darkgrey solid;
     background-color: #888;
     border-bottom: 6px #888 solid;
-}
-
-div.context-menu {
-  position:absolute;
-  background: #AAAAAA;
-  padding:2px;
-  border:#000000;
-}
-
-div.context-menu div.item {
-  padding:2px;
-  cursor:default;
-}
-
-div.context-menu div:hover {
-  background:#333333;
-  color:#AAAAAA;
 }
