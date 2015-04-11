@@ -1,6 +1,7 @@
 ﻿function(head, req) {
   // !code lib/mustache.js
   // !code lib/path.js
+  // !code localization.js
   start({headers: {"Content-Type": "text/html;charset=utf-8"}});
   var data = {languages:[]};
   var languageData = null; 
@@ -46,6 +47,8 @@
   data.script=true;
   data.css=true;
   data.prefix="..";
+  data.language=getPreferredLanguage();
+  data.i18n=localized(data.language);
   return Mustache.to_html(this.templates.works, data,this.templates.partials);
 }
 

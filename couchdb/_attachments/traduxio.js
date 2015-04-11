@@ -2,8 +2,10 @@ $.fn.concordancify = function() {
   
   default_language=$("body").data("language") || currentLanguage;
   default_query=$("body").data("query") || "";
+  
+  var search = $("#nav").data("i_search");
 
-  this.append('<input id="query" type="search" results="5" name="query" placeholder="Rechercher" value="'
+  this.append('<input id="query" type="search" results="5" name="query" placeholder="' + search + '" value="'
     +  default_query + '" />');
   this.append('<select id="language" name="language"/>');
   
@@ -14,7 +16,7 @@ $.fn.concordancify = function() {
       $.each(result.rows, function(i, o) {
 	$("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
-      $("#language").val(default_language);
+      $("#language").val($("body").data("lang"));
     }); 
   });
   
@@ -34,7 +36,7 @@ $.fn.concordancify = function() {
   $(".submit",form).on("click",submitForm);
   $("#language",form).on("keypress",function(e) {
       if(e.which == 13) {
-	  submitForm(e);
+        submitForm(e);
       }
   });
 };
@@ -44,7 +46,7 @@ var currentLanguage='fr';
 
 function getLanguageName(id,target) {
   var result=id;
-  target=target || currentLanguage;
+  target=target || default_language;
   if (languagesNames[id]) {
     var list=languagesNames[id];
     if(list[target]) {

@@ -6,40 +6,41 @@
       {{text.creator}}</h1>
 
 <div class="full group" data-id="{{id}}">
+  {{#i18n}}
   <div class="license-attributes">
-    <p class="chapeau">Caractéristiques de la licence</p>
+    <p class="chapeau">{{i_license_characteristics}}</p>
     <div class="dialog">
       <form id="license">
         <div class="option-group">
-	  <div class="label">Autorisez-vous les modifications de votre création ?</div>
-	  <div class="choice"><input type="radio" name="derivatives" value="EMPTY" checked/>Oui</div>
-	  <div class="choice"><input type="radio" name="derivatives" value="nd"/>Non</div>
-	  <div class="choice"><input type="radio" name="derivatives" value="sa"/>Oui, sous condition de partage dans les même conditions</div>
+    <div class="label">{{i_allow_changes_question}}</div>
+    <div class="choice"><input type="radio" name="derivatives" value="EMPTY" checked/>{{i_yes}}</div>
+    <div class="choice"><input type="radio" name="derivatives" value="nd"/>{{i_no}}</div>
+    <div class="choice"><input type="radio" name="derivatives" value="sa"/>{{i_yes_share_conditions}}</div>
         </div>
         <div class="option-group">
-	  <div class="label">Autorisez-vous les utilisations commerciales de votre oeuvre ?</div>
-	  <div class="choice"><input type="radio" name="commercial" value="EMPTY" checked/>Oui</div>
-	  <div class="choice"><input type="radio" name="commercial" value="nc"/>Non</div>
+    <div class="label">{{i_allow_commercial_use_question}}</div>
+    <div class="choice"><input type="radio" name="commercial" value="EMPTY" checked/>{{i_yes}}</div>
+    <div class="choice"><input type="radio" name="commercial" value="nc"/>{{i_no}}</div>
         </div>
         <div class="option-group bottom">
-	  <div class="label">Juridiction de la licence</div>
-	  <select name="country">
-            <option value="fr">France</option>
-            <option value="uk">Royaume Uni</option>
-            <option value="us">Etats-Unis</option>
-            <option value="it">Italie</option>
+    <div class="label">{{i_license_jurisdiction}}</div>
+    <select name="country">
+            <option value="fr">{{i_fr}}</option>
+            <option value="uk">{{i_uk}}</option>
+            <option value="us">{{i_us}}</option>
+            <option value="it">{{i_it}}</option>
           </select>
         </div>
         <div class="option-group bottom">
-	  <input type="submit" name="save" value="Enregistrer"/>
-	  <input type="button" name="cancel" value="Annuler"/>
+    <input type="submit" name="save" value="{{i_save}}"/>
+    <input type="button" name="cancel" value="{{i_cancel}}"/>
         </div>
         
       </form>
     </div>
   </div>
   <div class="license-selected">
-    <p class="chapeau">Licence sélectionnée</p>
+    <p class="chapeau">{{i_selected_license}}</p>
     <div class="dialog">
       <div class="license-name">{{text.license}}</div>
       <div class="graphical">
@@ -48,10 +49,11 @@
         <div class="cc derivatives"></div>
       </div>
       <div class="fc-dubious">
-	<div class="freework"></div>
-	<div class="freework-text">Ce n'est pas une licence culturelle gratuite</div>
+  <div class="freework"></div>
+  <div class="freework-text">{{i_not_free_license}}</div>
       </div>
     </div>
   </div>
+  {{/i18n}}
 </div>
 {{> footer}}

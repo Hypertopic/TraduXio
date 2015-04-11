@@ -1,67 +1,51 @@
 <html>
-    <head>
-        <title>TraduXio</title>
-        <link rel="stylesheet" href="shared/welcome.css" type="text/css" />
-        <!--[if lt IE 7]>
-        <style media="screen" type="text/css">
-        body {
-                height:100%;
-        }
-        </style>
-        <![endif]-->
-    </head>
-    <body id="main">
-        <div id="body">
-            <div id="top">
-                <h1 class="title">TraduXio</h1>
-                <strong class="subtitle">TraduXio est un environnement
-                    collaboratif pour les traducteurs de textes culturels.
-                </strong>
-            </div>
-            <!--Panels d'informations-->
-            <div id="middle">
-                <div>
-                    <div class="panel">
-                        <img src="shared/analysis.png" 
-                             alt="Analyse et comparaison"/>
-                        <h2>Analysez et comparez</h2>
-                        <p>TraduXio met à votre disposition la possibilité
-                            d'analyser et de comparer les traductions d'une 
-                            même œuvre, mais également de conserver toutes 
-                            vos contributions.</p>
-                    </div>
-                    <div class="panel">
-                        <img src="shared/cc.png" alt="Choisir la licence"/>
-                        <h2>Choisissez votre licence</h2>
-                        <p>TraduXio vous permet de définir une licence pour
-                            garantir les droits de vos contributions. La 
-                            définition des licences est basée sur le modèle 
-                            du Creative Commons.</p>
-                    </div>
-                </div><div>
-                    <div class="panel">
-                        <img src="shared/research.png" alt="Rechercher des 
-                             traductions"/>
-                        <h2>Recherchez des traductions</h2>
-                        <p>TraduXio vous offre la possibilité de rechercher 
-                            la traduction d'un ou plusieurs termes au 
-                            travers d'une bibliothèque d'œuvres de manière 
-                            simple et efficace.
-                        </p>
-                    </div>
-                    <div class="panel">
-                        <img src="shared/group.png" alt="Travail à 
-                             plusieurs"/>
-                        <h2>Travaillez à plusieurs</h2>
-                        <p>TraduXio propose un environnement collaboratif. 
-                            Il comprend un outil de traduction permettant à
-                            plusieurs collaborateurs de traduire une même
-                            œuvre en simultané.
-                        </p>
-                    </div>
-                </div>
-                <a href="works/" class="start">&nbsp;Commencer&nbsp;</a>
-            </div>
+  <head>
+    <title>TraduXio</title>
+      <link rel="stylesheet" href="shared/welcome.css" type="text/css" />
+      <!--[if lt IE 7]>
+      <style media="screen" type="text/css">
+      body {
+        height:100%;
+      }
+      </style>
+      <![endif]-->
+  </head>
+  <body id="main">
+    <div id="body">
+      {{#i18n}}
+      <div id="top">
+        <h1 class="title">TraduXio</h1>
+        <strong class="subtitle">{{i_traduxio_description}}</strong>
+      </div>
+      <!--Panels d'informations-->
+      <div id="middle">
+        <div>
+          <div class="panel">
+            <img src="shared/analysis.png" alt="{{i_analyze_compare}}"/>
+            <h2>{{i_analyze_compare}}</h2>
+            <p>{{i_analyze_compare_description}}</p>
+          </div>
+          <div class="panel">
+            <img src="shared/cc.png" alt="{{i_choose_license}}"/>
+            <h2>{{i_choose_license}}</h2>
+            <p>{{i_choose_license_description}}</p>
+          </div>
         </div>
-    </body>
+        <div>
+          <div class="panel">
+            <img src="shared/research.png" alt="{{i_research_translations}}"/>
+            <h2>{{i_search_translations}}</h2>
+            <p>{{i_search_translations_description}}</p>
+          </div>
+          <div class="panel">
+            <img src="shared/group.png" alt="{{i_work_together}}"/>
+            <h2>{{i_work_together}}</h2>
+            <p>{{i_work_together_description}}</p>
+          </div>
+        </div>
+        <a href="works/" class="start">&nbsp;{{i_start}}&nbsp;</a>
+      </div>
+      {{/i18n}}
+    </div>
+  </body>
 </html>

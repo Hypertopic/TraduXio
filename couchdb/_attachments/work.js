@@ -18,6 +18,10 @@
   function findPleat(version) {
     return $(".pleat.close[data-version='"+version+"']");
   }
+  
+  function getTranslated(name) {
+    return $("#hexapla").data(name);
+  }
 
   $.fn.getHeight = function() {
     var fake=$("<div>").css({"position":"fixed","left":"-1000px"}).append(this.clone());
@@ -76,7 +80,7 @@
       var position={};
       var tableLine=$("tr[data-line="+line+"]");
       if (tableLine.find("td:visible").length>0) {
-	position=tableLine.find("td:visible").position();
+        position=tableLine.find("td:visible").position();
         $(this).removeClass("dynamic");
       } else {
         $(this).addClass("dynamic");
@@ -203,16 +207,16 @@
 
   function toggleEdit (e) {
     var version=$(this).getVersion("th.open");
-	var doc = find(version);
+    var doc = find(version);
     var units = findUnits(version);
-	var top = doc.first();
-	var edited = doc.isEdited();
-    doc.find("input.edit").toggleName("Lire", "Editer");
+    var top = doc.first();
+    var edited = doc.isEdited();
+    doc.find("input.edit").toggleName(getTranslated("i_read"), getTranslated("i_edit"));
     if (edited) {
       top.css("width","auto");
       doc.removeClass("edit");
-	  top.find("input.editedMeta").remove();
-	  top.find(".delete").remove();
+      top.find("input.editedMeta").remove();
+      top.find(".delete").remove();
       if (getVersions().length==1) {
           var fulltext=$("textarea.fulltext").val();
           var lines=fulltext.split("\n\n");
@@ -245,10 +249,10 @@
     } else {
       doc.addClass("edit");
       top.css("width",doc.first().outerWidth()+"px");
-	  if(version != "original") {
-		top.find(".relative-wrapper").prepend('<span class="button delete"></span>');
-		top.find(".delete").on("click", clickDeleteVersion);
-	  }
+      if(version != "original") {
+        top.find(".relative-wrapper").prepend('<span class="button delete"></span>');
+        top.find(".delete").on("click", clickDeleteVersion);
+      }
       if (getVersions().length==1) {
           var fulltext="";
           var first=true;
@@ -264,39 +268,39 @@
       }
     }
     if(version == "original") {
-      setEditState(edited, top, "title", "Titre");
-      setEditState(edited, top, "work-creator", "Auteur");
-      setEditState(edited, top, "date", "Date, année, ou siècle de l'oeuvre");
-      setLangEditState(edited, top, "Langue originale");
+      setEditState(edited, top, "title", getTranslated("i_title"));
+      setEditState(edited, top, "work-creator", getTranslated("i_author"));
+      setEditState(edited, top, "date", getTranslated("i_year_original"));
+      setLangEditState(edited, top, getTranslated("i_original_language"));
     } else {
-      setEditState(edited, top, "title", "Titre traduit");
-      setEditState(edited, top, "work-creator", "Auteur (translittéré si nécessaire)");
-      setEditState(edited, top, "creator", "Traduction");
-      setEditState(edited, top, "date", "Date, année, ou siècle de la traduction");
-      setLangEditState(edited, top, "Langue de traduction");
+      setEditState(edited, top, "title", getTranslated("i_translated_title"));
+      setEditState(edited, top, "work-creator", getTranslated("i_version_author"));
+      setEditState(edited, top, "creator", getTranslated("i_translator"));
+      setEditState(edited, top, "date", getTranslated("i_year_version"));
+      setLangEditState(edited, top, getTranslated("i_version_language"));
     }
     units.each(function() {
       var unit=$(this);
       if ($(this).isEdited()) {
-		var self=this;
-		saveUnit.apply($(this).find('textarea'),[function () {
-		  $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
-		  unit.find(".split").remove();
-		  unit.find(".join").remove();
-		  unit.find("textarea").remove();
-		  unit.removeClass("edit");
-		}]);
+        var self=this;
+        saveUnit.apply($(this).find('textarea'),[function () {
+          $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
+          unit.find(".split").remove();
+          unit.find(".join").remove();
+          unit.find("textarea").remove();
+          unit.removeClass("edit");
+        }]);
       } else {
-		$(this).addClass("edit").find("span").remove();
-		var textarea=$("<textarea/>").addClass("autosize");
-		textarea.val(htmlToString($(".text",this)));
-		$(this).prepend(textarea);
-		$(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
-		autoSize.apply(textarea);
-		if (getVersions().indexOf(version)>0) {
-		  createJoins(unit);
-		  createSplits(unit);
-		}
+        $(this).addClass("edit").find("span").remove();
+        var textarea=$("<textarea/>").addClass("autosize");
+        textarea.val(htmlToString($(".text",this)));
+        $(this).prepend(textarea);
+        $(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
+        autoSize.apply(textarea);
+        if (getVersions().indexOf(version)>0) {
+          createJoins(unit);
+          createSplits(unit);
+        }
       }
     });
     if (e.hasOwnProperty("cancelable")) //means it is an event, and as such toggle occured on user action
@@ -324,39 +328,39 @@
   }
   
   function setLangEditState(isEdited, container, placeholder) {
-	var target = container.find(".language");
-	if(isEdited) {
-	  container.find("select").remove();
-	  target.removeClass("edit").show();
-	} else {
-	  target.hide();
-	  var language = $("<select></select>");
-	  fillLanguages(language, function() {
-	    if (placeholder) {
+    var target = container.find(".language");
+    if(isEdited) {
+      container.find("select").remove();
+      target.removeClass("edit").show();
+    } else {
+      target.hide();
+      var language = $("<select></select>");
+      fillLanguages(language, function() {
+        if (placeholder) {
         language.prepend("<option value=\"\">" + placeholder+"</option>");
         language.attr("title",placeholder);
-	    }
-		language.val(target.data("id"));
-		language.addClass("editedMeta").css("width", "50%");
-		language.on("change", function() {
-		  var id = $("#hexapla").data("id");
-		  var ref = $(this).closest("th").data("version");
-		  $.ajax({
-		    type: "PUT",
-		    url: "work/"+id+"/"+ref,
-		    contentType: 'text/plain',
-		    data: JSON.stringify({"key":"language", "value": language.val()})
-		  }).done(function() {
-			var lang_id = language.val();
-			fixLanguages(target.data("id",lang_id));
-			fixLanguages($("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
-			  .data("id", lang_id));
-			}).fail(function() { alert("fail!"); });
-		});
-		target.addClass("edit");
-		target.before(language);
-	  });
-	}
+        }
+        language.val(target.data("id"));
+        language.addClass("editedMeta").css("width", "50%");
+        language.on("change", function() {
+          var id = $("#hexapla").data("id");
+          var ref = $(this).closest("th").data("version");
+          $.ajax({
+            type: "PUT",
+            url: "work/"+id+"/"+ref,
+            contentType: 'text/plain',
+            data: JSON.stringify({"key":"language", "value": language.val()})
+          }).done(function() {
+            var lang_id = language.val();
+            fixLanguages(target.data("id",lang_id));
+            fixLanguages($("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
+              .data("id", lang_id));
+            }).fail(function() { alert("fail!"); });
+        });
+        target.addClass("edit");
+        target.before(language);
+      });
+    }
   }
   
   function updateUrl() {
@@ -376,103 +380,103 @@
   }
 
   function setEditState(isEdited, container, name, placeholder) {
-	setEditStateForComponent(isEdited, container, name, "focusout", '<input type="text" class="editedMeta ' + name + '" />', placeholder);
+    setEditStateForComponent(isEdited, container, name, "focusout", '<input type="text" class="editedMeta ' + name + '" />', placeholder);
   }
 
   function setEditStateForComponent(isEdited, container, name, event, textComponent, placeholder) {
-	var target = container.find("." + name);
-	if(isEdited) {
-	  target.removeClass("edit").show();
-	} else {
-	  target.addClass("edit");
-	  var component=$(textComponent);
-	  component.attr("placeholder", placeholder);
-    component.attr("title", placeholder);
-	  component.on(event, function() {
-		if(component.hasClass("dirty")) {
-		  var id = $("#hexapla").data("id");
-		  var ref = $(this).closest("th").data("version");
-		  $.ajax({
-		    type: "PUT",
-		    url: "work/"+id+"/"+ref,
-		    contentType: 'text/plain',
-		    data: JSON.stringify({"key": name, "value": component.val()})
-		  }).done(function(data) {
-			if(name == "creator") {
-			  changeVersion(ref, data);
-			}
-			component.val(data);
-			target.text(data);
-			component.removeClass("dirty");
-		  }).fail(function() { alert("fail!"); });
-		}
-	  });
-	  component.val($(target).text());
-	  target.before(component);
-	  target.hide();
-	}
+    var target = container.find("." + name);
+    if(isEdited) {
+      target.removeClass("edit").show();
+    } else {
+      target.addClass("edit");
+      var component=$(textComponent);
+      component.attr("placeholder", placeholder);
+      component.attr("title", placeholder);
+      component.on(event, function() {
+        if(component.hasClass("dirty")) {
+          var id = $("#hexapla").data("id");
+          var ref = $(this).closest("th").data("version");
+          $.ajax({
+            type: "PUT",
+            url: "work/"+id+"/"+ref,
+            contentType: 'text/plain',
+            data: JSON.stringify({"key": name, "value": component.val()})
+          }).done(function(data) {
+            if(name == "creator") {
+              changeVersion(ref, data);
+            }
+            component.val(data);
+            target.text(data);
+            component.removeClass("dirty");
+          }).fail(function() { alert("fail!"); });
+        }
+      });
+      component.val($(target).text());
+      target.before(component);
+      target.hide();
+    }
   }
   
   function changeVersion(oldVersion, newVersion) {
-	$("#hexapla").find("*[data-version='" + oldVersion + "']").attr("data-version", newVersion).data("version", newVersion).find(".creator").html(newVersion);
+    $("#hexapla").find("*[data-version='" + oldVersion + "']").attr("data-version", newVersion).data("version", newVersion).find(".creator").html(newVersion);
   }
   
   function toggleAddVersion() {
-	$("#addPanel").slideToggle(200);
-	$("#removePanel").slideUp(200);
+    $("#addPanel").slideToggle(200);
+    $("#removePanel").slideUp(200);
   }
   
   function toggleRemoveDoc() {
-	$("#removePanel").slideToggle(200);
-	$("#addPanel").slideUp(200);
+    $("#removePanel").slideToggle(200);
+    $("#addPanel").slideUp(200);
   }
   
   function addVersion() {
-	var id = $("#hexapla").data("id");
-	var ref = $("#addPanel").find("input[type='text']").val();
-	if(ref != "") {
-	  $.ajax({
-		type: "PUT",
-		url: "work/"+id+"/"+ref,
-		contentType: 'text/plain',
-		data: JSON.stringify({"key": "creator", "value": ref})
-	  }).done(function() {
-		window.location.href = id + "?edit=" + ref;
-	  }).fail(function() { alert("fail!"); });
-	}
-	return false;
+    var id = $("#hexapla").data("id");
+    var ref = $("#addPanel").find("input[type='text']").val();
+    if(ref != "") {
+      $.ajax({
+        type: "PUT",
+        url: "work/"+id+"/"+ref,
+        contentType: 'text/plain',
+        data: JSON.stringify({"key": "creator", "value": ref})
+      }).done(function() {
+        window.location.href = id + "?edit=" + ref;
+      }).fail(function() { alert("fail!"); });
+    }
+    return false;
   }
   
   function removeDoc() {
-	if(confirm("La suppression est irréversible. Continuer ?")) {
-	  $.ajax({
-		type: "PUT",
-		url: "work/"+$("#hexapla").data("id"),
-		contentType: 'text/plain',
-		data: JSON.stringify({"key": "remove"})
-	  }).done(function() {
-		window.location.href = "./";
-	  }).fail(function(error) { alert("failed: " + error.statusText); });
-	}
+    if(confirm(getTranslated("i_confirm_delete"))) {
+      $.ajax({
+        type: "PUT",
+        url: "work/"+$("#hexapla").data("id"),
+        contentType: 'text/plain',
+        data: JSON.stringify({"key": "remove"})
+      }).done(function() {
+        window.location.href = "./";
+      }).fail(function(error) { alert("failed: " + error.statusText); });
+    }
   }
   
   function clickDeleteVersion() {
-	var ref = $(this).closest("th").data("version");
-	if(confirm("Supprimer la traduction '" + ref + "' ?")) {
-	  deleteVersion(ref);
-	}
+    var ref = $(this).closest("th").data("version");
+    if(confirm(getTranslated("i_delete_version").replace("%s", ref))) {
+      deleteVersion(ref);
+    }
   }
   
   function deleteVersion(version) {
-	var id = $("#hexapla").data("id");
-	$.ajax({
-	  type: "PUT",
-	  url: "work/"+id+"/"+version,
-	  contentType: 'text/plain',
-	  data: JSON.stringify({"key": "delete"})
-	}).done(function() {
-	  window.location.reload(true);
-	}).fail(function() { alert("fail!"); });
+    var id = $("#hexapla").data("id");
+    $.ajax({
+      type: "PUT",
+      url: "work/"+id+"/"+version,
+      contentType: 'text/plain',
+      data: JSON.stringify({"key": "delete"})
+    }).done(function() {
+      window.location.reload(true);
+    }).fail(function() { alert("fail!"); });
   }
   
   function getEndLine (units,index) {
@@ -518,8 +522,8 @@
     var currPos=unit.position();
     if (currLine<lastLine && currLine<maxLines) {
       for (var i=currLine+1; i<=lastLine; ++i) {
-	var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
-	unit.append(split);
+    var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
+    unit.append(split);
       }
       positionSplits();
     }
@@ -539,19 +543,19 @@
       $(this).prop("disabled",true);
       var content=$(this).closest(".unit").find("textarea").val();
       editOnServer(content, $(this).getReference()).done(function(message,result) {
-		if (result == "success") {
-		  $(self).removeClass("dirty"); 
-		  $(self).prop("disabled",false);
-			if (callback && typeof(callback) == "function") {
-			  callback();
-			}
-		} else {
-		  alert(result+":"+message);
-		}
+        if (result == "success") {
+          $(self).removeClass("dirty"); 
+          $(self).prop("disabled",false);
+            if (callback && typeof(callback) == "function") {
+              callback();
+            }
+        } else {
+          alert(result+":"+message);
+        }
       });
     } else {
       if (callback && typeof(callback) == "function") {
-		callback();
+        callback();
       }
     } 
   }
@@ -628,8 +632,8 @@
       var units=findUnits(version);
       var previousUnit=units.eq(units.index(unit)-1);
       if (previousUnit) {
-	editOnServer("null", $(this).closest(".unit").getReference())
-	  .done(function() {
+    editOnServer("null", $(this).closest(".unit").getReference())
+      .done(function() {
             var previousContent=previousUnit.find("textarea").val();
             var thisContent=unit.find("textarea").val();
             previousUnit.find("textarea").val(previousContent+"\n"+thisContent);
@@ -673,22 +677,22 @@
         var versions=getVersions();
         var versionIndex=versions.indexOf(version);
         if (versionIndex==0) {
-	  $("tr[data-line="+line+"]").prepend(newTd);
+          $("tr[data-line="+line+"]").prepend(newTd);
         } else {
-	  var ok=false;
-	  $("tr[data-line="+line+"] .unit").each(function() {
+          var ok=false;
+          $("tr[data-line="+line+"] .unit").each(function() {
             var currVersion=$(this).data("version");
-	    if (versions.indexOf(currVersion) > versions.indexOf(version)) {
-	      $(this).closest("td").before(newTd);
-	      ok=true;
-	      return false;
-	    }
-	    if (versions.indexOf($(this).data("version")) +1 == versions.length) {
-	      $(this).closest("td").before(newTd);
-	    }
-	  });
+            if (versions.indexOf(currVersion) > versions.indexOf(version)) {
+              $(this).closest("td").before(newTd);
+              ok=true;
+              return false;
+            }
+            if (versions.indexOf($(this).data("version")) +1 == versions.length) {
+              $(this).closest("td").before(newTd);
+            }
+          });
           if (!ok) {
-	    $("tr[data-line="+line+"]").append(newTd);
+            $("tr[data-line="+line+"]").append(newTd);
           }
         }
         createJoins(unit);
@@ -702,12 +706,12 @@
     $("#hexapla").on('change input cut paste','textarea,input.editedMeta',modified);
 
     $("tr").on("focusout", ".unit.edit textarea", saveUnit);
-	
-	$(".top").on("click", ".addVersion", toggleAddVersion);
-	$(".top").on("click", ".removeDoc", toggleRemoveDoc);
-	
-	$("#addPanel").on("submit", addVersion);
-	$("#removePanel").on("click", removeDoc);
+
+    $(".top").on("click", ".addVersion", toggleAddVersion);
+    $(".top").on("click", ".removeDoc", toggleRemoveDoc);
+
+    $("#addPanel").on("submit", addVersion);
+    $("#removePanel").on("click", removeDoc);
     
     var versions=getVersions();
     const N = versions.length;
@@ -725,7 +729,7 @@
     }
     $("#hexapla th.edited").each(toggleEdit).removeClass("edited");
     fixWidths();
-	
+
     if(N==0) {
       $("#work-info").show().on("submit",function(e) {
         e.preventDefault();

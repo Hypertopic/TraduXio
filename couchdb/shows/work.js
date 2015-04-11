@@ -2,6 +2,7 @@ function(o, req) {
   // !code lib/mustache.js
   // !code lib/hexapla.js
   // !code lib/path.js
+  // !code localization.js
   if (o===null) {
       o={translations:{}};
   }
@@ -44,7 +45,8 @@ function(o, req) {
     headers: [],
     units: [],
     raw:[],
-    rows:[]
+    rows:[],
+    i18n: localized()
   };
   var hexapla = new Hexapla();
   var edited_versions=req.query.edit ? req.query.edit.split("|") : [];
@@ -80,14 +82,11 @@ function(o, req) {
       language: translation.language,
       date: translation.date,
       creativeCommons: translation.creativeCommons,
-	  trad:"Trad.",
+	  trad:data.i18n.i_trad,
 	  edited: (edited_versions.indexOf(t)!== -1),
 	  opened: (opened_versions.indexOf(t)!== -1)
     });
   }
-  data.addtrad="Traduction :";
-  data.send="Créer";
-  data.deleteMsg="Supprimer le texte et toutes ses traductions";
   data.rows=hexapla.getRows();
   data.name="work";
   data.css=true;
@@ -95,6 +94,10 @@ function(o, req) {
   data.scripts=["jquery.selection"];
   data.language=data.work_language;
   data.prefix="..";
+  data.i_edit=data.i18n.i_edit;
+  data.i_hide=data.i18n.i_hide;
+  data.i_edit_license=data.i18n.i_edit_license;
+  data.i_all_rights_reserved=data.i18n.i_all_rights_reserved;
  
   return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }
