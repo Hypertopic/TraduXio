@@ -1,10 +1,9 @@
 {{>header}}
+{{#i18n}}
 <div id="lead">
-  {{#i18n}}
   <img src="{{prefix}}/shared/traduxio_home_logo.jpg" alt="TraduXio Home Logo" />
   <div id="citation"><span class="quote"></span><span class="author"></span></div>
   <div class="welcome">{{i_participative_translation}}</div>
-  {{/i18n}}
 </div>
 <div id="works-list">
   <ul>
@@ -25,5 +24,8 @@
     {{/languages}}
   </ul>
 </div>
-<a href="new">{{i_add_work}}</a>
+<div id="aside">
+  <a href="new">{{i_add_work}}</a>
+</div>
+{{/i18n}}
 {{>footer}}
