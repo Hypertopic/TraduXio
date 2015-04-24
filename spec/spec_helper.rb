@@ -4,7 +4,7 @@ require 'capybara/webkit'
 Capybara.run_server = false
 Capybara.default_driver = :webkit
 Capybara.javascript_driver = :webkit
-Capybara.app_host = 'http://traduxio.test.hypertopic.org/'
+Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/'
 
 def a_string()
 	s = ('a'..'z').to_a.shuffle[0,8].join
