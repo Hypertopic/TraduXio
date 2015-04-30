@@ -1,20 +1,23 @@
-﻿require 'spec_helper'
+﻿require '../spec_helper.rb'
 
 feature 'Create a translation' do
 
     background do
-        visit '/works'
-        click_on '+'
+        visit 'works/'
+        click_on 'Ajouter une oeuvre'
         fill_in 'title', :with => 'The Raven'
-        fill_in 'author', :with => 'Edgar Allan Poe'
-        fill_in block(1,1), :with => 'Once upon a midnight dreary, while I pondered, weak and weary,'
-        fill_in block(1,2), :with => 'Over many a quaint and curious volume of forgotten lore'
-        click_on 'Save'
+        fill_in 'work-creator', :with => 'Edgar Allan Poe'
+	find('input[type="submit"][name=""]').click
+	sleep 5
+	first('.edit').click
+	fill_in '.fulltext', :with => 'This is a test \n\n This is not a test'
+	first('.edit').click
     end
 
     scenario 'Create a translation' do
-		click_on '+'
-		fill_in 'title', :with => 'Le Corbeau'
+		click_on '.addVersion'
+		fill_in '//#addPanel/input[type="text"]', :with => 'Le Corbeau'
+		find('//#addPanel/input[type="submit"]').click
 		click_on 'Choose your language', :with => 'Français'
 		fill_in 'translator', :with => 'Martin Dupont'
 		page.should have_field 'author', :with => 'Edgar Allan Poe'
