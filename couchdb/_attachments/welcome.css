@@ -53,6 +53,7 @@
 #middle .start {
     font-size: 120%;
     border: 3px black solid;
+    padding: 0 6px;
     position: relative;
     box-shadow: 3px 3px 0 black;
     bottom: -30px;

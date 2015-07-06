@@ -4,7 +4,21 @@ require 'capybara/webkit'
 Capybara.run_server = false
 Capybara.default_driver = :webkit
 Capybara.javascript_driver = :webkit
-Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/'
+Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite'
+
+RSpec.configure do |config|
+  config.before(:each) do
+    prefer_language 'en'
+  end
+end
+
+def sample(name)
+  IO.read("spec/samples/#{name}.txt")
+end
+
+def row(row)
+  find("#hexapla tr:nth-child(#{row}) .text")
+end
 
 def a_string()
 	s = ('a'..'z').to_a.shuffle[0,8].join

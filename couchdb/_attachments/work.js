@@ -262,7 +262,7 @@
               fulltext+=htmlToString($(".text",this));
           });
           $("#hexapla tbody tr").remove();
-          var textarea=$("<textarea/>").addClass("fulltext").val(fulltext);
+          var textarea=$('<textarea name="text"/>').addClass("fulltext").val(fulltext);
           var tr=$("<tr/>").append($("<td/>").append($("<div>").addClass("unit edit").append(textarea)));
           $("#hexapla tbody").append(tr);
       }
