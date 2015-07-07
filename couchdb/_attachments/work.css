@@ -95,10 +95,12 @@ div.metadata {
     margin:0 auto;
 }
 
-#work .addVersion, #work .removeDoc {
+.workButton {
     float: right;
-    display: inline;
-    cursor: pointer;
+    background-color: dimGray;
+    border-radius: 30px;
+    padding: 2px 5px;
+    margin: 0px 2px;
 }
 
 #work .top form input {

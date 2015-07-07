@@ -707,8 +707,8 @@
 
     $("tr").on("focusout", ".unit.edit textarea", saveUnit);
 
-    $(".top").on("click", ".addVersion", toggleAddVersion);
-    $(".top").on("click", ".removeDoc", toggleRemoveDoc);
+    $(".top").on("click", "#addVersion", toggleAddVersion);
+    $(".top").on("click", "#removeDoc", toggleRemoveDoc);
 
     $("#addPanel").on("submit", addVersion);
     $("#removePanel").on("click", removeDoc);
@@ -755,7 +755,7 @@
       });
 
       fillLanguages($("#work-info [name=language]"),"langue originale");
-      $(".top h1,img.removeDoc,img.addVersion").hide();
+      $(".top h1, .workButton").hide();
     }
     if (N==1) {
       $(".button.hide").remove();
