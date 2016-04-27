@@ -123,7 +123,7 @@ function Hexapla() {
 	  }
         }
       }
-      rows[i]=row;
+      if (!finished) rows[i]=row;
     }
     if (finished) {
       for (var version in lastLines) {
