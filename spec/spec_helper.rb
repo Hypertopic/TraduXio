@@ -1,10 +1,9 @@
 ﻿require 'capybara/rspec'
-require 'capybara/webkit'
+require 'capybara/poltergeist'
 
 Capybara.run_server = false
-Capybara.default_driver = :webkit
-Capybara.javascript_driver = :webkit
-Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite'
+Capybara.default_driver = :poltergeist
+Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/'
 
 RSpec.configure do |config|
   config.before(:each) do
@@ -25,7 +24,7 @@ def a_string()
 end
 
 def prefer_language(language)
-	page.driver.header 'Accept-Language', language
+	page.driver.add_headers("Accept-Language"=>language)
 end
 
 def should_have_in_bold(text)
