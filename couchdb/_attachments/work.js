@@ -341,6 +341,7 @@
         language.attr("title",placeholder);
         }
         language.val(target.data("id"));
+        language.attr("name","language");
         language.addClass("editedMeta").css("width", "50%");
         language.on("change", function() {
           var id = $("#hexapla").data("id");
@@ -392,6 +393,7 @@
       var component=$(textComponent);
       component.attr("placeholder", placeholder);
       component.attr("title", placeholder);
+      component.attr("name", name);
       component.on(event, function() {
         if(component.hasClass("dirty")) {
           var id = $("#hexapla").data("id");
@@ -416,24 +418,24 @@
       target.hide();
     }
   }
-  
+
   function changeVersion(oldVersion, newVersion) {
     $("#hexapla").find("*[data-version='" + oldVersion + "']").attr("data-version", newVersion).data("version", newVersion).find(".creator").html(newVersion);
   }
-  
+
   function toggleAddVersion() {
     $("#addPanel").slideToggle(200);
     $("#removePanel").slideUp(200);
   }
-  
+
   function toggleRemoveDoc() {
     $("#removePanel").slideToggle(200);
     $("#addPanel").slideUp(200);
   }
-  
+
   function addVersion() {
     var id = $("#hexapla").data("id");
-    var ref = $("#addPanel").find("input[type='text']").val();
+    var ref = $("#addPanel").find("input[name='work-creator']").val();
     if(ref != "") {
       $.ajax({
         type: "PUT",
