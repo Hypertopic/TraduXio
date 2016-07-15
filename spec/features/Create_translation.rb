@@ -3,34 +3,52 @@
 feature 'Create a translation' do
 
     background do
-        visit '/works'
-        click_on '+'
-        fill_in 'title', :with => 'The Raven'
-        fill_in 'author', :with => 'Edgar Allan Poe'
-        fill_in block(1,1), :with => 'Once upon a midnight dreary, while I pondered, weak and weary,'
-        fill_in block(1,2), :with => 'Over many a quaint and curious volume of forgotten lore'
-        click_on 'Save'
+        visit '/works/'
+        expect(page).to have_content 'Howard Phillips Lovecraft'
+        page.find('li.author.closed',text:'Howard Phillips Lovecraft').trigger(:click)
+        click_on 'Fungi from Yuggoth'
+        if page.has_selector? "th[data-version='Aurélien Bénel']" then
+          page.first("th[data-version='Aurélien Bénel'] input.edit").click
+          page.first("th[data-version='Aurélien Bénel'] span.delete").click
+          accept_alert
+          expect(page).not_to have_selector "th[data-version='Aurélien Bénel']"
+        end
     end
 
     scenario 'Create a translation' do
-		click_on '+'
-		fill_in 'title', :with => 'Le Corbeau'
-		click_on 'Choose your language', :with => 'Français'
-		fill_in 'translator', :with => 'Martin Dupont'
-		page.should have_field 'author', :with => 'Edgar Allan Poe'
-		fill_in block(2,1), :with => 'Une fois, sur le minuit lugubre pendant que je méditais, faible et fatigué,'
-		fill_in block(2,2), :with => 'Sur maint précieux et curieux volume d une doctrine oubliée'
-		page.should have_field block(2,1), :with => 'Une fois, sur le minuit lugubre pendant que je méditais, faible et fatigué,'
-		page.should have_field block(2,2), :with => 'Sur maint précieux et curieux volume d une doctrine oubliée'
-		click_on 'link_fields'
-		page.should have_field block(2,1), :with => 'Une fois, sur le minuit lugubre pendant que je méditais, faible et fatigué, Sur maint précieux et curieux volume d une doctrine oubliée'
-		page.should_not have_field block(2,2)
-		page.should have_button 'cut_fields'
-		click_on 'block1'
-		click_on 'cut_fields'
-		page.should have_field block(2,1), :with => 'Une fois, sur le minuit lugubre pendant que je méditais, faible et fatigué,'
-		page.should have_field block(2,2), :with => 'Sur maint précieux et curieux volume d une doctrine oubliée'
-		page.should have_button 'link_fields'
-    end 
+      page.find("a#addVersion").trigger(:click)
+      fill_in 'work-creator', :with => 'Aurélien Bénel'
+      until page.has_selector?("th.pleat.open[data-version='Aurélien Bénel']") do
+        begin
+          page.find('input[name=do-create]').click
+          page.save_screenshot("created.png")
+          wait_for_element("th.pleat.open[data-version='Aurélien Bénel']")
+        rescue RuntimeError
+        end
+      end
+      within ("thead.header th.pleat.open[data-version='Aurélien Bénel']") do
+        save_screenshot("passed.png")
+        expect(page).to have_field('creator', with: 'Aurélien Bénel')
+
+        fill_field('date','2015')
+        fill_field('title','La Lampe')
+        fill_select('language','fr')
+
+        save_screenshot("filled1.png")
+
+        save_screenshot("filled.png")
+      end
+
+      fill_block('Aurélien Bénel',0,'LA LAMPE')
+      fill_block('Aurélien Bénel',1,"Nous trouvâmes la lampe à l'intérieur de ces cavités rocheuses\n"+
+                                   "Aux signes sculptés qu'aucun prêtre de Thèbes ne déchiffra jamais\n"+
+                                   "Et dont les hiéroglyphes effrayés de leurs cavernes\n"+
+                                   "avertissaient toute créature vivante engendrée par la terre.")
+      page.save_screenshot("filled.png")
+      first("thead.header th.pleat.open[data-version='Aurélien Bénel']").click_on 'Read'
+      expect(page).to have_content("LA LAMPE")
+      expect(page).to have_content("Nous trouvâmes la lampe")
+      page.save_screenshot("saved.png")
+    end
 
 end
