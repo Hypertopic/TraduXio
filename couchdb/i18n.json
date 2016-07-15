@@ -11,14 +11,14 @@
     "i_work_together": "Work together",
     "i_work_together_description": "TraduXio provides a collaborative environment. It includes a tool that allows multiple contributors to translate the same text simultaneously.",
     "i_start": "Start",
-    
+
     "i_works": "Works",
     "i_my_translations": "My translations",
     "i_concordance": "Concordance",
-    
+
     "i_about": "About",
     "i_copyright": "Compliance with copyright",
-    
+
     "i_report": "Report",
     "i_report_description": "Report abusive publication",
     "i_at_page_": "at page:",
@@ -30,7 +30,7 @@
     "i_email": "Email",
     "i_email_optional_": "Email (optional):",
     "i_anti_spam_system_": "Anti-spam system:",
-    
+
     "i_license_characteristics": "License characteristics",
     "i_allow_changes_question": "Do you allow changes to your creation?",
     "i_yes": "Yes",
@@ -46,11 +46,11 @@
     "i_cancel": "Cancel",
     "i_selected_license": "Selected license",
     "i_not_free_license": "This is not a free cultural License",
-    
+
     "i_language": "Language",
     "i_language_": "Language:",
     "i_trad": "Trans.",
-    
+
     "i_translation": "Translation",
     "i_translation_": "Translation:",
     "i_create": "Create",
@@ -59,7 +59,7 @@
     "i_edit": "Edit",
     "i_edit_license": "Edit license",
     "i_all_rights_reserved": "All rights reserved",
-    
+
     "i_add_work": "Add a work",
     "i_search": "Search",
     "i_confirm_delete": "Deletion is irreversible. Continue?",
@@ -88,14 +88,14 @@
     "i_work_together": "Travaillez à plusieurs",
     "i_work_together_description": "TraduXio propose un environnement collaboratif. Il comprend un outil de traduction permettant à plusieurs collaborateurs de traduire une même œuvre en simultané.",
     "i_start": "Commencer",
-    
+
     "i_works": "Œuvres",
     "i_my_translations": "Mes traductions",
     "i_concordance": "Concordance",
-    
+
     "i_about": "À propos de",
     "i_copyright": "Respect des droits d'auteur",
-    
+
     "i_report": "Signaler",
     "i_report_description": "Signaler une mise en ligne abusive",
     "i_at_page_": "à la page :",
@@ -107,7 +107,7 @@
     "i_email": "Adresse de courrier électronique",
     "i_email_optional_": "Adresse de courrier électronique (optionnel) :",
     "i_anti_spam_system_": "Système anti-spam :",
-    
+
     "i_license_characteristics": "Caractéristiques de la licence",
     "i_allow_changes_question": "Autorisez-vous les modifications de votre création ?",
     "i_yes": "Oui",
@@ -123,11 +123,11 @@
     "i_cancel": "Annuler",
     "i_selected_license": "Licence sélectionnée",
     "i_not_free_license": "Ce n'est pas une licence culturelle gratuite",
-    
+
     "i_language": "Langue",
     "i_language_": "Langue :",
     "i_trad": "Trad.",
-    
+
     "i_translation": "Traduction",
     "i_translation_": "Traduction :",
     "i_create": "Créer",
@@ -136,7 +136,7 @@
     "i_edit": "Éditer",
     "i_edit_license": "Éditer la licence",
     "i_all_rights_reserved": "Tous droits réservés",
-    
+
     "i_add_work": "Ajouter une œuvre",
     "i_search": "Rechercher",
     "i_confirm_delete": "La suppression est irréversible. Continuer ?",
@@ -213,7 +213,7 @@
     "i_edit": "Editar",
     "i_edit_license": "Editar a licença",
     "i_all_rights_reserved": "Todos os direitos reservados",
-    
+
     "i_add_work": "Adicionar uma obra",
     "i_search": "Pesquisar",
     "i_confirm_delete": "A supressão é irreversível. Continuar?",
@@ -290,7 +290,7 @@
     "i_edit": "Editar",
     "i_edit_license": "Editar la licencia",
     "i_all_rights_reserved": "Todos los derechos reservados",
-    
+
     "i_add_work": "Añadir una obra",
     "i_search": "Buscar",
     "i_confirm_delete": "Esta acción es irreversible. ¿Continuar?",

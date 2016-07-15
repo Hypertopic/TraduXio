@@ -4,7 +4,7 @@
       (this.val()==name1)? name2 : name1
     );
   };
-  
+
   $.fn.toggleText = function(text1, text2) {
     this.text(
       (this.text()==text1)? text2 : text1
@@ -18,7 +18,7 @@
   function findPleat(version) {
     return $(".pleat.close[data-version='"+version+"']");
   }
-  
+
   function getTranslated(name) {
     return $("#hexapla").data(name);
   }
@@ -69,7 +69,7 @@
 
   function getSize(unit) {
     var rowspan=unit.closest("td").attr("rowspan");
-    if (rowspan) return parseInt(rowspan); 
+    if (rowspan) return parseInt(rowspan);
     else return 1;
   }
 
@@ -90,7 +90,7 @@
     });
     positionDynamicSplits(context);
   }
-  
+
   function positionDynamicSplits(context) {
     $("span.split.dynamic",context).each(function() {
       var unit=$(this).closest(".unit");
@@ -131,7 +131,7 @@
   $.fn.redraw = function() {
     return this.hide(0, function(){$(this).show()});
   };
-  
+
   function fixWidths() {
    var nbOpen=$("thead:first-child tr:first-child th.pleat.open:visible").length;
     if (nbOpen==0) {
@@ -150,7 +150,7 @@
     //when one version is edited, and we show a non edited one, pagination is ugly
     //so we toggle edited versions twice to get back to correct pagination
     //applying to both top and bottom buttons, so we do it twice
-    find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit); 
+    find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit);
     positionSplits();
   }
 
@@ -178,11 +178,11 @@
       line: this.closest("tr").data("line")
     };
   };
-  
+
   $.fn.getLanguage = function() {
     return find(this.getVersion("td.open")).find(".language").data("id");
   };
-  
+
   $.fn.getLine = function() {
     return this.closest("tr").data("line");
   };
@@ -196,7 +196,7 @@
         $(this).css({'width':'100%','height':'100%'});
     }
   }
-  
+
   function modified() {
     $(this).addClass("dirty");
     if ($(this).is(".autosize")) {
@@ -326,7 +326,7 @@
       updateSelect();
     }
   }
-  
+
   function setLangEditState(isEdited, container, placeholder) {
     var target = container.find(".language");
     if(isEdited) {
@@ -363,7 +363,7 @@
       });
     }
   }
-  
+
   function updateUrl() {
     var opened=$("thead:first-child th.open:visible").not(".edit").map(function() {return $(this).getVersion("th");}).toArray().join("|");
     var edited=$("thead:first-child th.edit:visible").map(function() {return $(this).getVersion("th");}).toArray().join("|");
@@ -448,7 +448,7 @@
     }
     return false;
   }
-  
+
   function removeDoc() {
     if(confirm(getTranslated("i_confirm_delete"))) {
       $.ajax({
@@ -461,14 +461,14 @@
       }).fail(function(error) { alert("failed: " + error.statusText); });
     }
   }
-  
+
   function clickDeleteVersion() {
     var ref = $(this).closest("th").data("version");
     if(confirm(getTranslated("i_delete_version").replace("%s", ref))) {
       deleteVersion(ref);
     }
   }
-  
+
   function deleteVersion(version) {
     var id = $("#hexapla").data("id");
     $.ajax({
@@ -480,7 +480,7 @@
       window.location.reload(true);
     }).fail(function() { alert("fail!"); });
   }
-  
+
   function getEndLine (units,index) {
     var nextIndex=index+1;
     var lastLine=0;
@@ -491,9 +491,9 @@
       lastLine=$("#hexapla").data("lines") - 1;
     }
     return lastLine;
-    
+
   }
- 
+
   function createJoin(unit1,unit2) {
       var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
       var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
@@ -546,7 +546,7 @@
       var content=$(this).closest(".unit").find("textarea").val();
       editOnServer(content, $(this).getReference()).done(function(message,result) {
         if (result == "success") {
-          $(self).removeClass("dirty"); 
+          $(self).removeClass("dirty");
           $(self).prop("disabled",false);
             if (callback && typeof(callback) == "function") {
               callback();
@@ -559,7 +559,7 @@
       if (callback && typeof(callback) == "function") {
         callback();
       }
-    } 
+    }
   }
 
   function getPreviousUnit(unit) {
@@ -714,7 +714,7 @@
 
     $("#addPanel").on("submit", addVersion);
     $("#removePanel").on("click", removeDoc);
-    
+
     var versions=getVersions();
     const N = versions.length;
     for (var i = N-1; i>=0; i--) {
@@ -771,4 +771,3 @@
       setTimeout(function() {$("tr"+window.location.hash+" .unit").removeClass("highlight");},500);
     }
   });
-

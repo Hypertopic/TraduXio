@@ -1,11 +1,11 @@
 {{> header}}
 {{#i18n}}
   <div class="top">
-	<h1>{{work_title}} – {{work_creator}}</h1>
-	<a href="#" class="workButton" id="removeDoc">✕</a>
-	<a href="#" class="workButton" id="addVersion">+</a>
-	<form id="addPanel"><h3>{{i_translation_}} </h3><input name="work-creator" placeholder="{{i_author}}"/><input type="submit" value="{{i_create}}" name="do-create" /></form>
-	<div id="removePanel"><button>{{i_delete_text_and_translations}}</button></div>
+  <h1>{{work_title}} – {{work_creator}}</h1>
+  <a href="#" class="workButton" id="removeDoc">✕</a>
+  <a href="#" class="workButton" id="addVersion">+</a>
+  <form id="addPanel"><h3>{{i_translation_}} </h3><input name="work-creator" placeholder="{{i_author}}"/><input type="submit" value="{{i_create}}" name="do-create" /></form>
+  <div id="removePanel"><button>{{i_delete_text_and_translations}}</button></div>
     <form id="work-info">
         <input class="title" name="title" placeholder="{{i_title}}">
         <input class="work-creator" name="work-creator" placeholder="{{i_author}}">
@@ -16,12 +16,12 @@
     </form>
   </div>
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full"
-    data-i_confirm_delete="{{i_confirm_delete}}" data-i_delete_version="{{i_delete_version}}" 
+    data-i_confirm_delete="{{i_confirm_delete}}" data-i_delete_version="{{i_delete_version}}"
     data-i_edit="{{i_edit}}" data-i_read="{{i_read}}" data-i_translator="{{i_translated_title}}"
     data-i_title="{{i_title}}" data-i_translated_title="{{i_translated_title}}"
     data-i_year_original="{{i_year_original}}" data-i_year_version="{{i_year_version}}"
     data-i_original_language="{{i_original_language}}" data-i_version_language="{{i_version_language}}"
-    data-i_author="{{i_author}}" data-i_version_author="{{i_version_author}}" 
+    data-i_author="{{i_author}}" data-i_version_author="{{i_version_author}}"
     data-i_original="{{i_original}}" data-i_translation="{{i_translation_}}">
     <thead class="header"><tr>
       {{#headers}}
@@ -30,8 +30,8 @@
           <div class="metadata work-creator">{{work_creator}}</div>
           <span>{{trad}}</span><div class="metadata creator">{{creator}}</div>
           <div class="meta group">
-	    <div class="metadata date">{{date}}</div>
-	    <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
+      <div class="metadata date">{{date}}</div>
+      <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
           </div>
           <input type="button" class="edit" value="{{i_edit}}" />
           <span class="button hide">{{i_hide}}</span>
