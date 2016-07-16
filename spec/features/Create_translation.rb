@@ -15,40 +15,24 @@ feature 'Create a translation' do
         end
     end
 
-    scenario 'Create a translation' do
-      page.find("a#addVersion").trigger(:click)
-      fill_in 'work-creator', :with => 'Aurélien Bénel'
-      until page.has_selector?("th.pleat.open[data-version='Aurélien Bénel']") do
-        begin
-          page.find('input[name=do-create]').click
-          page.save_screenshot("created.png")
-          wait_for_element("th.pleat.open[data-version='Aurélien Bénel']")
-        rescue RuntimeError
-        end
-      end
-      within ("thead.header th.pleat.open[data-version='Aurélien Bénel']") do
-        save_screenshot("passed.png")
-        expect(page).to have_field('creator', with: 'Aurélien Bénel')
+    scenario 'Create a first translation' do
+      create_translation('Aurélien Bénel')
+      expect(page).to have_translation("Aurélien Bénel")
 
-        fill_field('date','2015')
-        fill_field('title','La Lampe')
-        fill_select('language','fr')
-
-        save_screenshot("filled1.png")
-
-        save_screenshot("filled.png")
-      end
+      edit_translation_metadata('Aurélien Bénel',:date=>'2015',:title=>"La Lampe",:language=>'fr')
+      translation=find_translation('Aurélien Bénel')
 
       fill_block('Aurélien Bénel',0,'LA LAMPE')
       fill_block('Aurélien Bénel',1,"Nous trouvâmes la lampe à l'intérieur de ces cavités rocheuses\n"+
                                    "Aux signes sculptés qu'aucun prêtre de Thèbes ne déchiffra jamais\n"+
                                    "Et dont les hiéroglyphes effrayés de leurs cavernes\n"+
                                    "avertissaient toute créature vivante engendrée par la terre.")
-      page.save_screenshot("filled.png")
-      first("thead.header th.pleat.open[data-version='Aurélien Bénel']").click_on 'Read'
+      read_translation('Aurélien Bénel')
       expect(page).to have_content("LA LAMPE")
       expect(page).to have_content("Nous trouvâmes la lampe")
-      page.save_screenshot("saved.png")
+      expect(translation).to have_metadata('date','2015')
+      expect(translation).to have_metadata('title','La Lampe')
+      expect(translation).to have_metadata('language','fr')
     end
 
 end
