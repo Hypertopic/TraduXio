@@ -119,6 +119,10 @@ def open_work(author,title)
 end
 
 def find_translation(version)
+  find("thead.header th.pleat[data-version='#{version}']")
+end
+
+def find_open_translation(version)
   find("thead.header th.pleat.open[data-version='#{version}']")
 end
 
@@ -146,7 +150,7 @@ end
 
 def toggle_translation(version)
   debug "toggle translation #{version}"
-  find_translation(version).find("input.edit").click
+  find_open_translation(version).find("input.edit").click
 end
 
 def read_translation(version)
@@ -158,6 +162,35 @@ end
 def edit_translation(version)
   if not is_edited?(version)
     toggle_translation version
+  end
+end
+
+def is_open?(version)
+  find_translation(version)[:class].include?("open")
+end
+
+def open_translation(version)
+  if not is_open?(version)
+    save_screenshot "closed.png"
+    find_translation(version).find("span.button.show").click
+  end
+end
+
+def close_translation(version)
+  if is_open?(version)
+    find_translation(version).find("span.button.hide").click
+  end
+end
+
+def delete_translation(version)
+  if has_translation? version then
+    open_translation version
+    edit_translation version
+
+    debug "delete #{version}"
+    find_open_translation(version).find("span.delete").click
+    debug "confirm deletion if #{version}"
+    accept_alert
   end
 end
 

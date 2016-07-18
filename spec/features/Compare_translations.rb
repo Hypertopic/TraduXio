@@ -2,18 +2,20 @@
 
 feature 'Compare translations' do
 
-	scenario 'Compare translations' do
-		visit '/works'
-		click_on 'The lamp (Fungi from Yuggoth, 6)'
-		page.should have_content 'We found the lamp inside those hollow cliffs'
-		page.should have_content 'Nous trouvâmes la lampe à l\'intérieur de ces cavités rocheuses'
-		page.should_not have_content 'Nous trouvâmes la lampe à l’intérieur de ces falaises creuses'
-		click_on 'François Truchaud'
-		page.should have_content 'We found the lamp inside those hollow cliffs'
-		page.should have_content 'Nous trouvâmes la lampe à l\'intérieur de ces cavités rocheuses'
-		page.should have_content 'Nous trouvâmes la lampe à l’intérieur de ces falaises creuses'
-		click_on 'Aurélien Bénel'
-		page.should_not have_content 'Nous trouvâmes la lampe à l\'intérieur de ces cavités rocheuses'
-	end
-	
+  background 'Open work' do
+    open_work "Howard Phillips Lovecraft", "Fungi from Yuggoth"
+  end
+
+  scenario 'Compare translations' do
+    expect(page).to have_content 'We found the lamp inside those hollow cliffs'
+    expect(page).to have_content 'Nous trouvâmes la lampe à l\'intérieur de ces cavités rocheuses'
+    expect(page).to_not have_content 'Nous trouvâmes la lampe à l’intérieur de ces falaises creuses'
+    open_translation 'François Truchaud'
+    expect(page).to have_content 'We found the lamp inside those hollow cliffs'
+    expect(page).to have_content 'Nous trouvâmes la lampe à l\'intérieur de ces cavités rocheuses'
+    expect(page).to have_content 'Nous trouvâmes la lampe à l’intérieur de ces falaises creuses'
+    close_translation 'Aurélien Bénel'
+    expect(page).not_to have_content 'Nous trouvâmes la lampe à l\'intérieur de ces cavités rocheuses'
+  end
+
 end
