@@ -6,6 +6,10 @@ Capybara.default_driver = :poltergeist
 Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/'
 Capybara.default_max_wait_time = 5
 
+def do_debug?
+  false
+end
+
 RSpec.configure do |config|
   config.before(:each) do
     prefer_language 'en'
@@ -39,15 +43,19 @@ def finished_all_ajax_requests?
 end
 
 def fill_field(name,value)
-  input=find("[name='"+name+"']")
+  debug "fill field #{name} with #{value}"
+  input=find("[name='#{name}']")
   input.set(value)
+  debug "blur"
   input.trigger(:blur)
+  debug "wait_for_ajax"
   wait_for_ajax
+  debug "done"
 end
 
 def fill_select(name,option)
-  input=find("select[name='"+name+"']")
-  option=input.find("option[value='"+option+"']")
+  input=find("select[name='#{name}']")
+  option=input.find("option[value='#{option}']")
   select(option.text, :from => name)
   input.trigger(:blur)
   wait_for_ajax
@@ -55,6 +63,7 @@ end
 
 def fill_block(version,row,text)
   within block(version,row) do
+    debug "filling block #{row} of #{version} with #{text}"
     ta=find('textarea')
     ta.set(text)
     ta.trigger(:blur)
@@ -67,53 +76,102 @@ def wait_for_element (selector)
     loop until page.has_selector?(selector)
   end
 rescue Timeout::Error
-  raise "didn't find "+selector+" in page after "+Capybara.default_max_wait_time.to_s
+  raise "didn't find #{selector} in page after "+Capybara.default_max_wait_time.to_s
 end
 
 def block(version, row)
   table=page.find("table#hexapla")
-  row=table.find("tr[data-line='"+row.to_s+"']")
-  row.find("td.edit[data-version='"+version+"']")
+  row=table.find("tr[data-line='#{row.to_s}']")
+  row.find("td.edit[data-version='#{version}']")
 end
 
 def create_translation(version)
+  debug "click on add version button"
   page.find("a#addVersion").trigger(:click)
+  debug "fill the creator #{version}"
   fill_in 'work-creator', :with => version
-  until page.has_selector?("th.pleat.open[data-version='"+version+"']") do
+  debug "wait #{version} to appear"
+  until has_translation?(version) do
     begin
+      debug "click on create button"
       page.find('input[name=do-create]').click
-      wait_for_element("th.pleat.open[data-version='"+version+"']")
+      debug "wait"
+      wait_for_element("th.pleat.open[data-version='#{version}']")
     rescue RuntimeError
+      debug "timeout"
     end
   end
+  debug "created #{version}"
+end
+
+def open_work(author,title)
+  debug "visit"
+  visit '/works/'
+  debug "check author #{author}"
+  expect(page).to have_css('li.author.closed',:text=>author)
+  debug "open author #{author}"
+  page.find('li.author.closed',:text=>author).trigger(:click)
+  debug "check work #{title}"
+  expect(page).to have_css('a',:text=>title)
+  debug "click work #{title}"
+  click_on 'Fungi from Yuggoth'
+  debug "opened"
 end
 
 def find_translation(version)
-  first("thead.header th.pleat.open[data-version='"+version+"']")
+  find("thead.header th.pleat.open[data-version='#{version}']")
+end
+
+def has_translation?(version)
+  has_selector?("th.pleat[data-version='#{version}']")
 end
 
 def have_translation(version)
-  have_selector("th.pleat.open[data-version='"+version+"']")
+  have_selector("th.pleat[data-version='#{version}']")
 end
 
 def have_metadata(metadata,value)
   if metadata != "language"
-    have_css("div.metadata."+metadata,:text=>value)
+    have_css("div.metadata.#{metadata}",:text=>value)
   else
-    have_css("div.metadata."+metadata+"[title='"+value+"']")
+    have_css("div.metadata.#{metadata}[title='#{value}']")
   end
 end
 
+def is_edited?(version)
+  expect(page).to have_translation(version)
+  debug "check translation #{version} edited"
+  find_translation(version)[:class].include?("edit")
+end
+
+def toggle_translation(version)
+  debug "toggle translation #{version}"
+  find_translation(version).find("input.edit").click
+end
+
 def read_translation(version)
-  find_translation(version).click_on 'Read'
+  if is_edited?(version)
+    toggle_translation version
+  end
+end
+
+def edit_translation(version)
+  if not is_edited?(version)
+    toggle_translation version
+  end
 end
 
 def edit_translation_metadata(version,options)
   raise "Must pas a hash" if not options.is_a?(Hash)
-  within ("thead.header th.pleat.open[data-version='"+version+"']") do
+  edit_translation version
+  within ("thead.header th.pleat.open[data-version='#{version}']") do
     fill_field('date',options.delete(:date)) if options.has_key?(:date)
     fill_field('title',options.delete(:title)) if options.has_key?(:title)
     fill_field('creator',options.delete(:creator)) if options.has_key?(:creator)
     fill_select('language',options.delete(:language)) if options.has_key?(:language)
   end
+end
+
+def debug(step)
+  print Time.new.strftime("%H:%M:%S")+" #{step}\n" if do_debug?
 end
