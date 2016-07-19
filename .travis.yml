@@ -7,7 +7,7 @@ language:
 - python
 
 rvm:
-- 2.2
+- 2.2.2
 
 cache:
 - bundler
