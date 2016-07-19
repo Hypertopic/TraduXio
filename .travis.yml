@@ -20,7 +20,7 @@ install:
 - cp spec/samples/the_lamp.json couchdb/the_lamp.json
 - couchapp push couchdb http://localhost:5984/traduxio
 #Load data
-- bash -c 'for i in spec/samples/*.json; do curl -XPOST -H "Content-Type: application/json" http://localhost:5984/traduxio -d@$i; done'
+- spec/load_data.sh http://localhost:5984/traduxio
 
 script:
 - rspec spec/features/Search_concordance.rb
