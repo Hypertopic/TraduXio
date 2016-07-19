@@ -1,25 +1,26 @@
 $.fn.concordancify = function() {
-  
+
   default_language=$("body").data("language") || currentLanguage;
   default_query=$("body").data("query") || "";
-  
+
   var search = $("#nav").data("i_search");
 
   this.append('<input id="query" type="search" results="5" name="query" placeholder="' + search + '" value="'
     +  default_query + '" />');
+  this.append('<input id="submit" type="submit" value="Search"/>');
   this.append('<select id="language" name="language"/>');
-  
-  var form=this; 
+
+  var form=this;
 
   getLanguageNames(function() {
     $.getJSON(getPrefix()+"/languages", function(result) {
       $.each(result.rows, function(i, o) {
-	$("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
+        $("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
       $("#language").val($("body").data("lang"));
-    }); 
+    });
   });
-  
+
   var submitForm=function(event) { //TODO jQuery 2
     event.preventDefault();
     var query = form.find('#query').val().toLowerCase();
@@ -106,4 +107,3 @@ $(document).ready(function() {
   fixLanguages();
   $("form.concordance").concordancify();
 });
-

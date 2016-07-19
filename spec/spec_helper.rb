@@ -25,11 +25,11 @@ def row(row)
 end
 
 def prefer_language(language)
-	page.driver.add_headers("Accept-Language"=>language)
+  page.driver.add_headers("Accept-Language"=>language)
 end
 
-def should_have_in_bold(text)
-	expect(page).to have_css('b', :text => text)
+def have_in_bold(text)
+  have_css('b', :text => text)
 end
 
 def wait_for_ajax
@@ -42,10 +42,15 @@ def finished_all_ajax_requests?
   page.evaluate_script('jQuery.active').zero?
 end
 
-def fill_field(name,value)
-  debug "fill field #{name} with #{value}"
-  input=find("[name='#{name}']")
+def fill_input selector,value
+  debug "fill field #{selector} with #{value}"
+  input=find("input#{selector}")
   input.set(value)
+  input
+end
+
+def fill_field(name,value)
+  input=fill_input "[name=#{name}]",value
   debug "blur"
   input.trigger(:blur)
   debug "wait_for_ajax"
