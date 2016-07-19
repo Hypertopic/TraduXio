@@ -1,0 +1,31 @@
+sudo: false
+
+services: couchdb
+
+language:
+- ruby
+- python
+
+rvm:
+- 2.2
+
+cache:
+- bundler
+- pip
+
+install:
+- pip install --user couchapp
+- gem install poltergeist rspec
+# Install traduxio
+- cp spec/samples/the_lamp.json couchdb/the_lamp.json
+- couchapp push couchdb http://localhost:5984/traduxio
+#Load data
+- bash -c 'for i in spec/samples/*.json; do curl -XPOST -H "Content-Type: application/json" http://localhost:5984/traduxio -d@$i; done'
+
+script:
+- rspec spec/features/Search_concordance.rb
+- rspec spec/features/work_add.rb
+- rspec spec/features/Create_translation.rb
+- rspec spec/features/Compare_translations.rb
+- rspec spec/features/listworks.rb
+- rspec spec/features/Internationalization.rb
