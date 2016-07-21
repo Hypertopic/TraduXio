@@ -154,7 +154,6 @@ end
 
 def open_translation(version)
   if not is_open?(version)
-    save_screenshot "closed.png"
     find_translation(version).find("span.button.show").click
   end
 end
