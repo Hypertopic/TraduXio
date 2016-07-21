@@ -6,13 +6,6 @@ feature 'Create a translation' do
       open_work "Howard Phillips Lovecraft", "Fungi from Yuggoth"
     end
 
-    scenario 'Delete translation' do
-      delete_translation "Aurélien Bénel"
-      expect(page).not_to have_translation "Aurélien Bénel"
-      delete_translation "François Truchaud"
-      expect(page).not_to have_translation "François Truchaud"
-    end
-
     scenario 'Create a first translation' do
       create_translation('Aurélien Bénel')
       expect(page).to have_translation("Aurélien Bénel")
@@ -64,6 +57,13 @@ feature 'Create a translation' do
       expect(page).to have_content("LA LAMPE")
       expect(page).to have_content("Aux signes sculptés")
       debug "checked content"
+    end
+
+    scenario 'Delete translation' do
+      delete_translation "Aurélien Bénel"
+      expect(page).not_to have_translation "Aurélien Bénel"
+      delete_translation "François Truchaud"
+      expect(page).not_to have_translation "François Truchaud"
     end
 
 end

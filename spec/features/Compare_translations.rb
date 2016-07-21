@@ -3,7 +3,7 @@
 feature 'Compare translations' do
 
   background 'Open work' do
-    open_work "Howard Phillips Lovecraft", "Fungi from Yuggoth"
+    open_work "Howard Phillips Lovecraft", "The lamp (Fungi from Yuggoth, 6)"
   end
 
   scenario 'Compare translations' do

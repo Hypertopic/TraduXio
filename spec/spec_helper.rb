@@ -158,15 +158,13 @@ def close_translation(version)
 end
 
 def delete_translation(version)
-  if has_translation? version then
-    open_translation version
-    edit_translation version
+  open_translation version
+  edit_translation version
 
-    debug "delete #{version}"
-    find_open_translation(version).find("span.delete").click
-    debug "confirm deletion if #{version}"
-    accept_alert
-  end
+  debug "delete #{version}"
+  find_open_translation(version).find("span.delete").click
+  debug "confirm deletion if #{version}"
+  accept_alert
 end
 
 def edit_translation_metadata(version,options)
