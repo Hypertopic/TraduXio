@@ -23,9 +23,9 @@ install:
 - spec/load_data.sh http://localhost:5984/traduxio
 
 script:
-- rspec spec/features/Search_concordance.rb
-- rspec spec/features/work_add.rb
-- rspec spec/features/Create_translation.rb
-- rspec spec/features/Compare_translations.rb
-- rspec spec/features/listworks.rb
-- rspec spec/features/Internationalization.rb
+- "rspec  spec/features/Search_concordance.rb
+          spec/features/work_add.rb
+          spec/features/Create_translation.rb
+          spec/features/Compare_translations.rb
+          spec/features/listworks.rb
+          spec/features/Internationalization.rb"

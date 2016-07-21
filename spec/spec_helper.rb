@@ -190,10 +190,13 @@ def create_translation(version)
   page.find("a#addVersion").trigger(:click)
   debug "fill the creator #{version}"
   fill_in 'work-creator', :with => version
-  debug "click on create button"
-  #why do we need to click twice ????
-  page.find('input[name=do-create]').click
-  page.find('input[name=do-create]').click
+  begin
+    debug "click on create button"
+    #why do we need to click twice ????
+    page.find('input[name=do-create]').click
+    page.find('input[name=do-create]').click
+    debug "wait #{version} to appear"
+  end until has_translation?(version)
   debug "created #{version}"
 end
 
