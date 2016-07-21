@@ -97,8 +97,16 @@ def find_translation(version)
   find("thead.header th.pleat[data-version='#{version}']")
 end
 
+def find_translation_footer(version)
+  find("thead.footer th.pleat[data-version='#{version}']")
+end
+
 def find_open_translation(version)
   find("thead.header th.pleat.open[data-version='#{version}']")
+end
+
+def find_open_translation_footer(version)
+  find("thead.footer th.pleat.open[data-version='#{version}']")
 end
 
 def has_translation?(version)
@@ -165,6 +173,10 @@ def delete_translation(version)
   find_open_translation(version).find("span.delete").click
   debug "confirm deletion if #{version}"
   accept_alert
+end
+
+def change_license(version)
+  find_open_translation_footer(version).find("div.button.edit-license").click
 end
 
 def edit_translation_metadata(version,options)

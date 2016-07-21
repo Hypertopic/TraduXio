@@ -28,4 +28,5 @@ script:
           spec/features/Create_translation.rb
           spec/features/Compare_translations.rb
           spec/features/listworks.rb
-          spec/features/Internationalization.rb"
+          spec/features/Internationalization.rb
+          spec/features/Set_license.rb"
