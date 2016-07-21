@@ -51,19 +51,16 @@ end
 
 def fill_field(name,value)
   input=fill_input "[name=#{name}]",value
-  debug "blur"
-  input.trigger(:blur)
-  debug "wait_for_ajax"
   wait_for_ajax
-  debug "done"
+  input
 end
 
 def fill_select(name,option)
   input=find("select[name='#{name}']")
   option=input.find("option[value='#{option}']")
   select(option.text, :from => name)
-  input.trigger(:blur)
   wait_for_ajax
+  input
 end
 
 def fill_block(version,row,text)
@@ -76,37 +73,10 @@ def fill_block(version,row,text)
   end
 end
 
-def wait_for_element (selector)
-  Timeout.timeout(Capybara.default_max_wait_time) do
-    loop until page.has_selector?(selector)
-  end
-rescue Timeout::Error
-  raise "didn't find #{selector} in page after "+Capybara.default_max_wait_time.to_s
-end
-
 def block(version, row)
   table=page.find("table#hexapla")
   row=table.find("tr[data-line='#{row.to_s}']")
   row.find("td.edit[data-version='#{version}']")
-end
-
-def create_translation(version)
-  debug "click on add version button"
-  page.find("a#addVersion").trigger(:click)
-  debug "fill the creator #{version}"
-  fill_in 'work-creator', :with => version
-  debug "wait #{version} to appear"
-  until has_translation?(version) do
-    begin
-      debug "click on create button"
-      page.find('input[name=do-create]').click
-      debug "wait"
-      wait_for_element("th.pleat.open[data-version='#{version}']")
-    rescue RuntimeError
-      debug "timeout"
-    end
-  end
-  debug "created #{version}"
 end
 
 def open_work(author,title)
@@ -119,7 +89,7 @@ def open_work(author,title)
   debug "check work #{title}"
   expect(page).to have_css('a',:text=>title)
   debug "click work #{title}"
-  click_on 'Fungi from Yuggoth'
+  click_on title
   debug "opened"
 end
 
@@ -202,12 +172,29 @@ end
 def edit_translation_metadata(version,options)
   raise "Must pas a hash" if not options.is_a?(Hash)
   edit_translation version
+  edited=false
   within ("thead.header th.pleat.open[data-version='#{version}']") do
-    fill_field('date',options.delete(:date)) if options.has_key?(:date)
-    fill_field('title',options.delete(:title)) if options.has_key?(:title)
-    fill_field('creator',options.delete(:creator)) if options.has_key?(:creator)
-    fill_select('language',options.delete(:language)) if options.has_key?(:language)
+    edited=fill_field('date',options.delete(:date)) if options.has_key?(:date)
+    edited=fill_field('title',options.delete(:title)) if options.has_key?(:title)
+    edited=fill_field('creator',options.delete(:creator)) if options.has_key?(:creator)
+    edited=fill_select('language',options.delete(:language)) if options.has_key?(:language)
   end
+  if edited then
+    debug "blur"
+    edited.trigger(:blur)
+  end
+end
+
+def create_translation(version)
+  debug "click on add version button"
+  page.find("a#addVersion").trigger(:click)
+  debug "fill the creator #{version}"
+  fill_in 'work-creator', :with => version
+  debug "click on create button"
+  #why do we need to click twice ????
+  page.find('input[name=do-create]').click
+  page.find('input[name=do-create]').click
+  debug "created #{version}"
 end
 
 def debug(step)
