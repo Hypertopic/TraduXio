@@ -10,10 +10,9 @@ rvm:
 - 2.2.2
 
 cache:
-  bundler: true
-  pip: true
   directories:
-    - ~/
+    - ~/.rvm/gems
+    - ~/.local/lib/python2.7
 
 install:
 - pip install --user couchapp
@@ -33,4 +32,4 @@ script:
           spec/features/Internationalization.rb
           spec/features/Set_license.rb"
 #check what is installed to decide what to cache
-- du -h ~
+- "du -h ~ | sort -h"
