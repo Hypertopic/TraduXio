@@ -11,6 +11,8 @@ rvm:
 
 cache:
   directories:
+    #We cache gems for poltergeist and .local for couchapp,
+    #the longest tools to install
     - ~/.rvm/gems
     - ~/.local
 
