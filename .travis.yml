@@ -10,6 +10,8 @@ rvm:
 - 2.2.2
 
 cache:
+  bundler: true
+  pip: true
   directories:
     - ~/.rvm/gems
     - ~/.local
