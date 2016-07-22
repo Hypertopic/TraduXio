@@ -20,7 +20,6 @@ install:
 - pip install --user couchapp
 - gem install poltergeist rspec
 # Install traduxio
-- cp spec/samples/the_lamp.json couchdb/the_lamp.json
 - couchapp push couchdb http://localhost:5984/traduxio
 #Load data
 - spec/load_data.sh http://localhost:5984/traduxio
