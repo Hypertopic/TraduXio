@@ -11,7 +11,7 @@ feature 'Add a work' do
     click_on 'Add a work'
     fill_in 'Title', :with => 'Fungi from Yuggoth'
     fill_in 'Author', :with => 'Howard Phillips Lovecraft'
-    select 'English', :from => 'language'
+    fill_select 'language','en'
     fill_in 'Date, year, or text century', :with => '1930'
     check 'Original work'
     click_on 'Create'
@@ -28,10 +28,16 @@ feature 'Add a work' do
   scenario 'without an original version (and a known author)' do
     click_on 'Add a work'
     fill_in 'Title', :with => 'Genesis'
-    select 'Hebrew', :from => 'language'
+    fill_select 'language','he'
     click_on 'Create'
     expect(page).to have_content 'Genesis – Anonymus'
     expect(page).to have_content 'Trans.'
+  end
+
+  scenario 'Delete full work' do
+    open_work "Anonymus","Genesis"
+    delete_full_work
+    expect(page).not_to have_content 'Genesis – Anonymus'
   end
 
 end

@@ -164,6 +164,12 @@ def close_translation(version)
   end
 end
 
+def delete_full_work
+  click_on "removeDoc"
+  click_on "remove-confirm"
+  accept_alert
+end
+
 def delete_translation(version)
   open_translation version
   edit_translation version

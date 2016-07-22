@@ -3,7 +3,7 @@
 feature 'Search for a concordance' do
 
   def submitForm
-    click_on "Search"
+    click_on "submit"
   end
 
   scenario 'Search a valid sequence of words' do
