@@ -12,7 +12,7 @@ rvm:
 cache:
   directories:
     - ~/.rvm/gems
-    - ~/.local/lib/python2.7
+    - ~/.local
 
 install:
 - pip install --user couchapp
@@ -31,5 +31,3 @@ script:
           spec/features/listworks.rb
           spec/features/Internationalization.rb
           spec/features/Set_license.rb"
-#check what is installed to decide what to cache
-- "du -h ~ | sort -h"
