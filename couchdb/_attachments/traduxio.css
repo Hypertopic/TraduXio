@@ -1,6 +1,10 @@
-* {margin:0px; padding:0px; 
-   -moz-box-sizing:border-box; 
-   box-sizing:border-box; }
+* {
+  margin:0px;
+  padding:0px;
+  -moz-box-sizing:border-box;
+       box-sizing:border-box;
+}
+
 table, td, tr, th {
   /* firefox doesn't box-sizes table elements,
   so we switch back to default on all browsers
@@ -9,7 +13,12 @@ table, td, tr, th {
   -o-box-sizing:initial;
   -webkit-box-sizing:initial;
 }
-a {color:inherit; text-decoration:none; }
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
 .align-left { float:left; }
 .align-right { float:right; }
 
@@ -18,9 +27,11 @@ a {color:inherit; text-decoration:none; }
   content: "";
   display: table;
 }
+
 .group:after {
   clear: both;
 }
+
 .group {
   zoom: 1; /* IE6&7 */
 }
@@ -79,12 +90,6 @@ body,html,input,textarea {
   padding:0px;
   padding-top: 3px;
 }
-
-/*textarea {
-  width:100%;
-  box-sizing:border-box;
-  border:none;
-}*/
 
 #header li,
 #header div {
@@ -155,7 +160,7 @@ li.closed > ul {
 }
 
 /* ====
-I hate when you have to hack CSS to render natural stuff...
+CSS hack to render natural stuff...
 http://kizu.ru/en/fun/rotated-text/
 */
 .rotated-text__wrapper {
@@ -166,7 +171,6 @@ http://kizu.ru/en/fun/rotated-text/
 .rotated-text {
    display: inline-block;
    white-space: nowrap;
-
         transform: translate(0,100%) rotate(-90deg);
         transform-origin: 0 0;
      -o-transform: translate(0,100%) rotate(-90deg);

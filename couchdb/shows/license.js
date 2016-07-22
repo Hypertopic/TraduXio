@@ -13,7 +13,7 @@ function(work, req) {
   data.language=getPreferredLanguage();
   data.i18n=localized(data.language);
 
-  if (version) { 
+  if (version) {
     if (version=="original") {
       data.text=work;
       data.text.creator=work.creator?work.creator:"Anonymous";
@@ -22,7 +22,7 @@ function(work, req) {
       data.text.creator=data.i18n.i_trad+" "+version;
     }
   }
-  if (!data.text) { 
+  if (!data.text) {
     log("No text");
     start({"code":404});
     return "Not Found";

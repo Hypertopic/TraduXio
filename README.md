@@ -43,4 +43,3 @@ Tests running
 * In the application folder:
 
         rspec spec/features/*
-

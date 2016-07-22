@@ -33,7 +33,7 @@ function(o, req) {
       line.space=lineNum-line.lineNum;
       lines[line.lineNum]=line;
     }
-    
+
   }
 
   var data = {
@@ -77,14 +77,14 @@ function(o, req) {
     data.headers.push({
       id:t,
       title: translation.title,
-	  work_creator: translation.creator ? translation.creator : "",
+      work_creator: translation.creator ? translation.creator : "",
       creator: t,
       language: translation.language,
       date: translation.date,
       creativeCommons: translation.creativeCommons,
-	  trad:data.i18n.i_trad,
-	  edited: (edited_versions.indexOf(t)!== -1),
-	  opened: (opened_versions.indexOf(t)!== -1)
+      trad:data.i18n.i_trad,
+      edited: (edited_versions.indexOf(t)!== -1),
+      opened: (opened_versions.indexOf(t)!== -1)
     });
   }
   data.rows=hexapla.getRows();
@@ -98,6 +98,6 @@ function(o, req) {
   data.i_hide=data.i18n.i_hide;
   data.i_edit_license=data.i18n.i_edit_license;
   data.i_all_rights_reserved=data.i18n.i_all_rights_reserved;
- 
+
   return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }

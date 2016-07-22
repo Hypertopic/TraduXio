@@ -1,4 +1,4 @@
-// !json i18n 
+// !json i18n
 
 function getPreferredLanguage() {
   var available = "en";
@@ -14,8 +14,7 @@ function getPreferredLanguage() {
   }
   return available;
 }
-    
+
 function localized(language) {
   return i18n[language || getPreferredLanguage()];
 }
-

@@ -1,14 +1,14 @@
 table#hexapla {
-    border-collapse:separate;
-    border-spacing:0;
-    empty-cells:show;
-    height:80%;
-    margin: 0 0.5em;
+  border-collapse:separate;
+  border-spacing:0;
+  empty-cells:show;
+  height:80%;
+  margin: 0 0.5em;
 }
 
 table#hexapla.full {
-    margin: 0 auto;
-    width:99%;
+  margin: 0 auto;
+  width:99%;
 }
 
 #hexapla thead:first-child tr {
@@ -16,355 +16,355 @@ table#hexapla.full {
 }
 
 body {
-    background-color: black;
+  background-color: black;
 }
 
 #header #language {
-    display: none;
+  display: none;
 }
 
 #hexapla th {
-    background-color: white;
-    border: 1px solid;
+  background-color: white;
+  border: 1px solid;
 }
 
 #hexapla .header th {
-    border-radius:15px 15px 0px 0px;
-    border-bottom:0px;
-    position:relative;
-    color: #C11C1C;
-    border-color: darkgrey;
+  border-radius:15px 15px 0px 0px;
+  border-bottom:0px;
+  position:relative;
+  color: #C11C1C;
+  border-color: darkgrey;
 }
 
 #hexapla .pleat.close {
-    text-align:center;
+  text-align:center;
 }
 
 #hexapla .footer th {
-    border-radius:0px 0px 15px 15px;
-    border-top:0px;
-    padding:5px;
-    border-color: darkgrey;
+  border-radius:0px 0px 15px 15px;
+  border-top:0px;
+  padding:5px;
+  border-color: darkgrey;
 }
 
 #hexapla td {
-    background-color: white;
-    border-left:1px;
-    border-right:1px;
-    border-top:0px;
-    border-bottom:0px;
-    border-style:solid;
-    vertical-align:top;
-    border-color: darkgrey;
+  background-color: white;
+  border-left:1px;
+  border-right:1px;
+  border-top:0px;
+  border-bottom:0px;
+  border-style:solid;
+  vertical-align:top;
+  border-color: darkgrey;
 }
 
 #hexapla th.pleat.open .relative-wrapper,
 #hexapla td.pleat.open {
-    padding:0 35px;
+  padding:0 35px;
 }
 
 div.metadata {
-    padding:0.5em 2em;
+  padding:0.5em 2em;
 }
 
 .creator {
-    display: inline-block;
+  display: inline-block;
 }
 
 .editedMeta {
-    color: #C11C1C;
-    font-weight:bold;
-    text-align:center;
-    border-radius:0.5em;
-    padding: 0;
-    margin-top: 10px;
-    width: 100%;
+  color: #C11C1C;
+  font-weight:bold;
+  text-align:center;
+  border-radius:0.5em;
+  padding: 0;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .date.editedMeta {
-    width: 50%;
+  width: 50%;
 }
 
 .creator.editedMeta {
-    width: 80%;
+  width: 80%;
 }
 
 .meta {
-    max-width:400px;
-    margin:0 auto;
+  max-width:400px;
+  margin:0 auto;
 }
 
 .workButton {
-    float: right;
-    background-color: dimGray;
-    border-radius: 30px;
-    padding: 2px 5px;
-    margin: 0px 2px;
+  float: right;
+  background-color: dimGray;
+  border-radius: 30px;
+  padding: 2px 5px;
+  margin: 0px 2px;
 }
 
 #work .top form input {
-    display: inline-block;
-    margin: 5px;
+  display: inline-block;
+  margin: 5px;
 }
 
 #work .top form textarea {
-    width: 250px;
+  width: 250px;
 }
 
 #work .top button {
-    padding-left: 5px;
-    padding-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #work .top .removeDoc, #work .top .addVersion {
-    margin-top: -3px;
+  margin-top: -3px;
 }
 
 #work .top form, #removePanel {
-    text-align: right;
-    display: none;
+  text-align: right;
+  display: none;
 }
 
 #removePanel button {
-    padding: 5px;
-    font-size: 1em;
+  padding: 5px;
+  font-size: 1em;
 }
 
 #hexapla .pleat.open .title,
 #hexapla .pleat.open .work-creator {
-    clear:both;
+  clear:both;
 }
 
 #hexapla .pleat.open .language {
-    float:left;
+  float:left;
 }
 
 #hexapla .pleat.open .date {
-    float:right;
+  float:right;
 }
 
 #hexapla .pleat.close {
-    display:none;
-    width:50px;
-    height:50px;
-    min-width:50px;
-    min-height:50px;
-    max-width:50px;
+  display:none;
+  width:50px;
+  height:50px;
+  min-width:50px;
+  min-height:50px;
+  max-width:50px;
 }
 
 #hexapla .pleat.close .rotated-text__wrapper {
-    width:50px;
+  width:50px;
 
 }
 
 #hexapla td.pleat.close {
-    padding:0px;
+  padding:0px;
 }
 
 #hexapla .pleat.close .creator,
 #hexapla .pleat.close .language {
-    font-size:20px;
-    font-weight:bold;
-    white-space:nowrap;
+  font-size:20px;
+  font-weight:bold;
+  white-space:nowrap;
 }
 
 #hexapla .pleat.close .creator {
-    padding:8px;
+  padding:8px;
 }
 
 #hexapla .pleat.close .language {
-    border:3px solid black;
-    padding:5px;
+  border:3px solid black;
+  padding:5px;
 }
 
 .group:before,
 .group:after {
-    content: "";
-    display: table;
+  content: "";
+  display: table;
 }
 .group:after {
-    clear: both;
+  clear: both;
 }
 .group {
-    zoom: 1; /* IE6&7 */
+  zoom: 1; /* IE6&7 */
 }
 
 #hexapla div.unit {
-    position:relative;
-    height: 100%;
-    -webkit-transition: background-color 1s ease-in-out; /* For Safari 3.1 to 6.0 */
-    transition: background-color 1s ease-in-out;
+  position:relative;
+  height: 100%;
+  -webkit-transition: background-color 1s ease-in-out; /* For Safari 3.1 to 6.0 */
+  transition: background-color 1s ease-in-out;
 }
 
 #hexapla div.unit.highlight {
-    background-color:#C11C1C;
+  background-color:#C11C1C;
 }
 
 #hexapla div.unit .text {
-    padding: 0.5em;   /* Same border+padding as text area. */
-    padding-bottom: 1.5em; /* A bit more than one additional line of text. */ 
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 0 2px grey;
+  padding: 0.5em;   /* Same border+padding as text area. */
+  padding-bottom: 1.5em; /* A bit more than one additional line of text. */
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 2px grey;
 }
 
-/*to have the margin behaviour but allowing 
+/*to have the margin behaviour but allowing
 .unit to have 100% height */
 #hexapla td.pleat.open .box-wrapper {
-    padding:0.5em 0px;
-    height:100%;
+  padding:0.5em 0px;
+  height:100%;
 }
 
 #hexapla div.unit.edit {
-    padding:0px;
-    border:none;
-    background:none;
-    position:relative;
+  padding:0px;
+  border:none;
+  background:none;
+  position:relative;
 }
 
 .unit.edit textarea {
-    border:1px solid gray;
-    border-radius:0.5em;
-    padding:0.5em;
-    width:100%;
-    width: 100%;
-    font-size:1em;
-    font-size:1em;
-    height:100%;
+  border:1px solid gray;
+  border-radius:0.5em;
+  padding:0.5em;
+  width:100%;
+  width: 100%;
+  font-size:1em;
+  font-size:1em;
+  height:100%;
 }
 
 textarea.autosize {
-    overflow: hidden;
-    position: absolute;
+  overflow: hidden;
+  position: absolute;
 }
 
 .unit.edit div.text {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #hexapla .unit .join,
 #hexapla .unit .split {
-    position:absolute;
-    width:32px;
-    height:32px;
-    cursor:pointer;
-    border:1px solid black;
-    z-index:99;
-    right:0px;
+  position:absolute;
+  width:32px;
+  height:32px;
+  cursor:pointer;
+  border:1px solid black;
+  z-index:99;
+  right:0px;
 }
 
 .dirty {
-    background-color:#fdd;
+  background-color:#fdd;
 }
 
 #hexapla .unit .join {
-    background-image:url(merge.png);
-    top:-23px;
+  background-image:url(merge.png);
+  top:-23px;
 }
 
 #hexapla .unit .split {
-    background-image:url(split.png);
-    bottom:-32px;
+  background-image:url(split.png);
+  bottom:-32px;
 }
 
 #hexapla .unit.tomerge, #hexapla .unit.tosplit,#hexapla .unit.highlight.included.tosplit {
-    background-color:#aaa;
+  background-color:#aaa;
 }
 
 #hexapla .unit:not(.edit).active {
-    background-color:#eee;
+  background-color:#eee;
 }
 
 #hexapla .unit.highlight {
-    background-color:#eee;
+  background-color:#eee;
 }
 
 #hexapla .unit.highlight.partial {
-    background-color:#ddd;
+  background-color:#ddd;
 }
 
 #hexapla .unit.highlight.included {
-    background-color:#efefef;
+  background-color:#efefef;
 }
 
 .button.show {
-    background-image: url(pleat-closed.png);
-    width:20px;
-    right:15px;
+  background-image: url(pleat-closed.png);
+  width:20px;
+  right:15px;
 }
 
 .license {
-    left:10px;
+  left:10px;
 }
 
 .edit .license {
-    display:none;
+  display:none;
 }
 
 .button.hide {
-    background-image: url(pleat-open.png);
-    width:32px;
-    right: 10px;
+  background-image: url(pleat-open.png);
+  width:32px;
+  right: 10px;
 }
 
 .button.delete {
-    background-image: url(delete.png);
-    width:32px;
-    left: 10px;
+  background-image: url(delete.png);
+  width:32px;
+  left: 10px;
 }
 
 .edit .button.edit-license {
-    display:inline-block;
+  display:inline-block;
 }
 
 .button.edit-license {
-    background-image: url(lock.png);
-    width:32px;
-    left: 10px;
-    display:none;
+  background-image: url(lock.png);
+  width:32px;
+  left: 10px;
+  display:none;
 }
 
 .pleat .button {
-    background-repeat:no-repeat;
-    height:32px;
-    position: absolute;
-    top: 10px;
-    cursor:pointer;
-    text-indent: 100%;
-    overflow:hidden;
-    z-index:99;
+  background-repeat:no-repeat;
+  height:32px;
+  position: absolute;
+  top: 10px;
+  cursor:pointer;
+  text-indent: 100%;
+  overflow:hidden;
+  z-index:99;
 }
 
 .footer .pleat .button {
-    top:auto;
-    bottom:10px;
+  top:auto;
+  bottom:10px;
 }
 
 #work .top {
-    background-color:#888;
-    color:#fff;
-    padding:0.5em;
-    margin: 0 0.5em 0.5em;
-    font-size: 0.75em;
-    border-radius: 0.5em;
+  background-color:#888;
+  color:#fff;
+  padding:0.5em;
+  margin: 0 0.5em 0.5em;
+  font-size: 0.75em;
+  border-radius: 0.5em;
 }
 
 #work .top  h1{
-    font-weight: normal;
-    font-size: 1.2em;
-    display: inline;
-    margin-right: 50px;
-    margin-left: 15px;
+  font-weight: normal;
+  font-size: 1.2em;
+  display: inline;
+  margin-right: 50px;
+  margin-left: 15px;
 }
 
 #work .top #work-info {
-    display:none
+  display:none
 }
 
 #nav li.works {
-    border-top: 1px darkgrey solid;
-    background-color: #888;
-    border-bottom: 6px #888 solid;
+  border-top: 1px darkgrey solid;
+  background-color: #888;
+  border-bottom: 6px #888 solid;
 }
 
 div.context-menu {

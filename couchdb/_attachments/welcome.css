@@ -1,67 +1,67 @@
 #main {
-    font-family: "Trebuchet MS";
-    font-size: 90%;
-    background: linear-gradient(to bottom, rgba(235,235,235,1) 0%, white 5%);
+  font-family: "Trebuchet MS";
+  font-size: 90%;
+  background: linear-gradient(to bottom, rgba(235,235,235,1) 0%, white 5%);
 }
 
 #main #top {
-    margin: 1%;
-    margin-top: 30px;
-    text-align: center;
+  margin: 1%;
+  margin-top: 30px;
+  text-align: center;
 }
 
 #main #top .title {
-    font-size: 400%;
-    font-weight: 600;
-    display: inline-block;
-    margin-right: 30px; 
+  font-size: 400%;
+  font-weight: 600;
+  display: inline-block;
+  margin-right: 30px;
 }
 
 #main #top .subtitle {
-    text-align: justify;
-    font-size: 125%;
-    display: inline-block;
-    width: 420px;
-    position: relative;
-    margin-left: 25px;
+  text-align: justify;
+  font-size: 125%;
+  display: inline-block;
+  width: 420px;
+  position: relative;
+  margin-left: 25px;
 }
 
 #middle {
-    text-align: center;
+  text-align: center;
 }
 
 #middle .panel {
-    vertical-align: text-top;
-    text-align: left;
-    width: 45%;
-    display: inline-block;
-    margin: 20px;
-    max-height: 400px;
-    max-width: 600px;
+  vertical-align: text-top;
+  text-align: left;
+  width: 45%;
+  display: inline-block;
+  margin: 20px;
+  max-height: 400px;
+  max-width: 600px;
 }
 
 #middle .panel p {
-    text-align: justify;
+  text-align: justify;
 }
 
 #middle .panel img {
-    width: 128px;
-    height: 128px;
-    float: left;
+  width: 128px;
+  height: 128px;
+  float: left;
 }
 
 #middle .start {
-    font-size: 120%;
-    border: 3px black solid;
-    padding: 0 6px;
-    position: relative;
-    box-shadow: 3px 3px 0 black;
-    bottom: -30px;
-    text-decoration: none;
-    color: black;
+  font-size: 120%;
+  border: 3px black solid;
+  padding: 0 6px;
+  position: relative;
+  box-shadow: 3px 3px 0 black;
+  bottom: -30px;
+  text-decoration: none;
+  color: black;
 }
 
 #middle .start:hover {
-    box-shadow: 5px 5px 10px black;
-    font-size: 130%;
+  box-shadow: 5px 5px 10px black;
+  font-size: 130%;
 }

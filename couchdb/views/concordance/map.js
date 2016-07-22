@@ -17,30 +17,30 @@ function(o) {
 
     if (nb_translations) {
       if (o.language) for (var i in o.text) {
-	var text = o.text[i];
-	if (text && text.length<1024) {
-	  var match;
-	  while ((match = WORD_MATCHER.exec(text))) {
-	    var begin = match.index;
-	    emit([o.language, format(text, begin)], {unit: i, char: begin});
-	  }
-	}
+        var text = o.text[i];
+        if (text && text.length<1024) {
+          var match;
+          while ((match = WORD_MATCHER.exec(text))) {
+            var begin = match.index;
+            emit([o.language, format(text, begin)], {unit: i, char: begin});
+          }
+        }
       }
       for (var t in o.translations) {
-	var translation = o.translations[t];
-	if (translation.language) for (var i in translation.text) {
-	  var text = translation.text[i];
-	  if (text && text.length<1024) {
-	    var match;
-	    while ((match = WORD_MATCHER.exec(text))) {
-	      var begin = match.index;
-	      emit(
-		[translation.language, format(text, begin)], 
-		{unit: i, char: begin, translation: t}
-	      );
-	    }
-	  }
-	}
+        var translation = o.translations[t];
+        if (translation.language) for (var i in translation.text) {
+          var text = translation.text[i];
+          if (text && text.length<1024) {
+            var match;
+            while ((match = WORD_MATCHER.exec(text))) {
+              var begin = match.index;
+              emit(
+                [translation.language, format(text, begin)],
+                {unit: i, char: begin, translation: t}
+              );
+            }
+          }
+        }
       }
     }
   }

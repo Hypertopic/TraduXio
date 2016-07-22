@@ -17,7 +17,7 @@ function(old, req) {
             for(i=this.data.text.length;i<line;i++) {
                 this.data.text.push("");
             }
-        } 
+        }
         this.data.text[line] = content;
       } else {
         this.data.translations[version].text[line] = content;

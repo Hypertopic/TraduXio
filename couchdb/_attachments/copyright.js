@@ -6,7 +6,7 @@
     url: form.data("url"),
     dataType: "json",
     data: {
-      captcha: $("#recaptcha_response_field").val(), 
+      captcha: $("#recaptcha_response_field").val(),
       challenge: $("#recaptcha_challenge_field").val(),
       link: $("#link").find("input").val(),
       "wrong-ref": form.find("input[name='wrongref']").is(":checked"),
@@ -43,4 +43,3 @@ $(document).ready(function() {
   $("#header").find("form.concordance").remove();
   $("#middle").on("submit", "form", submit);
 });
-

@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $("#language").remove().appendTo("#filters");
+  $("#language").remove().appendTo("#filters");
 });
