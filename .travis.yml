@@ -10,8 +10,10 @@ rvm:
 - 2.2.2
 
 cache:
-- bundler
-- pip
+  bundler: true
+  pip: true
+  directories:
+    - ~/
 
 install:
 - pip install --user couchapp
@@ -30,3 +32,5 @@ script:
           spec/features/listworks.rb
           spec/features/Internationalization.rb
           spec/features/Set_license.rb"
+#check what is installed to decide what to cache
+- du -h ~
