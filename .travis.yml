@@ -20,11 +20,4 @@ install:
   - gem install poltergeist rspec
   - spec/init.sh
 
-script:
-  - "rspec  spec/features/Search_concordance.rb
-            spec/features/work_add.rb
-            spec/features/Create_translation.rb
-            spec/features/Compare_translations.rb
-            spec/features/listworks.rb
-            spec/features/Internationalization.rb
-            spec/features/Set_license.rb"
+script: rspec spec/features/*

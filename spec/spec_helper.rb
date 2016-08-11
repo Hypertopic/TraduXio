@@ -16,6 +16,25 @@ RSpec.configure do |config|
   end
 end
 
+def random_word(max_length)
+  s = ('a'..'z').to_a.shuffle[0,1+rand*(max_length-1)].join
+end
+
+def random_author
+  random_word(10)+" "+random_word(10)
+end
+
+def random_title
+  title=random_word(15)
+  n=0
+  words=rand*5
+  while n<words
+    title+=" "+random_word(15)
+    n+=1
+  end
+  title
+end
+
 def sample(name)
   IO.read("spec/samples/#{name}.txt")
 end
@@ -154,6 +173,7 @@ end
 
 def open_translation(version)
   if not is_open?(version)
+    debug "open translation #{version}"
     find_translation(version).find("span.button.show").click
   end
 end
@@ -185,7 +205,7 @@ def change_license(version)
 end
 
 def edit_translation_metadata(version,options)
-  raise "Must pas a hash" if not options.is_a?(Hash)
+  raise "Must pass a hash" if not options.is_a?(Hash)
   edit_translation version
   edited=false
   within ("thead.header th.pleat.open[data-version='#{version}']") do

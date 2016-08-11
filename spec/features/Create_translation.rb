@@ -3,56 +3,64 @@
 feature 'Create a translation' do
 
     background 'Open work' do
-      open_work "Howard Phillips Lovecraft", "Fungi from Yuggoth"
+      open_work "Howard Phillips Lovecraft", "The lamp (Fungi from Yuggoth, 6)"
     end
 
+    trans1_author=random_author
+    trans1_title=random_title
+
     scenario 'Create a first translation' do
-      create_translation('Aurélien Bénel')
-      expect(page).to have_translation("Aurélien Bénel")
+      create_translation(trans1_author)
+      expect(page).to have_translation(trans1_author)
     end
 
     scenario 'Edit metadata' do
-      edit_translation_metadata('Aurélien Bénel',:date=>'2008',:title=>"La Lampe",:language=>'fr')
-      read_translation('Aurélien Bénel')
+      open_translation trans1_author
+      edit_translation_metadata(trans1_author,:date=>'2008',:title=>trans1_title,:language=>'fr')
+      read_translation trans1_author
       debug "check metadata"
-      translation=find_open_translation('Aurélien Bénel')
+      translation=find_open_translation trans1_author
       expect(translation).to have_metadata('date','2008')
-      expect(translation).to have_metadata('title','La Lampe')
+      expect(translation).to have_metadata('title',trans1_title)
       expect(translation).to have_metadata('language','fr')
       debug "checked metadata"
     end
 
     scenario 'Edit text' do
-      edit_translation('Aurélien Bénel')
-      fill_block('Aurélien Bénel',0,'LA LAMPE')
-      fill_block('Aurélien Bénel',1,"Nous trouvâmes la lampe à l'intérieur de ces cavités rocheuses\n"+
+      open_translation trans1_author
+      edit_translation trans1_author
+      fill_block(trans1_author,0,'LA LAMPE')
+      fill_block(trans1_author,1,"Nous trouvâmes la lampe à l'intérieur de ces cavités rocheuses\n"+
                                    "Aux signes sculptés qu'aucun prêtre de Thèbes ne déchiffra jamais\n"+
                                    "Et dont les hiéroglyphes effrayés de leurs cavernes\n"+
                                    "avertissaient toute créature vivante engendrée par la terre.")
-      read_translation('Aurélien Bénel')
+      read_translation(trans1_author)
       debug "checking content"
       expect(page).to have_content("LA LAMPE")
       expect(page).to have_content("Nous trouvâmes la lampe")
       debug "checked content"
     end
 
+    trans2_author=random_author
+    trans2_title=random_title
+
     scenario 'Create a second translation' do
-      create_translation('François Truchaud')
-      expect(page).to have_translation("François Truchaud")
-      edit_translation_metadata('François Truchaud',:title=>"La Lampe",:language=>'fr')
-      read_translation('François Truchaud')
-      translation=find_open_translation('François Truchaud')
-      expect(translation).to have_metadata('creator','François Truchaud')
-      expect(translation).to have_metadata('title','La Lampe')
+      create_translation(trans2_author)
+      expect(page).to have_translation(trans2_author)
+      edit_translation_metadata(trans2_author,:title=>trans2_title,:language=>'fr')
+      read_translation(trans2_author)
+      translation=find_open_translation(trans2_author)
+      expect(translation).to have_metadata('creator',trans2_author)
+      expect(translation).to have_metadata('title',trans2_title)
       expect(translation).to have_metadata('language','fr')
       debug "checked metadata"
-      edit_translation('François Truchaud')
-      fill_block('François Truchaud',0,'LA LAMPE')
-      fill_block('François Truchaud',1,"Nous trouvâmes la lampe à l’intérieur de ces falaises creuses\n"+
+      edit_translation(trans2_author)
+      fill_block(trans2_author,0,'LA LAMPE')
+      fill_block(trans2_author,1,"Nous trouvâmes la lampe à l’intérieur de ces falaises creuses\n"+
                                    "Aux signes sculptés qu’aucun prêtre de Thèbes ne déchiffra jamais\n"+
                                    "Et les effrayants hiéroglyphes de ces cavernes étaient\n"+
                                    "Un avertissement pour toute créature vivante de l’espèce humaine..")
-      read_translation('François Truchaud')
+      read_translation(trans2_author)
       debug "checking content"
       expect(page).to have_content("LA LAMPE")
       expect(page).to have_content("Aux signes sculptés")
@@ -60,10 +68,10 @@ feature 'Create a translation' do
     end
 
     scenario 'Delete translation' do
-      delete_translation "Aurélien Bénel"
-      expect(page).not_to have_translation "Aurélien Bénel"
-      delete_translation "François Truchaud"
-      expect(page).not_to have_translation "François Truchaud"
+      delete_translation trans1_author
+      expect(page).not_to have_translation trans1_author
+      delete_translation trans2_author
+      expect(page).not_to have_translation trans2_author
     end
 
 end
