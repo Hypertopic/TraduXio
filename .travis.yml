@@ -3,11 +3,10 @@ sudo: false
 services: couchdb
 
 language:
-- ruby
-- python
+  - ruby
+  - python
 
-rvm:
-- 2.2.2
+rvm: 2.3.1
 
 cache:
   directories:
@@ -17,18 +16,18 @@ cache:
     - ~/.local
 
 install:
-- pip install --user couchapp
-- gem install poltergeist rspec
-# Install traduxio
-- couchapp push couchdb http://localhost:5984/traduxio
-#Load data
-- spec/load_data.sh http://localhost:5984/traduxio
+  - pip install --user couchapp
+  - gem install poltergeist rspec
+  # Install traduxio
+  - couchapp push couchdb http://localhost:5984/traduxio
+  #Load data
+  - spec/load_data.sh http://localhost:5984/traduxio
 
 script:
-- "rspec  spec/features/Search_concordance.rb
-          spec/features/work_add.rb
-          spec/features/Create_translation.rb
-          spec/features/Compare_translations.rb
-          spec/features/listworks.rb
-          spec/features/Internationalization.rb
-          spec/features/Set_license.rb"
+  - "rspec  spec/features/Search_concordance.rb
+            spec/features/work_add.rb
+            spec/features/Create_translation.rb
+            spec/features/Compare_translations.rb
+            spec/features/listworks.rb
+            spec/features/Internationalization.rb
+            spec/features/Set_license.rb"
