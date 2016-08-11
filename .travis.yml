@@ -18,10 +18,7 @@ cache:
 install:
   - pip install --user couchapp
   - gem install poltergeist rspec
-  # Install traduxio
-  - couchapp push couchdb http://localhost:5984/traduxio
-  #Load data
-  - spec/load_data.sh http://localhost:5984/traduxio
+  - spec/init.sh
 
 script:
   - "rspec  spec/features/Search_concordance.rb
