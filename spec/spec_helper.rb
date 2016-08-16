@@ -24,15 +24,65 @@ def random_author
   random_word(10)+" "+random_word(10)
 end
 
-def random_title
-  title=random_word(15)
+def random_int(max)
+  (rand*max).to_int
+end
+
+def random_boolean
+  if random_int(2) then
+    true
+  else
+    false
+  end
+end
+
+def random_text(nb_max)
+  text=random_lines 8
+  nb_paragraphs=nb_max
   n=0
-  words=rand*5
-  while n<words
-    title+=" "+random_word(15)
+  while n<nb_paragraphs
+    text+="\n\n"+random_lines(8)
     n+=1
   end
-  title
+  text
+end
+
+def random_lines(nb_max)
+  lines=random_line
+  nb_lines=random_int nb_max
+  n=0
+  while n<nb_lines
+    lines+="\n"+random_line
+    n+=1
+  end
+  lines
+end
+
+def random_line
+  random_words 10,25
+end
+
+def random_title
+  random_words 5,15
+end
+
+def random_words(nb_max,max_length)
+  words=random_word(max_length)
+  n=0
+  nb_words=random_int nb_max
+  while n<nb_words
+    words+=" "+random_word(max_length)
+    n+=1
+  end
+  words
+end
+
+def random_date
+  1000+random_int(1000)
+end
+
+def random_language
+  ['en','fr','he','el','pt','es','ar','ko'].shuffle[0,1].join
 end
 
 def sample(name)
@@ -156,15 +206,19 @@ def toggle_translation(version)
 end
 
 def read_translation(version)
-  if is_edited?(version)
+  read=!is_edited?(version)
+  if not read
     toggle_translation version
   end
+  read
 end
 
 def edit_translation(version)
-  if not is_edited?(version)
+  edited=is_edited?(version)
+  if not edited
     toggle_translation version
   end
+  edited
 end
 
 def is_open?(version)
@@ -204,20 +258,65 @@ def change_license(version)
   find_open_translation_footer(version).find("div.button.edit-license").click
 end
 
+def random_work
+  {:title=>random_title,:author=>random_author,:date=>random_date,:language=>random_language}
+end
+
+def create_random_work
+  metadata=random_work
+  debug metadata
+  if random_boolean then
+    metadata[:no_original]=true
+  end
+  debug metadata
+  create_work metadata
+  metadata[:text]=random_text(5)
+  edit_work_text(metadata[:author],metadata[:title],metadata[:text])
+  metadata
+end
+
+def create_work(options)
+  visit '/'
+  click_on 'Start'
+  click_on 'Add a work'
+  fill_in 'Title', :with => options[:title] if options.has_key?(:title)
+  fill_in 'Author', :with => options[:author] if options.has_key?(:author)
+  fill_select 'language',options[:language] if options.has_key?(:language)
+  fill_in 'Date, year, or text century', :with=>options[:date] if options.has_key?(:date)
+  if options.has_key?(:no_original) && options[:no_original] then
+    debug "no original"
+    uncheck 'Original work'
+  else
+    debug "original"
+    check 'Original work'
+  end
+  save_screenshot "work_create.png"
+  click_on 'Create'
+  wait_for_ajax
+end
+
+def edit_work_text (author,title,text)
+  open_work author, title
+  click_on 'Edit', :match => :first
+  fill_in 'text', :with => text
+  click_on 'Read', :match => :first
+end
+
 def edit_translation_metadata(version,options)
   raise "Must pass a hash" if not options.is_a?(Hash)
-  edit_translation version
+  previously_in_edit_mode=edit_translation version
   edited=false
   within ("thead.header th.pleat.open[data-version='#{version}']") do
-    edited=fill_field('date',options.delete(:date)) if options.has_key?(:date)
-    edited=fill_field('title',options.delete(:title)) if options.has_key?(:title)
-    edited=fill_field('creator',options.delete(:creator)) if options.has_key?(:creator)
-    edited=fill_select('language',options.delete(:language)) if options.has_key?(:language)
+    edited=fill_field('date',options[:date]) if options.has_key?(:date)
+    edited=fill_field('title',options[:title]) if options.has_key?(:title)
+    edited=fill_field('creator',options[:creator]) if options.has_key?(:creator)
+    edited=fill_select('language',options[:language]) if options.has_key?(:language)
   end
   if edited then
     debug "blur"
     edited.trigger(:blur)
   end
+  read_translation version if not previously_in_edit_mode
 end
 
 def create_translation(version)

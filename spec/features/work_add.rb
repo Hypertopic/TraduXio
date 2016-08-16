@@ -8,16 +8,10 @@ feature 'Add a work' do
   end
 
   scenario 'with an original version' do
-    title=random_title
-    author=random_author
-    click_on 'Add a work'
-    fill_in 'Title', :with => title
-    fill_in 'Author', :with => author
-    fill_select 'language','en'
-    fill_in 'Date, year, or text century', :with => '1930'
-    check 'Original work'
-    click_on 'Create'
-    expect(page).to have_content "#{title} – #{author}"
+    data=random_work
+    data[:no_original]=false
+    create_work data
+    expect(page).to have_content "#{data[:title]} – #{data[:author]}"
     expect(page).not_to have_content 'Trans.'
     click_on 'Edit', :match => :first
     fill_in 'text', :with => sample('the_lamp')
@@ -27,21 +21,21 @@ feature 'Add a work' do
     expect(row(3)).to have_content 'No more was there'
   end
 
-  anonymus_title=random_title
-
-  scenario 'without an original version (and a known author)' do
-    click_on 'Add a work'
-    fill_in 'Title', :with => anonymus_title
-    fill_select 'language','he'
-    click_on 'Create'
-    expect(page).to have_content "#{anonymus_title} – Anonymus"
+  scenario 'without an original version (and a unknown author)' do
+    data=random_work
+    data[:no_original]=true
+    data.delete(:author)
+    create_work data
+    expect(page).to have_content "#{data[:title]} – Anonymus"
     expect(page).to have_content 'Trans.'
   end
 
-  scenario 'Delete full work' do
-    open_work "Anonymus",anonymus_title
-    delete_full_work
-    expect(page).not_to have_content "#{anonymus_title} – Anonymus"
+  scenario 'without an original version (and a known author)' do
+    data=random_work
+    data[:no_original]=true
+    create_work data
+    expect(page).to have_content "#{data[:title]} – #{data[:author]}"
+    expect(page).to have_content 'Trans.'
   end
 
 end

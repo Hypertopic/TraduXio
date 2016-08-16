@@ -20,4 +20,4 @@ install:
   - gem install poltergeist rspec
   - spec/init.sh
 
-script: rspec spec/features/*
+script: rspec --order random spec/features/*.rb
