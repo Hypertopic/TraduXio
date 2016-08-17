@@ -26,7 +26,6 @@ Tests requirements
 ------------------
 
 * Ruby
-* [Install QT](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
 
 Note: If you're on MacOS X, [change your `PATH`](http://stackoverflow.com/a/14138490/1121345) so that `gem` refers to brew's gem rather than to system's.
 
@@ -35,11 +34,11 @@ Tests installation procedure
 
 * In any folder:
 
-        sudo gem install capybara capybara-webkit rspec
+        sudo gem install capybara poltergeist rspec
 
 Tests running
 -------------
 
 * In the application folder:
 
-        rspec spec/features/*
+        rspec spec/features/* [--order random]
