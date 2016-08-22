@@ -54,7 +54,6 @@ def create_work(options)
     debug "original"
     check 'Original work'
   end
-  save_screenshot "work_create.png"
   click_on 'Create'
   wait_for_ajax
 end
