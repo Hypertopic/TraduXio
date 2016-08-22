@@ -1,4 +1,4 @@
-﻿function submit() {
+function submit() {
   $("button").attr("disabled", "disabled");
   var form = $("form");
   $.ajax({

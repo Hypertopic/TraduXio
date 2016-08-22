@@ -1,4 +1,4 @@
-﻿require 'capybara/rspec'
+require 'capybara/rspec'
 require 'capybara/poltergeist'
 
 Capybara.run_server = false

@@ -1,4 +1,4 @@
-﻿/*
+/*
   Requires dependencies installation
   See node_config.json for server settings (initially set up for localhost)
   Update _shows/copyright.js when server_url or private_key are changed
@@ -13,8 +13,8 @@ var Recaptcha = require('recaptcha').Recaptcha;
 var config = JSON.parse(require("fs").readFileSync("node_config.json", "UTF-8"));
 
 var server = email.server.connect({
-   user: config.email_user, 
-   password: config.email_password, 
+   user: config.email_user,
+   password: config.email_password,
    host: config.email_host
 });
 
@@ -25,8 +25,8 @@ function sendReport(doc) {
 	+ (doc["is-protected"] === "true" ? "\nSignalé pour diffusion d'une œuvre protégée non-assimilable à une citation courte\n" : "")
 	+ "\nDétails: " + doc.details;
   server.send({
-	text: text, 
-	from: config.email_sender, 
+	text: text,
+	from: config.email_sender,
 	to: config.email_receiver,
 	subject: "Rapport de signalement TraduXio"
   });
