@@ -1,30 +1,6 @@
-﻿require 'spec_helper'
+require 'spec_helper'
 
 feature 'Create a translation' do
-
-  def check_translation_metadata(metadata)
-    translation=find_open_translation metadata[:author]
-    expect(translation).to have_metadata('date',metadata[:date]) if metadata.has_key?(:date)
-    expect(translation).to have_metadata('title',metadata[:title]) if metadata.has_key?(:title)
-    expect(translation).to have_metadata('language',metadata[:language]) if metadata.has_key?(:language)
-  end
-
-  def random_translation_metadata
-    { :author=>random_author,
-      :title=>random_title,
-      :date=>random_date,
-      :language=>random_language
-    }
-  end
-
-  def create_random_translation
-    data=random_translation_metadata
-    create_translation data[:author]
-    edit_translation_metadata(data[:author],data)
-    read_translation data[:author]
-    debug data
-    data
-  end
 
     given!(:work_metadata) { create_random_work }
 
