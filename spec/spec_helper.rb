@@ -4,7 +4,7 @@ require 'capybara/poltergeist'
 Capybara.run_server = false
 Capybara.default_driver = :poltergeist
 Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/'
-Capybara.default_max_wait_time = 5
+Capybara.default_max_wait_time = 10
 
 def do_debug?
   false
