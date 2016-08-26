@@ -29,7 +29,7 @@ function submitLicense(e) {
   var ref = tmp[tmp.length - 1];
   $.ajax({
     type:"PUT",
-    url: $("#license").data("prefix") + "/works/work/"+id+"/"+ref,
+    url: $("body").data("prefix") + "/works/work/"+id+"/"+ref,
     contentType:"text/plain",
     data:JSON.stringify({key: "creativeCommons", value: getLicense()})
   }).done(goBack).fail(function() {

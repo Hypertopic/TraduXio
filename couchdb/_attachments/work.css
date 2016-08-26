@@ -102,25 +102,25 @@ div.metadata {
   margin: 0px 2px;
 }
 
-#work .top form input {
+.top form input {
   display: inline-block;
   margin: 5px;
 }
 
-#work .top form textarea {
+.top form textarea {
   width: 250px;
 }
 
-#work .top button {
+.top button {
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#work .top .removeDoc, #work .top .addVersion {
+.top .removeDoc, .top .addVersion {
   margin-top: -3px;
 }
 
-#work .top form, #removePanel {
+.top form, #removePanel {
   text-align: right;
   display: none;
 }
@@ -340,7 +340,7 @@ textarea.autosize {
   bottom:10px;
 }
 
-#work .top {
+.top {
   background-color:#888;
   color:#fff;
   padding:0.5em;
@@ -349,7 +349,7 @@ textarea.autosize {
   border-radius: 0.5em;
 }
 
-#work .top  h1{
+.top  h1{
   font-weight: normal;
   font-size: 1.2em;
   display: inline;
@@ -357,7 +357,7 @@ textarea.autosize {
   margin-left: 15px;
 }
 
-#work .top #work-info {
+.top #work-info {
   display:none
 }
 

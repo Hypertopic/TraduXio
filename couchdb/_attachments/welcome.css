@@ -1,23 +1,23 @@
-#main {
+body {
   font-family: "Trebuchet MS";
   font-size: 90%;
   background: linear-gradient(to bottom, rgba(235,235,235,1) 0%, white 5%);
 }
 
-#main #top {
+#top {
   margin: 1%;
   margin-top: 30px;
   text-align: center;
 }
 
-#main #top .title {
+#top .title {
   font-size: 400%;
   font-weight: 600;
   display: inline-block;
   margin-right: 30px;
 }
 
-#main #top .subtitle {
+#top .subtitle {
   text-align: justify;
   font-size: 125%;
   display: inline-block;

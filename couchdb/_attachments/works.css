@@ -1,8 +1,8 @@
-body#works #main {
+div#main {
   width:100%;
 }
 
-body#works #main > *{
+div#main > *{
   margin-top: 25px;
   float:left;
 }
