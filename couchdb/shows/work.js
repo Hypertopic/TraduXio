@@ -63,8 +63,8 @@ function(o, req) {
       language: o.language,
       date: o.date,
       creativeCommons: o.creativeCommons,
-    edited: (edited_versions.indexOf("original")!=-1),
-    opened: (opened_versions.indexOf("original")!=-1)
+      edited: (edited_versions.indexOf("original")!=-1),
+      opened: (opened_versions.indexOf("original")!=-1)
     });
   }
   for (var t in o.translations) {
@@ -77,9 +77,9 @@ function(o, req) {
     data.headers.push({
       id:t,
       title: translation.title,
-      work_creator: translation.creator ? translation.creator : "",
+      work_creator: translation.creator || "",
       creator: t,
-      language: translation.language,
+      language: translation.language || "",
       date: translation.date,
       creativeCommons: translation.creativeCommons,
       trad:data.i18n.i_trad,
