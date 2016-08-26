@@ -598,9 +598,9 @@
 
     $("tr").on("mouseup select",".unit", function (e) {
       //requires jquery.selection plugin
-      var txt=$.selection();
+      var txt=$.selection(),language;
       var unit=$(this);
-      if (txt && unit.getLanguage()) {
+      if (txt && (language=unit.getLanguage())) {
         e.stopPropagation();
         var menu=$("<div/>").addClass("context-menu");
         menu.append($("<div/>").addClass("item concordance").append("search the concordance for <em>"+txt+"</em>"));
@@ -610,7 +610,7 @@
         $("body").append(menu);
         $(".context-menu .concordance").on("click",function() {
           $("form.concordance #query").val(txt);
-          $("form.concordance #language").val(unit.getLanguage());
+          $("form.concordance #language").val(language);
           $("form.concordance").submit();
         });
         $(".context-menu .item").on("click",function() {
