@@ -1,0 +1,14 @@
+services: couchdb
+language: node_js
+node_js: "0.12"
+language: ruby
+rvm: "2.1.0"
+install:
+- curl -X PUT -d '"false"' localhost:5984/_config/httpd/secure_rewrites
+- curl -X PUT localhost:5984/traduxio
+- sudo pip install couchapp
+- cd ./couchdb
+- couchapp push . http://localhost:5984/traduxio
+- cd ..
+- gem install capybara-webkit rspec
+script: xvfb-run rspec spec/features/*
