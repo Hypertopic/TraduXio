@@ -5,6 +5,20 @@ def check_translation_metadata(metadata)
   expect(translation).to have_metadata('language',metadata[:language]) if metadata.has_key?(:language)
 end
 
+def fill_translation_text (author,number)
+  edit_translation author
+
+  text = []
+
+  number.times do |i|
+    block=random_text(1)
+    fill_block(author,i,block)
+    text[i]=block
+  end
+
+  text
+end
+
 def random_translation_metadata
   { :author=>random_author,
     :title=>random_title,

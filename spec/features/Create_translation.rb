@@ -27,20 +27,16 @@ feature 'Create a translation' do
       check_translation_metadata (metadata)
 
       open_translation metadata[:author]
-      edit_translation metadata[:author]
 
-      text = []
+      text = fill_translation_text(metadata[:author],4)
 
-      4.times do |i|
-        block=random_text(1)
-        fill_block(metadata[:author],i,block)
-        text[i]=block
-      end
       read_translation(metadata[:author])
+
       debug "checking content"
       4.times do |i|
         expect(page).to have_content(text[i])
       end
+
       debug "checked content"
 
     end
