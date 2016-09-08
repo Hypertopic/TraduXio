@@ -3,7 +3,8 @@ require 'capybara/poltergeist'
 
 Capybara.run_server = false
 Capybara.default_driver = :poltergeist
-Capybara.app_host = 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/'
+Capybara.app_host = ENV['TEST_URL'] ? ENV['TEST_URL'] : 'http://127.0.0.1:5984/traduxio/_design/traduxio/_rewrite/'
+puts "testing #{Capybara.app_host}"
 Capybara.default_max_wait_time = 10
 
 def do_debug?
