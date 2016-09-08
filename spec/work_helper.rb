@@ -35,14 +35,12 @@ def create_random_work
   debug metadata
   create_work metadata
   metadata[:text]=random_text(5)
-  edit_work_text(metadata[:author],metadata[:title],metadata[:text])
+  insert_work_text(metadata[:text])
   metadata
 end
 
 def create_work(options)
-  visit '/'
-  click_on 'Start'
-  click_on 'Add a work'
+  visit '/works/new'
   fill_in 'Title', :with => options[:title] if options.has_key?(:title)
   fill_in 'Author', :with => options[:author] if options.has_key?(:author)
   fill_select 'language',options[:language] if options.has_key?(:language)
@@ -58,8 +56,7 @@ def create_work(options)
   wait_for_ajax
 end
 
-def edit_work_text (author,title,text)
-  open_work author, title
+def insert_work_text (text)
   click_on 'Edit', :match => :first
   fill_in 'text', :with => text
   click_on 'Read', :match => :first

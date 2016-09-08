@@ -1,10 +1,5 @@
 feature 'Add a work' do
 
-  background do
-    visit '/'
-    click_on 'Start'
-  end
-
   scenario 'with an original version' do
     data=random_work
     data[:no_original]=false

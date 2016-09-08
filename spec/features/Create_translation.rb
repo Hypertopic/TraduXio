@@ -39,14 +39,4 @@ feature 'Create a translation' do
 
     end
 
-    scenario 'Delete translation' do
-      metadata1=create_random_translation
-      metadata2=create_random_translation
-
-      delete_translation metadata1[:author]
-      expect(page).not_to have_translation metadata1[:author]
-      delete_translation metadata2[:author]
-      expect(page).not_to have_translation metadata2[:author]
-    end
-
 end
