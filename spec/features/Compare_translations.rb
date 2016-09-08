@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Compare translations' do
 
   background 'Open work' do

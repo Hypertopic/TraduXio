@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Add a work' do
 
   background do

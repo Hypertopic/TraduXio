@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Create a translation' do
 
     given!(:work_metadata) { create_random_work }

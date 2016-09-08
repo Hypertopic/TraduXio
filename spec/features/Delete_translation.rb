@@ -1,6 +1,3 @@
-require 'spec_helper'
-require "translation_helper"
-
 feature "Delete translations" do
   given!(:work_metadata) { create_random_work }
 

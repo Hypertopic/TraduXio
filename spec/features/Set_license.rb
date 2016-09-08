@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Set License' do
 
   background 'Open work' do

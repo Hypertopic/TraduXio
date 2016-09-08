@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Search for a concordance' do
 
   def submitForm

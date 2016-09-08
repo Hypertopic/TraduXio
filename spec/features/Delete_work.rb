@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Delete a work' do
 
   scenario 'Delete full work' do

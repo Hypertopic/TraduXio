@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Localization' do
 
     scenario 'french' do

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'List works' do
   scenario 'List languages' do
     visit '/works/'
