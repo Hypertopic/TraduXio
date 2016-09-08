@@ -31,7 +31,7 @@ function submitLicense(e) {
     type:"PUT",
     url: $("body").data("prefix") + "/works/work/"+id+"/"+ref,
     contentType:"text/plain",
-    data:JSON.stringify({key: "creativeCommons", value: getLicense()})
+    data:JSON.stringify({"creativeCommons": getLicense()})
   }).done(goBack).fail(function() {
     alert("failed!");
   });

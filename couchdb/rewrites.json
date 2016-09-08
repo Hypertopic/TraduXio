@@ -39,13 +39,21 @@
   "to": "_update/work/:id",
   "method": "PUT"
 },{
-  "from": "works/license/:id/:version",
-  "to": "_show/license/:id",
-  "method": "GET"
+  "from": "works/work/:id",
+  "to": "_update/work/:id",
+  "method": "DELETE"
 },{
   "from": "works/work/:id/:version",
   "to": "_update/work/:id",
   "method": "PUT"
+},{
+  "from": "works/work/:id/:version",
+  "to": "_update/work/:id",
+  "method": "DELETE"
+},{
+  "from": "works/license/:id/:version",
+  "to": "_show/license/:id",
+  "method": "GET"
 },{
   "from": "",
   "to": "_show/welcome"

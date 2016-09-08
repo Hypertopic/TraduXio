@@ -1,8 +1,9 @@
 function(work, req) {
-  var args = JSON.parse(req.body);
-  if(args.key == "remove") {
-    work._deleted = true;
-    return [work, "document removed"];
+  var args;
+  try {
+    args = JSON.parse(req.body);
+  } catch (e) {
+    args={};
   }
   if (work===null) {
     work=args;
@@ -18,16 +19,24 @@ function(work, req) {
     }
     return [work, JSON.stringify({ok:"created",id:work._id})];
   }
-  var version = req.query.version;
-  if(args.key == "delete") {
-    delete work.translations[version];
-    return [work, version + " deleted"];
+  var version_name = req.query.version;
+  if (!version_name) {
+    if (req.method=="DELETE") {
+        work._deleted = true;
+        return [work, JSON.stringify("document removed")];
+    }
   }
+
   var doc;
-  if(version == "original") {
+  original=false;
+  if(!version_name || version_name == "original") {
     doc = work;
+    orignal=true;
   } else {
-    if(!work.translations[version]) {
+    if(!work.translations[version_name]) {
+      if (req.method=="DELETE") {
+        return [work,{code:404,body:version+" not found"}];
+      }
       var l = 1;
       if (work.text) l=work.text.length;
       else if (work.translations) {
@@ -41,29 +50,46 @@ function(work, req) {
       for(var i=0 ; i<l ; i++) {
           text.push("");
       }
-      work.translations[version] = { title: "", language: "", creator:"", text: text };
+      work.translations[version_name] = { title: "", language: "", creator:"", text: text };
     }
-    doc = work.translations[version];
+    doc = work.translations[version_name];
   }
-  if(args.key == "work-creator") {
-    doc.creator = args.value;
-  } else if(args.key == "creator") {
-    var name = args.value;
-    if(name == undefined) {
-      name = "Unnamed document";
+  if (req.method=="DELETE") {
+    delete work.translations[version_name];
+    return [work,JSON.stringify(["remove version "+version_name])];
+  }
+  var actions=[];
+  if(args.hasOwnProperty("work-creator")) {
+    if (doc.creator != args["work-creator"]) {
+      actions.push("changed translated author from "+doc.creator+" to "+args["work-creator"]);
+      doc.creator = args["work-creator"];
     }
-    if(name != version) {
-      while(work.translations[name] || name == "original" || name.length == 0) {
-        name += "(2)";
+    delete args["work-creator"];
+  }
+  if(args.hasOwnProperty("creator")) {
+    var new_name = args["creator"];
+    delete args["creator"];
+    if(!new_name || typeof new_name != "string") {
+      new_name = "Unnamed document";
+    }
+    if(new_name != version_name) {
+      while(work.translations[new_name] || new_name == "original" || new_name.length == 0) {
+        new_name += "(2)";
       }
-      work.translations[name] = doc;
-      delete work.translations[version];
-      return [work, name];
-    } else {
-      return [work, version];
+      work.translations[new_name] = doc;
+      delete work.translations[version_name];
+      actions.push("changed version name from "+version_name+" to "+new_name);
+      version_name=new_name;
     }
-  } else {
-    doc[args.key] = args.value;
   }
-  return [work, typeof args.value=="string"?args.value:JSON.stringify(args.value)];
+  for (var key in args) {
+    if (doc[key] && doc[key] != args[key]) {
+      actions.push("change "+key+" from "+doc[key]+" to "+args[key]+" for "+version_name);
+        doc[key]=args[key];
+    } else if (!doc[key]) {
+      actions.push("set "+key+" to "+args[key]+" for "+version_name);
+      doc[key]=args[key];
+    }
+  }
+  return [work, JSON.stringify(actions)];
 }

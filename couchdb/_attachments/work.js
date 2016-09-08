@@ -222,7 +222,7 @@
           var lines=fulltext.split("\n\n");
             var id=$("#hexapla").data("id");
             var update=function(){
-                $("#hexapla tbody tr").remove();
+              $("#hexapla tbody tr").remove();
               lines.forEach(function(line,i) {
                 var newUnit=$("<div/>");
                 var text=$("<div>").addClass("text dirty");
@@ -238,7 +238,7 @@
             if ($("textarea.fulltext").is(".dirty")) {
                 $.ajax({
                     type:"PUT",
-                    data:JSON.stringify({key:"text",value:lines}),
+                    data:JSON.stringify({text:lines}),
                     contentType: "text/plain",
                     url:"work/"+id+"?version="+version
                 }).done(update);
@@ -350,7 +350,7 @@
             type: "PUT",
             url: "work/"+id+"/"+ref,
             contentType: 'text/plain',
-            data: JSON.stringify({"key":"language", "value": language.val()})
+            data: JSON.stringify({language: language.val()})
           }).done(function() {
             var lang_id = language.val();
             fixLanguages(target.data("id",lang_id));
@@ -398,17 +398,19 @@
         if(component.hasClass("dirty")) {
           var id = $("#hexapla").data("id");
           var ref = $(this).closest("th").data("version");
+          var modify={};
+          var newValue=component.val();
+          modify[name]=newValue;
           $.ajax({
             type: "PUT",
             url: "work/"+id+"/"+ref,
             contentType: 'text/plain',
-            data: JSON.stringify({"key": name, "value": component.val()})
-          }).done(function(data) {
+            data: JSON.stringify(modify)
+          }).done(function(result) {
             if(name == "creator") {
-              changeVersion(ref, data);
+              changeVersion(ref, newValue);
             }
-            component.val(data);
-            target.text(data);
+            target.text(newValue);
             component.removeClass("dirty");
           }).fail(function() { alert("fail!"); });
         }
@@ -441,7 +443,7 @@
         type: "PUT",
         url: "work/"+id+"/"+ref,
         contentType: 'text/plain',
-        data: JSON.stringify({"key": "creator", "value": ref})
+        data: JSON.stringify({creator: ref})
       }).done(function() {
         window.location.href = id + "?edit=" + ref;
       }).fail(function() { alert("fail!"); });
@@ -452,10 +454,9 @@
   function removeDoc() {
     if(confirm(getTranslated("i_confirm_delete"))) {
       $.ajax({
-        type: "PUT",
+        type: "DELETE",
         url: "work/"+$("#hexapla").data("id"),
-        contentType: 'text/plain',
-        data: JSON.stringify({"key": "remove"})
+        contentType: 'text/plain'
       }).done(function() {
         window.location.href = "./";
       }).fail(function(error) { alert("failed: " + error.statusText); });
@@ -472,10 +473,9 @@
   function deleteVersion(version) {
     var id = $("#hexapla").data("id");
     $.ajax({
-      type: "PUT",
+      type: "DELETE",
       url: "work/"+id+"/"+version,
-      contentType: 'text/plain',
-      data: JSON.stringify({"key": "delete"})
+      contentType: 'text/plain'
     }).done(function() {
       window.location.reload(true);
     }).fail(function() { alert("fail!"); });
