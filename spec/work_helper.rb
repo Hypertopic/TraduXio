@@ -52,12 +52,12 @@ def create_work(options)
     debug "original"
     check 'Original work'
   end
-  click_on 'Create'
+  click_on 'Save'
   wait_for_ajax
 end
 
 def insert_work_text (text)
-  click_on 'Edit', :match => :first
+  find("thead.header th.pleat.open input.edit",:match=>:first).click
   fill_in 'text', :with => text
-  click_on 'Read', :match => :first
+  find("thead.header th.pleat.open input.edit",:match=>:first).click
 end

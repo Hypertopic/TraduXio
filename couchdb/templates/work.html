@@ -1,19 +1,22 @@
 {{> header}}
 {{#i18n}}
   <div class="top">
-  <h1>{{work_title}} – {{work_creator}}</h1>
+  <h1><span class="title">{{work_title}}</span> – <span class="creator">{{work_creator}}</span> (<span class="language expand" data-id="{{language}}">{{language}}</span>)</h1>
+  {{^original}}<a href="#" class="workButton" id="editDoc">{{i_edit}}</a>{{/original}}
   <a href="#" class="workButton" id="removeDoc">✕</a>
   <a href="#" class="workButton" id="addVersion">+</a>
   <form id="addPanel"><h3>{{i_translation_}} </h3><input name="work-creator" placeholder="{{i_author}}"/><input type="submit" value="{{i_create}}" name="do-create" /></form>
   <div id="removePanel"><button id="remove-confirm">{{i_delete_text_and_translations}}</button></div>
+  {{#notext}}
     <form id="work-info">
-        <input class="title" name="title" placeholder="{{i_title}}">
-        <input class="work-creator" name="work-creator" placeholder="{{i_author}}">
-        <select class="language" name="language"></select>
-        <input class="date" name="date" placeholder="{{i_year_original}}">
-        <label>{{i_original}}<input type="checkbox" name="original-work"></label>
-        <input type="submit" value="{{i_create}}">
+        <input class="title" name="title" placeholder="{{i_title}}" value="{{work_title}}">
+        <input class="work-creator" name="work-creator" placeholder="{{i_author}}" value="{{work_creator}}">
+        <select class="language" name="language" placeholder="{{i_original_language}}" data-language="{{work_language}}"></select>
+        <input class="date" name="date" placeholder="{{i_year_original}}" value="{{date}}">
+        <label>{{i_original}}<input type="checkbox" name="original-work" {{#original}}checked="checked" {{/original}}></label>
+        <input type="submit" value="{{i_save}}">
     </form>
+  {{/notext}}
   </div>
   <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full"
     data-i_confirm_delete="{{i_confirm_delete}}" data-i_delete_version="{{i_delete_version}}"

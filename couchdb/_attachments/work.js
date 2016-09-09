@@ -337,8 +337,8 @@
       var language = $("<select></select>");
       fillLanguages(language, function() {
         if (placeholder) {
-        language.prepend("<option value=\"\">" + placeholder+"</option>");
-        language.attr("title",placeholder);
+          language.prepend("<option value=\"\">" + placeholder+"</option>");
+          language.attr("title",placeholder);
         }
         language.val(target.data("id"));
         language.attr("name","language");
@@ -433,6 +433,10 @@
   function toggleRemoveDoc() {
     $("#removePanel").slideToggle(200);
     $("#addPanel").slideUp(200);
+  }
+
+  function toggleEditDoc() {
+    $("#work-info").slideToggle(200);
   }
 
   function addVersion() {
@@ -711,6 +715,7 @@
 
     $(".top").on("click", "#addVersion", toggleAddVersion);
     $(".top").on("click", "#removeDoc", toggleRemoveDoc);
+    $(".top").on("click", "#editDoc", toggleEditDoc);
 
     $("#addPanel").on("submit", addVersion);
     $("#removePanel").on("click", removeDoc);
@@ -756,8 +761,37 @@
         return false;
       });
 
-      fillLanguages($("#work-info [name=language]"),"langue originale");
+      fillLanguages($("#work-info [name=language]"));
       $(".top h1, .workButton").hide();
+    } else {
+      var language=$("#work-info [name=language]");
+      fillLanguages(language,function() {
+        language.val(language.data("language"));
+        language.prepend("<option value=\"\">" + language.attr("placeholder")+"</option>");
+      });
+      $("#work-info").on("submit",function(e) {
+        e.preventDefault();
+        var data={};
+        ["work-creator","language","title","date"].forEach(function(field) {
+          data[field]=$("[name='"+field+"']","#work-info").val();
+        });
+        var id=$("#hexapla").data("id");
+        data.original=$("[name=original-work]","#work-info").prop("checked");
+        $.ajax({
+          type:"PUT",
+          url:"work/"+id+"/original",
+          data:JSON.stringify(data),
+          contentType:"application/json",
+          dataType:"json"
+        }).done(function(result) {
+          $("#work-info").hide();
+          $(".top h1 span.title").text(data.title);
+          $(".top h1 span.creator").text(data["work-creator"]);
+          $(".top h1 span.language").data("id",data["language"]);
+          fixLanguages($(".top h1"));
+        }).fail(function(){alert("fail");});
+        return false;
+      });
     }
     if (N==1) {
       $(".button.hide").remove();
