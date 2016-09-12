@@ -33,7 +33,7 @@ def random_int(max)
 end
 
 def random_boolean
-  if random_int(2) then
+  if random_int(2)>0 then
     true
   else
     false
