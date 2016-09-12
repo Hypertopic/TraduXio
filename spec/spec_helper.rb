@@ -8,7 +8,7 @@ puts "testing #{Capybara.app_host}"
 Capybara.default_max_wait_time = 10
 
 def do_debug?
-  false
+  ENV['TEST_DEBUG'] ? true : false;
 end
 
 RSpec.configure do |config|

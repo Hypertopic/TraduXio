@@ -54,6 +54,10 @@ def create_work(options)
   end
   click_on 'Save'
   wait_for_ajax
+  debug "Created #{options[:title]} – #{options[:author]}"
+  if options.has_key?(:no_original) && options[:no_original] then
+    edit_translation_metadata "first",random_translation_metadata
+  end
 end
 
 def insert_work_text (text)

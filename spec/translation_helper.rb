@@ -2,6 +2,8 @@ def check_translation_metadata(metadata)
   translation=find_open_translation metadata[:author]
   expect(translation).to have_metadata('date',metadata[:date]) if metadata.has_key?(:date)
   expect(translation).to have_metadata('title',metadata[:title]) if metadata.has_key?(:title)
+  expect(translation).to have_metadata('creator',metadata[:author]) if metadata.has_key?(:author)
+  expect(translation).to have_metadata('work-creator',metadata[:creator]) if metadata.has_key?(:creator)
   expect(translation).to have_metadata('language',metadata[:language]) if metadata.has_key?(:language)
 end
 
@@ -23,7 +25,8 @@ def random_translation_metadata
   { :author=>random_author,
     :title=>random_title,
     :date=>random_date,
-    :language=>random_language
+    :language=>random_language,
+    :creator=>random_author
   }
 end
 
@@ -129,12 +132,20 @@ def edit_translation_metadata(version,options)
   within ("thead.header th.pleat.open[data-version='#{version}']") do
     edited=fill_field('date',options[:date]) if options.has_key?(:date)
     edited=fill_field('title',options[:title]) if options.has_key?(:title)
-    edited=fill_field('creator',options[:creator]) if options.has_key?(:creator)
     edited=fill_select('language',options[:language]) if options.has_key?(:language)
+    if version!="original"
+      edited=fill_field('work-creator',options[:creator]) if options.has_key?(:creator)
+      edited=fill_field('creator',options[:author]) if options.has_key?(:author)
+    else
+      edited=fill_field('work-creator',options[:author]) if options.has_key?(:author)
+    end
   end
   if edited then
     debug "blur"
     edited.trigger(:blur)
+  end
+  if options.has_key?(:author)
+    version=options[:author]
   end
   read_translation version if not previously_in_edit_mode
 end
