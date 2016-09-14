@@ -117,7 +117,7 @@
 
             element.focus();
             try {
-                if (element.createTextRange) {
+                if (element.createTextRange && !toRange.native) {
                     var range = element.createTextRange();
 
                     if (win.navigator.userAgent.toLowerCase().indexOf("msie") >= 0) {
@@ -130,12 +130,52 @@
                     range.moveEnd('character', toRange.end - toRange.start);
 
                     range.select();
-                } else if (element.setSelectionRange) {
+                } else if (element.setSelectionRange && !toRange.native) {
                     element.setSelectionRange(toRange.start, toRange.end);
+                } else if (document.createRange || toRange.native) {
+                  range = toRange.native || document.createRange();
+                  toRange.native=range;
+                  if (this._nativeSelect(element,toRange)) {
+                    var sel=window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(toRange.native);
+                    var e=$.Event("select");
+                    var pos=$(element).position();
+                    e.pageX=pos.left;
+                    e.pageY=pos.top;
+                    $(element).trigger(e);
+                  }
                 }
             } catch (e) {
                 /* give up */
             }
+        },
+
+        _nativeSelect:function(element,toRange) {
+          var done=false;
+          toRange.start=toRange.start || 0;
+          toRange.end=toRange.end || element.textContent.length;
+          if (toRange.start>=0 && toRange.start<element.textContent.length
+          || toRange.end>=0 && toRange.end<element.textContent.length) {
+            if (element.childNodes && element.childNodes.length) {
+              for (i=0;i<element.childNodes.length && (toRange.end > 0 || toRange.start > 0);i++) {
+                var node=element.childNodes[i];
+                done=this._nativeSelect(node,toRange) || done;
+                toRange.start-=node.textContent.length;
+                toRange.end-=node.textContent.length;
+              }
+            } else {
+              if (toRange.start>=0 && toRange.start<element.textContent.length) {
+                toRange.native.setStart(element,toRange.start);
+                done=true;
+              }
+              if (toRange.end>=0 && toRange.end<element.textContent.length) {
+                toRange.native.setEnd(element,toRange.end);
+                done=true;
+              }
+            }
+          }
+          return done;
         },
 
         /**
