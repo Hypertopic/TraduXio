@@ -39,28 +39,40 @@ def create_random_translation
   data
 end
 
+def getVersions
+  page.evaluate_script("getVersions()")
+end
+
+def find_version(version,prefix="thead.header th.pleat")
+  find(selvers(version,prefix))
+end
+
+def selvers(version,prefix="thead.header th.pleat")
+  "#{prefix}[data-version='#{version}']"
+end
+
 def find_translation(version)
-  find("thead.header th.pleat[data-version='#{version}']")
+  find_version(version,"thead.header th.pleat")
 end
 
 def find_translation_footer(version)
-  find("thead.footer th.pleat[data-version='#{version}']")
+  find_version(version,"thead.footer th.pleat")
 end
 
 def find_open_translation(version)
-  find("thead.header th.pleat.open[data-version='#{version}']")
+  find_version(version,"thead.header th.pleat.open")
 end
 
 def find_open_translation_footer(version)
-  find("thead.footer th.pleat.open[data-version='#{version}']")
+  find_version(version,"thead.footer th.pleat.open")
 end
 
 def has_translation?(version)
-  has_selector?("th.pleat[data-version='#{version}']")
+  has_selector?(selvers(version,"th.pleat"))
 end
 
 def have_translation(version)
-  have_selector("th.pleat[data-version='#{version}']")
+  have_selector(selvers(version,"th.pleat"))
 end
 
 def have_metadata(metadata,value)
@@ -70,12 +82,6 @@ def have_metadata(metadata,value)
   else
     have_css("div.metadata.#{metadata}[title='#{value}']")
   end
-end
-
-def is_edited?(version)
-  expect(page).to have_translation(version)
-  debug "check translation #{version} edited"
-  find_translation(version)[:class].include?("edit")
 end
 
 def toggle_translation(version)
@@ -100,7 +106,13 @@ def edit_translation(version)
 end
 
 def is_open?(version)
+  debug "check translation #{version} open"
   find_translation(version)[:class].include?("open")
+end
+
+def is_edited?(version)
+  debug "check translation #{version} edited"
+  find_translation(version)[:class].include?("edit")
 end
 
 def open_translation(version)
@@ -130,7 +142,7 @@ def edit_translation_metadata(version,options)
   raise "Must pass a hash" if not options.is_a?(Hash)
   previously_in_edit_mode=edit_translation version
   edited=false
-  within ("thead.header th.pleat.open[data-version='#{version}']") do
+  within (selvers(version,"thead.header th.pleat.open")) do
     edited=fill_field(:date,options[:date]) if options.has_key?(:date)
     edited=fill_field(:title,options[:title]) if options.has_key?(:title)
     edited=fill_select(:language,options[:language]) if options.has_key?(:language)
