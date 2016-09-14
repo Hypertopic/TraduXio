@@ -1,10 +1,10 @@
 def check_translation_metadata(metadata)
   translation=find_open_translation metadata[:author]
-  expect(translation).to have_metadata('date',metadata[:date]) if metadata.has_key?(:date)
-  expect(translation).to have_metadata('title',metadata[:title]) if metadata.has_key?(:title)
-  expect(translation).to have_metadata('creator',metadata[:author]) if metadata.has_key?(:author)
-  expect(translation).to have_metadata('work-creator',metadata[:creator]) if metadata.has_key?(:creator)
-  expect(translation).to have_metadata('language',metadata[:language]) if metadata.has_key?(:language)
+  expect(translation).to have_metadata(:date,metadata[:date]) if metadata.has_key?(:date)
+  expect(translation).to have_metadata(:title,metadata[:title]) if metadata.has_key?(:title)
+  expect(translation).to have_metadata(:creator,metadata[:author]) if metadata.has_key?(:author)
+  expect(translation).to have_metadata(:'work-creator',metadata[:creator]) if metadata.has_key?(:creator)
+  expect(translation).to have_metadata(:language,metadata[:language]) if metadata.has_key?(:language)
 end
 
 def fill_translation_text (author,number)
@@ -64,7 +64,8 @@ def have_translation(version)
 end
 
 def have_metadata(metadata,value)
-  if metadata != "language"
+  debug "check metata #{metadata}"
+  if metadata != :language
     have_css("div.metadata.#{metadata}",:text=>value)
   else
     have_css("div.metadata.#{metadata}[title='#{value}']")
@@ -130,18 +131,18 @@ def edit_translation_metadata(version,options)
   previously_in_edit_mode=edit_translation version
   edited=false
   within ("thead.header th.pleat.open[data-version='#{version}']") do
-    edited=fill_field('date',options[:date]) if options.has_key?(:date)
-    edited=fill_field('title',options[:title]) if options.has_key?(:title)
-    edited=fill_select('language',options[:language]) if options.has_key?(:language)
-    if version!="original"
-      edited=fill_field('work-creator',options[:creator]) if options.has_key?(:creator)
-      edited=fill_field('creator',options[:author]) if options.has_key?(:author)
+    edited=fill_field(:date,options[:date]) if options.has_key?(:date)
+    edited=fill_field(:title,options[:title]) if options.has_key?(:title)
+    edited=fill_select(:language,options[:language]) if options.has_key?(:language)
+    if version!=:original
+      edited=fill_field(:'work-creator',options[:creator]) if options.has_key?(:creator)
+      edited=fill_field(:creator,options[:author]) if options.has_key?(:author)
     else
-      edited=fill_field('work-creator',options[:author]) if options.has_key?(:author)
+      edited=fill_field(:'work-creator',options[:author]) if options.has_key?(:author)
     end
   end
   if edited then
-    debug "blur"
+    debug :blur
     edited.trigger(:blur)
   end
   if options.has_key?(:author)
@@ -154,7 +155,7 @@ def create_translation(version)
   debug "click on add version button"
   page.find("a#addVersion").trigger(:click)
   debug "fill the creator #{version}"
-  fill_in 'work-creator', :with => version
+  fill_in :'work-creator', :with => version
   begin
     debug "click on create button"
     #why do we need to click twice ????
