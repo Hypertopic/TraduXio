@@ -41,14 +41,14 @@ def random_boolean
 end
 
 def random_text(nb_max)
-  text=random_lines 8
+  blocks=[]
   nb_paragraphs=nb_max
   n=0
   while n<nb_paragraphs
-    text+="\n\n"+random_lines(8)
+    blocks[n]=random_lines(8)
     n+=1
   end
-  text
+  blocks
 end
 
 def random_lines(nb_max)
