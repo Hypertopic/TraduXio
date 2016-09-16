@@ -170,7 +170,7 @@
               done=true;
             }
             toRange.start-=text.length;
-            if (toRange.end>=0 && toRange.end<text.length) {
+            if (toRange.end>=0 && toRange.end<=text.length) {
               toRange.native.setEnd(element,toRange.end);
               toRange.endElement=element;
               toRange.endPost=toRange.end;
