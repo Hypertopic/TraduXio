@@ -1,5 +1,6 @@
 function(o) {
-  const SIZE = 24;
+  const MAX_SIZE = 124;
+  const NB_WORDS = 10;
 
   var ideograms=["\\u3400-\\u9FFF","\\u3040-\\u30FF"].join("");
   var punctuation_signs=["'","`","\\-","\\uff0c","\\u3002"].join("");
@@ -7,7 +8,19 @@ function(o) {
   var regex="["+ideograms+"]|[^\\s"+punctuation_signs+ideograms+"]+";
 
   function format(text, begin) {
-    return text.substr(begin, SIZE).toLowerCase();
+    var SUB_WORD_MATCHER=new RegExp(regex,"g"),
+        s=text.substr(begin),
+        n=0, end=-1, m;
+    while ((m=SUB_WORD_MATCHER.exec(s)) && n<NB_WORDS && end < MAX_SIZE) {
+      n++;
+      if (m.index+m[0].length > MAX_SIZE && n>1) {
+        n=NB_WORDS; //force stop
+      } else {
+        end=m.index+m[0].length;
+      }
+    }
+
+    return s.substr(0, end).toLowerCase();
   }
 
   const WORD_MATCHER = new RegExp(regex,"g");
