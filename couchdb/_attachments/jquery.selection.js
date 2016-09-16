@@ -153,27 +153,30 @@
 
         _nativeSelect:function(element,toRange) {
           var done=false;
-          toRange.start=toRange.start || 0;
-          toRange.end=toRange.end || element.textContent.length;
-          if (toRange.start>=0 && toRange.start<element.textContent.length
-          || toRange.end>=0 && toRange.end<element.textContent.length) {
-            if (element.childNodes && element.childNodes.length) {
-              for (i=0;i<element.childNodes.length && (toRange.end > 0 || toRange.start > 0);i++) {
-                var node=element.childNodes[i];
-                done=this._nativeSelect(node,toRange) || done;
-                toRange.start-=node.textContent.length;
-                toRange.end-=node.textContent.length;
-              }
-            } else {
-              if (toRange.start>=0 && toRange.start<element.textContent.length) {
-                toRange.native.setStart(element,toRange.start);
-                done=true;
-              }
-              if (toRange.end>=0 && toRange.end<element.textContent.length) {
-                toRange.native.setEnd(element,toRange.end);
-                done=true;
-              }
+          if (element.childNodes && element.childNodes.length) {
+            toRange.start=toRange.start || 0;
+            toRange.end=toRange.end || element.innerText.length;
+            for (i=0;i<element.childNodes.length && (toRange.end > 0 || toRange.start > 0);i++) {
+              var node=element.childNodes[i];
+              done=this._nativeSelect(node,toRange) || done;
             }
+          } else {
+            var text=element.textContent;
+            if (element.nodeType==1 && element.tagName=="BR") text="\n";
+            if (toRange.start>=0 && toRange.start<text.length) {
+              toRange.native.setStart(element,toRange.start);
+              toRange.startElement=element;
+              toRange.startPost=toRange.start;
+              done=true;
+            }
+            toRange.start-=text.length;
+            if (toRange.end>=0 && toRange.end<text.length) {
+              toRange.native.setEnd(element,toRange.end);
+              toRange.endElement=element;
+              toRange.endPost=toRange.end;
+              done=true;
+            }
+            toRange.end-=text.length;
           }
           return done;
         },
