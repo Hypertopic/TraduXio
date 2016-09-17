@@ -8,12 +8,9 @@ feature 'Search for a concordance' do
     debug "select in #{version} block #{block} between #{s} and #{e}"
     open_translation version
     debug current_path
-    save_screenshot "visited.png", full:true
     page.evaluate_script("findUnits('#{version}').filter(':eq(#{block})').selection('setPos',{start:#{s},end:#{e}})")
-    save_screenshot "selected.png", full:true
     expect(page).to have_css("div.context-menu div.item.concordance")
     find("div.context-menu div.item.concordance").click
-    save_screenshot "searched.png", full:true
   end
 
   scenario 'Search a valid sequence of words' do
@@ -55,7 +52,7 @@ feature 'Search for a concordance' do
     read_translation translation_metadata[:author]
     debug getVersions
     block=random_int(translation_metadata[:text].length)
-    text=work_metadata[:text][block].gsub("\n"," ")
+    text=work_metadata[:text][block]
     word_n=random_int(16)
     word_nb=random_int(2)+1
     debug "select #{word_nb} words from #{word_n}th word"
@@ -69,12 +66,15 @@ feature 'Search for a concordance' do
     end
     debug "start index is #{startIndex}"
     endIndex=startIndex
+    eol=text.index("\n",startIndex)
+    if ! eol then eol=text.length end
     i=0
-    while (i<word_nb)
+    while (i<word_nb && endIndex<=eol)
       r=text.index(" ",endIndex+1)
       if (r != nil) then endIndex=r else endIndex=text.length-1 end
       i+=1
     end
+    if endIndex>eol then endIndex=eol end
     debug "end index is #{endIndex}"
     selected_text=text[startIndex..endIndex-1]
     debug "selected text is #{selected_text}"
