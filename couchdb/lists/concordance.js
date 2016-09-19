@@ -50,41 +50,41 @@ function(head, req) {
     occurrences:[]
   };
   if (req.query.query) {
-  while (row = getRow()) {
-    var translation_id = row.value.translation;
-    var line_number = row.value.unit; 
-    var work = row.doc;
-    var original = (work.text)? {
-      id: "original",
-      text: work.text
-    } : null;
-    var original_header = {
-      work_id: work._id,
-      creator: work.creator?work.creator:"Anonymus", 
-      title: work.title,
-      publisher: work.publisher,
-      date: work.date
-    };
-    if (translation_id) {
-      var translation = getTranslation(work, translation_id);
-      var translation_header = getHeaders(work, translation_id);
-      // translation >> original
-      if (original) {
-        push(data.occurrences, translation, original, line_number, original_header, translation_header);
-      }
-      // translation >> translations
-      for (var t in work.translations) {
-        if (t!=translation_id) {
-          push(data.occurrences, translation, getTranslation(work, t), line_number, original_header, [translation_header, getHeaders(work, t)]);
+    while (row = getRow()) {
+      var translation_id = row.value.translation;
+      var line_number = row.value.unit; 
+      var work = row.doc;
+      var original = (work.text)? {
+        id: "original",
+        text: work.text
+      } : null;
+      var original_header = {
+        work_id: work._id,
+        creator: work.creator?work.creator:"Anonymus",
+        title: work.title,
+        publisher: work.publisher,
+        date: work.date
+      };
+      if (translation_id) {
+        var translation = getTranslation(work, translation_id);
+        var translation_header = getHeaders(work, translation_id);
+        // translation >> original
+        if (original) {
+          push(data.occurrences, translation, original, line_number, original_header, translation_header);
+        }
+        // translation >> translations
+        for (var t in work.translations) {
+          if (t!=translation_id) {
+            push(data.occurrences, translation, getTranslation(work, t), line_number, original_header, [translation_header, getHeaders(work, t)]);
+          }
+        }
+      } else {
+        // original >> translations
+        for (var t in work.translations) {
+          push(data.occurrences, original, getTranslation(work, t), line_number, original_header, getHeaders(work, t));
         }
       }
-    } else {
-      // original >> translations
-      for (var t in work.translations) {
-        push(data.occurrences, original, getTranslation(work, t), line_number, original_header, getHeaders(work, t));
-      }
     }
-  }
   }
   data.name="concordance";
   data.css=true;

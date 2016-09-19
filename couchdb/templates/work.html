@@ -1,6 +1,6 @@
 {{> header}}
 {{#i18n}}
-  <div class="top">
+<div class="top">
   <h1><span class="title">{{work_title}}</span> – <span class="creator">{{work_creator}}</span> (<span class="language expand" data-id="{{language}}">{{language}}</span>)</h1>
   {{^original}}<a href="#" class="workButton" id="editDoc">{{i_edit}}</a>{{/original}}
   <a href="#" class="workButton" id="removeDoc">✕</a>
@@ -17,63 +17,63 @@
         <input type="submit" value="{{i_save}}">
     </form>
   {{/notext}}
-  </div>
-  <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full"
-    data-i_confirm_delete="{{i_confirm_delete}}" data-i_delete_version="{{i_delete_version}}"
-    data-i_edit="{{i_edit}}" data-i_read="{{i_read}}" data-i_translator="{{i_translated_title}}"
-    data-i_title="{{i_title}}" data-i_translated_title="{{i_translated_title}}"
-    data-i_year_original="{{i_year_original}}" data-i_year_version="{{i_year_version}}"
-    data-i_original_language="{{i_original_language}}" data-i_version_language="{{i_version_language}}"
-    data-i_author="{{i_author}}" data-i_version_author="{{i_version_author}}"
-    data-i_original="{{i_original}}" data-i_translation="{{i_translation_}}">
-    <thead class="header"><tr>
-      {{#headers}}
-        <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
-          <div class="metadata title">{{title}}</div>
-          <div class="metadata work-creator">{{work_creator}}</div>
-          <span>{{trad}}</span><div class="metadata creator">{{creator}}</div>
-          <div class="meta group">
-      <div class="metadata date">{{date}}</div>
-      <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
-          </div>
-          <input type="button" class="edit" value="{{i_edit}}" />
-          <span class="button hide">{{i_hide}}</span>
-        </div></th>
-      {{/headers}}
-    </tr></thead>
-    <tbody>
-    {{#rows}}
-    <tr id="{{line}}" data-line="{{line}}">
-      {{#units}}
-        <td class="pleat open" data-version="{{version}}" rowspan="{{space}}">
-          <div class="box-wrapper"><div class="unit" data-version="{{version}}"><div class="text">{{{text}}}</div></div></div>
-        </td>
-      {{/units}}
-    </tr>
-    {{/rows}}
-    </tbody>
-    <thead class="footer"><tr>
+</div>
+<table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full"
+  data-i_confirm_delete="{{i_confirm_delete}}" data-i_delete_version="{{i_delete_version}}"
+  data-i_edit="{{i_edit}}" data-i_read="{{i_read}}" data-i_translator="{{i_translated_title}}"
+  data-i_title="{{i_title}}" data-i_translated_title="{{i_translated_title}}"
+  data-i_year_original="{{i_year_original}}" data-i_year_version="{{i_year_version}}"
+  data-i_original_language="{{i_original_language}}" data-i_version_language="{{i_version_language}}"
+  data-i_author="{{i_author}}" data-i_version_author="{{i_version_author}}"
+  data-i_original="{{i_original}}" data-i_translation="{{i_translation_}}">
+  <thead class="header"><tr>
     {{#headers}}
-      <th class="pleat open" data-version="{{id}}">
-        <div class="relative-wrapper">
-          <input type="button" class="edit" value="{{i_edit}}" />
-          <div class="button edit-license" title="{{i_edit_license}}"></div>
-          <div class="license">
-          {{#creativeCommons}}
-            <a href="http://creativecommons.org/licenses/{{creativeCommons}}/3.0/fr">
-              <img src="http://i.creativecommons.org/l/{{creativeCommons}}/3.0/88x31.png" alt="License {{creativeCommons}}" name="{{creativeCommons}}"/>
-            </a>
-          {{/creativeCommons}}
-          {{^creativeCommons}}
-            {{i_all_rights_reserved}}.
-          {{/creativeCommons}}
-          </div>
-          <div class="button hide">{{i_hide}}</div>
+      <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
+        <div class="metadata title">{{title}}</div>
+        <div class="metadata work-creator">{{work_creator}}</div>
+        <span>{{trad}}</span><div class="metadata creator">{{creator}}</div>
+        <div class="meta group">
+    <div class="metadata date">{{date}}</div>
+    <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
         </div>
-      </th>
+        <input type="button" class="edit" value="{{i_edit}}" />
+        <span class="button hide">{{i_hide}}</span>
+      </div></th>
     {{/headers}}
-    </tr></thead>
-  </table>
+  </tr></thead>
+  <tbody>
+  {{#rows}}
+  <tr id="{{line}}" data-line="{{line}}">
+    {{#units}}
+      <td class="pleat open" data-version="{{version}}" rowspan="{{space}}">
+        <div class="box-wrapper"><div class="unit" data-version="{{version}}"><div class="text">{{{text}}}</div></div></div>
+      </td>
+    {{/units}}
+  </tr>
+  {{/rows}}
+  </tbody>
+  <thead class="footer"><tr>
+  {{#headers}}
+    <th class="pleat open" data-version="{{id}}">
+      <div class="relative-wrapper">
+        <input type="button" class="edit" value="{{i_edit}}" />
+        <div class="button edit-license" title="{{i_edit_license}}"></div>
+        <div class="license">
+        {{#creativeCommons}}
+          <a href="http://creativecommons.org/licenses/{{creativeCommons}}/3.0/fr">
+            <img src="http://i.creativecommons.org/l/{{creativeCommons}}/3.0/88x31.png" alt="License {{creativeCommons}}" name="{{creativeCommons}}"/>
+          </a>
+        {{/creativeCommons}}
+        {{^creativeCommons}}
+          {{i_all_rights_reserved}}.
+        {{/creativeCommons}}
+        </div>
+        <div class="button hide">{{i_hide}}</div>
+      </div>
+    </th>
+  {{/headers}}
+  </tr></thead>
+</table>
 
 {{/i18n}}
 {{> footer}}

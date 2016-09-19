@@ -71,7 +71,7 @@ function Hexapla() {
 
   /**
    * PUBLIC
-   * @return the versions of the corresponding unit 
+   * @return the versions of the corresponding unit
    * and the line number of the next unit (or null).
    */
   this.getUnitVersions = function(line_number,plain) {
@@ -88,11 +88,11 @@ function Hexapla() {
       }
     }
     return {
-      versions: unit, 
+      versions: unit,
       next: (line_number<LENGTH)? line_number : null
     };
   };
-  
+
   /**
    * PUBLIC
    * @return rows containing cells with space value
@@ -133,5 +133,5 @@ function Hexapla() {
     }
     return rows;
   };
-  
+
 }

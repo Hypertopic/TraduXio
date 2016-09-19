@@ -75,10 +75,10 @@ div.cc, div.freework {
   padding:2em;
   background-repeat:no-repeat;
   background-position:center center;
--webkit-background-size: cover;
-   -moz-background-size: cover;
-     -o-background-size: cover;
-        background-size: cover;
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
 }
 
 div.freework {
