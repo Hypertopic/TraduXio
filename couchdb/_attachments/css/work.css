@@ -258,12 +258,12 @@ textarea.autosize {
 }
 
 #hexapla .unit .join {
-  background-image:url(merge.png);
+  background-image:url(../img/merge.png);
   top:-23px;
 }
 
 #hexapla .unit .split {
-  background-image:url(split.png);
+  background-image:url(../img/split.png);
   bottom:-32px;
 }
 
@@ -288,7 +288,7 @@ textarea.autosize {
 }
 
 .button.show {
-  background-image: url(pleat-closed.png);
+  background-image: url(../img/pleat-closed.png);
   width:20px;
   right:15px;
 }
@@ -302,13 +302,13 @@ textarea.autosize {
 }
 
 .button.hide {
-  background-image: url(pleat-open.png);
+  background-image: url(../img/pleat-open.png);
   width:32px;
   right: 10px;
 }
 
 .button.delete {
-  background-image: url(delete.png);
+  background-image: url(../img/delete.png);
   width:32px;
   left: 10px;
 }
@@ -318,7 +318,7 @@ textarea.autosize {
 }
 
 .button.edit-license {
-  background-image: url(lock.png);
+  background-image: url(../img/lock.png);
   width:32px;
   left: 10px;
   display:none;

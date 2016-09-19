@@ -82,22 +82,22 @@ div.cc, div.freework {
 }
 
 div.freework {
-  background-image:url(fc_dubious.png);
+  background-image:url(../img/fc_dubious.png);
   float:right;
 }
 
 div.cc.by {
-  background-image:url(chooser_by.png);
+  background-image:url(../img/chooser_by.png);
 }
 
 div.cc.nc {
-  background-image:url(chooser_nc.png);
+  background-image:url(../img/chooser_nc.png);
 }
 
 div.cc.nd {
-  background-image:url(chooser_nd.png);
+  background-image:url(../img/chooser_nd.png);
 }
 
 div.cc.sa {
-  background-image:url(chooser_sa.png);
+  background-image:url(../img/chooser_sa.png);
 }

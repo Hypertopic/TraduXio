@@ -137,16 +137,16 @@ ul {
 }
 
 li {
-  list-style-image: url("list-square-small.png");
+  list-style-image: url("../img/list-square-small.png");
 }
 
 li.foldable {
-  list-style-image: url("open_list_item.gif");
+  list-style-image: url("../img/open_list_item.gif");
   cursor: pointer;
 }
 
 li.foldable.closed {
-  list-style-image: url("closed_list_item.gif");
+  list-style-image: url("../img/closed_list_item.gif");
 }
 
 li.closed > ul {

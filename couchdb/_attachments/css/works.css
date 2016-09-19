@@ -12,7 +12,7 @@ div#citation {
   text-align: justify;
   font-size: 0.7em;
   height: 15%;
-  background-image: url("citation-mark.gif");
+  background-image: url("../img/citation-mark.gif");
   background-repeat: no-repeat;
 }
 
