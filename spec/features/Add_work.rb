@@ -1,6 +1,6 @@
 feature 'Add a work' do
 
-  scenario 'with an original version' do
+  scenario 'With an original version' do
     data=random_work
     data[:no_original]=false
     create_work data
@@ -14,7 +14,7 @@ feature 'Add a work' do
     expect(row(3)).to have_content 'No more was there'
   end
 
-  scenario 'without an original version (and a unknown author)' do
+  scenario 'Without an original version (and a unknown author)' do
     data=random_work
     data[:no_original]=true
     data.delete(:author)
@@ -23,7 +23,7 @@ feature 'Add a work' do
     expect(page).to have_content 'Trans.'
   end
 
-  scenario 'without an original version (and a known author)' do
+  scenario 'Without an original version (and a known author)' do
     data=random_work
     data[:no_original]=true
     create_work data

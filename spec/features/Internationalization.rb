@@ -1,34 +1,34 @@
 feature 'Localization' do
 
-    scenario 'french' do
+    scenario 'French' do
         prefer_language('fr-FR;q=0.9,fr;q=0.8,en;q=0.7')
         visit '/works/'
         click_on 'Ajouter une œuvre'
         expect(page).to have_content 'Œuvre originale'
     end
 
-    scenario 'english' do
+    scenario 'English' do
         prefer_language('en-au,en-us,en,fr')
         visit '/works/'
         click_on 'Add a work'
         expect(page).to have_content 'Original work'
     end
 
-    scenario 'portugese' do
+    scenario 'Portugese' do
         prefer_language('pt-br,en-us,en')
         visit '/works/'
         click_on 'Adicionar uma obra'
         expect(page).to have_content 'Obra original'
     end
 
-    scenario 'spanish' do
+    scenario 'Spanish' do
         prefer_language('es-ar,es-es,en-us,en')
         visit '/works/'
         click_on 'Añadir una obra'
         expect(page).to have_content 'Obra original'
     end
 
-    scenario 'chinese' do
+    scenario 'Chinese' do
         prefer_language('zh-cn,en-us,en')
         visit '/works/'
         click_on '添加作品'
