@@ -104,8 +104,9 @@ def getVersions
   page.evaluate_script("getVersions()")
 end
 
-def find_version(version,prefix="thead.header th.pleat")
-  find(selvers(version,prefix))
+def find_version(version,prefix="thead.header th.pleat",suffix="")
+  if (suffix.length>0) then suffix=" #{suffix}" end
+  find(selvers(version,prefix)+suffix)
 end
 
 def selvers(version,prefix="thead.header th.pleat")
