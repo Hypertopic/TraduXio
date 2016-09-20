@@ -40,15 +40,14 @@ def random_boolean
   end
 end
 
-def random_text(nb_max)
-  blocks=[]
-  nb_paragraphs=nb_max
+def random_text(nb_paragraphs)
+  text=[]
   n=0
   while n<nb_paragraphs
-    blocks[n]=random_lines(8)
+    text[n]=random_lines(8)
     n+=1
   end
-  blocks
+  text
 end
 
 def random_lines(nb_max)
@@ -134,22 +133,6 @@ def fill_select(name,option)
   select(option.text, :from => name)
   wait_for_ajax
   input
-end
-
-def fill_block(version,row,text)
-  within block(version,row) do
-    debug "filling block #{row} of #{version} with #{text}"
-    ta=find('textarea')
-    ta.set(text)
-    ta.trigger(:blur)
-    wait_for_ajax
-  end
-end
-
-def block(version, row)
-  table=page.find("table#hexapla")
-  row=table.find("tr[data-line='#{row.to_s}']")
-  row.find("td.edit[data-version='#{version}']")
 end
 
 def debug(step)

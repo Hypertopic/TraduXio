@@ -31,9 +31,7 @@ feature 'Create a translation' do
       read_translation(metadata[:author])
 
       debug "checking content"
-      4.times do |i|
-        expect(page).to have_content(text[i])
-      end
+      check_text metadata[:author], text
 
       debug "checked content"
 

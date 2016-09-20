@@ -68,13 +68,36 @@ end
 def fill_translation_text (author,number)
   edit_translation author
 
-  text = random_text(1)
+  text = random_text(number)
 
   text.each_with_index { |paragraph, index|
     fill_block(author,index,paragraph)
   }
 
   text
+end
+
+def fill_block(version,row,text)
+  within block(version,row) do
+    debug "filling block #{row} of #{version} with #{text}"
+    ta=find('textarea')
+    ta.set(text)
+    ta.trigger(:blur)
+    wait_for_ajax
+  end
+end
+
+def check_text version,text
+  text.each_with_index { |paragraph, index|
+    debug "checking that block #{index} contains #{paragraph}"
+    expect(block(version,index)).to have_content paragraph
+  }
+end
+
+def block(version, row)
+  table=page.find("table#hexapla")
+  row=table.find("tr[data-line='#{row}']")
+  row.find("td[data-version='#{version}']")
 end
 
 def getVersions
