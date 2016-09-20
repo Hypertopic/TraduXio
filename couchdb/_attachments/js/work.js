@@ -484,25 +484,11 @@ function deleteVersion(version) {
   }).fail(function() { alert("fail!"); });
 }
 
-function getEndLine (units,index) {
-  var nextIndex=index+1;
-  var lastLine=0;
-  if (nextIndex<units.length) {
-    var nextUnit=units.eq(nextIndex);
-    lastLine=nextUnit.getReference().line - 1 ;
-  } else {
-    lastLine=$("#hexapla").data("lines") - 1;
-  }
-  return lastLine;
-
-}
-
 function createJoin(unit1,unit2) {
     var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
     var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
     unit2.prepend(join);
 }
-
 
 function createJoins(unit) {
   unit.find(".join").remove();
@@ -514,6 +500,7 @@ function createJoins(unit) {
     createJoin(prevUnit,unit);
   }
 }
+
 function createSplits(unit) {
   unit.find(".split").remove();
   var reference=unit.getReference();
@@ -637,8 +624,8 @@ $(document).ready(function() {
     var units=findUnits(version);
     var previousUnit=units.eq(units.index(unit)-1);
     if (previousUnit) {
-  editOnServer("null", $(this).closest(".unit").getReference())
-    .done(function() {
+      editOnServer("null", $(this).closest(".unit").getReference())
+        .done(function() {
           var previousContent=previousUnit.find("textarea").val();
           var thisContent=unit.find("textarea").val();
           previousUnit.find("textarea").val(previousContent+"\n"+thisContent);
