@@ -81,11 +81,11 @@ function positionSplits(context) {
     if (tableLine.find("td:visible").length>0) {
       position=tableLine.find("td:visible").position();
       $(this).removeClass("dynamic");
+      var currPos=currTd.position();
+      $(this).css("top",(position.top-currPos.top-24)+"px");
     } else {
       $(this).addClass("dynamic");
     }
-    var currPos=$(this).closest("td").position();
-    $(this).css("top",(position.top-currPos.top-24)+"px");
   });
   positionDynamicSplits(context);
 }
@@ -145,12 +145,14 @@ function fixWidths() {
 function toggleShow(version) {
   find(version).toggle();
   findPleat(version).toggle();
-  fixWidths();
-  //when one version is edited, and we show a non edited one, pagination is ugly
-  //so we toggle edited versions twice to get back to correct pagination
-  //applying to both top and bottom buttons, so we do it twice
-  find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit);
-  positionSplits();
+  setTimeout(function(){
+    fixWidths();
+    //when one version is edited, and we show a non edited one, pagination is ugly
+    //so we toggle edited versions twice to get back to correct pagination
+    //applying to both top and bottom buttons, so we do it twice
+    //find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit);
+    positionSplits();
+  },0);
 }
 
 $.fn.isEdited = function() {
@@ -191,7 +193,7 @@ function autoSize() {
   // which will make overall container taller, which will make textarea taller.
   var text = stringToHtml($(this).val());
   $(this).parent().find("div.text").html(text);
-  if ($(this).parents().is("box-wrapper")) {
+  if ($(this).parents().is(".box-wrapper")) {
       $(this).css({'width':'100%','height':'100%'});
   }
 }
@@ -302,8 +304,10 @@ function toggleEdit (e) {
       }
     }
   });
-  if (e.hasOwnProperty("cancelable")) //means it is an event, and as such toggle occured on user action
+  if (e.hasOwnProperty("cancelable")) { //means it is an event, and as such toggle occured on user action
     updateUrl();
+    fixWidths();
+  }
 }
 
 var languages=null;
@@ -514,10 +518,10 @@ function createSplits(unit) {
   var currPos=unit.position();
   if (currLine<lastLine && currLine<maxLines) {
     for (var i=currLine+1; i<=lastLine; ++i) {
-  var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
-  unit.append(split);
+      var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
+      unit.append(split);
     }
-    positionSplits();
+    setTimeout(positionSplits,0);
   }
 }
 
