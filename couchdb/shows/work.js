@@ -50,10 +50,11 @@ function(o, req) {
     units: [],
     raw:[],
     rows:[],
-    i18n: localized()
+    lang:getPreferredLanguage()
   };
+  data.i18n=localized(data.lang);
 
-   if (!newWork) {
+  if (!newWork) {
 
     var hexapla = new Hexapla();
     var edited_versions=req.query.edit ? req.query.edit.split("|") : [];

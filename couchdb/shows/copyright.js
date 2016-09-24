@@ -10,7 +10,7 @@ function(o, req) {
   data.css = true;
   data.public_key = "6LeEL_QSAAAAAJ2jLuZ9FcV7sIik7VFAHRHl1wPv";
   data.server_url = "http://localhost:1337";
-  data.language=getPreferredLanguage();
-  data.i18n=localized(data.language);
+  data.lang=getPreferredLanguage();
+  data.i18n=localized(data.lang);
   return Mustache.to_html(this.templates.copyright, data, this.templates.partials);
 }

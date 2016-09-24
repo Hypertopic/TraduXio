@@ -5,7 +5,7 @@ $.fn.concordancify = function() {
 
   var search = $("#nav").data("i_search");
 
-  this.append('<input id="query" type="search" results="5" name="query" placeholder="' + search + '" value="'
+  this.append('<input id="query" type="search" name="query" placeholder="' + search + '" value="'
     +  default_query + '" />');
   this.append('<input id="submit" type="submit" value="Search"/>');
   this.append('<select id="language" name="language"/>');
@@ -17,7 +17,7 @@ $.fn.concordancify = function() {
       $.each(result.rows, function(i, o) {
         $("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
-      $("#language").val($("body").data("lang"));
+      $("#language").val($("html").attr("lang"));
     });
   });
 

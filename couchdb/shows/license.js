@@ -10,7 +10,7 @@ function(work, req) {
   data.work_creator=work.creator;
   data.work_date=work.date;
   data.text=null;
-  data.language=getPreferredLanguage();
+  data.lang=getPreferredLanguage();
   data.i18n=localized(data.language);
 
   if (version) {
