@@ -11,7 +11,7 @@ table#hexapla.full {
   width:99%;
 }
 
-#hexapla thead:first-child tr {
+#hexapla thead tr {
   height:30%;
 }
 
@@ -28,7 +28,7 @@ body {
   border: 1px solid;
 }
 
-#hexapla .header th {
+#hexapla thead th {
   border-radius:15px 15px 0px 0px;
   border-bottom:0px;
   position:relative;
@@ -40,7 +40,7 @@ body {
   text-align:center;
 }
 
-#hexapla .footer th {
+#hexapla tfoot th {
   border-radius:0px 0px 15px 15px;
   border-top:0px;
   padding:5px;
@@ -324,7 +324,7 @@ textarea.autosize {
   display:none;
 }
 
-.pleat .button {
+#hexapla .pleat .button {
   background-repeat:no-repeat;
   height:32px;
   position: absolute;
@@ -335,7 +335,7 @@ textarea.autosize {
   z-index:99;
 }
 
-.footer .pleat .button {
+#hexapla tfoot .pleat .button {
   top:auto;
   bottom:10px;
 }

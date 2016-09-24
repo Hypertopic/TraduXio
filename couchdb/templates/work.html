@@ -20,7 +20,7 @@
   {{/notext}}
 </div>
 <table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full">
-  <thead class="header"><tr>
+  <thead><tr>
     {{#headers}}
       <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
         <div class="metadata title">{{title}}</div>
@@ -46,7 +46,7 @@
   </tr>
   {{/rows}}
   </tbody>
-  <thead class="footer"><tr>
+  <tfoot><tr>
   {{#headers}}
     <th class="pleat open" data-version="{{id}}">
       <div class="relative-wrapper">
@@ -66,7 +66,7 @@
       </div>
     </th>
   {{/headers}}
-  </tr></thead>
+  </tr></tfoot>
 </table>
 
 {{/i18n}}

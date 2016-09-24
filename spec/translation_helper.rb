@@ -17,7 +17,7 @@ def edit_translation_metadata(version,options)
   raise "Must pass a hash" if not options.is_a?(Hash)
   previously_in_edit_mode=edit_translation version
   edited=false
-  within (selvers(version,"thead.header th.pleat.open")) do
+  within (selvers(version,"thead th.pleat.open")) do
     edited=fill_field(:date,options[:date]) if options.has_key?(:date)
     edited=fill_field(:title,options[:title]) if options.has_key?(:title)
     edited=fill_select(:language,options[:language]) if options.has_key?(:language)
@@ -104,29 +104,29 @@ def getVersions
   page.evaluate_script("getVersions()")
 end
 
-def find_version(version,prefix="thead.header th.pleat",suffix="")
+def find_version(version,prefix="thead th.pleat",suffix="")
   if (suffix.length>0) then suffix=" #{suffix}" end
   find(selvers(version,prefix)+suffix)
 end
 
-def selvers(version,prefix="thead.header th.pleat")
+def selvers(version,prefix="thead th.pleat")
   "#{prefix}[data-version='#{version}']"
 end
 
 def find_translation(version)
-  find_version(version,"thead.header th.pleat")
+  find_version(version,"thead th.pleat")
 end
 
 def find_translation_footer(version)
-  find_version(version,"thead.footer th.pleat")
+  find_version(version,"tfoot th.pleat")
 end
 
 def find_open_translation(version)
-  find_version(version,"thead.header th.pleat.open")
+  find_version(version,"thead th.pleat.open")
 end
 
 def find_open_translation_footer(version)
-  find_version(version,"thead.footer th.pleat.open")
+  find_version(version,"tfoot th.pleat.open")
 end
 
 def has_translation?(version)

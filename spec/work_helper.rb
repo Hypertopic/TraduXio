@@ -61,9 +61,9 @@ def create_work(options)
 end
 
 def insert_work_text (text)
-  find("thead.header th.pleat.open input.edit",:match=>:first).click
+  find("thead th.pleat.open input.edit",:match=>:first).click
   fill_in 'text', :with => text.join("\n\n")
-  find("thead.header th.pleat.open input.edit",:match=>:first).click
+  find("thead th.pleat.open input.edit",:match=>:first).click
 end
 
 def work_line(line)

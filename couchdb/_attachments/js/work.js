@@ -51,7 +51,7 @@ function addPleat(version) {
   ).attr("data-version",version);
   header.after(pleatHead.clone());
   var pleatFoot=$("<th/>").addClass("pleat").addClass("close").attr("data-version",version);
-  find(version).last().after(pleatHead);
+  find(version).filter("th").last().after(pleatHead);
 }
 
 function findUnits(version) {
@@ -60,7 +60,7 @@ function findUnits(version) {
 
 function getVersions() {
   var versions=[];
-  $("#hexapla .header tr:first-child .pleat.open").each(function() {
+  $("#hexapla thead tr:first-child .pleat.open").each(function() {
     versions.push($(this).data("version"));
   });
   return versions;
@@ -132,14 +132,13 @@ $.fn.redraw = function() {
 };
 
 function fixWidths() {
- var nbOpen=$("thead:first-child tr:first-child th.pleat.open:visible").length;
+  var nbOpen=$("thead tr:first-child th.pleat.open:visible").length;
   if (nbOpen==0) {
     $("#hexapla").removeClass("full");
   } else {
     $("#hexapla").addClass("full");
-    $("thead:first-child tr:first-child th.pleat.open:visible").css("width",100/nbOpen+"%");
+    $("thead tr:first-child th.pleat.open:visible").css("width",100/nbOpen+"%");
   }
-
 }
 
 function toggleShow(version) {
@@ -368,8 +367,8 @@ function setLangEditState(isEdited, container, placeholder) {
 }
 
 function updateUrl() {
-  var opened=$("thead:first-child th.open:visible").not(".edit").map(function() {return $(this).getVersion("th");}).toArray().join("|");
-  var edited=$("thead:first-child th.edit:visible").map(function() {return $(this).getVersion("th");}).toArray().join("|");
+  var opened=$("thead th.open:visible").not(".edit").map(function() {return $(this).getVersion("th");}).toArray().join("|");
+  var edited=$("thead th.edit:visible").map(function() {return $(this).getVersion("th");}).toArray().join("|");
   var suffix="";
   if (opened) {
     suffix+="open="+encodeURIComponent(opened);
@@ -720,7 +719,7 @@ $(document).ready(function() {
       toggleShow(versions[i]);
     }
   } else {
-    $("thead:first-child tr:first-child th.open.pleat").not(".opened").not(".edited").each(function() {
+    $("thead tr:first-child th.open.pleat").not(".opened").not(".edited").each(function() {
       toggleShow($(this).getVersion("th"));
     });
   }
