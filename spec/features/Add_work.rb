@@ -6,9 +6,7 @@ feature 'Add a work' do
     create_work data
     expect(page).to have_content "#{data[:title]} – #{data[:author]}"
     expect(page).not_to have_content 'Trans.'
-    click_on 'Edit', :match => :first
-    fill_in 'text', :with => sample('the_lamp')
-    click_on 'Read', :match => :first
+    insert_work_text sample('the_lamp')
     expect(row(1)).to have_content 'THE LAMP'
     expect(row(2)).to have_content 'We found the lamp'
     expect(row(3)).to have_content 'No more was there'

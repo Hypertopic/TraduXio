@@ -20,7 +20,7 @@ feature 'Set License' do
       license="by-nd"
     end
     expect(page).to have_content license
-    click_on "save-license"
+    find("#save-license").trigger(:click)
     open_translation "Aurélien Bénel"
     expect(page).to have_css "div.license img[name='#{license}']"
   end

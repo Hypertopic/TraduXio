@@ -1,7 +1,7 @@
 feature 'Search for a concordance' do
 
   def submitForm
-    click_on "submit"
+    find("#submit").trigger(:click)
   end
 
   def select_and_search_concordance(version,block,s,e)

@@ -4,17 +4,17 @@ def open_work(author,title)
   debug "check author #{author}"
   expect(page).to have_css('li.author.closed',:text=>author)
   debug "open author #{author}"
-  page.find('li.author.closed',:text=>author).trigger(:click)
+  find('li.author.closed',:text=>author).trigger(:click)
   debug "check work #{title}"
   expect(page).to have_css('a',:text=>title)
   debug "click work #{title}"
-  click_on title
+  find('li.author',:text=>author).find('a',:text=>title).trigger(:click)
   debug "opened"
 end
 
 def delete_full_work
-  click_on "removeDoc"
-  click_on "remove-confirm"
+  find("a#removeDoc").trigger(:click)
+  find("button#remove-confirm").trigger(:click)
   accept_alert
 end
 
@@ -52,7 +52,7 @@ def create_work(options)
     debug "original"
     check 'Original work'
   end
-  click_on 'Save'
+  find('input[value=Save]').trigger(:click)
   wait_for_ajax
   debug "Created #{options[:title]} – #{options[:author]}"
   if options.has_key?(:no_original) && options[:no_original] then
@@ -62,7 +62,7 @@ end
 
 def insert_work_text (text)
   find("thead th.pleat.open input.edit",:match=>:first).trigger(:click)
-  fill_in 'text', :with => text.join("\n\n")
+  fill_in 'text', :with => (text.is_a? Array) ? text.join("\n\n") : text
   find("thead th.pleat.open input.edit",:match=>:first).trigger(:click)
 end
 
