@@ -19,7 +19,7 @@ def delete_full_work
 end
 
 def change_license(version)
-  find_open_translation_footer(version).find("div.button.edit-license").click
+  find_open_translation_footer(version).find("div.button.edit-license").trigger(:click)
 end
 
 def random_work
@@ -61,9 +61,9 @@ def create_work(options)
 end
 
 def insert_work_text (text)
-  find("thead th.pleat.open input.edit",:match=>:first).click
+  find("thead th.pleat.open input.edit",:match=>:first).trigger(:click)
   fill_in 'text', :with => text.join("\n\n")
-  find("thead th.pleat.open input.edit",:match=>:first).click
+  find("thead th.pleat.open input.edit",:match=>:first).trigger(:click)
 end
 
 def work_line(line)

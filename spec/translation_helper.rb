@@ -5,9 +5,7 @@ def create_translation(version)
   fill_in :'work-creator', :with => version
   begin
     debug "click on create button"
-    #why do we need to click twice ????
-    page.find('input[name=do-create]').click
-    page.find('input[name=do-create]').click
+    page.find('input[name=do-create]').trigger(:click)
     debug "wait #{version} to appear"
   end until has_translation?(version)
   debug "created #{version}"
@@ -148,19 +146,19 @@ end
 
 def toggle_translation(version)
   debug "toggle translation #{version}"
-  find_open_translation(version).find("input.edit").click
+  find_open_translation(version).find("input.edit").trigger(:click)
 end
 
 def open_translation(version)
   if not is_open?(version)
     debug "open translation #{version}"
-    find_translation(version).find("span.button.show").click
+    find_translation(version).find("span.button.show").trigger(:click)
   end
 end
 
 def close_translation(version)
   if is_open?(version)
-    find_translation(version).find("span.button.hide").click
+    find_translation(version).find("span.button.hide").trigger(:click)
   end
 end
 
@@ -195,7 +193,7 @@ def delete_translation(version)
   edit_translation version
 
   debug "delete #{version}"
-  find_open_translation(version).find("span.delete").click
+  find_open_translation(version).find("span.delete").trigger(:click)
   debug "confirm deletion if #{version}"
   accept_alert
 end

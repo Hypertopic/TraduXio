@@ -10,7 +10,7 @@ feature 'Search for a concordance' do
     debug current_path
     page.evaluate_script("findUnits('#{version}').filter(':eq(#{block})').selection('setPos',{start:#{s},end:#{e}})")
     expect(page).to have_css("div.context-menu div.item.concordance")
-    find("div.context-menu div.item.concordance").click
+    find("div.context-menu div.item.concordance").trigger(:click)
   end
 
   scenario 'Search a valid sequence of words' do
