@@ -105,6 +105,7 @@ function(o, req) {
   data.prefix="..";
   data.notext=o.text ? false : (o.original ? false : true);
   data.original=o.text ? true : (newWork ? true : false);
+  data.i18n_str=JSON.stringify(data.i18n);
 
   return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }

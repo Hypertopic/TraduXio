@@ -19,7 +19,7 @@ function findPleat(version) {
 }
 
 function getTranslated(name) {
-  return $("#hexapla").data(name);
+  return i18n[name] || name;
 }
 
 $.fn.getHeight = function() {

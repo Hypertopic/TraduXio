@@ -1,5 +1,6 @@
 {{> header}}
 {{#i18n}}
+<script>var i18n={{{i18n_str}}};</script>
 <div class="top">
   <h1><span class="title">{{work_title}}</span> – <span class="creator">{{work_creator}}</span> (<span class="language expand" data-id="{{language}}">{{language}}</span>)</h1>
   {{^original}}<a href="#" class="workButton" id="editDoc">{{i_edit}}</a>{{/original}}
@@ -9,23 +10,16 @@
   <div id="removePanel"><button id="remove-confirm">{{i_delete_text_and_translations}}</button></div>
   {{#notext}}
     <form id="work-info">
-        <input class="title" name="title" placeholder="{{i_title}}" value="{{work_title}}">
-        <input class="work-creator" name="work-creator" placeholder="{{i_author}}" value="{{work_creator}}">
-        <select class="language" name="language" placeholder="{{i_original_language}}" data-language="{{work_language}}"></select>
-        <input class="date" name="date" placeholder="{{i_year_original}}" value="{{date}}">
-        <label>{{i_original}}<input type="checkbox" name="original-work" {{#original}}checked="checked" {{/original}}></label>
-        <input type="submit" value="{{i_save}}">
+      <input class="title" name="title" placeholder="{{i_title}}" value="{{work_title}}">
+      <input class="work-creator" name="work-creator" placeholder="{{i_author}}" value="{{work_creator}}">
+      <select class="language" name="language" placeholder="{{i_original_language}}" data-language="{{work_language}}"></select>
+      <input class="date" name="date" placeholder="{{i_year_original}}" value="{{date}}">
+      <label>{{i_original}}<input type="checkbox" name="original-work" {{#original}}checked="checked" {{/original}}></label>
+      <input type="submit" value="{{i_save}}">
     </form>
   {{/notext}}
 </div>
-<table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full"
-  data-i_confirm_delete="{{i_confirm_delete}}" data-i_delete_version="{{i_delete_version}}"
-  data-i_edit="{{i_edit}}" data-i_read="{{i_read}}" data-i_translator="{{i_translated_title}}"
-  data-i_title="{{i_title}}" data-i_translated_title="{{i_translated_title}}"
-  data-i_year_original="{{i_year_original}}" data-i_year_version="{{i_year_version}}"
-  data-i_original_language="{{i_original_language}}" data-i_version_language="{{i_version_language}}"
-  data-i_author="{{i_author}}" data-i_version_author="{{i_version_author}}"
-  data-i_original="{{i_original}}" data-i_translation="{{i_translation_}}">
+<table id="hexapla" data-lines="{{lines}}" data-id="{{id}}" class="full">
   <thead class="header"><tr>
     {{#headers}}
       <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
