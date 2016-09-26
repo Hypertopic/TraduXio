@@ -23,31 +23,42 @@
   <thead><tr>
     {{#headers}}
       <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
-        {{^is_original}}<span class="button delete"></span>{{/is_original}}
+      {{#is_original}}
         <div class="metadata title">{{title}}</div>
-        <input type="text" class="editedMeta title" name="title" value="{{title}}"
-          title={{#is_original}}"{{i_title}}"{{/is_original}}
-                {{^is_original}}"{{i_translated_title}}"{{/is_original}} />
+        <input type="text" class="editedMeta title" name="title"
+        title="{{i_title}}" value="{{title}}" />
         <div class="metadata work-creator">{{work_creator}}</div>
         <input type="text" class="editedMeta work-creator" name="work-creator"
-          title={{#is_original}}"{{i_author}}"{{/is_original}}
-                {{^is_original}}"{{i_version_author}}"{{/is_original}}
-          value="{{work_creator}}"/>
-        {{^is_original}}
-          <span>{{i_trad}}</span><div class="metadata creator">{{creator}}</div>
-          <input type="text" class="editedMeta creator" name="creator" title="{{i_translator}}" value="{{creator}}"/>
-        {{/is_original}}
+          title="{{i_author}}" value="{{work_creator}}"/>
         <div class="meta group">
           <div class="metadata date">{{date}}</div>
-          <input type="text" class="editedMeta date" name="date" value="{{date}}"
-            title={{#is_original}}"{{i_year_original}}"{{/is_original}}
-                  {{^is_original}}"{{i_year_version}}"{{/is_original}} />
+          <input type="text" class="editedMeta date" name="date"
+            title="{{i_year_original}}" value="{{date}}" />
           <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
           <select class="editedMeta language" name="language"
-            title={{#is_original}}"{{i_original_language}}"{{/is_original}}
-                  {{^is_original}}"{{i_version_language}}"{{/is_original}}
-            value="{{language}}" data-language="{{language}}"></select>
+            title="{{i_original_language}}" value="{{language}}" data-language="{{language}}"></select>
         </div>
+      {{/is_original}}
+      {{^is_original}}
+        <span class="button delete"></span>
+        <div class="metadata title">{{title}}</div>
+        <input type="text" class="editedMeta title" name="title"
+          title="{{i_translated_title}}" value="{{title}}" />
+        <div class="metadata work-creator">{{work_creator}}</div>
+        <input type="text" class="editedMeta work-creator" name="work-creator"
+          title="{{i_version_author}}" value="{{work_creator}}"/>
+        <span>{{i_trad}}</span><div class="metadata creator">{{creator}}</div>
+        <input type="text" class="editedMeta creator" name="creator"
+          title="{{i_translator}}" value="{{creator}}"/>
+        <div class="meta group">
+          <div class="metadata date">{{date}}</div>
+          <input type="text" class="editedMeta date" name="date"
+            title="{{i_year_version}}" value="{{date}}" />
+          <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
+          <select class="editedMeta language" name="language"
+            title="{{i_version_language}}" value="{{language}}" data-language="{{language}}"></select>
+        </div>
+      {{/is_original}}
         <input type="button" class="edit" value="{{i_edit}}" />
         <span class="button hide">{{i_hide}}</span>
       </div></th>
