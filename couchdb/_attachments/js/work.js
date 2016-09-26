@@ -215,88 +215,24 @@ function toggleEdit (e) {
   if (edited) {
     top.css("width","auto");
     doc.removeClass("edit");
-    top.find("input.editedMeta").remove();
-    top.find(".delete").remove();
-    if (getVersions().length==1) {
-        var fulltext=$("textarea.fulltext").val();
-        var lines=fulltext.split("\n\n");
-          var id=$("#hexapla").data("id");
-          var update=function(){
-            $("#hexapla tbody tr").remove();
-            lines.forEach(function(line,i) {
-              var newUnit=$("<div/>");
-              var text=$("<div>").addClass("text dirty");
-              text.html(stringToHtml(line)).removeClass("dirty");
-              newUnit.append(text);
-              newUnit.addClass("unit").attr("data-version",version);
-              var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append($("<div>").addClass("box-wrapper").append(newUnit));
-              newUnit.setSize(1);
-              var tr=$("<tr/>").data("line",i).prepend(newTd);
-              $("#hexapla tbody").append(tr);
-            });
-          };
-          if ($("textarea.fulltext").is(".dirty")) {
-              $.ajax({
-                  type:"PUT",
-                  data:JSON.stringify({text:lines}),
-                  contentType: "text/plain",
-                  url:"work/"+id+"?version="+version
-              }).done(update);
-          } else {
-              update();
-          }
-    }
   } else {
     doc.addClass("edit");
     top.css("width",doc.first().outerWidth()+"px");
-    if(version != "original") {
-      top.find(".relative-wrapper").prepend('<span class="button delete"></span>');
-      top.find(".delete").on("click", clickDeleteVersion);
-    }
-    if (getVersions().length==1) {
-        var fulltext="";
-        var first=true;
-        units.each(function() {
-            if (first) first=false;
-            else fulltext+="\n\n";
-            fulltext+=htmlToString($(".text",this));
-        });
-        $("#hexapla tbody tr").remove();
-        var textarea=$('<textarea name="text"/>').addClass("fulltext").val(fulltext);
-        var tr=$("<tr/>").append($("<td/>").append($("<div>").addClass("unit edit").append(textarea)));
-        $("#hexapla tbody").append(tr);
-    }
-  }
-  if(version == "original") {
-    setEditState(edited, top, "title", getTranslated("i_title"));
-    setEditState(edited, top, "work-creator", getTranslated("i_author"));
-    setEditState(edited, top, "date", getTranslated("i_year_original"));
-    setLangEditState(edited, top, getTranslated("i_original_language"));
-  } else {
-    setEditState(edited, top, "title", getTranslated("i_translated_title"));
-    setEditState(edited, top, "work-creator", getTranslated("i_version_author"));
-    setEditState(edited, top, "creator", getTranslated("i_translator"));
-    setEditState(edited, top, "date", getTranslated("i_year_version"));
-    setLangEditState(edited, top, getTranslated("i_version_language"));
   }
   units.each(function() {
     var unit=$(this);
+    var textarea=unit.find("textarea");
     if ($(this).isEdited()) {
       var self=this;
-      saveUnit.apply($(this).find('textarea'),[function () {
+      saveUnit.apply(textarea,[function () {
         $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
         unit.find(".split").remove();
         unit.find(".join").remove();
-        unit.find("textarea").remove();
         unit.removeClass("edit");
       }]);
     } else {
       $(this).addClass("edit").find("span").remove();
-      var textarea=$("<textarea/>").addClass("autosize");
-      textarea.val(htmlToString($(".text",this)));
-      $(this).prepend(textarea);
       $(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
-      autoSize.apply(textarea);
       if (getVersions().indexOf(version)>0) {
         createJoins(unit);
         createSplits(unit);
@@ -307,17 +243,68 @@ function toggleEdit (e) {
     updateUrl();
     fixWidths();
   }
+  if (getVersions().length==1) {
+    if (edited) {
+      var fulltext=$("textarea.fulltext").val();
+      var lines=fulltext.split("\n\n");
+      var id=$("#hexapla").data("id");
+      var update=function(){
+        $("#hexapla tbody tr").remove();
+        lines.forEach(function(line,i) {
+          var newUnit=$("<div/>");
+          var text=$("<div>").addClass("text");
+          text.html(stringToHtml(line));
+          newUnit.append(text);
+          newUnit.addClass("unit").attr("data-version",version);
+          var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append($("<div>").addClass("box-wrapper").append(newUnit));
+          newUnit.setSize(1);
+          var tr=$("<tr/>").data("line",i).prepend(newTd);
+          $("#hexapla tbody").append(tr);
+        });
+      };
+      if ($("textarea.fulltext").is(".dirty")) {
+        $.ajax({
+          type:"PUT",
+          data:JSON.stringify({text:lines}),
+          contentType: "text/plain",
+          url:"work/"+id+"?version="+version
+        }).done(update);
+      } else {
+        update();
+      }
+    } else {
+      var fulltext="";
+      var first=true;
+      units.each(function() {
+        if (first) first=false;
+        else fulltext+="\n\n";
+        fulltext+=htmlToString($(".text",this));
+      });
+      $("#hexapla tbody tr").remove();
+      var textarea=$('<textarea name="text"/>').addClass("fulltext").val(fulltext);
+      var tr=$("<tr/>").append($("<td/>").append($("<div>").addClass("unit edit").append(textarea)));
+      $("#hexapla tbody").append(tr);
+    }
+  }
 }
 
 var languages=null;
 
-function fillLanguages(control,callback) {
+function fillLanguages(controls,callback) {
   function updateSelect() {
     $.each(languages, function(key, o) {
-      control.append("<option value=\""+key+"\">" + key + " (" + o.fr + " - " + o.en + " - " + o[key] + ")</option>");
+      var label=key + " (" + [ o.fr, o.en, o[key] ].join(" - ") + ")";
+      controls.append($("<option>").val(key).text(label));
+    });
+    controls.each(function(i,c) {
+      var control=$(c);
+      control.val(control.data("language"));
+      if (control.attr("placeholder")) {
+        control.prepend($("<option>").text(control.attr("placeholder")));
+      }
     });
     if (typeof callback=="function")
-        callback();
+      callback();
   };
   if (!languages) {
     $.getJSON(getPrefix() + "/shared/languages.json", function(result) {
@@ -326,43 +313,6 @@ function fillLanguages(control,callback) {
     }).fail(function() { alert("Cannot edit language field"); });;
   } else {
     updateSelect();
-  }
-}
-
-function setLangEditState(isEdited, container, placeholder) {
-  var target = container.find(".language");
-  if(isEdited) {
-    container.find("select").remove();
-    target.removeClass("edit").show();
-  } else {
-    target.hide();
-    var language = $("<select></select>");
-    fillLanguages(language, function() {
-      if (placeholder) {
-        language.prepend("<option value=\"\">" + placeholder+"</option>");
-        language.attr("title",placeholder);
-      }
-      language.val(target.data("id"));
-      language.attr("name","language");
-      language.addClass("editedMeta").css("width", "50%");
-      language.on("change", function() {
-        var id = $("#hexapla").data("id");
-        var ref = $(this).closest("th").data("version");
-        $.ajax({
-          type: "PUT",
-          url: "work/"+id+"/"+ref,
-          contentType: 'text/plain',
-          data: JSON.stringify({language: language.val()})
-        }).done(function() {
-          var lang_id = language.val();
-          fixLanguages(target.data("id",lang_id));
-          fixLanguages($("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
-            .data("id", lang_id));
-          }).fail(function() { alert("fail!"); });
-      });
-      target.addClass("edit");
-      target.before(language);
-    });
   }
 }
 
@@ -380,47 +330,6 @@ function updateUrl() {
   suffix = suffix ? "?"+suffix:"";
 
   window.history.pushState("object or string","",$("#hexapla").data("id")+suffix);
-}
-
-function setEditState(isEdited, container, name, placeholder) {
-  setEditStateForComponent(isEdited, container, name, "focusout", '<input type="text" class="editedMeta ' + name + '" />', placeholder);
-}
-
-function setEditStateForComponent(isEdited, container, name, event, textComponent, placeholder) {
-  var target = container.find("." + name);
-  if(isEdited) {
-    target.removeClass("edit").show();
-  } else {
-    target.addClass("edit");
-    var component=$(textComponent);
-    component.attr("placeholder", placeholder);
-    component.attr("title", placeholder);
-    component.attr("name", name);
-    component.on(event, function() {
-      if(component.hasClass("dirty")) {
-        var id = $("#hexapla").data("id");
-        var ref = $(this).closest("th").data("version");
-        var modify={};
-        var newValue=component.val();
-        modify[name]=newValue;
-        $.ajax({
-          type: "PUT",
-          url: "work/"+id+"/"+ref,
-          contentType: 'text/plain',
-          data: JSON.stringify(modify)
-        }).done(function(result) {
-          if(name == "creator") {
-            changeVersion(ref, newValue);
-          }
-          target.text(newValue);
-          component.removeClass("dirty");
-        }).fail(function() { alert("fail!"); });
-      }
-    });
-    component.val($(target).text());
-    target.before(component);
-    target.hide();
-  }
 }
 
 function changeVersion(oldVersion, newVersion) {
@@ -552,6 +461,42 @@ function saveUnit(callback) {
     if (callback && typeof(callback) == "function") {
       callback();
     }
+  }
+}
+
+function saveMetadata() {
+  var elem=$(this);
+  var inputType=elem.prop("tagName");
+  if(inputType!="INPUT" || elem.hasClass("dirty")) {
+    var id = $("#hexapla").data("id");
+    var ref = elem.closest("th").data("version");
+    var modify={};
+    var newValue=elem.val();
+    var name=elem.attr("name");
+    modify[name]=newValue;
+    $.ajax({
+      type: "PUT",
+      url: "work/"+id+"/"+ref,
+      contentType: 'text/plain',
+      data: JSON.stringify(modify)
+    }).done(function(result) {
+      var target=elem.siblings("div.metadata."+name);
+      if(name == "creator") {
+        changeVersion(ref, newValue);
+      }
+      if (inputType=="INPUT") {
+        target.text(newValue);
+        elem.removeClass("dirty");
+      }
+      if (name=="language") {
+        var lang_id = elem.val();
+        fixLanguages(target.data("id",lang_id));
+        fixLanguages($("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
+          .data("id", lang_id));
+      }
+    }).fail(function() {
+      alert("fail!");
+    });
   }
 }
 
@@ -701,6 +646,13 @@ $(document).ready(function() {
   $("#hexapla").on('change input cut paste','textarea,input.editedMeta',modified);
 
   $("tr").on("focusout", ".unit.edit textarea", saveUnit);
+  $("thead").on("focusout","input.editedMeta", saveMetadata);
+  $("thead").on("change","select.editedMeta", saveMetadata);
+  $("#hexapla").on("click","span.delete", clickDeleteVersion);
+
+  $(".editedMeta").each(function() {
+    $(this).attr("placeholder",$(this).attr("title"));
+  })
 
   $(".top").on("click", "#addVersion", toggleAddVersion);
   $(".top").on("click", "#removeDoc", toggleRemoveDoc);
@@ -723,8 +675,11 @@ $(document).ready(function() {
       toggleShow($(this).getVersion("th"));
     });
   }
-  $("#hexapla th.edited").each(toggleEdit).removeClass("edited");
+  $("#hexapla th.edited").removeClass("edited").not(".edit").each(toggleEdit);
+
   fixWidths();
+
+  fillLanguages($("select[name=language]"));
 
   if(N==0) {
     $("#work-info").show().on("submit",function(e) {
@@ -750,14 +705,8 @@ $(document).ready(function() {
       return false;
     });
 
-    fillLanguages($("#work-info [name=language]"));
     $(".top h1, .workButton").hide();
   } else {
-    var language=$("#work-info [name=language]");
-    fillLanguages(language,function() {
-      language.val(language.data("language"));
-      language.prepend("<option value=\"\">" + language.attr("placeholder")+"</option>");
-    });
     $("#work-info").on("submit",function(e) {
       e.preventDefault();
       var data={};

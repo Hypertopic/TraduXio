@@ -116,7 +116,8 @@ function Hexapla() {
 	    }
 	    var line={
 	      version:this.versions[vi].id,
-	      text:this.versions[vi].text[i].replace("<","&lt").replace(">","&gt;").replace(NEW_LINE, "<br/>")
+	      htmlText:this.versions[vi].text[i].replace("<","&lt").replace(">","&gt;").replace(NEW_LINE, "<br/>"),
+        rawText:this.versions[vi].text[i]        
 	    };
 	    row.units.push(line);
 	    lastLines[vi]={line:line,num:i};

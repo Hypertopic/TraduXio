@@ -67,8 +67,8 @@ div.metadata {
   padding:0.5em 2em;
 }
 
-.creator {
-  display: inline-block;
+.edit div.metadata {
+  display: none;
 }
 
 .editedMeta {
@@ -79,13 +79,19 @@ div.metadata {
   padding: 0;
   margin-top: 10px;
   width: 100%;
+  display: none;
 }
 
-.date.editedMeta {
+.edit .editedMeta {
+  display: inline-block;;
+}
+
+.editedMeta.date,
+.editedMeta.language {
   width: 50%;
 }
 
-.creator.editedMeta {
+.editedMeta.creator {
   width: 80%;
 }
 
@@ -222,7 +228,7 @@ div.metadata {
   position:relative;
 }
 
-.unit.edit textarea {
+.unit textarea {
   border:1px solid gray;
   border-radius:0.5em;
   padding:0.5em;
@@ -231,6 +237,10 @@ div.metadata {
   font-size:1em;
   font-size:1em;
   height:100%;
+  display: none;
+}
+.unit.edit textarea {
+  display:inherit;
 }
 
 textarea.autosize {
@@ -307,21 +317,23 @@ textarea.autosize {
   right: 10px;
 }
 
+.button.edit-license,
 .button.delete {
-  background-image: url(../img/delete.png);
-  width:32px;
-  left: 10px;
-}
-
-.edit .button.edit-license {
-  display:inline-block;
-}
-
-.button.edit-license {
-  background-image: url(../img/lock.png);
   width:32px;
   left: 10px;
   display:none;
+}
+
+.edit .button.edit-license,
+.edit .button.delete {
+  display:inline-block;
+}
+
+.button.delete {
+  background-image: url(../img/delete.png);
+}
+.button.edit-license {
+  background-image: url(../img/lock.png);
 }
 
 #hexapla .pleat .button {

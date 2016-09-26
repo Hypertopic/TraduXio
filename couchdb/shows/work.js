@@ -10,28 +10,6 @@ function(o, req) {
     for each (version in o.translations)
       return version.text.length;
   }
-  function getLines(text,version) {
-    var lines=[];
-    var line={};
-    for (var lineNum in text) {
-       if (text[lineNum]) {
-         if (line) {
-           line.space=lineNum-line.lineNum;
-           lines[line.lineNum]=line;
-         }
-         line={
-           text:text[lineNum],
-           line:lineNum,
-           version:version
-         };
-       }
-    }
-    if (line) {
-      line.space=lineNum-line.lineNum;
-      lines[line.lineNum]=line;
-    }
-
-  }
 
   var newWork = false;
   if (o===null) {
@@ -67,6 +45,7 @@ function(o, req) {
       data.raw["original"]=o.text;
       data.headers.push({
         id: "original",
+        is_original: true,
         title: o.title,
         language: o.language,
         date: o.date,
@@ -90,7 +69,6 @@ function(o, req) {
         language: translation.language || "",
         date: translation.date,
         creativeCommons: translation.creativeCommons,
-        trad:data.i18n.i_trad,
         edited: (edited_versions.indexOf(t)!== -1),
         opened: (opened_versions.indexOf(t)!== -1)
       });

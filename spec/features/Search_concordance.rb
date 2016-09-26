@@ -8,7 +8,9 @@ feature 'Search for a concordance' do
     debug "select in #{version} block #{block} between #{s} and #{e}"
     open_translation version
     debug current_path
-    page.evaluate_script("findUnits('#{version}').filter(':eq(#{block})').selection('setPos',{start:#{s},end:#{e}})")
+    script="findUnits('#{version}').filter(':eq(#{block})').find('div.text').selection('setPos',{start:#{s},end:#{e}})"
+    debug "Evalutating #{script}"
+    page.evaluate_script(script)
     expect(page).to have_css("div.context-menu div.item.concordance")
     find("div.context-menu div.item.concordance").trigger(:click)
   end
