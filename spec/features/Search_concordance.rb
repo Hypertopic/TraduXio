@@ -11,6 +11,7 @@ feature 'Search for a concordance' do
     script="findUnits('#{version}').filter(':eq(#{block})').find('div.text').selection('setPos',{start:#{s},end:#{e}})"
     debug "Evalutating #{script}"
     page.evaluate_script(script)
+    debug_screen "selected text"
     expect(page).to have_css("div.context-menu div.item.concordance")
     find("div.context-menu div.item.concordance").trigger(:click)
   end

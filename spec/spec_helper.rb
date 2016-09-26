@@ -15,6 +15,7 @@ RSpec.configure do |config|
   config.before(:each) do
     prefer_language 'en'
   end
+  config.example_status_persistence_file_path=".rspec-stats"
 end
 
 require 'work_helper'
@@ -137,4 +138,9 @@ end
 
 def debug(step)
   print Time.new.strftime("%H:%M:%S")+" #{step}\n" if do_debug?
+end
+
+def debug_screen(filename)
+  debug "saving screenshot #{filename}"
+  save_screenshot "#{filename}.png" if do_debug?
 end
