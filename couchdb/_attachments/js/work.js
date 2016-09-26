@@ -202,6 +202,7 @@ function modified() {
   if ($(this).is(".autosize")) {
     autoSize.apply(this);
     positionSplits($(this).closest(".unit"));
+    positionSplits($(".pleat.open").not("[data-version='"+$(this).getVersion()+"']"))
   }
 }
 
