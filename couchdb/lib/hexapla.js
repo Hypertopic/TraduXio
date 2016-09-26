@@ -32,6 +32,10 @@ function Hexapla() {
     return line_number;
   };
 
+  this.toHtml = function (text) {
+    return text.replace("<","&lt").replace(">","&gt;").replace(NEW_LINE, "<br/>");
+  };
+
   this.getLineVersion = function(version_number, line_number) {
     var version = this.versions[version_number];
     if (version)
@@ -47,7 +51,7 @@ function Hexapla() {
       return '<div class="unit" data-line="'
         + line_number + '" data-version="'
         + this.versions[version_number].id + '">'
-        + string.replace("<","&lt").replace(">","&gt;").replace(NEW_LINE, "<br/>")
+        + this.toHtml(string)
         + "</div>";
     return null;
   };
@@ -108,20 +112,20 @@ function Hexapla() {
       finished=true;
       var row={units:[],line:i};
       for (var vi in this.versions) {
-	if (i < this.versions[vi].text.length) {
+        if (i < this.versions[vi].text.length) {
           finished=false;
-	  if (this.versions[vi].text[i]!=null) {
-	    if (lastLines[vi]) {
-	      lastLines[vi].line.space=i-lastLines[vi].num;
-	    }
-	    var line={
-	      version:this.versions[vi].id,
-	      htmlText:this.versions[vi].text[i].replace("<","&lt").replace(">","&gt;").replace(NEW_LINE, "<br/>"),
-        rawText:this.versions[vi].text[i]        
-	    };
-	    row.units.push(line);
-	    lastLines[vi]={line:line,num:i};
-	  }
+          if (this.versions[vi].text[i]!=null) {
+            if (lastLines[vi]) {
+              lastLines[vi].line.space=i-lastLines[vi].num;
+            }
+            var line={
+              version:this.versions[vi].id,
+              htmlText:this.toHtml(this.versions[vi].text[i]),
+              rawText:this.versions[vi].text[i]
+            };
+            row.units.push(line);
+            lastLines[vi]={line:line,num:i};
+          }
         }
       }
       if (!finished) rows[i]=row;
