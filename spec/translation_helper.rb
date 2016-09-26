@@ -48,6 +48,8 @@ end
 def create_random_translation
   data=random_translation_metadata
   create_translation data[:author]
+  #check if translation is open after being created (with ?edit url modifier)
+  expect(page).to have_open_translation(data[:author])
   edit_translation_metadata(data[:author],data)
   read_translation data[:author]
   debug data
@@ -133,6 +135,10 @@ end
 
 def have_translation(version)
   have_selector(selvers(version,"th.pleat"))
+end
+
+def have_open_translation(version)
+  have_selector(selvers(version,"th.pleat.open"))
 end
 
 def have_metadata(metadata,value)
