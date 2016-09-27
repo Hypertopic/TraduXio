@@ -62,7 +62,7 @@ end
 
 def insert_work_text (text)
   find("thead th.pleat.open input.edit",:match=>:first).trigger(:click)
-  fill_in 'text', :with => (text.is_a? Array) ? text.join("\n\n") : text
+  find('textarea.fulltext').set((text.is_a? Array) ? text.join("\n\n") : text)
   find("thead th.pleat.open input.edit",:match=>:first).trigger(:click)
 end
 

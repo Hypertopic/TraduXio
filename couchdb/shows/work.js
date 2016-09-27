@@ -26,14 +26,12 @@ function(o, req) {
     lines: getTextLength(),
     headers: [],
     units: [],
-    raw:[],
     rows:[],
     lang:getPreferredLanguage()
   };
   data.i18n=localized(data.lang);
 
   if (!newWork) {
-
     var hexapla = new Hexapla();
     var edited_versions=req.query.edit ? req.query.edit.split("|") : [];
     var opened_versions=req.query.open ? req.query.open.split("|") : [];
@@ -42,13 +40,13 @@ function(o, req) {
         id: "original",
         text: o.text
       });
-      data.raw["original"]=o.text;
       data.headers.push({
         id: "original",
         is_original: true,
         title: o.title,
         language: o.language,
         date: o.date,
+        raw:o.text,
         creativeCommons: o.creativeCommons,
         edited: (edited_versions.indexOf("original")!=-1),
         opened: (opened_versions.indexOf("original")!=-1)
@@ -60,7 +58,6 @@ function(o, req) {
         id: t,
         text: translation.text
       });
-      data.raw[t]=translation.text;
       data.headers.push({
         id:t,
         title: translation.title,
@@ -68,6 +65,7 @@ function(o, req) {
         creator: t,
         language: translation.language || "",
         date: translation.date,
+        raw:translation.text,
         creativeCommons: translation.creativeCommons,
         edited: (edited_versions.indexOf(t)!== -1),
         opened: (opened_versions.indexOf(t)!== -1)
@@ -85,6 +83,10 @@ function(o, req) {
   data.notext=o.text ? false : (o.original ? false : true);
   data.original=o.text ? true : (newWork ? true : false);
   data.i18n_str=JSON.stringify(data.i18n);
+  if (data.headers.length==1) {
+    data.justOneText=true;
+    data.fulltext=data.headers[0].raw;
+  }
 
   return Mustache.to_html(this.templates.work, data, this.templates.partials);
 }

@@ -71,7 +71,9 @@
       <td class="pleat open" data-version="{{version}}" rowspan="{{space}}">
         <div class="box-wrapper">
           <div class="unit" data-version="{{version}}">
-            <textarea style="width: 100%; height: 100%;" class="autosize">{{{rawText}}}</textarea>
+            {{^justOneText}}
+              <textarea style="width: 100%; height: 100%;" class="autosize">{{{rawText}}}</textarea>
+            {{/justOneText}}
             <div class="text">{{{htmlText}}}</div>
           </div>
         </div>
@@ -79,6 +81,27 @@
     {{/units}}
   </tr>
   {{/rows}}
+  {{#justOneText}}
+  <tr class="fulltext">
+    <td class="pleat open edit" data-version="{{version}}" rowspan="{{raw.length}}">
+      <div class="box-wrapper">
+      <div class="unit" data-version="{{version}}">
+        <textarea style="width: 100%; height: 100%;" class="fulltext autosize">
+{{#fulltext}}
+{{.}}
+
+{{/fulltext}}
+       </textarea>
+       <div class="text">
+{{#fulltext}}
+{{.}}<br/>
+{{/fulltext}}
+       </div>
+     </div>
+    </div>
+    </td>
+  </tr>
+  {{/justOneText}}
   </tbody>
   <tfoot><tr>
   {{#headers}}

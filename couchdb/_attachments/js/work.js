@@ -220,37 +220,14 @@ function toggleEdit (e) {
     doc.addClass("edit");
     top.css("width",doc.first().outerWidth()+"px");
   }
-  units.each(function() {
-    var unit=$(this);
-    var textarea=unit.find("textarea");
-    if ($(this).isEdited()) {
-      var self=this;
-      saveUnit.apply(textarea,[function () {
-        $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
-        unit.find(".split").remove();
-        unit.find(".join").remove();
-        unit.removeClass("edit");
-      }]);
-    } else {
-      $(this).addClass("edit").find("span").remove();
-      $(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
-      if (getVersions().indexOf(version)>0) {
-        createJoins(unit);
-        createSplits(unit);
-      }
-    }
-  });
-  if (e.hasOwnProperty("cancelable")) { //means it is an event, and as such toggle occured on user action
-    updateUrl();
-    fixWidths();
-  }
   if (getVersions().length==1) {
     if (edited) {
       var fulltext=$("textarea.fulltext").val();
       var lines=fulltext.split("\n\n");
       var id=$("#hexapla").data("id");
       var update=function(){
-        $("#hexapla tbody tr").remove();
+        $("#hexapla tbody tr.fulltext").hide();
+        $("#hexapla tbody tr:not(.fulltext)").remove();
         lines.forEach(function(line,i) {
           var newUnit=$("<div/>");
           var text=$("<div>").addClass("text");
@@ -259,7 +236,7 @@ function toggleEdit (e) {
           newUnit.addClass("unit").attr("data-version",version);
           var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append($("<div>").addClass("box-wrapper").append(newUnit));
           newUnit.setSize(1);
-          var tr=$("<tr/>").data("line",i).prepend(newTd);
+          var tr=$("<tr/>").attr("id",i).attr("data-line",i).prepend(newTd);
           $("#hexapla tbody").append(tr);
         });
       };
@@ -274,18 +251,34 @@ function toggleEdit (e) {
         update();
       }
     } else {
-      var fulltext="";
-      var first=true;
-      units.each(function() {
-        if (first) first=false;
-        else fulltext+="\n\n";
-        fulltext+=htmlToString($(".text",this));
-      });
-      $("#hexapla tbody tr").remove();
-      var textarea=$('<textarea name="text"/>').addClass("fulltext").val(fulltext);
-      var tr=$("<tr/>").append($("<td/>").append($("<div>").addClass("unit edit").append(textarea)));
-      $("#hexapla tbody").append(tr);
+      $("#hexapla tbody tr:not(.fulltext)").hide();
+      $("#hexapla tbody tr.fulltext").show();
     }
+  } else {
+    units.each(function() {
+      var unit=$(this);
+      var textarea=unit.find("textarea");
+      if (edited) {
+        var self=this;
+        saveUnit.apply(textarea,[function () {
+          $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
+          unit.find(".split").remove();
+          unit.find(".join").remove();
+          unit.removeClass("edit");
+        }]);
+      } else {
+        $(this).addClass("edit").find("span").remove();
+        $(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
+        if (getVersions().indexOf(version)>0) {
+          createJoins(unit);
+          createSplits(unit);
+        }
+      }
+    });
+  }
+  if (e.hasOwnProperty("cancelable")) { //means it is an event, and as such toggle occured on user action
+    updateUrl();
+    fixWidths();
   }
 }
 

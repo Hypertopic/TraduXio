@@ -239,7 +239,13 @@ div.metadata {
   height:100%;
   display: none;
 }
-.unit.edit textarea {
+
+tr.fulltext {
+  display:none;
+}
+
+.unit.edit textarea,
+.edit textarea.fulltext {
   display:inherit;
 }
 
