@@ -57,7 +57,9 @@
     "i_delete_text_and_translations": "Delete text and all its translations",
     "i_hide": "Hide",
     "i_edit": "Edit",
+    "i_show": "Show",
     "i_edit_license": "Edit license",
+    "i_search_concordance": "Search the concordance",
     "i_all_rights_reserved": "All rights reserved",
 
     "i_add_work": "Add a work",
@@ -134,7 +136,9 @@
     "i_delete_text_and_translations": "Supprimer le texte et toutes ses traductions",
     "i_hide": "Cacher",
     "i_edit": "Éditer",
+    "i_show": "Montrer",
     "i_edit_license": "Éditer la licence",
+    "i_search_concordance": "Chercher dans la concordance",
     "i_all_rights_reserved": "Tous droits réservés",
 
     "i_add_work": "Ajouter une œuvre",

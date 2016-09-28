@@ -5,8 +5,9 @@ function(o, req) {
   // !code localization.js
 
   var js_i18n_elements=[
-    "i_read","i_edit",
-    "i_confirm_delete","i_delete_version"
+    "i_read","i_edit","i_show",
+    "i_confirm_delete","i_delete_version",
+    "i_search_concordance"
   ];
   function getTextLength() {
     if (o.text)

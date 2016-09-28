@@ -50,7 +50,7 @@ function addPleat(version) {
   find(version).filter("td").first().after(pleat);
   var pleatHead=$("<th/>").addClass("pleat").addClass("close").append(
     $("<div>").addClass("relative-wrapper").append(
-      $("<span>").addClass("button show").html("Montrer")
+      $("<span>").addClass("button show").html(getTranslated("i_show"))
     )
   ).attr("data-version",version);
   header.after(pleatHead.clone());
@@ -547,7 +547,7 @@ $(document).ready(function() {
       e.stopPropagation();
       var menu=$("<div/>").addClass("context-menu");
       menu.append($("<div/>").addClass("item concordance").
-        append("search the concordance for <em>"+txt+"</em>"));
+        append(getTranslated("i_search_concordance")+": <em>"+txt+"</em>"));
 
       menu.css({top:e.pageY,left:e.pageX});
       $("body .context-menu").remove();
