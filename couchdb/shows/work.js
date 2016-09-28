@@ -4,6 +4,10 @@ function(o, req) {
   // !code lib/path.js
   // !code localization.js
 
+  var js_i18n_elements=[
+    "i_read","i_edit",
+    "i_confirm_delete","i_delete_version"
+  ];
   function getTextLength() {
     if (o.text)
       return o.text.length;
@@ -30,6 +34,10 @@ function(o, req) {
     lang:getPreferredLanguage()
   };
   data.i18n=localized(data.lang);
+  var js_i18n={};
+  js_i18n_elements.forEach(function (item) {
+    if (data.i18n[item]) js_i18n[item]=data.i18n[item];
+  });
 
   if (!newWork) {
     var hexapla = new Hexapla();
@@ -82,7 +90,7 @@ function(o, req) {
   data.prefix="..";
   data.notext=o.text ? false : (o.original ? false : true);
   data.original=o.text ? true : (newWork ? true : false);
-  data.i18n_str=JSON.stringify(data.i18n);
+  data.i18n_str=JSON.stringify(js_i18n);
   if (data.headers.length==1) {
     data.justOneText=true;
     data.fulltext=data.headers[0].raw;

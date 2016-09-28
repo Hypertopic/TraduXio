@@ -19,6 +19,8 @@ function findPleat(version) {
 }
 
 function getTranslated(name) {
+  //show function only sends requested i18n elements, so need to modify the
+  //js_i18n_elements array to get them here (and load them inside the template)
   return i18n[name] || name;
 }
 
