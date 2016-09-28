@@ -2,8 +2,9 @@ def create_translation(version)
   debug "click on add version button"
   page.find("a#addVersion").trigger(:click)
   debug "fill the creator #{version}"
-  fill_in :'work-creator', :with => version
+  fill_input "[name='work-creator']", version
   begin
+    wait_for_ajax
     debug "click on create button"
     page.find('input[name=do-create]').trigger(:click)
     debug "wait #{version} to appear"
@@ -14,21 +15,16 @@ end
 def edit_translation_metadata(version,options)
   raise "Must pass a hash" if not options.is_a?(Hash)
   previously_in_edit_mode=edit_translation version
-  edited=false
   within (selvers(version,"thead th.pleat.open")) do
-    edited=fill_field(:date,options[:date]) if options.has_key?(:date)
-    edited=fill_field(:title,options[:title]) if options.has_key?(:title)
-    edited=fill_select(:language,options[:language]) if options.has_key?(:language)
+    fill_field(:date,options[:date]) if options.has_key?(:date)
+    fill_field(:title,options[:title]) if options.has_key?(:title)
+    fill_select(:language,options[:language]) if options.has_key?(:language)
     if version!=:original
-      edited=fill_field(:'work-creator',options[:creator]) if options.has_key?(:creator)
-      edited=fill_field(:creator,options[:author]) if options.has_key?(:author)
+      fill_field(:'work-creator',options[:creator]) if options.has_key?(:creator)
+      fill_field(:creator,options[:author]) if options.has_key?(:author)
     else
-      edited=fill_field(:'work-creator',options[:author]) if options.has_key?(:author)
+      fill_field(:'work-creator',options[:author]) if options.has_key?(:author)
     end
-  end
-  if edited then
-    debug :blur
-    edited.trigger(:blur)
   end
   if options.has_key?(:author)
     version=options[:author]
@@ -82,7 +78,6 @@ def fill_block(version,row,text)
     debug "filling block #{row} of #{version} with #{text}"
     ta=find('textarea')
     ta.set(text)
-    ta.trigger(:blur)
     wait_for_ajax
   end
 end

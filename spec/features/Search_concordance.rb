@@ -31,7 +31,6 @@ feature 'Search for a concordance' do
     fill_input '#query', 'ancient the'
     fill_select 'language', 'en'
     submitForm()
-    wait_for_ajax
     expect(page).not_to have_content 'Trans. Aurélien Bénel'
     expect(page).not_to have_content 'Trans. François Truchaud'
   end
@@ -41,7 +40,6 @@ feature 'Search for a concordance' do
     fill_input '#query', 'anc'
     fill_select 'language', 'en'
     submitForm()
-    wait_for_ajax
     expect(page).to have_in_bold('anc')
     expect(page).to have_content 'Trans. François Truchaud'
     expect(page).to have_content 'Trans. Aurélien Bénel'

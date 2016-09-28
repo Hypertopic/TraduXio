@@ -6,7 +6,7 @@ DATABASE=${1-http://localhost:5984/traduxio}
 echo Filling in $DATABASE
 for i in "$dirname"/samples/*.json; do
   echo Loading $i into $DATABASE
-  if ! curl -m 10 -s -XPOST -H "Content-Type: application/json" -d@$i $DATABASE -o /dev/null; then
+  if ! curl -m 10 -s -XPOST -H "Content-Type: application/json" -d@$i $DATABASE; then
     echo Failed; exit 1;
   fi
 done
