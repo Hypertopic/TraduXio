@@ -14,7 +14,12 @@
       <li class="author foldable closed">{{name}}
       <ul>
         {{#works}}
-        <li><a href="{{id}}">{{name}}</a></li>
+        <li>
+          {{^original}}<i>{{/original}}
+          <a href="{{id}}">{{name}}</a>
+          {{^original}}</i>{{/original}}
+          {{#languages}}({{languages}}){{/languages}}
+        </li>
         {{/works}}
       </ul>
       </li>

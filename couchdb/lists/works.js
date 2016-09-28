@@ -35,7 +35,9 @@ function(head, req) {
     }
     authorData.works.push({
       id: row.id,
-      name: row.value
+      name: row.value.title,
+      original: row.value.original,
+      languages: row.value.languages.join(", ")
     });
   }
   if (authorData) {
