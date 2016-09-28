@@ -391,7 +391,7 @@ function addVersion() {
   var ref = $("#addPanel").find("input[name='work-creator']").val();
   if(ref != "") {
     request({
-      type: "PUT",
+      type: "POST",
       url: "work/"+id+"/"+ref,
       contentType: 'text/plain',
       data: JSON.stringify({creator: ref})

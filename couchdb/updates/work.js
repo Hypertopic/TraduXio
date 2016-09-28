@@ -5,6 +5,9 @@ function(work, req) {
   } catch (e) {
     args={};
   }
+  if (["PUT","POST","DELETE"].indexOf(req.method)==-1) {
+    return [null,{code:405,body:"Method "+req.method+" not allowed"}];
+  }
   if (work===null) {
     work=args;
     work._id=work.id || req.id || req.uuid;
@@ -34,8 +37,8 @@ function(work, req) {
     orignal=true;
   } else {
     if(!work.translations[version_name]) {
-      if (req.method=="DELETE") {
-        return [work,{code:404,body:version+" not found"}];
+      if (req.method=="DELETE" || req.method=="PUT") {
+        return [null,{code:404,body:version_name+" not found"}];
       }
       var l = 1;
       if (work.text) l=work.text.length;
@@ -48,9 +51,13 @@ function(work, req) {
       }
       var text=[];
       for(var i=0 ; i<l ; i++) {
-          text.push("");
+        text.push("");
       }
       work.translations[version_name] = { title: "", language: "", creator:"", text: text };
+    } else {
+      if (req.method=="POST") {
+        return [null,{code:400,body:version_name+" already exists"}];
+      }
     }
     doc = work.translations[version_name];
   }
@@ -82,13 +89,18 @@ function(work, req) {
       version_name=new_name;
     }
   }
+  var keysOK=["date","language","title","text","creativeCommons"];
   for (var key in args) {
-    if (doc[key] && doc[key] != args[key]) {
-      actions.push("change "+key+" from "+doc[key]+" to "+args[key]+" for "+version_name);
+    if (keysOK.indexOf(key)!=-1) {
+      if (doc[key] && doc[key] != args[key]) {
+        actions.push("change "+key+" from "+doc[key]+" to "+args[key]+" for "+version_name);
+          doc[key]=args[key];
+      } else if (!doc[key]) {
+        actions.push("set "+key+" to "+args[key]+" for "+version_name);
         doc[key]=args[key];
-    } else if (!doc[key]) {
-      actions.push("set "+key+" to "+args[key]+" for "+version_name);
-      doc[key]=args[key];
+      }
+    } else {
+      return [work,{code:400,body:"can't set value for "+key}];
     }
   }
   return [work, JSON.stringify(actions)];
