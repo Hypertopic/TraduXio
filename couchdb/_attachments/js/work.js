@@ -11,7 +11,11 @@ $.fn.toggleText = function(text1, text2) {
 };
 
 function request(options) {
-  return $.ajax(options).retry({times:3,statusCodes:[0,409]});
+  return $.ajax(options)
+    .retry({times:3,statusCodes:[0,409]})
+    .fail(function () {
+      alert("request failed");
+    });
 }
 
 function find(version) {
@@ -334,7 +338,7 @@ function fillLanguages(controls,callback) {
     $.getJSON(getPrefix() + "/shared/languages.json", function(result) {
       languages=result;
       updateSelect();
-    }).fail(function() { alert("Cannot edit language field"); });;
+    });
   } else {
     updateSelect();
   }
@@ -393,7 +397,7 @@ function addVersion() {
       data: JSON.stringify({creator: ref})
     }).done(function() {
       window.location.href = id + "?edit=" + ref;
-    }).fail(function() { alert("fail!"); });
+    });
   }
   return false;
 }
@@ -406,7 +410,7 @@ function removeDoc() {
       contentType: 'text/plain'
     }).done(function() {
       window.location.href = "./";
-    }).fail(function(error) { alert("failed: " + error.statusText); });
+    });
   }
 }
 
@@ -425,7 +429,7 @@ function deleteVersion(version) {
     contentType: 'text/plain'
   }).done(function() {
     window.location.reload(true);
-  }).fail(function() { alert("fail!"); });
+  });
 }
 
 function createJoin(unit1,unit2) {
@@ -521,8 +525,6 @@ function saveMetadata() {
         fixLanguages($("pleat.close[data-version='" + ref + "']")
           .find(".language").data("id", lang_id));
       }
-    }).fail(function() {
-      alert("fail!");
     });
   }
 }
@@ -757,7 +759,7 @@ $(document).ready(function() {
         $(".top h1 span.creator").text(data["work-creator"]);
         $(".top h1 span.language").data("id",data["language"]);
         fixLanguages($(".top h1"));
-      }).fail(function(){alert("fail");});
+      });
       return false;
     });
   }
