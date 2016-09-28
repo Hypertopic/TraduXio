@@ -213,17 +213,20 @@ function toggleEdit (e) {
   var units = findUnits(version);
   var top = doc.first();
   var edited = doc.isEdited();
-  doc.find("input.edit").toggleName(getTranslated("i_read"), getTranslated("i_edit"));
-  if (edited) {
-    top.css("width","auto");
-    doc.removeClass("edit");
-  } else {
-    doc.addClass("edit");
-    top.css("width",doc.first().outerWidth()+"px");
+  function applyToggle() {
+    if (edited) {
+      top.css("width","auto");
+      doc.removeClass("edit");
+    } else {
+      doc.addClass("edit");
+      top.css("width",doc.first().outerWidth()+"px");
+    }
+    doc.find("input.edit").toggleName(getTranslated("i_read"), getTranslated("i_edit"));
   }
   if (getVersions().length==1) {
     if (edited) {
       var fulltext=$("textarea.fulltext").val();
+      $("textarea.fulltext").prop("disabled",true);
       var lines=fulltext.split("\n\n");
       var id=getDocId();
       var update=function(){
@@ -241,6 +244,8 @@ function toggleEdit (e) {
           var tr=$("<tr/>").attr("id",i).attr("data-line",i).prepend(newTd);
           $("#hexapla tbody").append(tr);
         });
+        applyToggle();
+        $("textarea.fulltext").removeClass("dirty")
       };
       if ($("textarea.fulltext").is(".dirty")) {
         $.ajax({
@@ -248,35 +253,51 @@ function toggleEdit (e) {
           data:JSON.stringify({text:lines}),
           contentType: "text/plain",
           url:"work/"+id+"?version="+version
-        }).done(update);
+        }).done(update).always(function() {
+          $("textarea.fulltext").prop("disabled",false);
+        });
       } else {
         update();
       }
     } else {
       $("#hexapla tbody tr:not(.fulltext)").hide();
       $("#hexapla tbody tr.fulltext").show();
+      $("textarea.fulltext").prop("disabled",false);
+      applyToggle();
     }
   } else {
-    units.each(function() {
-      var unit=$(this);
-      var textarea=unit.find("textarea");
-      if (edited) {
-        var self=this;
+    if (edited) {
+      var unitsOk=0;
+      function finish() {
+        units.find(".split").remove();
+        units.find(".join").remove();
+        units.removeClass("edit");
+        applyToggle();
+      }
+      units.each(function() {
+        var unit=$(this);
+        var textarea=unit.find("textarea");
         saveUnit.apply(textarea,[function () {
-          $(self).find(".text").html(stringToHtml($(self).find("textarea").val()));
-          unit.find(".split").remove();
-          unit.find(".join").remove();
-          unit.removeClass("edit");
+          unit.find(".text").html(stringToHtml(textarea.val()));
+          unitsOk++;
+          if (unitsOk==units.length) {
+            finish();
+          }
         }]);
-      } else {
-        $(this).addClass("edit").find("span").remove();
-        $(this).find(".text").css("min-height",(getSize(unit)*32)+"px");
+      });
+    } else {
+      units.find("textarea").prop("disabled",false);
+      units.addClass("edit").find("span").remove();
+      units.each(function () {
+        var unit=$(this);
+        unit.find(".text").css("min-height",(getSize(unit)*32)+"px");
         if (getVersions().indexOf(version)>0) {
           createJoins(unit);
           createSplits(unit);
         }
-      }
-    });
+      });
+      applyToggle();
+    }
   }
   if (e.hasOwnProperty("cancelable")) {
     //means it is an event, and as such toggle occured on user action
@@ -438,29 +459,24 @@ function createSplits(unit) {
   }
 }
 
-function unedit() {
-  var self=this;
-  saveUnit.apply(this,[function() {
-     var unit=$(self).closest(".unit");
-     unit.html(stringToHtml($(self).val())).removeClass("edit");
-  }]);
-}
-
 function saveUnit(callback) {
-  var self=this;
-  if ($(this).hasClass("dirty")) {
-    $(this).prop("disabled",true);
-    var content=$(this).closest(".unit").find("textarea").val();
-    editOnServer(content, $(this).getReference()).done(function(message,result) {
+  var textarea=$(this);
+  if (textarea.hasClass("dirty")) {
+    textarea.prop("disabled",true);
+    var content=textarea.val();
+    editOnServer(content, textarea.getReference())
+    .done(function(message,result) {
       if (result == "success") {
-        $(self).removeClass("dirty");
-        $(self).prop("disabled",false);
-          if (callback && typeof(callback) == "function") {
-            callback();
-          }
+        textarea.removeClass("dirty");
+        if (callback && typeof(callback) == "function") {
+          callback();
+        }
       } else {
         alert(result+":"+message);
       }
+    })
+    .always(function() {
+      textarea.prop("disabled",false);
     });
   } else {
     if (callback && typeof(callback) == "function") {
