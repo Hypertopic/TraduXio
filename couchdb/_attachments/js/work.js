@@ -10,6 +10,10 @@ $.fn.toggleText = function(text1, text2) {
   );
 };
 
+function request(options) {
+  return $.ajax(options).retry({times:3,statusCodes:[0,409]});
+}
+
 function find(version) {
   return $(".pleat.open[data-version='"+version+"']");
 }
@@ -238,8 +242,8 @@ function toggleEdit (e) {
           text.html(stringToHtml(line));
           newUnit.append(text);
           newUnit.addClass("unit").attr("data-version",version);
-          var newTd=$("<td>").addClass("pleat open").attr("data-version",version).
-            append($("<div>").addClass("box-wrapper").append(newUnit));
+          var newTd=$("<td>").addClass("pleat open").attr("data-version",version)
+            .append($("<div>").addClass("box-wrapper").append(newUnit));
           newUnit.setSize(1);
           var tr=$("<tr/>").attr("id",i).attr("data-line",i).prepend(newTd);
           $("#hexapla tbody").append(tr);
@@ -248,12 +252,14 @@ function toggleEdit (e) {
         $("textarea.fulltext").removeClass("dirty")
       };
       if ($("textarea.fulltext").is(".dirty")) {
-        $.ajax({
+        request({
           type:"PUT",
           data:JSON.stringify({text:lines}),
           contentType: "text/plain",
           url:"work/"+id+"?version="+version
-        }).done(update).always(function() {
+        })
+        .done(update)
+        .always(function() {
           $("textarea.fulltext").prop("disabled",false);
         });
       } else {
@@ -339,8 +345,8 @@ function updateUrl() {
     .map(function() {
       return $(this).getVersion("th");
     }).toArray().join("|");
-  var edited=$("thead th.edit:visible").
-    map(function() {
+  var edited=$("thead th.edit:visible")
+    .map(function() {
       return $(this).getVersion("th");
     }).toArray().join("|");
   var suffix="";
@@ -380,7 +386,7 @@ function addVersion() {
   var id = getDocId();
   var ref = $("#addPanel").find("input[name='work-creator']").val();
   if(ref != "") {
-    $.ajax({
+    request({
       type: "PUT",
       url: "work/"+id+"/"+ref,
       contentType: 'text/plain',
@@ -394,7 +400,7 @@ function addVersion() {
 
 function removeDoc() {
   if(confirm(getTranslated("i_confirm_delete"))) {
-    $.ajax({
+    request({
       type: "DELETE",
       url: "work/"+getDocId(),
       contentType: 'text/plain'
@@ -413,7 +419,7 @@ function clickDeleteVersion() {
 
 function deleteVersion(version) {
   var id = getDocId();
-  $.ajax({
+  request({
     type: "DELETE",
     url: "work/"+id+"/"+version,
     contentType: 'text/plain'
@@ -495,7 +501,7 @@ function saveMetadata() {
     var newValue=elem.val();
     var name=elem.attr("name");
     modify[name]=newValue;
-    $.ajax({
+    request({
       type: "PUT",
       url: "work/"+id+"/"+ref,
       contentType: 'text/plain',
@@ -528,10 +534,9 @@ function getPreviousUnit(unit) {
 }
 
 var editOnServer = function(content, reference) {
-  var id=getDocId();
-  return $.ajax({
+  return request({
     type: "PUT",
-    url: "version/"+id+"?"+ $.param(reference),
+    url: "version/"+getDocId()+"?"+ $.param(reference),
     contentType: "text/plain",
     data: content
   });
@@ -562,8 +567,8 @@ $(document).ready(function() {
     if (txt && (language=unit.getLanguage())) {
       e.stopPropagation();
       var menu=$("<div/>").addClass("context-menu");
-      menu.append($("<div/>").addClass("item concordance").
-        append(getTranslated("i_search_concordance")+": <em>"+txt+"</em>"));
+      menu.append($("<div/>").addClass("item concordance")
+        .append(getTranslated("i_search_concordance")+": <em>"+txt+"</em>"));
 
       menu.css({top:e.pageY,left:e.pageX});
       $("body .context-menu").remove();
@@ -714,7 +719,7 @@ $(document).ready(function() {
         data[field]=$("[name='"+field+"']","#work-info").val();
       });
       data.original=$("[name=original-work]").prop("checked");
-      $.ajax({
+      request({
         type:"POST",
         url:"work",
         data:JSON.stringify(data),
@@ -726,7 +731,7 @@ $(document).ready(function() {
         } else {
           alert("fail");
         }
-      }).fail(function(){alert("fail");});
+      });
       return false;
     });
 
@@ -740,7 +745,7 @@ $(document).ready(function() {
       });
       var id=getDocId();
       data.original=$("[name=original-work]","#work-info").prop("checked");
-      $.ajax({
+      request({
         type:"PUT",
         url:"work/"+id+"/original",
         data:JSON.stringify(data),

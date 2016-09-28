@@ -86,7 +86,7 @@ function(o, req) {
   data.name="work";
   data.css=true;
   data.script=true;
-  data.scripts=["jquery.selection"];
+  data.scripts=["jquery.selection","jquery.ajax-retry"];
   data.language=data.work_language;
   data.prefix="..";
   data.notext=o.text ? false : (o.original ? false : true);
