@@ -38,19 +38,22 @@ $.fn.rotate = function () {
 
 function addPleat(version) {
   var header=find(version).filter("th").first();
-  var pleat=$("<td/>").addClass("pleat").addClass("close").attr("rowspan",$("tbody tr").length).attr("data-version",version);
+  var pleat=$("<td/>").addClass("pleat").addClass("close")
+    .attr("rowspan",$("tbody tr").length)
+    .attr("data-version",version);
   var language=header.find(".language").clone(true,true);
   language.attr("title",language.html()).html(language.data("id")).removeClass("expand");
   pleat.append(language.rotate());
   pleat.append(header.find(".creator").clone(true,true).rotate());
   find(version).filter("td").first().after(pleat);
   var pleatHead=$("<th/>").addClass("pleat").addClass("close").append(
-     $("<div>").addClass("relative-wrapper").append(
-          $("<span>").addClass("button show").html("Montrer")
-     )
+    $("<div>").addClass("relative-wrapper").append(
+      $("<span>").addClass("button show").html("Montrer")
+    )
   ).attr("data-version",version);
   header.after(pleatHead.clone());
-  var pleatFoot=$("<th/>").addClass("pleat").addClass("close").attr("data-version",version);
+  var pleatFoot=$("<th/>").addClass("pleat").addClass("close")
+    .attr("data-version",version);
   find(version).filter("th").last().after(pleatHead);
 }
 
@@ -146,30 +149,26 @@ function toggleShow(version) {
   findPleat(version).toggle();
   setTimeout(function(){
     fixWidths();
-    //when one version is edited, and we show a non edited one, pagination is ugly
-    //so we toggle edited versions twice to get back to correct pagination
-    //applying to both top and bottom buttons, so we do it twice
-    //find($(".unit.edit").getVersion("td.open")).find("input.edit").each(toggleEdit);
     positionSplits();
   },0);
+}
+
+function getDocId() {
+  return $("#hexapla").data("id");
 }
 
 $.fn.isEdited = function() {
   return this.hasClass("edit");
 };
 
-function htmlToString(unit) {
-  return unit.html()
-    .replace(/<br\/?>/g, "\n").replace("&lt;","<").replace("&gt;",">");
-}
-
 function stringToHtml(formattedString) {
-   return formattedString.replace("<","&lt").replace(">","&gt;").replace(/\n$/,"\n ").replace(/\n/g, "<br>");
+   return formattedString
+    .replace("<","&lt").replace(">","&gt;")
+    .replace(/\n$/,"\n ").replace(/\n/g, "<br>");
 }
 
 $.fn.getVersion = function(ancestor) {
   return this.closest(ancestor).data("version");
-  return $(ancestor,$(this).closest("tr")).index($(this).closest(ancestor)) +1 ;
 };
 
 $.fn.getReference = function() {
@@ -202,7 +201,7 @@ function modified() {
   if ($(this).is(".autosize")) {
     autoSize.apply(this);
     positionSplits($(this).closest(".unit"));
-    positionSplits($(".pleat.open").not("[data-version='"+$(this).getVersion()+"']"))
+    positionSplits($(".pleat.open").not("[data-version='"+$(this).getVersion()+"']"));
   }
 }
 
@@ -224,7 +223,7 @@ function toggleEdit (e) {
     if (edited) {
       var fulltext=$("textarea.fulltext").val();
       var lines=fulltext.split("\n\n");
-      var id=$("#hexapla").data("id");
+      var id=getDocId();
       var update=function(){
         $("#hexapla tbody tr.fulltext").hide();
         $("#hexapla tbody tr:not(.fulltext)").remove();
@@ -234,7 +233,8 @@ function toggleEdit (e) {
           text.html(stringToHtml(line));
           newUnit.append(text);
           newUnit.addClass("unit").attr("data-version",version);
-          var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append($("<div>").addClass("box-wrapper").append(newUnit));
+          var newTd=$("<td>").addClass("pleat open").attr("data-version",version).
+            append($("<div>").addClass("box-wrapper").append(newUnit));
           newUnit.setSize(1);
           var tr=$("<tr/>").attr("id",i).attr("data-line",i).prepend(newTd);
           $("#hexapla tbody").append(tr);
@@ -276,7 +276,8 @@ function toggleEdit (e) {
       }
     });
   }
-  if (e.hasOwnProperty("cancelable")) { //means it is an event, and as such toggle occured on user action
+  if (e.hasOwnProperty("cancelable")) {
+    //means it is an event, and as such toggle occured on user action
     updateUrl();
     fixWidths();
   }
@@ -311,8 +312,14 @@ function fillLanguages(controls,callback) {
 }
 
 function updateUrl() {
-  var opened=$("thead th.open:visible").not(".edit").map(function() {return $(this).getVersion("th");}).toArray().join("|");
-  var edited=$("thead th.edit:visible").map(function() {return $(this).getVersion("th");}).toArray().join("|");
+  var opened=$("thead th.open:visible").not(".edit")
+    .map(function() {
+      return $(this).getVersion("th");
+    }).toArray().join("|");
+  var edited=$("thead th.edit:visible").
+    map(function() {
+      return $(this).getVersion("th");
+    }).toArray().join("|");
   var suffix="";
   if (opened) {
     suffix+="open="+encodeURIComponent(opened);
@@ -323,11 +330,13 @@ function updateUrl() {
   }
   suffix = suffix ? "?"+suffix:"";
 
-  window.history.pushState("object or string","",$("#hexapla").data("id")+suffix);
+  window.history.pushState("object or string","",getDocId()+suffix);
 }
 
 function changeVersion(oldVersion, newVersion) {
-  $("#hexapla").find("*[data-version='" + oldVersion + "']").attr("data-version", newVersion).data("version", newVersion).find(".creator").html(newVersion);
+  $("#hexapla").find("*[data-version='" + oldVersion + "']")
+    .attr("data-version", newVersion).data("version", newVersion)
+    .find(".creator").html(newVersion);
 }
 
 function toggleAddVersion() {
@@ -345,7 +354,7 @@ function toggleEditDoc() {
 }
 
 function addVersion() {
-  var id = $("#hexapla").data("id");
+  var id = getDocId();
   var ref = $("#addPanel").find("input[name='work-creator']").val();
   if(ref != "") {
     $.ajax({
@@ -364,7 +373,7 @@ function removeDoc() {
   if(confirm(getTranslated("i_confirm_delete"))) {
     $.ajax({
       type: "DELETE",
-      url: "work/"+$("#hexapla").data("id"),
+      url: "work/"+getDocId(),
       contentType: 'text/plain'
     }).done(function() {
       window.location.href = "./";
@@ -380,7 +389,7 @@ function clickDeleteVersion() {
 }
 
 function deleteVersion(version) {
-  var id = $("#hexapla").data("id");
+  var id = getDocId();
   $.ajax({
     type: "DELETE",
     url: "work/"+id+"/"+version,
@@ -462,7 +471,7 @@ function saveMetadata() {
   var elem=$(this);
   var inputType=elem.prop("tagName");
   if(inputType!="INPUT" || elem.hasClass("dirty")) {
-    var id = $("#hexapla").data("id");
+    var id = getDocId();
     var ref = elem.closest("th").data("version");
     var modify={};
     var newValue=elem.val();
@@ -485,8 +494,8 @@ function saveMetadata() {
       if (name=="language") {
         var lang_id = elem.val();
         fixLanguages(target.data("id",lang_id));
-        fixLanguages($("#hexapla").find(".close[data-version='" + ref + "']").find(".language")
-          .data("id", lang_id));
+        fixLanguages($("pleat.close[data-version='" + ref + "']")
+          .find(".language").data("id", lang_id));
       }
     }).fail(function() {
       alert("fail!");
@@ -501,7 +510,7 @@ function getPreviousUnit(unit) {
 }
 
 var editOnServer = function(content, reference) {
-  var id=$("#hexapla").data("id");
+  var id=getDocId();
   return $.ajax({
     type: "PUT",
     url: "version/"+id+"?"+ $.param(reference),
@@ -523,7 +532,7 @@ $(document).ready(function() {
   });
 
   $("#hexapla").on("click", ".button.edit-license", function() {
-    window.location=getPrefix()+"/works/license/"+$("#hexapla").data("id")+'/'+$(this).getVersion("th");
+    window.location=getPrefix()+"/works/license/"+getDocId()+'/'+$(this).getVersion("th");
   });
 
   $("input.edit").on("click",toggleEdit);
@@ -535,7 +544,8 @@ $(document).ready(function() {
     if (txt && (language=unit.getLanguage())) {
       e.stopPropagation();
       var menu=$("<div/>").addClass("context-menu");
-      menu.append($("<div/>").addClass("item concordance").append("search the concordance for <em>"+txt+"</em>"));
+      menu.append($("<div/>").addClass("item concordance").
+        append("search the concordance for <em>"+txt+"</em>"));
 
       menu.css({top:e.pageY,left:e.pageX});
       $("body .context-menu").remove();
@@ -585,7 +595,8 @@ $(document).ready(function() {
   });
 
   $.fn.setSize = function (size) {
-    this.closest("td").attr("rowspan",size).find(".text").css("min-height",size*40+"px");
+    this.closest("td").attr("rowspan",size).find(".text")
+      .css("min-height",size*40+"px");
   };
 
   $("tr").on("click", ".split", function(e) {
@@ -605,7 +616,8 @@ $(document).ready(function() {
       autoSize.apply($("textarea",newUnit));
       newUnit.addClass("unit edit").attr("data-version",version);
       $(this).remove();
-      var newTd=$("<td>").addClass("pleat open").attr("data-version",version).append($("<div>").addClass("box-wrapper").append(newUnit));
+      var newTd=$("<td>").addClass("pleat open").attr("data-version",version)
+        .append($("<div>").addClass("box-wrapper").append(newUnit));
       newUnit.setSize(size-(line-initialLine));
       unit.setSize(line-initialLine);
       var versions=getVersions();
@@ -665,9 +677,10 @@ $(document).ready(function() {
       toggleShow(versions[i]);
     }
   } else {
-    $("thead tr:first-child th.open.pleat").not(".opened").not(".edited").each(function() {
-      toggleShow($(this).getVersion("th"));
-    });
+    $("thead tr:first-child th.open.pleat").not(".opened").not(".edited")
+      .each(function() {
+        toggleShow($(this).getVersion("th"));
+      });
   }
   $("#hexapla th.edited").removeClass("edited").not(".edit").each(toggleEdit);
 
@@ -707,7 +720,7 @@ $(document).ready(function() {
       ["work-creator","language","title","date"].forEach(function(field) {
         data[field]=$("[name='"+field+"']","#work-info").val();
       });
-      var id=$("#hexapla").data("id");
+      var id=getDocId();
       data.original=$("[name=original-work]","#work-info").prop("checked");
       $.ajax({
         type:"PUT",
@@ -734,6 +747,8 @@ $(document).ready(function() {
 $(window).load(function() {
   if (window.location.hash) {
     $("tr"+window.location.hash+" .unit").addClass("highlight");
-    setTimeout(function() {$("tr"+window.location.hash+" .unit").removeClass("highlight");},500);
+    setTimeout(function() {
+      $("tr"+window.location.hash+" .unit").removeClass("highlight");
+    },500);
   }
 });
