@@ -66,6 +66,7 @@ function(work, req) {
     return [work,JSON.stringify(["remove version "+version_name])];
   }
   var actions=[];
+  var result={};
   if(args.hasOwnProperty("work-creator")) {
     if (doc.creator != args["work-creator"]) {
       actions.push("changed translated author from "+doc.creator+" to "+args["work-creator"]);
@@ -76,26 +77,32 @@ function(work, req) {
   if(args.hasOwnProperty("creator")) {
     var new_name = args["creator"];
     delete args["creator"];
-    if(!new_name || typeof new_name != "string") {
+    if(!new_name || typeof new_name != "string" || new_name.length == 0) {
       new_name = "Unnamed document";
     }
     if(new_name != version_name) {
-      while(work.translations[new_name] || new_name == "original" || new_name.length == 0) {
-        new_name += "(2)";
+      var i=2, targetName=new_name;
+      while(work.translations[targetName] || targetName == "original") {
+        targetName = new_name + " ("+i+")";
+        i++;
       }
+      new_name=targetName;
       work.translations[new_name] = doc;
       delete work.translations[version_name];
       actions.push("changed version name from "+version_name+" to "+new_name);
       version_name=new_name;
     }
+    result.creator=version_name;
   }
   var keysOK=["date","language","title","text","creativeCommons"];
   for (var key in args) {
     if (keysOK.indexOf(key)!=-1) {
       if (doc[key] && doc[key] != args[key]) {
+        result[key]=args[key];
         actions.push("change "+key+" from "+doc[key]+" to "+args[key]+" for "+version_name);
           doc[key]=args[key];
       } else if (!doc[key]) {
+        result[key]=args[key];
         actions.push("set "+key+" to "+args[key]+" for "+version_name);
         doc[key]=args[key];
       }
@@ -103,5 +110,6 @@ function(work, req) {
       return [work,{code:400,body:"can't set value for "+key}];
     }
   }
-  return [work, JSON.stringify(actions)];
+  result.actions=actions;
+  return [work, JSON.stringify(result)];
 }

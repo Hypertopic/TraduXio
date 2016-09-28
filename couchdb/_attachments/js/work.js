@@ -370,6 +370,7 @@ function changeVersion(oldVersion, newVersion) {
   $("#hexapla").find("*[data-version='" + oldVersion + "']")
     .attr("data-version", newVersion).data("version", newVersion)
     .find(".creator").html(newVersion);
+  updateUrl();
 }
 
 function toggleAddVersion() {
@@ -509,9 +510,12 @@ function saveMetadata() {
       type: "PUT",
       url: "work/"+id+"/"+ref,
       contentType: 'text/plain',
-      data: JSON.stringify(modify)
+      data: JSON.stringify(modify),
+      dataType: "json"
     }).done(function(result) {
       var target=elem.siblings("div.metadata."+name);
+      newValue=result[name] || newValue;
+      elem.val(newValue);
       if(name == "creator") {
         changeVersion(ref, newValue);
       }
