@@ -154,13 +154,17 @@ function fixWidths() {
   }
 }
 
-function toggleShow(version) {
+function toggleShow(e) {
+  var version=$(this).getVersion("th");
   find(version).toggle();
   findPleat(version).toggle();
   setTimeout(function(){
     fixWidths();
     positionSplits();
   },0);
+  if (e.cancelable) {
+    updateUrl();
+  }
 }
 
 function getDocId() {
@@ -216,7 +220,7 @@ function modified() {
 }
 
 function toggleEdit (e) {
-  var version=$(this).getVersion("th.open");
+  var version=$(this).getVersion("th");
   var doc = find(version);
   var units = findUnits(version);
   var top = doc.first();
@@ -550,15 +554,8 @@ var editOnServer = function(content, reference) {
 
 $(document).ready(function() {
 
-  $("#hexapla").on("click", ".button.hide", function() {
-      toggleShow($(this).getVersion("th.open"));
-      updateUrl();
-  });
-
-  $("#hexapla").on("click", ".button.show", function() {
-    toggleShow($(this).getVersion("th.close"));
-    updateUrl();
-  });
+  $("#hexapla").on("click", ".button.hide", toggleShow);
+  $("#hexapla").on("click", ".button.show", toggleShow);
 
   $("#hexapla").on("click", ".button.edit-license", function() {
     window.location=getPrefix()+"/works/license/"+getDocId()+'/'+$(this).getVersion("th");
@@ -702,14 +699,11 @@ $(document).ready(function() {
     addPleat(versions[i]);
   }
   if ($("th.pleat.opened,th.pleat.edited").length==0) {
-    for (var i = 2; i<N; i++) {
-      toggleShow(versions[i]);
-    }
+    //hide all translations except the 2 first ones
+    $("thead tr th.open.pleat").filter(":gt(1)").each(toggleShow);
   } else {
-    $("thead tr:first-child th.open.pleat").not(".opened").not(".edited")
-      .each(function() {
-        toggleShow($(this).getVersion("th"));
-      });
+    $("thead tr th.open.pleat").not(".opened").not(".edited")
+      .each(toggleShow);
   }
   $("#hexapla th.edited").removeClass("edited").not(".edit").each(toggleEdit);
 
