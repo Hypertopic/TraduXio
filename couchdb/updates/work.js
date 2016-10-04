@@ -30,11 +30,11 @@ function(work, req) {
     }
   }
 
-  var doc;
-  original=false;
+  var doc,
+      original=false;
   if(!version_name || version_name == "original") {
     doc = work;
-    orignal=true;
+    original=true;
   } else {
     if(!work.translations[version_name]) {
       if (req.method=="DELETE" || req.method=="PUT") {
@@ -93,6 +93,15 @@ function(work, req) {
       version_name=new_name;
     }
     result.creator=version_name;
+  }
+  if(original && args.hasOwnProperty("original")) {
+    var has_original=work.text?true:false;
+    args.original=args.original?true:false;
+    if (args.original!=has_original) {
+      //here we can add the original version
+      return [work,{code:400,body:"can't add or remove original version"}];
+    }
+    delete args.original;
   }
   var keysOK=["date","language","title","text","creativeCommons"];
   for (var key in args) {

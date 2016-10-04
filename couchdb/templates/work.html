@@ -14,7 +14,7 @@
       <input class="work-creator" name="work-creator" placeholder="{{i_author}}" value="{{work_creator}}">
       <select class="language" name="language" placeholder="{{i_original_language}}" data-language="{{work_language}}"></select>
       <input class="date" name="date" placeholder="{{i_year_original}}" value="{{date}}">
-      <label>{{i_original}}<input type="checkbox" name="original-work" {{#original}}checked="checked" {{/original}}></label>
+      <label>{{i_original}}<input {{#id}}disabled="disabled"{{/id}} type="checkbox" name="original-work" {{#original}}checked="checked" {{/original}}></label>
       <input type="submit" value="{{i_save}}">
     </form>
   {{/notext}}

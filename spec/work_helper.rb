@@ -41,10 +41,6 @@ end
 
 def create_work(options)
   visit '/works/new'
-  fill_in 'Title', :with => options[:title] if options.has_key?(:title)
-  fill_in 'Author', :with => options[:author] if options.has_key?(:author)
-  fill_select 'language',options[:language] if options.has_key?(:language)
-  fill_in 'Date, year, or text century', :with=>options[:date] if options.has_key?(:date)
   if options.has_key?(:no_original) && options[:no_original] then
     debug "no original"
     uncheck 'Original work'
@@ -52,12 +48,21 @@ def create_work(options)
     debug "original"
     check 'Original work'
   end
-  find('input[value=Save]').trigger(:click)
-  wait_for_ajax
+  edit_work options
   debug "Created #{options[:title]} – #{options[:author]}"
   if options.has_key?(:no_original) && options[:no_original] then
     edit_translation_metadata "first",random_translation_metadata
   end
+end
+
+def edit_work(options)
+  debug options
+  fill_in 'Title', :with => options[:title] if options.has_key?(:title)
+  fill_in 'Author', :with => options[:author] if options.has_key?(:author)
+  fill_select 'language',options[:language] if options.has_key?(:language)
+  fill_in 'Date, year, or text century', :with=>options[:date] if options.has_key?(:date)
+  find('input[value=Save]').trigger(:click)
+  wait_for_ajax
 end
 
 def insert_work_text (text)
