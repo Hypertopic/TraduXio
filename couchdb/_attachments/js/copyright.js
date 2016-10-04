@@ -1,5 +1,5 @@
 function submit() {
-  $("button").attr("disabled", "disabled");
+  $("button").prop("disabled", true);
   var form = $("form");
   $.ajax({
     type: "POST",
@@ -24,7 +24,7 @@ function checkCaptchaResult(data) {
   } else {
     $("#recaptcha_reload").click();
     $("form").append("<div>" + (data ? data : "Serveur indisponible") + "</div>");
-    $("button").removeAttr("disabled");
+    $("button").removeProp("disabled");
   }
 }
 

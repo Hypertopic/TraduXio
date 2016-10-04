@@ -17,7 +17,7 @@ $.fn.concordancify = function() {
       $.each(result.rows, function(i, o) {
         $("#language").append("<option value=\""+o.key+"\">" + o.key + " - " + getLanguageName(o.key) + "</option>");
       });
-      $("#language").val($("html").attr("lang"));
+      $("#language").val($("html").prop("lang"));
     });
   });
 
@@ -95,9 +95,9 @@ function fixLanguages(container) {
       var langName=getLanguageName(langID);
       if ($(lang).is(".expand")) {
         $(lang).text(langName);
-        $(lang).attr('title',langID);
+        $(lang).prop('title',langID);
       } else {
-        $(lang).attr('title',langName);
+        $(lang).prop('title',langName);
       }
     });
   });

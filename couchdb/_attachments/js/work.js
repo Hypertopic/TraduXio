@@ -49,10 +49,10 @@ $.fn.rotate = function () {
 function addPleat(version) {
   var header=find(version).filter("th").first();
   var pleat=$("<td/>").addClass("pleat").addClass("close")
-    .attr("rowspan",$("tbody tr").length)
+    .prop("rowspan",$("tbody tr").length)
     .attr("data-version",version);
   var language=header.find(".language").clone(true,true);
-  language.attr("title",language.html()).html(language.data("id")).removeClass("expand");
+  language.prop("title",language.html()).html(language.data("id")).removeClass("expand");
   pleat.append(language.rotate());
   pleat.append(header.find(".creator").clone(true,true).rotate());
   find(version).filter("td").first().after(pleat);
@@ -80,7 +80,7 @@ function getVersions() {
 }
 
 function getSize(unit) {
-  var rowspan=unit.closest("td").attr("rowspan");
+  var rowspan=unit.closest("td").prop("rowspan");
   if (rowspan) return parseInt(rowspan);
   else return 1;
 }
@@ -331,8 +331,8 @@ function fillLanguages(controls,callback) {
     controls.each(function(i,c) {
       var control=$(c);
       control.val(control.data("language"));
-      if (control.attr("placeholder")) {
-        control.prepend($("<option>").text(control.attr("placeholder")));
+      if (control.prop("placeholder")) {
+        control.prepend($("<option>").text(control.prop("placeholder")));
       }
     });
     if (typeof callback=="function")
@@ -439,7 +439,7 @@ function deleteVersion(version) {
 
 function createJoin(unit1,unit2) {
     var p=($(unit2).offset().top-$(unit1).offset().top-$(unit1).outerHeight()+32)/(-2);
-    var join=$("<span/>").addClass("join").attr("title","merge with previous").css("top",p+"px");
+    var join=$("<span/>").addClass("join").prop("title","merge with previous").css("top",p+"px");
     unit2.prepend(join);
 }
 
@@ -467,7 +467,7 @@ function createSplits(unit) {
   var currPos=unit.position();
   if (currLine<lastLine && currLine<maxLines) {
     for (var i=currLine+1; i<=lastLine; ++i) {
-      var split=$("<span/>").addClass("split").attr("title","split line "+i).data("line",i);
+      var split=$("<span/>").addClass("split").prop("title","split line "+i).data("line",i);
       unit.append(split);
     }
     setTimeout(positionSplits,0);
@@ -508,7 +508,7 @@ function saveMetadata() {
     var ref = elem.closest("th").data("version");
     var modify={};
     var newValue=elem.val();
-    var name=elem.attr("name");
+    var name=elem.prop("name");
     modify[name]=newValue;
     request({
       type: "PUT",
@@ -611,7 +611,7 @@ $(document).ready(function() {
           var prevLine=previousUnit.getLine();
           var size=getSize(unit);
           var newSpan=thisLine-prevLine+size;
-          previousUnit.closest("td").attr("rowspan",newSpan);
+          previousUnit.closest("td").prop("rowspan",newSpan);
           previousUnit.find(".text").css("min-height",(newSpan*32)+"px");
           unit.closest("td").remove();
           createJoins(previousUnit);
@@ -621,7 +621,7 @@ $(document).ready(function() {
   });
 
   $.fn.setSize = function (size) {
-    this.closest("td").attr("rowspan",size).find(".text")
+    this.closest("td").prop("rowspan",size).find(".text")
       .css("min-height",size*40+"px");
   };
 
@@ -683,7 +683,7 @@ $(document).ready(function() {
   $("#hexapla").on("click","span.delete", clickDeleteVersion);
 
   $(".editedMeta").each(function() {
-    $(this).attr("placeholder",$(this).attr("title"));
+    $(this).prop("placeholder",$(this).prop("title"));
   })
 
   $(".top").on("click", "#addVersion", toggleAddVersion);
