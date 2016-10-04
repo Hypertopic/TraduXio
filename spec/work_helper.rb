@@ -67,5 +67,5 @@ def insert_work_text (text)
 end
 
 def work_line(line)
-  find("tr[data-line='#{line}']")
+  find("tr#line-#{line}")
 end

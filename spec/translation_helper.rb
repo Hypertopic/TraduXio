@@ -91,7 +91,7 @@ end
 
 def block(version, row)
   table=page.find("table#hexapla")
-  row=table.find("tr[data-line='#{row}']")
+  row=table.find("tr#line-#{row}")
   row.find("td[data-version='#{version}']")
 end
 

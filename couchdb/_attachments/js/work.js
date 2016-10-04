@@ -90,7 +90,7 @@ function positionSplits(context) {
     var currTd=$(this).closest("td");
     var line=$(this).data("line");
     var position={};
-    var tableLine=$("tr[data-line="+line+"]");
+    var tableLine=$("tr#line-"+line);
     if (tableLine.find("td:visible").length>0) {
       position=tableLine.find("td:visible").position();
       $(this).removeClass("dynamic");
@@ -253,7 +253,7 @@ function toggleEdit (e) {
           var newTd=$("<td>").addClass("pleat open").attr("data-version",version)
             .append($("<div>").addClass("box-wrapper").append(newUnit));
           newUnit.setSize(1);
-          var tr=$("<tr/>").attr("id",i).attr("data-line",i).prepend(newTd);
+          var tr=$("<tr/>").attr("id","line-"+i).data("line",i).prepend(newTd);
           $("#hexapla tbody").append(tr);
         });
         applyToggle();
@@ -649,10 +649,10 @@ $(document).ready(function() {
       var versions=getVersions();
       var versionIndex=versions.indexOf(version);
       if (versionIndex==0) {
-        $("tr[data-line="+line+"]").prepend(newTd);
+        $("tr#line-"+line).prepend(newTd);
       } else {
         var ok=false;
-        $("tr[data-line="+line+"] .unit").each(function() {
+        $("tr#line-"+line+" .unit").each(function() {
           var currVersion=$(this).data("version");
           if (versions.indexOf(currVersion) > versions.indexOf(version)) {
             $(this).closest("td").before(newTd);
@@ -664,7 +664,7 @@ $(document).ready(function() {
           }
         });
         if (!ok) {
-          $("tr[data-line="+line+"]").append(newTd);
+          $("tr#line-"+line).append(newTd);
         }
       }
       createJoins(unit);

@@ -94,7 +94,7 @@ def sample(name)
 end
 
 def row(row)
-  find("#hexapla tr[data-line='#{row-1}'] .text")
+  find("#hexapla tr#line-#{row-1} .text")
 end
 
 def prefer_language(language)

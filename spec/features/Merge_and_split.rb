@@ -3,7 +3,7 @@ feature 'Merge and split' do
   def merge_after(version,line)
     expect(work_line(line+1)).to have_selector(selvers(version,"td"))
     debug "merging #{version} after line #{line}"
-    find_version(version, "tr[data-line='#{line+1}'] td").find("span.join").trigger(:click)
+    find_version(version, "tr#line-#{line+1} td").find("span.join").trigger(:click)
     wait_for_ajax
     expect(work_line(line+1)).not_to have_selector(selvers(version,"td"))
   end

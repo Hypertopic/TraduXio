@@ -29,7 +29,8 @@ function(head, req) {
       occurrences.push({
         context: highlight(html[0], req.query.query),
         mapping: html[1],
-        open_list:encodeURIComponent(context.id+"|"+mapping.id)+"#"+line_number,
+        open_list:encodeURIComponent(context.id+"|"+mapping.id),
+        line_number:line_number,
         original: original_header,
         translation: translation_header
       });
@@ -52,7 +53,7 @@ function(head, req) {
   if (req.query.query) {
     while (row = getRow()) {
       var translation_id = row.value.translation;
-      var line_number = row.value.unit; 
+      var line_number = row.value.unit;
       var work = row.doc;
       var original = (work.text)? {
         id: "original",
