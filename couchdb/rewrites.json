@@ -36,12 +36,7 @@
   "method": "POST"
 },{
   "from": "works/work/:id",
-  "to": "_update/work/:id",
-  "method": "PUT"
-},{
-  "from": "works/work/:id",
-  "to": "_update/work/:id",
-  "method": "DELETE"
+  "to": "_update/work/:id"
 },{
   "from": "works/work/:id/:version",
   "to": "_update/work/:id"

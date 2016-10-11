@@ -397,7 +397,7 @@ function addVersion() {
   if(ref != "") {
     request({
       type: "POST",
-      url: "work/"+id+"/"+ref,
+      url: "work/"+id,
       contentType: 'text/plain',
       data: JSON.stringify({creator: ref})
     }).done(function() {
@@ -684,7 +684,7 @@ $(document).ready(function() {
 
   $(".editedMeta").each(function() {
     $(this).prop("placeholder",$(this).prop("title"));
-  })
+  });
 
   $(".top").on("click", "#addVersion", toggleAddVersion);
   $(".top").on("click", "#removeDoc", toggleRemoveDoc);
@@ -726,7 +726,7 @@ $(document).ready(function() {
         contentType:"application/json",
         dataType:"json"
       }).done(function(result) {
-        if (result.ok && result.id) {
+        if (result.id) {
           window.location.href=result.id;
         } else {
           alert("fail");
