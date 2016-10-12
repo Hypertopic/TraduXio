@@ -348,6 +348,16 @@ function fillLanguages(controls,callback) {
   }
 }
 
+function updateDocInfo(data) {
+  if (data.hasOwnProperty("title"))
+    $(".top h1 span.title").text(data.title?data.title:getTranslated("i_no_title"));
+  if (data.hasOwnProperty("work-creator"))
+    $(".top h1 span.creator").text(data["work-creator"]?data["work-creator"]:getTranslated("i_no_author"));
+  if (data.hasOwnProperty("language")) {
+    fixLanguages($(".top h1 span.language").data("id",data.language));
+  }
+}
+
 function updateUrl() {
   var opened=$("thead th.open:visible").not(".edit")
     .map(function() {
@@ -540,6 +550,7 @@ function saveMetadata() {
       data: JSON.stringify(modify),
       dataType: "json"
     }).done(function(result) {
+      if (ref=="original") updateDocInfo(result);
       var target=elem.siblings("div.metadata."+name);
       newValue=result[name] || newValue;
       elem.val(newValue);
@@ -547,14 +558,16 @@ function saveMetadata() {
         changeVersion(ref, newValue);
       }
       if (inputType=="INPUT") {
-        target.text(newValue);
+        var displayText=newValue;
+        if (name=="work-creator" && ref=="original") displayText=i18n["i_no_author"];
+        target.text(displayText);
         elem.removeClass("dirty");
       }
       if (name=="language") {
         var lang_id = elem.val();
         fixLanguages(target.data("id",lang_id));
-        fixLanguages($("pleat.close[data-version='" + ref + "']")
-          .find(".language").data("id", lang_id));
+        fixLanguages($(".pleat.close[data-version='" + ref + "']")
+          .find(".metadata.language").data("id", lang_id).text(lang_id));
       }
     });
   }
@@ -778,10 +791,7 @@ $(document).ready(function() {
         dataType:"json"
       }).done(function(result) {
         $("#work-info").hide();
-        $(".top h1 span.title").text(data.title);
-        $(".top h1 span.creator").text(data["work-creator"]);
-        $(".top h1 span.language").data("id",data["language"]);
-        fixLanguages($(".top h1"));
+        updateDocInfo(result);
       });
       return false;
     });

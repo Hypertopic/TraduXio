@@ -2,7 +2,7 @@
 {{#i18n}}
 <script>var i18n={{{i18n_str}}};</script>
 <div class="top">
-  <h1><span class="title">{{work_title}}</span> – <span class="creator">{{work_creator}}</span> (<span class="language expand" data-id="{{language}}">{{language}}</span>)</h1>
+  <h1><span class="title">{{display_work_title}}</span> – <span class="creator">{{display_work_creator}}</span> (<span class="language expand" data-id="{{language}}">{{language}}</span>)</h1>
   {{^original}}<a href="#" class="workButton" id="editDoc">{{i_edit}}</a>{{/original}}
   <a href="#" class="workButton" id="removeDoc">✕</a>
   <a href="#" class="workButton" id="addVersion">+</a>
@@ -23,7 +23,7 @@
       <input class="work-creator" name="work-creator" placeholder="{{i_author}}" value="{{work_creator}}">
       <select class="language" name="language" placeholder="{{i_original_language}}" data-language="{{work_language}}"></select>
       <input class="date" name="date" placeholder="{{i_year_original}}" value="{{date}}">
-      <label>{{i_original}}<input {{#id}}disabled="disabled"{{/id}} type="checkbox" name="original-work" {{#original}}checked="checked" {{/original}}></label>
+      {{^id}}<label>{{i_original}}<input type="checkbox" name="original-work" {{#original}}checked="checked" {{/original}}></label>{{/id}}
       <input type="submit" value="{{i_save}}">
     </form>
   {{/notext}}
@@ -34,36 +34,37 @@
       <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
       {{^justOneText}}<span class="button delete"></span>{{/justOneText}}
       {{#is_original}}
-        <div class="metadata title">{{title}}</div>
+        <div class="metadata title"  title="{{i_title}}">{{work_title}}</div>
         <input type="text" class="editedMeta title" name="title"
         title="{{i_title}}" value="{{title}}" />
-        <div class="metadata work-creator">{{work_creator}}</div>
+        <div class="metadata work-creator" title="{{i_author}}">{{display_work_creator}}</div>
         <input type="text" class="editedMeta work-creator" name="work-creator"
           title="{{i_author}}" value="{{work_creator}}"/>
+        <div>{{i_original}}</div>
         <div class="meta group">
-          <div class="metadata date">{{date}}</div>
+          <div class="metadata date" title="{{i_year_original}}">{{date}}</div>
           <input type="text" class="editedMeta date" name="date"
             title="{{i_year_original}}" value="{{date}}" />
-          <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
+          <div class="metadata language expand" title="{{i_original_language}}" data-id="{{language}}">{{language}}</div>
           <select class="editedMeta language" name="language"
             title="{{i_original_language}}" value="{{language}}" data-language="{{language}}"></select>
         </div>
       {{/is_original}}
       {{^is_original}}
-        <div class="metadata title">{{title}}</div>
+        <div class="metadata title" title="{{i_translated_title}}">{{title}}</div>
         <input type="text" class="editedMeta title" name="title"
           title="{{i_translated_title}}" value="{{title}}" />
-        <div class="metadata work-creator">{{work_creator}}</div>
+        <div class="metadata work-creator" title="{{i_version_author}}">{{work_creator}}</div>
         <input type="text" class="editedMeta work-creator" name="work-creator"
           title="{{i_version_author}}" value="{{work_creator}}"/>
-        <span>{{i_trad}}</span><div class="metadata creator">{{creator}}</div>
+        <span>{{i_trad}}</span><div class="metadata creator" title="{{i_translator}}">{{creator}}</div>
         <input type="text" class="editedMeta creator" name="creator"
           title="{{i_translator}}" value="{{creator}}"/>
         <div class="meta group">
-          <div class="metadata date">{{date}}</div>
+          <div class="metadata date" title="{{i_year_version}}">{{date}}</div>
           <input type="text" class="editedMeta date" name="date"
             title="{{i_year_version}}" value="{{date}}" />
-          <div class="metadata language expand" data-id="{{language}}">{{language}}</div>
+          <div class="metadata language expand" title="{{i_version_language}}" data-id="{{language}}">{{language}}</div>
           <select class="editedMeta language" name="language"
             title="{{i_version_language}}" value="{{language}}" data-language="{{language}}"></select>
         </div>

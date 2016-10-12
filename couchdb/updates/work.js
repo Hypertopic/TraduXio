@@ -110,7 +110,7 @@ function(work, req) {
         var new_name = args["creator"];
         delete args["creator"];
         if(!new_name || typeof new_name != "string" || new_name.length == 0) {
-          new_name = "Unnamed document";
+          new_name = version_name;
         }
         if(new_name != version_name) {
           var i=2, targetName=new_name;

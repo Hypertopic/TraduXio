@@ -61,8 +61,8 @@ function(head, req) {
       } : null;
       var original_header = {
         work_id: work._id,
-        creator: work.creator?work.creator:"Anonymus",
-        title: work.title,
+        creator: work.creator?work.creator:i18n["i_no_author"],
+        title: work.title?work.title:i18n["i_no_title"],
         publisher: work.publisher,
         date: work.date
       };

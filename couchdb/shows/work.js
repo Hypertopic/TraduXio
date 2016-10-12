@@ -6,8 +6,10 @@ function(o, req) {
 
   var js_i18n_elements=[
     "i_read","i_edit","i_show","i_search_concordance",
-    "i_confirm_delete","i_delete_version","i_delete_original"
+    "i_confirm_delete","i_delete_version","i_delete_original", "i_no_title", "i_no_author"
   ];
+  var i18n=localized();
+
   function getTextLength() {
     if (o.text)
       return o.text.length;
@@ -17,13 +19,15 @@ function(o, req) {
 
   var newWork = false;
   if (o===null) {
-    o={translations:{}};
+    o={translations:{},language:getMyLanguage()};
     newWork=true;
   }
   var data = {
     id: o._id,
     work_title: o.title,
-    work_creator: o.creator?o.creator:"Anonymus",
+    display_work_title: o.title?o.title:i18n["i_no_title"],
+    work_creator: o.creator,
+    display_work_creator: o.creator?o.creator:i18n["i_no_author"],
     work_language: o.language,
     original: o.text ? true : false,
     date:o.date,
@@ -31,12 +35,12 @@ function(o, req) {
     headers: [],
     units: [],
     rows:[],
-    lang:getPreferredLanguage()
+    lang:i18n.lang,
+    i18n:i18n
   };
-  data.i18n=localized(data.lang);
   var js_i18n={};
   js_i18n_elements.forEach(function (item) {
-    if (data.i18n[item]) js_i18n[item]=data.i18n[item];
+    if (i18n[item]) js_i18n[item]=i18n[item];
   });
 
   if (!newWork) {
