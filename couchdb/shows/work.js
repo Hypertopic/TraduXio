@@ -5,9 +5,8 @@ function(o, req) {
   // !code localization.js
 
   var js_i18n_elements=[
-    "i_read","i_edit","i_show",
-    "i_confirm_delete","i_delete_version",
-    "i_search_concordance"
+    "i_read","i_edit","i_show","i_search_concordance",
+    "i_confirm_delete","i_delete_version","i_delete_original"
   ];
   function getTextLength() {
     if (o.text)
@@ -89,7 +88,7 @@ function(o, req) {
   data.scripts=["jquery.selection","jquery.ajax-retry"];
   data.language=data.work_language;
   data.prefix="..";
-  data.notext=o.text ? false : (o.original ? false : true);
+  data.notext=o.text ? false : true;
   data.original=o.text ? true : (newWork ? true : false);
   data.i18n_str=JSON.stringify(js_i18n);
   if (data.headers.length==1) {

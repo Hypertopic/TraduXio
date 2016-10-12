@@ -6,7 +6,16 @@
   {{^original}}<a href="#" class="workButton" id="editDoc">{{i_edit}}</a>{{/original}}
   <a href="#" class="workButton" id="removeDoc">✕</a>
   <a href="#" class="workButton" id="addVersion">+</a>
-  <form id="addPanel"><h3>{{i_translation_}} </h3><input name="work-creator" placeholder="{{i_author}}"/><input type="submit" value="{{i_create}}" name="do-create" /></form>
+  <form id="addPanel">
+    {{^original}}
+      <input type="radio" name="add-type" value="original" /> {{i_original}}
+      <input type="radio" name="add-type" value="translation" checked="checked" /> {{i_translation_}}
+    {{/original}}
+    {{#original}}
+    <h3>{{i_translation_}} </h3>
+    {{/original}}
+    <input name="work-creator" placeholder="{{i_author}}"/><input type="submit" value="{{i_create}}" name="do-create" />
+  </form>
   <div id="removePanel"><button id="remove-confirm">{{i_delete_text_and_translations}}</button></div>
   {{#notext}}
     <form id="work-info">
@@ -23,6 +32,7 @@
   <thead><tr>
     {{#headers}}
       <th class="pleat open{{#edited}} edited{{/edited}}{{#opened}} opened{{/opened}}" data-version="{{id}}"><div class="relative-wrapper">
+      {{^justOneText}}<span class="button delete"></span>{{/justOneText}}
       {{#is_original}}
         <div class="metadata title">{{title}}</div>
         <input type="text" class="editedMeta title" name="title"
@@ -40,7 +50,6 @@
         </div>
       {{/is_original}}
       {{^is_original}}
-        <span class="button delete"></span>
         <div class="metadata title">{{title}}</div>
         <input type="text" class="editedMeta title" name="title"
           title="{{i_translated_title}}" value="{{title}}" />
@@ -70,7 +79,7 @@
     <td class="pleat open edit" data-version="{{version}}" rowspan="{{raw.length}}">
       <div class="box-wrapper">
       <div class="unit" data-version="{{version}}">
-<textarea style="width: 100%; height: 100%;" class="fulltext autosize">
+<textarea style="width: 100%; height: 100%;" class="fulltext autosize" placeholder="{{i_enter_text}}">
 {{#fulltext}}
 {{.}}
 

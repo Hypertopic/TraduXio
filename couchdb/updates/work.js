@@ -24,7 +24,7 @@ function(work, req) {
     if(!version_name || version_name == "original") {
       doc = work;
       original=true;
-      version_name = "original";
+
     } else {
       if(!work.translations[version_name]) {
         return [null,{code:404,body:version_name+" not found"}];
@@ -32,6 +32,9 @@ function(work, req) {
       doc = work.translations[version_name];
     }
   } else { //req.method==POST
+    if (version_name) {
+      return [null,{code:400,body:"Can't specify version"}];
+    }
     if (work!==null) {
       if (args.creator) {
         version_name=args.creator;
@@ -39,48 +42,55 @@ function(work, req) {
           return [null,{code:400,body:"reserved name 'original'"}];
         }
         delete args.creator;
-      }
-      version_name=version_name || "original";
-      if (version_name=="original" && work.text || work.translations[version_name]) {
-        return [null,{code:409,body:version_name+" already exists"}];
-      }
-      var text=emptyText(work);
-      if (version_name=="original") {
-        doc=work;
-        original=true;
-        doc.text=text;
       } else {
-        work.translations[version_name] = { title: "", language: "", creator:"", text: text };
-        doc=work.translations[version_name];
-        created=true;
+        original=true;
       }
-    } else if (version_name) {
-      return [null,{code:400,body:"Can't specify version"}];
+
     } else {
       created=true;
+      original=true;
+      version_name="original";
       work={};
       work._id=work.id || req.uuid;
       delete work.id;
       actions.push("created new doc "+work._id);
       work.translations={};
-      if (!args.hasOwnProperty("original") || args.original) {
-        work.text=[""];
-        version_name="original";
-        actions.push("created original version");
-      } else {
-        work.translations["first"]={text:[""]};
-        actions.push("created first translation");
-      }
       result.id=work._id;
-      delete args.original;
       doc=work;
     }
+
+    if (original) {
+      if (args.hasOwnProperty("original") && args.original) {
+        doc=work;
+        doc.text=emptyText(work);
+        actions.push("created original version");
+        created=true;
+      } else if (created) {
+        work.translations["first"] = { text: emptyText(work) };
+        actions.push("created first version");
+        created=true;
+      }
+      delete args.original;
+    } else if (version_name) {
+      if (!work.translations[version_name]) {
+        work.translations[version_name] = { title: "", language: "", creator:"", text: emptyText(work) };
+        doc=work.translations[version_name];
+        actions.push("created "+version_name+" version");
+        created=true;
+      }
+    }
+
   }
 
   if (req.method=="DELETE") {
-    if (original) {
+    if (!version_name && original) {
       work._deleted = true;
       actions.push("document removed");
+    } else if (version_name=="original") {
+      if (work.text) {
+        delete work.text;
+        actions.push("original version removed");
+      }
     } else {
       delete work.translations[version_name];
       actions.push("Translation "+version_name+" removed");
@@ -117,6 +127,15 @@ function(work, req) {
         result.creator=version_name;
       }
     } else {
+      if (args.hasOwnProperty("original")) {
+        delete args.original;
+        if (args.original) {
+          if (!work.text) {
+            work.text=[""];
+            actions.push("created original version");
+          }
+        }
+      }
       if (args.hasOwnProperty("creator")) {
         args["work-creator"]=args["creator"];
         delete args["creator"];

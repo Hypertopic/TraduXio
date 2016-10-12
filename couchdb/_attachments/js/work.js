@@ -391,16 +391,33 @@ function toggleEditDoc() {
   $("#work-info").slideToggle(200);
 }
 
+function addPanelFormUpdate() {
+  if($("#addPanel input[name='add-type']:checked").val()=="original") {
+    $("#addPanel input[name='work-creator']").prop("disabled",true);
+  } else {
+    $("#addPanel input[name='work-creator']").prop("disabled",false);
+  }
+}
+
 function addVersion() {
-  var id = getDocId();
-  var ref = $("#addPanel").find("input[name='work-creator']").val();
+  var id = getDocId(),
+      ref,
+      data = {};
+  if ($("#addPanel input[name='add-type']:checked").val()=="original") {
+    ref="original";
+    data.original=true;
+  } else {
+    ref = $("#addPanel").find("input[name='work-creator']").val();
+    data.creator=ref;
+  }
   if(ref != "") {
     request({
       type: "POST",
       url: "work/"+id,
-      contentType: 'text/plain',
-      data: JSON.stringify({creator: ref})
-    }).done(function() {
+      contentType: 'application/json',
+      dataType: "json",
+      data: JSON.stringify(data)
+    }).done(function(result) {
       window.location.href = id + "?edit=" + ref;
     });
   }
@@ -420,8 +437,14 @@ function removeDoc() {
 }
 
 function clickDeleteVersion() {
-  var ref = $(this).closest("th").data("version");
-  if(confirm(getTranslated("i_delete_version").replace("%s", ref))) {
+  var ref = $(this).closest("th").data("version"),
+      message;
+  if (ref=="original") {
+    message=getTranslated("i_delete_original");
+  } else {
+    message=getTranslated("i_delete_version").replace("%s", ref);
+  }
+  if(confirm(message)) {
     deleteVersion(ref);
   }
 }
@@ -687,10 +710,12 @@ $(document).ready(function() {
   });
 
   $(".top").on("click", "#addVersion", toggleAddVersion);
-  $(".top").on("click", "#removeDoc", toggleRemoveDoc);
   $(".top").on("click", "#editDoc", toggleEditDoc);
-
+  $(".top").on("click", "#addPanel input[type=radio]", addPanelFormUpdate);
+  addPanelFormUpdate();
   $("#addPanel").on("submit", addVersion);
+
+  $(".top").on("click", "#removeDoc", toggleRemoveDoc);
   $("#removePanel").on("click", removeDoc);
 
   var versions=getVersions();

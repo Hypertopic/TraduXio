@@ -125,6 +125,9 @@ div.metadata {
 .top .removeDoc, .top .addVersion {
   margin-top: -3px;
 }
+.top form h3 {
+  display: inline;
+}
 
 .top form, #removePanel {
   text-align: right;
