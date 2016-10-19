@@ -275,6 +275,16 @@ textarea.autosize {
   border:1px solid black;
   z-index:99;
   right:0px;
+  display: none;
+}
+
+#hexapla .unit .join{
+  top:-24px;
+}
+
+#hexapla .unit.edit .split,
+#hexapla .unit.edit .join {
+  display: inline;
 }
 
 .dirty {

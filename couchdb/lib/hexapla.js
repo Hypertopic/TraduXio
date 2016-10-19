@@ -111,6 +111,7 @@ function Hexapla() {
     for (var i=0; !finished; i++) {
       finished=true;
       var row={units:[],line:i};
+      var firstVersion=true;
       for (var vi in this.versions) {
         if (i < this.versions[vi].text.length) {
           finished=false;
@@ -121,9 +122,11 @@ function Hexapla() {
             var line={
               version:this.versions[vi].id,
               htmlText:this.toHtml(this.versions[vi].text[i]),
-              rawText:this.versions[vi].text[i]
+              rawText:this.versions[vi].text[i],
+              firstVersion:firstVersion
             };
             row.units.push(line);
+            firstVersion=false;
             lastLines[vi]={line:line,num:i};
           }
         }
