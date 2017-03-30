@@ -19,9 +19,9 @@ Cordialement,
 Equipe TraduXio 2017 
 
 Questions pendant la conférence:
-- Quelles fonctionnalités aimeriez vous voir arriver sur le site.
-- Quels bugs aviez vous rencontrez dans la version précédante du site?
-- Voyez vous des fonctionnalités nouvelles pour le site?
-- Vos étudiant ont ils soulevé des contraintes et ou des intérogations concernant le site?
-- Ont ils des idées d’améliorations?
+- Quelles fonctionnalités aimeriez vous voir arriver sur le site ?
+- Quels bugs aviez vous rencontrez dans la version précédente du site ?
+- Voyez vous des fonctionnalités nouvelles pour le site ?
+- Vos étudiant ont ils soulevé des contraintes et ou des intérogations concernant le site ?
+- Ont ils des idées d’améliorations ?
 - …
