@@ -20,8 +20,12 @@ Equipe TraduXio 2017
 
 Questions pendant la conférence:
 - Quelles fonctionnalités aimeriez vous voir arriver sur le site ?
+      Reviews, Glossaire, Sous-titres, v. privée, recherche, commentaires, impression, ouverture aux externes, espace mon compte
 - Quels bugs aviez vous rencontrez dans la version précédente du site ?
-- Voyez vous des fonctionnalités nouvelles pour le site ?
+      
 - Vos étudiant ont ils soulevé des contraintes et ou des intérogations concernant le site ?
 - Ont ils des idées d’améliorations ?
-- …
+- Est-ce que le forum est pertinent?
+- Est ce que la déconnexion est-elle intéressante ?
+- Est-ce que vous allez régulièrement sur le site? Quels intêrets pouvez vous voir aux notifications?
+- 
