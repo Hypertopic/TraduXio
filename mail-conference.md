@@ -28,4 +28,5 @@ Questions pendant la conférence:
 - Est-ce que le forum est pertinent?
 - Est ce que la déconnexion est-elle intéressante ?
 - Est-ce que vous allez régulièrement sur le site? Quels intêrets pouvez vous voir aux notifications?
-- 
+- Est-ce qu'il sera utile d'ajouter une liste de terminologie comme un outil de référence pendant la traduction des oeuvres ?
+- Si les autres peuvent donner des avis ou des points de récompense à l'auteur, est-ce qu'il va bien motiver les traducteurs ou les traductrices ?
