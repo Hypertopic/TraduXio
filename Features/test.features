@@ -1,0 +1,13 @@
+#language: fr
+
+Feature : 
+
+Scenario: Some determinable business situation
+    Given 
+    And 
+    When 
+    And 
+    And 
+    Then 
+    And 
+    
