@@ -1,6 +1,0 @@
-When /I sign up an account/ do
-  fill in "username" with "username"
-  fill in "password" with "password_1"
-  fill in "confirmation_password" with "password_2"
-  click_bouton "sign up" 
-end
