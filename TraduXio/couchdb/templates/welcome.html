@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>TraduXio</title>
+  <link rel="stylesheet" href="shared/css/welcome.css" type="text/css" />
+  <!--[if lt IE 7]>
+  <style media="screen" type="text/css">
+  body {
+    height:100%;
+  }
+  </style>
+  <![endif]-->
+</head>
+<body>
+  <div id="body">
+    {{#i18n}}
+    <div id="top">
+      <h1 class="title">TraduXio</h1>
+      <strong class="subtitle">{{i_traduxio_description}}</strong>
+    </div>
+    <!--Panels d'informations-->
+    <div id="middle">
+      <div>
+        <div class="panel">
+          <img src="shared/img/analysis.png" alt="{{i_analyze_compare}}"/>
+          <h2>{{i_analyze_compare}}</h2>
+          <p>{{i_analyze_compare_description}}</p>
+        </div>
+        <div class="panel">
+          <img src="shared/img/cc.png" alt="{{i_choose_license}}"/>
+          <h2>{{i_choose_license}}</h2>
+          <p>{{i_choose_license_description}}</p>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <img src="shared/img/research.png" alt="{{i_research_translations}}"/>
+          <h2>{{i_search_translations}}</h2>
+          <p>{{i_search_translations_description}}</p>
+        </div>
+        <div class="panel">
+          <img src="shared/img/group.png" alt="{{i_work_together}}"/>
+          <h2>{{i_work_together}}</h2>
+          <p>{{i_work_together_description}}</p>
+        </div>
+      </div>
+      <a href="works/" class="start">{{i_start}}</a>
+    </div>
+    {{/i18n}}
+  </div>
+</body>
+</html>

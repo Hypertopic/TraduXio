@@ -1,0 +1,50 @@
+[{
+  "from": "works/concordance",
+  "to": "_list/concordance/concordance",
+  "query": {
+    "include_docs": "true",
+    "limit":"100"
+  }
+},{
+  "from": "languages",
+  "to": "_view/languages",
+  "query": {
+    "group": "true"
+  }
+},{
+  "from": "works/version/:id",
+  "to": "_update/version/:id"
+},{
+  "from": "works/copyright",
+  "to": "_show/copyright"
+},{
+  "from": "works",
+  "to": "_list/works/works"
+},{
+  "from": "shared/*",
+  "to": "*"
+},{
+  "from": "robots.txt",
+  "to": "robots.txt"
+},{
+  "from": "works/:id",
+  "to": "_show/work/:id",
+  "method": "GET"
+},{
+  "from": "works/work",
+  "to": "_update/work",
+  "method": "POST"
+},{
+  "from": "works/work/:id",
+  "to": "_update/work/:id"
+},{
+  "from": "works/work/:id/:version",
+  "to": "_update/work/:id"
+},{
+  "from": "works/license/:id/:version",
+  "to": "_show/license/:id",
+  "method": "GET"
+},{
+  "from": "",
+  "to": "_show/welcome"
+}]

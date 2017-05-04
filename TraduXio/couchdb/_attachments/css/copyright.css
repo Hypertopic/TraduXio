@@ -1,0 +1,64 @@
+#middle {
+  min-width: 50%;
+  text-align: center;
+  padding: 25px;
+}
+
+#middle form {
+  margin-top: 40px;
+  text-align: left;
+  display: inline-block;
+}
+
+#middle button {
+  margin-bottom: 20px;
+}
+
+#recaptcha_widget_div {
+  margin-bottom: 30px;
+}
+
+#middle input {
+  margin-bottom: 20px;
+}
+
+#middle textarea {
+  height: 100px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+#middle #details {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+#middle input[type=text], #middle input[type=email] {
+  width: 100%;
+}
+
+#middle input[type=checkbox] {
+  margin-right: 10px;
+}
+
+#middle #link input {
+  max-width: 80%;
+}
+
+#middle h4 {
+  text-align: center;
+  margin-top: 30px;
+  color: green;
+}
+
+#middle label {
+  margin-right: 10px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+#middle button {
+  text-align: center;
+  padding: 2px 5px;
+  font-size: 1.05em;
+}
