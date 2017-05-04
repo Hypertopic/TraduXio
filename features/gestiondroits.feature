@@ -14,7 +14,7 @@ Etant donné qu'un utilisateur partage une oeuvre de droits réservés
 Quand il a choisi les personnes avec qui il veut la partager
 Alors ces personnes possèdent les même droits que la personne ayant fait le partage
 Et ils peuvent faire leur traduction de cette oeuvre
-Et cette traduction est visible par les personnes qui ont bénéficié du partage
+Et leurs traductions sont visible par les personnes qui ont bénéficié du partage
 
 Scénario: L'utilisateur travaille sur une oeuvre libre de droits et veut rendre sa traduction privée
 
