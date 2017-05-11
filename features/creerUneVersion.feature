@@ -18,10 +18,10 @@ Scénario: L'utilisateur créé une version traduite d'une version originale lib
 
 Etant donné qu'un utilisateur crée une version traduite d'une oeuvre libre de droit
 Quand il a enregistré sa version traduite
-Alors tout le monde a accès a cette version traduite
+Alors personne n'a accès à la traduction
 
 Scénario: L'utilisateur créé une version traduite d'une version originale ayant des droits réservés
 
 Etant donné qu'un utilisateur crée une version traduite d'une oeuvre ayant des droits réservés
 Quand il a enregistré sa version traduite
-Alors seul les personnes possèdant les droits de lecture et d'écriture sur cette version traduite peuvent y accéder
+Alors personne n'a accès à la traduction
