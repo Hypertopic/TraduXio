@@ -5,8 +5,8 @@ Etantdonnéqu(/^un utilisateur partage une version traduction de droits réserv�
 end
 
 Quand(/^il a choisi les utilisateurs avec qui il veut la partager$/) do
-  fill_in('Participants')
-  clikc_on('Valider')
+  fill_in('Participants', with: 'bob,alice'
+  click_on('Valider')
 end
 
 Alors(/^ces utilisateurs recoivent le droit de lecture sur cette version traduction\.$/) do
@@ -19,8 +19,8 @@ Etantdonnéqu(/^un utilisateur partage une version traduction d'une version orig
 end
 
 Quand(/^il choisit de la partager$/) do
-  fill_in('Participants')
-  clikc_on('Valider')
+  fill_in('Participants'), with: 'bob,alice'
+  click_on('Valider')
 end
 
 Alors(/^les utilisateurs qui ont bénéficié du premier partage de la VO ont les droits de lecture sur cette version traduction\.$/) do
@@ -47,7 +47,7 @@ end
 
 Quand(/^il veut la partager$/) do
   fill_in('Participants')
-  clikc_on('Valider')
+  click_on('Valider')
 end
 
 Alors(/^les utilisateurs qu'il a choisi recevront le droit de lecture sur cette traduction\.$/) do
@@ -56,11 +56,11 @@ end
 
 Etantdonnéque(/^l'utilsateur a une version originale libre de droit$/) do
   visit('Page de l oeuvre')
-  clikc_on('Partager')
+  click_on('Partager')
 end
 
 Quand(/^il veut la rendre publique$/) do
-  clikc_on('Rendre VO publique')
+  click_on('Rendre VO publique')
 end
 
 Alors(/^sa version originale sera visible par tous$/) do
@@ -73,11 +73,11 @@ end
 
 Etantdonnée(/^que l'utilisateur a une version traduite d'une version originale libre de droits$/) do
   visit('Page de l oeuvre')
-  clikc_on('Partager')
+  click_on('Partager')
 end
 
 Quand(/^il veut la rendre publique$/) do
-  clikc_on('Rendre VT publique')
+  click_on('Rendre VT publique')
 end
 
 Alors(/^sa version traduite sera visible par tous$/) do
