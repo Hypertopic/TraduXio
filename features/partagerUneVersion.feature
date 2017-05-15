@@ -14,7 +14,7 @@ Etant donné qu'un utilisateur partage une version traduction d'une version orig
 Quand il choisit de la partager
 Alors les utilisateurs qui ont bénéficié du premier partage de la VO ont les droits de lecture sur cette version traduction.
 
-Scénario: L'utilisateur rend public une version traduction d'une version originale libre de droits et veut rendre sa version traduction publique
+Scénario: L'utilisateur rend public une version traduction d'une version originale libre de droits
 
 Etant donné que l'utilisateur a une version traduction d'une version originale libre de droits,
 Et qu'il veut la rendre publique
