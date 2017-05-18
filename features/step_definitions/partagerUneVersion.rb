@@ -1,5 +1,5 @@
 Etantdonnéqu(/^un utilisateur partage une version traduction de droits réservés qui lui a été partagé$/) do
-  visit('Page de l oeuvre')
+  visit('Page de l\'oeuvre')
   click_on('Partager')
 
 end
@@ -14,7 +14,7 @@ Alors(/^ces utilisateurs recoivent le droit de lecture sur cette version traduct
 end
 
 Etantdonnéqu(/^un utilisateur partage une version traduction d'une version originale ayant des droits réservés qui lui a été partagé$/) do
-  visit('Page de l oeuvre')
+  visit('Page de l\'oeuvre')
   click_on('Partager')
 end
 
@@ -28,7 +28,7 @@ Alors(/^les utilisateurs qui ont bénéficié du premier partage de la VO ont le
 end
 
 Etantdonnéque(/^l'utilisateur a une version traduction d'une version originale libre de droits,$/) do
-  visit('Page de l oeuvre')
+  visit('Page de l\'oeuvre')
   click_on('Partager')
 end
 
@@ -41,7 +41,7 @@ Alors(/^tous les utilisateurs de TraduXio recevront les mêmes droits d'accès �
 end
 
 Etantdonnéque(/^l'utilisateur a une version traduction d'une version originale libre de droits,$/) do
-  visit('Page de l oeuvre')
+  visit('Page de l\'oeuvre')
   click_on('Partager')
 end
 
@@ -55,7 +55,7 @@ Alors(/^les utilisateurs qu'il a choisi recevront le droit de lecture sur cette 
 end
 
 Etantdonnéque(/^l'utilsateur a une version originale libre de droit$/) do
-  visit('Page de l oeuvre')
+  visit('Page de l\'oeuvre')
   click_on('Partager')
 end
 
@@ -72,7 +72,7 @@ Et(/^cette action sera irréversible\.$/) do
 end
 
 Etantdonnée(/^que l'utilisateur a une version traduite d'une version originale libre de droits$/) do
-  visit('Page de l oeuvre')
+  visit('Page de l\'oeuvre')
   click_on('Partager')
 end
 
@@ -87,3 +87,32 @@ end
 Et(/^il peut s'il le souhaite re rendre sa version traduite privée\.$/) do
   expect(Il peut cliquer sur Rendre Privée)
 end
+
+Etantdonnée(/^que l' utilisateur veut ajouter une traduction$/) do
+  visit('Page de l\'oeuvre')
+end
+
+Et(/^que il n'a pas accès a l\'oeuvre originale $/) do
+  click_on('Ajouter')
+end
+
+Alors(/^un message lui indique qu'il ne peut pas ajouter sa traduction et il renvoye sur la page d'accueil du site $/) do
+  expect(Apparition du message d erreur et retour sur la page d accueil)
+end  
+  
+Etantdonnée(/^que l' utilisateur veut partager une traduction d'une oeuvre protégée de droits$/) do
+  visit('Page de l\'oeuvre')
+end
+
+Et(/^que les personnes indiquées pour la partage ne sont pas issues du partage original $/) do
+  click_on('Partager')
+  fill_in('Liste des personnes avec qui partager')
+  click_on('Valider')
+end
+
+Alors(/^un message lui indique qu'il ne peut pas partager sa traduction et il renvoye sur la page de sa traudction en cours $/) do
+  expect(Apparition du message d erreur et retour sur la page de la traduction en cours)
+end  
+
+
+
