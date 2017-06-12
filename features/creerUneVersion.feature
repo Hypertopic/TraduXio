@@ -6,7 +6,7 @@ Scénario: L'utilisateur créé une version originale libre de droit
 
 Etant donné qu'un utilisateur crée une version originale libre de droit
 Quand il a enregistré sa version originale
-Alors tous les utilisateurs ont accès a cette version originale
+Alors lui seul possède les droits d'écriture et de lecture sur cette version originale
 
 Scénario: L'utilisateur créé une version originale ayant des droits réservés
 
