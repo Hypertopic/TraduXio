@@ -14,8 +14,8 @@ Quand(/^il a enregistré sa version originale$/) do
   click_on('Lire')
 end
 
-Alors(/^tous les utilisateurs ont accès a cette version originale$/) do
-  expect(Tout les utilisateurs ont les droits de lecture sur cette VO)
+Alors(/^lui seul possède les droits d'écriture et de lecture sur cette version originale$/) do
+  expect(Seul l'utilsateur ayant crée cette VO peut lire et écrire sur cette VO)
 end
 
 Etantdonnéqu(/^un utilisateur crée une version originale ayant des droits réservés$/) do
